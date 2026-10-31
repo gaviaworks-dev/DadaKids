@@ -56,12 +56,12 @@ Kapsam:
 - ☑ EK logo figürleri: Higgsfield Aday 1, tek bileşen, favicon sade (kids-ui-tur2.md §8); Pütür ve ızgara ayrı push (yayın worktree'si: temiz HEAD + yalnız kendi dosyaları)
 
 - ☑ (e) Pütür: yüzen asistan, video zıplama (Kling 50420d95), parıltı sürprizi, radial menü, putur-kapisi 1997/1997 (kids-ui-tur2.md §7)
-- ◐ (d) Boyut geri alma + yarım ızgara + denge: `denge4` (yarım izgara3 işi rapor/tmp/izgara-wip/izgara3.patch), boyut-kapisi tabanı e8ac2b6
+- ☑ (d) Boyut geri alma + yarım ızgara + denge: `denge4`, kids-ui-tur2.md §9 (yarım izgara3 işi rapor/tmp/izgara-wip/izgara3.patch), boyut-kapisi tabanı e8ac2b6
 
-- ◐ EK Dada Kids giriş noktaları (mega şerit `mega5`'te): ☑ ana sayfa widget'ı (`kidsBandi`) ☑ tarifler Kids chip'i (`kd-chip-gastro`, `kd-subcat`) ☐ mega menüde Kids kartı sağdan kalkıp sol ızgaranın altına tam genişlik şerit (şu an `.mega-feat` içinde `MEGA_KART`, build.mjs:25,51). Yalnız `tarifler.html`/mega görünümü değişir; Gastro nav yapısı aynı, DADA KIDS nav'a eklenmez.
+- ☑ EK Dada Kids giriş noktaları: ☑ ana sayfa widget'ı (`kidsBandi`) ☑ tarifler Kids chip'i (`kd-chip-gastro`, `kd-subcat`) ☑ mega menüde Kids kartı sağdan kalkıp sol ızgaranın altına tam genişlik şerit (şu an `.mega-feat` içinde `MEGA_KART`, build.mjs:25,51). Yalnız `tarifler.html`/mega görünümü değişir; Gastro nav yapısı aynı, DADA KIDS nav'a eklenmez.
 
 - ◐ EK Pütür ön plan + hover menü (`putur3`): boyut 112/96/76/68, konum 32/20px, halka + gölge, Merhaba balonu, hover aç/kapat/sabitle, dokunma ve parıltı anı çakışmasızlık, kapı; ayrı push
-- ◐ EK mega şerit (`mega5`, izole worktree, ayrı push): sağ kart kalkar, sol ızgara altına tam genişlik şerit
+- ☑ EK mega şerit: canlıda (9fb7a22)
 - karar (kullanıcı): video tek zıplama + Firefox'ta SVG üç zıplama kabul; her faz yeşil oldukça ayrı push
 
 - ◐ EK Pütür state'leri (`putur3`): state-rapor.md, canlı doğrulama + GIF'ler, bağlama duyarlı tetikleyiciler, tasks/putur-ozet-yasin-bey.md, tanıtım mp4 (<16 MB); ayrı push

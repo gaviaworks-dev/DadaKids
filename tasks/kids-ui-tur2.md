@@ -99,3 +99,147 @@ Eski çizimler yalnız `sekil` anahtarından üretiliyordu; aynı şekilli besin
 - karar: Safari yolu WebKit 2370 ile ölçüldü: Range destekli geçici sunucuda HEVC alpha hazır, oynadı, şeffaf (ekran görüntüsü tmp/webkit-video.png), menü açıldı, JS hatası yok. gerekçe: Ortak yerel sunucu (8765) Range yanıtı vermiyor (200, octet-stream), bu yüzden WebKit orada videoyu reddedip SVG/CSS zıplamaya düşüyor; bu sessiz ve hatasız bir yedek. GitHub Pages Range veriyor.
 - karar: Firefox 1538 ile ölçüldü: video kullanmaz, SVG/CSS zıplar, menü açılır, JS hatası yok. gerekçe: Kasıtlı yedek yol.
 - karar: Dar ekranda sayfanın en üstünde de, tam boy Pütür bir bağın/düğmenin ortasını örtecekse kenara çekilir. gerekçe: İlk sürümdeki "en üstte hep tam boy" kuralı içerik düzenine bağlıydı; kids-tarifler yaş şeridi yer değiştirince 390'da "Tümü" çipini örttü (kapi-taban.txt, 1996/1997). Yeni kontrol ızgara sınıfı kullanmaz.
+
+## 9. Boyut geri alma, ızgara ve denge
+
+Taban: e8ac2b6. Kural: öğe büyütülmez; kısa kolon içerikle doldurulur ya da düzen sadeleşir. Kapılar: araclar/boyut-kapisi.mjs, araclar/izgara-kapisi.mjs. Bilinçli sapmalar: araclar/boyut-istisna.json.
+
+- karar (lead): tarih seçicideki gömülü küçük Pütür tamamen kaldırıldı. gerekçe: kullanıcı "buraya gömülü balonla konmasın" dedi; Pütür yalnız yüzen asistan.
+- karar (lead): Ezilme testi kartına "Örnek içerik — uzman onayı bekliyor" etiketi eklendi. gerekçe: panel Atlas etiketinin dışında.
+- karar (lead): evre üst etiketi tek satır, cümle düzeninde. gerekçe: kullanıcı "tek satır ve kısa" istedi.
+
+### Geri alınan boyutlar
+
+# FAZ 1 — boyut geri alma (denge4)
+
+Taban: e8ac2b6 (8772) · Sonra: çalışma ağacı (8765). Sayılar tarayıcıdan ölçüldü (reducedMotion, 1440×900 / 390×844).
+
+## Ölçüm: taban → sonra
+
+| Sayfa · sınıf | 1440 taban | 1440 sonra | 390 taban | 390 sonra |
+|---|---|---|---|---|
+| araclar .kd-ar-kart | 575×431 | 576×421 | 358×405 | 358×399 |
+| araclar .kd-ar-kart__ust | 511×84 | 512×84 | 314×84 | 310×84 |
+| araclar .kd-ar-kart__ikon | 84×84 | 84×84 | 84×84 | 84×84 |
+| araclar .kd-ar-guven | 1176×279 | 1176×269 | 358×591 | 358×591 |
+| araclar .kd-ar-guven__yan | 484×175 | 491×175 | 314×239 | 310×239 |
+| araclar #araclar .kd-bas | 1176×145 | 1176×145 | 358×160 | 358×160 |
+| donem-6-8-ay .kd-hero__gorsel | 532×399 | 532×399 | 358×269 | 358×269 |
+| donem-6-8-ay .kd-hero__izgara | 1176×399 | 1176×399 | 358×626 | 358×626 |
+| rehber-ek-gidaya-gecis .kd-hero__gorsel | 364×273 | 364×273 | 358×269 | 358×269 |
+| rehber-ek-gidaya-gecis .kd-hero__izgara | 1176×273 | 1176×273 | 358×604 | 358×602 |
+| donem-hamilelik .kd-modul | 278×382 | 278×382 | 358×312 | 358×312 |
+| donem-6-8-ay .kd-dsss | 880×402 | 880×396 | 390×458 | 390×452 |
+| donem-6-8-ay .kd-dguven | 1240×72 | 1240×72 | 390×177 | 390×205 |
+| donemler .kd-evre | 218×222 | 218×222 | 358×156 | 358×156 |
+| donemler .kd-dyol | 1176×208 | 1176×194 | 358×559 | 358×491 |
+| donemler .kd-devreler | 1176×222 | 1176×222 | 358×836 | 358×836 |
+| guvenli-kesim .kd-khero | 532×330 | 532×330 | 358×269 | 358×269 |
+| mevsim .kd-mhero | 532×320 | 532×320 | 358×260 | 358×260 |
+| mevsim .kd-acik .kd-mpanel__bas | 1176×74 | 1176×86 | 1002×63 | 358×102 |
+| mevsim .kd-mneden | 1240×372 | 1240×360 | 390×840 | 390×799 |
+| mevsim .kd-mguven | 1240×72 | 1240×72 | 390×154 | 390×180 |
+| tarif .kd-td-kutular | 788×190 | 788×190 | 358×501 | 358×499 |
+| tarif .kd-kutu.kd-td-ipucu | - | 248×190 | - | 358×140 |
+| arac-alerjen-takip .kd-at-bos | 706×96 | 709×88 | 358×137 | 358×129 |
+| arac-persentil .kd-pr-bos | 764×281 | 764×265 | 358×225 | 358×217 |
+| arac-persentil .kd-pr-sonuc | 764×433 | 764×409 | 358×470 | 358×454 |
+| arac-hazir-mi .kd-hero__izgara | 1176×320 | 1176×320 | 358×222 | 358×222 |
+| arac-hazir-mi .kd-hm-sonuc__canli | 411×151 | 411×149 | 318×136 | 318×134 |
+| tarifler .kd-hero__izgara | 1176×300 | 1176×300 | 358×454 | 358×480 |
+| kids .kd-hub-ay__kahraman:not([hidden]) | 544×131 | 544×131 | 322×183 | 322×183 |
+| rehber-ek-gidaya-gecis .kd-rkutu | 720×124 | 720×116 | 358×147 | 358×166 |
+
+## Geri alınan sınıflar (head → sonra)
+
+- `.kd-ar-kart` 576×659 → 576×421 (390: 358×536 → 358×399). `.kd-ar-kart__resim` bandı kaldırıldı; illüstrasyon `.kd-ar-kart__ikon--illus` ile 84px simge kutusunda. Köşe dairesi `::before` geri geldi.
+- `.kd-ar-izgara`, `.kd-gorundu` kart üzerinden tabana döndü.
+- `.kd-ar-guven__yan` 491×291 → 491×175; ipucu kutudan çıkıp `.kd-ar-guven` altına `.kd-ar-guven-not` olarak indi. `.kd-ar-guven` 355 → 269.
+- `.kd-ar-hero-illus`: araç sayfası 340 → 320 (rozet boyutu), hub 440 → 400 (kolaj boyutu). ≤1024 araç sayfasında gizli (tabandaki rozet gibi), hub'da 140px.
+- `.kd-hero__gorsel` (dönem) 480×480 → 532×399; (rehber) 364×364 → 364×273; 390: 358×358 → 358×269. Kutu 4:3, kare görsel `object-fit: contain` ve kırpılmadan ortalı (kids.css'te tek kural; araclar/rehber/donem/mevsim.css kopyaları silindi).
+- `.kd-hero__izgara` dönem 480 → 399, rehber 364 → 273.
+- `.kd-modul` 278×514 → 278×382; `.kd-modul__illus` yerine `.kd-modul__ikon--illus` (64px). `.kd-dyardim` padding override'ı silindi (22px'e döndü).
+- `.kd-evre` 218×408 → 218×222; `.kd-devre-g__resim` bandı yerine `.kd-evre__ikon--illus` (52px). `.kd-devreler` 408 → 222; 390: 2169 → 836.
+- `.kd-dyol` 329 → 194; `.kd-dyol__resim` silindi, kıvam ikonu tabandaki 60px kutuda.
+- `.kd-dsss` 1440×396 → 880×396; `.kd-dsss__ana`, `.kd-dsss__yan` kaldırıldı; Pütür notu ayrı `.kd-dsss__not` satırında (880px).
+- `.kd-dguven` 116 → 72; 390: 269 → 205. `.kd-mguven` 104 → 72; 390: 238 → 180. Yeni ortak `.kd-ipucu--kompakt`.
+- `.kd-mhero` 532×508 → 532×320; çerçeve 460×460 → 391×313 (video 5:4, contain). 390: 358×352 → 358×260.
+- `.kd-mpanel__bas` 232 → 86; illüstrasyon 200 → 64 (390'da 56), metin satırı tabandaki gibi yan yana.
+- `.kd-mneden` 577 → 360; `.kd-mneden__resim` silindi, kutu tabandaki gibi sağ kolonda, `align-items: center`.
+- `.kd-mmevsim__resim` ≤1100'de gizli; yıl bölümü 390'da 2014 → 964 (taban 769; üç sütunlu ay blokları site turu bulgusu, kalan fark bundan).
+- `.kd-murun` 768: 171 → 231; `minmax(172px)` ile sütun sayısı tabana döndü (12px boşluk 4. sütunu sığdırıyordu).
+- `.kd-khero` 532×418 → 532×330; padding silindi, görsel en çok 330 yükseklik (390: 269), ölçek kartı tabandaki konumda.
+- `.kd-td-kutular`, `.kd-kutu` 229 → 190; maskot başlık satırına indi (36px), metin kolonu 208px'e döndü.
+- `.kd-at-bos` 164 → 88; 390: 235 → 129, sütun düzeni kaldırıldı. Görsel 56px.
+- `.kd-pr-bos` 369 → 265; `.kd-pr-sonuc` 513 → 409. Görsel 76px.
+- `.kd-hm-sonuc` padding 28px'e döndü; `__canli` 419×117 → 411×149.
+- `.kd-bas` 390: 241/322 → 107/160; `.kd-ipucu--sag` ≤1024'te gizli (kids.css).
+- `.kd-tl-video` 390: 358×269 → 240×180; 1024: 293 genişlik. `.kd-hero__izgara` 569 → 480.
+- `.kd-hub-ay__kahraman` 544×157 → 544×131; 390: 279 → 183. `.kd-hub-ay__illus` silindi. `.kd-hub-mevsim`, `.kd-hub-ay` tabana döndü.
+- `.kd-at-alt` padding yatay 20px'e döndü.
+
+## Rehber makalesi: "içeri girmiş" bulgusu
+
+`.kd-rmakale` 7 genişlikte tabanla aynı (1440: 720px, sol 518.8). İç öğelerde iki gerçek daralma bulundu ve düzeltildi:
+
+1. `.kd-rfigur` sağa yüzüyordu: 3. bölümde başlık ve liste 720 → 486px, `li` 684 → 454px. Figür kaldırıldı (`.kd-rbolum--figur`, `.kd-rfigur`, `SAHNE`); bölüm 427 → 330px (taban 336).
+2. `.kd-rkutu-putur`: padding + 104px maskot + balon içi padding metni L132/R16'ya itiyordu (metin 524px, taban 676px). Tabandaki `.kd-kutu.kd-rkutu` geri geldi, metin 672px; küçük Pütür başlık satırında (36px).
+
+Ek: giriş ipucu `.kd-rgiris-ipucu` kompakt (maskot 104 → 64), balon metni genişledi. Liste `li` kenarı 18 → 16px (token yuvarlaması), tablo ve kaynak listesi tabanla aynı genişlikte.
+
+## Değişen dosyalar
+
+varlik/kids/kids.css · varlik/kids/css/{araclar,donem,hub,kesim,mevsim,rehber,tarifler}.css · src/kids/sayfalar/{araclar,donemler,hub,mevsim,rehber,tarifler}.mjs · araclar/boyut-kapisi.mjs (istisnada `genislik` alanı) · araclar/boyut-istisna.json · derlenen kids*.html
+
+### Denge listesi
+
+# Denge listesi (FAZ 3)
+
+Kapı eşiği 96px ve %12. Ek tarama: 64px ve %8, 1440 ve 1024 (rapor/tmp/denge/denge-tarama.log).
+
+| Sayfa | Bulgu (head) | Çözüm | Sonra |
+|---|---|---|---|
+| kids.html · `.kd-hub-profil__izgara` | 838 / 399, tarih seçici kart içinde hep açık | Seçici düğmeyle açılan popover / alt sheet; sağ kolona seçili evrenin 2 tarifi, Pütür balonu kaldırıldı | kart 721×423 (taban 399), sağ 433×405, fark 18px |
+| kids-mevsim.html · `.kd-mneden` | 360 / 577 | FAZ 1'de sağdaki görsel kaldırıldı, taban düzeni `align-items: center` | 360 / 251, dikey ortalı |
+| kids-rehber.html · `.kd-rguven` | 703 / 1287 | 1287 kapı hatasıydı: kapalı `details` içeriği sayılıyordu, kapı düzeltildi. Gerçek fark 148; ilk gösterilen kaynak 7 → 8 | 703 / 618 |
+| kids-arac-persentil.html · `kdPersentil` | 689 / 513 | Boy notu "Ölçerken" kutusuna, örnek + lisans notu sağ kolona alındı | kapı yeşil |
+| kids-arac-hazir-mi.html · `kdHazirMi` | 603 / 410 | Sonuç paneli yapışkan, liste kaydırılırken yanında kalır: `data-denge-serbest` | muaf |
+| kids-tarif.html · `.kd-td-govde` | 880 / 498 | Malzeme sütunu yapışkan: `data-denge-serbest` | muaf |
+
+Eşik altında kalan, dokunulmayanlar (64px taraması): `.kd-mkahraman` 408/487 (mevsim 1440), `.kd-hub-guven` 264/341 (hub 1440), `.kd-dikili` 434/360 (0-6 ay 1024). Üçü de 96px altında, bu yüzden değiştirilmedi.
+
+### Kararlar
+
+karar: Boşluk tokenı yuvarlamaları (22→24, 20→16 gibi ±2–6px) kalır; yalnız tur 2'nin bileşen özel padding override'ları ve kartı daraltan/uzatan olanlar tabana döndü (.kd-dyardim, .kd-devre-g, .kd-khero, .kd-mhero, .kd-hm-sonuc, .kd-at-alt). gerekçe: proje kuralı kd-s tokenı istiyor; kalanlar kapı toleransının altında.
+karar: Kartlardaki illüstrasyonlar silinmedi, tabandaki simge kutusuna alındı (84/64/52px). gerekçe: kart boyutu tabanda kalırken üretilmiş görseller kullanılmaya devam eder.
+karar: .kd-dyol illüstrasyonu tamamen kaldırıldı, kıvam ikonu kaldı. gerekçe: ikon evrenin kıvamını anlatıyor; 60px kutuya ikisi sığmaz.
+karar: Kare hero görseli 4:3 kutuda kare olarak ortalı (kutu 532×399, görsel 399×399). gerekçe: object-fit contain + img genişliği %100 olsa köşe yuvarlaması görselin kenarına oturmaz.
+karar: Mevsim videosu 5:4 olduğundan çerçeve 391×313. gerekçe: kırpma yok, tabandaki 420×315 yüksekliği korunur.
+karar: Başlık yanı ipucu (.kd-ipucu--sag) ≤1024'te gizli. gerekçe: lead .kd-bas'ın tabana dönmesini istedi; bu notlar temel içerik değil, yüzen Pütür sayfada duruyor. Bilinen bedel: mobilde bu notlar görünmez.
+karar: .kd-ipucu--kompakt ≤640'ta "Pütür'ün notu:" önekini gizler. gerekçe: .kd-dguven 390'da 18% sınırına ancak böyle sığıyor; metnin kendisi kalır.
+karar: Araç sayfası hero illüstrasyonu ≤1024'te gizli. gerekçe: taban rozeti de gizliydi; 222px hero 446'ya çıkıyordu.
+karar: .kd-ar-guven ipucu kutunun altına indi. gerekçe: kutu içinde kaldığında .kd-ar-guven__yan 291 oluyordu.
+karar: SSS Pütür notu .kd-dsss içinde değil, altında ayrı satır. gerekçe: .kd-dsss 880 genişliğe dönünce yan sütun sığmıyor.
+karar: Boyut kapısına istisnada isteğe bağlı `genislik` alanı eklendi. gerekçe: eşik gevşetme değil, istisnayı tek genişliğe daraltır; kids-mevsim 390'da taban 1002px taşıyordu, kıyas anlamsız.
+
+# FAZ 2
+karar: izgara3 yaması süzülerek `git apply --3way` ile uygulandı (scratchpad/izgara3-suz.patch). Atılan hunk'lar: donemler.mjs:477 (kaldırılan görsel bandı), hub.css (--kd-min silen), mevsim.css:80 ve :157 (4 sütun zorlayan), kids.css (tümü elle yazıldı). gerekçe: FAZ 1 boyutları ve sütun sayısı korunsun.
+karar: .kd-sutun-N, .kd-evre-izgara, .kd-hizali--6, .kd-devre-g görsel kuralları, evre kartında dikey .kd-evre__ust alınmadı. gerekçe: kart genişliği/yüksekliği değiştiriyorlardı.
+karar: .kd-dortlu sütunları .kd-izgara'nın otomatik sayısıyla aynı (4 / 3 / 2 / 1; 1160 ve 856 eşikleri ölçüldü). 3 sütunda altı izli ızgara. gerekçe: kart genişliği tabanda kalır, tek kalan kart ortalanabilir.
+karar: Boş yuva kartları: Tüm besinler (.kd-dodak-cta, 4 ve 2 sütunda), Tüm tarifler (.kd-seri-cta), Evreleri karşılaştırın ve Ek gıdaya hazır mı (.kd-evre-cta, 5 sütunda gizli), Ezilme testi (.kd-kbogulma__bilgi, tek sütunda gizli). gerekçe: yalnız mevcut sayfalara yönlendirme ya da yamadaki metin; uydurma tıbbi içerik yok.
+karar: Şerit 4 kart + 3 sütunda dördüncü kart gizli. gerekçe: orta genişlikte CTA ile iki satır olunca tarif detayı ve ogurme büyüyordu (366 → 757); gizleme satırı tam tutar, kart boyutu değişmez. Bedel: 1024'te 4. öneri görünmez, bu yüzden 16 küçülme istisnası eklendi.
+karar: Tarif detay ve hub şeritleri mobilde yatay kaydırmaz, alt alta kalır; tarif detayında mobilde 3 kart. gerekçe: taban böyle; kaydırıcı kartı 358 → 240 daraltıyordu.
+karar: Ay tarifleri kendi sütun kuralını taşır (1016 üstü 4, 766 üstü 3, 641 üstü 2), .kd-dortlu kullanmaz. gerekçe: tabanda --kd-min 230.
+karar: .kd-mtezgah__liste sarmalı flex, sütun 6/5/4/3/2. gerekçe: tür süzgeci kart sayısını değiştirir; yamadaki sabit 4 sütun kartı 185 → 285 genişletiyordu.
+karar: izgara-kapisi.mjs öneri denetimi span ve 6 izli 3 sütunu sayar, 3 sütunda 3 kart satırı tam kabul edilir. gerekçe: "sütun sayısı tabandaki gibi" kuralı; BOZ=1 ile kapı hâlâ kırmızı veriyor (2 sayfada doğrulandı).
+karar: .kd-evre__aralik ≥641'de iki satır yer ayırır, alta hizalı. gerekçe: etiket satır sayısı başlık hizasını 14px bozuyordu; satır yüksekliğini en uzun kart belirlediği için kart büyümez.
+
+# FAZ 3
+karar: Tarih seçici sonuç kartı (.kd-ds__sonuc, küçük Pütür) açılır panelin içine alındı, kaldırılmadı; hub'daki .kd-hub-pütür balonu silindi. gerekçe: lead "görünüm ve mantık aynı" ve "gömülü balonu kaldır" dedi; sonuç metni seçici davranışının parçası.
+karar: Popover modal değil ama Tab paneli içinde döner. gerekçe: alt sheet ile tek kod yolu; Esc ve dış tık kapatır.
+karar: Panel açılınca sayfa en az miktarda kaydırılır (scrollIntoView nearest, instant). gerekçe: hero altındaki kart yüksek ekranda kesilmesin; sticky menü için scroll-margin var.
+karar: Sağ kolondaki 2 tarif yalnız ≥1025'te. gerekçe: alt alta düzende denge sorunu yok, mobil büyümesin. Tarifi olmayan evrede (hamilelik, 0–6 ay) başlık "Ek gıdaya geçince" ve 6–8 ay tarifleri görünür.
+karar: Üçüncü madde metni kısaldı ("Hiçbir yere gönderilmez, bu tarayıcıda durur."). gerekçe: .kd-hub-liste tabana dönsün; ayrıntı formun altındaki notta duruyor.
+karar: Persentil .kd-pr-son sağ kolona alındı, .kd-pr ≤1024'te uzadı; istisna eklendi. gerekçe: içerik aynı, sayfa toplamı değişmedi.
+karar: boyut-kapisi.mjs kapalı details içeriğini saymıyor. gerekçe: hata düzeltmesi, kd-rguven 1287 sahteydi; eşik değişmedi.
+karar: hazirMi ve td-govde data-denge-serbest. gerekçe: yapışkan yan sütun, kalıcı boş alan yok.
