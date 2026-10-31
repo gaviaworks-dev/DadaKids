@@ -1,0 +1,51 @@
+{
+  "_aciklama": "Evre özetleri — ÖRNEK İÇERİK, uzman onayı bekliyor. Yalnız DSÖ / NHS / AAP'nin uzlaştığı genel ifadeler; sayısal dozaj ve tanı içermez. Alanlar her evrede aynıdır (karşılaştırılabilirlik).",
+  "alanlar": ["beslenme", "kivam", "odak"],
+  "evreler": [
+    {
+      "kod": "hamilelik",
+      "ad": "Hamilelik & Lohusalık",
+      "aralik": "T1 · T2 · T3 · Emzirme",
+      "ikon": "fa-person-pregnant",
+      "beslenme": "Dengeli ve çeşitli öğünler; takviyeler için hekim önerisi esas.",
+      "kivam": "Çiğ ya da az pişmiş et, yumurta ve pastörize edilmemiş süt ürünlerinden kaçınılır.",
+      "odak": "Folat, demir ve iyot öne çıkar."
+    },
+    {
+      "kod": "0-6-ay",
+      "ad": "0–6 Ay",
+      "aralik": "Sıvı beslenme",
+      "ikon": "fa-bottle-water",
+      "beslenme": "Yalnız anne sütü ya da formül mama; ek gıda başlanmaz.",
+      "kivam": "Katı gıda yok. Hazır olma belirtileri genellikle 6. ay civarında görülür.",
+      "odak": "Anne sütü, formül mama ve hazırlık belirtileri."
+    },
+    {
+      "kod": "6-8-ay",
+      "ad": "6–8 Ay",
+      "aralik": "Ek gıdaya geçiş",
+      "ikon": "fa-spoon",
+      "beslenme": "Süt hâlâ ana besin; ek gıda tadım ve alışma içindir.",
+      "kivam": "Pürüzsüz püreden çatalla ezilmişe hızlı geçiş; yumuşak parmak gıdalar.",
+      "odak": "Demirden zengin besinler ve tek tek tanıştırılan alerjenler."
+    },
+    {
+      "kod": "9-12-ay",
+      "ad": "9–12 Ay",
+      "aralik": "Pütürlü & parmak gıda",
+      "ikon": "fa-hand-pointer",
+      "beslenme": "Günde 3 öğüne doğru; süt beslenmesi sürer.",
+      "kivam": "Pütürlü, küçük ve yumuşak parçalar; kıskaç tutuşuna uygun parmak gıdalar.",
+      "odak": "Demir, çinko ve çeşitlilik."
+    },
+    {
+      "kod": "1-3-yas",
+      "ad": "1–3 Yaş",
+      "aralik": "Aile sofrası",
+      "ikon": "fa-utensils",
+      "beslenme": "Aile sofrasına uyum; tuz ve şeker eklenmeden ayrılan porsiyonlar.",
+      "kivam": "Aile yemekleri, boğulma riskine göre kesilmiş; yuvarlak besinler bütün verilmez.",
+      "odak": "Seçici yeme dönemi ve düzenli öğün ritmi."
+    }
+  ]
+}

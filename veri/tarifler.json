@@ -1,0 +1,682 @@
+{
+ "_aciklama": "Dada Kids örnek kataloğu. Tarifler dadagastro.com Bebek Tarifleri kategorisinden (ad, görsel, malzeme, süre, yazar, puan: Gastro JSON-LD). Kids alanları (yas, kivam, icerir, glutensiz/sutsuz/yumurtasiz) prototip ataması: ÖRNEK İÇERİK — uzman onayı bekliyor.",
+ "_kurallar": {
+  "yas": "kaynak tarifteki ay, Kids kovalarına (6/8/9/12/18/24) YUKARI yuvarlanır; ör. 10 ay → +12. Kaynağın söylediğinden erken yaş gösterilmez.",
+  "glutensiz": "emin olunamayan malzeme (kabartma tozu) varsa false."
+ },
+ "kovalar": [
+  {
+   "ay": 6,
+   "etiket": "+6 Ay"
+  },
+  {
+   "ay": 8,
+   "etiket": "+8 Ay"
+  },
+  {
+   "ay": 9,
+   "etiket": "+9 Ay"
+  },
+  {
+   "ay": 12,
+   "etiket": "+12 Ay"
+  },
+  {
+   "ay": 18,
+   "etiket": "+18 Ay"
+  },
+  {
+   "ay": 24,
+   "etiket": "2–3 Yaş"
+  }
+ ],
+ "kivamlar": {
+  "pure": "Pürüzsüz Püre",
+  "ezilmis": "Çatalla Ezilmiş",
+  "parmak": "Parmak Gıda / BLW"
+ },
+ "alerjenler": {
+  "sut": "Süt",
+  "yumurta": "Yumurta",
+  "bugday": "Buğday (gluten)",
+  "yerfistigi": "Yer fıstığı",
+  "sertkabuklu": "Sert kabuklu",
+  "susam": "Susam",
+  "soya": "Soya",
+  "balik": "Balık",
+  "kabuklu": "Kabuklu deniz ürünü"
+ },
+ "demoKiler": [
+  "su",
+  "patates",
+  "havuç",
+  "elma",
+  "muz",
+  "yulaf",
+  "zeytinyağı",
+  "yoğurt",
+  "yumurta",
+  "kabak"
+ ],
+ "tarifler": [
+  {
+   "id": 1403,
+   "ad": "Elma Püresi",
+   "tamAd": "Elma Püresi | 6 Ay ve Üzeri Bebekler İçin Şekersiz Tarif",
+   "gastroSlug": "elma-puresi-6-ay-ve-uzeri-bebekler-icin-sekersiz-tarif",
+   "gorsel": "varlik/gastro/varliklar/media/1403.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1403/thumb.webp",
+   "sureDk": 20,
+   "porsiyon": "2 kişilik",
+   "yazar": "Ada Önür",
+   "puan": null,
+   "kaynakAy": 6,
+   "yas": 6,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "1 adet Elma",
+     "anahtar": "elma"
+    },
+    {
+     "metin": "½ su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1404,
+   "ad": "Avokado Muz Püresi",
+   "tamAd": "Avokado Muz Püresi | 6 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "avokado-muz-puresi-6-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1404.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1404/thumb.webp",
+   "sureDk": 5,
+   "porsiyon": "2 kişilik",
+   "yazar": "Ada Önür",
+   "puan": 5.0,
+   "kaynakAy": 6,
+   "yas": 6,
+   "kivam": "ezilmis",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "½ adet Avokado",
+     "anahtar": "avokado"
+    },
+    {
+     "metin": "½ adet Muz",
+     "anahtar": "muz"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1405,
+   "ad": "Balkabağı Püresi",
+   "tamAd": "Balkabağı Püresi | 6 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1405.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1405/thumb.webp",
+   "sureDk": 20,
+   "porsiyon": "3 kişilik",
+   "yazar": "Esma Çevik",
+   "puan": 3.3,
+   "kaynakAy": 6,
+   "yas": 6,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "200 gram balkabağı",
+     "anahtar": "balkabağı"
+    },
+    {
+     "metin": "½ su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": "kids__tarif__balkabagi-puresi.html"
+  },
+  {
+   "id": 1406,
+   "ad": "Havuçlu Patates Püresi",
+   "tamAd": "Havuçlu Patates Püresi | 6 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "havuclu-patates-puresi-6-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1406.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1406/thumb.webp",
+   "sureDk": 26,
+   "porsiyon": "3 kişilik",
+   "yazar": "Esma Çevik",
+   "puan": 4.3,
+   "kaynakAy": 6,
+   "yas": 6,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "1 adet Havuç",
+     "anahtar": "havuç"
+    },
+    {
+     "metin": "1 adet Patates",
+     "anahtar": "patates"
+    },
+    {
+     "metin": "1 çay kaşığı Zeytinyağı",
+     "anahtar": "zeytinyağı"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1952,
+   "ad": "Kabak Püresi",
+   "tamAd": "Kabak Püresi | 6 Ay ve Üzeri Bebekler İçin Nötr Kıvamında Tarif",
+   "gastroSlug": "kabak-puresi-6-ay-ve-uzeri-bebekler-icin-notr-kivaminda-tarif",
+   "gorsel": "varlik/gastro/varliklar/media/1952.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1952/thumb.webp",
+   "sureDk": 17,
+   "porsiyon": "2 kişilik",
+   "yazar": "Emel Çatalbaş",
+   "puan": null,
+   "kaynakAy": 6,
+   "yas": 6,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "1 adet Kabak",
+     "anahtar": "kabak"
+    },
+    {
+     "metin": "½ su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1953,
+   "ad": "Tatlı Patates Püresi",
+   "tamAd": "Tatlı Patates Püresi | 6 Ay ve Üzeri Bebekler İçin Kremamsı Dokulu Şekersiz Tarif",
+   "gastroSlug": "tatli-patates-puresi-6-ay-ve-uzeri-bebekler-icin-kremamsi-dokulu-sekersiz-tarif",
+   "gorsel": "varlik/gastro/varliklar/media/1953.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1953/thumb.webp",
+   "sureDk": 25,
+   "porsiyon": "2 kişilik",
+   "yazar": "Emel Çatalbaş",
+   "puan": 5.0,
+   "kaynakAy": 6,
+   "yas": 6,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "1 adet tatlı patates",
+     "anahtar": "tatlı patates"
+    },
+    {
+     "metin": "½ su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1407,
+   "ad": "Kırmızı Mercimek Çorbası",
+   "tamAd": "Kırmızı Mercimek Çorbası | 8 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "kirmizi-mercimek-corbasi-8-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1407.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1407/thumb.webp",
+   "sureDk": 40,
+   "porsiyon": "4 kişilik",
+   "yazar": "Esma Çevik",
+   "puan": 4.0,
+   "kaynakAy": 8,
+   "yas": 8,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "½ su bardağı kırmızı mercimek",
+     "anahtar": "mercimek"
+    },
+    {
+     "metin": "1 adet Havuç",
+     "anahtar": "havuç"
+    },
+    {
+     "metin": "1 adet Patates",
+     "anahtar": "patates"
+    },
+    {
+     "metin": "3 su bardağı Su",
+     "anahtar": "su"
+    },
+    {
+     "metin": "1 çay kaşığı Zeytinyağı",
+     "anahtar": "zeytinyağı"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1410,
+   "ad": "Yoğurtlu Armut Ezmesi",
+   "tamAd": "Yoğurtlu Armut Ezmesi | 8 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "yogurtlu-armut-ezmesi-8-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1410.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1410/thumb.webp",
+   "sureDk": 15,
+   "porsiyon": "2 kişilik",
+   "yazar": "Bora Küçükler",
+   "puan": null,
+   "kaynakAy": 8,
+   "yas": 8,
+   "kivam": "ezilmis",
+   "icerir": [
+    "sut"
+   ],
+   "glutensiz": true,
+   "sutsuz": false,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "1 adet Armut",
+     "anahtar": "armut"
+    },
+    {
+     "metin": "2 yemek kaşığı Süzme yoğurt",
+     "anahtar": "yoğurt"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1412,
+   "ad": "Brokoli Patates Püresi",
+   "tamAd": "Brokoli Patates Püresi | 8 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "brokoli-patates-puresi-8-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1412.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1412/thumb.webp",
+   "sureDk": 23,
+   "porsiyon": "3 kişilik",
+   "yazar": "Bora Küçükler",
+   "puan": 3.5,
+   "kaynakAy": 8,
+   "yas": 8,
+   "kivam": "pure",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "4 adet Brokoli",
+     "anahtar": "brokoli"
+    },
+    {
+     "metin": "1 adet Patates",
+     "anahtar": "patates"
+    },
+    {
+     "metin": "1 çay kaşığı Zeytinyağı",
+     "anahtar": "zeytinyağı"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1959,
+   "ad": "Yulaflı Muzlu Kahvaltı Lapası",
+   "tamAd": "Yulaflı Muzlu Kahvaltı Lapası | 8 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "yulafli-muzlu-kahvalti-lapasi-8-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1959.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1959/thumb.webp",
+   "sureDk": 13,
+   "porsiyon": "2 kişilik",
+   "yazar": "Toprak Ekşioğlu",
+   "puan": 5.0,
+   "kaynakAy": 8,
+   "yas": 8,
+   "kivam": "ezilmis",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "3 yemek kaşığı glutensiz yulaf ezmesi",
+     "anahtar": "yulaf"
+    },
+    {
+     "metin": "½ adet Muz",
+     "anahtar": "muz"
+    },
+    {
+     "metin": "½ su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1962,
+   "ad": "Haşlanmış Yumurta Sarısı Ezmesi",
+   "tamAd": "Haşlanmış Yumurta Sarısı Ezmesi | 8 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "haslanmis-yumurta-sarisi-ezmesi-8-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1962.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1962/thumb.webp",
+   "sureDk": 15,
+   "porsiyon": "2 kişilik",
+   "yazar": "Toprak Ekşioğlu",
+   "puan": null,
+   "kaynakAy": 8,
+   "yas": 8,
+   "kivam": "ezilmis",
+   "icerir": [
+    "yumurta"
+   ],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": false,
+   "malzemeler": [
+    {
+     "metin": "1 adet Yumurta",
+     "anahtar": "yumurta"
+    },
+    {
+     "metin": "1 yemek kaşığı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1980,
+   "ad": "Buharda Pişmiş Sebze Çubukları (Brokoli ve Havuç)",
+   "tamAd": "Buharda Pişmiş Sebze Çubukları (Brokoli ve Havuç) | 9 Ay ve Üzeri Bebekler İçin Parmak Besin",
+   "gastroSlug": "buharda-pismis-sebze-cubuklari-brokoli-ve-havuc-9-ay-ve-uzeri-bebekler-icin-parmak-besin",
+   "gorsel": "varlik/gastro/varliklar/media/1980.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1980/thumb.webp",
+   "sureDk": 22,
+   "porsiyon": "2 kişilik",
+   "yazar": "Kerem Özbey",
+   "puan": 5.0,
+   "kaynakAy": 9,
+   "yas": 9,
+   "kivam": "parmak",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "100 gram Brokoli",
+     "anahtar": "brokoli"
+    },
+    {
+     "metin": "1 adet Havuç",
+     "anahtar": "havuç"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1409,
+   "ad": "Tavuklu Sebze Püresi",
+   "tamAd": "Tavuklu Sebze Püresi | 10 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "tavuklu-sebze-puresi-10-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1409.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1409/thumb.webp",
+   "sureDk": 40,
+   "porsiyon": "3 kişilik",
+   "yazar": "Esma Çevik",
+   "puan": 3.7,
+   "kaynakAy": 10,
+   "yas": 12,
+   "kivam": "ezilmis",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "50 gram Tavuk göğsü",
+     "anahtar": "tavuk"
+    },
+    {
+     "metin": "1 adet Havuç",
+     "anahtar": "havuç"
+    },
+    {
+     "metin": "1 adet Patates",
+     "anahtar": "patates"
+    },
+    {
+     "metin": "½ adet Kabak",
+     "anahtar": "kabak"
+    },
+    {
+     "metin": "2 su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1965,
+   "ad": "Bulgurlu Sebze Lapası",
+   "tamAd": "Bulgurlu Sebze Lapası | 12 Ay ve Üzeri Bebekler İçin",
+   "gastroSlug": "bulgurlu-sebze-lapasi-12-ay-ve-uzeri-bebekler-icin",
+   "gorsel": "varlik/gastro/varliklar/media/1965.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1965/thumb.webp",
+   "sureDk": 30,
+   "porsiyon": "3 kişilik",
+   "yazar": "Türker Abacı",
+   "puan": null,
+   "kaynakAy": 12,
+   "yas": 12,
+   "kivam": "ezilmis",
+   "icerir": [
+    "bugday"
+   ],
+   "glutensiz": false,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "3 yemek kaşığı ince bulgur",
+     "anahtar": "bulgur"
+    },
+    {
+     "metin": "1 adet Kabak",
+     "anahtar": "kabak"
+    },
+    {
+     "metin": "1 adet Havuç",
+     "anahtar": "havuç"
+    },
+    {
+     "metin": "1 su bardağı Su",
+     "anahtar": "su"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1966,
+   "ad": "Yumuşak Nohut Köftesi",
+   "tamAd": "Yumuşak Nohut Köftesi | 12 Ay ve Üzeri Bebekler İçin Parmak Besin",
+   "gastroSlug": "yumusak-nohut-koftesi-12-ay-ve-uzeri-bebekler-icin-parmak-besin",
+   "gorsel": "varlik/gastro/varliklar/media/1966.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1966/thumb.webp",
+   "sureDk": 35,
+   "porsiyon": "3 kişilik",
+   "yazar": "Türker Abacı",
+   "puan": 4.3,
+   "kaynakAy": 12,
+   "yas": 12,
+   "kivam": "parmak",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "1 su bardağı Nohut",
+     "anahtar": "nohut"
+    },
+    {
+     "metin": "2 yemek kaşığı glutensiz yulaf ezmesi",
+     "anahtar": "yulaf"
+    },
+    {
+     "metin": "1 yemek kaşığı Zeytinyağı",
+     "anahtar": "zeytinyağı"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1967,
+   "ad": "Muzlu Yulaf Kurabiyesi",
+   "tamAd": "Muzlu Yulaf Kurabiyesi | 12 Ay ve Üzeri Bebekler İçin Şekersiz Tarif",
+   "gastroSlug": "muzlu-yulaf-kurabiyesi-12-ay-ve-uzeri-bebekler-icin-sekersiz-tarif",
+   "gorsel": "varlik/gastro/varliklar/media/1967.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1967/thumb.webp",
+   "sureDk": 33,
+   "porsiyon": "14 kişilik",
+   "yazar": "Türker Abacı",
+   "puan": 4.0,
+   "kaynakAy": 12,
+   "yas": 12,
+   "kivam": "parmak",
+   "icerir": [],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": true,
+   "malzemeler": [
+    {
+     "metin": "2 adet Muz",
+     "anahtar": "muz"
+    },
+    {
+     "metin": "1 su bardağı glutensiz yulaf ezmesi",
+     "anahtar": "yulaf"
+    },
+    {
+     "metin": "½ çay kaşığı Tarçın",
+     "anahtar": "tarçın"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1981,
+   "ad": "Sebzeli Bebek Omleti",
+   "tamAd": "Sebzeli Bebek Omleti | 10 Ay ve Üzeri Bebekler İçin Parmak Besin",
+   "gastroSlug": "sebzeli-bebek-omleti-10-ay-ve-uzeri-bebekler-icin-parmak-besin",
+   "gorsel": "varlik/gastro/varliklar/media/1981.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1981/thumb.webp",
+   "sureDk": 25,
+   "porsiyon": "2 kişilik",
+   "yazar": "Kerem Özbey",
+   "puan": 4.0,
+   "kaynakAy": 10,
+   "yas": 12,
+   "kivam": "parmak",
+   "icerir": [
+    "yumurta"
+   ],
+   "glutensiz": true,
+   "sutsuz": true,
+   "yumurtasiz": false,
+   "malzemeler": [
+    {
+     "metin": "2 adet Yumurta",
+     "anahtar": "yumurta"
+    },
+    {
+     "metin": "½ adet Kabak",
+     "anahtar": "kabak"
+    },
+    {
+     "metin": "½ adet Havuç",
+     "anahtar": "havuç"
+    }
+   ],
+   "kidsSayfa": null
+  },
+  {
+   "id": 1983,
+   "ad": "Elmalı Pirinç Keki",
+   "tamAd": "Elmalı Pirinç Keki | 12 Ay ve Üzeri Bebekler İçin Şekersiz Tarif",
+   "gastroSlug": "elmali-pirinc-keki-12-ay-ve-uzeri-bebekler-icin-sekersiz-tarif",
+   "gorsel": "varlik/gastro/varliklar/media/1983.webp",
+   "kucuk": "varlik/gastro/varliklar/media/1983/thumb.webp",
+   "sureDk": 40,
+   "porsiyon": "8 dilim",
+   "yazar": "Kerem Özbey",
+   "puan": null,
+   "kaynakAy": 12,
+   "yas": 12,
+   "kivam": "parmak",
+   "icerir": [
+    "yumurta",
+    "sut"
+   ],
+   "glutensiz": false,
+   "sutsuz": false,
+   "yumurtasiz": false,
+   "malzemeler": [
+    {
+     "metin": "1 su bardağı Pirinç unu",
+     "anahtar": "pirinç unu"
+    },
+    {
+     "metin": "1 adet Elma",
+     "anahtar": "elma"
+    },
+    {
+     "metin": "1 adet Yumurta",
+     "anahtar": "yumurta"
+    },
+    {
+     "metin": "¼ su bardağı Süt",
+     "anahtar": "süt"
+    },
+    {
+     "metin": "½ tatlı kaşığı Kabartma tozu",
+     "anahtar": "kabartma tozu"
+    }
+   ],
+   "kidsSayfa": null
+  }
+ ]
+}
