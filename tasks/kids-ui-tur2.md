@@ -79,3 +79,23 @@ Eski çizimler yalnız `sekil` anahtarından üretiliyordu; aynı şekilli besin
 - karar: yerleşim: el sallayan çocuk sol altta "d"nin yanında, zıplayan çocuk sağ üstte "s"nin ucuna tutunuyor; harflerin üstüne binmez. 320px'te de sığıyor (eylem düğmelerine 8px), ≤360 gizleme kuralı kaldırıldı.
 - karar: favicon ve dokunma ikonu yalnız "k" (figürsüz); `dada-kids-sade.svg` figürsüz kalır; `dada-kids.svg` figürleri gömülü taşır.
 
+## 7. Pütür asistanı
+
+# Pütür — kararlar
+- karar: Video denemeleri kling3_0, 3 sn (modelin alt sınırı), start=end aynı idle kare, krom yeşil zemin. gerekçe: Birim maliyet 4,5–5,25 kr; 3 sn çekim sonradan 2–2,5 sn'ye hızlandırılabilir; start=end ilk/son kare idle uyumunu sağlar.
+- karar: Video adayı 50420d95 (kling3_0 pro, P3) seçildi. gerekçe: 10 adaydan biçimi en iyi koruyan aday. Tur 1'de bacak/kol uzuyordu, kapak ayrılıyordu; Seedance adaylarında kapak havalanıyor ya da beyaz sticker kenarı/gölge ekleniyordu. Bu aday küçük ayak ve eldivenleri koruyor, kapak gövdede kalıyor; tek bozuk geçiş karesi (26–28) kesilecek.
+- karar: Şerit rengi 5 ayrı video kopyası (zipla-pembe|mavi|seftali|mint|sari). gerekçe: Şerit evre ve temayla renk değiştiriyor; tek pembe video oynarken renk zıplıyordu. Kopyalar aynı hareket, ayıklama hattında şerit bileşeni yeniden boyanıyor, yalnız gerekli dosya iniyor.
+- karar: Safari için HEVC alpha ürettim (hevc_videotoolbox), animasyonlu webp yedeğine gerek kalmadı. gerekçe: AVFoundation dosyada public.contains-alpha-channel raporladı.
+- karar: Video yalnız Chromium ailesi (VP9) ve Safari'de (HEVC) oynar; Firefox ve diğerleri SVG/CSS zıplaması. gerekçe: Şeffaflık bozuk çıkma riskini almamak; iki yol da aynı koreografi.
+- karar: Video kaynağında tek büyük sıçrayış + iniş sekmesi var (2–3 zıplama değil); SVG/CSS zıplaması 3 sekmeli. gerekçe: En temiz aday bu; 3 sekmeli Kling adaylarında bacak uzuyor ve kapak ayrılıyordu, tanınırlık önceliklidir.
+- karar: Video kareleri %4,5 parlaklaştırıldı, ilk 4 ve son 5 kare SVG idle pozuna premultiplied karışımla bağlandı. gerekçe: Kling tüm kareyi ~%4 koyulaştırıyor; SVG ile geçiş fark edilmesin.
+- karar: Dar ekranda (Pütür sol boşluğa sığmıyorsa) sayfa 48 px'ten fazla kayınca Pütür kenara çekilir (%60'ı görünür), tık/odak/menüde tam çıkar. gerekçe: Mobilde içerik sütununda boş sol kenar yok; kenara çekilmeden sabit maskot okunan içeriğin üstünde kalırdı.
+- karar: Footer açılınca Pütür yasal bağların ve telif satırının üstüne kalkar (--pt-kaldir). gerekçe: Footer sabit perde; 768–1024'te telif sütunu Pütür'le kesişiyordu.
+- karar: Klavyeyle açılışta (click detail 0) zıplama beklenmez, menü hemen açılır. gerekçe: Klavye/ekran okuyucu kullanıcısı 2 sn animasyon beklememeli.
+- karar: Acil seçeneğinde düşünme animasyonu ve gecikme yok. gerekçe: Acil bilgi bekletilmez.
+- karar: "Bu besin güvenli mi?" dönem matrisiyle aynı kuralı kullanır (minAy, durum, boğulma riski), profil hamilelikse hamilelik kayıtları görünür, bebek aramasından süzülür. gerekçe: besinler.json şeması bunu ister; site içi çelişki olmaz.
+- karar: "Ek gıdaya hazır mı?" balonunda 3 işaret evreler.json'dan gelir, 5 işaretlik liste araca yönlendirilir. gerekçe: 5 işaret yalnız araç sayfasında; balonda tekrar yazmak ikinci kaynak yaratırdı.
+- karar: Dosya değişikliği yapmadan önceki `rapor/tmp/putur-yarim` kopyasına dokunmadım; varlik/kids/putur/ içinde eski ad `zipla.webm` hiç üretilmedi. gerekçe: Tek kaynak varlik/kids/js/putur.js.
+- karar: Safari yolu WebKit 2370 ile ölçüldü: Range destekli geçici sunucuda HEVC alpha hazır, oynadı, şeffaf (ekran görüntüsü tmp/webkit-video.png), menü açıldı, JS hatası yok. gerekçe: Ortak yerel sunucu (8765) Range yanıtı vermiyor (200, octet-stream), bu yüzden WebKit orada videoyu reddedip SVG/CSS zıplamaya düşüyor; bu sessiz ve hatasız bir yedek. GitHub Pages Range veriyor.
+- karar: Firefox 1538 ile ölçüldü: video kullanmaz, SVG/CSS zıplar, menü açılır, JS hatası yok. gerekçe: Kasıtlı yedek yol.
+- karar: Dar ekranda sayfanın en üstünde de, tam boy Pütür bir bağın/düğmenin ortasını örtecekse kenara çekilir. gerekçe: İlk sürümdeki "en üstte hep tam boy" kuralı içerik düzenine bağlıydı; kids-tarifler yaş şeridi yer değiştirince 390'da "Tümü" çipini örttü (kapi-taban.txt, 1996/1997). Yeni kontrol ızgara sınıfı kullanmaz.

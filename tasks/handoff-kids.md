@@ -55,6 +55,9 @@ Kapsam:
 
 - ☑ EK logo figürleri: Higgsfield Aday 1, tek bileşen, favicon sade (kids-ui-tur2.md §8); Pütür ve ızgara ayrı push (yayın worktree'si: temiz HEAD + yalnız kendi dosyaları)
 
+- ☑ (e) Pütür: yüzen asistan, video zıplama (Kling 50420d95), parıltı sürprizi, radial menü, putur-kapisi 1997/1997 (kids-ui-tur2.md §7)
+- ◐ (d) Boyut geri alma + yarım ızgara + denge: `denge4` (yarım izgara3 işi rapor/tmp/izgara-wip/izgara3.patch), boyut-kapisi tabanı e8ac2b6
+
 Ajan kolları (git yalnız lead'de; iki ajan aynı dosyaya yazmaz):
 - `izgara3`: src/kids/ortak.mjs, src/kids/sayfalar/*.mjs, varlik/kids/kids.css, varlik/kids/css/*.css (putur.css ve dogum-secici.css HARİÇ), varlik/kids/js/kesim.js|mevsim.js|rehber.js|donem.js|hub.js, araclar/izgara-kapisi.mjs, rapor/tmp/izgara/** · build yalnız bu kolda
 - `putur3`: varlik/kids/css/putur.css, varlik/kids/js/putur.js, varlik/kids/putur/**, araclar/putur-kapisi.mjs, rapor/tmp/putur/** · ≤300 kr · build çalıştırmaz
