@@ -128,36 +128,114 @@ export default async function donemler(o) {
     }
     return g;
   }
-  function matrisOge(b0, kod, tur) {
+  /* Sekmeli besin bileşeni (matris kolu): üstte durum sekmeleri, altta dengeli kart ızgarası.
+     İçerik bugünküyle aynı (ad, gerekçe, sunum, açılış yaşı, kesim bağı); yalnız sunuş değişti.
+     Kapı sözleşmesi: [data-kd-matris=kod] · sekme [data-durum][data-sayi] · kart [data-besin] (0–6 ay evre notu: [data-kd-ek]) */
+  const MATRIS_SINIR = 8;
+  const FILTRE_GRUP = { 'sebze': 'sebze', 'meyve': 'meyve', 'protein': 'protein', 'baklagil': 'protein', 'kuruyemiş': 'protein', 'tohum': 'protein', 'tahıl': 'tahil', 'süt ürünü': 'sut' };
+  const FILTRE_AD = { sebze: 'Sebze', meyve: 'Meyve', protein: 'Protein', tahil: 'Tahıl', sut: 'Süt ürünü', diger: 'Diğer' };
+  const URUN_ESLE = { 'kiraz-domates': 'domates' };
+  const TARIF_ESLE = { mercimek: ['kirmizi-mercimek'], kofte: ['kiyma'], balik: ['somon'], peynir: ['lor-peyniri', 'kasar'], 'yer-fistigi': ['fistik-ezmesi'] };
+  const svg64 = (ic, boy = 40) => `<svg viewBox="0 0 64 64" width="${boy}" height="${boy}" fill="none" stroke="#3A2E2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ic}</svg>`;
+  const GRUP_SVG = {
+    'süt ürünü': '<path d="M24 8h16v9l6 9v27a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V26l6-9z" fill="#E4F0FB"/><path d="M24 17h16"/><path d="M18 34c5-3 9 3 14 0s9-3 14 0" />',
+    'protein': '<path d="M40 8c9 0 16 7 15 16-1 10-11 15-19 12l-8 8a5.5 5.5 0 1 1-7.5 1.5 5.5 5.5 0 1 1 1.5-7.5l8-8c-3-8 0-22 10-22z" fill="#FFC4A3"/><path d="M42 16c4 1 6 4 6 8" stroke-width="2"/>',
+    'baklagil': '<ellipse cx="23" cy="36" rx="12" ry="9" transform="rotate(-24 23 36)" fill="#F6C58F"/><ellipse cx="42" cy="30" rx="11" ry="8" transform="rotate(22 42 30)" fill="#FFDF7E"/><path d="M19 38c3-1 6-3 7-6M39 28c2 1 5 3 6 5" stroke-width="2"/>',
+    'tahıl': '<path d="M32 58V12"/><g fill="#FFDF7E"><ellipse cx="25" cy="18" rx="5" ry="8" transform="rotate(-32 25 18)"/><ellipse cx="39" cy="18" rx="5" ry="8" transform="rotate(32 39 18)"/><ellipse cx="25" cy="30" rx="5" ry="8" transform="rotate(-32 25 30)"/><ellipse cx="39" cy="30" rx="5" ry="8" transform="rotate(32 39 30)"/><ellipse cx="25" cy="42" rx="5" ry="8" transform="rotate(-32 25 42)"/><ellipse cx="39" cy="42" rx="5" ry="8" transform="rotate(32 39 42)"/></g>',
+    'kuruyemiş': '<path d="M32 7c8 0 12 6 11 13-1 4-3 6-3 9s3 6 3 11c0 8-5 15-11 15s-11-7-11-15c0-5 3-8 3-11s-2-5-3-9C20 13 24 7 32 7z" fill="#F2D6A8"/><g fill="#3A2E2A" stroke="none"><circle cx="28" cy="18" r="1.4"/><circle cx="35" cy="22" r="1.4"/><circle cx="29" cy="40" r="1.4"/><circle cx="36" cy="45" r="1.4"/></g>',
+    'tohum': '<g fill="#FFF4CC"><path d="M20 22c6 2 8 10 4 16-6-2-8-10-4-16z"/><path d="M40 14c6 3 7 11 2 16-6-3-7-11-2-16z"/><path d="M38 38c6 1 9 9 5 15-6-1-9-9-5-15z"/></g>',
+    'tatlandırıcı': '<rect x="16" y="22" width="32" height="34" rx="11" fill="#FFDF7E"/><rect x="20" y="11" width="24" height="11" rx="3" fill="#F7B8CB"/><path d="M24 34c2 4 4 4 6 0" stroke-width="2"/>',
+    'içecek': '<path d="M18 20h28l-4 34a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4z" fill="#AFD3F5"/><path d="M36 20l5-12h7"/><path d="M20 32h24" stroke-width="2"/>',
+    'atıştırmalık': '<g fill="#FFF4CC"><circle cx="22" cy="22" r="7"/><circle cx="32" cy="17" r="7"/><circle cx="42" cy="22" r="7"/></g><path d="M15 26h34l-5 30H20z" fill="#F7B8CB"/><path d="M27 26l1 30M37 26l-1 30" stroke-width="2"/>',
+  };
+  const DURUM = {
+    uygun: { ikon: () => ikon('kalkan', 28), bebek: ['Uygun hazırlık', 'Bu evrede verilebilir'], hamile: ['Rahatça', 'Dengeli beslenmenin parçası'] },
+    dikkat: { ikon: () => ikon('uyari', 28), bebek: ['Dikkat', 'Uygun, ama hazırlık şekli kritik'], hamile: ['Dikkat', 'Pişirme ve hijyen önemli'] },
+    henuz: { ikon: () => svg64('<path d="M22 8h20l14 14v20L42 56H22L8 42V22z" fill="#F7B8CB"/><path d="M22 32h20" stroke-width="4"/>', 28), bebek: ['Henüz erken', 'Açılış yaşı gelmedi'], hamile: ['Kaçınılır', 'Bu dönemde önerilmez'] },
+  };
+  const filtreGrubu = (b) => FILTRE_GRUP[b.grup] || 'diger';
+  function besinGorsel(b, tur) {
+    const u = b.slug ? (URUN_ESLE[b.slug] || b.slug) : '';
+    if (u && urunVar(u)) return o.urun(u, 40);
+    if (GRUP_SVG[b.grup]) return svg64(GRUP_SVG[b.grup]);
+    if (!b.slug) return ikon(tur === 'uygun' ? 'biberon' : 'takvim', 36);
+    return ikon('kase', 36);
+  }
+  function tarifBul(slug, kod) {
+    const ar = AY_ARALIGI[kod];
+    if (!ar || !slug) return null;
+    const anahtar = [slug, ...(TARIF_ESLE[slug] || [])];
+    const aday = tarifler.filter((t) => Number(t.yas) <= ar[1] && (t.malzemeler || []).some((m) => anahtar.includes(m.anahtar)));
+    aday.sort((a, c) => (c.evre === kod) - (a.evre === kod) || c.yas - a.yas);
+    return aday[0] || null;
+  }
+  function matrisKart(b0, kod, tur, n) {
     // Hamilelik: bebek odaklı gerekçe/yaş/kesim gösterilmez; hamilelikNotu ya da hamileliğe özel kaydın gerekçesi kullanılır
-    const b = kod === 'hamilelik' ? { ad: b0.ad, gerekce: b0.hamilelik ? b0.gerekce : (b0.hamilelikNotu || ''), minAy: undefined, kesimSlug: null } : b0;
+    const hamile = kod === 'hamilelik';
+    const b = hamile ? { ad: b0.ad, gerekce: b0.hamilelik ? b0.gerekce : (b0.hamilelikNotu || ''), minAy: undefined, kesimSlug: null } : b0;
     const anahtar = ILK_SUNUM_ANAHTARI[kod];
     const nasil = tur !== 'henuz' && anahtar && b.ilkSunum && b.ilkSunum[anahtar] ? b.ilkSunum[anahtar] : '';
-    const kesim = b.kesimSlug && kesimSluglari.has(b.kesimSlug) ? `<a class="kd-bag kd-dmatris__kesim" href="kids-guvenli-kesim.html#${esc(b.kesimSlug)}">Nasıl kesilir?</a>` : '';
-    const yas = b.minAy === undefined ? '' : `<span class="kd-dmatris__yas"><i class="fa-regular fa-calendar" aria-hidden="true"></i>${yasMetni(b.minAy)}</span>`;
-    return `<li>
-     <b>${esc(b.ad)}</b>
-     ${b.gerekce ? `<p>${esc(b.gerekce)}</p>` : ''}
-     ${nasil ? `<p class="kd-dmatris__nasil"><i class="fa-solid fa-utensils" aria-hidden="true"></i><span><span class="kd-gizli">Bu evrede sunum: </span>${esc(nasil)}</span></p>` : ''}
-     ${yas || kesim ? `<div class="kd-dmatris__alt">${yas}${kesim}</div>` : ''}
+    const notHtml = nasil ? `<span class="kd-gizli">Bu evrede sunum: </span>${esc(nasil)}` : esc(b.gerekce);
+    const ek = nasil && b.gerekce ? b.gerekce : '';
+    const kesim = b.kesimSlug && kesimSluglari.has(b.kesimSlug)
+      ? `<a class="kd-mkart__bag" href="kids-guvenli-kesim.html#${esc(b.kesimSlug)}">${ikon('bicak-tahta', 18)}<span>Nasıl kesilir?</span><span class="kd-gizli"> (${esc(b.ad)}, Güvenli Kesim)</span></a>` : '';
+    const t = !hamile && tur !== 'henuz' ? tarifBul(b0.slug, kod) : null;
+    const tarif = t ? `<a class="kd-mkart__bag" href="${o.tarifHref(t.slug)}" title="${esc(t.ad)}">${ikon('kase', 18)}<span>Tarif</span><span class="kd-gizli">: ${esc(t.ad)}</span></a>` : '';
+    const yas = b.minAy === undefined ? '' : `<span class="kd-mkart__yas"><i class="fa-regular fa-calendar" aria-hidden="true"></i>${yasMetni(b.minAy)}</span>`;
+    const id = `mk-${kod}-${tur}-${n}`;
+    const acButon = ek || (nasil || b.gerekce).length > 36
+      ? `<button class="kd-mkart__ac" type="button" aria-expanded="false" aria-controls="${id}" aria-label="${esc(b.ad)}: ayrıntıyı göster" title="Ayrıntı"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>` : '';
+    const veriAttr = b0.slug ? `data-besin="${esc(b0.slug)}"` : 'data-kd-ek="evre-notu"';
+    return `<li class="kd-mkart" id="${id}" ${veriAttr} data-grup="${filtreGrubu(b0)}" tabindex="-1"${n >= MATRIS_SINIR ? ' data-kd-fazla' : ''}>
+     <span class="kd-mkart__gorsel">${besinGorsel(b0, tur)}</span>
+     <div class="kd-mkart__govde">
+      <b class="kd-mkart__ad">${esc(b.ad)}</b>
+      ${yas}
+      ${notHtml ? `<div class="kd-mkart__notsatir"><p class="kd-mkart__not">${notHtml}</p>${acButon}</div>` : ''}
+      ${ek ? `<p class="kd-mkart__ek">${esc(ek)}</p>` : ''}
+      ${kesim || tarif ? `<div class="kd-mkart__alt">${kesim}${tarif}</div>` : ''}
+     </div>
     </li>`;
+  }
+  function matrisPanel(kod, tur, liste, acik) {
+    const hamile = kod === 'hamilelik';
+    const [baslik, aciklama] = DURUM[tur][hamile ? 'hamile' : 'bebek'];
+    const gruplar = [...new Set(liste.map(filtreGrubu))].sort((a, c) => Object.keys(FILTRE_AD).indexOf(a) - Object.keys(FILTRE_AD).indexOf(c));
+    const filtre = liste.length > MATRIS_SINIR && gruplar.length > 1
+      ? `<div class="kd-mfiltre" role="group" aria-label="${esc(baslik)}: besin grubuna göre süz">
+       <button class="kd-chip" type="button" data-grup="hepsi" aria-pressed="true">Tümü <span class="kd-mfiltre__n">${liste.length}</span></button>
+       ${gruplar.map((g) => `<button class="kd-chip" type="button" data-grup="${g}" aria-pressed="false">${FILTRE_AD[g]} <span class="kd-mfiltre__n">${liste.filter((b) => filtreGrubu(b) === g).length}</span></button>`).join('')}
+      </div>` : '';
+    return `<div class="kd-mpanel" role="tabpanel" id="besinler-panel-${tur}" aria-labelledby="besinler-${tur}" data-durum="${tur}" tabindex="0"${acik ? '' : ' data-kd-kapali'}>
+     <h3 class="kd-mpanel__bas">${DURUM[tur].ikon()}<span>${esc(baslik)} <span class="kd-mpanel__sayi">(${liste.length})</span></span></h3>
+     <div class="kd-mpanel__ust"><p class="kd-mpanel__ac"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>${esc(aciklama)}</p>${filtre}</div>
+     ${liste.length ? `<ul class="kd-mizgara">${liste.map((b, n) => matrisKart(b, kod, tur, n)).join('')}</ul>` : '<p class="kd-mpanel__bos">Bu evrede bu grupta besin yok.</p>'}
+     ${liste.length > MATRIS_SINIR ? `<div class="kd-mdaha"><button class="kd-btn kd-btn--hafif" type="button" data-kd-daha><span>Tümünü göster (<span data-kd-n>${liste.length}</span>)</span><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button></div>` : ''}
+     <p class="kd-gizli" aria-live="polite" data-kd-durum></p>
+    </div>`;
   }
   function matris(kod, z = '') {
     const g = matrisGruplari(kod);
     if (!g.uygun.length && !g.dikkat.length && !g.henuz.length) return '';
-    const sutun = (tur, baslik, ikonSinif, aciklama) => `<section class="kd-dmatris__sutun kd-gir" data-durum="${tur}" aria-labelledby="m-${tur}">
-    <header><span class="kd-dmatris__ikon">${o.ikon({ uygun: 'kalkan', dikkat: 'uyari', henuz: 'takvim' }[tur] || 'kalp', 28)}</span><div><h3 id="m-${tur}">${baslik}</h3><small>${aciklama}</small></div><span class="kd-dmatris__sayi">${g[tur].length}</span></header>
-    ${g[tur].length ? `<ul>${g[tur].map((b) => matrisOge(b, kod, tur)).join('')}</ul>` : '<p class="kd-dmatris__bos">Bu evrede bu grupta besin yok.</p>'}
-   </section>`;
     const hamile = kod === 'hamilelik';
+    const turler = ['uygun', 'dikkat', 'henuz'];
+    const sekme = (tur, i) => {
+      const [baslik] = DURUM[tur][hamile ? 'hamile' : 'bebek'];
+      return `<button class="kd-msekme" type="button" role="tab" id="besinler-${tur}" aria-controls="besinler-panel-${tur}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-durum="${tur}" data-sayi="${g[tur].length}">
+      <span class="kd-msekme__ikon">${DURUM[tur].ikon()}</span><span class="kd-msekme__ad">${esc(baslik)}</span><span class="kd-msekme__sayi">${g[tur].length}<span class="kd-gizli"> besin</span></span>
+     </button>`;
+    };
     return `<section class="kd-bolum${z}" id="besinler" aria-labelledby="besin-bas">
  <div class="wrap">
-  ${o.bolumBasi({ ust: 'Besin matrisi', ikonAd: 'liste', renk: EVRE[kod].renk, baslik: `<span id="besin-bas">${hamile ? 'Bu dönemde besinler' : 'Bu evrede hangi besin?'}</span>`, alt: hamile ? 'Rahatça tüketilenler, hazırlığına dikkat edilenler ve bu dönemde kaçınılanlar.' : 'Her besinde bir satır gerekçe ve açılış yaşı.', sag: ipucu('buyutec', hamile ? 'Şüphede kaldığınızda iyi pişirin ve taze tüketin; emin olamadığınızı hekiminize sorun.' : 'Renk tek başına anlam taşımaz: ikon ve başlık her sütunda yazılı. "Nasıl kesilir?" bağı Güvenli Kesim\'e götürür.', 'kd-ipucu--sag') })}
+  ${o.bolumBasi({ ust: 'Besin matrisi', ikonAd: 'liste', renk: EVRE[kod].renk, baslik: `<span id="besin-bas">${hamile ? 'Bu dönemde besinler' : 'Bu evrede hangi besin?'}</span>`, alt: hamile ? 'Rahatça tüketilenler, hazırlığına dikkat edilenler ve bu dönemde kaçınılanlar.' : 'Her besinde bir satır gerekçe ve açılış yaşı.', sag: ipucu('buyutec', hamile ? 'Şüphede kaldığınızda iyi pişirin ve taze tüketin; emin olamadığınızı hekiminize sorun.' : 'Renk tek başına anlam taşımaz: ikon ve başlık her sekmede yazılı. "Nasıl kesilir?" bağı Güvenli Kesim\'e götürür.', 'kd-ipucu--sag') })}
   ${o.ornek()}
-  <div class="kd-dmatris">
-   ${sutun('uygun', hamile ? 'Rahatça' : 'Uygun', 'fa-circle-check', hamile ? 'Dengeli beslenmenin parçası' : 'Bu evrede verilebilir')}
-   ${sutun('dikkat', 'Hazırlığa dikkat', 'fa-triangle-exclamation', hamile ? 'Pişirme ve hijyen önemli' : 'Uygun, ama hazırlık şekli kritik')}
-   ${sutun('henuz', hamile ? 'Kaçınılır' : 'Henüz erken', hamile ? 'fa-ban' : 'fa-hourglass-half', hamile ? 'Bu dönemde önerilmez' : 'Açılış yaşı gelmedi')}
+  <div class="kd-mtab kd-gir" data-kd-matris="${kod}">
+   <div class="kd-mtab__liste" role="tablist" aria-label="${hamile ? 'Bu dönemde besinler' : 'Bu evrede hangi besin?'}">
+    ${turler.map(sekme).join('')}
+   </div>
+   <div class="kd-mtab__paneller">
+    ${turler.map((tur, i) => matrisPanel(kod, tur, g[tur], i === 0)).join('')}
+   </div>
   </div>
  </div>
 </section>`;
