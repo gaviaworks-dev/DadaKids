@@ -22,7 +22,16 @@ function zorunlu(html, eski, yeni, etiket) {
 }
 
 /* ---------- Kabuk eklemeleri (tüm sayfalar) ---------- */
-const MEGA_KART = `<a class="mega-find kd-mega" href="kids.html"><span class="mf-ico"><i class="fa-solid fa-baby" aria-hidden="true"></i></span><span class="mf-body"><b>Dada Kids</b><small>Yaşa göre bebek tarifleri</small></span><i class="fa-solid fa-arrow-right mf-arr" aria-hidden="true"></i></a>`;
+// Mega menü Dada Kids şeridi: .mega-cats altında tam genişlik (CSS: varlik/kids/css/mega.css).
+// Chip'ler yalnız tarif filtresi olan evreler; her evre kendi ilk yaş kovasına gider (kids.js EVRE.kova ile aynı: 6/9/12).
+// Hamilelik ve 0–6 Ay yaş kovası taşımaz (6 aydan önce ek gıda yok), şeritte chip'i yok; Keşfet ile Kids ana sayfasından erişilir.
+const megaChip = (kod) => {
+  const e = ortak.EVRE[kod];
+  return `<a class="kd-mega-serit__chip" data-renk="${e.renk}" href="kids-tarifler.html?yas=${ortak.YASLAR.find((y) => ortak.yasEvresi(y) === kod)}" aria-label="${esc(e.ad)} tarifleri">${ortak.ikon(e.ikon, 16)}${esc(e.ad)}</a>`;
+};
+const MEGA_SERIT = `<div class="kd-mega-serit" role="group" aria-label="Dada Kids">
+${ortak.kidsLogoSvg({ sinif: 'kd-mega-serit__logo', boy: 'header' })}<span class="kd-mega-serit__metin">Yaşa göre bebek ve çocuk tarifleri</span><span class="kd-mega-serit__chipler">${ortak.EVRE_SIRA.filter((k) => ortak.YASLAR.some((y) => ortak.yasEvresi(y) === k)).map(megaChip).join('')}</span><a class="kd-mega-serit__kesfet" href="kids.html" aria-label="Dada Kids'i keşfet">Keşfet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+</div>`;
 const CEKMECE_BAG = `<a href="kids.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> <span>Dada Kids · Bebek &amp; Çocuk</span></a>`;
 
 // Header logosu: "gastro" harf gruplarını sar + renkli "kids" ekle ("dada" yolları aynı kalır).
@@ -48,9 +57,9 @@ function tariflerIcerde(html) {
 
 async function kabukEkle(html, { css = [], js = [] } = {}) {
   html = tariflerIcerde(markaYazimi(logoDonusumu(html)));
-  html = zorunlu(html, /(<a class="mega-find" href="https:\/\/dadagastro\.com\/dolapta-ne-var">[\s\S]*?<\/a>)/, `$1\n${MEGA_KART}`, 'mega-find');
+  html = zorunlu(html, /<div class="mega-feat">/, (t) => `${MEGA_SERIT}\n${t}`, 'mega-feat');
   html = zorunlu(html, /(<div class="d-sub">\s*<a href="tarifler\.html">[\s\S]*?<\/a>)/, `$1\n ${CEKMECE_BAG}`, 'çekmece');
-  const cssEk = [`<link rel="stylesheet" href="varlik/kids/kids.css?v=${SURUM}">`];
+  const cssEk = [`<link rel="stylesheet" href="varlik/kids/kids.css?v=${SURUM}">`, `<link rel="stylesheet" href="varlik/kids/css/mega.css?v=${SURUM}">`];
   for (const c of css) if (await varMi(`varlik/kids/css/${c}.css`)) cssEk.push(`<link rel="stylesheet" href="varlik/kids/css/${c}.css?v=${SURUM}">`);
   const jsEk = [`<script src="varlik/kids/kids.js?v=${SURUM}" defer></script>`];
   for (const j of js) if (await varMi(`varlik/kids/js/${j}.js`)) jsEk.push(`<script src="varlik/kids/js/${j}.js?v=${SURUM}" defer></script>`);

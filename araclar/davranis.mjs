@@ -146,6 +146,52 @@ for (const s of ['kids.html', 'kids-tarifler.html', 'index.html', 'tarifler.html
   const kok = await p.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')).filter((h) => /^\/(?!\/)/.test(h)));
   ok(kok.length === 0, `çalışma anı bağları ${s}: köke giden ${kok.length}` + (kok.length ? ' (' + [...new Set(kok)].slice(0, 4).join(', ') + ')' : ''));
 }
+// 7 · Tarifler mega menüsü: Kids şeridi kategorilerin altında, sağ kolonda Kids kartı yok, yükseklik taban ölçüyü aşmaz
+// Taban: şerit öncesi düzen (sağ kolonda iki kart), tarayıcıda ölçüldü. 1024 ve altında nav gizli, mega yok.
+const MEGA_TABAN = { 1440: 410, 1280: 410, 1025: 368 };
+for (const [g, taban] of Object.entries(MEGA_TABAN)) {
+  await p.setViewportSize({ width: +g, height: 900 });
+  for (const s of ['tarifler.html', 'index.html', 'kids.html']) {
+    await p.goto(T + s, { waitUntil: 'networkidle' });
+    const var_mi = await p.$('.mega .kd-mega-serit');
+    ok(!!var_mi, `mega şerit var ${s}@${g}`);
+    if (!var_mi) continue;
+    await p.hover('.nav-item.has-mega > a'); await p.waitForTimeout(350);
+    const m = await p.evaluate(() => {
+      const k = (s) => document.querySelector(s).getBoundingClientRect();
+      const serit = k('.kd-mega-serit'), kat = k('.mega-cats'), kart = k('.mega-feat .mega-find');
+      return { yuk: k('.mega').height, sagKart: document.querySelectorAll('.mega-find.kd-mega, .mega-feat .kd-mega-serit').length, ust: serit.top - kat.bottom, sol: Math.abs(serit.left - kat.left), sag: Math.abs(serit.right - kat.right), alt: Math.abs(serit.bottom - kart.bottom), bag: [...document.querySelectorAll('.kd-mega-serit__chip')].map((a) => a.getAttribute('href')) };
+    });
+    ok(m.sagKart === 0, `sağ kolonda kd-mega kartı yok ${s}@${g}`);
+    ok(m.ust >= 0 && m.sol <= 1 && m.sag <= 1, `şerit .mega-cats altında tam genişlik ${s}@${g} (üst boşluk ${m.ust}, sol ${m.sol}, sağ ${m.sag})`);
+    ok(m.alt <= 1, `şerit ve "Dolapta Ne Var?" alt hizada ${s}@${g} (fark ${m.alt})`);
+    ok(m.bag.length > 0 && m.bag.every((h) => h.includes('kids-tarifler.html?yas=')), `chip bağları kids-tarifler.html?yas= ${s}@${g}: ${m.bag.length} chip`);
+    ok(m.yuk <= taban, `mega yüksekliği tabanı aşmıyor ${s}@${g}: ${m.yuk} ≤ ${taban}`);
+    await p.mouse.move(0, 800);
+  }
+}
+await p.setViewportSize({ width: 1440, height: 900 });
+{
+  await p.goto(T + 'tarifler.html', { waitUntil: 'networkidle' });
+  const hedefler = await p.$$eval('.kd-mega-serit__chip', (a) => a.map((x) => new URL(x.href).searchParams.get('yas'))).catch(() => []);
+  for (let i = 0; i < hedefler.length; i++) {
+    await p.goto(T + 'tarifler.html', { waitUntil: 'networkidle' });
+    await p.hover('.nav-item.has-mega > a'); await p.waitForTimeout(350);
+    await p.locator('.kd-mega-serit__chip').nth(i).click();
+    await p.waitForURL(/kids-tarifler\.html/, { timeout: 4000 }); await p.waitForLoadState('networkidle');
+    const secili = await p.$$eval('.kd-yas-chip[aria-checked="true"]', (c) => c.map((x) => x.dataset.yas));
+    ok(secili.length === 1 && secili[0] === hedefler[i], `mega chip'i ?yas=${hedefler[i]} filtresini seçili açar (seçili: ${secili.join(',')})`);
+  }
+}
+{
+  const m = await (await t.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })).newPage();
+  await m.goto(T + 'tarifler.html', { waitUntil: 'networkidle' });
+  await m.locator('#hamburger').click(); await m.waitForTimeout(450);
+  await m.locator('#drawer .d-has-sub .d-toggle').first().click(); await m.waitForTimeout(450);
+  const r = await m.evaluate(() => { const a = [...document.querySelectorAll('#drawer .d-sub a')].find((x) => x.getAttribute('href') === 'kids.html'); if (!a) return false; const b = a.getBoundingClientRect(); return a.contains(document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2)); });
+  ok(r === true, '390 çekmecede Tarifler altında Dada Kids girişi görünür');
+  await m.context().close();
+}
 ok(jsHata.length === 0, 'JS hatası yok' + (jsHata.length ? ': ' + jsHata.slice(0, 3).join(' | ') : ''));
 await t.close();
 console.log(hata ? `\n${hata} kontrol başarısız` : '\nTüm davranış kontrolleri geçti');
