@@ -25,7 +25,7 @@ for (const w of GENISLIK) {
     for (let y = 0; y < boy; y += 700) { await sayfa.mouse.wheel(0, 700); await sayfa.waitForTimeout(70); }
     await sayfa.evaluate(() => scrollTo(0, 0)); await sayfa.waitForTimeout(500);
     const r = await sayfa.evaluate(() => {
-      const out = { yatay: document.documentElement.scrollWidth - innerWidth, kirik: [], kesik: [], gorselsiz: [], bitisik: [], kesim: [] };
+      const out = { yatay: document.documentElement.scrollWidth - innerWidth, kirik: [], kesik: [], gorselsiz: [], bitisik: [], kesim: [], alt: [] };
       const kids = document.body.classList.contains('pg-kids');
       // kırık görsel
       document.querySelectorAll('img').forEach((i) => { if (i.complete && i.naturalWidth === 0 && getComputedStyle(i).display !== 'none' && i.getBoundingClientRect().width > 0) out.kirik.push(i.getAttribute('src')); });
@@ -54,6 +54,8 @@ for (const w of GENISLIK) {
           if (bosluk < 7 && bosluk > -1) { out.bitisik.push((g.id || g.className).slice(0, 30) + ` boşluk=${Math.round(bosluk)}`); break; }
         }
       });
+      // alt metin: Kids içeriğindeki her görsel ya anlamlı alt taşır ya da dekoratif işaretlidir
+      out.alt = [...document.querySelectorAll('.kd-sayfa img')].filter((i) => !i.hasAttribute('alt') || (i.getAttribute('alt').trim() === '' && i.getAttribute('aria-hidden') !== 'true' && i.getAttribute('role') !== 'presentation' && !i.closest('[aria-hidden="true"]'))).map((i) => i.getAttribute('src'));
       // Güvenli Kesim: aynı besinin aşama çizimleri birbirinden farklı (metinler farklıysa)
       document.querySelectorAll('[data-besin]').forEach((k) => {
         const as = [...k.querySelectorAll('[data-asama]')].map((a) => { const g = a.querySelector('svg, img'); return { ad: a.dataset.asama, cizim: g ? (g.tagName === 'IMG' ? g.getAttribute('src') : g.innerHTML.replace(/\s+/g, ' ')) : '', metin: a.textContent.replace(/\s+/g, ' ').trim() }; });
@@ -71,6 +73,7 @@ for (const w of GENISLIK) {
     if (r.kesik.length) sorun.push(`kesilme ${r.kesik.length} (${r.kesik.slice(0, 2).join(' | ')})`);
     if (r.gorselsiz.length) sorun.push(`görselsiz bölüm ${r.gorselsiz.length} (${r.gorselsiz.slice(0, 3).join(', ')})`);
     if (r.bitisik.length) sorun.push(`bitişik ${r.bitisik.length} (${r.bitisik[0]})`);
+    if (r.alt.length) sorun.push(`alt metinsiz içerik görseli ${r.alt.length} (${r.alt.slice(0, 2).join(', ')})`);
     if (r.kesim.length) sorun.push(`kesim çizim=metin uyumsuz ${r.kesim.length} (${r.kesim.slice(0, 3).join(', ')})`);
     olcum++;
     if (sorun.length) hata++;

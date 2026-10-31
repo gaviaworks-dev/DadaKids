@@ -33,6 +33,16 @@ ok(yildiz.length === 0, 'Kids içeriğinde yıldız/puan yok' + (yildiz.length ?
 const ornekYok = kidsSayfalari.filter((f) => !readFileSync(f, 'utf8').includes('Örnek içerik — uzman onayı bekliyor'));
 ok(ornekYok.length === 0, 'her Kids sayfasında "Örnek içerik — uzman onayı bekliyor"' + (ornekYok.length ? ': eksik → ' + ornekYok.join(', ') : ''));
 
+// Logo tek kaynak: header'daki ve hub hero'daki "kids" harfleri + figürler aynı bileşenden (işaretleme birebir)
+{
+  const h = readFileSync('kids.html', 'utf8');
+  const parca = (kaynak) => { const i = kaynak.indexOf('<g class="kd-logo-harfler"'); if (i < 0) return ''; const j = kaynak.indexOf('</svg>', i); return kaynak.slice(i, j).replace(/\s+/g, ' ').replace(/<\/g>\s*$/, ''); };
+  const bas = h.indexOf('<header'), basSon = h.indexOf('</header>');
+  const header = parca(h.slice(bas, basSon));
+  const hi = h.indexOf('kd-hub-logo'); const hero = parca(h.slice(hi, h.indexOf('</svg>', hi) + 6));
+  ok(header && hero && header === hero, 'logo tek kaynak: header ve hero "kids" + figür işaretlemesi aynı (' + header.length + ' karakter)');
+}
+
 /* ---------- Tarayıcı ---------- */
 const t = await chromium.launch();
 const p = await (await t.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
@@ -130,6 +140,12 @@ await p.goto(T + 'index.html', { waitUntil: 'networkidle' });
 const bant = await p.$$eval('.kd-bant .kd-chip', (c) => c.map((x) => x.getBoundingClientRect().top));
 ok(bant.length === 5 && new Set(bant.map(Math.round)).size === 1, 'masaüstünde bant chip\'leri tek satır');
 
+// çalışma anı bağları: hiçbir betik bağları köke (/…) ya da canlı Laravel rotalarına çevirmesin (Pages'te 404)
+for (const s of ['kids.html', 'kids-tarifler.html', 'index.html', 'tarifler.html']) {
+  await p.goto(T + s, { waitUntil: 'networkidle' }); await p.waitForTimeout(400);
+  const kok = await p.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')).filter((h) => /^\/(?!\/)/.test(h)));
+  ok(kok.length === 0, `çalışma anı bağları ${s}: köke giden ${kok.length}` + (kok.length ? ' (' + [...new Set(kok)].slice(0, 4).join(', ') + ')' : ''));
+}
 ok(jsHata.length === 0, 'JS hatası yok' + (jsHata.length ? ': ' + jsHata.slice(0, 3).join(' | ') : ''));
 await t.close();
 console.log(hata ? `\n${hata} kontrol başarısız` : '\nTüm davranış kontrolleri geçti');
