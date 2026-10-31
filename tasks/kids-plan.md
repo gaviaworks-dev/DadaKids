@@ -1,6 +1,7 @@
 # Dada Kids — Prototip Planı (GitHub Pages)
 
-> Durum: **dalga 0 + 1 tamam** · 31 Ekim 2026 · yayın: https://gaviaworks-dev.github.io/DadaKids/
+> **Yenileme turu (31 Eki, akşam):** Kids ayrı görsel kimliğe geçti (krem + pastel evre renkleri, "dada kids" yazı imi, Kids alt menüsü), tüm modüller dolu: 23 sayfa. Ayrıntı ve kararlar: `tasks/handoff-kids.md`. Not: yaş rozeti renkleri artık evre rengini izler (6–8 şeftali, 9–12 nane, 1–3 sarı) — spesifikasyondaki mor/mavi/turuncu/yeşil eşlemesinin yerine, kullanıcı kararıyla.
+> Durum (önceki): **dalga 0 + 1 tamam** · 31 Ekim 2026 · yayın: https://gaviaworks-dev.github.io/DadaKids/
 > Kesinleşen kararlar: nav'a kalem yok, üç giriş kapısı (§1.3) · profil URL parametresiyle (`?evre=…&c=…[&ay=…]`) · hitap "siz".
 > Renkler (kontrast ölçümlü): yaş rozetleri +6 `#6D28D9` · +8 `#1D4ED8` · +9 `#B45309` · +12 `#15803D` · +18 `#0F766E` · 2–3 yaş `#1F2937`;
 > tema `--kd-tema`: kız `#B8537A` · erkek `#4C7A9E` · nötr Gastro tomato. Tema ↔ rozet ΔE ≥ 30, tema rengi beyazda ≥ 4,4:1.
