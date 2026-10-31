@@ -1,5 +1,5 @@
 // Pütür kapısı: maskot asistanı tüm Kids sayfalarında görünür mü, hiçbir şeyi örtüyor mu, akışları doğru mu?
-// Ölçülenler (1440 · 768 · 390 · 320): görünürlük · yukarı-çık / alt menü / footer telif / çerez bandı çakışması ·
+// Ölçülenler (1440 · 1024 · 768 · 390 · 320): görünürlük · yukarı-çık / alt menü / footer telif / çerez bandı çakışması ·
 // tıklanabilir öğe erişimi · menü aç/kapa ve yay sınırları · 6 seçeneğin hedefi · sürpriz (bir kez, menü açılmadan, geri gelir) ·
 // tepki ve sürpriz sırasında kare kare etkileşimli öğe örtme (SVG, parçalar, video alfası; gerçek sayfa ve yapay düğme) ·
 // reduced-motion · klavye · gizle/göster · tema-evre rengi · video · filtre paneli ve tarih seçici · sayfa içi JS hatası.
@@ -17,8 +17,9 @@ const TABAN = (process.env.TABAN || 'http://localhost:8765/DadaKids/').replace(/
 const KOKEN = new URL(TABAN).origin;
 const AGAC = process.env.AGAC || fileURLToPath(new URL('..', import.meta.url));
 const SAYFALAR = process.argv.slice(2).length ? process.argv.slice(2) : readdirSync(AGAC).filter((f) => /^kids.*\.html$/.test(f) && !f.startsWith('kids__'));
-const GENISLIK = (process.env.GENISLIK || '1440,768,390,320').split(',').map(Number);
-const BOY = { 1440: 900, 768: 1024, 390: 844, 320: 640 };
+const GENISLIK = (process.env.GENISLIK || '1440,1024,768,390,320').split(',').map(Number);
+const BOY = { 1440: 900, 1024: 800, 768: 1024, 390: 844, 320: 640 };
+const YALNIZ_EK = !!process.env.YALNIZ_EK;   // yalnız boyut/konum/hover/tetikleyici bölümü
 const HIZLI = !!process.env.HIZLI;
 
 let gecen = 0, kalan = 0; const hatalar = [];
@@ -66,11 +67,13 @@ const OLCUM = () => {
     const onde = [...metinKutulari(e)].some((r) => kes(b, r) && r.top < H && (() => { const y = document.elementFromPoint(Math.min(W - 1, r.left + r.width / 2), Math.min(H - 1, r.top + r.height / 2)); return y && (y === e || e.contains(y) || y.closest('.kd-pt')); })());
     if (onde) out.cakisma.push('footer telif: ' + (e.textContent || '').trim().slice(0, 28));
   });
+  const tamBoy = !kok.classList.contains('kd-pt--kenar');
   document.querySelectorAll('a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]').forEach((e) => {
     if (e.closest('.kd-pt') || e.closest('.kd-pt-sekme')) return;
     const r = e.getBoundingClientRect(); if (r.width < 8 || r.height < 8) return;
     const x = r.left + r.width / 2, y = r.top + r.height / 2; if (x < 0 || y < 0 || x >= W || y >= H) return;
     if (!gorunur(e)) return;
+    if (tamBoy && kes(b, r) && !e.closest('.bottom-nav')) out.ortu.push('kutu: ' + (e.getAttribute('aria-label') || e.textContent || e.tagName).trim().slice(0, 34));
     const u = document.elementFromPoint(x, y);
     if (u && u.closest('.kd-pt')) out.ortu.push((e.tagName + '.' + (e.className || '') + ' ' + (e.getAttribute('aria-label') || e.textContent || '').trim()).slice(0, 46));
   });
@@ -87,7 +90,7 @@ const IZ_BASLAT = () => {
     const r = e.getBoundingClientRect(); if (r.width < 8 || r.height < 8) return null;
     const x = r.left + r.width / 2, y = r.top + r.height / 2; if (x < 0 || y < 0 || x >= W || y >= H) return null;
     const c = getComputedStyle(e); if (c.display === 'none' || c.visibility === 'hidden' || +c.opacity <= .05) return null;
-    return { x, y, e, ad: (e.getAttribute('aria-label') || e.textContent || e.tagName).trim().slice(0, 24) };
+    return { x, y, e, r, ad: (e.getAttribute('aria-label') || e.textContent || e.tagName).trim().slice(0, 24) };
   }).filter(Boolean);
   const iz = { kare: 0, video: 0, ihlal: {}, calis: true, merkez: merkezler.length };
   const ihlal = (m, kaynak) => { const k = kaynak + ': ' + m.ad; iz.ihlal[k] = (iz.ihlal[k] || 0) + 1; };
@@ -101,7 +104,10 @@ const IZ_BASLAT = () => {
     const kok = document.querySelector('.kd-pt'), karakter = kok.querySelector('.kd-pt__karakter'), video = kok.querySelector('.kd-pt__video');
     const videoda = kok.classList.contains('kd-pt--video');
     const dugme = kok.querySelector('.kd-pt__btn').getBoundingClientRect();
+    // tam boy ve yerine oturmuşken öğe kutusuna hiç binmez; kenardayken (yer yoksa) yalnız orta noktası korunur
+    const oturdu = !kok.classList.contains('kd-pt--kenar') && Math.abs(dugme.left - kok.offsetLeft) < 1;
     merkezler.forEach((m) => {
+      if (oturdu && m.r.left < dugme.right && m.r.right > dugme.left && m.r.top < dugme.bottom && m.r.bottom > dugme.top) ihlal(m, 'kutu');
       if (icinde(dugme, m)) ihlal(m, 'düğme');
       const u = document.elementFromPoint(m.x, m.y);
       if (u && u.closest('.kd-pt, .kd-pt-yakala') && !u.closest('.kd-pt__menu, .kd-pt__balon')) ihlal(m, 'elementFromPoint[' + (u.getAttribute('class') || u.tagName) + ']');
@@ -176,7 +182,7 @@ const jsHata = [];
 }
 
 /* ---------- 1 · Tüm sayfalar × tüm genişlikler: görünürlük, çakışma, menü ---------- */
-if (!HIZLI) for (const w of GENISLIK) {
+if (!HIZLI && !YALNIZ_EK) for (const w of GENISLIK) {
   const bag = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 } });
   await bag.addInitScript(() => { try { sessionStorage.setItem('dadakids.putur.selam', '1'); } catch (e) {} window.__kdPuturVideo = null; });
   let n = 0;
@@ -232,7 +238,7 @@ if (!HIZLI) for (const w of GENISLIK) {
 }
 
 /* ---------- 2 · Akışlar: her seçenek doğru yere gider ---------- */
-for (const w of GENISLIK) {
+if (!YALNIZ_EK) for (const w of GENISLIK) {
   const bag = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 } });
   await bag.addInitScript(() => { window.__kdPuturVideo = null; });
   const yil = new Date().getFullYear(), ayNo = new Date().getMonth() + 1;
@@ -376,6 +382,7 @@ for (const w of GENISLIK) {
       kontrol(`${w} ${ad} ${tur}: animasyon gerçekten ölçüldü`, iz.kare >= 30 && iz.merkez > 0 && (tur === 'tepki' ? iz.menu : iz.surpriz === '1'), JSON.stringify({ kare: iz.kare, merkez: iz.merkez, menu: iz.menu, surpriz: iz.surpriz }));
       kontrol(`${w} ${ad} ${tur}: etkileşimli öğelerin ortası hiçbir karede örtülmüyor`, Object.keys(iz.ihlal).length === 0, ihlalYazi(iz));
       if (tur === 'tepki') {
+        await a.waitForTimeout(620);                                            // kademeli açılış bitsin
         const m = await a.evaluate(() => { const b = document.querySelector('.kd-pt__btn').getBoundingClientRect(), W = innerWidth; const og = [...document.querySelectorAll('.kd-pt__oge')].map((e) => e.getBoundingClientRect()); return { ekranDisi: og.filter((r) => r.left < 2 || r.right > W - 2 || r.top < 0).length, btn: [b.left, b.top, b.right, b.bottom].map(Math.round) }; });
         kontrol(`${w} ${ad} tepki sonrası: menü ekranda`, m.ekranDisi === 0, JSON.stringify(m));
       }
@@ -446,7 +453,7 @@ for (const w of GENISLIK) {
 }
 
 /* ---------- 3 · Azaltılmış hareket ---------- */
-{
+if (!YALNIZ_EK) {
   const bag = await tarayici.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const s = await acSayfa(bag, 'kids-tarifler.html', jsHata);
   await s.waitForTimeout(600);
@@ -470,7 +477,7 @@ for (const w of GENISLIK) {
 }
 
 /* ---------- 4 · Klavye, gizle/göster, depolama kapalı, tema-evre ---------- */
-{
+if (!YALNIZ_EK) {
   const bag = await tarayici.newContext({ viewport: { width: 1440, height: 900 } });
   await bag.addInitScript(() => { window.__kdPuturVideo = null; });
   let s = await acSayfa(bag, 'kids-tarifler.html', jsHata);
@@ -515,7 +522,7 @@ for (const w of GENISLIK) {
 }
 
 /* ---------- 5 · Video ---------- */
-{
+if (!YALNIZ_EK) {
   const bag = await tarayici.newContext({ viewport: { width: 1440, height: 900 } });
   const s = await acSayfa(bag, 'kids-tarifler.html', jsHata);
   await s.waitForFunction(() => /hazir|yok/.test(document.querySelector('.kd-pt').getAttribute('data-video') || ''), null, { timeout: 6000 }).catch(() => {});
@@ -538,6 +545,251 @@ for (const w of GENISLIK) {
     await s.waitForFunction(() => /zipla-mint/.test((document.querySelector('.kd-pt__video') || {}).src || ''), null, { timeout: 2500 }).then(() => kontrol('video: evre rengine göre kaynak değişir', true), () => kontrol('video: evre rengine göre kaynak değişir', false));
   }
   await bag.close();
+}
+
+/* ---------- 6 · Boyut ve konum (EK) ---------- */
+const HEDEF = { 1440: { boy: 112, alt: 32, sol: 32 }, 1024: { boy: 96, alt: 24, sol: 24 }, 768: { boy: 96, alt: 24, sol: 24 }, 390: { boy: 76, alt: 20, sol: 20 }, 320: { boy: 68, alt: 20, sol: 20 } };
+const BANT = () => {
+  const d = document.createElement('div'); d.id = 'cookieBanner'; d.className = 'cookie-banner show';
+  d.innerHTML = '<div class="cookie-inner"><div class="cookie-text"><p>Çerez bandı denemesi: gerçek sitedeki bandın sınıflarıyla.</p></div><button type="button">Kabul et</button></div>';
+  document.body.appendChild(d); dispatchEvent(new Event('resize'));
+};
+for (const w of GENISLIK) {
+  const h = HEDEF[w]; if (!h) continue;
+  const bag = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 } });
+  await bag.addInitScript(() => { try { localStorage.setItem('dadakids.putur.merhaba.v1', '1'); sessionStorage.setItem('dadakids.putur.selam', '1'); } catch (e) {} window.__kdPuturVideo = null; });
+  for (const yol of ['kids-tarifler.html', 'kids.html', 'kids-guvenli-kesim.html']) {
+    const a = await acSayfa(bag, yol, jsHata); await a.waitForTimeout(520);
+    const o = await a.evaluate(() => {
+      const k = document.querySelector('.kd-pt'), n = document.querySelector('.bottom-nav'), nc = n && getComputedStyle(n), navVar = n && nc.display !== 'none';
+      const kol = document.querySelector('.kd-sayfa .wrap'), kolSol = kol ? kol.getBoundingClientRect().left + parseFloat(getComputedStyle(kol).paddingLeft) : 0;
+      return { boy: k.offsetWidth, sol: k.offsetLeft, alt: innerHeight - k.offsetTop - k.offsetHeight, navPay: navVar ? n.offsetHeight + (parseFloat(nc.bottom) || 0) : 0, kolSol };
+    });
+    kontrol(`${w} ${yol} boyut ~${h.boy}px`, Math.abs(o.boy - h.boy) <= 3, JSON.stringify(o));
+    kontrol(`${w} ${yol} alt mesafe ~${h.alt}px (alt çubuk varsa onun üstünde)`, Math.abs(o.alt - o.navPay - h.alt) <= 3, JSON.stringify(o));
+    const sigiyor = h.sol + h.boy + 8 <= o.kolSol;
+    kontrol(`${w} ${yol} sol mesafe ~${h.sol}px ya da kolona girmeyecek kadar içeride`, Math.abs(o.sol - h.sol) <= 3 || (!sigiyor && o.sol >= 10 && o.sol + o.boy + 8 <= o.kolSol), JSON.stringify(o));
+    await a.close();
+  }
+  // yukarı çık ile aynı alt hiza
+  const t = await acSayfa(bag, 'kids-tarifler.html', jsHata);
+  await t.evaluate(() => scrollTo({ top: 900, behavior: 'instant' })); await t.waitForTimeout(700);
+  const hiz = await t.evaluate(() => { const tt = document.querySelector('#toTop'), k = document.querySelector('.kd-pt'); if (!tt) return null; const r = tt.getBoundingClientRect(); return { tt: Math.round(innerHeight - r.bottom), pt: Math.round(innerHeight - k.offsetTop - k.offsetHeight), gor: getComputedStyle(tt).visibility }; });
+  kontrol(`${w} yukarı-çık ile aynı alt hiza`, hiz && hiz.gor === 'visible' && Math.abs(hiz.tt - hiz.pt) <= 3, JSON.stringify(hiz));
+  await t.close();
+  // çerez bandı açıkken: dinlenme, tepki, sürpriz
+  for (const tur of ['dinlenme', 'tepki', 'sürpriz']) {
+    const a = await acSayfa(bag, 'kids-tarifler.html', jsHata);
+    await a.evaluate(BANT); await a.waitForTimeout(620);
+    const r0 = await a.evaluate(() => { const b = document.querySelector('.kd-pt__btn').getBoundingClientRect(), c = document.querySelector('#cookieBanner').getBoundingClientRect(); return { btnAlt: Math.round(b.bottom), bantUst: Math.round(c.top) }; });
+    if (tur === 'dinlenme') { kontrol(`${w} çerez bandı açık: Pütür bandın üstünde`, r0.btnAlt <= r0.bantUst, JSON.stringify(r0)); await a.close(); continue; }
+    const [ax, ay] = await merkez(a, '.kd-pt__btn');
+    await a.evaluate(IZ_BASLAT);
+    if (tur === 'tepki') { await a.mouse.click(ax, ay); await bekleMenu(a, 3600); await a.waitForTimeout(120); } else { for (let i = 0; i < 6; i++) { await a.mouse.click(ax, ay); await a.waitForTimeout(90); } await a.waitForTimeout(2300); }
+    const iz = await a.evaluate(IZ_BITIR);
+    const r1 = await a.evaluate(() => { const b = document.querySelector('.kd-pt__btn').getBoundingClientRect(), c = document.querySelector('#cookieBanner').getBoundingClientRect(); return { btnAlt: Math.round(b.bottom), bantUst: Math.round(c.top) }; });
+    kontrol(`${w} çerez bandı açık ${tur}: band ve öğeler örtülmüyor`, iz.kare >= 30 && Object.keys(iz.ihlal).length === 0 && r1.btnAlt <= r1.bantUst, ihlalYazi(iz) + ' ' + JSON.stringify({ ...r1, kare: iz.kare }));
+    await a.close();
+  }
+  await bag.close();
+}
+
+/* ---------- 7 · Hover menü, tıklama sabitleme, dokunmatik, klavye (EK) ---------- */
+const menuAcikMi = (s) => s.evaluate(() => !!document.querySelector('#kdPtMenu.kd-acik'));
+for (const w of GENISLIK.filter((x) => x >= 1024)) {
+  const bag = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 } });
+  await bag.addInitScript(() => { try { localStorage.setItem('dadakids.putur.merhaba.v1', '1'); sessionStorage.setItem('dadakids.putur.selam', '1'); } catch (e) {} window.__kdPuturVideo = null; });
+  const s = await acSayfa(bag, 'kids-tarifler.html', jsHata); await s.waitForTimeout(500);
+  const [x, y] = await merkez(s, '.kd-pt__btn');
+  await s.mouse.move(x, y, { steps: 3 }); await s.waitForTimeout(90);
+  kontrol(`${w} hover: gecikme öncesi menü kapalı`, !(await menuAcikMi(s)));
+  await s.waitForTimeout(520);
+  kontrol(`${w} hover: ~200 ms sonra menü açık`, await menuAcikMi(s));
+  kontrol(`${w} hover: küçük merhaba tepkisi, video zıplaması değil`, await s.evaluate(() => { const k = document.querySelector('.kd-pt'); return k.getAttribute('data-durum') !== 'tepki' && !k.classList.contains('kd-pt--video'); }));
+  kontrol(`${w} hover: tepki state'i izlendi`, await s.evaluate(() => document.querySelector('.kd-pt').hasAttribute('data-hover')));
+  // Pütür → menü geçişi: boşluktan geçerken kapanmaz
+  const hedefOge = await merkez(s, '.kd-pt__oge[data-secenek="acil"]');
+  const adim = 8; let kapandi = false;
+  for (let i = 1; i <= adim; i++) { await s.mouse.move(x + (hedefOge[0] - x) * i / adim, y + (hedefOge[1] - y) * i / adim); await s.waitForTimeout(70); if (!(await menuAcikMi(s))) kapandi = true; }
+  kontrol(`${w} hover: Pütür→menü geçişinde kapanmıyor`, !kapandi);
+  await s.waitForTimeout(520);
+  kontrol(`${w} hover: menü üstündeyken açık kalıyor`, await menuAcikMi(s));
+  await s.mouse.move(w - 200, 300, { steps: 2 }); await s.waitForTimeout(220);
+  kontrol(`${w} hover: çıkınca hemen kapanmıyor`, await menuAcikMi(s));
+  await s.waitForTimeout(560);
+  kontrol(`${w} hover: ~400 ms sonra kapanıyor`, !(await menuAcikMi(s)));
+  // hover ile açıkken tıklama: sabitler ve zıplatır, kapatıp açmaz
+  await s.mouse.move(x, y, { steps: 2 }); await bekleMenu(s, 1500); await s.waitForTimeout(420);
+  await s.mouse.down(); await s.mouse.up();
+  const izTk = []; for (let i = 0; i < 14; i++) { izTk.push(await menuAcikMi(s)); await s.waitForTimeout(40); }
+  kontrol(`${w} tıklama: açık menüyü kapatıp yeniden açmaz`, izTk.every(Boolean), izTk.join(','));
+  kontrol(`${w} tıklama: zıplatır`, (await durum(s)) === 'tepki', await durum(s));
+  await s.waitForTimeout(1800);
+  await s.mouse.move(w - 200, 300, { steps: 2 }); await s.waitForTimeout(800);
+  kontrol(`${w} tıklama: imleç çıksa da açık kalır`, await menuAcikMi(s));
+  await s.mouse.click(w - 200, 300); await s.waitForTimeout(420);
+  kontrol(`${w} tıklama: dışarı tıklama kapatır`, !(await menuAcikMi(s)));
+  await s.close();
+  // hover + 5 tık: sürpriz aynen, menü kapalı
+  const h = await acSayfa(bag, 'kids-tarifler.html', jsHata); await h.waitForTimeout(500);
+  await h.mouse.move(x, y, { steps: 2 }); await bekleMenu(h, 1500); await h.waitForTimeout(300);
+  for (let i = 0; i < 6; i++) { await h.mouse.click(x, y); await h.waitForTimeout(80); }
+  await h.waitForTimeout(300);
+  const sv = await h.evaluate(() => ({ d: document.querySelector('.kd-pt').getAttribute('data-durum'), say: document.querySelector('.kd-pt').getAttribute('data-surpriz'), m: !!document.querySelector('#kdPtMenu.kd-acik') }));
+  kontrol(`${w} hover menüsü açıkken 5 tık: sürpriz oynar, menü kapanır`, sv.d === 'surpriz' && sv.say === '1' && !sv.m, JSON.stringify(sv));
+  await h.waitForTimeout(2300);
+  kontrol(`${w} sürpriz sonrası: tek oynadı, menü kendiliğinden açılmadı`, await h.evaluate(() => document.querySelector('.kd-pt').getAttribute('data-surpriz') === '1' && !document.querySelector('#kdPtMenu.kd-acik')));
+  await h.close();
+  // klavye
+  const k = await acSayfa(bag, 'kids-tarifler.html', jsHata); await k.waitForTimeout(400);
+  await k.evaluate(() => { document.activeElement && document.activeElement.blur(); });
+  await k.keyboard.press('Shift+Tab'); await k.keyboard.press('Shift+Tab'); await k.waitForTimeout(160);
+  const o1 = await k.evaluate(() => ({ odak: document.activeElement === document.querySelector('.kd-pt__btn'), ad: document.activeElement.className }));
+  await k.waitForTimeout(560);
+  kontrol(`${w} klavye: odak gelince menü açılır`, o1.odak && await menuAcikMi(k), JSON.stringify(o1));
+  await k.keyboard.press('Tab'); const t1 = await k.evaluate(() => document.activeElement.getAttribute('data-secenek'));
+  await k.keyboard.press('ArrowDown'); const t2 = await k.evaluate(() => document.activeElement.getAttribute('data-secenek'));
+  kontrol(`${w} klavye: Tab ve ok menüde gezer`, t1 === 'yas' && t2 === 'besin', JSON.stringify([t1, t2]));
+  await k.keyboard.press('Escape'); await k.waitForTimeout(420);
+  const o2 = await k.evaluate(() => ({ btn: document.activeElement === document.querySelector('.kd-pt__btn') }));
+  kontrol(`${w} klavye: Esc kapatır, odak butonda, yeniden açılmaz`, o2.btn && !(await menuAcikMi(k)), JSON.stringify(o2));
+  await k.keyboard.press('Shift+Tab'); await k.waitForTimeout(320);
+  kontrol(`${w} klavye: geri sekmede tuzak yok`, await k.evaluate(() => !document.activeElement.closest('.kd-pt') && !!document.activeElement && !document.querySelector('#kdPtMenu.kd-acik')));
+  await k.close();
+  const k2 = await acSayfa(bag, 'kids-tarifler.html', jsHata); await k2.waitForTimeout(300);
+  await k2.evaluate(() => document.activeElement && document.activeElement.blur());
+  await k2.keyboard.press('Shift+Tab'); await k2.keyboard.press('Shift+Tab'); await k2.waitForTimeout(420);
+  for (let i = 0; i < 9; i++) await k2.keyboard.press('Tab');
+  await k2.waitForTimeout(320);
+  kontrol(`${w} klavye: ileri sekmede tuzak yok, menü kapanır`, await k2.evaluate(() => !document.activeElement.closest('.kd-pt') && !document.querySelector('#kdPtMenu.kd-acik')), await k2.evaluate(() => document.activeElement.tagName + '.' + document.activeElement.className));
+  await k2.close();
+  await bag.close();
+}
+for (const w of GENISLIK.filter((x) => x <= 768)) {
+  const bag = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 }, hasTouch: true, isMobile: true });
+  await bag.addInitScript(() => { try { localStorage.setItem('dadakids.putur.merhaba.v1', '1'); } catch (e) {} window.__kdPuturVideo = null; });
+  const s = await acSayfa(bag, 'kids-tarifler.html', jsHata); await s.waitForTimeout(500);
+  const [x, y] = await merkez(s, '.kd-pt__btn');
+  await s.touchscreen.tap(x, y); await s.waitForTimeout(160);
+  kontrol(`${w} dokunmatik: ilk dokunuş zıplama`, (await durum(s)) === 'tepki', await durum(s));
+  kontrol(`${w} dokunmatik: ardından menü açılır`, await bekleMenu(s, 3200));
+  await s.close(); await bag.close();
+}
+
+/* ---------- 8 · "Merhaba!" balonu (EK) ---------- */
+for (const w of GENISLIK.filter((x) => x === 1440 || x === 390 || x === 320)) {
+  const bag = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 } });
+  await bag.addInitScript(() => { window.__kdPuturVideo = null; });
+  const s = await bag.newPage(); s.on('pageerror', (e) => jsHata.push('merhaba: ' + e.message));
+  await s.goto(TABAN + 'kids-tarifler.html', { waitUntil: 'domcontentloaded' });
+  const gor = await s.waitForFunction(() => { const e = document.querySelector('.kd-pt__merhaba'); return e && !e.hidden && getComputedStyle(e).opacity > .5; }, null, { timeout: 4000 }).then(() => true, () => false);
+  const t = await s.evaluate(() => { const e = document.querySelector('.kd-pt__merhaba'); if (!e) return null; const r = e.getBoundingClientRect(); return { yazi: e.textContent.trim(), sol: r.left, sag: innerWidth - r.right, ust: r.top }; });
+  kontrol(`${w} Merhaba: ilk ziyarette görünür ve ekranda`, gor && t && /Merhaba!/.test(t.yazi) && t.sol >= 0 && t.sag >= 0 && t.ust >= 0, JSON.stringify(t));
+  await s.waitForTimeout(3700);
+  kontrol(`${w} Merhaba: ~3 sn sonra kaybolur`, await s.evaluate(() => { const e = document.querySelector('.kd-pt__merhaba'); return !e || e.hidden || +getComputedStyle(e).opacity === 0; }));
+  await s.reload({ waitUntil: 'domcontentloaded' }); await s.waitForTimeout(1600);
+  kontrol(`${w} Merhaba: ikinci ziyarette gösterilmez`, await s.evaluate(() => { const e = document.querySelector('.kd-pt__merhaba'); return !e || e.hidden || +getComputedStyle(e).opacity === 0; }));
+  await s.close(); await bag.close();
+}
+{
+  const bag = await tarayici.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  await bag.addInitScript(() => { window.__kdPuturVideo = null; });
+  const s = await bag.newPage(); await s.goto(TABAN + 'kids-tarifler.html', { waitUntil: 'domcontentloaded' }); await s.waitForTimeout(1300);
+  const m = await s.evaluate(() => ({ an: document.getAnimations().filter((a) => a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('.kd-pt')).length, var_: !!document.querySelector('.kd-pt__merhaba') }));
+  kontrol('reduced: Merhaba animasyonsuz', m.var_ && m.an === 0, JSON.stringify(m));
+  await s.close(); await bag.close();
+}
+
+/* ---------- 9 · Bağlama duyarlı tetikleyiciler (EK) ---------- */
+{
+  const bag = await tarayici.newContext({ viewport: { width: 1440, height: 900 } });
+  await bag.addInitScript(() => { try { localStorage.setItem('dadakids.putur.merhaba.v1', '1'); sessionStorage.setItem('dadakids.putur.selam', '1'); } catch (e) {} window.__kdPuturVideo = null; });
+  // scroll yönüne bakma
+  let s = await acSayfa(bag, 'kids-tarifler.html', jsHata); await s.waitForTimeout(400);
+  await s.mouse.move(700, 400); await s.mouse.wheel(0, 300); await s.waitForTimeout(80);
+  const b1 = await s.evaluate(() => document.querySelector('.kd-pt').getAttribute('data-bakis'));
+  await s.mouse.wheel(0, -200); await s.waitForTimeout(80);
+  const b2 = await s.evaluate(() => document.querySelector('.kd-pt').getAttribute('data-bakis'));
+  await s.waitForTimeout(560);
+  const b3 = await s.evaluate(() => ({ b: document.querySelector('.kd-pt').getAttribute('data-bakis'), d: document.querySelector('.kd-pt').getAttribute('data-durum') }));
+  kontrol('tetikleyici: scroll yönüne bakar, durunca idle', b1 === 'asagi' && b2 === 'yukari' && !b3.b && b3.d === 'idle', JSON.stringify([b1, b2, b3]));
+  // arama kutusu ve filtre
+  await s.evaluate(() => scrollTo({ top: 0, behavior: 'instant' })); await s.waitForTimeout(200);
+  const aramaVar = await s.$('input[type="search"], input[role="searchbox"]');
+  if (aramaVar) {
+    await aramaVar.focus(); await s.waitForTimeout(160);
+    kontrol('tetikleyici: arama kutusuna odak → araştırma', (await durum(s)) === 'arama', await durum(s));
+    await s.evaluate(() => document.activeElement.blur()); await s.waitForTimeout(420);
+    kontrol('tetikleyici: odak gidince idle', (await durum(s)) === 'idle', await durum(s));
+  } else kontrol('tetikleyici: arama kutusu bulundu', false);
+  const filtre = await s.$('form input[type="checkbox"]');
+  if (filtre) {
+    await s.evaluate(() => { const i = document.querySelector('form input[type="checkbox"]'); i.click(); }); await s.waitForTimeout(160);
+    kontrol('tetikleyici: filtre değişince araştırma', (await durum(s)) === 'arama', await durum(s));
+    await s.waitForTimeout(2800);
+    kontrol('tetikleyici: filtreden sonra idle', (await durum(s)) === 'idle', await durum(s));
+  } else kontrol('tetikleyici: filtre bulundu', false);
+  await s.close();
+  // menü seçimi: ~0,6 sn düşünme → anlatma, balon açıkken anlatma sürer
+  s = await acSayfa(bag, 'kids-tarifler.html', jsHata);
+  await s.evaluate(() => { const k = document.querySelector('.kd-pt'); window.__sira = []; const t0 = performance.now(); new MutationObserver(() => window.__sira.push([Math.round(performance.now() - t0), k.getAttribute('data-durum')])).observe(k, { attributes: true, attributeFilter: ['data-durum'] }); });
+  await sec(s, 'alerjen'); await s.waitForTimeout(3400);
+  const si = await s.evaluate(() => window.__sira);
+  const dus = si.findIndex((x) => x[1] === 'dusunme'), anl = si.findIndex((x) => x[1] === 'anlatma');
+  const fark = dus >= 0 && anl > dus ? si[anl][0] - si[dus][0] : -1;
+  kontrol('tetikleyici: seçim → ~0,6 sn düşünme → anlatma', fark >= 480 && fark <= 900, JSON.stringify(si));
+  kontrol('tetikleyici: balon açıkken anlatma sürer', (await durum(s)) === 'anlatma', await durum(s));
+  await s.keyboard.press('Escape'); await s.waitForTimeout(320);
+  kontrol('tetikleyici: balon kapanınca idle', (await durum(s)) === 'idle', await durum(s));
+  await s.close();
+  // besin aramasında durum titremez
+  s = await acSayfa(bag, 'kids-tarifler.html?evre=9-12-ay', jsHata);
+  await s.evaluate(() => { const k = document.querySelector('.kd-pt'); window.__sira = []; const t0 = performance.now(); new MutationObserver(() => window.__sira.push([Math.round(performance.now() - t0), k.getAttribute('data-durum')])).observe(k, { attributes: true, attributeFilter: ['data-durum'] }); });
+  await sec(s, 'besin'); await s.fill('#kdPtAra', 'üzüm'); await s.waitForTimeout(900);
+  const sb = await s.evaluate(() => window.__sira);
+  const kisa = sb.filter((x, i) => i + 1 < sb.length && sb[i + 1][0] - x[0] < 120);
+  kontrol('doğrulama: besin aramasında durum titremesi yok', kisa.length === 0, JSON.stringify(sb));
+  await s.close();
+  // okuma: rehber makalesi, 20+ sn yavaş okuma; başka sayfada yok
+  s = await acSayfa(bag, 'kids-rehber-alerjen-tanitimi.html', jsHata);
+  await s.mouse.move(700, 400);
+  await s.evaluate(() => { window.__bas = 0; new MutationObserver(() => { if (document.querySelector('.kd-pt').classList.contains('kd-pt--bas')) window.__bas++; }).observe(document.querySelector('.kd-pt'), { attributes: true, attributeFilter: ['class'] }); });
+  for (let i = 0; i < 12; i++) { await s.mouse.wheel(0, 90); await s.waitForTimeout(1900); }
+  await s.waitForTimeout(800);
+  const ok1 = await s.evaluate(() => ({ d: document.querySelector('.kd-pt').getAttribute('data-durum'), kitap: +getComputedStyle(document.querySelector('.pt-kitap') || document.body).opacity, kitapVar: !!document.querySelector('.pt-kitap') }));
+  kontrol('tetikleyici: makalede 20+ sn → okuma pozu, kitapçık görünür', ok1.d === 'okuma' && ok1.kitapVar && ok1.kitap > .9, JSON.stringify(ok1));
+  for (let i = 0; i < 14; i++) { await s.mouse.wheel(0, 160); await s.waitForTimeout(420); }
+  kontrol('tetikleyici: okurken bölüm geçişinde baş sallar', (await s.evaluate(() => window.__bas)) > 0, String(await s.evaluate(() => window.__bas)));
+  await s.close();
+  s = await acSayfa(bag, 'kids-tarifler.html', jsHata); await s.mouse.move(700, 400);
+  for (let i = 0; i < 6; i++) { await s.mouse.wheel(0, 90); await s.waitForTimeout(600); }
+  kontrol('tetikleyici: makale dışında okuma pozu yok', (await durum(s)) !== 'okuma');
+  await s.close();
+  // hareketsizlik: gezinti, sonra idle
+  s = await acSayfa(bag, 'kids-tarifler.html', jsHata);
+  await s.evaluate(() => { const k = document.querySelector('.kd-pt'); window.__sira = []; const t0 = performance.now(); new MutationObserver(() => window.__sira.push([Math.round(performance.now() - t0), k.getAttribute('data-durum')])).observe(k, { attributes: true, attributeFilter: ['data-durum'] }); });
+  await s.mouse.move(700, 400); await s.waitForTimeout(29000);
+  const on = await s.evaluate(() => window.__sira.filter((x) => x[1] === 'gezinti').length);
+  await s.waitForTimeout(21000);
+  const sg = await s.evaluate(() => window.__sira);
+  const gz = sg.filter((x) => x[1] === 'gezinti');
+  kontrol('tetikleyici: 30 sn dolmadan gezinti yok', on === 0, JSON.stringify(sg));
+  kontrol('tetikleyici: 30–45 sn hareketsizlikte bir kez gezinti, sonra idle', gz.length === 1 && gz[0][0] >= 29000 && gz[0][0] <= 47000 && sg[sg.length - 1][1] === 'idle', JSON.stringify(sg));
+  await s.close();
+  // sekme gizliyken her şey durur
+  s = await acSayfa(bag, 'kids-tarifler.html', jsHata); await s.waitForTimeout(400);
+  await s.evaluate(() => { window.__tm = 0; const st = window.setTimeout; window.setTimeout = function (f, t, ...a) { window.__tm++; return st(f, t, ...a); }; });
+  await s.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => true }); Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange')); });
+  await s.waitForTimeout(300);
+  const g0 = await s.evaluate(() => { window.__tm = 0; return document.getAnimations().filter((a) => a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('.kd-pt') && a.playState === 'running').length; });
+  await s.waitForTimeout(7000);
+  const g1 = await s.evaluate(() => window.__tm);
+  kontrol('gizli sekme: çalışan animasyon yok', g0 === 0, String(g0));
+  kontrol('gizli sekme: zamanlayıcı uyanmıyor', g1 === 0, String(g1));
+  await s.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => false }); Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange')); });
+  await s.waitForTimeout(300);
+  kontrol('gizli sekme: görünür olunca animasyon sürer', await s.evaluate(() => document.getAnimations().filter((a) => a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('.kd-pt') && a.playState === 'running').length > 0));
+  await s.close(); await bag.close();
 }
 
 kontrol('sayfa içi JS hatası / yerel 4xx yok', jsHata.length === 0, [...new Set(jsHata)].slice(0, 6).join(' | '));
