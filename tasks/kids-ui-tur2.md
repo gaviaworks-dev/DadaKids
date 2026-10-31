@@ -99,6 +99,21 @@ Eski çizimler yalnız `sekil` anahtarından üretiliyordu; aynı şekilli besin
 - karar: Safari yolu WebKit 2370 ile ölçüldü: Range destekli geçici sunucuda HEVC alpha hazır, oynadı, şeffaf (ekran görüntüsü tmp/webkit-video.png), menü açıldı, JS hatası yok. gerekçe: Ortak yerel sunucu (8765) Range yanıtı vermiyor (200, octet-stream), bu yüzden WebKit orada videoyu reddedip SVG/CSS zıplamaya düşüyor; bu sessiz ve hatasız bir yedek. GitHub Pages Range veriyor.
 - karar: Firefox 1538 ile ölçüldü: video kullanmaz, SVG/CSS zıplar, menü açılır, JS hatası yok. gerekçe: Kasıtlı yedek yol.
 - karar: Dar ekranda sayfanın en üstünde de, tam boy Pütür bir bağın/düğmenin ortasını örtecekse kenara çekilir. gerekçe: İlk sürümdeki "en üstte hep tam boy" kuralı içerik düzenine bağlıydı; kids-tarifler yaş şeridi yer değiştirince 390'da "Tümü" çipini örttü (kapi-taban.txt, 1996/1997). Yeni kontrol ızgara sınıfı kullanmaz.
+- karar: Dar ekranda açık durumlar (tepki, sürpriz, menü, balon, klavye odağı) için konum bir kez hesaplanır ve kapanana kadar sabit kalır: önce tam boy (gerekirse yukarı kayarak), olmazsa kenarda. gerekçe: Kullanıcı kararı; "kullanıcı başlatıyor" gerekçesi geçersiz. Kural yalnız ekrandaki etkileşimli öğe ortalarını okur, ızgara sınıfı kullanmaz.
+- karar: Zıplama alanı için boyun %36'sı yukarı payı kullanıldı. gerekçe: 45 video karesinin alfa kutusundan ölçüldü (tepe -55/160 birim); SVG zıplaması bunun içinde kalıyor.
+- karar: Hareket eksenlere bölündü (dikey transform, yatay translate): açılırken önce yukarı, çekilirken önce yana. gerekçe: Çapraz yol kenardan çıkarken çipin ortasından geçiyordu.
+- karar: Dinlenme yerinde animasyon boyunca görünmez yakalama alanı (.kd-pt-yakala) var. gerekçe: Pütür kayınca hızlı dokunuşlar boşa gidiyor, kenardaki Pütür'de sürpriz hiç tetiklenmiyordu; bu hata yeni kapıyla ortaya çıktı.
+- karar: Uçan parçaların yolu etkileşimli öğe ortalarından geçmeyecek şekilde seçilir; güvenli yol yoksa o parça çıkmaz. gerekçe: Parçalar da görsel olarak örter; kapı parça kutularını da ölçüyor.
+- karar: Tık alanı yalnız düğme kutusu; iç SVG ve karakter kutuları pointer-events: none. gerekçe: Döndürülen/ölçeklenen iç kutu düğmenin dışına taşıp bir kare tıklamayı yutuyordu. Görünen karakter pikselleri kapıda ayrıca ölçülüyor.
+- karar: 1440'ta sol mesafe 32 değil 12 px. gerekçe: 112 px Pütür + 32 px sol, 132 px'te başlayan içerik sütununa giriyordu. Boyutu koruyup içeri aldım; sütun yeterince uzaksa (~1480+) 32 px. 1440'tan dar masaüstünde sığmaz: sayfa kayınca kenara çekilir.
+- karar: Yukarı-çık düğmesi Pütür'ün alt hizasına taşındı (masaüstü 22→32, mobil 85→98). gerekçe: Gastro kabuğu bu düğmeyi kendi hizasında tutuyor; "aynı alt hiza" ve "~32/~20" birlikte ancak böyle sağlanır. Kural yalnız putur.css'te, yalnız Kids sayfalarında.
+- karar: Tablet ölçüsü 96 px, sol/alt 24 px. gerekçe: İstekte tablet kenar mesafesi yok; masaüstü ile mobil arası seçildi.
+- karar: Çakışma ölçütü merkezden kutuya çıktı: tam boy Pütür hiçbir etkileşimli öğenin kutusuna binmez; kenarda (yer yoksa) yalnız orta noktası korunur. gerekçe: Merkez ölçütü çipin üst yarısına binmeyi geçiriyordu. Kenar konumda mobil sütun tam genişlik olduğu için kutu örtüşmesi sol kenarda ~22 px kalabilir.
+- karar: Sayfadaki rastgele araştırma/düşünme zamanlayıcısı kaldırıldı; ikisi yalnız bağlamdan gelir. Boşta ara sıra el sallama (45–90 sn) kaldı, gezinti 30–45 sn hareketsizlik + 120 sn arayla. gerekçe: Bağlama duyarlı ve abartısız isteği; rastgele büyüteç anlamsızdı.
+- karar: Anlatma, balon açık kaldıkça durum olarak sürer ama ağız ve el 3 sn civarı sonra durur. gerekçe: İstenen "balon açıkken anlatma"; sürekli konuşan ağız okumayı dağıtır.
+- karar: Pütür kapalı tutulduğunda (hover) ikinci tıklama sabit menüyü kapatır. gerekçe: Dışarı tıklama ve Esc'e ek olarak beklenen davranış; 5 tık sürprizini bozmaz.
+- karar: "Merhaba!" yer bulamazsa o sayfada gösterilmez, işaret de yazılmaz; sonraki sayfada dener. gerekçe: Bir öğenin üstüne binmesin.
+- karar: Video 640 px kaynaktan yeniden çıkarıldı, yeni kredi harcanmadı. gerekçe: 112 px Pütür 2x ekranda 480 px kaynakta sınırdaydı.
 
 ## 9. Boyut geri alma, ızgara ve denge
 

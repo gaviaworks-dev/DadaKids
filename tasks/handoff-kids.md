@@ -60,12 +60,14 @@ Kapsam:
 
 - ☑ EK Dada Kids giriş noktaları: ☑ ana sayfa widget'ı (`kidsBandi`) ☑ tarifler Kids chip'i (`kd-chip-gastro`, `kd-subcat`) ☑ mega menüde Kids kartı sağdan kalkıp sol ızgaranın altına tam genişlik şerit (şu an `.mega-feat` içinde `MEGA_KART`, build.mjs:25,51). Yalnız `tarifler.html`/mega görünümü değişir; Gastro nav yapısı aynı, DADA KIDS nav'a eklenmez.
 
-- ◐ EK Pütür ön plan + hover menü (`putur3`): boyut 112/96/76/68, konum 32/20px, halka + gölge, Merhaba balonu, hover aç/kapat/sabitle, dokunma ve parıltı anı çakışmasızlık, kapı; ayrı push
+- ☑ EK Pütür ön plan + hover menü: boyut 112/96/76/68, konum 32/20px, halka + gölge, Merhaba balonu, hover aç/kapat/sabitle, dokunma ve parıltı anı çakışmasızlık, kapı; ayrı push
 - ☑ EK mega şerit: canlıda (9fb7a22)
 - karar (kullanıcı): video tek zıplama + Firefox'ta SVG üç zıplama kabul; her faz yeşil oldukça ayrı push
 
-- ◐ EK Pütür state'leri (`putur3`): state-rapor.md, canlı doğrulama + GIF'ler, bağlama duyarlı tetikleyiciler, tasks/putur-ozet-yasin-bey.md, tanıtım mp4 (<16 MB); ayrı push
+- ◐ EK Pütür state'leri (tanıtım videosu `putur4`): state-rapor.md, canlı doğrulama + GIF'ler, bağlama duyarlı tetikleyiciler, tasks/putur-ozet-yasin-bey.md, tanıtım mp4 (<16 MB); ayrı push
 - ☑ Geri almalar push edildi (`2177d34`): canlıda Araçlar 576×421, Rehber metni 720px
+
+- ◐ EK spacing (`bosluk6`): kutu boşlukları + bosluk-kapisi.mjs; ayrı push
 
 Ajan kolları (git yalnız lead'de; iki ajan aynı dosyaya yazmaz):
 - `izgara3`: src/kids/ortak.mjs, src/kids/sayfalar/*.mjs, varlik/kids/kids.css, varlik/kids/css/*.css (putur.css ve dogum-secici.css HARİÇ), varlik/kids/js/kesim.js|mevsim.js|rehber.js|donem.js|hub.js, araclar/izgara-kapisi.mjs, rapor/tmp/izgara/** · build yalnız bu kolda
