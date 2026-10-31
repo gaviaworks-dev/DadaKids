@@ -3,10 +3,44 @@
 > Compact/clear sonrası İLK İŞ: bu dosyanın "▶ ŞU AN" bölümünü oku, oradan devam et.
 > Görev metni: Beyar'ın 31 Eki "kapsamlı yenile" isteği (görsel kimlik + tüm modüller dolu + Kids tarifleri). Push ÖNCESİ DUR ve Beyar'a sor.
 
-## ▶ ŞU AN
+## ▶ ŞU AN (TUR 2 — kalite turu, FULL OTONOM)
+**Tek kaynak bu dosya.** Compact sonrası yalnız buradan devam; bitmiş (☑) işi tekrarlama. Teammate'ler de buna bakar.
+**İzinler:** push izni VAR (yalnız bu repo, main): güvenlik commit'i hazır olur olmaz push; tur sonunda kalan commit'ler push. Force push YOK, geçmiş yeniden yazılmaz, `git add -A` YOK, her commit'te staged kontrol. Beyar'a soru sorma; belirsizlikte en makul seçenek + tasks/kids-ui-tur2.md'ye "karar: … gerekçe: …".
+**Kredi tavanı:** ~500 (başlangıç: ölçülecek). Yetmezse SVG/CSS ile kapat, raporda belirt.
+**Bitiş kriteri:** Pages derlemesi bitmiş + canlıda (gaviaworks-dev.github.io/DadaKids/) genişletilmiş kapılar yeşil (token/csrf taraması, 4 genişlik 1440/1024/768/390, kesilme, taşma, spacing, görselsiz bölüm, metin-çizim uyumu, kırık bağlantı). Kırmızı → düzelt-commit-push.
+**Son rapor:** canlı linkler (hub, Kids Tarifleri, Güvenli Kesim, Araçlar, bir evre, bir tarif, ana sayfa bandı) · önce/sonra görüntüler 1440+390 + 3 tema · illüstrasyon paftası · logo geçişi GIF · video kareleri · kids-ui-tur2.md özeti · kredi · token raporu · kararlar listesi → DUR.
+**Önce görüntüleri:** rapor/tmp/once/ (tur başında alınacak, tur 1 hâli)
+
+İşler:
+- ☑ 0a Güvenlik taraması → bulgular: meta dada-kimlik (misafir CSRF), meta dada-kalkan (şifreli kalkan_zaman), ?akis=eyJ… (şifreli akış imleci), canlı og/twitter (Balkabağı Püresi Tarifi), gizli tarif panelleri (rdActbar/rdSharePop/lightbox/cookmode), fbModal/feedback-tab, acct-wrap, head-bell/hb-badge, cookieBanner, lgGate
+- ☑ 0b araclar/temizle.mjs (kabukTemizle + tokenTaramasi) → snapshot.mjs + build.mjs bağlı; build kırmızıda durur; her sayfa kendi title/description/og/twitter
+- ☑ 0c Geçmiş: c8ac74a…5046d72 arası commit'lerde misafir CSRF (dada-kimlik), şifreli kalkan_zaman ve akis değerleri + canlı twitter meta VAR. Değerlendirme: CSRF'ler hiç saklanmamış misafir oturumlarına bağlı (curl çerezi atıldı, Laravel oturumu ~120 dk) → yenileme gerekmez; kalkan_zaman APP_KEY ile şifreli, anahtar sızmadı → APP_KEY rotasyonu gerekmez; öneri: kalkan zaman damgasının sunucuda süre sınırlı olduğunu doğrulayın. Kullanıcı verisi/API anahtarı/parola/oturum çerezi YOK. Geçmiş yeniden yazılmadı.
+- ☑ 0d 61fcef1 fix(security) push edildi (e8ac2b6..61fcef1) · yerel kapılar: varlık 46/46 · davranış 36/36 (token taraması dahil) · parite 14/14 (canlıda çerez bandı Reddet ile kapatılıp ölçülüyor) · canlı token taraması tur sonunda
+- ☑ 1a Önce görüntüleri rapor/tmp/once/ (15 dosya) · frontend-design skill okundu · ☑ 1b araştırma bitti → tasks/kids-ui-tur2.md (artık lead'in; §4 Kararlar ve §5 kesim denetimi YAZILDI) · uygulandı: sayfa başına ≤3 ayırıcı, zebra %45, beliriş 16px/360ms cubic-bezier(.25,1,.5,1)
+- ☑ 2a gorsel2 BİTTİ: maskot Pütür 10 poz SVG (varlik/kids/maskot, pafta.png) · 26 illüstrasyon nano_banana_pro (illus/pafta.png) · 3 video kling3_0 (video/kareler.png) · harcama 101,1 kr (manifest varlik/kids/gorsel2/manifest.json) · not: Homebrew ffmpeg bozuk (libx265) — sisteme dokunulmadı
+- ☑ 2b kesim2 BİTTİ: 45 aşama + 15 bütün besin SVG (varlik/kids/svg/kesim, build'de kesim.mjs üretir) · kesim.json metin düzeltmeleri + cizim alt metni · denetim tablosu kesim2 raporunda → kids-ui-tur2.md'ye taşınacak · pafta rapor/tmp/kesim-pafta.png · menü altı kesilme + çapa kaydırma düzeltildi · Güvenli Kesim 15×3 yeni çizim + metin-çizim uyumu (kol: kesim2)
+- ☑ 3 Higgsfield: illüstrasyon + video gorsel2 içinde yapıldı (101,1 kr; tarif fotoğrafları zaten tam)
+- ◐ 4 UI (lead): ☑ kids.css tur-2 katmanı (spacing --kd-s1..s9, Fredoka başlık fontu varlik/kids/font/, .kd-zebra/.kd-desen--*/.kd-ayirici, maskot+baloncuk, basma tepkisi, tema v3 zemin kayması, alt menü ortalı + yazı imi gizli, tema seçici, header logo dada kids dönüşümü + view-transition) ☑ kids.js (tema localStorage dadakids.tema.v1 + seçici, logo tıklama dönüşümü, video reduced-motion, kademeli gecikme) ☑ build: logoDonusumu ☑ hub ritim/maskot/hero medya ☑ tarif detay ritim · kalan: spacing ölçeği (4/8/12/16/24/32/48/64/96) · kesilme yok · section ritmi (dalga/bulut ayırıcı, evre zebra, desen) · header logo dada kids dönüşümü · alt menü ortalı/mobil kaydırma · animasyon · tema (localStorage + alt menüden değiştir, tüm temaya hafif)
+- ◐ 5 İçerik tutarlılığı (lead): ☑ yaş chip sayıları derlemede gerçek ☑ yaş etiketi +24 Ay ☑ alerjen filtresi veri kapsamlı (yer fıstığı ayrı, susam, balık) ☑ kartta tüm alerjenler ☑ tarif foto alt metni · kalan: yaş chip sayıları · yaş etiketi birliği · alerjen filtresi (yer fıstığı ayrı, balık, susam) · kartta tüm alerjenler · boş durum · alt metinler · terim birliği · bağlar
+- ☑ 6 Kapılar YEREL YEŞİL: varlık 92/92 (23 sayfa × 4 genişlik) · davranış 38/38 · parite 14/14 · (görselsiz alt bölümlere SVG ikon eklendi; açık c=belirtilmedi tema hatası düzeltildi) · eski not: ☑ varlik-kapisi v2 (4 genişlik; 404, JS, yatay taşma, kırık görsel, kesilme/menü altı, görselsiz bölüm, bitişik, kesim çizim≠metin — [data-besin]/[data-asama] sözleşmesi kesim2'ye bildirildi) — bozuk test sayfasında kırmızı verdiği gösterildi ☑ davranis: token taraması · kalan: tüm sayfalarda yeşil
+- ◐ 7 sonra görüntüleri (rapor/tmp/sonra) → önce/sonra paftaları + logo GIF → concern commit'leri → push → Pages → canlı kapılar → son rapor
+
+Ajan kolları (dosya sahipliği; iki ajan aynı dosyaya yazmaz):
+- lead: araclar/*, src/kids/ortak.mjs, varlik/kids/kids.css, varlik/kids/kids.js, src/donor/*, hub/tarifler modülleri + css/js, veri/kids-tarifler.json, tasks/*, git
+- `arastirma`: YALNIZ tasks/kids-ui-tur2.md (bitene kadar sahibi; lead sonra §4 Kararlar'ı yazar)
+- `gorsel2`: varlik/kids/maskot/** (maskot "Pütür", 10 poz SVG) · varlik/kids/illus/** (30 kawaii illüstrasyon) · varlik/kids/video/** (hub/tarifler/mevsim döngüleri) · eksik tarif fotoğrafları · varlik/kids/gorsel2/manifest.json · bütçe ≤420 kr
+- `kesim2`: src/kids/sayfalar/kesim.mjs · varlik/kids/css/kesim.css · varlik/kids/js/kesim.js · veri/kesim.json · varlik/kids/svg/kesim/** · 15×3 çizim + metin-çizim denetimi + rapor/tmp/kesim-pafta.png · port 8766
+- `sayfalar2`: donemler/mevsim/rehber/araclar .mjs + css/{donem,mevsim,rehber,araclar}.css + js/{donem,mevsim,rehber}.js (+ araç JS yalnız düzen için) · port 8767
+- `sayfalar2` BİTTİ: 4 modül ritim()+zebra+ayırıcı, illüstrasyonlar her bölümde, Pütür ipuçları, spacing --kd-s*, araçlar boşluğu kapandı, mevsim 390 panel taşması düzeltildi, terim birliği · tüm kollar kapandı → lead entegrasyon
+- lead portu 8765
+- **Kredi:** tur 2 başlangıç 4771,93 (hesap başka oturumla paylaşımlı → kendi harcamamızı manifest'ten say)
+- **Kararlar (kids-ui-tur2.md §4'e taşınacak):** yaş rozeti biçimi tek: "+N Ay" (2–3 Yaş → +24 Ay) · başlık fontu Fredoka (OFL, kendi barındırma), gövde Gilroy · maskot "Pütür" (krem kase karakteri) · ortak.mjs: illus/maskot/ayirici/video yardımcıları eklendi
+
+## Tur 1 durumu (arşiv)
 - **yapılanlar:** handoff kuruldu · Higgsfield başlangıç kredisi 5095,93 (ultra plan) · model maliyetleri: nano_banana_pro 2 · seedream_v5_pro 2,5 · flux_2 1 · gpt_image_2 6,5
 - **QA geçti:** varlık kapısı 46/46 (23 sayfa × 2 genişlik) · davranış 35/35 (iç bağlantı taraması, Dalga/puan yok, tema değişmezliği, katalog, detay) · parite 14/14
-- **sıradakiler:** Beyar'dan PUSH onayı bekleniyor (9 commit yerelde, origin/main'in önünde). Onay gelince: git push → Pages derlemesini bekle → canlıda varlik-kapisi (TABAN=https://gaviaworks-dev.github.io/DadaKids/)
+- **YAYINDA (31 Eki):** push f20e355..e8ac2b6 (Beyar onayıyla, force yok) · Pages derledi (e8ac2b6) · canlı kapılar: varlık 46/46 · davranış 35/35 · düzeltme commit'i gerekmedi
+- **sıradakiler:** Beyar'ın yeni talimatı. Açık konu: tasks/kids-spec-duzeltmeleri.md YOK (Yasin Bey'e gidecek düzeltmeler şu an tasks/kids-plan.md §6.2'de); istenirse oluşturulacak
 - **commitler:** 3c1e959 tasarım sistemi · 7189dbd görseller · 526ca0d içerik · 47c058c hub+tarifler · 078bd29 dönem/kesim/mevsim/rehber · 8ddbc03 araçlar · 5046d72 bant+yönlendirme · ff0d62c kapılar · (bu) docs
 - **teslim görüntüleri:** rapor/tmp/teslim/ (gitignored)
 - **QA notu:** bak.mjs artık tekerlekle kaydırıyor (kd-gir animasyonları için) · hub hero kadrajı 5:4 / %82
@@ -19,7 +53,7 @@
 - **yazıldı (lead):** varlik/kids/kids.css v2 · src/kids/ortak.mjs · araclar/build.mjs v2 (Kids kabuğu = tarif detayı donörü; eski kids__*.html → yönlendirme)
 - **iskelet:** veri/kids-tarifler.json 27 tarif (12×6–8 ay, 8×9–12 ay, 7×1–3 yaş) yazıldı
 - **bekleyen kararlar:** —
-- **bekleyen onaylar:** commit (concern bazında) · PUSH (Beyar'a sorulacak)
+- **bekleyen onaylar:** yok (bu handoff güncellemesi commit'lenmedi; sonraki turda docs commit'ine girer)
 
 ## Mimari (yeni tur)
 - Dosya adları: kullanıcı kuralı **tireli** (`kids-tarifler.html`, `kids-tarif.html?t=<slug>`). Eski `kids__*.html` → yönlendirme sayfası.
