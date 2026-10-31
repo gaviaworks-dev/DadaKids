@@ -6,6 +6,7 @@
 // Kullanım: node araclar/snapshot.mjs
 import { mkdir, writeFile, readFile, access } from 'node:fs/promises';
 import path from 'node:path';
+import { kabukTemizle, tokenTaramasi } from './temizle.mjs';
 
 const KOK = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const CANLI = 'https://dadagastro.com';
@@ -132,7 +133,8 @@ async function main() {
     const yanit = await fetch(CANLI + yol, { headers: { 'User-Agent': UA } });
     if (!yanit.ok) throw new Error(`${ad}: ${yanit.status}`);
     let html = await yanit.text();
-    html = htmlTemizle(html);
+    html = kabukTemizle(htmlTemizle(html));   // token/csrf/oturum/kullanıcıya özel blok kopyalanmaz
+    const kalan = tokenTaramasi(html); if (kalan.length) throw new Error(`${ad}: temizlik sonrası kalan: ${kalan.join(', ')}`);
     // dm-p5-l.js pencere kalıbı CSS'ini mutlak '/revize/tur7/p-pencere.css' yoluyla ekler; Pages alt yolunda kırılır.
     // Betiğin kendi koşulu ('link[data-pencere-kalibi]' varsa ekleme) kullanılır: aynı dosya head'e yerel yolla konur.
     if (html.includes('dm-p5-l.js') && !html.includes('data-pencere-kalibi'))

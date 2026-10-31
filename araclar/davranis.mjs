@@ -2,11 +2,18 @@
 // Kullanım: node araclar/davranis.mjs   (önce: node araclar/sunucu.mjs)
 import { chromium } from 'playwright';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { tokenTaramasi } from './temizle.mjs';
 const T = (process.env.TABAN || 'http://localhost:8765/DadaKids/');
 let hata = 0;
 const ok = (kosul, ad) => { console.log(`${kosul ? '✓' : '✗'} ${ad}`); if (!kosul) hata++; };
 
 /* ---------- Statik taramalar ---------- */
+// Güvenlik: tüm yayımlanan HTML + donörlerde token/csrf/oturum/kullanıcıya özel blok yok
+{
+  const tum = [...readdirSync('.').filter((f) => f.endsWith('.html')), ...readdirSync('src/donor').map((f) => 'src/donor/' + f)];
+  const kirmizi = tum.map((f) => [f, tokenTaramasi(readFileSync(f, 'utf8'))]).filter(([, r]) => r.length);
+  ok(kirmizi.length === 0, `token/csrf taraması: ${tum.length} dosya` + (kirmizi.length ? ' → ' + kirmizi.map(([f, r]) => f + ': ' + r.join('/')).join(' | ') : ''));
+}
 const kidsSayfalari = readdirSync('.').filter((f) => /^kids-.*\.html$|^kids\.html$/.test(f));
 const kirik = [];
 for (const f of [...kidsSayfalari, 'index.html', 'tarifler.html']) {

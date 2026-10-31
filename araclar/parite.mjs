@@ -22,6 +22,8 @@ const TOL = 4;
 async function olc(sayfa, url) {
   await sayfa.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
   await sayfa.waitForTimeout(500);
+  // canlıda çerez bandı alt çubuğu iter; prototipte bant yok (temizlendi) → canlıda 'Reddet' ile kapatıp ölç
+  if (!url.startsWith(YEREL)) { try { await sayfa.click('#cookieReject', { timeout: 2000 }); await sayfa.waitForTimeout(600); } catch {} }
   // BOZ=1: kapının kırmızı verebildiğini göstermek için yerel sayfada logoyu 12px kaydırır
   if (process.env.BOZ && url.startsWith(YEREL)) await sayfa.addStyleTag({ content: 'header .brand{margin-left:12px!important}' });
   return sayfa.evaluate((sec) => sec.map(([s]) => {

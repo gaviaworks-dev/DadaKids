@@ -7,6 +7,7 @@
 import { readFile, writeFile, readdir, access } from 'node:fs/promises';
 import path from 'node:path';
 import * as ortak from '../src/kids/ortak.mjs';
+import { kabukTemizle, tokenTaramasi } from './temizle.mjs';
 
 const KOK = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const oku = (p) => readFile(path.join(KOK, p), 'utf8');
@@ -36,24 +37,35 @@ async function kabukEkle(html, { css = [], js = [] } = {}) {
   return html;
 }
 
-function basliklar(html, baslik, aciklama) {
-  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(baslik)}</title>`);
-  html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(aciklama)}">`);
-  html = html.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(baslik)}">`);
-  html = html.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(aciklama)}">`);
-  html = html.replace(/<meta property="og:image" content="[^"]*">/, '');
+const YAYIN = 'https://gaviaworks-dev.github.io/DadaKids/';
+/** Sayfaya özel kimlik: title + description + og + twitter (canlı sayfanın meta'ları temizlikte silinir). */
+function basliklar(html, baslik, aciklama, { dosya = '', gorsel = 'varlik/kids/gorsel/hero-mutfak.webp', tur = 'website' } = {}) {
+  html = html.replace(/<meta (property|name)="(og:[^"]*|twitter:[^"]*|description)"[^>]*>\s*/g, '');
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(baslik)}</title>
+<meta name="description" content="${esc(aciklama)}">
+<meta property="og:site_name" content="Dada Kids · Dada Gastro (prototip)">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:type" content="${tur}">
+<meta property="og:url" content="${YAYIN}${dosya}">
+<meta property="og:title" content="${esc(baslik)}">
+<meta property="og:description" content="${esc(aciklama)}">
+<meta property="og:image" content="${YAYIN}${gorsel}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(baslik)}">
+<meta name="twitter:description" content="${esc(aciklama)}">
+<meta name="twitter:image" content="${YAYIN}${gorsel}">`);
   return html;
 }
 const yorum = (donor, not) => `<!-- Dada Kids prototipi · ${not} · donör: ${donor} · araclar/build.mjs ile üretildi, elle düzenlenmez -->\n`;
 
 /* ---------- Kids sayfası kabuğu: Gastro tarif detayı (açık, düz header) ---------- */
-const KABUK_HAM = await oku('src/donor/tarif-balkabagi.html');
-async function kidsSayfasi({ baslik, aciklama, main, css = [], js = [] }) {
+const KABUK_HAM = kabukTemizle(await oku('src/donor/tarif-balkabagi.html'));
+async function kidsSayfasi({ dosya, baslik, aciklama, main, css = [], js = [], gorsel }) {
   let html = KABUK_HAM;
   const a = html.indexOf('<main'); const ac = html.indexOf('>', a) + 1; const b = html.indexOf('</main>', ac);
   html = html.slice(0, ac) + '\n' + main + '\n' + html.slice(b);   // tarif detayına özgü betikler taşınmaz
   html = html.replace(/<body([^>]*) class="([^"]*)"/, (t, n, s) => `<body${n} class="pg-kids ${s.replace('pg-tarif-detay', '').trim()}"`);
-  html = basliklar(html, baslik, aciklama);
+  html = basliklar(html, baslik, aciklama, { dosya, gorsel });
   return yorum('https://dadagastro.com (kabuk: tarif detayı)', 'Kids sayfası') + await kabukEkle(html, { css, js });
 }
 
@@ -76,17 +88,19 @@ function kidsBandi() {
 </section>`;
 }
 async function indexSayfasi() {
-  let html = await oku('src/donor/ana.html');
+  let html = kabukTemizle(await oku('src/donor/ana.html'));
   html = zorunlu(html, /(<section class="findbar-sec">[\s\S]*?<\/section>)/, `$1\n${kidsBandi()}`, 'findbar-sec');
+  html = basliklar(html, 'Dada Gastro ana sayfası + Dada Kids bandı (prototip)', 'Dada Gastro ana sayfasının prototip kopyası; Dada Kids giriş bandı eklenmiştir.', { dosya: 'index.html', gorsel: 'varlik/kids/gorsel/bant-kids.webp' });
   return yorum('https://dadagastro.com/', 'yalnız Kids bandı eklendi (kapı A)') + await kabukEkle(html);
 }
 
 /* ---------- tarifler.html — Gastro tarif listesi + Kids chip'i (kapı B) ---------- */
 async function tariflerSayfasi() {
-  let html = await oku('src/donor/tarifler.html');
+  let html = kabukTemizle(await oku('src/donor/tarifler.html'));
   html = zorunlu(html, /(<span class="lbl">Popüler:<\/span>)/, `$1\n <a class="chip kd-chip-gastro" href="kids-tarifler.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> Dada Kids</a>`, 'lh-chips');
   html = zorunlu(html, /(<div class="subcat-track[^>]*>\s*<a class="subcat\s+active[\s\S]*?<\/a>)/,
     `$1\n <a class="subcat kd-subcat" href="kids-tarifler.html">\n <span class="sc-ico" style="background-image:url('varlik/kids/gorsel/tarif/avokado-muz-ezmesi.webp')"></span>\n <span><b>Bebek &amp; Çocuk</b><span>Dada Kids</span></span>\n </a>`, 'subcat-track');
+  html = basliklar(html, 'Tarifler — Dada Gastro (prototip, Dada Kids girişli)', 'Dada Gastro tarif listesinin prototip kopyası; Dada Kids chip\'i ve alt kategori kalemi eklenmiştir.', { dosya: 'tarifler.html' });
   return yorum('https://dadagastro.com/tarifler', 'yalnız Dada Kids chip\'i ve alt kategori kalemi eklendi (kapı B)') + await kabukEkle(html);
 }
 
@@ -115,6 +129,8 @@ for (const f of moduller) {
   }
 }
 for (const [ad, html] of cikti) {
+  const kalan = tokenTaramasi(html);
+  if (kalan.length) throw new Error(`${ad}: token taraması kırmızı → ${kalan.join(', ')}`);
   await writeFile(path.join(KOK, ad), html);
   console.log('✓', ad.padEnd(40), (html.length / 1024).toFixed(0) + ' KB');
 }
