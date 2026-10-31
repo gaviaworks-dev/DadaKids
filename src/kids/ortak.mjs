@@ -246,35 +246,21 @@ function _harfler() {
   }).join('');
 }
 
-/** Tel kollu çocuk figürü (yerel koordinat: ayak ortası 0,0). tur: 'salla' | 'tutun' */
-function _cocuk(tur, { x, y, olcek = 1, kafa = '#FFC4A3', sac = '#F7B8CB' }) {
-  const ortak = 'stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"';
-  const yuz = (cy) => `<circle cx="-15" cy="${cy - 4}" r="6.5" fill="currentColor"/><circle cx="15" cy="${cy - 4}" r="6.5" fill="currentColor"/><path d="M-14 ${cy + 12} Q0 ${cy + 24} 14 ${cy + 12}" stroke="currentColor" stroke-width="7" stroke-linecap="round" fill="none"/><ellipse cx="-28" cy="${cy + 9}" rx="8" ry="5" fill="#F7B8CB" opacity=".9"/><ellipse cx="28" cy="${cy + 9}" rx="8" ry="5" fill="#F7B8CB" opacity=".9"/>`;
-  if (tur === 'salla') {
-    // ayakta, bir eli havada sallıyor, öbürü harfe dayanıyor; tepede bukle
-    return `<g class="kd-cocuk kd-cocuk--salla" transform="translate(${x} ${y}) scale(${olcek})">
-<g class="kd-cocuk__govde"><path d="M0 -122 L0 -52" ${ortak}/><path d="M0 -52 L-22 0 M0 -52 L22 0" ${ortak}/><path d="M-22 0 L-34 0 M22 0 L34 0" ${ortak}/></g>
-<g class="kd-cocuk__kol"><path d="M0 -104 L-36 -82 L-56 -66" ${ortak}/><g class="kd-cocuk__sallayan"><path d="M0 -104 L34 -132 L46 -168" ${ortak}/><circle cx="46" cy="-176" r="9" fill="${kafa}" stroke="currentColor" stroke-width="7"/></g></g>
-<g class="kd-cocuk__bas"><circle cx="0" cy="-170" r="46" fill="${kafa}" stroke="currentColor" stroke-width="9"/><path d="M-6 -214 q10 -22 26 -8 q-14 0 -10 12" stroke="currentColor" stroke-width="7" fill="none" stroke-linecap="round"/>${yuz(-170)}</g>
-</g>`;
-  }
-  // tutunuyor: harfe uzanan kol, öbür kol aşağıda; iki yanda saç topuzu
-  return `<g class="kd-cocuk kd-cocuk--tutun" transform="translate(${x} ${y}) scale(${olcek})">
-<g class="kd-cocuk__govde"><path d="M0 -108 L0 -44" ${ortak}/><path d="M0 -44 L-20 0 M0 -44 L24 -4" ${ortak}/><path d="M-20 0 L-32 2 M24 -4 L36 -2" ${ortak}/></g>
-<g class="kd-cocuk__kol"><path d="M0 -92 L30 -104 L52 -112" ${ortak}/><circle cx="56" cy="-113" r="8.5" fill="${kafa}" stroke="currentColor" stroke-width="7"/><path d="M0 -92 L-30 -70 L-44 -52" ${ortak}/></g>
-<g class="kd-cocuk__bas"><circle cx="-44" cy="-160" r="15" fill="${sac}" stroke="currentColor" stroke-width="7"/><circle cx="44" cy="-160" r="15" fill="${sac}" stroke="currentColor" stroke-width="7"/><circle cx="0" cy="-152" r="44" fill="${kafa}" stroke="currentColor" stroke-width="9"/>${yuz(-152)}</g>
-</g>`;
-}
-
-const _cocuklar = () => `<g class="kd-logo-cocuk kd-logo-cocuk--sag">${_cocuk('salla', { x: 2508, y: 336, kafa: '#FFC4A3' })}</g><g class="kd-logo-cocuk kd-logo-cocuk--sol">${_cocuk('tutun', { x: 868, y: 560, kafa: '#A6E3CB' })}</g>`;
+// Logo figürleri (Higgsfield, seçim: tasks/kids-ui-tur2.md): şeffaf WebP. Yerleşim tek; dosya render boyuna göre değişir.
+const LOGO_COCUKLARI = [
+  // [dosya, yan, x, y, genişlik, yükseklik] — logo koordinatı
+  ['salla', 'sol', 650, 167, 256, 408],
+  ['tutun', 'sag', 2402, 138, 366, 408],
+];
+const _cocuklar = (boy) => LOGO_COCUKLARI.map(([ad, yan, x, y, g, h]) => `<g class="kd-logo-cocuk kd-logo-cocuk--${yan}"><image class="kd-cocuk kd-cocuk--${ad}" href="varlik/kids/logo/cocuk-${ad}-${boy}.webp" x="${x}" y="${y}" width="${g}" height="${h}"/></g>`).join('');
 
 /** Header'daki Gastro logosunun içine giren grup (gastro harflerinin yerine geçer). */
 export function kidsLogoGrup({ cocuk = true } = {}) {
-  return `<g class="kd-logo-kids" aria-hidden="true"><g class="kd-logo-harfler" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324">${_harfler()}</g>${cocuk ? _cocuklar() : ''}</g>`;
+  return `<g class="kd-logo-kids" aria-hidden="true"><g class="kd-logo-harfler" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324">${_harfler()}</g>${cocuk ? _cocuklar('header') : ''}</g>`;
 }
 
-/** Bağımsız "dada kids" logosu (bant, hub hero, pafta). sade: figürsüz. Renk: CSS color (dada + çizgiler). */
-export function kidsLogoSvg({ sade = false, sinif = '', etiket = 'Dada Kids' } = {}) {
-  const vb = sade ? '900 200 1580 380' : '800 90 1860 560';
-  return `<svg class="kd-logo-svg ${sinif}" viewBox="${vb}" role="img" aria-label="${esc(etiket)}" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor">${_dadaYollari}</g><g class="kd-logo-kids kd-logo-kids--acik"><g class="kd-logo-harfler" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324">${_harfler()}</g>${sade ? '' : _cocuklar()}</g></svg>`;
+/** Bağımsız "dada kids" logosu (bant, hub hero, pafta). sade: figürsüz; boy: figür dosyası (hero|header). Renk: CSS color (dada + çizgiler). */
+export function kidsLogoSvg({ sade = false, sinif = '', etiket = 'Dada Kids', boy = 'hero' } = {}) {
+  const vb = sade ? '900 200 1580 380' : '640 120 2140 470';
+  return `<svg class="kd-logo-svg ${sinif}" viewBox="${vb}" role="img" aria-label="${esc(etiket)}" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor">${_dadaYollari}</g><g class="kd-logo-kids kd-logo-kids--acik"><g class="kd-logo-harfler" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324">${_harfler()}</g>${sade ? '' : _cocuklar(boy)}</g></svg>`;
 }

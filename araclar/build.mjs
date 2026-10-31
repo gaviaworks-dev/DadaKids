@@ -103,7 +103,7 @@ function kidsBandi() {
   <div class="kd-bant">
    <a class="kd-bant__gorsel" href="kids.html" tabindex="-1" aria-hidden="true"><img src="varlik/kids/gorsel/bant-kids.webp" alt="" width="240" height="240" loading="lazy" decoding="async"></a>
    <div class="kd-bant__metin">
-    ${ortak.kidsLogoSvg({ sinif: 'kd-bant__logo' })}
+    ${ortak.kidsLogoSvg({ sinif: 'kd-bant__logo', boy: 'header' })}
     <b class="kd-bant__baslik">Bebeğiniz kaç aylık?</b>
     <p>Hamilelikten 3 yaşa; yaşa uygun tarifler, güvenli kesim ve beslenme rehberi.</p>
     <div class="kd-bant__chipler">${chip}</div>

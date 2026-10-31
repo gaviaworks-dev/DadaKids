@@ -36,7 +36,7 @@ ok(ornekYok.length === 0, 'her Kids sayfasında "Örnek içerik — uzman onayı
 // Logo tek kaynak: header'daki ve hub hero'daki "kids" harfleri + figürler aynı bileşenden (işaretleme birebir)
 {
   const h = readFileSync('kids.html', 'utf8');
-  const parca = (kaynak) => { const i = kaynak.indexOf('<g class="kd-logo-harfler"'); if (i < 0) return ''; const j = kaynak.indexOf('</svg>', i); return kaynak.slice(i, j).replace(/\s+/g, ' ').replace(/<\/g>\s*$/, ''); };
+  const parca = (kaynak) => { const i = kaynak.indexOf('<g class="kd-logo-harfler"'); if (i < 0) return ''; const j = kaynak.indexOf('</svg>', i); return kaynak.slice(i, j).replace(/\s+/g, ' ').replace(/(cocuk-\w+)-(?:header|hero)\.webp/g, '$1.webp').replace(/<\/g>\s*$/, ''); };
   const bas = h.indexOf('<header'), basSon = h.indexOf('</header>');
   const header = parca(h.slice(bas, basSon));
   const hi = h.indexOf('kd-hub-logo'); const hero = parca(h.slice(hi, h.indexOf('</svg>', hi) + 6));

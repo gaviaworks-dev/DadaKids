@@ -53,6 +53,8 @@ Kapsam:
 - ☐ (e) Pütür: sol altta, state'ler, tek tık Higgsfield zıplama, ~5 tık parıltı, radial menü 6 seçenek, erişilebilirlik, putur-kapisi.mjs. Yarım JS: rapor/tmp/putur-yarim/putur.js (612 satır, sözdizimi tam; CSS/varlık/kapı yok; derlemeden çekildi, commit edilmedi)
 - ☐ Tam kapılar → commit → push → Pages → canlı kapılar → son rapor
 
+- ☑ EK logo figürleri: Higgsfield Aday 1, tek bileşen, favicon sade (kids-ui-tur2.md §8); Pütür ve ızgara ayrı push (yayın worktree'si: temiz HEAD + yalnız kendi dosyaları)
+
 Ajan kolları (git yalnız lead'de; iki ajan aynı dosyaya yazmaz):
 - `izgara3`: src/kids/ortak.mjs, src/kids/sayfalar/*.mjs, varlik/kids/kids.css, varlik/kids/css/*.css (putur.css ve dogum-secici.css HARİÇ), varlik/kids/js/kesim.js|mevsim.js|rehber.js|donem.js|hub.js, araclar/izgara-kapisi.mjs, rapor/tmp/izgara/** · build yalnız bu kolda
 - `putur3`: varlik/kids/css/putur.css, varlik/kids/js/putur.js, varlik/kids/putur/**, araclar/putur-kapisi.mjs, rapor/tmp/putur/** · ≤300 kr · build çalıştırmaz

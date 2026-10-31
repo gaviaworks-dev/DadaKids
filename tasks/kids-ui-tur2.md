@@ -70,3 +70,12 @@ Eski çizimler yalnız `sekil` anahtarından üretiliyordu; aynı şekilli besin
 - **Düzeltme:** pembe lila-fuşya aralığına alındı (krem #FDF2FA, krem-2 #F8E2F3, çizgi #EDD5E9, tema #A23585, tema-açık #F5DEF2): zemin ΔE 8,4 (mavi 6,7), krem-2 16,1 (mavi 12,5); Hamilelik pembesinden (tema-açık ↔ pembe-a 7,4; tema ↔ pembe-k 23,8) ve şeftaliden (16) ayrık; beyaz/tema 6,2:1 (AA). İki tema da aynı yüzeyleri değiştirir: zemin, bantlar, çizgiler, gölge tonu (`--kd-golge-ton`), hero zemini (tema-açık radyal), alt menü aktif sekme, butonlar, seçili chip'ler. Evre ve uyarı renkleri sabit.
 - **karar:** mavi tema-açık #DCE9F9 ve zemin #F5F8FD'ye hafifçe güçlendirildi (pembe ile simetri). **gerekçe:** tema kapısında iki temanın değişen piksel oranı benzer olmalı.
 - **karar:** Modül adı "Rehber & Uzman" → "Rehber" (görünen her yerde). **gerekçe:** içerik henüz uzman tarafından incelenmedi; "Uzman" ifadesi onay varmış izlenimi veriyordu (site turu bulgusu S1 ile aynı dürüstlük ilkesi).
+
+## 8. Logo figürleri (çöp adam → Higgsfield cartoon)
+- karar: eski SVG çöp adamlar kaldırıldı; nano_banana_pro 2k, 4 aday (işler e44d6ad5, e724fb8c, 1ab8093d, ef082041; tek çizimde iki çocuk, aynı stil garantisi). gerekçe: kullanıcı kaba bulduğu figürlerin yeniden üretilmesini istedi.
+- karar: Aday 1 seçildi. gerekçe: kıvırcık saç Pütür'ün kapak kıvrımını yankılıyor, domates tişört "dada" rengiyle aynı, sarı elbise küçük boyda ayrışıyor, ince çöp kol/bacak korunuyor.
+- karar: düz yeşil zemin + kendi kroma ayıklaması, şeffaf WebP (vektör değil). gerekçe: potrace tek renkli; WebP'de gölge ve renk korunuyor, dosyalar 3–12 KB.
+- karar: `<image>` tek yerleşim (`LOGO_COCUKLARI`), iki dosya: header 102px (34px @3x, çizgi optik kalınlaştırılmış), hero 240px. bant header dosyasını kullanır. gerekçe: logo tek bileşen, boyuta göre ayrı dosya.
+- karar: yerleşim: el sallayan çocuk sol altta "d"nin yanında, zıplayan çocuk sağ üstte "s"nin ucuna tutunuyor; harflerin üstüne binmez. 320px'te de sığıyor (eylem düğmelerine 8px), ≤360 gizleme kuralı kaldırıldı.
+- karar: favicon ve dokunma ikonu yalnız "k" (figürsüz); `dada-kids-sade.svg` figürsüz kalır; `dada-kids.svg` figürleri gömülü taşır.
+

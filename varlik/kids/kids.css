@@ -420,7 +420,7 @@ html.kd-logo-kids .brand-word svg .kd-logo-kids, .pg-kids:not(.kd-logo-cikis) .b
 .kd-ar-panel__baslik img, .kd-dmatris__ikon img { width: 28px; height: 28px; }
 
 /* ---------------------------------------------------------------------
-   Dada Kids logosu — dağınık "kids" + tel kollu çocuklar (tek bileşen: ortak.mjs kidsLogoGrup/kidsLogoSvg)
+   Dada Kids logosu — dağınık "kids" + iki cartoon çocuk (tek bileşen: ortak.mjs kidsLogoGrup/kidsLogoSvg)
    --------------------------------------------------------------------- */
 .brand-word svg { overflow: visible; }          /* figürler logo kutusundan taşar; kutu/header boyu değişmez */
 .kd-logo-cocuk { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(var(--kd-cocuk-olcek, 1)); }
@@ -430,15 +430,17 @@ html.kd-logo-kids .brand-word svg .kd-logo-cocuk, .pg-kids:not(.kd-logo-cikis) .
 .pg-kids.kd-logo-cikis .brand-word svg .kd-logo-cocuk { transition-delay: 0s; }
 /* bağımsız logo (bant, hub hero) */
 .kd-logo-svg { display: block; height: auto; overflow: visible; color: var(--kd-murekkep); }
-.kd-logo-svg .kd-cocuk__sallayan { transform-box: fill-box; transform-origin: 10% 100%; animation: kd-salla 2.6s ease-in-out infinite; }
-@keyframes kd-salla { 0%, 60%, 100% { transform: rotate(0deg); } 70% { transform: rotate(-16deg); } 80% { transform: rotate(10deg); } 90% { transform: rotate(-8deg); } }
-.kd-hub-logo { width: clamp(220px, 18vw + 120px, 360px); margin-bottom: var(--kd-s4); }
-.kd-bant__logo { width: 190px; margin-bottom: var(--kd-s1); }
-@media (max-width: 480px) { :root { --kd-cocuk-olcek: .82; } .kd-bant__logo { width: 168px; } }
-@media (max-width: 360px) { .brand-word svg .kd-logo-cocuk { display: none; } } /* çok darda figürler gizli: yalnız kafa+kol nokta gibi kalıyordu (karar) */
+.kd-logo-svg .kd-cocuk { transform-box: fill-box; transform-origin: 50% 100%; }
+.kd-logo-svg .kd-cocuk--salla { animation: kd-cocuk-sekme 4.2s ease-in-out infinite; }
+.kd-logo-svg .kd-cocuk--tutun { transform-origin: 0 47%; animation: kd-cocuk-salinma 4.8s ease-in-out infinite; }
+@keyframes kd-cocuk-sekme { 0%, 72%, 100% { transform: none; } 80% { transform: translateY(-3%); } 88% { transform: none; } 94% { transform: translateY(-1.5%); } }
+@keyframes kd-cocuk-salinma { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+.kd-hub-logo { width: clamp(250px, 22vw + 110px, 430px); margin-bottom: var(--kd-s4); }
+.kd-bant__logo { width: 230px; margin-bottom: var(--kd-s1); }
+@media (max-width: 480px) { .kd-bant__logo { width: 200px; } }
 @media (prefers-reduced-motion: reduce) {
   .brand-word svg .kd-logo-cocuk { transition: none; }
-  .kd-logo-svg .kd-cocuk__sallayan { animation: none; }
+  .kd-logo-svg .kd-cocuk { animation: none; }
 }
 
 /* ---------------------------------------------------------------------
