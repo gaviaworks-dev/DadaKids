@@ -58,6 +58,15 @@ Kapsam:
 - ☑ (e) Pütür: yüzen asistan, video zıplama (Kling 50420d95), parıltı sürprizi, radial menü, putur-kapisi 1997/1997 (kids-ui-tur2.md §7)
 - ◐ (d) Boyut geri alma + yarım ızgara + denge: `denge4` (yarım izgara3 işi rapor/tmp/izgara-wip/izgara3.patch), boyut-kapisi tabanı e8ac2b6
 
+- ◐ EK Dada Kids giriş noktaları (mega şerit `mega5`'te): ☑ ana sayfa widget'ı (`kidsBandi`) ☑ tarifler Kids chip'i (`kd-chip-gastro`, `kd-subcat`) ☐ mega menüde Kids kartı sağdan kalkıp sol ızgaranın altına tam genişlik şerit (şu an `.mega-feat` içinde `MEGA_KART`, build.mjs:25,51). Yalnız `tarifler.html`/mega görünümü değişir; Gastro nav yapısı aynı, DADA KIDS nav'a eklenmez.
+
+- ◐ EK Pütür ön plan + hover menü (`putur3`): boyut 112/96/76/68, konum 32/20px, halka + gölge, Merhaba balonu, hover aç/kapat/sabitle, dokunma ve parıltı anı çakışmasızlık, kapı; ayrı push
+- ◐ EK mega şerit (`mega5`, izole worktree, ayrı push): sağ kart kalkar, sol ızgara altına tam genişlik şerit
+- karar (kullanıcı): video tek zıplama + Firefox'ta SVG üç zıplama kabul; her faz yeşil oldukça ayrı push
+
+- ◐ EK Pütür state'leri (`putur3`): state-rapor.md, canlı doğrulama + GIF'ler, bağlama duyarlı tetikleyiciler, tasks/putur-ozet-yasin-bey.md, tanıtım mp4 (<16 MB); ayrı push
+- ☑ Geri almalar push edildi (`2177d34`): canlıda Araçlar 576×421, Rehber metni 720px
+
 Ajan kolları (git yalnız lead'de; iki ajan aynı dosyaya yazmaz):
 - `izgara3`: src/kids/ortak.mjs, src/kids/sayfalar/*.mjs, varlik/kids/kids.css, varlik/kids/css/*.css (putur.css ve dogum-secici.css HARİÇ), varlik/kids/js/kesim.js|mevsim.js|rehber.js|donem.js|hub.js, araclar/izgara-kapisi.mjs, rapor/tmp/izgara/** · build yalnız bu kolda
 - `putur3`: varlik/kids/css/putur.css, varlik/kids/js/putur.js, varlik/kids/putur/**, araclar/putur-kapisi.mjs, rapor/tmp/putur/** · ≤300 kr · build çalıştırmaz
