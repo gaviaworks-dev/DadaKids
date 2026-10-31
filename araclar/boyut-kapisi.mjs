@@ -31,7 +31,7 @@ const denge = ({ DENGE_PX, DENGE_ORAN }) => {
     const c = [...p.children].filter((x) => { const s = getComputedStyle(x); return s.display !== 'none' && s.position !== 'absolute' && s.position !== 'fixed' && x.getBoundingClientRect().height > 80; });
     if (c.length !== 2) return; const [a, b] = c.map((x) => x.getBoundingClientRect());
     if (Math.abs(a.top - b.top) > 60 || a.right > b.left + 1 || a.width < pb.width * .25 || b.width < pb.width * .25) return;
-    const icerik = (x) => { let alt = x.getBoundingClientRect().top; x.querySelectorAll('*').forEach((d) => { if (d.closest('svg') && d.tagName.toLowerCase() !== 'svg') return; const s = getComputedStyle(d); if (s.display === 'none' || s.visibility === 'hidden' || s.position === 'absolute') return; const r = d.getBoundingClientRect(); if (r.height && r.height < 2000) alt = Math.max(alt, r.bottom); }); return alt; };
+    const icerik = (x) => { let alt = x.getBoundingClientRect().top; x.querySelectorAll('*').forEach((d) => { if (d.closest('svg') && d.tagName.toLowerCase() !== 'svg') return; if (d.closest('details:not([open])') && !d.closest('summary')) return; const s = getComputedStyle(d); if (s.display === 'none' || s.visibility === 'hidden' || s.position === 'absolute') return; const r = d.getBoundingClientRect(); if (r.height && r.height < 2000) alt = Math.max(alt, r.bottom); }); return alt; };
     const [x, y] = [icerik(c[0]), icerik(c[1])]; const fark = Math.abs(x - y), boy = Math.max(x, y) - Math.min(a.top, b.top);
     if (fark > DENGE_PX && fark > boy * DENGE_ORAN) out.push(`${(p.id || p.className || p.tagName).toString().slice(0, 44)} fark=${Math.round(fark)}px (${Math.round(x - a.top)} / ${Math.round(y - b.top)})`);
   });
