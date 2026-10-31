@@ -1,0 +1,473 @@
+/* Mutfağa Giriş — brief §8 hub yeniden inşası + /dersler + /rota + /sorun-cozme
+   (mutfaga-giris-plan.md §6 pub-hub sahipliği). Token-yalnız glue-CSS: yeni
+   renk/radius/gölge İCAT EDİLMEZ (CLAUDE.md §Görsel Kurallar). Var olan
+   disc-card/disc-fig/disc-meta/chip/lvl-*/rstep/pg-tag/btn aileleri temel
+   alınır; burada yalnız bu ailelerin brief'in yeni 8 bölümüne uyarlanması
+   için gereken KÜÇÜK ek/glue kuralları var. .lst-empty/.le-ico bu sayfa
+   ailesinde hiç TANIMLANMAMIŞTI (index/liste.blade.php zaten kullanıyordu —
+   ölü/stilsiz kural, latent bug) — tarif-liste.css'teki kanonik tanım BİREBİR
+   buraya taşındı (yeni tasarım değil, eksik kaynak-transferin tamamlanması). */
+
+/* ---- boş durum (tarif-liste.css .lst-empty/.le-ico VERBATIM — bu sayfa
+   ailesinde daha önce hiç tanımlı değildi) ---- */
+.lst-empty{display:none;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:78px 30px;margin-top:24px}
+.lst-empty.show{display:block;animation:fadeUp .35s var(--ease)}
+.le-ico{width:76px;height:76px;border-radius:var(--radius-lg);background:var(--tomato-tint);color:var(--tomato);display:grid;place-items:center;font-size:30px;margin:0 auto 20px}
+.lst-empty h3{font-size:23px;margin-bottom:9px}
+.lst-empty p{font-size:14.5px;color:var(--muted);font-weight:500;max-width:420px;margin:0 auto 24px;line-height:1.6}
+
+/* ---- geri linki (yeni, minimal — hiçbir sayfada önceden tanımlı değildi) ---- */
+.lst-back{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:13.5px;font-weight:700;color:#e7edf1;transition:.2s var(--ease)}
+.lst-back:hover{color:#ea8b74}
+
+/* ---- A1 (Beyar bulgusu) — akış renk yardımcıları. index.blade.php §8.2-§8.8
+   arası bölümler koşullu render edildiği için (boş olan bölüm hiç basılmaz)
+   sabit sınıf yerine bu iki jenerik sınıf, GERÇEK render sırasına göre PHP
+   toggle'ıyla atanır (bkz. index.blade.php $flow yorumu) — hiçbir ardışık
+   ikili aynı zemini paylaşmaz, kombinasyondan bağımsız. Yalnız tokens. ---- */
+.flow-white{background:var(--bg-white)}
+.flow-cream{background:var(--bg-cream)}
+
+/* ---- §8.1 üst karşılama aksiyon satırı ---- */
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+
+/* ---- §8.2 Kaldığın Yerden Devam Et ---- */
+.continue-sec{padding:44px 0}
+.continue-card{display:flex;gap:24px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--sh-sm)}
+.continue-card .cc-fig{flex:none;width:140px;height:140px;border-radius:var(--radius-md);background-size:cover;background-position:center}
+.continue-card .cc-fig--empty{display:flex;align-items:center;justify-content:center;background:var(--bg-cream);color:var(--muted);font-size:30px}
+.continue-card .cc-body{flex:1;min-width:0}
+.continue-card h3{font-size:20px;margin:4px 0 12px}
+.continue-card .cc-meta{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--muted);font-weight:500;margin:12px 0 16px}
+.continue-card .cc-meta span{display:inline-flex;align-items:center;gap:6px}
+
+/* ---- ilerleme çubuğu (kart + konu kartı + devam-et ortak) ----
+   A5 (Beyar bulgusu): max-width:220px çubuğu kart genişliğinin çok altında
+   kesiyordu ("stop short"); flex:1 zaten kapsayıcı genişliğe göre büyüyor,
+   sabit üst sınır KALDIRILDI. */
+.lc-progress{display:flex;align-items:center;gap:10px;margin:10px 0}
+.lc-progress-bar{flex:1;height:6px;border-radius:var(--radius-pill);background:var(--line);overflow:hidden}
+.lc-progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--tomato),var(--tomato-dark));border-radius:inherit}
+.lc-progress-txt{font-size:12px;font-weight:700;color:var(--slate-2);white-space:nowrap}
+
+/* Yukarıdaki .lc-progress üçlüsü "Devam Et" kartı ve konu kartlarında
+   kullanılıyor; ders kartının çubuğu ayrı (.lc-fig-progress, aşağıda). */
+
+/* ---- §8.4 konu kartları ---- */
+.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.topic-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;transition:.25s var(--ease)}
+.topic-card:hover{transform:translateY(-3px);border-color:var(--tomato);box-shadow:var(--sh-sm)}
+.topic-card h3{font-size:17px;margin-bottom:6px}
+.topic-card p{font-size:13px;color:var(--muted);font-weight:500;line-height:1.55;margin-bottom:10px;flex:1}
+.topic-card .disc-meta{border-top:none;padding-top:0;margin-top:0;flex-wrap:wrap}
+.topic-card .topic-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:13px;font-weight:700;color:var(--tomato)}
+.topic-card .topic-go i{font-size:11px;transition:transform .2s var(--ease)}
+.topic-card:hover .topic-go i{transform:translateX(3px)}
+
+/* ---- A3 (Beyar direktifi) — dama tahtası dolgu, (satır+sütun)%2'den
+   türetilmiş, index%2 DEĞİL: çift sütun sayısında naif index%2 dikey şerit
+   üretir, tek sütun sayısında diyagonali bozar (lead brifi). Grid'in HER
+   genişlikteki gerçek sütun sayısı bir CSS gerçeği (.topic-grid media
+   query'leri) — formül o sütun sayısına göre ayrı yazılır. Her breakpoint
+   bloğu KENDİ İÇİNDE tam (dolu+boş) — önceki breakpoint'in kalıntısı
+   sızmasın diye reset + yeniden atama sırayla yapılır. Renk yalnız tokens:
+   dolu = var(--tomato-tint), boş = var(--paper) (mevcut varsayılan). */
+.topic-card:nth-child(8n+1),
+.topic-card:nth-child(8n+3),
+.topic-card:nth-child(8n+6),
+.topic-card:nth-child(8n){background:var(--tomato-tint)}
+
+@media (max-width:1024px){
+  /* .topic-grid burada 2 sütuna düşer (aşağıdaki TABLET bloğu) — periyot 4. */
+  .topic-card:nth-child(8n+1),
+  .topic-card:nth-child(8n+3),
+  .topic-card:nth-child(8n+6),
+  .topic-card:nth-child(8n){background:var(--paper)}
+  .topic-card:nth-child(4n+1),
+  .topic-card:nth-child(4n){background:var(--tomato-tint)}
+}
+
+@media (max-width:640px){
+  /* .topic-grid burada tek sütuna düşer (aşağıdaki MOBİL bloğu) — satır=index,
+     sütun HER ZAMAN 1, dama deseni düz tek-çift alternasyona indirgenir. */
+  .topic-card:nth-child(4n+1),
+  .topic-card:nth-child(4n){background:var(--paper)}
+  .topic-card:nth-child(odd){background:var(--tomato-tint)}
+}
+
+/* ---- A4 (Beyar bulgusu, lead kök-neden ölçümü) — portal.css .disc-cat{color:
+   var(--gourmet)} (satır 1006) bu sayfada da .disc-cat kullandığı için moru
+   (rgb(177,79,197)) sızdırıyordu. liste.css/beceriler.css'in ZATEN uyguladığı
+   "marka rengi düzeltmesi" AYNI kopyayla burada: bu sayfa gourmet DEĞİL,
+   tomato marka rengini kullanır (her tüketen sayfa kendi kopyasını taşır
+   emsali, docs/lessons.md "sistematik CSS sızıntısı"). Sayfada .discover/.dt
+   scoped kuralları (portal.css 980/981/1017-1018/1753) HİÇ kullanılmıyor —
+   bu markup'ta .discover kapsayıcısı/.dt sekmesi yok, sızıntı yaratmazlar. */
+.disc-cat{color:var(--tomato)}
+
+/* --- Ders kartı (_lesson-card.blade.php) — karar: kararlar.md EDR-34.
+   İskelet portal.css'in .disc-* ailesinden; burada yalnız referansta
+   karşılığı olmayan iki alan (ilerleme, Pro kilidi) ve eylem metni. --- */
+.lc-card{display:flex;flex-direction:column}
+
+/* Eylem metni — referansın .disc-stats sağ hizası. Buton değil: kartın
+   tamamı zaten link. */
+.lc-go{display:inline-flex;align-items:center;gap:7px;color:var(--tomato);font-weight:700}
+.lc-go i{font-size:10.5px;transition:transform .2s var(--ease)}
+.disc-card:hover .lc-go i{transform:translateX(3px)}
+
+/* İlerleme — figürün alt kenarında; absolute olduğu için kart akışında yer
+   kaplamaz, dolu/boş olması kart yüksekliğini değiştirmez. */
+.lc-fig-progress{position:absolute;left:0;right:0;bottom:0;z-index:3;display:block;height:4px;background:rgba(20,18,12,.35)}
+.lc-fig-progress i{display:block;height:100%;background:linear-gradient(90deg,var(--tomato),var(--tomato-dark))}
+
+/* Kilitli premium dili — kaynak: public/reference/video-mutfagi/
+   video-mutfagi.css:152-170 (.vid-card.locked). Değerler birebir; watermark
+   96px (16/10 figürde 128px taşıyor). Katmanlar pointer-events:none — kart
+   tek link, tıklamayı bozmamalı. */
+.lc-card.lc-locked{--lk-blur:7px;--lk-dim:.30;--lk-gold:#fbeeb4;--lk-gold-2:#e9c468}
+.lc-card.lc-locked .disc-fig::before{content:"\f521";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-size:96px;color:rgba(251,238,180,.20);background:rgba(20,18,12,var(--lk-dim));-webkit-backdrop-filter:blur(var(--lk-blur));backdrop-filter:blur(var(--lk-blur));pointer-events:none;text-shadow:0 6px 26px rgba(10,9,6,.5)}
+/* merkez altın crown madalyonu (referansın büyütülmüş .play düğmesi) */
+.lc-lock-crown{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;width:74px;height:74px;border-radius:var(--radius-circle);display:grid;place-items:center;font-size:26px;color:#7a560c;background:linear-gradient(180deg,var(--lk-gold),var(--lk-gold-2));box-shadow:0 10px 30px rgba(10,9,6,.45);pointer-events:none;transition:transform .2s var(--ease)}
+.lc-card.lc-locked:hover .lc-lock-crown{transform:translate(-50%,-50%) scale(1.08)}
+/* sol üst altın "Pro" rozeti — referans satır 169 birebir */
+.vlock-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;color:#7a560c;background:linear-gradient(180deg,#fbeeb4,#f1cf73);padding:4px 9px;border-radius:var(--radius-pill);pointer-events:none}
+.vlock-badge i{font-size:10px}
+/* kilitli kartta seviye/video rozetleri watermark'ın ALTINDA kalmasın */
+.lc-card.lc-locked .disc-badges,.lc-card.lc-locked .m-types{z-index:4}
+
+/* ---- pg-tag küçük varyant (kart içi kilit rozeti — pg-panel'in TAMAMI
+   DEĞİL, yalnız etiket parçası; gourmet/karsilastir/_pro-gate.blade.php ile
+   AYNI .pg-tag sınıfı, burada yalnız satır-içi konumlandırma) ---- */
+.pg-tag{display:inline-flex;align-items:center;gap:6px;background:var(--tomato);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--radius-sm);letter-spacing:.03em}
+
+/* ---- §8.3/§7 rota adımı — hub.css .rstep temel alınır, durum modifier'ları ---- */
+.rstep--completed{background:rgba(59,183,126,.08);border-color:rgba(59,183,126,.3)}
+.rstep--completed .rs-num{background:rgba(59,183,126,.16);border-color:rgba(59,183,126,.4);color:var(--green-deep)}
+.rstep--current{border-color:var(--tomato);box-shadow:0 0 0 2px rgba(220,61,23,.16)}
+.rstep--locked{opacity:.72}
+.rs-stage--completed{color:var(--green-deep)}
+.rs-stage--current{color:#ea8b74}
+
+/* ---- /rota tam sayfa: yatay track yerine responsive grid ---- */
+.rota-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rota-grid .rstep{width:auto}
+.rota-next-cta{margin-top:32px;text-align:center}
+
+/* ---- A7 (Beyar bulgusu) — §8.8 sorun-cozme teaser yeniden kuruldu. Eski
+   hâli tek düz .problem-grid (2 sütun, konu/kaynak ilişkisi YOK) — "flat FAQ
+   row list" olarak reddedildi. Yeni yapı sorun-cozme.blade.php'nin (aşağıda)
+   KENDİ diliyle TUTARLI: konuya göre gruplanmış sütunlar (.problem-groups,
+   sayısı gerçek veriye göre değiştiği için auto-fill — sabit sütun sayısı
+   İCAT EDİLMEZ) + AYNI .problem-links/.chip kaynak rozeti (aşağıda zaten
+   tanımlı, burada YENİDEN TANIMLANMAZ) — teaser'daki kaynak linki de doğrudan
+   derse/püf noktasına gider, genel aramaya değil (gerçek $problem->content/
+   ->tip varlığına bakar, uydurma yok). .lib-head/.lb-cnt hub.css'te kanonik,
+   burada da AYNI sınıf kullanılır. ---- */
+.problem-groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;align-items:start}
+.problem-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.problem-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:13px 15px;transition:.2s var(--ease)}
+.problem-card:hover{border-color:var(--tomato)}
+.problem-q-link{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;font-weight:600;color:var(--slate);line-height:1.4}
+.problem-q-link:hover{color:var(--tomato)}
+.problem-q-link i{flex:none;color:var(--tomato);font-size:13px;margin-top:2px}
+.problem-card .problem-links{margin-top:10px;padding-left:23px}
+
+/* ---- /sorun-cozme sayfası ---- */
+.sorun-search{display:flex;gap:10px;margin-top:22px;max-width:560px}
+.sorun-search input{flex:1;height:var(--ctl-h);border-radius:var(--radius-md);border:none;padding:0 18px;font-family:inherit;font-size:14.5px}
+.problem-answer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+.problem-answer-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.problem-answer-card h4{display:flex;align-items:flex-start;gap:10px;font-size:15.5px;margin-bottom:8px}
+.problem-answer-card h4 i{color:var(--tomato);margin-top:2px}
+.problem-answer-card p{font-size:13.5px;color:var(--slate-2);font-weight:500;line-height:1.6;margin-bottom:12px}
+.problem-links{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ---- /dersler filtre ----
+   Masaüstü: .dersler-sheet sticky sol sütun, HER ZAMAN görünür ([hidden]
+   attribute'u masaüstünde CSS'te BİLİNÇLİ görmezden gelinir — display:block
+   burada set edilir, UA [hidden] kuralını author-origin önceliğiyle ezer).
+   Mobil (≤640px): .dersler-sheet [data-sheet] tam ekran backdrop olur;
+   GÖRÜNÜRLÜK yalnız .is-open'a bağlıdır (JS: ui.js bindFilterSheet zaten
+   overlay.hidden=false + classList.add('is-open') aynı anda yapıyor) —
+   base kuralda `display` YOK, [hidden] varsayılanı kapalı durumda korunur. */
+.dersler-sec{padding:36px 0 64px;background:var(--bg-cream)}
+.dersler-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;align-items:start}
+.dersler-filter-open{display:none}
+.dersler-sheet{display:block;grid-column:1;position:sticky;top:calc(var(--header-offset) + 16px)}
+.dersler-sheet-inner{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px}
+.dersler-sheet .sheet-head{display:none}
+.dersler-filter-form{display:flex;flex-direction:column;gap:16px}
+.dersler-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--slate)}
+.dersler-field select,.dersler-field input[type="search"]{height:var(--ctl-h);border:1px solid var(--line);border-radius:var(--radius-md);padding:0 14px;font-family:inherit;font-size:14px;background:var(--paper);color:var(--slate)}
+.dersler-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dersler-check{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:var(--slate-2)}
+.dersler-field-acts{display:flex;gap:10px;margin-top:4px}
+.dersler-field-acts .btn{flex:1;justify-content:center}
+.dersler-results{grid-column:2}
+
+/* ===================== TABLET (≤1024px) ===================== */
+@media (max-width:1024px){
+  .topic-grid{grid-template-columns:repeat(2,1fr)}
+  .rota-grid{grid-template-columns:repeat(2,1fr)}
+  /* .problem-groups artık auto-fill (minmax 260px) — sabit sütun sayısı yok,
+     genişliğe göre kendiliğinden daralır, breakpoint kuralına gerek yok. */
+  .problem-answer-grid{grid-template-columns:1fr}
+  .dersler-layout{grid-template-columns:1fr}
+  .dersler-results{grid-column:1}
+}
+
+/* ===================== MOBİL (≤640px) ===================== */
+@media (max-width:640px){
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .hero-ctas .btn{width:100%}
+  .continue-card{flex-direction:column}
+  .continue-card .cc-fig{width:100%;height:160px}
+  .topic-grid{grid-template-columns:1fr}
+  .rota-grid{grid-template-columns:1fr}
+
+  /* filtre paneli mobilde tam-ekran backdrop + alttan kayan panele döner
+     (ui.js data-sheet/[data-sheet-open]/[data-sheet-close] GENEL binder'ı —
+     resources/js/ui.js bindFilterSheet, yeni JS YOK). `display` yalnız
+     .is-open'da set edilir — [hidden] varsayılan kapalı durumu korunur. */
+  .dersler-filter-open{display:inline-flex;margin-bottom:16px}
+  .dersler-sheet{display:none;position:fixed;inset:0;z-index:80;background:rgba(20,18,12,.45);align-items:flex-end}
+  .dersler-sheet.is-open{display:flex}
+  .dersler-sheet-inner{width:100%;max-height:82vh;overflow-y:auto;border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding-bottom:28px;transform:translateY(100%);transition:transform .28s var(--ease)}
+  .dersler-sheet.is-open .dersler-sheet-inner{transform:translateY(0)}
+  .dersler-sheet .sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .dersler-sheet .sheet-close{width:36px;height:36px;border-radius:var(--radius-circle);border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer}
+  .dersler-field-row{grid-template-columns:1fr}
+}
+
+/* ============================================================================
+   SORUN ÇÖZME REVİZYONU (Beyar, 2026-07-31 5. tur)
+   ÖLÇÜLEN SORUN (hub): .problem-groups her konuyu KENDİ yüksekliğinde bir
+   sütun olarak diziyordu (soru sayıları 4/2/1/1) + align-items:start →
+   sağda kocaman tırtıklı boşluk. Sorular ayrıca kutu-içinde-kutuydu ve iki
+   iri çip alt alta duruyordu: az bilgi, çok gürültü.
+   ÇÖZÜM: konu gruplaması korunur (A7 kararı) ama her konu TEK kart, kartlar
+   satırda EŞİT yükseklik alır, sorular sade satır, linkler tek satır küçük
+   metin. Kart başına en fazla 3 soru (blade'de) → yükseklikler yakınsar.
+   ========================================================================= */
+
+.problem-groups {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  align-items: stretch;   /* start DEĞİL — satırdaki kartlar eşit yükseklik */
+  gap: 20px;
+}
+.problem-group {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px 16px;
+  transition: border-color .2s var(--ease);
+}
+.problem-group:hover { border-color: color-mix(in srgb, var(--tomato) 35%, var(--line)); }
+
+.problem-group .pg-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.problem-group .pg-head h3 { font-size: 15.5px; font-weight: 800; line-height: 1.35; color: var(--slate); margin: 0; }
+.problem-group .pg-head .lb-cnt { flex: none; font-size: 11.5px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+
+/* Sorular artık kart değil, sade satır — kutu-içinde-kutu kalktı. */
+.problem-groups .problem-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.problem-row { padding: 12px 0; }
+.problem-row + .problem-row { border-top: 1px solid var(--line); }
+.problem-groups .problem-q-link { font-size: 14px; }
+
+/* Kaynak linkleri: iri çip yerine tek satır küçük metin bağlantısı. */
+.problem-links-sm { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 7px; padding-left: 23px; }
+.problem-links-sm a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--slate-2); text-decoration: none; transition: color .18s var(--ease); }
+.problem-links-sm a:hover { color: var(--tomato); }
+.problem-links-sm a i { font-size: 11px; color: var(--tomato); }
+
+/* "N soru daha" kartın DİBİNE yapışır — kartlar farklı sayıda soru taşısa
+   bile alt kenar hizası bozulmaz. */
+.problem-more { margin-top: auto; padding-top: 14px; display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; color: var(--tomato); text-decoration: none; }
+.problem-more:hover { text-decoration: underline; }
+.problem-more i { font-size: 10.5px; }
+
+/* ---- /sorun-cozme sayfası ---------------------------------------------- */
+/* Bölüm başlıkları önceki ızgaraya yapışıyordu (aralık yoktu). */
+.lib-block + .lib-block { margin-top: 44px; }
+.problem-answer-grid { align-items: stretch; }
+.problem-answer-card { display: flex; flex-direction: column; }
+.problem-answer-card p { flex: 1; }
+/* Kaynak çipleri kartın dibinde hizalanır — kartlar farklı uzunlukta metin
+   taşısa bile buton satırı aynı çizgide durur. */
+.problem-answer-card .problem-links { margin-top: auto; padding-top: 4px; }
+
+@media (max-width: 640px) {
+  .problem-groups { grid-template-columns: minmax(0, 1fr); }
+  .problem-answer-grid { grid-template-columns: minmax(0, 1fr); }
+  .lib-block + .lib-block { margin-top: 32px; }
+}
+
+/* ============================================================================
+   ROTA SAYFASI — AÇIK ZEMİN VARYANTI (Beyar, 2026-07-31 6. tur)
+   ----------------------------------------------------------------------------
+   KÖK NEDEN: `.rstep` hub.css'te KOYU rota şeridi için tasarlanmış —
+   `h4{color:#fff}`, `p{color:#b8b1a5}`, kart zemini `rgba(255,255,255,.055)`.
+   /rota sayfasının zemini BEYAZ olduğu için kart başlıkları BEYAZ ÜSTÜNE
+   BEYAZ basılıyordu: 12 dersin adı okunamıyordu (ekran görüntüsüyle
+   doğrulandı). Bileşen açık zemine taşınırken açık varyantı yazılmamış.
+
+   Çözüm: aynı bileşen, sayfa gövdesine (.pg-mutfaga-giris-rota) kapsanmış
+   AÇIK varyant. Yeni bileşen icat edilmedi, yalnız yüzeye uygun renkler
+   tokens.css'ten veriliyor. Koyu hub şeridi ETKİLENMEZ.
+   ========================================================================= */
+.pg-mutfaga-giris-rota .rstep {
+  background: var(--paper);
+  border-color: var(--line);
+  box-shadow: var(--sh-sm);
+}
+.pg-mutfaga-giris-rota .rstep:hover {
+  background: var(--paper);
+  border-color: var(--tomato);
+  box-shadow: var(--sh-md);
+}
+.pg-mutfaga-giris-rota .rstep h4 { color: var(--slate); }
+.pg-mutfaga-giris-rota .rstep p { color: var(--slate-2); }
+.pg-mutfaga-giris-rota .rstep .rs-stage { color: var(--muted); }
+.pg-mutfaga-giris-rota .rstep .rs-num {
+  background: var(--tomato-tint);
+  border-color: color-mix(in srgb, var(--tomato) 30%, transparent);
+  color: var(--tomato-deep);
+}
+.pg-mutfaga-giris-rota .rstep .rs-go { color: var(--tomato); }
+
+/* Durum modifier'ları açık zeminde de okunur kalsın. */
+.pg-mutfaga-giris-rota .rstep--completed { background: color-mix(in srgb, var(--green) 8%, var(--paper)); border-color: color-mix(in srgb, var(--green) 32%, transparent); }
+.pg-mutfaga-giris-rota .rstep--completed .rs-num { background: color-mix(in srgb, var(--green) 16%, transparent); border-color: color-mix(in srgb, var(--green) 34%, transparent); color: var(--green-deep); }
+.pg-mutfaga-giris-rota .rstep--current { border-color: var(--tomato); box-shadow: 0 0 0 2px var(--tomato-tint), var(--sh-sm); }
+.pg-mutfaga-giris-rota .rstep--locked .rs-num { background: var(--bg-cream); border-color: var(--line); color: var(--muted); }
+.pg-mutfaga-giris-rota .rstep--locked h4 { color: var(--slate-2); }
+
+/* Kart yüksekliği: adım açıklamaları farklı uzunlukta; "Dersi aç" satırı
+   kartın DİBİNE yapışsın ki 12 kartın alt kenarı aynı çizgide dursun. */
+.pg-mutfaga-giris-rota .rstep { height: 100%; }
+.pg-mutfaga-giris-rota .rstep .rs-go { margin-top: auto; padding-top: 4px; }
+.rota-grid { align-items: stretch; }
+
+/* Rota hero'su — 2026-08-01 (Beyar): sayfaya özel BEYAZ TEMA OVERRIDE'I
+   KALDIRILDI. Banner artık /tarifler hero'sunun birebir aynısı: sayfa
+   `reference/tarif-liste/tarif-liste.css` yükler ve `.lst-top` oradan gelir
+   (koyu zemin + gradient + görsel, `.lst-hero` grid'i, h1/lead/crumb
+   renkleri). Buradaki `.lst-top`/`h1`/`lead`/`.lst-back` kuralları o
+   dosyayla ÇAKIŞIYORDU — hepsi düştü.
+
+   `.lst-stats` kuralları da düştü: tarif-liste.css'in kendi `.lst-stats`
+   dili (koyu zemin üstünde okunur) devraldı. Eskiden buradaki turuncu/muted
+   renkler beyaz zemine göreydi. */
+
+/* Kart yüksekliği — kartlar satırda eşit uzar, meta şeridi dibe yapışır.
+   2026-08-11: `height:100%` KALDIRILDI. Kutu boyunu zaten stretch veriyordu;
+   yüzde yükseklik ise ≤640'ta portal.css'in `.disc-grid`'i yatay slider'a
+   (yüksekliği belirsiz flex satır) çevirdiği için stretch'i bozuyor ve
+   kartları içerik boyuna düşürüyordu — 390'da ölçüldü, /dersler ızgarasında
+   12 kartın biri 370px, kalanı 346px. Flex kolon + meta'nın dibe sabitlenmesi
+   artık portal.css'te TEK yerde (.disc-grid > .disc-card); aşağıdaki iki
+   satır o kuralla aynı değeri söyler, sayfa-yerel kopya olarak duruyor. */
+.disc-grid { align-items: stretch; }
+.disc-grid > .disc-card { display: flex; flex-direction: column; }
+.disc-grid > .disc-card .disc-meta { margin-top: auto; }
+/* Kart ızgarası sıkışıktı — satırlar birbirine yapışıyordu (Beyar 2026-07-31).
+   Sütun arası korunur, SATIR arası açılır. */
+.disc-grid { gap: 26px 22px; }
+@media (max-width: 640px) { .disc-grid { gap: 20px; } }
+
+/* 2026-08-01 (Beyar) — "Rota hero görselli banner" bloğu KALDIRILDI:
+   `.lst-hero` 420px'lik ikinci sütun override'ı, `.lst-hero-media` kartı ve
+   `.lhm-*` ailesi. /tarifler kompozisyonunda hero'nun sağ sütunu
+   İSTATİSTİKLERDİR; rota da artık onu kullanıyor (Şu anki adım / Toplam
+   adım). Grid tanımı tarif-liste.css'ten geliyor:
+   `minmax(0,1fr) auto`. Bu sınıfları başka sayfa kullanmıyordu —
+   `.lst-hero-media`/`.lhm-*` yalnız bu dosyada tanımlıydı. */
+/* ===================== C1 — MUTFAK KURTARMA MERKEZİ ======================
+   mutfak-kurtarma-merkezi.md — lead kararları (KARAR 1-4). Token sistemi
+   DIŞINDA renk/radius/gölge İCAT EDİLMEDİ: .lst-stats/.st, .lc-progress-bar,
+   .lvl--*/.ed-quiz__result--*/.cd-ico/.chip-filter (tokens.css, GLOBAL,
+   YENİDEN TANIMLANMADI) + .topic-card/.problem-answer-card (bu dosyada
+   yukarıda zaten VAR) yeniden kullanıldı. Yalnız gerçekten yeni bir içerik
+   şekli olan modal/drawer + MCQ seçenek + XP toast için yeni sınıf. ========= */
+
+/* ---- Kategori kartları (spec §5) — .topic-card'ın ilerleme çubuklu hâli ---- */
+.krt-cat-card{cursor:pointer;text-align:left;font-family:inherit;width:100%}
+.krt-cat-card.is-active{border-color:var(--tomato);box-shadow:0 0 0 2px rgba(220,61,23,.14)}
+.krt-cat-meta{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.krt-cat-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;color:var(--tomato);background:var(--tomato-tint);padding:4px 9px;border-radius:var(--radius-sm);margin-top:10px}
+
+/* ---- Günün Mutfak Sorunu (spec §4) — .problem-answer-card'ın büyük/vurgulu hâli ---- */
+.krt-daily{background:linear-gradient(135deg,var(--tomato-tint),var(--paper));border:1px solid rgba(220,61,23,.28);border-radius:var(--radius-lg);padding:28px;margin-bottom:32px;box-shadow:var(--sh-sm)}
+.krt-daily-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--tomato-deep);margin-bottom:10px}
+.krt-daily h3{font-size:22px;margin-bottom:14px;max-width:640px}
+.krt-daily-badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.krt-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--slate-2);background:var(--paper);border:1px solid var(--line);padding:6px 12px;border-radius:var(--radius-sm)}
+.krt-badge i{color:var(--tomato)}
+
+/* ---- Soru kartı eklentileri (spec §6) — mevcut .problem-answer-card'a meta+aksiyon satırı ---- */
+.krt-card-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.krt-card-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.krt-card-actions .problem-links{margin:0}
+.krt-status{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800}
+.krt-status--completed{color:var(--green-deep)}
+.krt-status--in_progress{color:var(--tomato-deep)}
+
+/* ---- Etkileşimli akış modalı/drawer'ı (spec §7) — .lg-gate konumlandırma
+       ilkeleriyle AYNI (position:fixed;inset:0;backdrop), panel GENİŞ. ---- */
+.krt-overlay{position:fixed;inset:0;z-index:95;background:color-mix(in srgb, var(--slate) 55%, transparent)}
+.krt-overlay[hidden]{display:none}
+.krt-modal{position:fixed;inset:0;z-index:96;display:flex;align-items:center;justify-content:center;padding:24px}
+.krt-modal[hidden]{display:none}
+.krt-panel{position:relative;width:100%;max-width:620px;max-height:88vh;overflow-y:auto;background:var(--paper);border-radius:var(--radius-lg);box-shadow:var(--sh-lg);padding:32px}
+.krt-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:var(--radius-md);display:grid;place-items:center;color:var(--muted);border:1px solid var(--line);background:var(--paper)}
+.krt-close:hover{background:var(--cream-2);color:var(--slate)}
+.krt-steps{display:flex;gap:6px;margin-bottom:22px}
+.krt-steps i{flex:1;height:4px;border-radius:var(--radius-pill);background:var(--line)}
+.krt-steps i.is-done{background:var(--green)}
+.krt-steps i.is-current{background:var(--tomato)}
+.krt-step-label{font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--tomato-deep);margin-bottom:8px}
+.krt-scenario{font-size:15.5px;color:var(--slate);line-height:1.6;background:var(--cream-2);border-radius:var(--radius-md);padding:18px;margin-bottom:20px}
+.krt-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.krt-option{display:flex;align-items:center;gap:12px;text-align:left;font-family:inherit;font-size:14px;font-weight:600;color:var(--slate);background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:14px 16px;cursor:pointer;transition:.15s var(--ease)}
+.krt-option:hover{border-color:var(--tomato)}
+.krt-option:disabled{cursor:default}
+.krt-option.is-correct{background:color-mix(in srgb, var(--green) 12%, var(--paper));border-color:color-mix(in srgb, var(--green) 40%, var(--line));color:var(--green-deep)}
+.krt-option.is-wrong{background:var(--tomato-tint);border-color:color-mix(in srgb, var(--tomato) 35%, var(--line));color:var(--tomato-deep)}
+.krt-option-mark{flex:none;width:22px;height:22px;border-radius:var(--radius-circle);border:2px solid var(--line);display:grid;place-items:center;font-size:11px}
+.krt-option.is-correct .krt-option-mark{border-color:var(--green);background:var(--green);color:#fff}
+.krt-option.is-wrong .krt-option-mark{border-color:var(--tomato);background:var(--tomato);color:#fff}
+.krt-solution{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.krt-solution li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--slate-2);font-weight:500;line-height:1.5}
+.krt-solution li i{flex:none;color:var(--green-deep);margin-top:3px}
+.krt-tip{display:flex;gap:12px;background:var(--tomato-tint);border-radius:var(--radius-md);padding:16px 18px;margin-bottom:20px}
+.krt-tip i{flex:none;color:var(--tomato-deep);font-size:18px}
+.krt-tip p{font-size:13.5px;color:var(--slate);font-weight:500;line-height:1.55}
+.krt-result{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 0 8px}
+.krt-result h3{font-size:21px;margin:4px 0 18px}
+.krt-result-list{list-style:none;display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px;margin-bottom:22px}
+.krt-result-list li{display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:700;color:var(--slate)}
+.krt-result-list li i{color:var(--green-deep)}
+.krt-modal-foot{display:flex;justify-content:space-between;gap:12px;margin-top:8px}
+.krt-guest-note{font-size:12.5px;color:var(--muted);font-weight:600;text-align:center;margin-top:14px}
+
+/* ---- XP toast (kısa bildirim, sade animasyon — spec §11 "hafif mikro
+       animasyon", arcade/neon YOK) ---- */
+.krt-toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,20px);z-index:97;display:flex;align-items:center;gap:10px;background:var(--slate);color:#fff;font-size:13.5px;font-weight:700;padding:12px 20px;border-radius:var(--radius-md);box-shadow:var(--sh-lg);opacity:0;pointer-events:none;transition:.3s var(--ease)}
+.krt-toast.is-show{opacity:1;transform:translate(-50%,0)}
+.krt-toast i{color:var(--tomato)}
+
+@media (max-width:640px){
+  .krt-daily{padding:20px}
+  .krt-panel{max-width:none;max-height:100vh;height:100%;border-radius:0;padding:24px 18px}
+  .krt-modal{padding:0}
+  .krt-card-actions{flex-direction:column;align-items:stretch}
+  .krt-card-actions .btn{width:100%;justify-content:center}
+  /* spec §5/§12 "Mobil görünümde bu filtreler yatay kaydırılabilmeli" —
+     .topic-grid'in genel mobil kuralı (yukarıda, tek sütun) BURADA kategori
+     filtresi için EZİLİR: yatay kaydıran bir ray olur (BNP mode-bar deseni). */
+  #krtCategoryGrid{display:flex;grid-template-columns:none;overflow-x:auto;gap:12px;flex-wrap:nowrap;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  #krtCategoryGrid .krt-cat-card{flex:0 0 220px}
+}
