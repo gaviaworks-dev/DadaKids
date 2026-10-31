@@ -108,7 +108,7 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-ar-kolaj__kare--4 { transform: rotate(-4deg) translateY(12px); }
 .kd-ar-kolaj__sus { position: absolute; top: -6px; right: -4px; width: 48px; height: 48px; }
 
-.kd-ar-izgara { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--kd-s4), 2vw, var(--kd-s5)); }
+.kd-ar-izgara { --kd-izgara-bosluk: clamp(var(--kd-s4), 2vw, var(--kd-s5)); --kd-satir-bosluk: var(--kd-s3); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--kd-s4), 2vw, var(--kd-s5)); }
 .kd-ar-kart { padding: clamp(var(--kd-s5), 2.4vw, var(--kd-s6)); gap: var(--kd-s3); isolation: isolate; }
 .kd-ar-kart::before { content: ""; position: absolute; z-index: -1; width: 220px; height: 220px; right: -70px; top: -90px; border-radius: 50%; background: var(--r-a); }
 .kd-ar-kart:hover { transform: translateY(-4px); box-shadow: var(--kd-golge-yuksek); }
@@ -126,7 +126,7 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-ar-kart__maddeler { list-style: none; margin: 2px 0 var(--kd-s1); padding: 0; display: grid; gap: var(--kd-s2); }
 .kd-ar-kart__maddeler li { display: flex; gap: var(--kd-s2); align-items: flex-start; font-size: 14.5px; font-weight: 600; }
 .kd-ar-kart__maddeler i { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; background: var(--r-a); color: var(--r-k); margin-top: 1px; }
-.kd-sayfa .kd-ar-kart__ac { margin-top: auto; align-self: flex-start; background: var(--r-k); box-shadow: 0 8px 18px -10px var(--r-k); }
+.kd-sayfa .kd-ar-kart__ac { margin-top: auto; align-self: end; justify-self: start; background: var(--r-k); box-shadow: 0 8px 18px -10px var(--r-k); }
 .kd-ar-kart:hover .kd-ar-kart__ac { transform: translateX(3px); }
 
 .kd-ar-guven { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(var(--kd-s4), 3vw, var(--kd-s6)); align-items: center; padding: clamp(var(--kd-s5), 3vw, var(--kd-s6)); border-radius: var(--kd-r-xl); background: linear-gradient(120deg, var(--kd-mavi-a), var(--kd-mint-a) 60%, var(--kd-sari-a)); }
@@ -257,7 +257,7 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 
 .kd-at-harita { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--kd-s2); }
 .kd-at-harita li { display: grid; gap: var(--kd-s1); align-content: start; min-height: 74px; padding: var(--kd-s2); border-radius: var(--kd-r-m); background: var(--kd-krem); box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
-.kd-at-harita__ad { font-size: 13.5px; font-weight: 800; line-height: 1.2; hyphens: auto; }
+.kd-at-harita__ad { font-size: 13.5px; font-weight: 800; line-height: 1.2; hyphens: auto; min-height: 2.4em; }
 .kd-at-harita__durum { font-size: 12px; font-weight: 700; color: var(--kd-ikincil); line-height: 1.2; }
 .kd-at-harita li[data-durum="gozlem"] { background: var(--kd-mavi-a); box-shadow: inset 0 0 0 2px var(--kd-mavi-o); }
 .kd-at-harita li[data-durum="gozlem"] .kd-at-harita__durum { color: var(--kd-mavi-k); }

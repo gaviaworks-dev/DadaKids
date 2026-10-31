@@ -151,7 +151,7 @@ export default async function mevsim(o) {
   <div class="kd-mtarif">
    <div class="kd-mtarif__bas"><h3>${esc(a.ad || AY_AD[a.ay - 1])} ürünleriyle tarifler</h3>${tarifListe.length ? `<a class="kd-bag" href="kids-tarifler.html">Tüm tarifler</a>` : ''}</div>
    ${tarifListe.length
-     ? `<div class="kd-izgara kd-mtarif__izgara">${tarifListe.slice(0, 4).map((t, n) => o.tarifKart(t, { sira: n, gir: false })).join('')}</div>`
+     ? o.tarifSeridi(tarifListe.slice(0, 4), { sinif: 'kd-mtarif__izgara', gir: false, dortlu: false })
      : `<div class="kd-mtarif__yok">${bos('bos-durum', 'Bu ayın ürünleriyle eşleşen tarif henüz yok.', '<a class="kd-bag" href="kids-tarifler.html">Tüm Kids tariflerine göz atın</a>')}</div>`}
   </div>
  </section>`;

@@ -299,7 +299,7 @@ export default async function donemler(o) {
     return `<section class="kd-bolum${z}" aria-labelledby="odak-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Odak besinler', ikonAd: 'parilti', renk: EVRE[kod].renk, baslik: '<span id="odak-bas">Bu evrede öne çıkanlar</span>', alt: e.odak ? esc(e.odak) : '' })}
-  <div class="kd-izgara kd-dodaklar" data-renk="${EVRE[kod].renk}">${odak.map(kart).join('')}</div>
+  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4 kd-dodaklar" data-renk="${EVRE[kod].renk}">${odak.map(kart).join('')}${odak.length % 4 === 3 ? o.ctaKart({ href: '#besinler', ikonAd: 'liste', baslik: 'Tüm besinler', metin: kod === 'hamilelik' ? 'Bu dönemde hangi besinin nasıl tüketileceğini tek listede görün.' : 'Bu evrede hangi besinin nasıl hazırlanacağını tek listede görün.', etiket: 'Besin listesi', renk: EVRE[kod].renk, sinif: 'kd-dodak-cta' }) : ''}</div>
  </div>
 </section>`;
   }
@@ -361,7 +361,7 @@ export default async function donemler(o) {
       return `<section class="kd-bolum${z}" aria-labelledby="yardim-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: kod === '0-6-ay' ? 'Tarif yerine' : 'Bu dönemde işinize yarar', ikonAd: 'parilti', renk: e.renk, baslik: `<span id="yardim-bas">${kod === '0-6-ay' ? 'İlk kaşığa hazırlık' : 'Bebeğinize hazırlanırken'}</span>`, alt: kod === '0-6-ay' ? 'Bu evrede tarif yok: bebeğinizin tek besini anne sütü ya da formül mama. Ek gıdaya geçişe hazırlanmak için:' : 'Hamilelik tarifleri hazırlanıyor; şimdilik bu rehberler ve araçlar yanınızda.' })}
-  <div class="kd-izgara">${kartlar.join('')}</div>
+  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4">${kartlar.join('')}</div>
  </div>
 </section>`;
     }
@@ -371,7 +371,7 @@ export default async function donemler(o) {
     return `<section class="kd-bolum${z}" aria-labelledby="tarif-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Bu evreye özel', ikonAd: 'kase', renk: e.renk, baslik: `<span id="tarif-bas">${esc(e.ad)} tarifleri</span>`, alt: `${liste.length} tarif · kıvamı ve alerjenleri kartın üzerinde.`, sag: `<a class="kd-btn kd-btn--hafif" href="kids-tarifler.html?yas=${yas}">Tümünü gör <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` })}
-  <div class="kd-izgara kd-kaydir-mobil">${liste.slice(0, 8).map((t, n) => o.tarifKart(t, { sira: n })).join('')}</div>
+  ${o.tarifSeridi(liste.slice(0, 8), { tumuHref: `kids-tarifler.html?yas=${yas}`, renk: e.renk })}
  </div>
 </section>`;
   }
@@ -474,7 +474,7 @@ export default async function donemler(o) {
     const e = EVRE[kod];
     const d = v(kod);
     return `<a class="kd-evre kd-devre-g kd-gir" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false" style="--kd-gecikme:${n * 70}ms">
- <div class="kd-evre__ust"><span class="kd-evre__ikon${illusVar(`evre-${kod}`) ? ' kd-evre__ikon--illus' : ''}">${illusVar(`evre-${kod}`) ? o.illus(`evre-${kod}`, '', { boy: 104 }) : ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(d.aralik || e.aralik)}</span><h3>${esc(e.ad)}</h3></div></div>
+ <div class="kd-evre__ust"><span class="kd-evre__ikon${illusVar(`evre-${kod}`) ? ' kd-evre__ikon--illus' : ''}">${illusVar(`evre-${kod}`) ? o.illus(`evre-${kod}`, '', { boy: 104 }) : ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(e.etiket)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(d.slogan || d.ozet || '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
 </a>`;
@@ -504,7 +504,7 @@ ${ritim(o, [
   (z) => `<section class="kd-bolum${z}" id="evreler" aria-labelledby="evre-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Evreler', ikonAd: 'kalp', renk: 'pembe', baslik: '<span id="evre-bas">Hangi evredesiniz?</span>', alt: 'Her evre sayfasında günlük denge, besin matrisi, uygun tarifler ve sık sorulanlar var.' })}
-  <div class="kd-izgara kd-devreler">${EVRE_SIRA.map(evreKartGorselli).join('')}</div>
+  <div class="kd-izgara kd-devreler">${EVRE_SIRA.map(evreKartGorselli).join('')}${o.ctaKart({ href: 'kids-arac-hazir-mi.html', ikonAd: 'liste', baslik: 'Ek gıdaya hazır mı?', metin: 'Evrenizden emin değilseniz hazırlık belirtilerini işaretleyin.', etiket: 'Kontrol listesi', renk: 'mint', sinif: 'kd-evre-cta' })}</div>
  </div>
 </section>`,
   guven,

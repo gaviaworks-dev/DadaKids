@@ -498,7 +498,7 @@ export default async function kesim(o) {
    <a class="kd-kesim__bag" href="#${esc(x.slug)}" aria-label="${esc(x.ad)} kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
   </header>
   ${x.pisirme ? `<p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> ${esc(x.pisirme)}</span></p>` : ''}
-  <ol class="kd-kesim__asamalar" aria-label="${esc(x.ad)}: yaşa göre kesim">${ASAMALAR.map((_, i) => asamaHucre(x, i)).join('')}</ol>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="${esc(x.ad)}: yaşa göre kesim">${ASAMALAR.map((_, i) => asamaHucre(x, i)).join('')}</ol>
   <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
   ${asla || ezilme ? `<footer class="kd-kesim__alt">${asla}${ezilme}</footer>` : ''}
  </article>`;
@@ -523,6 +523,16 @@ export default async function kesim(o) {
       <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> ${esc(t.yerine)}${t.slug && sluglar.has(t.slug) ? ` <a class="kd-bag" href="#${t.slug}">Kesimi göster</a>` : ''}</span></p>
      </div>
     </li>`).join('')}
+    <li class="kd-kbogulma__bilgi kd-gir" style="--kd-gecikme:${TEHLIKELER.length * 60}ms">
+     <span class="kd-kbogulma__svg" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span>
+     <div>
+      <h3>Ezilme testi</h3>
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> Vermeden önce deneyin</span>
+      <p>Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Her besinin kartında boyut ve kesim çizimi var. <a class="kd-bag" href="#atlas">Atlasa git</a></span></p>
+      <small class="kd-kbogulma__ornek">Örnek içerik — uzman onayı bekliyor</small>
+     </div>
+    </li>
    </ul>
    <div class="kd-kbogulma__acil">
     <span class="kd-kbogulma__112" aria-hidden="true">112</span>
@@ -581,7 +591,7 @@ ${o.ayirici ? o.ayirici('dalga', '#fff') : ''}
 <section class="kd-bolum kd-bolum--beyaz" aria-labelledby="devam-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Devam edin', ikonAd: 'kitap', renk: 'pembe', baslik: '<span id="devam-bas">Kesimden sonrası</span>' })}
-  <div class="kd-izgara">
+  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4">
    ${[
      ['kids-rehber.html', 'kitap', 'Öğürme mi, boğulma mı?', 'Farkı önceden öğrenmek ilk haftaları çok rahatlatır.', 'pembe'],
      ['kids-arac-hazir-mi.html', 'liste', 'Ek gıdaya hazır mı?', 'Oturma, baş kontrolü ve ilgi: hazırlık belirtilerini işaretleyin.', 'mint'],

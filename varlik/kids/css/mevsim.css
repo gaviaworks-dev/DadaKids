@@ -80,7 +80,12 @@ html:not(.kd-js) .kd-may { display: none; }
 .kd-mtezgah { margin-top: var(--kd-s6); }
 .kd-mtezgah__bas, .kd-mtarif__bas h3 { display: flex; align-items: center; gap: var(--kd-s2); font-size: 1.35rem !important; }
 .kd-mtezgah__bas span { min-width: 30px; height: 30px; padding: 0 var(--kd-s2); border-radius: var(--kd-r-tam); display: inline-grid; place-items: center; background: var(--r-a); color: var(--r-k); font-size: 14px; }
-.kd-mtezgah__liste { list-style: none; margin: var(--kd-s3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(172px, 100%), 1fr)); gap: var(--kd-s3); }
+/* tür filtresi kart sayısını değiştirir: sarmalı flex, son satır ortalı; sütun sayısı önceki otomatik düzenle aynı */
+.kd-mtezgah__liste { --kd-m-sutun: 6; --kd-m-bosluk: var(--kd-s3); list-style: none; margin: var(--kd-s3) 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--kd-m-bosluk); }
+.kd-mtezgah__liste > li { flex: 0 0 calc((100% - (var(--kd-m-sutun) - 1) * var(--kd-m-bosluk)) / var(--kd-m-sutun)); min-width: 0; }
+@media (max-width: 1155px) { .kd-mtezgah__liste { --kd-m-sutun: 5; } }
+@media (max-width: 971px) { .kd-mtezgah__liste { --kd-m-sutun: 4; } }
+@media (max-width: 771px) { .kd-mtezgah__liste { --kd-m-sutun: 3; } }
 .kd-murun { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--kd-s1); padding: var(--kd-s4) var(--kd-s3) var(--kd-s3); border-radius: var(--kd-r-l); background: #fff; box-shadow: var(--kd-golge); transition: transform .25s ease, box-shadow .25s ease; }
 .kd-murun:hover { transform: translateY(-3px); box-shadow: var(--kd-golge-yuksek); }
 .kd-murun__gorsel { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--r-a); margin-bottom: var(--kd-s1); transition: transform .3s ease; }
@@ -110,7 +115,23 @@ html:not(.kd-js) .kd-may { display: none; }
 /* Tarifler */
 .kd-mtarif { margin-top: var(--kd-s6); }
 .kd-mtarif__bas { display: flex; align-items: center; justify-content: space-between; gap: var(--kd-s3); flex-wrap: wrap; margin-bottom: var(--kd-s3); }
-.kd-mtarif__izgara { --kd-min: 230px; }
+/* Ay tarifleri: sütun sayısı önceki otomatik düzenle aynı (4 / 3 / 2); boş yuvayı "Tüm tarifler" kartı doldurur */
+@media (min-width: 1016px) {
+  .kd-mtarif__izgara { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .kd-mtarif__izgara:has(> :nth-child(4n + 1 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; grid-column: span 3; }
+  .kd-mtarif__izgara:has(> :nth-child(4n + 2 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; grid-column: span 2; }
+  .kd-mtarif__izgara:has(> :nth-child(4n + 3 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; }
+}
+@media (min-width: 766px) and (max-width: 1015px) {
+  .kd-mtarif__izgara { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kd-mtarif__izgara > :nth-child(4 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden])) { display: none; }
+  .kd-mtarif__izgara:has(> :nth-child(1 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; grid-column: span 2; }
+  .kd-mtarif__izgara:has(> :nth-child(2 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; }
+}
+@media (min-width: 641px) and (max-width: 765px) {
+  .kd-mtarif__izgara { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kd-mtarif__izgara:has(> :nth-child(2n + 1 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; }
+}
 .kd-mtarif__yok { display: flex; align-items: center; gap: var(--kd-s2); flex-wrap: wrap; margin: 0; padding: var(--kd-s4); border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); color: var(--kd-ikincil); }
 .kd-mtarif__yok img { width: 22px; height: 22px; }
 
@@ -157,7 +178,7 @@ html:not(.kd-js) .kd-may { display: none; }
   .kd-may__ikon { width: 38px; height: 38px; }
   .kd-may__ikon img { width: 26px; height: 26px; }
   .kd-mkahraman { padding: var(--kd-s4) var(--kd-s3); border-radius: var(--kd-r-l); }
-  .kd-mtezgah__liste { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--kd-s2); }
+  .kd-mtezgah__liste { --kd-m-sutun: 2; --kd-m-bosluk: var(--kd-s2); }
   .kd-murun { padding: var(--kd-s3) var(--kd-s2) var(--kd-s3); }
   .kd-murun__gorsel { width: 76px; height: 76px; }
   .kd-murun__gorsel img { width: 54px; height: 54px; }
@@ -177,9 +198,6 @@ html:not(.kd-js) .kd-may { display: none; }
 }
 @media (max-width: 640px) {
   .kd-mhero > img { width: min(78%, 300px); }
-  /* tarifler: mobilde yatay kaydırıcı */
-  .kd-mtarif__izgara { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(240px, 80%); overflow-x: auto; scroll-snap-type: x mandatory; padding: var(--kd-s1) var(--kd-s1) var(--kd-s3); margin: calc(var(--kd-s1) * -1); scrollbar-width: thin; }
-  .kd-mtarif__izgara > * { scroll-snap-align: start; }
 }
 .kd-mtarif__bas .kd-bag { display: inline-block; padding-block: var(--kd-s2); margin-block: calc(var(--kd-s2) * -1); }
 

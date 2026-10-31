@@ -104,7 +104,7 @@ export default async function (o) {
 ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="araclar">
  <div class="wrap">
   ${o.bolumBasi({ ust: '4 araç', ikonAd: 'arac', renk: 'mavi', baslik: 'Hangisine ihtiyacınız var?', alt: 'Her araç bir soruya odaklanır. Sonuçlar bilgilendirme amaçlıdır; kararları çocuk doktorunuzla birlikte verin.', sag: ipucu('merhaba', 'Hepsi tarayıcınızda çalışır, hesap gerekmez. Birini seçin, birlikte bakalım!', 'kd-ipucu--sag') })}
-  <div class="kd-ar-izgara">${ARACLAR.map(hubKart).join('\n')}</div>
+  <div class="kd-ar-izgara kd-hizali kd-hizali--5">${ARACLAR.map(hubKart).join('\n')}</div>
  </div>
 </section>`, (z) => `<section class="kd-bolum${z}">
  <div class="wrap">

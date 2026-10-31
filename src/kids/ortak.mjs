@@ -26,11 +26,11 @@ export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '
 
 /* ---------- Evreler: sabit renk, ad, ikon ---------- */
 export const EVRE = {
-  'hamilelik': { ad: 'Hamilelik & Lohusalık', kisa: 'Hamilelik', renk: 'pembe', ikon: 'hamile', aralik: '1., 2., 3. trimester ve emzirme' },
-  '0-6-ay':    { ad: '0–6 Ay', kisa: '0–6 ay', renk: 'mavi', ikon: 'biberon', aralik: 'Sıvı beslenme' },
-  '6-8-ay':    { ad: '6–8 Ay', kisa: '6–8 ay', renk: 'seftali', ikon: 'kasik', aralik: 'Ek gıdaya geçiş' },
-  '9-12-ay':   { ad: '9–12 Ay', kisa: '9–12 ay', renk: 'mint', ikon: 'tabak-bolmeli', aralik: 'Pütürlü & parmak gıda' },
-  '1-3-yas':   { ad: '1–3 Yaş', kisa: '1–3 yaş', renk: 'sari', ikon: 'yurumeye-baslayan', aralik: 'Aile sofrası' },
+  'hamilelik': { ad: 'Hamilelik & Lohusalık', kisa: 'Hamilelik', renk: 'pembe', ikon: 'hamile', aralik: '1., 2., 3. trimester ve emzirme', etiket: 'Trimester & emzirme' },
+  '0-6-ay':    { ad: '0–6 Ay', kisa: '0–6 ay', renk: 'mavi', ikon: 'biberon', aralik: 'Sıvı beslenme', etiket: 'Sıvı beslenme' },
+  '6-8-ay':    { ad: '6–8 Ay', kisa: '6–8 ay', renk: 'seftali', ikon: 'kasik', aralik: 'Ek gıdaya geçiş', etiket: 'Ek gıdaya geçiş' },
+  '9-12-ay':   { ad: '9–12 Ay', kisa: '9–12 ay', renk: 'mint', ikon: 'tabak-bolmeli', aralik: 'Pütürlü & parmak gıda', etiket: 'Parmak gıda' },
+  '1-3-yas':   { ad: '1–3 Yaş', kisa: '1–3 yaş', renk: 'sari', ikon: 'yurumeye-baslayan', aralik: 'Aile sofrası', etiket: 'Aile sofrası' },
 };
 export const EVRE_SIRA = Object.keys(EVRE);
 export const evreSayfasi = (kod) => `kids-donem-${kod}.html`;
@@ -40,8 +40,11 @@ export const YASLAR = [6, 8, 9, 12, 18, 24];
 export const YAS_ETIKET = { 6: '+6 Ay', 8: '+8 Ay', 9: '+9 Ay', 12: '+12 Ay', 18: '+18 Ay', 24: '+24 Ay' };  // tek biçim: "+N Ay" (karar: tur 2)
 export const yasEvresi = (yas) => (yas < 9 ? '6-8-ay' : yas < 12 ? '9-12-ay' : '1-3-yas');
 export const yasRenk = (yas) => EVRE[yasEvresi(yas)].renk;
+// Tek sistem: yaş bilgisi her yerde "+N Ay" = "N. aydan itibaren" (rozet, filtre, süzme bağı).
+// Evre adı (6–8 Ay) tarifin yaşını değil, Dönemler modülündeki yaşam dönemini anlatır; rozet evre rengini taşır.
+export const yasAciklama = (yas) => `${yas}. aydan itibaren uygun`;
 export const yasRozet = (yas, boy = 'm', uzun = false) =>
-  `<span class="kd-yas kd-yas--${boy}" data-renk="${yasRenk(yas)}">${esc(YAS_ETIKET[yas])}${uzun ? ' için uygundur' : ''}</span>`;
+  `<span class="kd-yas kd-yas--${boy}" data-renk="${yasRenk(yas)}" title="${esc(yasAciklama(yas))}">${esc(YAS_ETIKET[yas])}${uzun ? ' için uygundur' : ''}</span>`;
 
 /* ---------- İkon / illüstrasyon (görsel kolunun dosyaları) ---------- */
 const _dek = (alt) => (alt ? '' : ' aria-hidden="true"');   // boş alt → dekoratif
@@ -134,7 +137,7 @@ export function bolumBasi({ ust, ikonAd, renk, baslik, alt, sag = '' }) {
 
 /* ---------- Tarif kartı ---------- */
 export const tarifHref = (slug) => `kids-tarif.html?t=${encodeURIComponent(slug)}`;
-export const OGUN_AD = { kahvalti: 'Kahvaltı', ana: 'Öğle / Akşam', ara: 'Ara öğün' };
+export const OGUN_AD = { kahvalti: 'Kahvaltı', ana: 'Öğle · Akşam', ara: 'Ara öğün' };
 export function tarifKart(t, { gir = true, sira = 0 } = {}) {
   const ogun = (t.ogun || []).map((o) => OGUN_AD[o]).join(' · ');
   return `<a class="kd-kart kd-tarif${gir ? ' kd-gir' : ''}" href="${tarifHref(t.slug)}" data-renk="${yasRenk(t.yas)}" data-yas="${t.yas}" data-kivam="${t.kivam}" data-ogun="${(t.ogun || []).join(' ')}" data-alerjen="${(t.alerjenler || []).join(' ')}" data-sure="${t.sureDk ?? 999}" data-ad="${esc(t.ad.toLocaleLowerCase('tr'))}" data-sira="${sira}" style="--kd-gecikme:${Math.min(sira, 8) * 40}ms">
@@ -142,17 +145,38 @@ export function tarifKart(t, { gir = true, sira = 0 } = {}) {
  <div class="kd-kart__govde">
   <h3>${esc(t.ad)}</h3>
   <div class="kd-tarif__olgu">${kivamEtiket(t.kivam)}${alerjenPilleri(t.alerjenler)}</div>
-  <div class="kd-tarif__meta">${t.sureDk ? `<span><i class="fa-regular fa-clock" aria-hidden="true"></i>${t.sureDk} dk</span>` : ''}${ogun ? `<span><i class="fa-regular fa-sun" aria-hidden="true"></i>${esc(ogun)}</span>` : ''}</div>
+  <div class="kd-tarif__meta">${t.sureDk ? `<span><i class="fa-regular fa-clock" aria-hidden="true"></i>${t.sureDk} dk</span>` : ''}${ogun ? `<span><i class="fa-solid fa-utensils" aria-hidden="true"></i>${esc(ogun)}</span>` : ''}</div>
  </div>
 </a>`;
 }
+
+/* ---------- Öneri şeridi: satır her zaman tam ---------- */
+/**
+ * Bir tarife `adet` öneri: önce aynı evreden, yetmezse komşu evrelerden yaşı en yakın olanlar
+ * (küçük yaş önce: bebeğe daha erken tanışılmış kıvam). Açık tarif hiçbir zaman listede olmaz.
+ */
+export function benzerTarifler(t, hepsi, adet = 4) {
+  const sira = (e) => EVRE_SIRA.indexOf(e);
+  const uzak = (x) => [Math.abs(sira(x.evre) - sira(t.evre)), x.yas > t.yas ? 1 : 0, Math.abs(x.yas - t.yas)];
+  const komsu = hepsi.filter((x) => x.slug !== t.slug && x.evre !== t.evre).map((x, i) => [uzak(x), i, x])
+    .sort(([a, i], [b, j]) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2] || i - j).map(([, , x]) => x);
+  return [...hepsi.filter((x) => x.slug !== t.slug && x.evre === t.evre), ...komsu].slice(0, adet);
+}
+/** Şeridin boş yuvasını CSS ile dolduran kart: görünürlüğü ve genişliği yalnız boş yuvaya göre belirlenir. */
+export const seriCta = ({ href = 'kids-tarifler.html', renk = 'mint' } = {}) => ctaKart({ href, ikonAd: 'kase', baslik: 'Tüm tarifler', metin: 'Yaşa, kıvama ve alerjene göre süzün.', etiket: 'Tarif listesi', renk, sinif: 'kd-seri-cta' });
+/** Dörtlü şerit: masaüstü 4 · tablet 2+2 · mobil yatay kaydırma. Kapı [data-izgara-oneri] üzerinden denetler. */
+export const tarifSeridi = (liste, { sinif = '', gir = true, tumuHref = 'kids-tarifler.html', renk = 'mint', dortlu = true, kaydir = true } = {}) =>
+  `<div class="kd-izgara${dortlu ? ' kd-dortlu' : ''}${kaydir ? ' kd-kaydir-mobil' : ''} ${sinif}" data-izgara-oneri>${liste.map((t, n) => tarifKart(t, { sira: n, gir })).join('')}${seriCta({ href: tumuHref, renk })}</div>`;
+/** İçerik sayısı tutmayan ızgarada son yuvayı dolduran yönlendirme kartı (uydurma içerik yok, yalnız yönlendirme). */
+export const ctaKart = ({ href, ikonAd, baslik, metin, etiket, renk = 'mint', sinif = '' }) =>
+  `<a class="kd-kart kd-cta-kart ${sinif}" href="${href}" data-renk="${renk}"><span class="kd-modul__ikon">${ikon(ikonAd, 40)}</span><span class="kd-cta-kart__metin"><h3>${esc(baslik)}</h3><p>${esc(metin)}</p></span><span class="kd-kart__alt">${esc(etiket)} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
 
 /* ---------- Evre kartı ---------- */
 export function evreKart(kod, { metin, gir = true } = {}) {
   const e = EVRE[kod];
   const v = (veri.evreler.evreler || []).find((x) => x.kod === kod) || {};
   return `<a class="kd-evre${gir ? ' kd-gir' : ''}" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false">
- <div class="kd-evre__ust"><span class="kd-evre__ikon">${ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(v.aralik || e.aralik)}</span><h3>${esc(e.ad)}</h3></div></div>
+ <div class="kd-evre__ust"><span class="kd-evre__ikon">${ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(e.etiket)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(metin ?? v.slogan ?? v.ozet ?? '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
 </a>`;

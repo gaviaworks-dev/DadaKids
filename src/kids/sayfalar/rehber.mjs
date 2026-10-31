@@ -102,7 +102,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="makaleler" aria-labelledby
    ${EVRE_SIRA.filter((k) => evreSayi[k]).map((k) => `<button type="button" class="kd-chip" data-evre="${k}" data-renk="${EVRE[k].renk}" aria-pressed="false">${ikon(EVRE[k].ikon, 18)}${esc(EVRE[k].ad)} <span class="kd-rsuz__sayi">${evreSayi[k]}</span></button>`).join('')}
   </div>
   <p class="kd-gizli" role="status" aria-live="polite" id="rehber-durum"></p>
-  <div class="kd-rizgara">${makaleler.map(hubKart).join('')}</div>
+  <div class="kd-rizgara kd-hizali kd-hizali--5">${makaleler.map(hubKart).join('')}</div>
  </div>
 </section>`, (z) => `<section class="kd-bolum${z}" id="ilkeler" aria-labelledby="ilke-bas">
  <div class="wrap kd-rguven">
@@ -182,7 +182,9 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="makaleler" aria-labelledby
     }).join('\n');
     if (dizi(m.kaynaklar).length) icindekiler.push(['kaynaklar', 'Kaynaklar']);
 
-    const ilgili = dizi(m.ilgiliTarifler).map((s) => tarifHarita.get(s)).filter((t) => t && t.ad);
+    const ilgiliHam = dizi(m.ilgiliTarifler).map((s) => tarifHarita.get(s)).filter((t) => t && t.ad);
+    // şerit her zaman 4 kart: seçilen tariflere en yakın tariflerle tamamlanır (yaş rozeti kartta görünür)
+    const ilgili = ilgiliHam.length ? [...ilgiliHam, ...o.benzerTarifler(ilgiliHam[ilgiliHam.length - 1], [...tarifHarita.values()], 8).filter((t) => !ilgiliHam.includes(t))].slice(0, 4) : [];
     const sonraki = makaleler[(i + 1) % makaleler.length];
     const toc = `<ol>${icindekiler.map(([id, ad]) => `<li><a href="#${id}">${esc(ad)}</a></li>`).join('')}</ol>`;
 
@@ -224,7 +226,7 @@ ${ritim(o, [(z) => `<div class="kd-bolum kd-rduzen-kap${z}">
 </div>`, (z) => (ilgili.length ? `<section class="kd-bolum${z}" aria-labelledby="ilgili-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Mutfağa geçin', ikonAd: 'kase', renk: r, baslik: '<span id="ilgili-bas">Bu konuyla ilgili tarifler</span>', sag: '<a class="kd-btn kd-btn--hafif" href="kids-tarifler.html">Tüm tarifler <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
-  <div class="kd-izgara kd-rilgili kd-kaydir-mobil">${ilgili.slice(0, 4).map((t, n) => o.tarifKart(t, { sira: n })).join('')}</div>
+  ${o.tarifSeridi(ilgili, { sinif: 'kd-rilgili' })}
  </div>
 </section>` : ''), (z) => (sonraki && sonraki !== m ? `<section class="kd-bolum${z}" aria-label="Sıradaki makale">
  <div class="wrap">

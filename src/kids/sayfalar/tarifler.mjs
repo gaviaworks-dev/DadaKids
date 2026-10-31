@@ -49,7 +49,7 @@ export default async function (o) {
     </form>
     <button class="kd-btn kd-filtre__kapat" type="button">Sonuçları göster</button>
    </aside>
-   <div>
+   <div class="kd-tl-sonuc">
     <div class="kd-sonuc-bar">
      <b id="kdSonucSayi" aria-live="polite">${T.length} tarif</b>
      <div>
@@ -61,6 +61,7 @@ export default async function (o) {
     ${o.ornek('Yaş, kıvam ve alerjen bilgileri prototip için hazırlanmış örneklerdir. Tariflere tuz, şeker ve bal eklenmez.')}
     <div class="kd-izgara kd-tl-izgara" id="kdTarifIzgara">
 ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
+${o.ctaKart({ href: 'kids-guvenli-kesim.html', ikonAd: 'bicak-tahta', baslik: 'Malzemeyi yaşa göre kesin', metin: 'Tarifteki besinleri 6–8 ay, 9–12 ay ve 12 ay sonrası için nasıl keseceğinizi adım adım görün.', etiket: 'Güvenli Kesim', renk: 'mint', sinif: 'kd-tl-cta' })}
     </div>
     ${o.bosDurum({ baslik: 'Bu seçimle tarif bulunamadı', metin: 'Aşağıdaki önerilerle sonuçları genişletebilirsiniz.', id: 'kdBos' })}
    </div>
@@ -80,7 +81,8 @@ ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
   }
   function detay(t, i) {
     const ev = evreOf(t);
-    const benzer = T.filter((x) => x.slug !== t.slug && x.evre === t.evre).slice(0, 3);
+    const benzer = o.benzerTarifler(t, T, 4);
+    const hepsiEvreden = benzer.every((b) => b.evre === t.evre);
     const ogun = (t.ogun || []).map((x) => OGUN_AD[x]).join(' · ');
     return `<article class="kd-detay" data-slug="${t.slug}" data-baslik="${esc(`${t.ad} (${YAS_ETIKET[t.yas]}) | Dada Kids · Dada Gastro`)}"${i ? ' hidden' : ''}>
 <section class="kd-hero kd-td-hero" data-renk="${ev.renk}">
@@ -128,7 +130,7 @@ ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
   </aside>
  </div>
 </section>
-${benzer.length ? `${o.ayirici('dalga', o.zebraRenk(ev.renk))}<section class="kd-bolum kd-zebra kd-desen--nokta" data-renk="${ev.renk}"><div class="wrap">${o.bolumBasi({ ust: ev.ad, ikonAd: ev.ikon, renk: ev.renk, baslik: 'Bu evreden başka tarifler', sag: `<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-tarifler.html?yas=${t.yas}">Tümü <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` })}<div class="kd-izgara">${benzer.map((b, n) => o.tarifKart(b, { sira: n })).join('')}</div></div></section>` : ''}
+${benzer.length ? `${o.ayirici('dalga', o.zebraRenk(ev.renk))}<section class="kd-bolum kd-zebra kd-desen--nokta" data-renk="${ev.renk}"><div class="wrap">${o.bolumBasi({ ust: ev.ad, ikonAd: ev.ikon, renk: ev.renk, baslik: hepsiEvreden ? 'Bu evreden başka tarifler' : 'Benzer tarifler', sag: `<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-tarifler.html?yas=${t.yas}">Tümü <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` })}${o.tarifSeridi(benzer, { sinif: 'kd-td-oneri', kaydir: false })}</div></section>` : ''}
 </article>`;
   }
 

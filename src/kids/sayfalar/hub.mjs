@@ -75,7 +75,7 @@ export default async function (o) {
   const evreler = `${o.ayirici('bulut', o.zebraRenk('mavi'))}<section class="kd-bolum kd-zebra kd-desen--nokta" data-renk="mavi" id="evreler">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Dönemler', ikonAd: 'takvim', renk: 'mavi', baslik: 'Beş evre, her biri kendi renginde', alt: 'Hamilelikten 3 yaşa: hangi evrede ne yenir, kıvam nasıl olur, hangi besinler öne çıkar?', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-donemler.html">Tüm dönemler <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
-  <div class="kd-izgara kd-hub-evreler">${EVRE_SIRA.map((k) => o.evreKart(k)).join('\n')}</div>
+  <div class="kd-izgara kd-hub-evreler">${EVRE_SIRA.map((k) => o.evreKart(k)).join('\n')}${o.ctaKart({ href: 'kids-donemler.html', ikonAd: 'takvim', baslik: 'Evreleri karşılaştırın', metin: 'Süt, ek gıda ve kıvam dengesini beş evre boyunca yan yana görün.', etiket: 'Tüm dönemler', renk: 'mavi', sinif: 'kd-evre-cta' })}</div>
  </div>
 </section>`;
 
@@ -85,14 +85,14 @@ export default async function (o) {
   <div class="kd-bas"><div>${o.ustYazi('Kids Tarifleri', { ikonAd: 'kase', renk: 'seftali' })}<h2 data-kd-onizleme-baslik>Ek gıdaya başlarken ilk tarifler</h2><p>${tarifler.length} örnek tarif; yaş rozeti, kıvam ve alerjen etiketiyle.</p></div>
    <a class="kd-btn" href="kids-tarifler.html" data-kd-tumu>Tümünü gör <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
   <p class="kd-ornek kd-hub-not" data-kd-erken-not hidden role="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span><b>Bu evrede ek gıda başlanmaz.</b> Tarifler 6. aydan itibaren; ilk tadım tariflerini önceden inceleyebilirsiniz. Hazır olup olmadığını <a class="kd-bag" href="kids-arac-hazir-mi.html">kontrol listesiyle</a> görün.</span></p>
-  <div class="kd-izgara" id="kdOnizleme">${kartlar}</div>
+  <div class="kd-izgara kd-dortlu" id="kdOnizleme" data-izgara-oneri>${kartlar}${o.seriCta({ renk: 'seftali' })}</div>
  </div>
 </section>`;
 
   const moduller = `<section class="kd-bolum kd-desen--konfeti" id="moduller">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Modüller', ikonAd: 'parilti', renk: 'mint', baslik: 'Altı modül, tek mutfak', alt: 'Her biri açık ve dolu; dilediğinizden başlayın.' })}
-  <div class="kd-izgara kd-hub-moduller">${o.MODULLER.filter((m) => m.kod !== 'kids').map((m) => o.modulKart(m)).join('\n')}</div>
+  <div class="kd-izgara kd-hizali kd-hizali--4 kd-hub-moduller">${o.MODULLER.filter((m) => m.kod !== 'kids').map((m) => o.modulKart(m)).join('\n')}</div>
  </div>
 </section>`;
 
@@ -119,7 +119,7 @@ export default async function (o) {
     rehberBolum = `<section class="kd-bolum" id="rehber">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Rehber', ikonAd: 'kitap', renk: 'pembe', baslik: 'Merak ettikleriniz, sade bir dille', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-rehber.html">Tüm rehber <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
-  <div class="kd-izgara">${rehber.map((r, i) => `<a class="kd-kart kd-gir kd-hub-makale" href="kids-rehber-${r.slug}.html" data-renk="${['seftali', 'mint', 'pembe', 'mavi'][i % 4]}">
+  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4">${rehber.map((r, i) => `<a class="kd-kart kd-gir kd-hub-makale" href="kids-rehber-${r.slug}.html" data-renk="${['seftali', 'mint', 'pembe', 'mavi'][i % 4]}">
    <div class="kd-hub-makale__kapak">${o.illus({ 'ek-gidaya-gecis': 'rehber-ek-gida', 'blw-temelleri': 'rehber-blw', 'ogurme-mi-bogulma-mi': 'rehber-ogurme', 'alerjen-tanitimi': 'rehber-alerjen' }[r.slug] || '', `${r.baslik} — kapak illüstrasyonu`, { boy: 600, yedek: '' }) || (r.kapak ? o.foto(r.kapak, `${r.baslik} — kapak fotoğrafı`, { gen: 1400, yuk: 788 }) : o.sahne('tabak-parmak-gida'))}</div>
    <div class="kd-kart__govde"><h3>${esc(r.baslik)}</h3><p>${esc(r.ozet)}</p><span class="kd-kart__alt"><span class="kd-ikincil">${r.okumaDk ? r.okumaDk + ' dk okuma' : ''}</span><span>Oku <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></span></div>
   </a>`).join('\n')}</div>

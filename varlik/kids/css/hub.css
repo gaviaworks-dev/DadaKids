@@ -9,7 +9,21 @@
 .kd-hub-liste li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; font-size: 14px; color: var(--kd-ikincil); }
 .kd-hub-liste li img { width: 44px; height: 44px; padding: 8px; background: #fff; border-radius: 14px; }
 .kd-hub-liste b { display: block; color: var(--kd-murekkep); font-size: 15px; }
-.kd-hub-evreler { --kd-min: 200px; }
+/* Sütun sayısı önceki otomatik düzenle aynı (5 / 4 / 3 / 1); boş yuvaları Dönemler yönlendirme kartı doldurur */
+.kd-hub-evreler { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.kd-hub-evreler > .kd-evre-cta { display: none; padding: var(--kd-s4); gap: var(--kd-s2); }
+.kd-hub-evreler > .kd-evre-cta .kd-modul__ikon { display: none; }
+@media (max-width: 1136px) {
+  .kd-hub-evreler { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .kd-hub-evreler > .kd-evre-cta { display: flex; grid-column: span 3; flex-direction: row; align-items: center; }
+  .kd-hub-evreler > .kd-evre-cta .kd-cta-kart__metin { flex: 1; }
+  .kd-hub-evreler > .kd-evre-cta .kd-kart__alt { margin-top: 0; }
+}
+@media (max-width: 890px) {
+  .kd-hub-evreler { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kd-hub-evreler > .kd-evre-cta { grid-column: auto; flex-direction: column; align-items: stretch; }
+  .kd-hub-evreler > .kd-evre-cta .kd-kart__alt { margin-top: auto; }
+}
 .kd-hub-not { margin-bottom: 18px; }
 .kd-hub-moduller { --kd-min: 300px; }
 .kd-hub-mevsim { background: var(--kd-sari-a); border-radius: var(--kd-r-xl); padding: clamp(18px, 3vw, 32px); }
@@ -35,7 +49,8 @@
   .kd-hub-profil__izgara, .kd-hub-ay, .kd-hub-guven { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .kd-hub-evreler { --kd-min: 100%; }
+  .kd-hub-evreler { grid-template-columns: minmax(0, 1fr); }
+  .kd-hub-evreler > .kd-evre-cta { display: none; }
   .kd-hub-ay__urunler { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
   .kd-hub-urun { padding: 8px 2px; }
   .kd-hub-urun img { width: 34px; height: 34px; }
