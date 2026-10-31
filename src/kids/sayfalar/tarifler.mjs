@@ -6,11 +6,15 @@ export default async function (o) {
 
   /* ================= Liste ================= */
   const say = (f) => T.filter(f).length;
+  // yaş chip'leri: birikimli gerçek sayılar derlemede basılır (JS filtrelerle günceller)
   const yasChip = [`<button class="kd-chip kd-yas-chip" type="button" role="radio" aria-checked="false" data-yas="tumu">Tümü <small>${T.length}</small></button>`]
-    .concat(YASLAR.map((y) => `<button class="kd-chip kd-yas-chip" type="button" role="radio" aria-checked="false" data-yas="${y}" data-renk="${yasRenk(y)}">${esc(YAS_ETIKET[y])} <small>0</small></button>`)).join('');
+    .concat(YASLAR.map((y) => `<button class="kd-chip kd-yas-chip" type="button" role="radio" aria-checked="false" data-yas="${y}" data-renk="${yasRenk(y)}">${esc(YAS_ETIKET[y])} <small>${T.filter((t) => t.yas <= y).length}</small></button>`)).join('');
   const secim = (ad, tip, liste) => `<div class="kd-secim">${liste.map(([v, et, renk, ek = '', duz]) => `<label${renk ? ` data-renk="${renk}"` : ''}><input type="${tip}" name="${ad}" value="${v}" data-ad="${esc(duz || et)}"${ek}><span>${et}</span></label>`).join('')}</div>`;
   const kivamlar = Object.entries(KIVAM_AD).map(([k, ad]) => [k, `${o.kivamSvg(k).replace('<svg ', '<svg width="18" height="18" ')}${esc(ad)} <small class="kd-ikincil">${say((t) => t.kivam === k)}</small>`, null, '', ad]);
-  const icermez = [['gluten', 'Gluten'], ['sut', 'Süt'], ['yumurta', 'Yumurta'], ['kuruyemis', 'Kuruyemiş']].map(([k, ad]) => [k, `${ad} içermez`, null]);
+  // alerjen filtresi kartlardaki alerjenleri tam kapsar: veride geçen her alerjen ayrı seçenek (yer fıstığı ≠ sert kabuklu)
+  const alerjenSira = ['gluten', 'sut', 'yumurta', 'yerfistigi', 'sertkabuklu', 'susam', 'balik', 'soya'];
+  const icermez = alerjenSira.filter((a) => T.some((t) => (t.alerjenler || []).includes(a)))
+    .map((k) => [k, `${o.ALERJEN_AD[k]} içermez <small class="kd-ikincil">${T.filter((t) => !(t.alerjenler || []).includes(k)).length}</small>`, null, '', `${o.ALERJEN_AD[k]} içermez`]);
   const ogunler = Object.entries(OGUN_AD).map(([k, ad]) => [k, ad, null]);
   const sureler = [['', 'Hepsi', null, ' checked'], ['15', '15 dk ve altı', null], ['30', '30 dk ve altı', null]];
 
@@ -21,9 +25,9 @@ export default async function (o) {
     kirinti: [['Tarifler', 'tarifler.html'], ['Dada Kids', 'kids.html'], ['Kids Tarifleri']],
     ust: { metin: 'Kids Tarifleri', ikon: 'kase' },
     baslik: 'Yaşa göre bebek ve çocuk tarifleri',
-    giris: `${T.length} örnek tarif: önce yaşı seçin, sonra kıvam, alerjen, öğün ve süreye göre daraltın.`,
+    giris: `6. aydan 3 yaşa ${T.length} örnek tarif. Önce yaşı seçin, sonra kıvam, alerjen, öğün ve süreye göre daraltın.`,
     ek: `<div class="kd-ara kd-tl-ara"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label class="kd-gizli" for="kdTarifAra">Tariflerde ara</label><input id="kdTarifAra" type="search" placeholder="Tarif ya da malzeme ara (ör. balkabağı)" autocomplete="off"></div>`,
-    sag: kolaj,
+    sag: o.video('tarifler', '') ? `<div class="kd-hero__gorsel kd-tl-video">${o.video('tarifler', '')}</div>` : (o.illus('hero-tarifler', '', { yedek: '' }) ? `<div class="kd-hero__gorsel kd-tl-illus">${o.illus('hero-tarifler', 'Sevimli yüzlü renkli bebek püreleri', { yedek: '' })}<span class="kd-hero__sus kd-hero__sus--2">${o.maskot('sef', { boy: 96 })}</span></div>` : kolaj),
   })}
 <div class="kd-tl-yas">
  <div class="wrap">
@@ -108,7 +112,7 @@ ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
    <div class="kd-izgara kd-izgara--2 kd-td-kutular">
     ${t.kesimNotu ? `<div class="kd-kutu kd-gir" data-renk="${ev.renk}"><h3>${o.ikon('bicak-tahta', 22)} Kıvam ve kesim</h3><p>${esc(t.kesimNotu)}</p><a class="kd-bag" href="kids-guvenli-kesim.html">Güvenli kesim rehberi</a></div>` : ''}
     ${t.saklama ? `<div class="kd-kutu kd-gir"><h3>${o.ikon('kase', 22)} Saklama</h3><p>${esc(t.saklama)}</p></div>` : ''}
-    ${t.ipucu ? `<div class="kd-kutu kd-gir" data-renk="mint"><h3>${o.ikon('parilti', 22)} İpucu</h3><p>${esc(t.ipucu)}</p></div>` : ''}
+    ${t.ipucu ? `<div class="kd-kutu kd-gir kd-td-ipucu" data-renk="mint">${o.maskot('sef', { boy: 72 })}<div><h3>${o.ikon('parilti', 22)} Pütür'ün ipucu</h3><p>${esc(t.ipucu)}</p></div></div>` : ''}
    </div>
    ${sonrakiKart(t)}
   </div>
@@ -124,7 +128,7 @@ ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
   </aside>
  </div>
 </section>
-${benzer.length ? `<section class="kd-bolum kd-bolum--beyaz"><div class="wrap">${o.bolumBasi({ ust: ev.ad, ikonAd: ev.ikon, renk: ev.renk, baslik: 'Bu evreden başka tarifler', sag: `<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-tarifler.html?yas=${t.yas}">Tümü <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` })}<div class="kd-izgara">${benzer.map((b, n) => o.tarifKart(b, { sira: n })).join('')}</div></div></section>` : ''}
+${benzer.length ? `${o.ayirici('dalga', o.zebraRenk(ev.renk))}<section class="kd-bolum kd-zebra kd-desen--nokta" data-renk="${ev.renk}"><div class="wrap">${o.bolumBasi({ ust: ev.ad, ikonAd: ev.ikon, renk: ev.renk, baslik: 'Bu evreden başka tarifler', sag: `<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-tarifler.html?yas=${t.yas}">Tümü <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` })}<div class="kd-izgara">${benzer.map((b, n) => o.tarifKart(b, { sira: n })).join('')}</div></div></section>` : ''}
 </article>`;
   }
 

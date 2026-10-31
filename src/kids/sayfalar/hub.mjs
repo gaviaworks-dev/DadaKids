@@ -21,7 +21,7 @@ export default async function (o) {
   </fieldset>
   <p class="kd-ornek" data-kd-uyari hidden role="alert"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Lütfen bir evre seçin.</span></p>
   <button class="kd-btn" type="submit">Uygula <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
-  <p class="kd-profil__not"><i class="fa-solid fa-lock" aria-hidden="true"></i> Seçim kaydedilmez; yalnız bu ziyarette Kids sayfaları arasında taşınır.</p>
+  <p class="kd-profil__not"><i class="fa-solid fa-lock" aria-hidden="true"></i> Evre seçimi kaydedilmez, yalnız bu ziyarette taşınır. Tema rengi (cinsiyet seçimine göre) bu cihazda hatırlanır.</p>
  </form>
  <div class="kd-profil__ozet">
   <span class="kd-profil__ozet-ikon">${o.ikon('kalp', 36)}</span>
@@ -30,10 +30,12 @@ export default async function (o) {
  </div>
 </div>`;
 
+  const heroMedya = o.video('hub', '') || o.illus('hero-hub', 'Pastel mama sandalyesi, kase ve meyvelerle sevimli mutfak illüstrasyonu', { yedek: '', boy: 900 })
+    || o.foto('varlik/kids/gorsel/hero-mutfak.webp', 'Gün ışığı alan mutfakta, tepsisinde pastel kase ve kaşık olan ahşap mama sandalyesi', { gen: 1800, yuk: 1200, oncelik: true });
   const kahramanGorsel = `<div class="kd-hero__gorsel kd-hub-gorsel">
-  ${o.foto('varlik/kids/gorsel/hero-mutfak.webp', 'Gün ışığı alan mutfakta, tepsisinde pastel kase ve kaşık olan ahşap mama sandalyesi', { gen: 1800, yuk: 1200, oncelik: true })}
+  ${heroMedya}
   <span class="kd-hero__sus kd-hero__sus--1 kd-yuz">${o.ikon('parilti', 64)}</span>
-  <span class="kd-hero__sus kd-hero__sus--2 kd-yuz">${o.ikon('kasik', 52)}</span>
+  <span class="kd-hero__sus kd-hero__sus--2">${o.maskot('merhaba', { boy: 120, alt: 'Dada Kids maskotu Pütür el sallıyor' })}</span>
  </div>`;
 
   const ustBolum = `<section class="kd-hero kd-hub-hero" data-renk="seftali">
@@ -58,17 +60,18 @@ export default async function (o) {
  <div class="wrap"><div class="kd-hub-profil__izgara">
   ${profil}
   <div class="kd-hub-profil__yan kd-gir">
+   <div class="kd-rehberci kd-hub-pütür">${o.maskot('kalp', { boy: 96 })}<p class="kd-baloncuk"><b>Merhaba, ben Pütür!</b> Bebeğinizin evresini seçin, size uygun tarifleri ve ipuçlarını öne çıkarayım.</p></div>
    <h2>Size özel bir Kids</h2>
    <ul class="kd-hub-liste">
     <li>${o.ikon('kase', 28)}<span><b>Tarifler yaşa göre süzülür</b>Rozet, kıvam ve alerjen etiketleriyle.</span></li>
     <li>${o.ikon('takvim', 28)}<span><b>Evreniz öne çıkar</b>Beslenme, kıvam ve odak besinler.</span></li>
-    <li>${o.ikon('kalp', 28)}<span><b>Hiçbir şey kaydedilmez</b>Seçim yalnız bu ziyaret boyunca taşınır.</span></li>
+    <li>${o.ikon('kalp', 28)}<span><b>Profiliniz kaydedilmez</b>Evre seçimi yalnız bu ziyarette taşınır; tema rengi bu cihazda hatırlanır.</span></li>
    </ul>
   </div>
  </div></div>
 </section>`;
 
-  const evreler = `<section class="kd-bolum" id="evreler">
+  const evreler = `${o.ayirici('bulut', o.zebraRenk('mavi'))}<section class="kd-bolum kd-zebra kd-desen--nokta" data-renk="mavi" id="evreler">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Dönemler', ikonAd: 'takvim', renk: 'mavi', baslik: 'Beş evre, her biri kendi renginde', alt: 'Hamilelikten 3 yaşa: hangi evrede ne yenir, kıvam nasıl olur, hangi besinler öne çıkar?', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-donemler.html">Tüm dönemler <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
   <div class="kd-izgara kd-hub-evreler">${EVRE_SIRA.map((k) => o.evreKart(k)).join('\n')}</div>
@@ -76,7 +79,7 @@ export default async function (o) {
 </section>`;
 
   const kartlar = tarifler.map((t, i) => o.tarifKart(t, { sira: i })).join('\n');
-  const tarifBolum = `<section class="kd-bolum kd-bolum--beyaz" id="tarifler">
+  const tarifBolum = `<section class="kd-bolum kd-zebra" data-renk="seftali" id="tarifler">
  <div class="wrap">
   <div class="kd-bas"><div>${o.ustYazi('Kids Tarifleri', { ikonAd: 'kase', renk: 'seftali' })}<h2 data-kd-onizleme-baslik>Ek gıdaya başlarken ilk tarifler</h2><p>${tarifler.length} örnek tarif; yaş rozeti, kıvam ve alerjen etiketiyle.</p></div>
    <a class="kd-btn" href="kids-tarifler.html" data-kd-tumu>Tümünü gör <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
@@ -85,7 +88,7 @@ export default async function (o) {
  </div>
 </section>`;
 
-  const moduller = `<section class="kd-bolum" id="moduller">
+  const moduller = `<section class="kd-bolum kd-desen--konfeti" id="moduller">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Modüller', ikonAd: 'parilti', renk: 'mint', baslik: 'Altı modül, tek mutfak', alt: 'Her biri açık ve dolu; dilediğinizden başlayın.' })}
   <div class="kd-izgara kd-hub-moduller">${o.MODULLER.filter((m) => m.kod !== 'kids').map((m) => o.modulKart(m)).join('\n')}</div>
@@ -97,10 +100,10 @@ export default async function (o) {
   const aylar = veri.mevsim.aylar || [];
   if (aylar.length) {
     const panel = aylar.map((a) => `<div class="kd-hub-ay" data-ay="${a.ay}"${a.ay === 1 ? '' : ' hidden'}>
-   <div class="kd-hub-ay__kahraman" data-renk="sari">${o.urun(a.kahraman.ikon, 96, a.kahraman.ad)}<div><span class="kd-ust-yazi" data-renk="sari">${esc(a.ad)} · Ayın kahramanı</span><h3>${esc(a.kahraman.ad)}</h3><p>${esc(a.kahraman.neden)}</p></div></div>
+   <div class="kd-hub-ay__kahraman" data-renk="sari">${o.illus(['mevsim-kis', 'mevsim-kis', 'mevsim-ilkbahar', 'mevsim-ilkbahar', 'mevsim-ilkbahar', 'mevsim-yaz', 'mevsim-yaz', 'mevsim-yaz', 'mevsim-sonbahar', 'mevsim-sonbahar', 'mevsim-sonbahar', 'mevsim-kis'][a.ay - 1], '', { boy: 140, sinif: 'kd-hub-ay__illus', yedek: '' })}${o.urun(a.kahraman.ikon, 96, a.kahraman.ad)}<div><span class="kd-ust-yazi" data-renk="sari">${esc(a.ad)} · Ayın kahramanı</span><h3>${esc(a.kahraman.ad)}</h3><p>${esc(a.kahraman.neden)}</p></div></div>
    <div class="kd-hub-ay__urunler">${a.urunler.slice(0, 8).map((u) => `<span class="kd-hub-urun">${o.urun(u.ikon, 44, '')}<small>${esc(u.ad)}</small></span>`).join('')}</div>
   </div>`).join('\n');
-    mevsimBolum = `<section class="kd-bolum kd-bolum--beyaz" id="mevsim">
+    mevsimBolum = `${o.ayirici('dalga', o.zebraRenk('sari'))}<section class="kd-bolum kd-zebra" data-renk="sari" id="mevsim">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Mevsimsel Takvim', ikonAd: 'sepet', renk: 'sari', baslik: 'Bu ay tezgâhta neler var?', alt: 'Mevsiminde ürün daha lezzetli ve ekonomik; Türkiye geneli için örnek bir tezgâh.', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-mevsim.html">Mevsim takvimi <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
   <div class="kd-hub-mevsim kd-gir" data-kd-bu-ay>${panel}</div>
@@ -116,14 +119,14 @@ export default async function (o) {
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Rehber & Uzman', ikonAd: 'kitap', renk: 'pembe', baslik: 'Merak ettikleriniz, sade bir dille', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-rehber.html">Tüm rehber <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
   <div class="kd-izgara">${rehber.map((r, i) => `<a class="kd-kart kd-gir kd-hub-makale" href="kids-rehber-${r.slug}.html" data-renk="${['seftali', 'mint', 'pembe', 'mavi'][i % 4]}">
-   <div class="kd-hub-makale__kapak">${r.kapak ? o.foto(r.kapak, '', { gen: 1400, yuk: 788 }) : o.sahne('tabak-parmak-gida')}</div>
+   <div class="kd-hub-makale__kapak">${o.illus({ 'ek-gidaya-gecis': 'rehber-ek-gida', 'blw-temelleri': 'rehber-blw', 'ogurme-mi-bogulma-mi': 'rehber-ogurme', 'alerjen-tanitimi': 'rehber-alerjen' }[r.slug] || '', `${r.baslik} — kapak illüstrasyonu`, { boy: 600, yedek: '' }) || (r.kapak ? o.foto(r.kapak, `${r.baslik} — kapak fotoğrafı`, { gen: 1400, yuk: 788 }) : o.sahne('tabak-parmak-gida'))}</div>
    <div class="kd-kart__govde"><h3>${esc(r.baslik)}</h3><p>${esc(r.ozet)}</p><span class="kd-kart__alt"><span class="kd-ikincil">${r.okumaDk ? r.okumaDk + ' dk okuma' : ''}</span><span>Oku <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></span></div>
   </a>`).join('\n')}</div>
  </div>
 </section>`;
   }
 
-  const guven = `<section class="kd-bolum kd-bolum--beyaz" id="guven">
+  const guven = `${o.ayirici('dalga', o.zebraRenk('mint'))}<section class="kd-bolum kd-zebra kd-desen--bulut" data-renk="mint" id="guven">
  <div class="wrap"><div class="kd-hub-guven">
   <div>
    ${o.ustYazi('Güven merkezi', { ikonAd: 'kalp', renk: 'mint' })}
