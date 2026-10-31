@@ -1,0 +1,15 @@
+{
+  "name": "dadakids-prototip",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "snapshot": "node araclar/snapshot.mjs",
+    "build": "node araclar/build.mjs",
+    "kapi": "node araclar/varlik-kapisi.mjs",
+    "parite": "node araclar/parite.mjs",
+    "serve": "node araclar/sunucu.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}
