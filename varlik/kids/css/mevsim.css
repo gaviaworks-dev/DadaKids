@@ -146,7 +146,7 @@ html:not(.kd-js) .kd-may { display: none; }
 .kd-myilserit li[data-bu-ay] a { box-shadow: inset 0 0 0 2px var(--r-k); }
 
 /* ---------- Neden mevsiminde + dondurulmuş ---------- */
-.kd-mneden { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(var(--kd-s4), 3vw, var(--kd-s7)); align-items: center; }
+.kd-mneden { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(var(--kd-s5), 3vw, var(--kd-s7)); align-items: center; }
 .kd-mneden__liste { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--kd-s3); }
 .kd-mneden__liste li { display: flex; gap: var(--kd-s3); align-items: flex-start; padding: var(--kd-s3) var(--kd-s4); border-radius: var(--kd-r-m); background: #fff; box-shadow: var(--kd-golge); }
 .kd-mneden__liste img { width: 28px; height: 28px; flex: none; margin-top: 2px; }
@@ -156,7 +156,7 @@ html:not(.kd-js) .kd-may { display: none; }
 .kd-mdondurulmus h3 { color: var(--r-k); font-size: 1.2rem; margin-bottom: var(--kd-s2) !important; }
 .kd-mdondurulmus p + p { margin-top: var(--kd-s2); }
 .kd-mdondurulmus__not { font-size: 13.5px; color: var(--kd-ikincil); }
-.kd-mguven { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--kd-s4); align-items: center; }
+.kd-mguven { --kd-kutu-dis: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--kd-s4); align-items: center; }
 .kd-mguven p { margin: 0; font-size: 14px; }
 
 /* ---------- Duyarlı ---------- */
@@ -264,7 +264,7 @@ html:not(.kd-js) .kd-may { display: none; }
 @media (max-width: 640px) {
   .kd-mpanel__bas { padding: var(--kd-s2) var(--kd-s3); flex-wrap: nowrap; }
   .kd-mpanel__illus { width: 56px; }
-  .kd-mguven { gap: var(--kd-s3); }
+  .kd-mguven { gap: var(--kd-s5); }
   .kd-mpanel__bas-metin { grid-template-columns: minmax(0, 1fr); }
   .kd-mpanel__bas-metin p { margin-top: var(--kd-s1); text-align: left; }
   .kd-mmevsimler { grid-template-columns: 1fr; }

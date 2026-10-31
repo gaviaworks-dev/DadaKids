@@ -46,15 +46,16 @@ a.kd-rkart:hover .kd-rkart__medya > img, a.kd-rkart:hover .kd-rkart__medya > .kd
 }
 
 /* ---------- Hub: güven ---------- */
-.kd-rguven { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(var(--kd-s4), 3vw, var(--kd-s7)); align-items: start; }
+.kd-rguven { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(var(--kd-s5), 3vw, var(--kd-s7)); align-items: start; }
 .kd-rilke { list-style: none; margin: 0 0 var(--kd-s4); padding: 0; display: grid; gap: var(--kd-s3); }
 .kd-rilke li { display: flex; gap: var(--kd-s3); align-items: flex-start; padding: var(--kd-s3) var(--kd-s4); border-radius: var(--kd-r-m); background: var(--kd-krem); }
 .kd-rilke i { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--kd-mint-a); color: var(--kd-mint-k); font-size: 16px; }
 .kd-rilke span { font-size: 14.5px; line-height: 1.55; color: var(--kd-ikincil); }
 .kd-rilke b { color: var(--kd-murekkep); }
-.kd-rguven__muhur { display: grid; gap: var(--kd-s3); }
+.kd-rguven__muhur { --kd-kutu-dis: 0; display: grid; gap: var(--kd-s5); }
 .kd-rguven__kaynak { position: sticky; top: calc(var(--kd-ust-bosluk, 0px) + 80px); padding: var(--kd-s4); border-radius: var(--kd-r-l); background: var(--kd-krem); box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
-.kd-rguven__kaynak h3 { display: flex; align-items: center; gap: var(--kd-s2); margin-bottom: var(--kd-s3) !important; }
+.kd-rguven__kaynak h3 { display: flex; align-items: center; gap: var(--kd-s2); margin-bottom: var(--kd-s4) !important; }
+@media (max-width: 1024px) { .kd-rilke { margin-bottom: var(--kd-s5); } }
 .kd-rguven__kaynak h3 img { width: 22px; height: 22px; }
 
 .kd-rkaynak { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--kd-s2); counter-reset: kaynak; }
@@ -74,7 +75,7 @@ a.kd-rkart:hover .kd-rkart__medya > img, a.kd-rkart:hover .kd-rkart__medya > .kd
 /* ---------- Makale: düzen ---------- */
 .kd-rduzen-kap { padding-top: clamp(var(--kd-s4), 3vw, var(--kd-s6)); }
 .kd-rduzen { display: grid; grid-template-columns: 260px minmax(0, 720px); justify-content: center; gap: clamp(var(--kd-s5), 4vw, var(--kd-s8)); align-items: start; }
-.kd-rtoc { position: sticky; top: calc(var(--kd-ust-bosluk, 0px) + 80px); display: grid; gap: var(--kd-s3); }
+.kd-rtoc { position: sticky; top: calc(var(--kd-ust-bosluk, 0px) + 80px); display: grid; gap: var(--kd-s5); }
 .kd-rtoc__kutu { background: #fff; border-radius: var(--kd-r-l); box-shadow: var(--kd-golge); padding: var(--kd-s1) var(--kd-s2) var(--kd-s2); }
 .kd-rtoc__kutu summary { display: flex; align-items: center; justify-content: space-between; gap: var(--kd-s2); padding: var(--kd-s2) var(--kd-s2) var(--kd-s2); font-weight: 800; font-size: 14px; letter-spacing: .03em; text-transform: uppercase; list-style: none; cursor: default; }
 .kd-rtoc__kutu summary::-webkit-details-marker { display: none; }
@@ -91,22 +92,21 @@ a.kd-rkart:hover .kd-rkart__medya > img, a.kd-rkart:hover .kd-rkart__medya > .kd
 
 /* ---------- Makale: gövde ---------- */
 .kd-rmakale { min-width: 0; font-size: 17px; }
-.kd-rmakale > .kd-ornek { margin-bottom: var(--kd-s2); }
 .kd-rbolum { padding-top: var(--kd-s5); scroll-margin-top: calc(var(--kd-ust-bosluk, 0px) + 80px); }
 .kd-rbolum h2 { font-size: clamp(1.35rem, 1.1rem + .9vw, 1.75rem) !important; margin-bottom: var(--kd-s3) !important; display: flex; align-items: baseline; gap: var(--kd-s2); }
 .kd-rbolum h2::before { content: ""; flex: none; width: 12px; height: 12px; border-radius: 4px; background: var(--r-o); transform: translateY(-2px) rotate(45deg); }
 .kd-rbolum p { margin: 0 0 var(--kd-s3); line-height: 1.75; color: #4A3C36; }
-.kd-rmadde { list-style: none; margin: var(--kd-s1) 0 var(--kd-s4); padding: var(--kd-s4) var(--kd-s4); border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); display: grid; gap: var(--kd-s2); }
+.kd-rmadde { list-style: none; margin: var(--kd-s5) 0; padding: var(--kd-s4) var(--kd-s4); border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); display: grid; gap: var(--kd-s2); }
 .kd-rmadde li { position: relative; padding-left: var(--kd-s6); line-height: 1.6; font-size: 16px; }
 .kd-rmadde li::before { content: ""; position: absolute; left: 0; top: 2px; width: 21px; height: 21px; border-radius: 50%; background: var(--r-a); box-shadow: inset 0 0 0 1.5px var(--r-o); }
 .kd-rmadde li::after { content: ""; position: absolute; left: 7.5px; top: 6.5px; width: 5px; height: 9px; border: solid var(--r-k); border-width: 0 2.2px 2.2px 0; transform: rotate(45deg); }
-.kd-rkutu { margin: var(--kd-s5) 0 var(--kd-s1); padding: var(--kd-s4) var(--kd-s5); border-radius: var(--kd-r-l); }
+.kd-rkutu { margin: var(--kd-s5) 0; padding: var(--kd-s4) var(--kd-s5); border-radius: var(--kd-r-l); }
 .kd-rkutu h3 { font-size: 1.1rem; }
 .kd-rkutu:not(.kd-kutu--uyari) h3 i { color: var(--r-k); }
 .kd-rkutu p { line-height: 1.65; }
 
 /* Karşılaştırma tablosu */
-.kd-rtablo-kap { border-radius: var(--kd-r-l); overflow: hidden; background: #fff; box-shadow: var(--kd-golge); }
+.kd-rtablo-kap { margin-block: var(--kd-s5); border-radius: var(--kd-r-l); overflow: hidden; background: #fff; box-shadow: var(--kd-golge); }
 .kd-rtablo { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; }
 .kd-rtablo th, .kd-rtablo td { padding: var(--kd-s3) var(--kd-s4); text-align: left; vertical-align: top; line-height: 1.5; }
 .kd-rtablo thead th { font-size: 15px; font-weight: 800; background: var(--r-a); }
@@ -124,7 +124,7 @@ a.kd-rkart:hover .kd-rkart__medya > img, a.kd-rkart:hover .kd-rkart__medya > .kd
 .kd-racil .kd-bag { color: var(--kd-tehlike-k); }
 
 .kd-rkaynaklar .kd-rkaynak { margin-top: var(--kd-s1); }
-.kd-rsonu { display: grid; gap: var(--kd-s2); margin-top: var(--kd-s6); padding-top: var(--kd-s4); border-top: 1px dashed var(--kd-cizgi); }
+.kd-rsonu { --kd-kutu-dis: 0; display: grid; gap: var(--kd-s5); margin-top: var(--kd-s6); padding-top: var(--kd-s4); border-top: 1px dashed var(--kd-cizgi); }
 .kd-rsonu p { margin: 0; font-size: 14px; }
 
 /* ---------- Sıradaki makale ---------- */

@@ -208,6 +208,10 @@ a.kd-tarif:hover .kd-tarif__medya img { transform: scale(1.04); }
    6 · Örnek içerik, uzman mührü, kutular, boş durum
    --------------------------------------------------------------------- */
 .kd-ornek { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border-radius: var(--kd-r-m); background: var(--kd-uyari-a); color: var(--kd-uyari-k); box-shadow: inset 0 0 0 1px var(--kd-uyari-c); font-size: 14px; line-height: 1.5; margin: 0; }
+/* Bilgi kutularının dış boşluğu tek yerde: metin akışında üstten ve alttan --kd-s5. Izgara/esnek taşıyıcılar boşluğu gap ile verir ve --kd-kutu-dis: 0 ile bu payı kapatır. */
+.kd-ornek, .kd-onay { margin-block: var(--kd-kutu-dis, var(--kd-s5)); }
+.kd-ornek:first-child, .kd-onay:first-child { margin-top: 0; }
+.kd-ornek:last-child, .kd-onay:last-child { margin-bottom: 0; }
 .kd-ornek i { margin-top: 3px; }
 .kd-onay { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
 .kd-onay__ikon { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--kd-uyari-a); color: var(--kd-uyari-k); font-size: 18px; flex: none; }

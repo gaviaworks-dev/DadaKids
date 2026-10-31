@@ -33,12 +33,12 @@
 .kd-kbogulma__yerine { display: flex; gap: 8px; color: var(--kd-murekkep) !important; background: var(--kd-uygun-a); border-radius: 12px; padding: 8px 10px; margin-top: 8px !important; }
 .kd-kbogulma__yerine > i { color: var(--kd-uygun-k); margin-top: 3px; }
 .kd-kbogulma__yerine .kd-bag { white-space: nowrap; }
-.kd-kbogulma__acil { display: flex; align-items: center; gap: 16px; margin-top: 18px; padding: 14px 18px; border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 2px #F5C6C3; }
+.kd-kbogulma__acil { display: flex; align-items: center; gap: 16px; margin-top: var(--kd-s5); padding: 14px 18px; border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 2px #F5C6C3; }
 .kd-kbogulma__112 { flex: none; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; background: var(--kd-tehlike-k); color: #fff; font-family: "GilroyXB", var(--font, system-ui); font-weight: 800; font-size: 22px; letter-spacing: .02em; }
 .kd-kbogulma__acil p { margin: 0; font-size: 14.5px; }
 
 /* ---------- Üst bilgi + nasıl okunur ---------- */
-.kd-kust { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: stretch; margin-bottom: 16px; }
+.kd-kust { --kd-kutu-dis: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--kd-s5) 14px; align-items: stretch; margin-bottom: var(--kd-s5); }
 .kd-kokuma { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 54px; gap: 18px; align-items: center; padding: 16px 20px; border-radius: var(--kd-r-l); background: #fff; box-shadow: var(--kd-golge); margin-bottom: 18px; }
 .kd-kokuma h3 { font-size: 1.05rem; margin-bottom: 4px !important; }
 .kd-kokuma p { margin: 0; font-size: 14px; color: var(--kd-ikincil); }
@@ -112,7 +112,7 @@
 .kd-kasama--yok { background: #FFF8F7; box-shadow: inset 0 0 0 1.5px #F5C6C3; }
 .kd-kasama__yok { display: flex; gap: 8px; align-items: center; font-weight: 800; color: var(--kd-tehlike-k); }
 
-.kd-kesim__alt { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; margin-top: 14px; }
+.kd-kesim__alt { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: var(--kd-s5) var(--kd-s3); margin-top: var(--kd-s5); }
 .kd-kesim__asla, .kd-kesim__ezilme { display: flex; gap: 12px; align-items: flex-start; margin: 0; padding: 12px 14px; border-radius: var(--kd-r-m); font-size: 14px; line-height: 1.5; }
 .kd-kesim__asla { background: var(--kd-tehlike-a); color: var(--kd-tehlike-k); }
 .kd-kesim__ezilme { background: var(--kd-uygun-a); color: var(--kd-murekkep); }

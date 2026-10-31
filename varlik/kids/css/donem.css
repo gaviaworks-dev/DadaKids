@@ -112,7 +112,6 @@ html:not(.kd-js) .kd-dsekme__liste { display: none; }
 
 /* ---------- SSS ---------- */
 .kd-dsss { max-width: 880px; }
-.kd-dsss .kd-ornek { margin-bottom: var(--kd-s3); }
 .kd-dsss__liste { display: grid; gap: var(--kd-s2); }
 .kd-dsss__oge { background: #fff; border-radius: var(--kd-r-m); box-shadow: var(--kd-golge); overflow: hidden; }
 .kd-dsss__oge summary { display: flex; align-items: center; justify-content: space-between; gap: var(--kd-s3); padding: var(--kd-s4) var(--kd-s4); min-height: 56px; cursor: pointer; font-weight: 800; font-size: 16px; list-style: none; }
@@ -124,7 +123,7 @@ html:not(.kd-js) .kd-dsekme__liste { display: none; }
 .kd-dsss__oge > div p { margin: 0 0 var(--kd-s2); }
 
 /* ---------- Güven + sonraki ---------- */
-.kd-dguven { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--kd-s4); }
+.kd-dguven { --kd-kutu-dis: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--kd-s4); }
 .kd-dguven p { margin: 0; font-size: 14px; max-width: 640px; }
 .kd-dsonraki { display: grid; grid-template-columns: 1fr 1fr; gap: var(--kd-s4); }
 .kd-dsonraki--tek { grid-template-columns: 1fr; }
@@ -250,7 +249,7 @@ a.kd-dyardim:active { transform: translateY(-1px) scale(.99); }
 /* Kıvam yolculuğu: evre görseli + kıvam rozeti */
 
 /* SSS + Pütür */
-.kd-dsss__not { max-width: 880px; margin-top: var(--kd-s4); }
+.kd-dsss__not { max-width: 880px; margin-top: var(--kd-s5); }
 .kd-dsss__oge { transition: box-shadow .2s, transform .2s; }
 .kd-dsss__oge:hover { box-shadow: var(--kd-golge-yuksek); }
 
@@ -280,7 +279,7 @@ a.kd-dyardim:active { transform: translateY(-1px) scale(.99); }
 .kd-dbas-sahne { width: clamp(96px, 9vw, 124px); align-self: center; }
 .kd-dbakis .kd-dhaplar { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
 @media (min-width: 641px) and (max-width: 1024px) { .kd-dguven { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: var(--kd-s4); } }
-@media (max-width: 640px) { .kd-dbas-sahne { display: block; width: 84px; } .kd-dguven { gap: var(--kd-s4); } }
+@media (max-width: 640px) { .kd-dbas-sahne { display: block; width: 84px; } .kd-dguven { gap: var(--kd-s5); } }
 
 /* =====================================================================
    Besin sekmeleri (matris kolu): Uygun hazırlık / Dikkat / Henüz erken

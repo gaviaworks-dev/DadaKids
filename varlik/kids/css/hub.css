@@ -24,7 +24,6 @@
   .kd-hub-evreler > .kd-evre-cta { grid-column: auto; flex-direction: column; align-items: stretch; }
   .kd-hub-evreler > .kd-evre-cta .kd-kart__alt { margin-top: auto; }
 }
-.kd-hub-not { margin-bottom: 18px; }
 .kd-hub-moduller { --kd-min: 300px; }
 .kd-hub-mevsim { background: var(--kd-sari-a); border-radius: var(--kd-r-xl); padding: clamp(18px, 3vw, 32px); }
 .kd-hub-ay { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; }
@@ -41,7 +40,7 @@
 .kd-hub-guven { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 32px; align-items: start; }
 .kd-hub-guven h2 { margin-bottom: 12px; }
 .kd-hub-guven p { color: var(--kd-ikincil); }
-.kd-hub-guven__yan { display: grid; gap: 14px; }
+.kd-hub-guven__yan { --kd-kutu-dis: 0; display: grid; gap: var(--kd-s5); }
 .kd-hub-kaynak { list-style: none; margin: 0; padding: 16px 18px; background: var(--kd-krem); border-radius: var(--kd-r-m); display: grid; gap: 10px; font-size: 14px; color: var(--kd-ikincil); }
 .kd-hub-kaynak b { display: block; color: var(--kd-murekkep); }
 /* Sağ kolon: seçili evrenin iki tarifi; dar ekranda kolonlar alt alta olduğundan gerekmez */
