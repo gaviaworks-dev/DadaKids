@@ -182,6 +182,7 @@
     addEventListener('resize', function () { olc(); yerlesimIste(); if (D.menu) konumla(); if (D.balon) balonSinirla(); });
     addEventListener('scroll', yerlesimIste, { passive: true });
     olc(); yerlesim(); setTimeout(function () { olc(); yerlesim(); }, 450);
+    addEventListener('load', function () { olc(); yerlesim(); });
     if ('requestIdleCallback' in window) requestIdleCallback(videoHazirla, { timeout: 2500 }); else setTimeout(videoHazirla, 1200);
     kirpPlanla(); ortamPlanla(); ilkSelam();
   }
@@ -197,10 +198,21 @@
     if (kolon) { var r = kolon.getBoundingClientRect(); sol = r.left + (parseFloat(getComputedStyle(kolon).paddingLeft) || 0); }
     D.dar = btn.offsetWidth + kok.offsetLeft + 6 > sol;                         // sol boşluğa sığmıyorsa içerikle kesişir
   }
+  function altindaEtkilesim() {                          // tam boy Pütür bir bağın ya da düğmenin ortasını örter mi? (sayfa düzeninden bağımsız)
+    var l = kok.offsetLeft, u = kok.offsetTop, boy = btn.offsetWidth, n = document.querySelectorAll('a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]');
+    for (var i = 0; i < n.length; i++) {
+      var e = n[i]; if (kok.contains(e) || e === sekme) continue;
+      var r = e.getBoundingClientRect(); if (r.width < 8 || r.height < 8) continue;
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      if (x < l - 2 || x > l + boy + 2 || y < u - 2 || y > u + boy + 2) continue;
+      if (getComputedStyle(e).visibility !== 'hidden') return true;
+    }
+    return false;
+  }
   function yerlesim() {
     if (D.gizli) return;
     var acik = D.menu || D.balon || D.mesgul || btn.matches(':focus-visible');
-    var kenar = D.dar && !acik && (window.scrollY || 0) > 48;
+    var kenar = D.dar && !acik && ((window.scrollY || 0) > 48 || altindaEtkilesim());
     kok.classList.toggle('kd-pt--kenar', kenar);
     // footer perdesi açıldıysa yasal bağlara ve telif satırına binmez: üstüne çıkar
     var boy = btn.offsetWidth, ust = kok.offsetTop, alt = ust + boy, sag = kenar ? boy * .6 : kok.offsetLeft + boy, kaldir = 0;

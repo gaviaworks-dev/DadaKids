@@ -305,6 +305,29 @@ for (const w of GENISLIK) {
   kontrol(`${w} sürpriz: bekleme süresinde tekrar oynamaz`, (await s.evaluate(() => document.querySelector('.kd-pt').getAttribute('data-surpriz'))) === '1');
   await s.close();
 
+  // Düzenden bağımsızlık: sayfa en üstteyken Pütür'ün altına bir düğme gelirse kenara çekilir (dar ekran)
+  {
+    const d = await acSayfa(bag, 'kids.html', jsHata);
+    const sonuc = await d.evaluate(async () => {
+      const kok = document.querySelector('.kd-pt'), r = kok.getBoundingClientRect();
+      const kolon = document.querySelector('.kd-sayfa .wrap'), sol = kolon ? kolon.getBoundingClientRect().left + parseFloat(getComputedStyle(kolon).paddingLeft) : 0;
+      if (r.right + 6 <= sol) return { atla: true };
+      scrollTo({ top: 0, behavior: 'instant' });
+      await new Promise((t) => setTimeout(t, 120));
+      const once = kok.classList.contains('kd-pt--kenar');
+      const b = document.createElement('button'); b.textContent = 'deneme';
+      b.style.cssText = `position:fixed;z-index:1;left:${r.left + 6}px;top:${r.top + 6}px;width:${r.width - 12}px;height:${r.height - 12}px`;
+      document.body.appendChild(b); dispatchEvent(new Event('resize'));
+      await new Promise((t) => setTimeout(t, 120));
+      const sonra = kok.classList.contains('kd-pt--kenar');
+      b.remove(); dispatchEvent(new Event('resize'));
+      await new Promise((t) => setTimeout(t, 120));
+      return { once, sonra, geri: kok.classList.contains('kd-pt--kenar') };
+    });
+    if (!sonuc.atla) kontrol(`${w} düzenden bağımsız: altına gelen düğmede kenara çekilir, gidince döner`, sonuc.sonra === true && sonuc.geri === sonuc.once, JSON.stringify(sonuc));
+    await d.close();
+  }
+
   // Filtre paneli ve tarih seçici (alt sayfa) Pütür'ün üstünde kalır
   if (w <= 768) {
     s = await acSayfa(bag, 'kids-tarifler.html', jsHata);
