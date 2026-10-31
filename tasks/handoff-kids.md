@@ -40,10 +40,10 @@ Ajan kolları (dosya sahipliği; iki ajan aynı dosyaya yazmaz):
 ## ▶ ŞU AN — GECE OTONOM (1 Kas, Beyar uyuyor; compact sonrası YALNIZ buradan devam)
 Kurallar: soru yok, onay yok. Push izni yalnız bu repo/main, force push yok, `git add -A` yok, staged kontrol her commit'te. Yayın yöntemi: izole worktree (scratchpad/yayin) temiz HEAD + yalnız ilgili dosyalar → kapılar `TABAN=http://localhost:8771/DadaKids/` → commit → push → ana ağaçta `git reset --mixed <sha>`. Takılan işi bırak, canlıdaki çalışan hali koru, kararı buraya yaz.
 Canlı son: 478be10 (spacing).
-- ☑ Spacing (`bosluk6`): 478be10 — bosluk-kapisi 92/92, boyut 42/42, davranış, varlık 46/46
+- ☑ Spacing (`bosluk6`): 478be10 — yerelde bosluk 92/92, boyut 42/42, davranış, varlık 46/46; CANLI 478be10: bosluk 92/92, boyut 84/84 (4 genişlik), ızgara 128/128, varlık 115/115 (5 genişlik), davranış, parite 14/14
 - ◐ Pütür: dizüstü düzeltmesi (yerelde, rapor/tmp/putur/bekleyen/) + telefonda Araçlar "4 ARAÇ" çakışması → `putur5`; kapı + push. 10 dk'da yeşile gelmeyen sürüm 642d811 Pütür'ü korur.
 - ☐ Canlı kapılar (putur, bosluk, boyut, izgara, davranış, varlık) son push sonrası
-- ☐ Boştaki ajanları kapat
+- ☑ Boştaki ajanları kapat (15 ajan; çalışan yalnız `putur5`)
 - ☐ tasks/SABAH-RAPORU-kids.md (canlı linkler, gece commit'leri, kapı sonuçları, açık işler + öneri, video yolu + sahne saniyeleri, Yasin Bey özeti yolu) → push → DUR
 Video: /Users/gaviaworks/Developer/Projects/dadakids-prototip/rapor/tmp/putur/putur-tanitim.mp4 (642d811'den, 40,7 sn). Sahneler: 0–2 idle · 1,7 Merhaba · 4,5 hover menü · 8,3 tıklama zıplaması · 10,8 düşünme→anlatma · 14,3 arama/büyüteç · 18,0 okuma · 21,1 kaydırma/bakış · 24,6 gidip gelme · 27,8 parıltı · 32,3–40,7 mobil.
 
