@@ -82,7 +82,10 @@
     var id = decodeURIComponent(location.hash.slice(1));
     if (!id) return;
     var k = document.getElementById(id);
-    if (!k || !k.classList.contains('kd-kesim')) return;
+    if (!k) return;
+    var azaltH = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // kart dışı çapalar (#atlas, #bogulma-bas): yapışkan menünün altına hizala (scroll-margin)
+    if (!k.classList.contains('kd-kesim')) { if (k.closest('.kd-sayfa')) k.scrollIntoView({ behavior: yumusak && !azaltH ? 'smooth' : 'instant', block: 'start' }); return; }
     if (k.hidden) sifirla();
     var d = $('.kd-kdizin[open]'); if (d && yumusak) d.open = false;
     k.classList.add('kd-gorundu');
@@ -92,5 +95,5 @@
     k.classList.add('kd-hedef');
   }
   window.addEventListener('hashchange', function () { hedefeGit(true); });
-  if (location.hash) setTimeout(function () { hedefeGit(false); }, 60);
+  if (location.hash) { setTimeout(function () { hedefeGit(false); }, 60); window.addEventListener('load', function () { setTimeout(function () { hedefeGit(false); }, 120); }); }
 })();
