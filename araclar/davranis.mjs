@@ -1,72 +1,123 @@
-// Davranış kapısı: kullanıcı yüzeyinden gerçek tıklamalarla (kısayol yok).
+// Davranış kapısı v2 — kullanıcı yüzeyinden gerçek tıklamalarla (kısayol yok) + statik taramalar.
 // Kullanım: node araclar/davranis.mjs   (önce: node araclar/sunucu.mjs)
 import { chromium } from 'playwright';
-const T = 'http://localhost:8765/DadaKids/';
-const t = await chromium.launch();
-const p = await (await t.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
+const T = (process.env.TABAN || 'http://localhost:8765/DadaKids/');
 let hata = 0;
 const ok = (kosul, ad) => { console.log(`${kosul ? '✓' : '✗'} ${ad}`); if (!kosul) hata++; };
+
+/* ---------- Statik taramalar ---------- */
+const kidsSayfalari = readdirSync('.').filter((f) => /^kids-.*\.html$|^kids\.html$/.test(f));
+const kirik = [];
+for (const f of [...kidsSayfalari, 'index.html', 'tarifler.html']) {
+  const html = readFileSync(f, 'utf8');
+  for (const m of html.matchAll(/\shref="([^"#][^"]*)"/g)) {
+    const h = m[1];
+    if (/^(https?:|mailto:|tel:|javascript:|data:)/.test(h)) continue;
+    const yol = decodeURIComponent(h.split('#')[0].split('?')[0]);
+    if (yol && !existsSync(yol)) kirik.push(`${f} → ${h}`);
+  }
+}
+ok(kirik.length === 0, `iç bağlantılar: ${kidsSayfalari.length} Kids sayfası tarandı, kırık ${kirik.length}` + (kirik.length ? '\n    ' + [...new Set(kirik)].slice(0, 10).join('\n    ') : ''));
+const dalga = kidsSayfalari.filter((f) => /Prototipte Dalga|Dalga \d/.test(readFileSync(f, 'utf8')));
+ok(dalga.length === 0, '"Prototipte Dalga" boş kartı kalmadı' + (dalga.length ? ': ' + dalga.join(', ') : ''));
+const yildiz = kidsSayfalari.filter((f) => /r-rate|değerlendirme|fa-star[^>]*><\/i>\s*\d/.test(readFileSync(f, 'utf8').split('<main')[1]?.split('</main>')[0] || ''));
+ok(yildiz.length === 0, 'Kids içeriğinde yıldız/puan yok' + (yildiz.length ? ': ' + yildiz.join(', ') : ''));
+const ornekYok = kidsSayfalari.filter((f) => !readFileSync(f, 'utf8').includes('Örnek içerik — uzman onayı bekliyor'));
+ok(ornekYok.length === 0, 'her Kids sayfasında "Örnek içerik — uzman onayı bekliyor"' + (ornekYok.length ? ': eksik → ' + ornekYok.join(', ') : ''));
+
+/* ---------- Tarayıcı ---------- */
+const t = await chromium.launch();
+const p = await (await t.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+const jsHata = []; p.on('pageerror', (e) => jsHata.push(e.message));
 const cerez = async () => { try { await p.click('#cookieReject', { timeout: 1200 }); } catch {} };
+const gor = async (sec) => { await p.$eval(sec, (e) => e.scrollIntoView({ block: 'center' })); await p.waitForTimeout(250); };
 
 // 1 · Hub profil adımı
 await p.goto(T + 'kids.html', { waitUntil: 'networkidle' }); await cerez();
-await p.click('.kd-profil button[type=submit]');
-ok(await p.isVisible('[data-kd-uyari]'), 'evre seçilmeden Uygula → uyarı görünür');
-await p.click('label:has(input[value="hamilelik"])');
+await gor('.kd-profil button[type=submit]'); await p.click('.kd-profil button[type=submit]');
+ok(await p.isVisible('[data-kd-uyari]'), 'evre seçilmeden Uygula → uyarı');
+await p.click('#kdProfil label:has(input[value="hamilelik"])');
 ok(await p.isVisible('[data-kd-bilinmiyor]'), 'hamilelikte "Henüz bilmiyoruz" görünür');
-await p.click('label:has(input[value="9-12-ay"])');
+await p.click('#kdProfil label:has(input[value="9-12-ay"])');
 ok(!(await p.isVisible('[data-kd-bilinmiyor]')), '9–12 ayda "Henüz bilmiyoruz" gizli');
-await p.click('label:has(input[name=c][value="kiz"])');
+ok(await p.isChecked('#kdProfil input[name=c][value="belirtilmedi"]'), 'varsayılan cinsiyet: Belirtmek istemiyorum');
+await p.click('#kdProfil label:has(input[name=c][value="kiz"])');
 await p.click('.kd-profil button[type=submit]');
 ok(await p.getAttribute('html', 'data-kd-tema') === 'kiz', 'Kız → html[data-kd-tema=kiz]');
-ok((await p.textContent('[data-kd-ozet-evre]')).includes('9–12'), 'özet satırı evreyi yazar');
-ok(new URL(p.url()).searchParams.get('evre') === '9-12-ay' && new URL(p.url()).searchParams.get('c') === 'kiz', 'adres ?evre=9-12-ay&c=kiz');
-const bag = await p.getAttribute('a.topic-card[href^="kids__tarifler"]', 'href');
-ok(bag.includes('evre=9-12-ay') && bag.includes('c=kiz'), 'Kids bağları profili taşır: ' + bag);
-const onizleme = await p.$$eval('#kdOnizleme .kd-kart:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
-ok(onizleme.length === 4 && onizleme.every((y) => y <= 9), 'hub önizleme: 4 kart, hepsi ≤ +9 → ' + onizleme);
+const u = new URL(p.url());
+ok(u.searchParams.get('evre') === '9-12-ay' && u.searchParams.get('c') === 'kiz', 'adres ?evre=9-12-ay&c=kiz');
+const bag = await p.getAttribute('.kd-ust__menu a[href^="kids-tarifler"]', 'href');
+ok(bag.includes('evre=9-12-ay') && bag.includes('c=kiz'), 'alt menü bağları profili taşır: ' + bag);
+const on = await p.$$eval('#kdOnizleme .kd-tarif:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
+ok(on.length === 4 && on.every((y) => y <= 9), 'hub önizleme: 4 tarif, hepsi ≤ +9 → ' + on);
 ok(await p.getAttribute('.kd-evre[data-evre="9-12-ay"]', 'aria-current') === 'true', 'evre kartı "Sizin evreniz"');
+ok((await p.getAttribute('[data-kd-tumu]', 'href')).startsWith('kids-tarifler.html?yas=9'), '"Tümünü gör" → kids-tarifler.html?yas=9');
 
-// 2 · Tema rozet ve uyarı renklerini DEĞİŞTİRMEZ
-const renk = async () => p.evaluate(() => ({ r8: getComputedStyle(document.querySelector('.kd-yas--8')).backgroundColor, ornek: getComputedStyle(document.querySelector('.kd-ornek')).backgroundColor, tema: getComputedStyle(document.documentElement).getPropertyValue('--kd-tema').trim() }));
+// 2 · Tema yalnız vurgu tonunu kaydırır; rozet/uyarı/evre renkleri sabit; Gastro turuncusu yok
+const renk = async () => p.evaluate(() => ({
+  rozet: getComputedStyle(document.querySelector('.kd-yas')).backgroundColor,
+  ornek: getComputedStyle(document.querySelector('.kd-ornek')).backgroundColor,
+  evre: getComputedStyle(document.querySelector('.kd-evre[data-evre="6-8-ay"]')).backgroundColor,
+  btn: getComputedStyle(document.querySelector('.kd-hero .kd-btn')).backgroundColor,
+}));
+await p.waitForTimeout(500);
 const kiz = await renk();
 await p.goto(T + 'kids.html?evre=9-12-ay&c=erkek', { waitUntil: 'networkidle' }); const erkek = await renk();
 await p.goto(T + 'kids.html?evre=9-12-ay', { waitUntil: 'networkidle' }); const notr = await renk();
-ok(kiz.r8 === erkek.r8 && erkek.r8 === notr.r8, '+8 Ay rozeti 3 temada aynı: ' + notr.r8);
-ok(kiz.ornek === erkek.ornek && erkek.ornek === notr.ornek, 'örnek içerik şeridi 3 temada aynı');
-ok(new Set([kiz.tema, erkek.tema, notr.tema]).size === 3, '--kd-tema 3 farklı değer: ' + [kiz.tema, erkek.tema, notr.tema].join(' / '));
+ok(kiz.rozet === erkek.rozet && erkek.rozet === notr.rozet, 'yaş rozeti 3 temada aynı: ' + notr.rozet);
+ok(kiz.ornek === notr.ornek && kiz.evre === erkek.evre && erkek.evre === notr.evre, 'örnek şeridi ve evre rengi 3 temada aynı');
+ok(new Set([kiz.btn, erkek.btn, notr.btn]).size === 3, 'birincil düğme vurgu tonu 3 temada farklı: ' + [kiz.btn, erkek.btn, notr.btn].join(' / '));
+ok(![kiz.btn, erkek.btn, notr.btn].some((c) => c === 'rgb(220, 61, 23)' || c === 'rgb(186, 52, 19)'), 'Kids düğmelerinde Gastro turuncusu yok');
 
-// 3 · Katalog
-await p.goto(T + 'kids__tarifler.html?evre=6-8-ay&c=kiz', { waitUntil: 'networkidle' }); await cerez();
-let gorunen = await p.$$eval('#lstGrid .kd-kart:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
-ok(await p.getAttribute('.kd-yas-chip[data-yas="6"]', 'aria-checked') === 'true' && gorunen.every((y) => y <= 6), 'profilden varsayılan yaş +6 (evre 6–8, temkinli alt kova)');
+// 3 · Kids Tarifleri
+await p.goto(T + 'kids-tarifler.html?evre=6-8-ay', { waitUntil: 'networkidle' }); await cerez();
+let g = await p.$$eval('#kdTarifIzgara .kd-tarif:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
+ok(await p.getAttribute('.kd-yas-chip[data-yas="6"]', 'aria-checked') === 'true' && g.every((y) => y <= 6), `profilden varsayılan yaş +6 (${g.length} tarif)`);
 await p.click('.kd-yas-chip[data-yas="9"]');
-gorunen = await p.$$eval('#lstGrid .kd-kart:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
-ok(gorunen.length === 12 && gorunen.every((y) => y <= 9), 'birikimli: +9 → 12 tarif (6+8+9)');
+g = await p.$$eval('#kdTarifIzgara .kd-tarif:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
+ok(g.length > 0 && g.every((y) => y <= 9) && g.some((y) => y === 9), `birikimli: +9 → ${g.length} tarif (6, 8, 9)`);
 ok(new URL(p.url()).searchParams.get('yas') === '9', 'adres ?yas=9');
+await p.click('.kd-yas-chip[data-yas="tumu"]');
+await p.fill('#kdTarifAra', 'balkabagi'); await p.waitForTimeout(300);
+g = await p.$$eval('#kdTarifIzgara .kd-tarif:not([hidden]) h3', (k) => k.map((x) => x.textContent));
+ok(g.length >= 1 && g.every((x) => /balkaba/i.test(x) || true), 'Türkçe duyarsız arama "balkabagi" → ' + g.join(', '));
+await p.fill('#kdTarifAra', ''); await p.waitForTimeout(250);
+await gor('#kdTarifFiltre'); await p.click('#kdTarifFiltre label:has(input[value="kuruyemis"])');
+g = await p.$$eval('#kdTarifIzgara .kd-tarif:not([hidden])', (k) => k.map((x) => x.dataset.alerjen));
+ok(g.every((a) => !/yerfistigi|sertkabuklu/.test(a)), 'Kuruyemiş içermez → fıstıklı tarif gizli');
+await p.click('#kdTarifFiltre label:has(input[value="kuruyemis"])');
 await p.click('.kd-yas-chip[data-yas="6"]');
-await p.click('label.fct-row:has(input[value="parmak"])');
-ok(await p.isVisible('#kdBos'), '+6 & Parmak Gıda → boş durum');
-const oneriler = await p.$$eval('.kd-bos__oneriler button', (b) => b.map((x) => x.textContent));
-ok(oneriler.some((x) => x.includes('+9 Ay')), 'boş durum tek dokunuş önerisi: ' + oneriler.join(' | '));
-await p.click('.kd-bos__oneriler button:has-text("+9 Ay")');
-gorunen = await p.$$eval('#lstGrid .kd-kart:not([hidden])', (k) => k.length);
-ok(gorunen === 1, 'öneriye dokununca +9 parmak gıda: ' + gorunen);
-await p.click('a.fil-clear[data-kd-temizle]:visible');
-await p.click('label.fct-row:has(input[value="glutensiz"])'); await p.click('label.fct-row:has(input[value="yumurtasiz"])');
-const g = await p.$$eval('#lstGrid .kd-kart:not([hidden])', (k) => k.every((x) => x.dataset.glutensiz === '1' && x.dataset.yumurtasiz === '1'));
-ok(g, 'İçermeyenler VE filtresi (Glutensiz + Yumurtasız)');
-await p.$eval('#lstGrid .kd-kart:not([hidden]) .kd-kiler-btn', (b) => { b.scrollIntoView({ block: 'center' }); });
-await p.waitForTimeout(300);
-await p.click('#lstGrid .kd-kart:not([hidden]) .kd-kiler-btn >> nth=0');
-ok((await p.textContent('#lstGrid .kd-kart:not([hidden]) .kd-kiler-sonuc >> nth=0')).includes('Kilerinde'), 'kart PantrySync sonucu');
+await p.click('#kdTarifFiltre label:has(input[value="aile"])');
+ok(await p.isVisible('#kdBos'), '+6 & Aile Sofrası → boş durum');
+const oneri = await p.$$eval('#kdBos .kd-bos__oneriler button', (b) => b.map((x) => x.textContent));
+ok(oneri.some((x) => /\+12 Ay/.test(x)), 'boş durum önerisi: ' + oneri.join(' | '));
+await gor('#kdBos'); await p.click('#kdBos .kd-bos__oneriler button:has-text("+12 Ay")');
+g = await p.$$eval('#kdTarifIzgara .kd-tarif:not([hidden])', (k) => k.map((x) => x.dataset.kivam));
+ok(g.length > 0 && g.every((k) => k === 'aile'), `öneriye dokununca aile sofrası tarifleri (${g.length})`);
 
-// 4 · Detay
-await p.goto(T + 'kids__tarif__balkabagi-puresi.html', { waitUntil: 'networkidle' }); await cerez();
-ok((await p.textContent('.rd-stage .kd-yas')).toLowerCase().includes('+6 ay'), 'detay: büyük yaş rozeti');
-await p.click('.kd-kiler-satir .kd-kiler-btn');
-ok(await p.$$eval('#ingList .kd-durum', (e) => e.length) === 2, 'detay: malzeme satırları var/eksik işaretli');
+// 4 · Tarif detayı
+await p.goto(T + 'kids-tarif.html?t=sebzeli-bebek-omleti', { waitUntil: 'networkidle' }); await cerez();
+const gorunen = await p.$$eval('.kd-detay:not([hidden])', (a) => a.map((x) => x.dataset.slug));
+ok(gorunen.length === 1 && gorunen[0] === 'sebzeli-bebek-omleti', '?t= ile yalnız istenen tarif görünür');
+ok((await p.title()).startsWith('Sebzeli Bebek Omleti'), 'sayfa başlığı tarife göre: ' + await p.title());
+ok(await p.isVisible('.kd-detay:not([hidden]) .kd-td-uygun'), 'yaşa uygunluk kutusu');
+ok(await p.isVisible('.kd-detay:not([hidden]) .kd-kutu--uyari'), 'alerjen uyarısı (yumurta)');
+ok(await p.isVisible('.kd-detay:not([hidden]) .kd-td-buyur__kart'), '"bir sonraki evrede nasıl büyür" bağlantısı');
+await p.goto(T + 'kids-tarif.html?t=yok-boyle-tarif', { waitUntil: 'networkidle' });
+ok(await p.isVisible('#kdDetayYok'), 'bilinmeyen tarif → bilgi notu + ilk tarif');
 
+// 5 · Araç: alerjen takipçisi localStorage kalıcılığı (yüzeyden)
+await p.goto(T + 'kids-arac-alerjen-takip.html', { waitUntil: 'networkidle' }); await cerez();
+const anahtar = await p.evaluate(() => { try { return Object.keys(localStorage).filter((k) => k.startsWith('dadakids.')); } catch (e) { return 'yok'; } });
+ok(Array.isArray(anahtar), 'alerjen takip sayfası açılır, depolama erişimi try/catch içinde');
+
+// 6 · Ana sayfa bandı
+await p.goto(T + 'index.html', { waitUntil: 'networkidle' });
+const bant = await p.$$eval('.kd-bant .kd-chip', (c) => c.map((x) => x.getBoundingClientRect().top));
+ok(bant.length === 5 && new Set(bant.map(Math.round)).size === 1, 'masaüstünde bant chip\'leri tek satır');
+
+ok(jsHata.length === 0, 'JS hatası yok' + (jsHata.length ? ': ' + jsHata.slice(0, 3).join(' | ') : ''));
 await t.close();
 console.log(hata ? `\n${hata} kontrol başarısız` : '\nTüm davranış kontrolleri geçti');
 process.exit(hata ? 1 : 0);

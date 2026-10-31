@@ -3,7 +3,8 @@
 import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
 const TABAN = process.env.TABAN || 'http://localhost:8765/DadaKids/';
-const SAYFALAR = process.argv.slice(2).length ? process.argv.slice(2) : ['index.html', 'tarifler.html', 'kids.html', 'kids__tarifler.html', 'kids__tarif__balkabagi-puresi.html'];
+import { readdirSync } from 'node:fs';
+const SAYFALAR = process.argv.slice(2).length ? process.argv.slice(2) : readdirSync('.').filter((f) => f.endsWith('.html') && !f.startsWith('kids__'));
 const GENISLIK = [[1440, 900], [390, 844]];
 await mkdir('rapor/tmp', { recursive: true });
 const tarayici = await chromium.launch();

@@ -3,12 +3,15 @@
 // Kullanım: node araclar/parite.mjs   (önce: node araclar/sunucu.mjs)
 import { chromium } from 'playwright';
 const YEREL = 'http://localhost:8765/DadaKids/';
+const D = 'https://dadagastro.com/tarif/balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin'; // Kids kabuğunun donörü
 const CIFTLER = [
   ['index.html', 'https://dadagastro.com/'],
   ['tarifler.html', 'https://dadagastro.com/tarifler'],
-  ['kids.html', 'https://dadagastro.com/mutfaga-giris'],
-  ['kids__tarifler.html', 'https://dadagastro.com/tarifler'],
-  ['kids__tarif__balkabagi-puresi.html', 'https://dadagastro.com/tarif/balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin'],
+  ['kids.html', D],
+  ['kids-tarifler.html', D],
+  ['kids-tarif.html', D],
+  ['kids-donem-6-8-ay.html', D],
+  ['kids-arac-persentil.html', D],
 ];
 const SECICILER = [
   ['header.header', 'xywh'], ['header .brand', 'xywh'], ['nav.ana-menu', 'xywh'], ['nav.ana-menu > .nav-item:nth-child(1)', 'xywh'],
