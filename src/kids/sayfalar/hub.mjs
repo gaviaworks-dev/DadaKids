@@ -1,4 +1,5 @@
 // kids.html — Dada Kids ana sayfası (sahibi: lead)
+import { dogumSecici } from '../dogum.mjs';
 export default async function (o) {
   const { esc, EVRE, EVRE_SIRA, veri } = o;
   const tarifler = veri.tarifler.tarifler || [];
@@ -10,7 +11,7 @@ export default async function (o) {
   <h2>Bebeğiniz kaç aylık?</h2>
   <p class="kd-profil__alt">Seçiminize göre tarifler ve öneriler süzülür.</p>
   <fieldset><legend>Evre</legend><div class="kd-secim">${evreSecim}</div></fieldset>
-  <div class="kd-profil__tarih"><label for="kdDogum">ya da doğum tarihi</label><input type="date" id="kdDogum" lang="tr" max="${new Date().toISOString().slice(0, 10)}"></div>
+  ${dogumSecici(o)}
   <fieldset><legend>Cinsiyet <span class="kd-ikincil">(isteğe bağlı)</span></legend>
    <div class="kd-secim">
     <label><input type="radio" name="c" value="belirtilmedi" checked><span>Belirtmek istemiyorum</span></label>
@@ -21,7 +22,7 @@ export default async function (o) {
   </fieldset>
   <p class="kd-ornek" data-kd-uyari hidden role="alert"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Lütfen bir evre seçin.</span></p>
   <button class="kd-btn" type="submit">Uygula <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
-  <p class="kd-profil__not"><i class="fa-solid fa-lock" aria-hidden="true"></i> Evre seçimi kaydedilmez, yalnız bu ziyarette taşınır. Tema rengi (cinsiyet seçimine göre) bu cihazda hatırlanır.</p>
+  <p class="kd-profil__not"><i class="fa-solid fa-lock" aria-hidden="true"></i> Doğum ayı yalnız bu tarayıcıda saklanır; hiçbir yere gönderilmez. Evre seçimi bu ziyarette taşınır, tema rengi (cinsiyet seçimine göre) bu cihazda hatırlanır.</p>
  </form>
  <div class="kd-profil__ozet">
   <span class="kd-profil__ozet-ikon">${o.ikon('kalp', 36)}</span>
@@ -43,7 +44,7 @@ export default async function (o) {
   ${o.kirinti([['Tarifler', 'tarifler.html'], ['Dada Kids']])}
   <div class="kd-hero__izgara">
    <div class="kd-hero__metin">
-    ${o.yaziIm('kd-hub-im')}
+    ${o.kidsLogoSvg({ sinif: 'kd-hub-logo' })}
     <h1>Hamilelikten 3 yaşa, minik adımlarla beslenme</h1>
     <p class="kd-giris">Yaşa uygun tarifler, güvenli kesim rehberi, mevsim tezgâhı ve pratik araçlar — Dada Gastro'nun mutfağında, bebeğinizin evresine göre.</p>
     <div class="kd-hero__eylem">
@@ -65,7 +66,7 @@ export default async function (o) {
    <ul class="kd-hub-liste">
     <li>${o.ikon('kase', 28)}<span><b>Tarifler yaşa göre süzülür</b>Rozet, kıvam ve alerjen etiketleriyle.</span></li>
     <li>${o.ikon('takvim', 28)}<span><b>Evreniz öne çıkar</b>Beslenme, kıvam ve odak besinler.</span></li>
-    <li>${o.ikon('kalp', 28)}<span><b>Profiliniz kaydedilmez</b>Evre seçimi yalnız bu ziyarette taşınır; tema rengi bu cihazda hatırlanır.</span></li>
+    <li>${o.ikon('kalp', 28)}<span><b>Bilgileriniz sizde kalır</b>Doğum ayı yalnız bu tarayıcıda saklanır, hiçbir yere gönderilmez; evre seçimi bu ziyarette taşınır.</span></li>
    </ul>
   </div>
  </div></div>
@@ -117,7 +118,7 @@ export default async function (o) {
   if (rehber.length) {
     rehberBolum = `<section class="kd-bolum" id="rehber">
  <div class="wrap">
-  ${o.bolumBasi({ ust: 'Rehber & Uzman', ikonAd: 'kitap', renk: 'pembe', baslik: 'Merak ettikleriniz, sade bir dille', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-rehber.html">Tüm rehber <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
+  ${o.bolumBasi({ ust: 'Rehber', ikonAd: 'kitap', renk: 'pembe', baslik: 'Merak ettikleriniz, sade bir dille', sag: '<a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-rehber.html">Tüm rehber <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' })}
   <div class="kd-izgara">${rehber.map((r, i) => `<a class="kd-kart kd-gir kd-hub-makale" href="kids-rehber-${r.slug}.html" data-renk="${['seftali', 'mint', 'pembe', 'mavi'][i % 4]}">
    <div class="kd-hub-makale__kapak">${o.illus({ 'ek-gidaya-gecis': 'rehber-ek-gida', 'blw-temelleri': 'rehber-blw', 'ogurme-mi-bogulma-mi': 'rehber-ogurme', 'alerjen-tanitimi': 'rehber-alerjen' }[r.slug] || '', `${r.baslik} — kapak illüstrasyonu`, { boy: 600, yedek: '' }) || (r.kapak ? o.foto(r.kapak, `${r.baslik} — kapak fotoğrafı`, { gen: 1400, yuk: 788 }) : o.sahne('tabak-parmak-gida'))}</div>
    <div class="kd-kart__govde"><h3>${esc(r.baslik)}</h3><p>${esc(r.ozet)}</p><span class="kd-kart__alt"><span class="kd-ikincil">${r.okumaDk ? r.okumaDk + ' dk okuma' : ''}</span><span>Oku <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></span></div>
@@ -131,7 +132,7 @@ export default async function (o) {
   <div>
    ${o.ustYazi('Güven merkezi', { ikonAd: 'kalp', renk: 'mint' })}
    <h2>Bu içerikler nasıl hazırlanıyor?</h2>
-   <p>Dada Kids'teki her yaş, kıvam ve alerjen bilgisi tek bir besin tablosundan beslenir; aynı kural tarif kartında, evre sayfasında ve araçlarda aynı sonucu verir. Yayından önce her satır bir çocuk doktoru ya da çocuk diyetisyeni tarafından incelenir ve inceleme tarihiyle gösterilir.</p>
+   <p>Dada Kids'teki her yaş, kıvam ve alerjen bilgisi tek bir besin tablosundan beslenir; aynı kural tarif kartında, evre sayfasında ve araçlarda aynı sonucu verir. Bu prototipteki içerikler henüz bir çocuk doktoru ya da çocuk diyetisyeni tarafından incelenmedi; hepsi örnek içeriktir. Yayına alınmadan önce uzman incelemesinden geçmesi ve inceleme tarihinin gösterilmesi planlanıyor.</p>
    ${o.ornek('Prototipteki tüm beslenme bilgileri örnektir; tıbbi tavsiye yerine geçmez.')}
   </div>
   <div class="kd-hub-guven__yan">
@@ -151,8 +152,8 @@ export default async function (o) {
     baslik: 'Dada Kids — Hamilelikten 3 Yaşa Beslenme | Dada Gastro',
     aciklama: 'Hamilelikten 3 yaşa, bebeğinizin evresine göre tarifler, güvenli kesim, mevsim takvimi, rehber ve pratik araçlar.',
     aktif: 'kids',
-    css: ['hub'],
-    js: ['hub'],
+    css: ['hub', 'dogum-secici'],
+    js: ['hub', 'dogum-secici'],
     main: o.sayfa([ustBolum, profilBolum, evreler, tarifBolum, moduller, mevsimBolum, rehberBolum, guven].join('\n'), 'kids'),
   }];
 }
