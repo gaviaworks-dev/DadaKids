@@ -129,7 +129,7 @@ export default async function mevsim(o) {
   </header>
   ${kh.ad ? `<article class="kd-mkahraman" aria-labelledby="kh-${a.ay}">
    <div class="kd-mkahraman__gorsel">
-    <span class="kd-mkahraman__rozet">${ikon('parilti', 20)} Ayın Kahramanı</span>
+    <span class="kd-mkahraman__rozet">${ikon('parilti', 20)} ${esc(a.ad || AY_AD[a.ay - 1])} ayının kahramanı</span>
     <span class="kd-mkahraman__daire">${urun(kh.ikon, 200, kh.ad)}</span>
    </div>
    <div class="kd-mkahraman__metin">
@@ -144,7 +144,7 @@ export default async function mevsim(o) {
    </div>
   </article>` : ''}
   ${urunler.length ? `<div class="kd-mtezgah">
-   <h3 class="kd-mtezgah__bas">Tezgâhta bu ay <span>${urunler.length}</span></h3>
+   <h3 class="kd-mtezgah__bas">${esc(a.ad || AY_AD[a.ay - 1])} tezgâhında <span>${urunler.length}</span></h3>
    <ul class="kd-mtezgah__liste">${urunler.map(urunKart).join('')}</ul>
    <div class="kd-mtezgah__bos" hidden>${bos('bos-arama', 'Bu ay bu türde ürün yok.', '<button type="button" class="kd-bag kd-mtur-sifirla">Tümünü göster</button>')}</div>
   </div>` : ''}

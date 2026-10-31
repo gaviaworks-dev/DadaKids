@@ -1,4 +1,4 @@
-// Dada Kids — Rehber & Uzman: hub + makale sayfaları (sahibi: sayfalar kolu)
+// Dada Kids — Rehber: hub + makale sayfaları (sahibi: sayfalar kolu)
 // Veri: veri/rehber.json [{slug, baslik, ozet, okumaDk, kapak, ikon, evreler[], bolumler:[{baslik,paragraflar[],maddeler[]}],
 //        kutu:{tur,baslik,metin}, karsilastirmaSutunlar?:{anahtar:baslik}, karsilastirma?:[{ozellik,...}], ilgiliTarifler[], kaynaklar:[{ad,url}]}]
 // İlk yardım adımı yazılmaz: yalnız "acil durumda 112" ve resmi kurs bağlantısı.
@@ -80,7 +80,7 @@ export default async function rehber(o) {
 
   const hub = {
     dosya: 'kids-rehber.html',
-    baslik: 'Rehber & Uzman: ek gıda, BLW, öğürme ve alerjenler | Dada Kids',
+    baslik: 'Rehber: ek gıda, BLW, öğürme ve alerjenler | Dada Kids',
     aciklama: 'Ek gıdaya geçiş, BLW temelleri, öğürme ile boğulma farkı ve alerjen tanıtımı: ana akım rehberlere dayanan, kaynaklı ve sade anlatım.',
     aktif: 'rehber',
     css: ['rehber'],
@@ -89,7 +89,7 @@ export default async function rehber(o) {
 ${o.hero({
   renk: 'pembe',
   kirinti: [['Tarifler', 'tarifler.html'], ['Dada Kids', 'kids.html'], ['Rehber']],
-  ust: { metin: 'Rehber & Uzman', ikon: 'kitap' },
+  ust: { metin: 'Rehber', ikon: 'kitap' },
   baslik: 'Sakin, kaynaklı,<br>adım adım',
   giris: 'İlk kaşıktan alerjen tanışmasına kadar en çok merak edilen konular. Her makale DSÖ, NHS, AAP gibi ana akım rehberlerin uzlaştığı bilgilere dayanır ve kaynaklarını sonunda listeler.',
   eylemler: `<a class="kd-btn" href="#makaleler">${ikon('kitap', 20)} Makaleler</a><a class="kd-btn kd-btn--hafif" href="#ilkeler">Editoryal ilkelerimiz</a>`,

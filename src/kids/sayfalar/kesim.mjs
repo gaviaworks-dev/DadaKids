@@ -451,7 +451,7 @@ export default async function kesim(o) {
   const sluglar = new Set(atlas.map((x) => x.slug));
   const buyukHarf = (s) => GRUP_AD[s] || String(s || '').replace(/-/g, ' ').replace(/^./, (c) => c.toLocaleUpperCase('tr'));
   const besinIkon = (x) => (KESIM_CIZIM[x.slug]
-    ? `<img src="${SVG_KLASOR}/${x.slug}.svg" width="56" height="56" alt="" loading="lazy" decoding="async">`
+    ? `<img src="${SVG_KLASOR}/${x.slug}.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async">`
     : `<i class="fa-solid ${x.slug === 'yumurta' ? 'fa-egg' : GRUP_IKON[x.grup] || 'fa-utensils'}" aria-hidden="true"></i>`);
 
   const grupSay = new Map();
