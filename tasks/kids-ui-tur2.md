@@ -63,3 +63,10 @@ Eski çizimler yalnız `sekil` anahtarından üretiliyordu; aynı şekilli besin
 - **Peynir 6–8**: lor + rendelenmiş kaşar (eski çizim iki büyük küptü, "asla" satırıyla çelişiyordu).
 - **Salatalık 6–8**: parmaktan uzun kalın soyulmuş çubuk (eski "parmak boyu" metinle çelişiyordu).
 - Ölçek birliği: 9–12 ≈ 1 cm (nohut), 12+ ≈ 1,5 cm lokma. Tüm tablo: kesim2 raporu (handoff tarihçesi).
+
+## 6. Tema teşhisi (pembe neden görünmüyordu)
+- **Uygulanıyor muydu?** Evet: `html[data-kd-tema="kiz"]` doğru yazılıyor, localStorage `dadakids.tema.v1` okunuyor, kids.js tema sınıfını ilk boyamadan önce (betik başında) uyguluyor. Sorun uygulama sırası değildi.
+- **Neden görünmüyordu?** Pembe tema zemin token'larını mavinin yarısı kadar değiştiriyordu ve kremle aynı sıcak tonda kalıyordu: ΔE(nötr→pembe / nötr→mavi) krem 3,2 / 6,7 · krem-2 6,2 / 12,5 · çizgi 7,7 / 14,6. Mavi soğuk yöne kaydığı için krem zeminde belirgin, pembe ise şeftali/krem ailesinde kaybolduğu için fark edilmiyordu. Yalnız butonlar (tema rengi) değişiyordu.
+- **Düzeltme:** pembe lila-fuşya aralığına alındı (krem #FDF2FA, krem-2 #F8E2F3, çizgi #EDD5E9, tema #A23585, tema-açık #F5DEF2): zemin ΔE 8,4 (mavi 6,7), krem-2 16,1 (mavi 12,5); Hamilelik pembesinden (tema-açık ↔ pembe-a 7,4; tema ↔ pembe-k 23,8) ve şeftaliden (16) ayrık; beyaz/tema 6,2:1 (AA). İki tema da aynı yüzeyleri değiştirir: zemin, bantlar, çizgiler, gölge tonu (`--kd-golge-ton`), hero zemini (tema-açık radyal), alt menü aktif sekme, butonlar, seçili chip'ler. Evre ve uyarı renkleri sabit.
+- **karar:** mavi tema-açık #DCE9F9 ve zemin #F5F8FD'ye hafifçe güçlendirildi (pembe ile simetri). **gerekçe:** tema kapısında iki temanın değişen piksel oranı benzer olmalı.
+- **karar:** Modül adı "Rehber & Uzman" → "Rehber" (görünen her yerde). **gerekçe:** içerik henüz uzman tarafından incelenmedi; "Uzman" ifadesi onay varmış izlenimi veriyordu (site turu bulgusu S1 ile aynı dürüstlük ilkesi).

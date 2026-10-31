@@ -477,7 +477,6 @@ export default async function donemler(o) {
     const d = v(kod);
     return `<a class="kd-evre kd-devre-g kd-gir" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false" style="--kd-gecikme:${n * 70}ms">
  <span class="kd-devre-g__resim">${evreGorsel(kod, '', { boy: 360 })}</span>
- <span class="kd-evre__sen">Sizin evreniz</span>
  <div class="kd-evre__ust"><span class="kd-evre__ikon">${ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(d.aralik || e.aralik)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(d.slogan || d.ozet || '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>

@@ -185,7 +185,13 @@
       doldur(); if (profil.evre) ozet();
     }
     var guncelle = function () {
-      $$('.kd-evre[data-evre]').forEach(function (k) { k.setAttribute('aria-current', String(k.getAttribute('data-evre') === profil.evre)); });
+      // "Sizin evreniz" etiketi yalnız seçili evrenin kartında bulunur (statik işaretlemede tekrar etmez)
+      $$('.kd-evre[data-evre]').forEach(function (k) {
+        var bu = k.getAttribute('data-evre') === profil.evre; k.setAttribute('aria-current', String(bu));
+        var et = $('.kd-evre__sen', k);
+        if (bu && !et) { et = document.createElement('span'); et.className = 'kd-evre__sen'; et.textContent = 'Sizin evreniz'; k.insertBefore(et, k.firstChild); }
+        else if (!bu && et) et.remove();
+      });
       var iz = $('#kdOnizleme'); if (!iz) return;
       var kv = kova(), kartlar = $$('.kd-tarif', iz);
       var uygun = kartlar.filter(function (k) { return kv === null ? +k.dataset.yas === 6 : +k.dataset.yas <= kv; })

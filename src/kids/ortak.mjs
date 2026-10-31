@@ -152,7 +152,6 @@ export function evreKart(kod, { metin, gir = true } = {}) {
   const e = EVRE[kod];
   const v = (veri.evreler.evreler || []).find((x) => x.kod === kod) || {};
   return `<a class="kd-evre${gir ? ' kd-gir' : ''}" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false">
- <span class="kd-evre__sen">Sizin evreniz</span>
  <div class="kd-evre__ust"><span class="kd-evre__ikon">${ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(v.aralik || e.aralik)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(metin ?? v.slogan ?? v.ozet ?? '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>

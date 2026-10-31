@@ -3,7 +3,7 @@
 > Compact/clear sonrası İLK İŞ: bu dosyanın "▶ ŞU AN" bölümünü oku, oradan devam et.
 > Görev metni: Beyar'ın 31 Eki "kapsamlı yenile" isteği (görsel kimlik + tüm modüller dolu + Kids tarifleri). Push ÖNCESİ DUR ve Beyar'a sor.
 
-## ▶ ŞU AN (TUR 2 — kalite turu, FULL OTONOM)
+## Tur 2 ilk bölüm (TAMAM, arşiv — güncel liste aşağıda)
 **Tek kaynak bu dosya.** Compact sonrası yalnız buradan devam; bitmiş (☑) işi tekrarlama. Teammate'ler de buna bakar.
 **İzinler:** push izni VAR (yalnız bu repo, main): güvenlik commit'i hazır olur olmaz push; tur sonunda kalan commit'ler push. Force push YOK, geçmiş yeniden yazılmaz, `git add -A` YOK, her commit'te staged kontrol. Beyar'a soru sorma; belirsizlikte en makul seçenek + tasks/kids-ui-tur2.md'ye "karar: … gerekçe: …".
 **Kredi tavanı:** ~500 (başlangıç: ölçülecek). Yetmezse SVG/CSS ile kapat, raporda belirt.
@@ -36,6 +36,29 @@ Ajan kolları (dosya sahipliği; iki ajan aynı dosyaya yazmaz):
 - lead portu 8765
 - **Kredi:** tur 2 başlangıç 4771,93 (hesap başka oturumla paylaşımlı → kendi harcamamızı manifest'ten say)
 - **Kararlar (kids-ui-tur2.md §4'e taşınacak):** yaş rozeti biçimi tek: "+N Ay" (2–3 Yaş → +24 Ay) · başlık fontu Fredoka (OFL, kendi barındırma), gövde Gilroy · maskot "Pütür" (krem kase karakteri) · ortak.mjs: illus/maskot/ayirici/video yardımcıları eklendi
+
+## ▶ ŞU AN — TUR 2 KAPSAMI (tek güncel liste; compact sonrası yalnız buradan devam)
+**Kurallar aynen:** full otonom · push izni (yalnız bu repo, main; force yok, geçmiş yazılmaz, `git add -A` yok, her commit'te staged kontrol) · kredi tavanı ~500 (harcanan: 101,1 — kalan ~398; hesap paylaşımlı, kendi işlerimizi say) · belirsizlikte en makul seçenek + kids-ui-tur2.md "karar: … gerekçe: …" · limit riski: küçük commit, her alt iş bitince tikle.
+**Bitiş:** Pages derlenmiş + canlıda kapılar yeşil → son rapor (canlı linkler, görüntü/GIF yolları, kredi, kararlar) → DUR. (SendUserFile artık yok: dosya yollarını yaz.)
+**Son push:** 0c244cf · yerel kapılar: varlık 115/115 (5 genişlik) · davranış 43/43 · parite 14/14 · tema 21/21 · matris 5/5
+
+Kapsam:
+- ☑ (a) Logo: dağınık "kids", 2 tel kollu çocuk, geçiş + pop, responsive (≤360 figür gizli), favicon, sade varyant, pafta `rapor/tmp/teslim2/logo-pafta.png`, GIF `logo-gecisi.gif`
+- ☑ (b) Hero logosu: hub hero = aynı bileşen, aynı renk; davranış kapısı işaretlemeyi karşılaştırır
+- ☑ (c) Pembe tema simetrisi: teşhis kids-ui-tur2.md §6, tema-kapisi.mjs · ☐ rapor kolajı (hub/tarifler/evre × 3 tema × 1440/390; ham: rapor/tmp/tema/)
+- ☑ Tarih seçici (dogum.mjs, js/css dogum-secici; görüntü+GIF rapor/tmp/tarih/)
+- ☑ Besin matrisi sekmeli (donemler.mjs, matris-kapisi.mjs; önce rapor/tmp/matris-once, sonra rapor/tmp/matris-sonra)
+- ☑ (f) Site turu: ☑ güven metni ☑ oturum/hesap menüsü/Çıkış ☑ mevsim ay adları ☑ logo→kids.html, Tarifler → prototip içi ☑ marka yazımı ☑ alt metin kapısı ☑ trimester etiketi ☑ "Sizin evreniz" yalnız seçili kartta (JS ekler; statik HTML'de yok)
+- ☐ (d) Izgara/hizalama/meta/footer: yarım satır yok, öneri şeridi 4'e tamam, subgrid hizası, öğün ikonu, footer görünürlüğü + izgara-kapisi.mjs + genel tarama listesi kids-ui-tur2.md + önce/sonra (kesim, dönemler, tarif × 1440/768/390)
+- ☐ (e) Pütür: sol altta, state'ler, tek tık Higgsfield zıplama, ~5 tık parıltı, radial menü 6 seçenek, erişilebilirlik, putur-kapisi.mjs. Yarım JS: rapor/tmp/putur-yarim/putur.js (612 satır, sözdizimi tam; CSS/varlık/kapı yok; derlemeden çekildi, commit edilmedi)
+- ☐ Tam kapılar → commit → push → Pages → canlı kapılar → son rapor
+
+Ajan kolları (git yalnız lead'de; iki ajan aynı dosyaya yazmaz):
+- `izgara3`: src/kids/ortak.mjs, src/kids/sayfalar/*.mjs, varlik/kids/kids.css, varlik/kids/css/*.css (putur.css ve dogum-secici.css HARİÇ), varlik/kids/js/kesim.js|mevsim.js|rehber.js|donem.js|hub.js, araclar/izgara-kapisi.mjs, rapor/tmp/izgara/** · build yalnız bu kolda
+- `putur3`: varlik/kids/css/putur.css, varlik/kids/js/putur.js, varlik/kids/putur/**, araclar/putur-kapisi.mjs, rapor/tmp/putur/** · ≤300 kr · build çalıştırmaz
+- lead: kids.js, build.mjs, temizle.mjs, varlik-kapisi/davranis/parite/tema kapıları, handoff, kids-ui-tur2.md (ajan notlarını birleştirir), git · sunucu 8765 ortak
+
+<!-- eski ayrıntı notları git geçmişinde: 0c244cf öncesi handoff -->
 
 ## Tur 1 durumu (arşiv)
 - **yapılanlar:** handoff kuruldu · Higgsfield başlangıç kredisi 5095,93 (ultra plan) · model maliyetleri: nano_banana_pro 2 · seedream_v5_pro 2,5 · flux_2 1 · gpt_image_2 6,5
