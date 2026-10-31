@@ -2,7 +2,7 @@
 // Tolerans 4px. Footer'ın y'si içerik uzunluğuna bağlı olduğundan footer'da yalnız x/genişlik/yükseklik ölçülür.
 // Kullanım: node araclar/parite.mjs   (önce: node araclar/sunucu.mjs)
 import { chromium } from 'playwright';
-const YEREL = 'http://localhost:8765/DadaKids/';
+const YEREL = process.env.TABAN || 'http://localhost:8765/DadaKids/';   // TABAN=… ile izole ağaç ya da canlı
 const D = 'https://dadagastro.com/tarif/balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin'; // Kids kabuğunun donörü
 const CIFTLER = [
   ['index.html', 'https://dadagastro.com/'],
