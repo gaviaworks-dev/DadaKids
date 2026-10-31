@@ -464,3 +464,6 @@ html[data-kd-tema="erkek"] { --kd-krem: #F5F8FD; --kd-krem-2: #E6EEFA; --kd-cizg
 @media (prefers-reduced-motion: reduce) { .pg-kids, .pg-kids .page-main, .kd-sayfa, .kd-hero, .kd-zebra, .kd-ust, .kd-kart, .kd-btn, .kd-chip, .kd-secim span, .kd-tema-sec button { transition: none !important; } }
 /* Bağımsız logo (hub hero, ana sayfa bandı) header'daki logoyla aynı renkte: boyut dışında fark yok */
 .kd-logo-svg { color: var(--tomato, #DC3D17); }
+
+/* Kapalı mobil çekmecenin gölgesi sağ kenara sızmasın (Gastro kabuğu değişmedi, yalnız Kids sayfaları) */
+.pg-kids .drawer:not(.open) { box-shadow: none; }
