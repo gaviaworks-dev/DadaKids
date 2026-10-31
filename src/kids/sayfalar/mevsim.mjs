@@ -2,7 +2,7 @@
 // Veri: veri/mevsim.json {_not, aylar:[{ay, ad, kahraman:{ikon,ad,neden,secim,saklama,bebekIcin}, urunler:[{ikon,ad,tur,minAy,durum,uzmanNotu?}]}]}
 // 12 ayın paneli statik basılır; varlik/kids/js/mevsim.js bu ayı seçer ve aylar arasında geçiş yapar.
 
-const MEVSIM = (ay) => (ay === 12 || ay <= 2 ? { ad: 'Kış', renk: 'mavi' } : ay <= 5 ? { ad: 'İlkbahar', renk: 'mint' } : ay <= 8 ? { ad: 'Yaz', renk: 'sari' } : { ad: 'Sonbahar', renk: 'seftali' });
+const MEVSIM = (ay) => (ay === 12 || ay <= 2 ? { ad: 'Kış', renk: 'mavi', key: 'kis' } : ay <= 5 ? { ad: 'İlkbahar', renk: 'mint', key: 'ilkbahar' } : ay <= 8 ? { ad: 'Yaz', renk: 'sari', key: 'yaz' } : { ad: 'Sonbahar', renk: 'seftali', key: 'sonbahar' });
 const AY_KISA = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
 const AY_AD = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const TUR_AD = { meyve: 'Meyve', sebze: 'Sebze', yesillik: 'Yeşillik', baklagil: 'Baklagil' };
@@ -12,8 +12,33 @@ const normal = (s) => String(s || '').toLocaleLowerCase('tr')
   .replace(/ı/g, 'i').replace(/i̇/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ö/g, 'o').replace(/ü/g, 'u')
   .replace(/[âà]/g, 'a').replace(/[îì]/g, 'i').replace(/[ûù]/g, 'u').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
 
+/* ---------- Tur 2: görsel varlık denetimi + bölüm ritmi (sayfalar kolu; 4 modülde aynı küçük yardımcılar) ---------- */
+import { existsSync } from 'node:fs';
+const KOK = new URL('../../../', import.meta.url).pathname;
+const illusVar = (k) => ['webp', 'svg', 'png'].some((u) => existsSync(`${KOK}varlik/kids/illus/${k}.${u}`));
+const urunVar = (k) => existsSync(`${KOK}varlik/kids/svg/urun/${k}.svg`);
+const DESEN = ['nokta', 'bulut', 'konfeti'];
+const zemin = (renk) => (renk ? `color-mix(in srgb, var(--kd-${renk}-a) 62%, var(--kd-krem))` : 'var(--kd-krem)');
+/** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (zebra + desen); aralarına dalga/bulut ayırıcı.
+ *  Her bölüm (z) => html; z, section etiketinin class değerine eklenecek metindir (zebra ise data-renk'i de taşır). */
+function ritim(o, bolumler, renkler, { zebraIle = true } = {}) {
+  const dolu = bolumler.filter((b) => b && b(''));
+  let html = ''; let onceki = null; let oncekiDesen = '';
+  dolu.forEach((b, i) => {
+    const zebra = (i % 2 === 0) === zebraIle ? renkler[Math.floor(i / 2) % renkler.length] : null;
+    const desen = zebra ? DESEN[Math.floor(i / 2) % DESEN.length] : '';
+    if (i > 0 || zebra) html += `<div class="kd-gecis${onceki ? ` kd-zebra kd-desen--${oncekiDesen}` : ''}"${onceki ? ` data-renk="${onceki}"` : ''}>${o.ayirici(i % 2 ? 'bulut' : 'dalga', zemin(zebra))}</div>\n`;
+    html += b(zebra ? ` kd-zebra kd-desen--${desen}" data-renk="${zebra}` : '') + '\n';
+    onceki = zebra; oncekiDesen = desen;
+  });
+  return html;
+}
+
 export default async function mevsim(o) {
   const { esc, ikon, urun } = o;
+  const ipucu = (poz, html, sinif = '') => `<div class="kd-rehberci kd-ipucu kd-gir ${sinif}">${o.maskot(poz, { boy: 104 }) || `<span class="kd-ipucu__yedek" aria-hidden="true">${ikon('parilti', 40)}</span>`}<p class="kd-baloncuk"><b>Pütür'ün notu:</b> ${html}</p></div>`;
+  const mevsimIllus = (mv, alt = '', boy = 360) => (illusVar(`mevsim-${mv.key}`) ? o.illus(`mevsim-${mv.key}`, alt, { boy }) : o.sahne('meyve-sepeti', alt));
+  const bos = (illusKey, baslik, metin) => `<div class="kd-mbos">${illusVar(illusKey) ? o.illus(illusKey, '', { boy: 200, sinif: 'kd-mbos__illus' }) : o.sahne('bos-kase')}<div class="kd-mbos__metin">${o.maskot('uyku', { boy: 72, sinif: 'kd-mbos__maskot' })}<p><b>${baslik}</b> ${metin}</p></div></div>`;
   const m = o.veri.mevsim || {};
   const aylar = (m.aylar || []).filter((a) => a && a.ay >= 1 && a.ay <= 12).sort((a, b) => a.ay - b.ay);
   const tarifler = (o.veri.tarifler.tarifler || []).filter((t) => t.slug && t.ad);
@@ -65,7 +90,9 @@ export default async function mevsim(o) {
     if (parcalar.length < 3) return `<p>${esc(metin)}</p>`;
     const giris = parcalar[0].trim();
     const satirlar = [];
-    for (let i = 1; i < parcalar.length; i += 2) satirlar.push([parcalar[i].replace(/\s+/g, ' '), (parcalar[i + 1] || '').trim()]);
+    // Aşama adları kesim aşamalarıyla aynı: "6–8 ay · 9–12 ay · 12+ ay"
+    const asama = (e) => { const t = e.replace(/\s+/g, ' ').replace(/-/g, '–'); return /^(1\s*–\s*3 yaş|12 ay ve sonrası|12 ay\s*\+)$/i.test(t) ? '12+ ay' : t; };
+    for (let i = 1; i < parcalar.length; i += 2) satirlar.push([asama(parcalar[i]), (parcalar[i + 1] || '').trim()]);
     const renk = (e) => (/^6/.test(e) ? 'seftali' : /^9/.test(e) ? 'mint' : 'sari');
     return `${giris ? `<p class="kd-mbebek__giris">${esc(giris)}</p>` : ''}<ul class="kd-mbebek">${satirlar.map(([e, t]) => `<li><span class="kd-mbebek__yas" data-renk="${renk(e)}">${esc(e)}</span><span>${esc(t.replace(/[.;]\s*$/, ''))}</span></li>`).join('')}</ul>`;
   }
@@ -73,7 +100,7 @@ export default async function mevsim(o) {
   /* ---------- Ürün kartı ---------- */
   function urunKart(u, n) {
     const d = DURUM[u.durum];
-    const rozet = [6, 8, 9, 12].includes(u.minAy) ? o.yasRozet(u.minAy, 's') : u.minAy ? `<span class="kd-etiket">${u.minAy} ay +</span>` : '<span class="kd-etiket">Yaş: uzman kararı</span>';
+    const rozet = o.YASLAR.includes(u.minAy) ? o.yasRozet(u.minAy, 's') : u.minAy ? `<span class="kd-etiket">+${u.minAy} Ay</span>` : '<span class="kd-etiket">Yaş: uzman kararı</span>';
     const k = kesimBul(u);
     return `<li class="kd-murun" data-tur="${esc(u.tur || '')}" style="--kd-gecikme:${Math.min(n, 10) * 30}ms">
      <span class="kd-murun__gorsel">${urun(u.ikon, 72, '')}</span>
@@ -96,8 +123,9 @@ export default async function mevsim(o) {
     const kart = (baslik, ikonAd, govde) => (govde ? `<div class="kd-mbilgi"><h4>${ikon(ikonAd, 22)}${baslik}</h4>${govde}</div>` : '');
     return `<section class="kd-mpanel" id="ay-${a.ay}" role="tabpanel" aria-labelledby="ay-sekme-${a.ay}" data-ay="${a.ay}" data-renk="${mv.renk}" tabindex="-1">
   <header class="kd-mpanel__bas">
-   <div><span class="kd-mpanel__mevsim">${esc(mv.ad)}</span><h2>${esc(a.ad || AY_AD[a.ay - 1])} tezgâhı</h2></div>
-   <p>${urunler.length} ürün${zirvede ? ` · ${zirvede} tanesi zirvede` : ''}${turler.length ? ` · ${turler.map((t) => TUR_AD[t] || t).join(', ')}` : ''}</p>
+   <div class="kd-mpanel__bas-metin"><span class="kd-mpanel__mevsim">${esc(mv.ad)}</span><h2>${esc(a.ad || AY_AD[a.ay - 1])} tezgâhı</h2>
+   <p>${urunler.length} ürün${zirvede ? ` · ${zirvede} tanesi zirvede` : ''}${turler.length ? ` · ${turler.map((t) => TUR_AD[t] || t).join(', ')}` : ''}</p></div>
+   <span class="kd-mpanel__illus">${mevsimIllus(mv, `${mv.ad} mevsiminin ürünleriyle sevimli bir pazar tezgâhı illüstrasyonu`)}</span>
   </header>
   ${kh.ad ? `<article class="kd-mkahraman" aria-labelledby="kh-${a.ay}">
    <div class="kd-mkahraman__gorsel">
@@ -118,13 +146,13 @@ export default async function mevsim(o) {
   ${urunler.length ? `<div class="kd-mtezgah">
    <h3 class="kd-mtezgah__bas">Tezgâhta bu ay <span>${urunler.length}</span></h3>
    <ul class="kd-mtezgah__liste">${urunler.map(urunKart).join('')}</ul>
-   <p class="kd-mtezgah__bos" hidden>Bu ay bu türde ürün yok. <button type="button" class="kd-bag kd-mtur-sifirla">Tümünü göster</button></p>
+   <div class="kd-mtezgah__bos" hidden>${bos('bos-arama', 'Bu ay bu türde ürün yok.', '<button type="button" class="kd-bag kd-mtur-sifirla">Tümünü göster</button>')}</div>
   </div>` : ''}
   <div class="kd-mtarif">
    <div class="kd-mtarif__bas"><h3>${esc(a.ad || AY_AD[a.ay - 1])} ürünleriyle tarifler</h3>${tarifListe.length ? `<a class="kd-bag" href="kids-tarifler.html">Tüm tarifler</a>` : ''}</div>
    ${tarifListe.length
      ? `<div class="kd-izgara kd-mtarif__izgara">${tarifListe.slice(0, 4).map((t, n) => o.tarifKart(t, { sira: n, gir: false })).join('')}</div>`
-     : `<p class="kd-mtarif__yok">${ikon('kase', 22)} Bu ayın ürünleriyle eşleşen tarif henüz yok. <a class="kd-bag" href="kids-tarifler.html">Tüm Kids tariflerine göz atın</a></p>`}
+     : `<div class="kd-mtarif__yok">${bos('bos-durum', 'Bu ayın ürünleriyle eşleşen tarif henüz yok.', '<a class="kd-bag" href="kids-tarifler.html">Tüm Kids tariflerine göz atın</a>')}</div>`}
   </div>
  </section>`;
   }
@@ -141,19 +169,27 @@ export default async function mevsim(o) {
 
   const turSecenek = [...new Set(aylar.flatMap((a) => (a.urunler || []).map((u) => u.tur)).filter(Boolean))];
 
-  const yilSeridi = aylar.map((a) => `<li data-renk="${MEVSIM(a.ay).renk}"><a href="#ay-${a.ay}" data-ay-git="${a.ay}"><span>${urun(a.kahraman?.ikon, 44, '')}</span><small>${esc(a.ad)}</small><b>${esc(a.kahraman?.ad || '')}</b></a></li>`).join('');
+  // Yıl boyu: dört mevsim kartı (illüstrasyon + o mevsimin üç ayı)
+  const MEVSIM_SIRA = [[12, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10, 11]];
+  const ayLi = (a) => `<li data-renk="${MEVSIM(a.ay).renk}"><a href="#ay-${a.ay}" data-ay-git="${a.ay}"><span>${urun(a.kahraman?.ikon, 44, '')}</span><small>${esc(a.ad)}</small><b>${esc(a.kahraman?.ad || '')}</b></a></li>`;
+  const mevsimKartlari = MEVSIM_SIRA.map((grup, n) => {
+    const mv = MEVSIM(grup[0]);
+    const ay = grup.map((x) => aylar.find((y) => y.ay === x)).filter(Boolean);
+    if (!ay.length) return '';
+    return `<article class="kd-mmevsim kd-gir" data-renk="${mv.renk}" style="--kd-gecikme:${n * 80}ms">
+     <div class="kd-mmevsim__resim">${mevsimIllus(mv, '', 420)}</div>
+     <h3>${esc(mv.ad)}</h3>
+     <ol class="kd-myilserit">${ay.map(ayLi).join('')}</ol>
+    </article>`;
+  }).join('');
 
-  const main = o.sayfa(`
-${o.hero({
-  renk: 'sari',
-  kirinti: [['Tarifler', 'tarifler.html'], ['Dada Kids', 'kids.html'], ['Mevsimsel Takvim']],
-  ust: { metin: 'Mevsimsel takvim', ikon: 'sepet' },
-  baslik: 'Bu ay tezgâhta<br>ne var?',
-  giris: 'Mevsiminde ürün daha lezzetli, daha ekonomik ve daha çeşitli. Her ay için tezgâh, ayın kahramanı, yaş rozetleri ve o ayın ürünleriyle Kids tarifleri.',
-  eylemler: '<a class="kd-btn" href="#tezgah"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i> Bu ayın tezgâhı</a><a class="kd-btn kd-btn--hafif" href="#yil">Yıl boyu kahramanlar</a>',
-  sag: `<div class="kd-mhero">${o.sahne('meyve-sepeti', '')}${['cilek', 'havuc', 'elma', 'karpuz', 'brokoli'].map((u, i) => `<span class="kd-mhero__u kd-mhero__u--${i + 1} kd-yuz" style="--kd-gecikme:${i * 0.6}s">${urun(u, 64, '')}</span>`).join('')}</div>`,
-})}
-<section class="kd-bolum kd-mevsim" id="tezgah" aria-label="Aylara göre tezgâh">
+  const heroVideo = o.video('mevsim', 'Mevsim meyve ve sebzeleriyle dolu bir pazar sepetinin sessiz döngü videosu');
+  const heroGorsel = heroVideo || (illusVar('hero-mevsim') ? o.illus('hero-mevsim', 'Mevsim meyve ve sebzeleriyle dolu sevimli bir pazar sepeti illüstrasyonu', { boy: 640 }) : '');
+  const heroSag = heroGorsel
+    ? `<div class="kd-mhero kd-mhero--medya"><div class="kd-mhero__cerceve">${heroGorsel}</div>${['cilek', 'havuc', 'karpuz', 'brokoli'].map((u, i) => `<span class="kd-mhero__u kd-mhero__u--${i + 1} kd-yuz" style="--kd-gecikme:${i * 0.6}s">${urun(u, 64, '')}</span>`).join('')}</div>`
+    : `<div class="kd-mhero">${o.sahne('meyve-sepeti', '')}${['cilek', 'havuc', 'elma', 'karpuz', 'brokoli'].map((u, i) => `<span class="kd-mhero__u kd-mhero__u--${i + 1} kd-yuz" style="--kd-gecikme:${i * 0.6}s">${urun(u, 64, '')}</span>`).join('')}</div>`;
+
+  const tezgahBolum = (z) => `<section class="kd-bolum kd-mevsim${z}" id="tezgah" aria-label="Aylara göre tezgâh">
  <div class="wrap">
   <div class="kd-may">
    <button type="button" class="kd-may__ok" data-yon="-1" aria-label="Önceki ay"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
@@ -170,31 +206,49 @@ ${o.hero({
   ${o.ornek('Yaş rozetleri ve sunum önerileri prototip için hazırlanmış örneklerdir; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.')}
   <div class="kd-mpaneller">${aylar.map(panel).join('\n')}</div>
  </div>
-</section>
-<section class="kd-bolum kd-bolum--beyaz" id="yil" aria-labelledby="yil-bas">
+</section>`;
+
+  const yilBolum = (z) => `<section class="kd-bolum${z}" id="yil" aria-labelledby="yil-bas">
  <div class="wrap">
-  ${o.bolumBasi({ ust: 'Yıl boyu', ikonAd: 'takvim', renk: 'sari', baslik: '<span id="yil-bas">On iki ayın kahramanları</span>', alt: 'Bir aya dokunun, o ayın tezgâhı açılsın.' })}
-  <ol class="kd-myilserit">${yilSeridi}</ol>
+  ${o.bolumBasi({ ust: 'Yıl boyu', ikonAd: 'takvim', renk: 'sari', baslik: '<span id="yil-bas">On iki ayın kahramanları</span>', alt: 'Bir aya dokunun, o ayın tezgâhı açılsın.', sag: ipucu('takvim', 'Her mevsimin üç kahramanı var. Bir aya dokunun, tezgâh o aya geçsin.', 'kd-ipucu--sag') })}
+  <div class="kd-mmevsimler">${mevsimKartlari}</div>
  </div>
-</section>
-<section class="kd-bolum" aria-labelledby="neden-bas">
+</section>`;
+
+  const nedenBolum = (z) => `<section class="kd-bolum${z}" aria-labelledby="neden-bas">
  <div class="wrap kd-mneden">
   <div>
    ${o.bolumBasi({ ust: 'Neden mevsiminde?', ikonAd: 'kalp', renk: 'mint', baslik: '<span id="neden-bas">Lezzet, bütçe ve çeşitlilik</span>' })}
    <ul class="kd-mneden__liste">
-    <li>${ikon('parilti', 28)}<span><b>Daha lezzetli</b>Dalında olgunlaşan ürünün tadı ve kokusu belirgindir; bebekler yeni tatları böyle daha kolay sever.</span></li>
-    <li>${ikon('sepet', 28)}<span><b>Daha ekonomik</b>Bol olduğu ayda ürün daha uygun fiyatlıdır.</span></li>
-    <li>${ikon('tabak-bolmeli', 28)}<span><b>Daha çeşitli</b>Her ay farklı ürünler, tabağa doğal bir çeşitlilik getirir.</span></li>
+    <li class="kd-gir">${ikon('parilti', 28)}<span><b>Daha lezzetli</b>Dalında olgunlaşan ürünün tadı ve kokusu belirgindir; bebekler yeni tatları böyle daha kolay sever.</span></li>
+    <li class="kd-gir" style="--kd-gecikme:80ms">${ikon('sepet', 28)}<span><b>Daha ekonomik</b>Bol olduğu ayda ürün daha uygun fiyatlıdır.</span></li>
+    <li class="kd-gir" style="--kd-gecikme:160ms">${ikon('tabak-bolmeli', 28)}<span><b>Daha çeşitli</b>Her ay farklı ürünler, tabağa doğal bir çeşitlilik getirir.</span></li>
    </ul>
   </div>
-  <div class="kd-kutu kd-mdondurulmus" data-renk="mavi">
-   <h3><i class="fa-regular fa-snowflake" aria-hidden="true"></i> Dondurulmuş da iyi bir alternatif</h3>
-   <p>Mevsimi geçmiş bir ürünü dondurulmuş olarak almak da iyi bir seçimdir; besin değerini büyük ölçüde korur. Bebekler için dondurulmuş sebze ve meyveyi <b>pişirerek</b> kullanın.</p>
-   ${m._not ? `<p class="kd-mdondurulmus__not">${esc(m._not.replace(/\s*ÖRNEK İÇERİK[^.]*\.?\s*$/i, ''))}</p>` : ''}
+  <div class="kd-mneden__yan">
+   <div class="kd-mneden__resim${heroVideo && illusVar('hero-mevsim') ? '' : ' kd-mneden__resim--kolaj'}">${heroVideo && illusVar('hero-mevsim') ? o.illus('hero-mevsim', '', { boy: 420 }) : ['cilek', 'brokoli', 'portakal', 'havuc', 'karpuz', 'balkabagi'].map((u, i) => `<span class="kd-yuz" style="animation-delay:${i * 0.4}s">${urun(u, 64, '')}</span>`).join('')}</div>
+   <div class="kd-kutu kd-mdondurulmus" data-renk="mavi">
+    <h3><i class="fa-regular fa-snowflake" aria-hidden="true"></i> Dondurulmuş da iyi bir alternatif</h3>
+    <p>Mevsimi geçmiş bir ürünü dondurulmuş olarak almak da iyi bir seçimdir; besin değerini büyük ölçüde korur. Bebekler için dondurulmuş sebze ve meyveyi <b>pişirerek</b> kullanın.</p>
+    ${m._not ? `<p class="kd-mdondurulmus__not">${esc(m._not.replace(/\s*ÖRNEK İÇERİK[^.]*\.?\s*$/i, ''))}</p>` : ''}
+   </div>
   </div>
  </div>
-</section>
-<section class="kd-bolum kd-bolum--sikisik"><div class="wrap kd-mguven">${o.onay()}<p class="kd-ikincil">Takvim yaklaşık bir rehberdir; ürünlerin bulunabilirliği bölgeye, rakıma ve yılın havasına göre değişir.</p></div></section>
+</section>`;
+
+  const guvenBolum = (z) => `<section class="kd-bolum${z}"><div class="wrap kd-mguven">${o.onay()}${ipucu('sepet', 'Takvim yaklaşık bir rehberdir; ürünlerin bulunabilirliği bölgeye, rakıma ve yılın havasına göre değişir.')}</div></section>`;
+
+  const main = o.sayfa(`
+${o.hero({
+  renk: 'sari',
+  kirinti: [['Tarifler', 'tarifler.html'], ['Dada Kids', 'kids.html'], ['Mevsimsel Takvim']],
+  ust: { metin: 'Mevsimsel takvim', ikon: 'sepet' },
+  baslik: 'Bu ay tezgâhta<br>ne var?',
+  giris: 'Mevsiminde ürün daha lezzetli, daha ekonomik ve daha çeşitli. Her ay için tezgâh, ayın kahramanı, yaş rozetleri ve o ayın ürünleriyle Kids tarifleri.',
+  eylemler: '<a class="kd-btn" href="#tezgah"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i> Bu ayın tezgâhı</a><a class="kd-btn kd-btn--hafif" href="#yil">Yıl boyu kahramanlar</a>',
+  sag: heroSag,
+})}
+${ritim(o, [tezgahBolum, yilBolum, nedenBolum, guvenBolum], ['sari', 'mint'])}
 `, 'mevsim');
 
   return [{

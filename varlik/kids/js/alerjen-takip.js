@@ -193,7 +193,8 @@
     var aktif = suren().sort(function (a, b) { return b.ts - a.ts; });
     var html = mesajHtml();
     if (!aktif.length) {
-      html += '<div class="kd-at-bos"><span class="kd-at-bos__ikon" aria-hidden="true"><i class="fa-regular fa-calendar-check"></i></span><div><b>Şu an süren gözlem yok</b><p>Yukarıdan bir besin seçip başlangıç tarihini girin; Gün 1, 2 ve 3 kartları burada açılır.</p></div></div>';
+      var bosG = document.querySelector('[data-at-bos-gorsel]');
+      html += '<div class="kd-at-bos">' + (bosG && bosG.innerHTML.trim() ? '<span class="kd-ar-bos" aria-hidden="true">' + bosG.innerHTML + '</span>' : '<span class="kd-at-bos__ikon" aria-hidden="true"><i class="fa-regular fa-calendar-check"></i></span>') + '<div><b>Şu an süren gözlem yok</b><p>Yukarıdan bir besin seçip başlangıç tarihini girin; Gün 1, 2 ve 3 kartları burada açılır.</p></div></div>';
     } else html += aktif.map(kayitHtml).join('');
     liste.innerHTML = html;
     $('#atSurenBaslik').textContent = aktif.length > 1 ? 'Süren gözlemler (' + aktif.length + ')' : 'Süren gözlem';
