@@ -148,7 +148,7 @@
         var ev = (form.querySelector('input[name="evre"]:checked') || {}).value, hamile = ev === 'hamilelik';
         bil.hidden = !hamile;
         if (!hamile) { var r = bil.querySelector('input'); if (r.checked) { r.checked = false; form.querySelector('input[name="c"][value="belirtilmedi"]').checked = true; } }
-        if (tarih) tarih.closest('.kd-profil__tarih').hidden = hamile;
+        if (tarih && tarih.closest('.kd-profil__tarih')) tarih.closest('.kd-profil__tarih').hidden = hamile;
       };
       var doldur = function () {
         if (profil.evre) { var e = form.querySelector('input[name="evre"][value="' + profil.evre + '"]'); if (e) e.checked = true; }
@@ -163,11 +163,11 @@
         kutu.setAttribute('data-durum', 'ozet');
       };
       form.addEventListener('change', function (e) {
-        if (e.target === tarih && tarih.value) {
+        if (tarih && e.target === tarih && tarih.value) {
           var d = new Date(tarih.value + 'T00:00:00'), b = new Date();
           var ay = (b.getFullYear() - d.getFullYear()) * 12 + (b.getMonth() - d.getMonth()) - (b.getDate() < d.getDate() ? 1 : 0);
           if (ay >= 0 && ay <= 36) { form.querySelector('input[name="evre"][value="' + evreAydan(ay) + '"]').checked = true; tarih.setAttribute('data-ay', ay); }
-        } else if (e.target.name === 'evre') { tarih.removeAttribute('data-ay'); tarih.value = ''; }
+        } else if (e.target.name === 'evre' && tarih) { tarih.removeAttribute('data-ay'); tarih.value = ''; }
         bilGoster();
       });
       form.addEventListener('submit', function (e) {
