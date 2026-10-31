@@ -119,7 +119,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="makaleler" aria-labelledby
   </div>
   <aside class="kd-rguven__kaynak" aria-labelledby="kaynak-bas">
    <h3 id="kaynak-bas">${ikon('liste', 22)} Başvurduğumuz kaynaklar</h3>
-   ${kaynakListesi(tumKaynaklar, 7)}
+   ${kaynakListesi(tumKaynaklar, 8)}
   </aside>
  </div>
 </section>`], ['pembe', 'mint'])}

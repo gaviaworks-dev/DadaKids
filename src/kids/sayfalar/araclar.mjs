@@ -156,7 +156,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="araclar">
 ${ritim(o, [(z) => `<section class="kd-bolum${z}">
  <div class="wrap">
   ${noscript}
-  <form class="kd-hm" id="kdHazirMi" data-renk="seftali" novalidate>
+  <form class="kd-hm" id="kdHazirMi" data-renk="seftali" data-denge-serbest="sonuç paneli yapışkan, liste kaydırılırken yanında kalır" novalidate>
    <div class="kd-hm__sol">
     <fieldset class="kd-ar-panel">
      <legend class="kd-ar-panel__baslik"><span>Bebeğinizde hangilerini görüyorsunuz?</span><small>Gözlemlerinize göre işaretleyin. Emin değilseniz boş bırakın.</small></legend>
@@ -458,8 +458,9 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
     ${olcuAlan('prBas', 'Baş çevresi', 'cm', 'ör. 44')}
     <p class="kd-at-hata" data-pr-hata hidden role="alert"></p>
     <button class="kd-btn" type="submit">${fa('chart-line')} Hesapla</button>
-    <p class="kd-ar-alan__ipucu">Ondalık için virgül ya da nokta kullanabilirsiniz. 24. aydan sonra boy ayakta ölçülür; 24. ayda iki ölçüm arasında ~0,7 cm fark olağandır.</p>
+    <p class="kd-ar-alan__ipucu">Ondalık için virgül ya da nokta kullanabilirsiniz.</p>
    </form>
+   <div class="kd-pr-sag">
    <div class="kd-pr-sonuc" data-pr-sonuc>
     <div class="kd-pr-bos" data-pr-bos>
      ${illusVar('bos-durum') ? `<span class="kd-ar-bos">${bosGorsel('bos-durum')}</span>` : `<span class="kd-pr-bos__ikon" aria-hidden="true">${fa('chart-line')}</span>`}
@@ -475,10 +476,15 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
      <p>50. persentil "olması gereken" değil, ortadaki değerdir. 3. ile 97. persentil arası geniş bir sağlıklı çeşitliliği kapsar. Asıl önemli olan, bebeğinizin kendi eğrisini zaman içinde nasıl izlediğidir. Sorularınızı bir sonraki kontrolde doktorunuzla paylaşın. DSÖ standardı tanı değildir.</p>
     </div>
    </div>
-  </div>
-  <div class="kd-pr-son">
+    <div class="kd-kutu kd-pr-olcum" data-renk="mavi">
+     <h3>${fa('ruler')} Ölçerken</h3>
+     <p>24. aydan sonra boy ayakta ölçülür; 24. ayda iki ölçüm arasında ~0,7 cm fark olağandır.</p>
+    </div>
+    <div class="kd-pr-son">
    ${o.ornek('Hesaplama DSÖ LMS yöntemiyle yapılır; metinler ve gösterim örnektir, uzman onayı bekliyor. Erken doğan bebekler için düzeltilmiş yaş kullanılması gerekebilir; bu araç düzeltme yapmaz.')}
    <p class="kd-pr-lisans">${fa('scale-balanced')} <span>Veri: <a class="kd-bag" href="https://www.who.int/tools/child-growth-standards" rel="noopener" target="_blank">WHO Child Growth Standards (2006)</a>, CC BY-NC-SA 3.0 IGO — ticari olmayan prototip kullanımı; üretimde DSÖ izni gerekir. DSÖ bu aracı onaylamış değildir.</span></p>
+  </div>
+   </div>
   </div>
  </div>
 </section>`, digerAraclar('persentil')], ['mavi'], { zebraIle: false })}`, 'araclar'),

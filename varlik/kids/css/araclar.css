@@ -411,7 +411,8 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-pr-dil { border-radius: var(--kd-r-l); padding: var(--kd-s4) var(--kd-s5); }
 .kd-pr-dil h3 { font-size: 1.02rem; color: var(--r-k); }
 .kd-pr-dil p { font-size: 14.5px; }
-.kd-pr-son { display: grid; gap: var(--kd-s3); margin-top: var(--kd-s5); }
+.kd-pr-sag { display: grid; gap: var(--kd-s4); min-width: 0; }
+.kd-pr-son { display: grid; gap: var(--kd-s3); }
 .kd-pr-lisans { display: flex; gap: var(--kd-s2); align-items: flex-start; margin: 0; padding: var(--kd-s3) var(--kd-s4); border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); font-size: 13.5px; line-height: 1.5; color: var(--kd-ikincil); }
 .kd-pr-lisans i { margin-top: 3px; color: var(--kd-mavi-k); }
 

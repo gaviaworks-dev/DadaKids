@@ -106,7 +106,7 @@ ${o.ctaKart({ href: 'kids-guvenli-kesim.html', ikonAd: 'bicak-tahta', baslik: 'M
  </div>
 </section>
 <section class="kd-bolum kd-bolum--sikisik">
- <div class="wrap kd-td-govde">
+ <div class="wrap kd-td-govde" data-denge-serbest="malzeme sütunu yapışkan, adımlar kaydırılırken yanında kalır">
   <div class="kd-td-ana">
    ${t.alerjenUyari ? `<div class="kd-kutu kd-kutu--uyari kd-gir"><h3><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Alerjen uyarısı</h3><p>${esc(t.alerjenUyari)}</p></div>` : ''}
    <h2 class="kd-td-bolum">Hazırlanışı</h2>

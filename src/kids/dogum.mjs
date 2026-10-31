@@ -1,4 +1,5 @@
 // Doğum ayı / tahmini doğum ayı seçici — tek, yeniden kullanılabilir bileşen (sahibi: tarih)
+// Kapalı başlar: düğme masaüstünde popover, mobilde alt sayfa açar; dışarıdan: document 'kd-dogum-ac' olayı.
 // Davranış: varlik/kids/js/dogum-secici.js · stil: varlik/kids/css/dogum-secici.css
 // Kullanım (sayfa modülü): import { dogumSecici } from '../dogum.mjs'; ... ${dogumSecici(o)} ; css/js: ['dogum-secici']
 // Form içinde input[name="evre"] radyoları varsa evre çipleriyle kendiliğinden senkron olur (hamilelik → tahmini doğum ayı modu).
@@ -45,7 +46,7 @@ export const MEVSIM_SVG = {
 
 /**
  * Bileşen markup'ı. Yıl çipleri tarayıcıda o günün tarihine göre çizilir (statik sayfa yıllar sonra da doğru kalsın).
- * @param {object} o ortak yardımcılar (maskot, EVRE, evreSayfasi, esc)
+ * @param {object} o ortak yardımcılar (EVRE, evreSayfasi, esc)
  * @param {{id?: string, baslik?: string, aciklama?: string}} opts
  */
 export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.' } = {}) {
@@ -60,26 +61,23 @@ export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını se�
   return `<div class="kd-ds" data-kd-dogum data-mod="dogum" id="${id}" aria-live="off" data-evre='${esc(JSON.stringify(evreVeri))}'>
  <div class="kd-ds__bas">
   <span class="kd-ds__baslik" id="${id}Baslik" data-kd-ds-baslik data-dogum="${esc(baslik)}" data-gebelik="ya da tahmini doğum ayını seçin">${esc(baslik)}</span>
-  <small class="kd-ds__aciklama" data-kd-ds-aciklama data-dogum="${esc(aciklama)}" data-gebelik="Bugünden itibaren önümüzdeki 9 ay seçilebilir.">${esc(aciklama)}</small>
  </div>
  <button type="button" class="kd-ds__ac" aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}Panel">
   <span class="kd-ds__ac-ikon">${MEVSIM_SVG.ilkbahar}</span><span class="kd-ds__ac-metin" data-kd-ds-tetik>Doğum ayını seçin</span>${kalem('M9 6l6 6-6 6')}
  </button>
  <div class="kd-ds__perde" data-kd-ds-perde hidden></div>
- <div class="kd-ds__panel" id="${id}Panel" role="group" aria-labelledby="${id}Baslik" tabindex="-1">
+ <div class="kd-ds__panel" id="${id}Panel" role="dialog" aria-labelledby="${id}Baslik" tabindex="-1">
   <div class="kd-ds__sheet-bas"><span class="kd-ds__tutamak" aria-hidden="true"></span><b data-kd-ds-sheet-baslik>Doğum ayı</b><button type="button" class="kd-ds__kapat" data-kd-ds-kapat aria-label="Kapat">${kalem('M6 6l12 12M18 6 6 18')}</button></div>
+  <small class="kd-ds__aciklama" data-kd-ds-aciklama data-dogum="${esc(aciklama)}" data-gebelik="Bugünden itibaren önümüzdeki 9 ay seçilebilir.">${esc(aciklama)}</small>
   <div class="kd-ds__grup-ad" id="${id}YilAd">Yıl</div>
   <div class="kd-ds__yillar" role="radiogroup" aria-labelledby="${id}YilAd" data-kd-ds-yillar></div>
   <div class="kd-ds__grup-ad" id="${id}AyAd">Ay <small data-kd-ds-ay-ipucu>önce yılı seçin</small></div>
   <div class="kd-ds__aylar" role="grid" aria-labelledby="${id}AyAd" data-kd-ds-aylar>${satirlar}</div>
+  <div class="kd-ds__sonuc" data-kd-ds-sonuc data-tur="bos">
+   <div class="kd-ds__metin" aria-live="polite" aria-atomic="true" data-kd-ds-metin><p class="kd-ds__ana">Doğum yılını, sonra ayını seçin; evresini birlikte bulalım.</p></div>
+   <div class="kd-ds__eylem" data-kd-ds-eylem></div>
+  </div>
   <div class="kd-ds__sheet-alt"><span data-kd-ds-kisa aria-hidden="true"></span><button type="button" class="kd-btn kd-btn--kucuk" data-kd-ds-tamam>Tamam</button></div>
- </div>
- <div class="kd-ds__sonuc" data-kd-ds-sonuc data-tur="bos">
-  <span class="kd-ds__maskot" data-poz="merhaba">${o.maskot('merhaba', { boy: 72 })}</span>
-  <span class="kd-ds__maskot" data-poz="kalp" hidden>${o.maskot('kalp', { boy: 72 })}</span>
-  <span class="kd-ds__maskot" data-poz="kitap" hidden>${o.maskot('kitap', { boy: 72 })}</span>
-  <div class="kd-ds__metin" aria-live="polite" aria-atomic="true" data-kd-ds-metin><p class="kd-ds__ana">Doğum yılını, sonra ayını seçin; evresini birlikte bulalım.</p></div>
-  <div class="kd-ds__eylem" data-kd-ds-eylem></div>
  </div>
 </div>`;
 }

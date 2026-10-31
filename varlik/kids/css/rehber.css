@@ -192,7 +192,7 @@ a.kd-rkart:hover .kd-rkart__medya > img, a.kd-rkart:hover .kd-rkart__medya > .kd
 .kd-rkaynak-daha summary { display: inline-flex; align-items: center; gap: var(--kd-s2); min-height: 44px; padding: var(--kd-s2) var(--kd-s3); border-radius: var(--kd-r-tam); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); font-weight: 800; font-size: 14px; cursor: pointer; list-style: none; }
 .kd-rkaynak-daha summary::-webkit-details-marker { display: none; }
 .kd-rkaynak-daha[open] summary i { transform: rotate(180deg); }
-.kd-rkaynak-daha .kd-rkaynak { margin-top: var(--kd-s2); counter-reset: kaynak 7; }
+.kd-rkaynak-daha .kd-rkaynak { margin-top: var(--kd-s2); counter-reset: kaynak 8; }
 @media (max-width: 640px) {
   .kd-kaydir-mobil { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(240px, 80%); overflow-x: auto; scroll-snap-type: x mandatory; padding: var(--kd-s1) var(--kd-s1) var(--kd-s3); margin: calc(var(--kd-s1) * -1); scrollbar-width: thin; }
   .kd-kaydir-mobil > * { scroll-snap-align: start; }

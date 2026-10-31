@@ -44,7 +44,18 @@
 .kd-hub-guven__yan { display: grid; gap: 14px; }
 .kd-hub-kaynak { list-style: none; margin: 0; padding: 16px 18px; background: var(--kd-krem); border-radius: var(--kd-r-m); display: grid; gap: 10px; font-size: 14px; color: var(--kd-ikincil); }
 .kd-hub-kaynak b { display: block; color: var(--kd-murekkep); }
+/* Sağ kolon: seçili evrenin iki tarifi; dar ekranda kolonlar alt alta olduğundan gerekmez */
+.kd-hub-oneri { margin-top: var(--kd-s4); }
+.kd-hub-oneri h3 { font-size: 1rem; margin: 0 0 var(--kd-s2); }
+.kd-hub-oneri__liste { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--kd-s2); }
+.kd-hub-oneri__liste[hidden] { display: none; }
+.kd-hub-mini { display: flex; align-items: center; gap: var(--kd-s3); padding: var(--kd-s1) var(--kd-s2) var(--kd-s1) var(--kd-s1); border-radius: var(--kd-r-m); background: #fff; color: inherit; text-decoration: none; font-size: 14px; font-weight: 700; line-height: 1.3; }
+.kd-hub-mini:hover { box-shadow: inset 0 0 0 1.5px var(--kd-mint-k); }
+.kd-hub-mini__foto { flex: none; width: 44px; height: 44px; border-radius: var(--kd-r-s); overflow: hidden; }
+.kd-hub-mini__foto img { width: 100%; height: 100%; object-fit: cover; }
+.kd-hub-mini__ad { flex: 1; min-width: 0; }
 @media (max-width: 1024px) {
+  .kd-hub-oneri { display: none; }
   .kd-hub-profil { margin-top: 0; }
   .kd-hub-profil__izgara, .kd-hub-ay, .kd-hub-guven { grid-template-columns: 1fr; }
 }
@@ -61,6 +72,5 @@
 /* tur 2 */
 .kd-hub-hero .kd-hero__gorsel > video, .kd-hub-hero .kd-hero__gorsel > .kd-illus { aspect-ratio: 5 / 4; border-radius: var(--kd-r-xl); box-shadow: var(--kd-golge-yuksek); object-fit: cover; background: #fff; }
 .kd-hub-hero .kd-hero__sus--2 { left: -38px; bottom: -18px; width: 120px; height: auto; }
-.kd-hub-pütür { margin-bottom: var(--kd-s5); }
 .kd-hub-mevsim { background: #fff; }
 @media (max-width: 640px) { .kd-hub-hero .kd-hero__sus--2 { display: block; left: auto; right: -6px; bottom: -22px; width: 84px; } }

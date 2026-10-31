@@ -57,17 +57,21 @@ export default async function (o) {
  </div>
 </section>`;
 
+  const miniTarif = (t) => `<li><a class="kd-hub-mini" href="${o.tarifHref(t.slug)}"><span class="kd-hub-mini__foto">${o.foto(t.gorsel, '', { gen: 96, yuk: 96 })}</span><span class="kd-hub-mini__ad">${esc(t.ad)}</span>${o.yasRozet(t.yas, 's')}</a></li>`;
   const profilBolum = `<section class="kd-bolum kd-bolum--sikisik kd-hub-profil">
  <div class="wrap"><div class="kd-hub-profil__izgara">
   ${profil}
   <div class="kd-hub-profil__yan kd-gir">
-   <div class="kd-rehberci kd-hub-pütür">${o.maskot('kalp', { boy: 96 })}<p class="kd-baloncuk"><b>Merhaba, ben Pütür!</b> Bebeğinizin evresini seçin, size uygun tarifleri ve ipuçlarını öne çıkarayım.</p></div>
    <h2>Size özel bir Kids</h2>
    <ul class="kd-hub-liste">
     <li>${o.ikon('kase', 28)}<span><b>Tarifler yaşa göre süzülür</b>Rozet, kıvam ve alerjen etiketleriyle.</span></li>
     <li>${o.ikon('takvim', 28)}<span><b>Evreniz öne çıkar</b>Beslenme, kıvam ve odak besinler.</span></li>
-    <li>${o.ikon('kalp', 28)}<span><b>Bilgileriniz sizde kalır</b>Doğum ayı yalnız bu tarayıcıda saklanır, hiçbir yere gönderilmez; evre seçimi bu ziyarette taşınır.</span></li>
+    <li>${o.ikon('kalp', 28)}<span><b>Bilgileriniz sizde kalır</b>Hiçbir yere gönderilmez, bu tarayıcıda durur.</span></li>
    </ul>
+   <div class="kd-hub-oneri" data-kd-evre-oneri>
+    <h3 data-kd-oneri-baslik data-var="Bu evreden iki tarif" data-yok="Ek gıdaya geçince">Ek gıdaya geçince</h3>
+    ${['6-8-ay', '9-12-ay', '1-3-yas'].map((e, n) => `<ul class="kd-hub-oneri__liste" data-evre="${e}"${n ? ' hidden' : ''}>${tarifler.filter((t) => t.evre === e).slice(0, 2).map(miniTarif).join('')}</ul>`).join('')}
+   </div>
   </div>
  </div></div>
 </section>`;

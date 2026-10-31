@@ -4,7 +4,8 @@
    · Yıl: role=radiogroup (oklar seçer, APG) · Ay: role=grid (oklar gezer, Enter/Boşluk seçer)
    · Form içinde input[name="evre"] varsa: sonuç → evre çipi seçilir (change olayı ile, kids.js senkron);
      hamilelik seçilirse "tahmini doğum ayı" moduna geçer. Uygula'da DadaKids.profilAyarla({ay}).
-   · Mobil (≤640px): alt sayfa (role=dialog), Esc kapatır · masaüstü: kart içinde satır içi panel
+   · Düğmeyle açılır (varsayılan kapalı): mobil (≤640px) alt sayfa, masaüstü popover; Esc ve dış tık kapatır
+   · Dışarıdan açma: document.dispatchEvent(new CustomEvent('kd-dogum-ac'))
    · Saklama: yalnız bu tarayıcı — localStorage 'dadakids.dogum.v1' {y, m, mod}, try/catch
    ===================================================================== */
 (function () {
@@ -112,22 +113,18 @@
       hedef.classList.remove('kd-ds-zip'); void hedef.offsetWidth; hedef.classList.add('kd-ds-zip');
       hedef.addEventListener('animationend', function f() { hedef.classList.remove('kd-ds-zip'); hedef.removeEventListener('animationend', f); });
     }
-    function maskot(poz) { $$('.kd-ds__maskot').forEach(function (m) { m.hidden = m.getAttribute('data-poz') !== poz; }); }
     function ok() { return '<span aria-hidden="true" class="kd-ds__ok">→</span><span class="kd-gizli">, </span>'; }
     function sonucCiz() {
       var s = sonuc(), ana = '', alt = '', btn = '', kisa = '', tetikMetin = '', renk = '';
       var temizle = '<button type="button" class="kd-ds__temizle" data-kd-ds-temizle>Seçimi temizle</button>';
       if (s.tur === 'bos') {
-        maskot('merhaba');
         ana = d.mod === 'gebelik' ? 'Tahmini doğum yılını, sonra ayını seçin; kaçıncı haftada olduğunuzu birlikte bulalım.' : 'Doğum yılını, sonra ayını seçin; evresini birlikte bulalım.';
         tetikMetin = d.mod === 'gebelik' ? 'Tahmini doğum ayını seçin' : 'Doğum ayını seçin';
       } else if (s.tur === 'ay') {
-        maskot('merhaba');
         ana = d.y + ' — şimdi ' + (d.mod === 'gebelik' ? 'tahmini doğum ayını' : 'doğum ayını') + ' seçin.';
         tetikMetin = d.y + ' · ayı seçin';
       } else if (s.tur === 'tamam') {
         var e = EVRE[s.evre] || {}; renk = e.renk || '';
-        maskot('kalp');
         ana = s.ay === 0 ? 'Bebeğiniz <b>bu ay</b> doğmuş ' + ok() + '<b>' + e.ad + '</b> evresi'
           : 'Bebeğiniz yaklaşık <b>' + s.ay + ' aylık</b> ' + ok() + '<b>' + e.ad + '</b> evresi';
         alt = AYLAR[d.m - 1] + ' ' + d.y + ' doğumlu' + (s.ay >= 12 ? ' · ' + yasMetni(s.ay) : '') + (e.aralik ? ' · ' + e.aralik : '');
@@ -135,7 +132,7 @@
         kisa = s.ay + ' aylık · ' + e.ad;
         tetikMetin = AYLAR[d.m - 1] + ' ' + d.y + ' · ' + s.ay + ' aylık';
       } else if (s.tur === 'buyuk') {
-        maskot('kitap'); renk = 'uyari';
+        renk = 'uyari';
         ana = 'Minikiniz <b>3 yaşını geçmiş</b> görünüyor.';
         alt = 'Dada Kids 3 yaşa kadar; Dada Gastro\'nun <a class="kd-bag" href="tarifler.html">aile tariflerine</a> göz atın.';
         btn = '<a class="kd-btn kd-btn--kucuk kd-btn--hafif" href="tarifler.html">Aile tarifleri <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' + temizle;
@@ -143,7 +140,6 @@
         tetikMetin = (d.y === 'once' ? 'Daha önce' : AYLAR[d.m - 1] + ' ' + d.y) + ' · 3 yaş üstü';
       } else if (s.tur === 'gebelik') {
         var g = EVRE.hamilelik || {}; renk = g.renk || 'pembe';
-        maskot('kalp');
         ana = 'Yaklaşık <b>' + s.hafta + '. hafta</b> ' + ok() + '<b>' + (g.kisa || 'Hamilelik') + '</b> evresi';
         alt = 'Tahmini doğum: ' + AYLAR[d.m - 1] + ' ' + d.y + ' · ' + (s.hafta >= 40 ? 'doğum ayındasınız' : trimester(s.hafta));
         btn = '<a class="kd-btn kd-btn--kucuk" href="' + (g.sayfa || 'kids-donem-hamilelik.html') + '" data-kd-ds-git>Bu evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' + temizle;
@@ -245,22 +241,24 @@
       sheetKapat(false);
     });
 
-    /* ---------- mobil alt sayfa ---------- */
-    function odaklanabilir() { return Array.prototype.slice.call(panel.querySelectorAll('button:not([disabled]), [tabindex="0"]')).filter(function (x) { return x.offsetParent !== null || x === document.activeElement; }); }
+    /* ---------- açılır panel: masaüstü popover · mobil alt sayfa ---------- */
+    function odaklanabilir() { return Array.prototype.slice.call(panel.querySelectorAll('button:not([disabled]), a[href], [tabindex="0"]')).filter(function (x) { return x.offsetParent !== null || x === document.activeElement; }); }
     function rolAyarla() {
-      if (mobilMq.matches) { panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true'); }
-      else { panel.setAttribute('role', 'group'); panel.removeAttribute('aria-modal'); if (acik) sheetKapat(false); }
+      if (acik) sheetKapat(false);
+      if (mobilMq.matches) panel.setAttribute('aria-modal', 'true'); else panel.removeAttribute('aria-modal');
     }
     var kapatZaman = null;
     function sheetAc() {
-      if (!mobilMq.matches || acik) return;
+      if (acik) return;
+      var mobil = mobilMq.matches;
       clearTimeout(kapatZaman);
       acik = true;
-      if (panel.parentNode === kok) { kok.insertBefore(yer, panel); document.body.appendChild(perde); document.body.appendChild(panel); }
-      perde.hidden = false; void panel.offsetHeight;                                   // geçiş için bir kare
+      if (mobil && panel.parentNode === kok) { kok.insertBefore(yer, panel); document.body.appendChild(perde); document.body.appendChild(panel); }
+      perde.hidden = !mobil; void panel.offsetHeight;                                  // geçiş için bir kare
       panel.setAttribute('data-acik', ''); kok.setAttribute('data-acik', '');
       tetik.setAttribute('aria-expanded', 'true');
-      document.documentElement.classList.add('kd-ds-kilit');
+      if (mobil) document.documentElement.classList.add('kd-ds-kilit');
+      else panel.scrollIntoView({ block: 'nearest', behavior: 'instant' });
       var f = $('.kd-ds__yil[aria-checked="true"]') ? hucreler.filter(function (h) { return h.tabIndex === 0; })[0] : $('.kd-ds__yil[tabindex="0"]');
       setTimeout(function () { (f || panel).focus(); }, azaltMq.matches ? 0 : 60);
     }
@@ -273,7 +271,15 @@
       if (odakGeri !== false) tetik.focus();
       kapatZaman = setTimeout(yerineKoy, azaltMq.matches ? 0 : 360);
     }
-    tetik.addEventListener('click', sheetAc);
+    tetik.addEventListener('click', function () { if (acik) sheetKapat(); else sheetAc(); });
+    document.addEventListener('pointerdown', function (e) { if (acik && !mobilMq.matches && !panel.contains(e.target) && !tetik.contains(e.target)) sheetKapat(false); });
+    document.addEventListener('keydown', function (e) { if (acik && e.key === 'Escape') sheetKapat(); });
+    document.addEventListener('kd-dogum-ac', function () {
+      var kart = kok.closest('[data-durum="ozet"]'), degistir = kart && kart.querySelector('.kd-degistir');
+      if (degistir) degistir.click();                                                  // özet görünümündeyse önce formu aç
+      if (!mobilMq.matches) tetik.scrollIntoView({ block: 'center', behavior: 'instant' });
+      sheetAc();
+    });
     perde.addEventListener('click', function () { sheetKapat(); });
     $('[data-kd-ds-kapat]').addEventListener('click', function () { sheetKapat(); });
     $('[data-kd-ds-tamam]').addEventListener('click', function () { sheetKapat(); });
