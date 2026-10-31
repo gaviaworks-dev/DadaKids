@@ -376,6 +376,21 @@ html[data-kd-tema="erkek"] { --kd-krem: #F7F8FC; --kd-krem-2: #EEF2FA; --kd-cizg
 
 /* İllüstrasyon + video */
 .kd-illus { display: block; width: 100%; height: auto; }
+/* Kare illüstrasyon hero'da: kutu tabandaki 4:3 ölçüde kalır, görsel kırpılmadan ortalanır */
+.kd-hero__gorsel.kd-dhero-illus, .kd-hero__gorsel.kd-rhero-illus { display: flex; justify-content: center; aspect-ratio: 4 / 3; }
+.kd-hero__gorsel.kd-dhero-illus::after, .kd-hero__gorsel.kd-rhero-illus::after { display: none; }
+.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-rhero-illus > img { width: auto; max-width: 100%; height: 100%; aspect-ratio: 1; object-fit: contain; background: transparent; box-shadow: var(--kd-golge); border-radius: var(--kd-r-xl); }
+/* Kompakt ipucu: güven şeridi gibi dar bantlarda bandın boyunu uzatmaz */
+.kd-rehberci.kd-ipucu--kompakt { align-items: center; }
+.kd-rehberci.kd-ipucu--kompakt .kd-maskot { width: 64px; }
+.kd-rehberci.kd-ipucu--kompakt .kd-baloncuk { margin: 0; padding: var(--kd-s2) var(--kd-s3); max-width: 640px; font-size: 14px; line-height: 1.45; }
+@media (max-width: 640px) {
+  .kd-rehberci.kd-ipucu--kompakt { gap: var(--kd-s2); }
+  .kd-rehberci.kd-ipucu--kompakt .kd-maskot { width: 40px; }
+  .kd-rehberci.kd-ipucu--kompakt .kd-baloncuk b { display: none; }
+}
+/* Başlık yanı ipucu yalnız geniş ekranda: dar ekranda bölüm başını uzatmaz */
+@media (max-width: 1024px) { .kd-bas .kd-ipucu--sag { display: none; } }
 .kd-video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; background: var(--kd-krem-2); }
 .kd-yuzen { animation: kd-suzul 6s ease-in-out infinite; }
 

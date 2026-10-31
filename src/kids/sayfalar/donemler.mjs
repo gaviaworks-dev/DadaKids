@@ -335,7 +335,7 @@ export default async function donemler(o) {
 
   /* ---------- Tarifler / alternatif ---------- */
   function yardimKart(href, ikonAd, baslik, metin, renk, illusKey = '') {
-    const gorsel = illusKey && illusVar(illusKey) ? `<span class="kd-modul__illus">${o.illus(illusKey, '', { boy: 240 })}</span>` : `<span class="kd-modul__ikon">${ikon(ikonAd, 40)}</span>`;
+    const gorsel = illusKey && illusVar(illusKey) ? `<span class="kd-modul__ikon kd-modul__ikon--illus">${o.illus(illusKey, '', { boy: 128 })}</span>` : `<span class="kd-modul__ikon">${ikon(ikonAd, 40)}</span>`;
     return `<a class="kd-kart kd-modul kd-dyardim kd-gir" href="${href}" data-renk="${renk}">${gorsel}<h3>${esc(baslik)}</h3><p>${esc(metin)}</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
   }
   function tarifBolumu(kod, z = '') {
@@ -382,15 +382,13 @@ export default async function donemler(o) {
     if (!s.length) return '';
     return `<section class="kd-bolum${z}" aria-labelledby="sss-bas">
  <div class="wrap kd-dsss">
-  <div class="kd-dsss__ana">
    ${o.bolumBasi({ ust: 'Sık sorulanlar', ikonAd: 'kitap', renk: EVRE[kod].renk, baslik: '<span id="sss-bas">Aklınıza takılanlar</span>' })}
    ${o.ornek()}
    <div class="kd-dsss__liste" data-renk="${EVRE[kod].renk}">
     ${s.map((x) => `<details class="kd-dsss__oge"><summary><span>${esc(x.s)}</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary><div>${dizi(x.c).map((p) => `<p>${esc(p)}</p>`).join('')}</div></details>`).join('')}
    </div>
-  </div>
-  <aside class="kd-dsss__yan">${ipucu('kitap', 'Sorunuz burada yoksa çocuk doktorunuza sormaktan çekinmeyin; küçük sorular da önemlidir.')}</aside>
  </div>
+ <div class="wrap kd-dsss__not">${ipucu('kitap', 'Sorunuz burada yoksa çocuk doktorunuza sormaktan çekinmeyin; küçük sorular da önemlidir.', 'kd-ipucu--kompakt')}</div>
 </section>`;
   }
 
@@ -417,7 +415,7 @@ export default async function donemler(o) {
 </section>`;
   }
 
-  const guven = (z = '') => `<section class="kd-bolum kd-dguven-bolum${z}"><div class="wrap kd-dguven">${o.onay()}${ipucu('kalp', 'Bu sayfadaki bilgiler DSÖ, NHS ve AAP gibi ana akım rehberlerin uzlaştığı genel ilkeleri özetler; bebeğinize özel bir durum varsa çocuk doktorunuza danışın.')}</div></section>`;
+  const guven = (z = '') => `<section class="kd-bolum kd-dguven-bolum${z}"><div class="wrap kd-dguven">${o.onay()}${ipucu('kalp', 'Bu sayfadaki bilgiler DSÖ, NHS ve AAP gibi ana akım rehberlerin uzlaştığı genel ilkeleri özetler; bebeğinize özel bir durum varsa çocuk doktorunuza danışın.', 'kd-ipucu--kompakt')}</div></section>`;
 
   /* =====================================================================
      Genel bakış
@@ -465,19 +463,18 @@ export default async function donemler(o) {
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Kıvam yolculuğu', ikonAd: 'kasik', renk: 'seftali', baslik: '<span id="kivam-bas">Sütten aile sofrasına</span>', alt: 'Kıvam yaşla birlikte adım adım kalınlaşır; bebeğinizin hızını izleyin.' })}
   <ol class="kd-dyol">
-   ${adim.map((a, n) => `<li class="kd-gir" data-renk="${EVRE[a.kod].renk}" style="--kd-gecikme:${n * 90}ms"><span class="kd-dyol__resim" aria-hidden="true">${evreGorsel(a.kod, '', { boy: 240 })}<span class="kd-dyol__ikon">${a.svg ? o.kivamSvg(a.svg) : ikon('biberon', 34)}</span></span><small>${esc(EVRE[a.kod].ad)}</small><b>${esc(a.baslik)}</b><span>${esc(a.metin)}</span></li>`).join('')}
+   ${adim.map((a, n) => `<li class="kd-gir" data-renk="${EVRE[a.kod].renk}" style="--kd-gecikme:${n * 90}ms"><span class="kd-dyol__ikon">${a.svg ? o.kivamSvg(a.svg) : ikon('biberon', 34)}</span><small>${esc(EVRE[a.kod].ad)}</small><b>${esc(a.baslik)}</b><span>${esc(a.metin)}</span></li>`).join('')}
   </ol>
  </div>
 </section>`;
   }
 
-  /* Evre kartı (görselli): ortak evreKart içeriği + üstte evre illüstrasyonu/fotoğrafı */
+  /* Evre kartı: ortak evreKart içeriği; evre illüstrasyonu 52px simge kutusunda */
   function evreKartGorselli(kod, n) {
     const e = EVRE[kod];
     const d = v(kod);
     return `<a class="kd-evre kd-devre-g kd-gir" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false" style="--kd-gecikme:${n * 70}ms">
- <span class="kd-devre-g__resim">${evreGorsel(kod, '', { boy: 360 })}</span>
- <div class="kd-evre__ust"><span class="kd-evre__ikon">${ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(d.aralik || e.aralik)}</span><h3>${esc(e.ad)}</h3></div></div>
+ <div class="kd-evre__ust"><span class="kd-evre__ikon${illusVar(`evre-${kod}`) ? ' kd-evre__ikon--illus' : ''}">${illusVar(`evre-${kod}`) ? o.illus(`evre-${kod}`, '', { boy: 104 }) : ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(d.aralik || e.aralik)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(d.slogan || d.ozet || '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
 </a>`;

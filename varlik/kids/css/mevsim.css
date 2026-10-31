@@ -80,7 +80,7 @@ html:not(.kd-js) .kd-may { display: none; }
 .kd-mtezgah { margin-top: var(--kd-s6); }
 .kd-mtezgah__bas, .kd-mtarif__bas h3 { display: flex; align-items: center; gap: var(--kd-s2); font-size: 1.35rem !important; }
 .kd-mtezgah__bas span { min-width: 30px; height: 30px; padding: 0 var(--kd-s2); border-radius: var(--kd-r-tam); display: inline-grid; place-items: center; background: var(--r-a); color: var(--r-k); font-size: 14px; }
-.kd-mtezgah__liste { list-style: none; margin: var(--kd-s3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr)); gap: var(--kd-s3); }
+.kd-mtezgah__liste { list-style: none; margin: var(--kd-s3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(172px, 100%), 1fr)); gap: var(--kd-s3); }
 .kd-murun { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--kd-s1); padding: var(--kd-s4) var(--kd-s3) var(--kd-s3); border-radius: var(--kd-r-l); background: #fff; box-shadow: var(--kd-golge); transition: transform .25s ease, box-shadow .25s ease; }
 .kd-murun:hover { transform: translateY(-3px); box-shadow: var(--kd-golge-yuksek); }
 .kd-murun__gorsel { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--r-a); margin-bottom: var(--kd-s1); transition: transform .3s ease; }
@@ -197,23 +197,18 @@ html:not(.kd-js) .kd-may { display: none; }
 .kd-ipucu__yedek { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: var(--kd-golge); }
 .kd-ipucu__yedek img { width: 40px; height: 40px; }
 .kd-bas .kd-ipucu--sag { max-width: 440px; flex: 0 1 440px; }
-.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-dhero-illus > .kd-illus { aspect-ratio: auto; object-fit: contain; box-shadow: none; background: transparent; border-radius: var(--kd-r-xl); }
-.kd-hero__gorsel.kd-dhero-illus::after { opacity: .55; }
 
 
 /* Hero: video / illüstrasyon çerçevesi + yüzen ürün rozetleri */
-.kd-mhero--medya { min-height: 0; padding: var(--kd-s5); }
-.kd-mhero__cerceve { width: min(100%, 460px); aspect-ratio: 1; border-radius: var(--kd-r-xl); overflow: hidden; background: var(--kd-sari-a); box-shadow: 0 0 0 6px #fff, var(--kd-golge-yuksek); }
-.kd-mhero__cerceve > img, .kd-mhero__cerceve > video { width: 100%; height: 100%; object-fit: cover; }
-.kd-mhero--medya .kd-mhero__u--1 { top: 2%; left: 4%; }
-.kd-mhero--medya .kd-mhero__u--2 { top: 6%; right: 4%; }
-.kd-mhero--medya .kd-mhero__u--3 { bottom: 6%; left: 2%; }
-.kd-mhero--medya .kd-mhero__u--4 { bottom: 2%; right: 6%; }
+.kd-mhero__cerceve { width: min(100%, 391px); aspect-ratio: 5 / 4; border-radius: var(--kd-r-xl); overflow: hidden; background: var(--kd-sari-a); box-shadow: 0 0 0 6px #fff, var(--kd-golge-yuksek); }
+.kd-mhero__cerceve > img, .kd-mhero__cerceve > video { width: 100%; height: 100%; object-fit: contain; }
 
 /* Ay paneli başlığı: mevsim bandı + illüstrasyon */
-.kd-mpanel__bas { align-items: center; gap: var(--kd-s5); padding: var(--kd-s4) var(--kd-s4) var(--kd-s4) var(--kd-s6); border-radius: var(--kd-r-xl); background: linear-gradient(110deg, #fff 0%, var(--r-a) 70%); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--r-o) 55%, transparent); margin-bottom: var(--kd-s5); }
-.kd-mpanel__bas-metin p { margin: var(--kd-s2) 0 0; color: var(--kd-ikincil); font-weight: 600; font-size: 14.5px; }
-.kd-mpanel__illus { flex: none; width: clamp(120px, 16vw, 200px); aspect-ratio: 1; border-radius: var(--kd-r-l); overflow: hidden; box-shadow: 0 0 0 4px #fff, var(--kd-golge); }
+.kd-mpanel__bas { align-items: center; gap: var(--kd-s4); padding: var(--kd-s2) var(--kd-s3) var(--kd-s2) var(--kd-s5); border-radius: var(--kd-r-xl); background: linear-gradient(110deg, #fff 0%, var(--r-a) 70%); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--r-o) 55%, transparent); margin-bottom: var(--kd-s5); }
+.kd-mpanel__bas-metin { flex: 1; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--kd-s4); align-items: end; }
+.kd-mpanel__bas-metin .kd-mpanel__mevsim { grid-column: 1 / -1; justify-self: start; }
+.kd-mpanel__bas-metin p { margin: 0; text-align: right; color: var(--kd-ikincil); font-weight: 600; font-size: 14.5px; }
+.kd-mpanel__illus { flex: none; width: 64px; aspect-ratio: 1; border-radius: var(--kd-r-l); overflow: hidden; box-shadow: 0 0 0 4px #fff, var(--kd-golge); }
 .kd-mpanel__illus img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Boş durumlar: illüstrasyon + uykucu Pütür */
@@ -240,25 +235,22 @@ html:not(.kd-js) .kd-may { display: none; }
 .kd-mmevsim .kd-myilserit b { font-size: 13px; line-height: 1.25; }
 .kd-myilserit a:active { transform: scale(.97); }
 
-/* Neden mevsiminde: illüstrasyon + dondurulmuş kutusu */
-.kd-mneden { align-items: start; }
-.kd-mneden__yan { display: grid; gap: var(--kd-s4); }
-.kd-mneden__resim { border-radius: var(--kd-r-xl); overflow: hidden; aspect-ratio: 16 / 9; box-shadow: 0 0 0 5px #fff, var(--kd-golge); }
-.kd-mneden__resim img { width: 100%; height: 100%; object-fit: cover; }
+/* Neden mevsiminde */
 .kd-mneden__liste li { transition: transform .2s ease, box-shadow .2s ease; }
 .kd-mneden__liste li:hover { transform: translateX(4px); box-shadow: var(--kd-golge-yuksek); }
 
-.kd-mguven .kd-baloncuk { max-width: 640px; font-size: 14.5px; }
 .kd-may { top: calc(var(--kd-ust-bosluk, 0px) + 64px); }
 
-@media (max-width: 1100px) { .kd-mmevsimler { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 1024px) { .kd-bas .kd-ipucu--sag { flex-basis: 100%; max-width: 560px; } }
+@media (max-width: 1100px) { .kd-mmevsimler { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kd-mmevsim__resim { display: none; } }
+@media (min-width: 641px) and (max-width: 1024px) { .kd-mguven { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); } }
 @media (max-width: 640px) {
-  .kd-mpanel__bas { padding: var(--kd-s4); flex-wrap: nowrap; }
-  .kd-mpanel__illus { width: 96px; }
+  .kd-mpanel__bas { padding: var(--kd-s2) var(--kd-s3); flex-wrap: nowrap; }
+  .kd-mpanel__illus { width: 56px; }
+  .kd-mguven { gap: var(--kd-s3); }
+  .kd-mpanel__bas-metin { grid-template-columns: minmax(0, 1fr); }
+  .kd-mpanel__bas-metin p { margin-top: var(--kd-s1); text-align: left; }
   .kd-mmevsimler { grid-template-columns: 1fr; }
-  .kd-mhero--medya { padding: var(--kd-s4); }
-  .kd-mhero__cerceve { width: min(100%, 320px); }
+  .kd-mhero__cerceve { width: min(78%, 300px); }
   .kd-mbos { flex-direction: column; text-align: center; }
   .kd-may { top: calc(var(--kd-ust-bosluk, 0px) + 58px); }
 }
@@ -267,7 +259,4 @@ html:not(.kd-js) .kd-may { display: none; }
   .kd-mmevsim:hover, .kd-mmevsim:hover .kd-mmevsim__resim img, .kd-mneden__liste li:hover { transform: none; }
 }
 
-.kd-mneden__resim--kolaj { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--kd-s4); padding: var(--kd-s5); background: linear-gradient(135deg, var(--kd-sari-a), var(--kd-mint-a)); aspect-ratio: auto; }
-.kd-mneden__resim--kolaj span { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: var(--kd-golge); }
-.kd-mneden__resim--kolaj img { width: 58% !important; height: auto !important; object-fit: contain; }
 .kd-mpaneller > .kd-mpanel { min-width: 0; }

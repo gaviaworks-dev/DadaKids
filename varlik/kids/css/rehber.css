@@ -209,35 +209,20 @@ a.kd-rkart:hover .kd-rkart__medya > img, a.kd-rkart:hover .kd-rkart__medya > .kd
 .kd-ipucu__yedek { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: var(--kd-golge); }
 .kd-ipucu__yedek img { width: 40px; height: 40px; }
 .kd-bas .kd-ipucu--sag { max-width: 440px; flex: 0 1 440px; }
-.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-dhero-illus > .kd-illus { aspect-ratio: auto; object-fit: contain; box-shadow: none; background: transparent; border-radius: var(--kd-r-xl); }
-.kd-hero__gorsel.kd-dhero-illus::after { opacity: .55; }
 
 
-.kd-hero__gorsel.kd-rhero-illus { max-width: 480px; width: 100%; justify-self: center; }
-.kd-hero__gorsel.kd-rhero-illus::after { display: none; }
-.kd-hero__gorsel.kd-rhero-illus > img { aspect-ratio: 1; object-fit: cover; box-shadow: var(--kd-golge); border-radius: var(--kd-r-xl); }
-.kd-hero--kucuk .kd-rhero-illus { max-width: 380px; }
 
 .kd-rkart__medya > .kd-illus { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 a.kd-rkart:hover .kd-rkart__medya > .kd-illus { transform: scale(1.04); }
 a.kd-rkart:active, a.kd-rsonraki:active { transform: translateY(-1px) scale(.99); }
 .kd-rsonraki__medya > .kd-illus { width: 100%; height: 100%; object-fit: cover; }
 
-/* Makale: giriş ipucu, Pütür kutusu, bölüm figürü */
+/* Makale: giriş ipucu, kutu başlığında küçük Pütür */
 .kd-rgiris-ipucu { margin-top: var(--kd-s5); }
-.kd-rgiris-ipucu .kd-baloncuk, .kd-rkutu-putur .kd-baloncuk { font-size: 15.5px; max-width: none; }
-.kd-rkutu-putur { margin: var(--kd-s5) 0 var(--kd-s1); padding: var(--kd-s4); border-radius: var(--kd-r-l); background: color-mix(in srgb, var(--r-a) 70%, #fff); }
-.kd-rkutu-putur .kd-baloncuk b { display: block; margin-bottom: var(--kd-s1); color: var(--r-k); }
-.kd-rbolum--figur::after { content: ""; display: table; clear: both; }
-.kd-rfigur { float: right; width: clamp(150px, 18vw, 210px); margin: 0 0 var(--kd-s4) var(--kd-s5); padding: var(--kd-s3); border-radius: var(--kd-r-l); background: var(--r-a); shape-outside: margin-box; }
-.kd-rfigur img { width: 100%; height: auto; }
+.kd-rkutu .kd-maskot { width: 36px; flex: none; margin-block: calc(var(--kd-s2) * -1); }
+@media (max-width: 1024px) { .kd-hero:not(.kd-hero--kucuk) .kd-hero__gorsel.kd-rhero-illus { max-width: 409px; } }
 .kd-rguven .kd-ipucu { margin-bottom: var(--kd-s4); }
 .kd-rguven .kd-baloncuk { font-size: 14.5px; }
-@media (max-width: 1024px) { .kd-bas .kd-ipucu--sag { flex-basis: 100%; max-width: 560px; } }
-@media (max-width: 640px) {
-  .kd-rfigur { width: 120px; margin-left: var(--kd-s3); padding: var(--kd-s2); }
-  .kd-rkutu-putur { padding: var(--kd-s3); }
-}
 @media (prefers-reduced-motion: reduce) {
   .kd-rkart__medya > .kd-illus { transition: none; }
   a.kd-rkart:hover .kd-rkart__medya > .kd-illus { transform: none; }

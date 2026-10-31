@@ -156,7 +156,7 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-hm-isaret__kutu { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: #fff; box-shadow: inset 0 0 0 2px var(--kd-cizgi); color: transparent; font-size: 14px; transition: background .2s, color .2s, transform .2s; }
 .kd-hm-isaret input:checked + label .kd-hm-isaret__kutu { background: var(--r-k); color: #fff; box-shadow: none; transform: scale(1.06); }
 
-.kd-hm-sonuc { --s-a: #fff; position: relative; overflow: hidden; isolation: isolate; padding: clamp(var(--kd-s4), 2.2vw, var(--kd-s5)); border-radius: var(--kd-r-xl); background: var(--s-a); box-shadow: var(--kd-golge-yuksek); transition: background .3s; }
+.kd-hm-sonuc { --s-a: #fff; position: relative; overflow: hidden; isolation: isolate; padding: clamp(calc(var(--kd-s4) + var(--kd-s1)), 2.2vw, calc(var(--kd-s5) + var(--kd-s1))); border-radius: var(--kd-r-xl); background: var(--s-a); box-shadow: var(--kd-golge-yuksek); transition: background .3s; }
 .kd-hm-sonuc::after { content: ""; position: absolute; z-index: -1; width: 200px; height: 200px; right: -70px; bottom: -90px; border-radius: 50%; background: var(--s-o, var(--kd-krem-2)); opacity: .7; transition: background .3s; }
 .kd-hm-sonuc[data-durum="erken"], .kd-hm-sonuc[data-durum="ay"] { --s-a: var(--kd-sari-a); --s-o: var(--kd-sari-o); }
 .kd-hm-sonuc[data-durum="cogu"] { --s-a: var(--kd-mint-a); --s-o: var(--kd-mint-o); }
@@ -284,7 +284,7 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-at-gecmis small { font-size: 12.5px; color: var(--kd-ikincil); }
 .kd-at-gecmis .kd-at-geri { margin: 0; flex: none; }
 
-.kd-at-alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kd-s3) var(--kd-s4); margin-top: var(--kd-s5); padding: var(--kd-s4) var(--kd-s4); border-radius: var(--kd-r-l); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-at-alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kd-s3) var(--kd-s4); margin-top: var(--kd-s5); padding: var(--kd-s4) calc(var(--kd-s4) + var(--kd-s1)); border-radius: var(--kd-r-l); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
 .kd-at-alt__not { display: flex; gap: var(--kd-s2); align-items: flex-start; margin: 0; font-size: 14px; max-width: 640px; }
 .kd-at-alt__not i { color: var(--kd-mint-k); margin-top: 3px; }
 .kd-at-alt__eylem { display: flex; flex-wrap: wrap; gap: var(--kd-s2); }
@@ -542,26 +542,19 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-ipucu__yedek { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: var(--kd-golge); }
 .kd-ipucu__yedek img { width: 40px; height: 40px; }
 .kd-bas .kd-ipucu--sag { max-width: 440px; flex: 0 1 440px; }
-.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-dhero-illus > .kd-illus { aspect-ratio: auto; object-fit: contain; box-shadow: none; background: transparent; border-radius: var(--kd-r-xl); }
-.kd-hero__gorsel.kd-dhero-illus::after { opacity: .55; }
 
 
 /* Hero illüstrasyonu (hub + araç sayfaları) */
-.kd-hero__gorsel.kd-ar-hero-illus { max-width: 440px; width: 100%; justify-self: center; }
+.kd-hero__gorsel.kd-ar-hero-illus { max-width: 400px; width: 100%; justify-self: center; }
 .kd-hero__gorsel.kd-ar-hero-illus::after { display: none; }
 .kd-hero__gorsel.kd-ar-hero-illus > img { aspect-ratio: 1; object-fit: cover; box-shadow: var(--kd-golge); border-radius: var(--kd-r-xl); }
-.kd-hero--kucuk .kd-ar-hero-illus { max-width: 340px; }
+.kd-hero--kucuk .kd-ar-hero-illus { max-width: 320px; }
 
-/* Hub kartı: üstte illüstrasyon */
-.kd-ar-kart__resim { margin: calc(clamp(var(--kd-s5), 2.4vw, var(--kd-s6)) * -1) calc(clamp(var(--kd-s5), 2.4vw, var(--kd-s6)) * -1) var(--kd-s1); aspect-ratio: 16 / 8; overflow: hidden; background: var(--r-a); }
-.kd-ar-kart { padding: clamp(var(--kd-s5), 2.4vw, var(--kd-s6)); }
-.kd-ar-kart__resim img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-.kd-ar-kart:hover .kd-ar-kart__resim img { transform: scale(1.04); }
-.kd-ar-kart:has(.kd-ar-kart__resim)::before { display: none; }
-.kd-ar-kart:has(.kd-ar-kart__resim) .kd-ar-kart__ikon { width: 64px; height: 64px; border-radius: 22px; margin-top: calc(var(--kd-s7) * -1); box-shadow: 0 0 0 4px #fff, inset 0 0 0 6px color-mix(in srgb, #fff 45%, transparent); position: relative; z-index: 1; }
-.kd-ar-kart:has(.kd-ar-kart__resim) .kd-ar-kart__ikon img { width: 40px; height: 40px; }
+/* Hub kartı: illüstrasyon 84px simge kutusunda, kart boyu değişmez */
+.kd-ar-kart__ikon--illus { overflow: hidden; }
+.kd-ar-kart__ikon--illus img { width: 100%; height: 100%; object-fit: cover; }
 .kd-ar-kart:active { transform: translateY(-1px) scale(.99); }
-.kd-ar-guven__yan .kd-baloncuk { font-size: 14.5px; }
+.kd-ar-guven-not { margin-top: var(--kd-s4); }
 
 /* Diğer araçlar: küçük illüstrasyon */
 .kd-ar-mini__ikon--illus { overflow: hidden; width: 64px; height: 64px; border-radius: 20px; }
@@ -570,10 +563,9 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 
 /* Boş durumlar: illüstrasyon + uykucu Pütür */
 .kd-ar-bos { position: relative; display: inline-flex; align-items: flex-end; flex: none; }
-.kd-ar-bos .kd-ar-bos__illus { width: 132px; height: auto; border-radius: var(--kd-r-l); }
-.kd-ar-bos .kd-ar-bos__maskot { width: 56px; margin-left: calc(var(--kd-s5) * -1); }
-.kd-pr-bos .kd-ar-bos .kd-ar-bos__illus { width: 180px; }
-.kd-at-bos { align-items: center; }
+.kd-ar-bos .kd-ar-bos__illus { width: 56px; height: auto; border-radius: var(--kd-r-m); }
+.kd-ar-bos .kd-ar-bos__maskot { width: 40px; margin-left: calc(var(--kd-s3) * -1); }
+.kd-pr-bos .kd-ar-bos .kd-ar-bos__illus { width: 76px; }
 
 /* Pütür ipuçları araç sayfalarında */
 .kd-at-ipucu, .kd-pl-ipucu-putur { margin-bottom: var(--kd-s5); }
@@ -581,15 +573,12 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-hm-bilgi .kd-kutu:hover { transform: translateY(-3px); box-shadow: var(--kd-golge); }
 
 @media (max-width: 1024px) {
-  .kd-hero--kucuk .kd-ar-hero-illus { display: block; max-width: 260px; justify-self: start; }
-  .kd-bas .kd-ipucu--sag { flex-basis: 100%; max-width: 560px; }
+  .kd-hero--kucuk .kd-ar-hero-illus { display: none; }
+  .kd-hero__gorsel.kd-ar-hero-illus { max-width: 140px; justify-self: start; }
 }
 @media (max-width: 640px) {
-  .kd-hero--kucuk .kd-ar-hero-illus { max-width: 200px; }
-  .kd-at-bos { flex-direction: column; text-align: center; }
-  .kd-ar-bos .kd-ar-bos__illus { width: 112px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .kd-ar-kart__resim img, .kd-hm-bilgi .kd-kutu { transition: none; }
-  .kd-ar-kart:hover .kd-ar-kart__resim img, .kd-hm-bilgi .kd-kutu:hover { transform: none; }
+  .kd-hm-bilgi .kd-kutu { transition: none; }
+  .kd-hm-bilgi .kd-kutu:hover { transform: none; }
 }

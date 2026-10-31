@@ -84,8 +84,9 @@
   .kd-td-buyur__kart img { width: 90px; height: 68px; }
 }
 /* tur 2 */
-.kd-td-ipucu { display: flex; gap: var(--kd-s3); align-items: flex-start; }
-.kd-td-ipucu .kd-maskot { width: 64px; flex: none; }
+@media (max-width: 1024px) { .kd-hero__gorsel.kd-tl-video, .kd-hero__gorsel.kd-tl-illus { max-width: 293px; } }
+@media (max-width: 640px) { .kd-hero__gorsel.kd-tl-video, .kd-hero__gorsel.kd-tl-illus { max-width: 240px; } }
+.kd-td-ipucu .kd-maskot { width: 36px; flex: none; margin-block: calc(var(--kd-s2) * -1); }
 .kd-tl-video, .kd-tl-illus { aspect-ratio: 4 / 3; border-radius: var(--kd-r-xl); overflow: visible; }
 .kd-tl-video video, .kd-tl-illus .kd-illus { border-radius: var(--kd-r-xl); box-shadow: var(--kd-golge-yuksek); aspect-ratio: 4 / 3; object-fit: cover; background: #fff; }
 .kd-tl-illus .kd-hero__sus--2 { width: 96px; height: auto; left: -24px; bottom: -14px; }

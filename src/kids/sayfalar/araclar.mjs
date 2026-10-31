@@ -75,9 +75,8 @@ export default async function (o) {
      1 · HUB
      ===================================================================== */
   const hubKart = (a, i) => `<article class="kd-kart kd-ar-kart kd-gir" data-renk="${a.renk}" style="--kd-gecikme:${i * 70}ms">
-  ${illusVar(ARAC_ILLUS[a.kod]) ? `<div class="kd-ar-kart__resim">${aracIllus(a, '', 560)}</div>` : ''}
   <div class="kd-ar-kart__ust">
-   <span class="kd-ar-kart__ikon">${ikon(a.ikon, 52)}</span>
+   ${illusVar(ARAC_ILLUS[a.kod]) ? `<span class="kd-ar-kart__ikon kd-ar-kart__ikon--illus">${aracIllus(a, '', 168)}</span>` : `<span class="kd-ar-kart__ikon">${ikon(a.ikon, 52)}</span>`}
    <span class="kd-ar-kart__tur">${esc(a.tur)}<small>${fa('clock', 'regular')} ${esc(a.sure)}</small></span>
   </div>
   <h3><a href="${a.href}">${esc(a.ad)}</a></h3>
@@ -118,8 +117,9 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="araclar">
      <li>${fa('book-open')}<span><b>Kaynaklar açık.</b> DSÖ, AAP, NHS ve ASCIA gibi ana akım rehberlerin uzlaştığı bilgiler kullanılır.</span></li>
     </ul>
    </div>
-   <div class="kd-ar-guven__yan">${ipucu('kalp', 'Sonuçlar bir sohbet başlangıcıdır; kararları çocuk doktorunuzla birlikte verin.')}${o.onay()}${o.ornek('Araçlardaki metinler ve eşikler prototip için hazırlanmıştır; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.')}</div>
+   <div class="kd-ar-guven__yan">${o.onay()}${o.ornek('Araçlardaki metinler ve eşikler prototip için hazırlanmıştır; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.')}</div>
   </div>
+  ${ipucu('kalp', 'Sonuçlar bir sohbet başlangıcıdır; kararları çocuk doktorunuzla birlikte verin.', 'kd-ar-guven-not')}
  </div>
 </section>`], ['mavi'])}`, 'araclar'),
   };

@@ -211,8 +211,6 @@ html:not(.kd-js) .kd-dsekme__liste { display: none; }
 .kd-ipucu__yedek { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: var(--kd-golge); }
 .kd-ipucu__yedek img { width: 40px; height: 40px; }
 .kd-bas .kd-ipucu--sag { max-width: 440px; flex: 0 1 440px; }
-.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-dhero-illus > .kd-illus { aspect-ratio: auto; object-fit: contain; box-shadow: none; background: transparent; border-radius: var(--kd-r-xl); }
-.kd-hero__gorsel.kd-dhero-illus::after { opacity: .55; }
 
 /* Evre şeridi zemini kremle bütünleşir (dalga ayırıcıyla dikiş olmasın) */
 .kd-dserit { background: var(--kd-krem); }
@@ -231,42 +229,29 @@ html:not(.kd-js) .kd-dsekme__liste { display: none; }
 .kd-dodak__gorsel img[src*="/urun/"] { width: 70%; }
 .kd-dodak:hover .kd-dodak__gorsel { transform: rotate(-8deg) scale(1.06); }
 
-/* Yardım kartları (hamilelik / 0–6 ay): illüstrasyonlu */
-.kd-modul__illus { display: block; margin: calc(var(--kd-s5) * -1) calc(var(--kd-s5) * -1) var(--kd-s2); aspect-ratio: 4 / 3; background: var(--r-a); overflow: hidden; }
-.kd-modul__illus img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-a.kd-dyardim:hover .kd-modul__illus img { transform: scale(1.04); }
+/* Yardım kartları (hamilelik / 0–6 ay): illüstrasyon 64px simge kutusunda */
+.kd-modul__ikon--illus { overflow: hidden; }
+.kd-modul__ikon--illus img { width: 100%; height: 100%; object-fit: cover; }
 a.kd-dyardim:active { transform: translateY(-1px) scale(.99); }
 
 /* Evre kartları (görselli) */
-.kd-devre-g { overflow: hidden; padding-top: 0; }
-.kd-devre-g__resim { display: block; margin: 0 calc(var(--kd-s5) * -1) var(--kd-s1); aspect-ratio: 4 / 3; overflow: hidden; background: var(--r-o); }
-.kd-devre-g__resim img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-.kd-devre-g:hover .kd-devre-g__resim img { transform: scale(1.05); }
+.kd-evre__ikon--illus { overflow: hidden; }
+.kd-evre__ikon--illus img { width: 100%; height: 100%; object-fit: cover; }
 .kd-devre-g:active { transform: translateY(-1px) scale(.99); }
-.kd-devre-g .kd-evre__sen { position: absolute; top: var(--kd-s3); left: var(--kd-s3); }
-.kd-devre-g { position: relative; }
 
 /* Karşılaştırma tablosu evre görseli */
 .kd-dtablo__ikon { overflow: hidden; }
 .kd-dtablo__ikon img { width: 100% !important; height: 100% !important; object-fit: cover; }
 
 /* Kıvam yolculuğu: evre görseli + kıvam rozeti */
-.kd-dyol__resim { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--kd-r-m); overflow: hidden; background: #fff; margin-bottom: var(--kd-s3); }
-.kd-dyol__resim > img { width: 100%; height: 100%; object-fit: cover; }
-.kd-dyol__resim .kd-dyol__ikon { position: absolute; left: var(--kd-s2); bottom: var(--kd-s2); width: 52px; height: 52px; border-radius: 18px; margin: 0; box-shadow: var(--kd-golge); }
-.kd-dyol__resim .kd-dyol__ikon svg, .kd-dyol__resim .kd-dyol__ikon img { width: 32px; height: 32px; }
 
 /* SSS + Pütür */
-.kd-dsss { max-width: none; display: grid; grid-template-columns: minmax(0, 880px) minmax(220px, 320px); gap: var(--kd-s7); align-items: start; justify-content: center; }
-.kd-dsss__yan { position: sticky; top: calc(var(--kd-ust-bosluk, 0px) + 96px); padding-top: var(--kd-s8); }
-.kd-dsss__yan .kd-rehberci { flex-direction: column-reverse; align-items: flex-start; }
-.kd-dsss__yan .kd-baloncuk::before { left: 36px; bottom: -8px; }
+.kd-dsss__not { max-width: 880px; margin-top: var(--kd-s4); }
 .kd-dsss__oge { transition: box-shadow .2s, transform .2s; }
 .kd-dsss__oge:hover { box-shadow: var(--kd-golge-yuksek); }
 
 /* Güven + Pütür */
 .kd-dguven { grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: var(--kd-s5); }
-.kd-dguven .kd-baloncuk { max-width: 640px; font-size: 14.5px; }
 
 /* Önceki / sonraki evre görseli */
 .kd-dsonraki__ikon { overflow: hidden; width: 88px; height: 88px; box-shadow: 0 0 0 4px #fff; }
@@ -275,39 +260,23 @@ a.kd-dyardim:active { transform: translateY(-1px) scale(.99); }
 
 @media (max-width: 1024px) {
   .kd-dbakis__ic { grid-template-columns: 1fr; align-items: start; }
-  .kd-dsss { grid-template-columns: 1fr; gap: var(--kd-s5); }
-  .kd-dsss__yan { position: static; padding-top: 0; }
-  .kd-dsss__yan .kd-rehberci { flex-direction: row; align-items: flex-end; }
-  .kd-dsss__yan .kd-baloncuk::before { left: -9px; bottom: 18px; }
-  .kd-bas .kd-ipucu--sag { flex-basis: 100%; max-width: 560px; }
-  .kd-dyol__resim { aspect-ratio: 16 / 9; }
 }
 @media (max-width: 760px) {
   .kd-dguven { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .kd-dyol li > .kd-dyol__resim { grid-row: span 3; width: 96px; aspect-ratio: 1; margin: 0; }
-  .kd-dyol__resim .kd-dyol__ikon { width: 36px; height: 36px; border-radius: 12px; left: var(--kd-s1); bottom: var(--kd-s1); }
-  .kd-dyol__resim .kd-dyol__ikon svg, .kd-dyol__resim .kd-dyol__ikon img { width: 22px; height: 22px; }
   .kd-dbas-sahne { display: none; }
   .kd-dsonraki__ikon { width: 64px; height: 64px; }
   .kd-dodak__gorsel { width: 60px; height: 60px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .kd-dodak__gorsel, .kd-devre-g__resim img, .kd-modul__illus img { transition: none; }
-  .kd-dodak:hover .kd-dodak__gorsel, .kd-devre-g:hover .kd-devre-g__resim img, a.kd-dyardim:hover .kd-modul__illus img { transform: none; }
+  .kd-dodak__gorsel { transition: none; }
+  .kd-dodak:hover .kd-dodak__gorsel { transform: none; }
 }
-.kd-dyardim { padding: var(--kd-s5); }
-.kd-devre-g { padding: 0 var(--kd-s5) var(--kd-s5); }
 .kd-dbas-sahne { width: clamp(96px, 9vw, 124px); align-self: center; }
 .kd-dbakis .kd-dhaplar { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
-/* hero illüstrasyonu: yumuşak kart, taşan blob yok */
-.kd-hero__gorsel.kd-dhero-illus { max-width: 480px; justify-self: center; width: 100%; }
-.kd-hero__gorsel.kd-dhero-illus::after { display: none; }
-.kd-hero__gorsel.kd-dhero-illus > img { aspect-ratio: 1; object-fit: cover; box-shadow: var(--kd-golge); border-radius: var(--kd-r-xl); }
-.kd-dsss { grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); }
-@media (max-width: 1024px) { .kd-dsss { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .kd-dbas-sahne { display: block; width: 84px; } }
+@media (min-width: 641px) and (max-width: 1024px) { .kd-dguven { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: var(--kd-s4); } }
+@media (max-width: 640px) { .kd-dbas-sahne { display: block; width: 84px; } .kd-dguven { gap: var(--kd-s4); } }
 
 /* =====================================================================
    Besin sekmeleri (matris kolu): Uygun hazırlık / Dikkat / Henüz erken

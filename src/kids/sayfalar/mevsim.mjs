@@ -225,18 +225,15 @@ export default async function mevsim(o) {
     <li class="kd-gir" style="--kd-gecikme:160ms">${ikon('tabak-bolmeli', 28)}<span><b>Daha çeşitli</b>Her ay farklı ürünler, tabağa doğal bir çeşitlilik getirir.</span></li>
    </ul>
   </div>
-  <div class="kd-mneden__yan">
-   <div class="kd-mneden__resim${heroVideo && illusVar('hero-mevsim') ? '' : ' kd-mneden__resim--kolaj'}">${heroVideo && illusVar('hero-mevsim') ? o.illus('hero-mevsim', '', { boy: 420 }) : ['cilek', 'brokoli', 'portakal', 'havuc', 'karpuz', 'balkabagi'].map((u, i) => `<span class="kd-yuz" style="animation-delay:${i * 0.4}s">${urun(u, 64, '')}</span>`).join('')}</div>
-   <div class="kd-kutu kd-mdondurulmus" data-renk="mavi">
-    <h3><i class="fa-regular fa-snowflake" aria-hidden="true"></i> Dondurulmuş da iyi bir alternatif</h3>
-    <p>Mevsimi geçmiş bir ürünü dondurulmuş olarak almak da iyi bir seçimdir; besin değerini büyük ölçüde korur. Bebekler için dondurulmuş sebze ve meyveyi <b>pişirerek</b> kullanın.</p>
-    ${m._not ? `<p class="kd-mdondurulmus__not">${esc(m._not.replace(/\s*ÖRNEK İÇERİK[^.]*\.?\s*$/i, ''))}</p>` : ''}
-   </div>
+  <div class="kd-kutu kd-mdondurulmus" data-renk="mavi">
+   <h3><i class="fa-regular fa-snowflake" aria-hidden="true"></i> Dondurulmuş da iyi bir alternatif</h3>
+   <p>Mevsimi geçmiş bir ürünü dondurulmuş olarak almak da iyi bir seçimdir; besin değerini büyük ölçüde korur. Bebekler için dondurulmuş sebze ve meyveyi <b>pişirerek</b> kullanın.</p>
+   ${m._not ? `<p class="kd-mdondurulmus__not">${esc(m._not.replace(/\s*ÖRNEK İÇERİK[^.]*\.?\s*$/i, ''))}</p>` : ''}
   </div>
  </div>
 </section>`;
 
-  const guvenBolum = (z) => `<section class="kd-bolum${z}"><div class="wrap kd-mguven">${o.onay()}${ipucu('sepet', 'Takvim yaklaşık bir rehberdir; ürünlerin bulunabilirliği bölgeye, rakıma ve yılın havasına göre değişir.')}</div></section>`;
+  const guvenBolum = (z) => `<section class="kd-bolum${z}"><div class="wrap kd-mguven">${o.onay()}${ipucu('sepet', 'Takvim yaklaşık bir rehberdir; ürünlerin bulunabilirliği bölgeye, rakıma ve yılın havasına göre değişir.', 'kd-ipucu--kompakt')}</div></section>`;
 
   const main = o.sayfa(`
 ${o.hero({

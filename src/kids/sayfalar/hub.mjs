@@ -101,7 +101,7 @@ export default async function (o) {
   const aylar = veri.mevsim.aylar || [];
   if (aylar.length) {
     const panel = aylar.map((a) => `<div class="kd-hub-ay" data-ay="${a.ay}"${a.ay === 1 ? '' : ' hidden'}>
-   <div class="kd-hub-ay__kahraman" data-renk="sari">${o.illus(['mevsim-kis', 'mevsim-kis', 'mevsim-ilkbahar', 'mevsim-ilkbahar', 'mevsim-ilkbahar', 'mevsim-yaz', 'mevsim-yaz', 'mevsim-yaz', 'mevsim-sonbahar', 'mevsim-sonbahar', 'mevsim-sonbahar', 'mevsim-kis'][a.ay - 1], '', { boy: 140, sinif: 'kd-hub-ay__illus', yedek: '' })}${o.urun(a.kahraman.ikon, 96, a.kahraman.ad)}<div><span class="kd-ust-yazi" data-renk="sari">${esc(a.ad)} · Ayın kahramanı</span><h3>${esc(a.kahraman.ad)}</h3><p>${esc(a.kahraman.neden)}</p></div></div>
+   <div class="kd-hub-ay__kahraman" data-renk="sari">${o.urun(a.kahraman.ikon, 96, a.kahraman.ad)}<div><span class="kd-ust-yazi" data-renk="sari">${esc(a.ad)} · Ayın kahramanı</span><h3>${esc(a.kahraman.ad)}</h3><p>${esc(a.kahraman.neden)}</p></div></div>
    <div class="kd-hub-ay__urunler">${a.urunler.slice(0, 8).map((u) => `<span class="kd-hub-urun">${o.urun(u.ikon, 44, '')}<small>${esc(u.ad)}</small></span>`).join('')}</div>
   </div>`).join('\n');
     mevsimBolum = `${o.ayirici('dalga', o.zebraRenk('sari'))}<section class="kd-bolum kd-zebra" data-renk="sari" id="mevsim">

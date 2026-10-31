@@ -47,6 +47,5 @@
 .kd-hub-hero .kd-hero__gorsel > video, .kd-hub-hero .kd-hero__gorsel > .kd-illus { aspect-ratio: 5 / 4; border-radius: var(--kd-r-xl); box-shadow: var(--kd-golge-yuksek); object-fit: cover; background: #fff; }
 .kd-hub-hero .kd-hero__sus--2 { left: -38px; bottom: -18px; width: 120px; height: auto; }
 .kd-hub-pütür { margin-bottom: var(--kd-s5); }
-.kd-hub-ay__illus { width: 140px; flex: none; }
 .kd-hub-mevsim { background: #fff; }
-@media (max-width: 640px) { .kd-hub-hero .kd-hero__sus--2 { display: block; left: auto; right: -6px; bottom: -22px; width: 84px; } .kd-hub-ay__illus { display: none; } }
+@media (max-width: 640px) { .kd-hub-hero .kd-hero__sus--2 { display: block; left: auto; right: -6px; bottom: -22px; width: 84px; } }

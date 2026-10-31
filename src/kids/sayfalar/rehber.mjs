@@ -9,7 +9,6 @@ const SUTUN_AD = { ogurme: 'Öğürme', bogulma: 'Boğulma', kasik: 'Kaşıkla b
 const KIZILAY = 'https://www.kizilay.org.tr/';
 const dizi = (x) => (Array.isArray(x) ? x.filter(Boolean) : x ? [x] : []);
 const ILLUS = { 'ek-gidaya-gecis': 'rehber-ek-gida', 'blw-temelleri': 'rehber-blw', 'ogurme-mi-bogulma-mi': 'rehber-ogurme', 'alerjen-tanitimi': 'rehber-alerjen' };
-const SAHNE = { 'ek-gidaya-gecis': 'mama-sandalyesi-sahne', 'blw-temelleri': 'tabak-parmak-gida', 'ogurme-mi-bogulma-mi': 'mama-sandalyesi-sahne', 'alerjen-tanitimi': 'meyve-sepeti' };
 /* ---------- Tur 2: görsel varlık denetimi + bölüm ritmi (sayfalar kolu; 4 modülde aynı küçük yardımcılar) ---------- */
 import { existsSync } from 'node:fs';
 const KOK = new URL('../../../', import.meta.url).pathname;
@@ -164,19 +163,16 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="makaleler" aria-labelledby
     const karsSonra = Math.min(1, bolumler.length - 1); // 2. bölümden sonra
     const kutuSonra = bolumler.length > 3 ? Math.floor(bolumler.length / 2) : bolumler.length - 1;
     const kutuTablodaMi = dizi(m.karsilastirma).length && Object.keys(m.karsilastirmaSutunlar || {}).includes('bogulma') && /112/.test(m.kutu?.metin || '');
-    const kutu = m.kutu && m.kutu.metin && !kutuTablodaMi && m.kutu.tur !== 'uyari'
-      ? `<aside class="kd-rkutu-putur">${ipucu('kitap', `<b>${esc(m.kutu.baslik || 'İpucu')}</b> ${esc(m.kutu.metin)}`)}</aside>`
-      : m.kutu && m.kutu.metin && !kutuTablodaMi
-      ? `<aside class="kd-kutu kd-rkutu${m.kutu.tur === 'uyari' ? ' kd-kutu--uyari' : ''}"${m.kutu.tur === 'uyari' ? '' : ` data-renk="${r}"`}><h3><i class="fa-solid ${m.kutu.tur === 'uyari' ? 'fa-triangle-exclamation' : 'fa-lightbulb'}" aria-hidden="true"></i>${esc(m.kutu.baslik || (m.kutu.tur === 'uyari' ? 'Dikkat' : 'İpucu'))}</h3><p>${esc(m.kutu.metin)}</p></aside>`
+    const kutu = m.kutu && m.kutu.metin && !kutuTablodaMi
+      ? `<aside class="kd-kutu kd-rkutu${m.kutu.tur === 'uyari' ? ' kd-kutu--uyari' : ''}"${m.kutu.tur === 'uyari' ? '' : ` data-renk="${r}"`}><h3>${m.kutu.tur === 'uyari' ? '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>' : o.maskot('kitap', { boy: 72 }) || '<i class="fa-solid fa-lightbulb" aria-hidden="true"></i>'}${esc(m.kutu.baslik || (m.kutu.tur === 'uyari' ? 'Dikkat' : 'İpucu'))}</h3><p>${esc(m.kutu.metin)}</p></aside>`
       : '';
 
     const icindekiler = [];
     const govde = bolumler.map((b, n) => {
       const id = `b-${n + 1}`;
       icindekiler.push([id, b.baslik]);
-      const figur = n === 2 ? `<figure class="kd-rfigur" aria-hidden="true">${o.sahne(SAHNE[m.slug] || 'tabak-parmak-gida')}</figure>` : '';
-      let h = `<section class="kd-rbolum${figur ? ' kd-rbolum--figur' : ''}" id="${id}" aria-labelledby="${id}-bas">
-      ${figur}<h2 id="${id}-bas" class="kd-rbas">${o.ikon(['kasik', 'kase', 'tabak-bolmeli', 'kalp', 'parilti', 'liste', 'kitap'][n % 7], 32)}<span>${esc(b.baslik)}</span></h2>
+      let h = `<section class="kd-rbolum" id="${id}" aria-labelledby="${id}-bas">
+      <h2 id="${id}-bas" class="kd-rbas">${o.ikon(['kasik', 'kase', 'tabak-bolmeli', 'kalp', 'parilti', 'liste', 'kitap'][n % 7], 32)}<span>${esc(b.baslik)}</span></h2>
       ${dizi(b.paragraflar).map((p) => `<p>${esc(p)}</p>`).join('')}
       ${dizi(b.maddeler).length ? `<ul class="kd-rmadde">${dizi(b.maddeler).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
      </section>`;
@@ -219,7 +215,7 @@ ${ritim(o, [(z) => `<div class="kd-bolum kd-rduzen-kap${z}">
   </nav>
   <article class="kd-rmakale" data-renk="${r}">
    ${o.ornek()}
-   ${ipucu('kitap', `<b>Pütür bu yazıda size eşlik ediyor.</b> ${bolumler.length} bölüm${m.okumaDk ? `, yaklaşık ${m.okumaDk} dakika` : ''}. Acele etmeyin; soldaki listeden istediğiniz bölüme atlayabilirsiniz.`, 'kd-rgiris-ipucu')}
+   ${ipucu('kitap', `<b>Pütür bu yazıda size eşlik ediyor.</b> ${bolumler.length} bölüm${m.okumaDk ? `, yaklaşık ${m.okumaDk} dakika` : ''}. Acele etmeyin; soldaki listeden istediğiniz bölüme atlayabilirsiniz.`, 'kd-rgiris-ipucu kd-ipucu--kompakt')}
    ${govde}
    ${dizi(m.kaynaklar).length ? `<section class="kd-rbolum kd-rkaynaklar" id="kaynaklar" aria-labelledby="kaynaklar-bas"><h2 id="kaynaklar-bas" class="kd-rbas">${o.ikon('kitap', 32)}<span>Kaynaklar</span></h2><p class="kd-ikincil">Metin bu kaynakların uzlaştığı genel ilkeleri kendi sözlerimizle özetler; kaynak metinleri kopyalanmamıştır.</p>${kaynakListesi(dizi(m.kaynaklar))}</section>` : ''}
    <div class="kd-rsonu">${o.onay()}<p class="kd-ikincil">Bebeğinize özel bir durum varsa (erken doğum, alerji öyküsü, kronik hastalık) çocuk doktorunuza danışın.</p></div>

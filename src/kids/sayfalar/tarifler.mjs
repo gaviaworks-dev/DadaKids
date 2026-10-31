@@ -112,7 +112,7 @@ ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
    <div class="kd-izgara kd-izgara--2 kd-td-kutular">
     ${t.kesimNotu ? `<div class="kd-kutu kd-gir" data-renk="${ev.renk}"><h3>${o.ikon('bicak-tahta', 22)} Kıvam ve kesim</h3><p>${esc(t.kesimNotu)}</p><a class="kd-bag" href="kids-guvenli-kesim.html">Güvenli kesim rehberi</a></div>` : ''}
     ${t.saklama ? `<div class="kd-kutu kd-gir"><h3>${o.ikon('kase', 22)} Saklama</h3><p>${esc(t.saklama)}</p></div>` : ''}
-    ${t.ipucu ? `<div class="kd-kutu kd-gir kd-td-ipucu" data-renk="mint">${o.maskot('sef', { boy: 72 })}<div><h3>${o.ikon('parilti', 22)} Pütür'ün ipucu</h3><p>${esc(t.ipucu)}</p></div></div>` : ''}
+    ${t.ipucu ? `<div class="kd-kutu kd-gir kd-td-ipucu" data-renk="mint"><h3>${o.maskot('sef', { boy: 72 }) || o.ikon('parilti', 22)} Pütür'ün ipucu</h3><p>${esc(t.ipucu)}</p></div>` : ''}
    </div>
    ${sonrakiKart(t)}
   </div>
