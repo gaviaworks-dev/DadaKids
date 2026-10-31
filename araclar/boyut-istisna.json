@@ -49,6 +49,13 @@
     { "sayfa": "kids-mevsim.html", "sinif": "kd-murun", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
     { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
     { "sayfa": "kids-mevsim.html", "sinif": "kd-izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif__izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" }
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif__izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-donem-0-6-ay.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
+    { "sayfa": "kids-donem-1-3-yas.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
+    { "sayfa": "kids-donem-6-8-ay.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
+    { "sayfa": "kids-donem-9-12-ay.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
+    { "sayfa": "kids-donem-hamilelik.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
+    { "sayfa": "kids-donemler.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" }
   ]
 }
