@@ -25,7 +25,20 @@ function zorunlu(html, eski, yeni, etiket) {
 const MEGA_KART = `<a class="mega-find kd-mega" href="kids.html"><span class="mf-ico"><i class="fa-solid fa-baby" aria-hidden="true"></i></span><span class="mf-body"><b>Dada Kids</b><small>Yaşa göre bebek tarifleri</small></span><i class="fa-solid fa-arrow-right mf-arr" aria-hidden="true"></i></a>`;
 const CEKMECE_BAG = `<a href="kids.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> <span>Dada Kids · Bebek &amp; Çocuk</span></a>`;
 
+// Header logosu: "gastro" harf gruplarını sar + renkli "kids" ekle ("dada" yolları aynı kalır).
+// Kids sayfalarında kids.js html.kd-logo-kids ekler; Gastro sayfalarında Kids bağına tıklayınca dönüşüm oynar.
+const KIDS_LOGO = `<g class="kd-logo-kids" aria-hidden="true"><text x="1812" y="495.5" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324" letter-spacing="2"><tspan fill="#D4557C">k</tspan><tspan fill="#3F82C4">i</tspan><tspan fill="#D9783A">d</tspan><tspan fill="#23906C">s</tspan></text></g>`;
+function logoDonusumu(html) {
+  return html.replace(/(<span class="brand-word"><svg[^>]*>)([\s\S]*?)(<\/svg>)/g, (t, ac, ic, kap) => {
+    if (ic.includes('kd-logo-gastro')) return t;
+    const i = ic.indexOf('<g transform=');
+    if (i < 0) return t;
+    return ac + ic.slice(0, i) + '<g class="kd-logo-gastro">' + ic.slice(i) + '</g>' + KIDS_LOGO + kap;
+  });
+}
+
 async function kabukEkle(html, { css = [], js = [] } = {}) {
+  html = logoDonusumu(html);
   html = zorunlu(html, /(<a class="mega-find" href="https:\/\/dadagastro\.com\/dolapta-ne-var">[\s\S]*?<\/a>)/, `$1\n${MEGA_KART}`, 'mega-find');
   html = zorunlu(html, /(<div class="d-sub">\s*<a href="tarifler\.html">[\s\S]*?<\/a>)/, `$1\n ${CEKMECE_BAG}`, 'çekmece');
   const cssEk = [`<link rel="stylesheet" href="varlik/kids/kids.css?v=${SURUM}">`];

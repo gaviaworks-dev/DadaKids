@@ -37,7 +37,7 @@ export const evreSayfasi = (kod) => `kids-donem-${kod}.html`;
 
 /* ---------- Yaş rozeti (tarifler) ---------- */
 export const YASLAR = [6, 8, 9, 12, 18, 24];
-export const YAS_ETIKET = { 6: '+6 Ay', 8: '+8 Ay', 9: '+9 Ay', 12: '+12 Ay', 18: '+18 Ay', 24: '2–3 Yaş' };
+export const YAS_ETIKET = { 6: '+6 Ay', 8: '+8 Ay', 9: '+9 Ay', 12: '+12 Ay', 18: '+18 Ay', 24: '+24 Ay' };  // tek biçim: "+N Ay" (karar: tur 2)
 export const yasEvresi = (yas) => (yas < 9 ? '6-8-ay' : yas < 12 ? '9-12-ay' : '1-3-yas');
 export const yasRenk = (yas) => EVRE[yasEvresi(yas)].renk;
 export const yasRozet = (yas, boy = 'm', uzun = false) =>
@@ -63,7 +63,7 @@ export const kivamEtiket = (k) => `<span class="kd-etiket">${KIVAM_SVG[k] || ''}
 
 /* ---------- Alerjen ---------- */
 export const ALERJEN_AD = { gluten: 'Gluten', sut: 'Süt', yumurta: 'Yumurta', yerfistigi: 'Yer fıstığı', sertkabuklu: 'Sert kabuklu', susam: 'Susam', balik: 'Balık', soya: 'Soya' };
-export function alerjenPilleri(liste = [], { en = 3 } = {}) {
+export function alerjenPilleri(liste = [], { en = 8 } = {}) {  // varsayılan: hepsi okunur biçimde
   if (!liste.length) return `<span class="kd-alerjen kd-alerjen--yok"><i class="fa-solid fa-check" aria-hidden="true"></i> Ana alerjen yok</span>`;
   const p = liste.map((a) => `<span class="kd-alerjen"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ${esc(ALERJEN_AD[a] || a)}</span>`);
   return p.slice(0, en).join('') + (p.length > en ? `<span class="kd-alerjen">+${p.length - en}</span>` : '');
@@ -89,7 +89,7 @@ export const yaziIm = (ek = '') => `<span class="kd-im ${ek}" aria-label="dada k
 
 export function altMenu(aktif) {
   const linkler = MODULLER.map((m) => `<a href="${m.href}"${m.kod === aktif ? ' aria-current="page"' : ''}>${ikon(m.ikon, 20)}<span>${esc(m.kisa)}</span></a>`).join('');
-  return `<nav class="kd-ust" aria-label="Dada Kids menüsü"><div class="wrap"><a href="kids.html" class="kd-ust__im" aria-label="Dada Kids ana sayfa">${yaziIm()}</a><div class="kd-ust__menu">${linkler}</div></div></nav>`;
+  return `<nav class="kd-ust" aria-label="Dada Kids menüsü"><div class="wrap"><div class="kd-ust__menu">${linkler}</div></div></nav>`;  // yazı imi header logosuna taşındı; tema seçiciyi kids.js ekler
 }
 
 export const sayfa = (icerik, aktif) => `<div class="kd-sayfa">\n${altMenu(aktif)}\n${icerik}\n</div>`;
@@ -137,10 +137,10 @@ export const OGUN_AD = { kahvalti: 'Kahvaltı', ana: 'Öğle / Akşam', ara: 'Ar
 export function tarifKart(t, { gir = true, sira = 0 } = {}) {
   const ogun = (t.ogun || []).map((o) => OGUN_AD[o]).join(' · ');
   return `<a class="kd-kart kd-tarif${gir ? ' kd-gir' : ''}" href="${tarifHref(t.slug)}" data-renk="${yasRenk(t.yas)}" data-yas="${t.yas}" data-kivam="${t.kivam}" data-ogun="${(t.ogun || []).join(' ')}" data-alerjen="${(t.alerjenler || []).join(' ')}" data-sure="${t.sureDk ?? 999}" data-ad="${esc(t.ad.toLocaleLowerCase('tr'))}" data-sira="${sira}" style="--kd-gecikme:${Math.min(sira, 8) * 40}ms">
- <div class="kd-tarif__medya">${foto(t.gorsel, t.ad, { gen: 1200, yuk: 900 })}${yasRozet(t.yas)}</div>
+ <div class="kd-tarif__medya">${foto(t.gorsel, `${t.ad}: ${(KIVAM_AD[t.kivam] || '').toLocaleLowerCase('tr')} kıvamda, ${YAS_ETIKET[t.yas]} için örnek tarif fotoğrafı`, { gen: 1200, yuk: 900 })}${yasRozet(t.yas)}</div>
  <div class="kd-kart__govde">
   <h3>${esc(t.ad)}</h3>
-  <div class="kd-tarif__olgu">${kivamEtiket(t.kivam)}${alerjenPilleri(t.alerjenler, { en: 2 })}</div>
+  <div class="kd-tarif__olgu">${kivamEtiket(t.kivam)}${alerjenPilleri(t.alerjenler)}</div>
   <div class="kd-tarif__meta">${t.sureDk ? `<span><i class="fa-regular fa-clock" aria-hidden="true"></i>${t.sureDk} dk</span>` : ''}${ogun ? `<span><i class="fa-regular fa-sun" aria-hidden="true"></i>${esc(ogun)}</span>` : ''}</div>
  </div>
 </a>`;
@@ -171,3 +171,45 @@ export function modulKart(m, { gir = true } = {}) {
 export function bosDurum({ baslik = 'Sonuç bulunamadı', metin = '', id = '' } = {}) {
   return `<div class="kd-bos"${id ? ` id="${id}"` : ''} hidden>${sahne('bos-kase')}<h3>${esc(baslik)}</h3><p>${esc(metin)}</p><div class="kd-bos__oneriler"></div></div>`;
 }
+
+/* =====================================================================
+   TUR 2 yardımcıları — illüstrasyon, maskot, ayırıcı, bant/desen, video, tema seçici
+   ===================================================================== */
+import { existsSync as _var } from 'node:fs';
+const _kok = (p) => path.join(KOK, p);
+
+/** Kawaii illüstrasyon (varlik/kids/illus/<key>.webp|.svg). Dosya yoksa sahne SVG'sine ya da boşa düşer (kırık görsel yok). */
+export function illus(key, alt = '', { boy = 480, sinif = '', yedek = 'meyve-sepeti' } = {}) {
+  for (const uz of ['webp', 'svg', 'png']) {
+    const yol = `varlik/kids/illus/${key}.${uz}`;
+    if (_var(_kok(yol))) return `<img class="kd-illus ${sinif}" src="${yol}" width="${boy}" height="${boy}" alt="${esc(alt)}"${alt ? '' : ' aria-hidden="true"'} loading="lazy" decoding="async">`;
+  }
+  return yedek ? `<img class="kd-illus ${sinif}" src="varlik/kids/svg/sahne/${yedek}.svg" width="240" height="180" alt="${esc(alt)}"${alt ? '' : ' aria-hidden="true"'} loading="lazy" decoding="async">` : '';
+}
+
+/** Dada Kids maskotu (varlik/kids/maskot/<poz>.svg). Pozlar: merhaba, kasik, kitap, buyutec, takvim, uyku, kalp, sef, sepet, bicak. */
+export function maskot(poz = 'merhaba', { boy = 120, alt = '', sinif = '' } = {}) {
+  const yol = `varlik/kids/maskot/${poz}.svg`;
+  if (!_var(_kok(yol))) return '';
+  return `<img class="kd-maskot ${sinif}" src="${yol}" width="${boy}" height="${boy}" alt="${esc(alt)}"${alt ? '' : ' aria-hidden="true"'} loading="lazy" decoding="async">`;
+}
+
+/** Bölüm ayırıcı: üstteki bölümün altına konur; `renk` bir sonraki bölümün zemini (CSS değişkeni ya da renk adı). */
+export function ayirici(tip = 'dalga', renk = 'var(--kd-krem)', { ters = false, once = '' } = {}) {
+  const d = {
+    dalga: 'M0,32 C120,8 240,8 360,28 C480,48 600,52 720,34 C840,16 960,10 1080,26 C1200,42 1320,44 1440,30 L1440,64 L0,64 Z',
+    bulut: 'M0,64 L0,40 C40,40 50,18 90,22 C120,4 170,8 190,30 C220,16 260,22 270,40 C300,28 340,30 350,46 C380,30 420,26 440,44 C470,20 520,18 540,40 C570,30 600,32 610,44 C650,24 700,20 720,42 C750,22 800,24 815,42 C845,30 880,30 895,46 C925,24 975,22 990,42 C1020,28 1060,30 1070,44 C1100,20 1150,18 1170,40 C1200,30 1240,32 1250,46 C1280,26 1330,24 1345,42 C1380,32 1420,34 1440,40 L1440,64 Z',
+  }[tip] || '';
+  return `<div class="kd-ayirici${ters ? ' kd-ayirici--ters' : ''}" aria-hidden="true"${once ? ` style="background:${once}"` : ''}><svg viewBox="0 0 1440 64" preserveAspectRatio="none"><path d="${d}" style="fill:${renk}"/></svg></div>`;
+}
+
+/** Sessiz döngü video: autoplay muted loop playsinline; azaltılmış harekette yalnız poster (kids.js durdurur). */
+export function video(ad, alt = '', { sinif = '' } = {}) {
+  const k = `varlik/kids/video/${ad}`;
+  if (!_var(_kok(`${k}.mp4`)) && !_var(_kok(`${k}.webm`))) return '';
+  const poster = _var(_kok(`${k}.webp`)) ? `${k}.webp` : (_var(_kok(`${k}.jpg`)) ? `${k}.jpg` : '');
+  return `<video class="kd-video ${sinif}" autoplay muted loop playsinline preload="metadata"${poster ? ` poster="${poster}"` : ''}${alt ? ` aria-label="${esc(alt)}"` : ' aria-hidden="true"'}>${_var(_kok(`${k}.webm`)) ? `<source src="${k}.webm" type="video/webm">` : ''}${_var(_kok(`${k}.mp4`)) ? `<source src="${k}.mp4" type="video/mp4">` : ''}</video>`;
+}
+
+/** Zebra bant zemin rengi (ayırıcı dolgusu için): .kd-zebra[data-renk] ile aynı formül */
+export const zebraRenk = (renk) => renk ? `color-mix(in srgb, var(--kd-${renk}-a) 45%, var(--kd-krem))` : 'var(--kd-krem)';

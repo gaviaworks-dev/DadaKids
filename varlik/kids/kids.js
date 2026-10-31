@@ -66,10 +66,35 @@
   }
   function profilAyarla(yeni) {
     Object.keys(yeni).forEach(function (k) { profil[k] = yeni[k]; });
+    if ('c' in yeni) temaYaz(yeni.c === 'kiz' || yeni.c === 'erkek' ? yeni.c : 'notr');
     temaUygula(); adresiGuncelle(); baglariGuncelle();
     dinleyiciler.forEach(function (fn) { try { fn(profil); } catch (e) {} });
   }
+  /* Tema tercihi: URL'deki c (profil) önceliklidir; yoksa bu cihazdaki tercih (localStorage, try/catch) */
+  var TEMA_ANAHTAR = 'dadakids.tema.v1';
+  function temaOku() { try { return localStorage.getItem(TEMA_ANAHTAR); } catch (e) { return null; } }
+  function temaYaz(t) { try { localStorage.setItem(TEMA_ANAHTAR, t); } catch (e) { /* depolama kapalı: yalnız bu sayfa */ } }
+  // URL'de c açıkça varsa o geçerli ve hatırlanır ('belirtilmedi'/'bilinmiyor' → nötr); yoksa cihazdaki tercih
+  if (q.has('c') && profil.c) temaYaz(profil.c === 'kiz' || profil.c === 'erkek' ? profil.c : 'notr');
+  else { var kayitli = temaOku(); if (kayitli === 'kiz' || kayitli === 'erkek') profil.c = kayitli; }
   temaUygula();
+  function temaSeciciKur() {
+    var menu = $('.kd-ust .wrap'); if (!menu || $('.kd-tema-sec')) return;
+    var kutu = document.createElement('div'); kutu.className = 'kd-tema-sec'; kutu.setAttribute('role', 'group'); kutu.setAttribute('aria-label', 'Tema rengi');
+    [['notr', 'Nötr tema'], ['kiz', 'Pembe tema'], ['erkek', 'Mavi tema']].forEach(function (x) {
+      var b = document.createElement('button'); b.type = 'button'; b.dataset.tema = x[0]; b.setAttribute('aria-label', x[1]); b.title = x[1];
+      b.innerHTML = '<span aria-hidden="true"></span>'; kutu.appendChild(b);
+    });
+    menu.appendChild(kutu);
+    var guncelle = function () { var t = (profil.c === 'kiz' || profil.c === 'erkek') ? profil.c : 'notr'; $$('button', kutu).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.tema === t)); }); };
+    kutu.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      var t = b.dataset.tema; temaYaz(t);
+      profilAyarla({ c: t === 'notr' ? 'belirtilmedi' : t });
+      guncelle();
+    });
+    dinleyiciler.push(guncelle); guncelle();
+  }
   window.DadaKids = { profil: profil, EVRE: EVRE, kova: kova, profilAyarla: profilAyarla, dinle: function (fn) { dinleyiciler.push(fn); }, normal: normal, adresiGuncelle: adresiGuncelle };
 
   /* ---------- Kart girişi animasyonu ---------- */
@@ -194,7 +219,7 @@
       var al = k.dataset.alerjen ? k.dataset.alerjen.split(' ') : [];
       for (var i = 0; i < d.icermez.length; i++) {
         var x = d.icermez[i];
-        if (x === 'kuruyemis' ? (al.indexOf('yerfistigi') > -1 || al.indexOf('sertkabuklu') > -1) : al.indexOf(x) > -1) return false;
+        if (al.indexOf(x) > -1) return false;
       }
       if (d.ogun.length) { var og = k.dataset.ogun.split(' '); if (!d.ogun.some(function (o) { return og.indexOf(o) > -1; })) return false; }
       if (d.sure && +k.dataset.sure > d.sure) return false;
@@ -258,6 +283,31 @@
     $$('.kd-gir', hedef).forEach(function (o) { o.classList.add('kd-gorundu'); });
   }
 
-  function basla() { detayKur(); girisKur(); ustBoslukKur(); filtrePaneliKur(); hubKur(); katalogKur(); baglariGuncelle(); }
+  /* Logo: Gastro → Kids bağında "gastro" yerinde "kids"e döner, sonra gidilir; Kids → Gastro'da tersi */
+  function logoKur() {
+    var kidsSayfa = document.body.classList.contains('pg-kids');
+    var brand = $('header .brand'); if (kidsSayfa && brand) brand.setAttribute('aria-label', 'Dada Kids · Dada Gastro ana sayfa');
+    var azalt = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]'); if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+      var h = a.getAttribute('href'); if (/^(https?:|mailto:|tel:|#)/.test(h)) return;
+      var hedefKids = /^kids/.test(h), hedefGastro = /^(index|tarifler)\.html/.test(h);
+      if (azalt) return;
+      if (!kidsSayfa && hedefKids) { e.preventDefault(); document.documentElement.classList.add('kd-logo-kids'); setTimeout(function () { location.href = a.href; }, 420); }
+      else if (kidsSayfa && hedefGastro) { e.preventDefault(); document.body.classList.add('kd-logo-cikis'); setTimeout(function () { location.href = a.href; }, 380); }
+    });
+  }
+  function videoKur() {
+    var vs = $$('video.kd-video'); if (!vs.length) return;
+    var mq = matchMedia('(prefers-reduced-motion: reduce)');
+    var uygula = function () { vs.forEach(function (v) { if (mq.matches) { v.removeAttribute('autoplay'); v.pause(); try { v.currentTime = 0; } catch (e) {} } else { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); } }); };
+    uygula(); if (mq.addEventListener) mq.addEventListener('change', uygula);
+  }
+  function kademeKur() {
+    var gruplar = new Map();
+    $$('.kd-gir').forEach(function (o) { if (o.style.getPropertyValue('--kd-gecikme')) return; var p = o.parentElement; var n = gruplar.get(p) || 0; gruplar.set(p, n + 1); o.style.setProperty('--kd-gecikme', Math.min(n, 6) * 60 + 'ms'); });
+  }
+
+  function basla() { temaSeciciKur(); logoKur(); videoKur(); kademeKur(); detayKur(); girisKur(); ustBoslukKur(); filtrePaneliKur(); hubKur(); katalogKur(); baglariGuncelle(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();
 })();

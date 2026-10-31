@@ -290,7 +290,7 @@ a.kd-tarif:hover .kd-tarif__medya img { transform: scale(1.04); }
 /* ---------------------------------------------------------------------
    10 · Mikro animasyon (kart girişi) — azaltılmış hareket tercihine saygı
    --------------------------------------------------------------------- */
-.kd-js .kd-gir { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; transition-delay: var(--kd-gecikme, 0s); }
+.kd-js .kd-gir { opacity: 0; transform: translateY(16px); transition: opacity .36s cubic-bezier(.25,1,.5,1), transform .36s cubic-bezier(.25,1,.5,1); transition-delay: var(--kd-gecikme, 0s); }
 .kd-js .kd-gir.kd-gorundu { opacity: 1; transform: none; }
 @keyframes kd-zipla { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 .kd-yuz { animation: kd-zipla 4s ease-in-out infinite; }
@@ -332,3 +332,89 @@ a.kd-tarif:hover .kd-tarif__medya img { transform: scale(1.04); }
 }
 /* yazı imi bağı: dokunma alanı ≥ 44px */
 .kd-ust__im { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; text-decoration: none; }
+
+/* =====================================================================
+   TUR 2 — spacing ölçeği · başlık fontu · bölüm ritmi · maskot · hareket · tema v3 · logo
+   ===================================================================== */
+@font-face { font-family: 'Fredoka'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('font/fredoka-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Fredoka'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('font/fredoka-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  /* tek spacing ölçeği */
+  --kd-s1: 4px; --kd-s2: 8px; --kd-s3: 12px; --kd-s4: 16px; --kd-s5: 24px; --kd-s6: 32px; --kd-s7: 48px; --kd-s8: 64px; --kd-s9: 96px;
+  --kd-baslik: 'Fredoka', 'GilroyXB', var(--font, system-ui), sans-serif;
+  --kd-gecis: .35s cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Tema v3: cinsiyet seçimi tüm Kids zeminini çok hafif çevirir (krem taban korunur); evre/uyarı renkleri sabit */
+html[data-kd-tema="kiz"]   { --kd-krem: #FFF6F4; --kd-krem-2: #FDEDEC; --kd-cizgi: #F4DFE0; }
+html[data-kd-tema="erkek"] { --kd-krem: #F7F8FC; --kd-krem-2: #EEF2FA; --kd-cizgi: #DFE5F1; }
+.kd-sayfa, .kd-hero, .kd-ust, .kd-bolum, .kd-zebra, .kd-btn, .kd-ust__menu a { transition: background-color var(--kd-gecis), color var(--kd-gecis), box-shadow var(--kd-gecis), transform .18s ease; }
+
+/* Başlık tipografisi: yuvarlak, sevimli; gövde Gilroy */
+.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa .kd-baslik { font-family: var(--kd-baslik); font-weight: 600; letter-spacing: -.005em; }
+.kd-sayfa h1 { font-weight: 600; }
+
+/* Bölüm ritmi: çok açık evre bantları (zebra) + desen + dalga/bulut ayırıcı */
+.kd-zebra { position: relative; background-color: color-mix(in srgb, var(--r-a, var(--kd-krem-2)) 45%, var(--kd-krem)); }
+.kd-zebra:not([data-renk]) { background-color: var(--kd-krem-2); }
+.kd-desen--nokta { background-image: radial-gradient(color-mix(in srgb, var(--r-k, var(--kd-murekkep)) 13%, transparent) 1.4px, transparent 1.6px); background-size: 22px 22px; }
+.kd-desen--bulut { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cpath d='M30 70c0-12 10-20 21-18 4-10 17-14 26-7 8-6 21-2 22 9 10 0 17 8 15 17H34c-3 0-4-1-4-1z' fill='%23ffffff' fill-opacity='.55'/%3E%3Cpath d='M140 34c0-8 7-13 14-12 3-7 11-9 17-5 5-4 14-1 14 6 7 0 11 5 10 11h-52c-2 0-3 0-3 0z' fill='%23ffffff' fill-opacity='.45'/%3E%3C/svg%3E"); background-size: 220px 120px; }
+.kd-desen--konfeti { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill-opacity='.35'%3E%3Ccircle cx='20' cy='24' r='3' fill='%23F7B8CB'/%3E%3Ccircle cx='120' cy='40' r='2.5' fill='%23AFD3F5'/%3E%3Ccircle cx='70' cy='110' r='3' fill='%23A6E3CB'/%3E%3Ccircle cx='140' cy='130' r='2.5' fill='%23FFDF7E'/%3E%3Cpath d='M86 30q6-6 12 0' stroke='%23FFC4A3' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M28 128q6-6 12 0' stroke='%23F7B8CB' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E"); background-size: 160px 160px; }
+.kd-ayirici { display: block; line-height: 0; margin: -1px 0 0; position: relative; z-index: 1; pointer-events: none; }
+.kd-ayirici svg { display: block; width: 100%; height: clamp(24px, 3.6vw, 52px); }
+.kd-ayirici--ters svg { transform: scaleY(-1); }
+
+/* Maskot + konuşma balonu */
+.kd-maskot { display: inline-block; height: auto; animation: kd-suzul 5.5s ease-in-out infinite; transform-origin: 50% 90%; }
+@keyframes kd-suzul { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-7px) rotate(1.5deg); } }
+.kd-rehberci { display: flex; align-items: flex-end; gap: var(--kd-s3); }
+.kd-rehberci .kd-maskot { width: clamp(72px, 8vw, 104px); flex: none; }
+.kd-baloncuk { position: relative; background: #fff; border-radius: 22px; padding: var(--kd-s4) var(--kd-s5); box-shadow: var(--kd-golge); font-size: 15px; line-height: 1.5; color: var(--kd-murekkep); max-width: 520px; }
+.kd-baloncuk::before { content: ""; position: absolute; left: -9px; bottom: 18px; width: 18px; height: 18px; background: #fff; border-radius: 3px; transform: rotate(45deg); box-shadow: -3px 3px 6px -4px rgba(90,60,40,.18); }
+.kd-baloncuk b { font-family: var(--kd-baslik); font-weight: 600; }
+
+/* İllüstrasyon + video */
+.kd-illus { display: block; width: 100%; height: auto; }
+.kd-video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; background: var(--kd-krem-2); }
+.kd-yuzen { animation: kd-suzul 6s ease-in-out infinite; }
+
+/* Basma tepkisi */
+.kd-btn:active, .kd-chip:active, .kd-secim label:active span, .kd-ust__menu a:active { transform: scale(.97); }
+
+/* Alt menü: ortalı; yazı imi header logosuna taşındı → gizli; tema seçici sağda */
+.kd-ust .wrap { justify-content: center; gap: var(--kd-s4); }
+.kd-ust__im { display: none !important; }
+.kd-ust__menu { margin-left: 0; scroll-padding-inline: var(--kd-s6); }
+.kd-tema-sec { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: var(--kd-r-tam); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); flex: none; }
+.kd-tema-sec button { width: 30px; height: 30px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; background: transparent; padding: 0; }
+.kd-tema-sec button span { width: 16px; height: 16px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 1.5px rgba(58,46,42,.25); }
+.kd-tema-sec button[data-tema="notr"] span { background: linear-gradient(135deg, #A6E3CB 50%, #FFC4A3 50%); }
+.kd-tema-sec button[data-tema="kiz"] span { background: #F7B8CB; }
+.kd-tema-sec button[data-tema="erkek"] span { background: #AFD3F5; }
+.kd-tema-sec button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--kd-tema); background: var(--kd-tema-a); }
+.kd-tema-sec button:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+
+/* Header logosu: Kids sayfalarında "dada gastro" → "dada kids" ("dada" aynı kalır) */
+.brand-word svg .kd-logo-kids { opacity: 0; transform: translateY(40px); transition: opacity .45s ease .05s, transform .45s cubic-bezier(.2,.8,.2,1) .05s; }
+.brand-word svg .kd-logo-gastro { transition: opacity .3s ease, transform .35s ease; }
+html.kd-logo-kids .brand-word svg .kd-logo-gastro, .pg-kids:not(.kd-logo-cikis) .brand-word svg .kd-logo-gastro { opacity: 0; transform: translateY(-40px); }
+html.kd-logo-kids .brand-word svg .kd-logo-kids, .pg-kids:not(.kd-logo-cikis) .brand-word svg .kd-logo-kids { opacity: 1; transform: none; }
+@view-transition { navigation: auto; }
+.brand { view-transition-name: kd-logo; }
+
+@media (max-width: 640px) {
+  .kd-ust .wrap { justify-content: flex-start; }
+  .kd-tema-sec button { width: 28px; height: 28px; }
+  .kd-baloncuk { font-size: 14px; padding: var(--kd-s3) var(--kd-s4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kd-maskot, .kd-yuzen { animation: none; }
+  .brand-word svg .kd-logo-kids, .brand-word svg .kd-logo-gastro { transition: none; }
+  .kd-sayfa, .kd-hero, .kd-ust, .kd-bolum, .kd-zebra { transition: none; }
+  @view-transition { navigation: none; }
+}
+/* alt bölüm başlıklarında konuya özel küçük ikon (görselsiz düz metin bloğu kalmasın) */
+.kd-rbas { display: flex; align-items: center; gap: var(--kd-s3); }
+.kd-rbas > img { width: 32px; height: 32px; flex: none; padding: 4px; border-radius: 12px; background: var(--r-a, var(--kd-krem-2)); }
+.kd-ar-panel__baslik img, .kd-dmatris__ikon img { width: 28px; height: 28px; }
