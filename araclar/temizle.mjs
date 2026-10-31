@@ -25,8 +25,8 @@ export function ogeSil(html, bas) {
 }
 
 const ID_SIL = ['rdActbar', 'rdSharePop', 'lightbox', 'cookmode', 'fbTab', 'fbOverlay', 'fbModal', 'cookieBanner', 'lgOverlay', 'lgGate', 'keToast', 'mentorPanel'];
-const SINIF_SIL = ['fb-rail', 'head-bell', 'acct-item acct-wrap'];
-const BETIK_SIL = /<script[^>]*src="[^"]*(analitik|goruntulenme|gorus-gonder|gorus-girisleri|dm-gorus|dm-p4-depo|dm-p4-m|dm-p5-l|tarif-eylem|telefon-maskesi|sosyal-kayit-onayi|basari-bildirimi|kaydedilmemis|zil-sayaci)[^"]*"[^>]*><\/script>\s*/g;
+const SINIF_SIL = ['fb-rail', 'head-bell', 'acct-item acct-wrap', 'drawer-acct', 'd-item d-acct-block'];
+const BETIK_SIL = /<script[^>]*src="[^"]*(analitik|goruntulenme|gorus-gonder|gorus-girisleri|dm-gorus|dm-p4-depo|dm-p4-m|dm-p5-l|tarif-eylem|yol-koprusu|telefon-maskesi|sosyal-kayit-onayi|basari-bildirimi|kaydedilmemis|zil-sayaci)[^"]*"[^>]*><\/script>\s*/g;
 
 export function kabukTemizle(html) {
   // 1 · head: kimlik, CSRF, şifreli değerler, canlı sayfa kimliği
@@ -65,7 +65,7 @@ export function tokenTaramasi(html) {
     ['oturum çerezi adı', /(laravel_session|XSRF-TOKEN)/],
     ['jeton/token niteliği', /data-[a-z-]*(jeton|token|imza|signature)[a-z-]*="[^"]+"/i],
     ['Görüş Bildir formu', /id="fbModal"|class="feedback-tab"/],
-    ['hesap menüsü', /class="acct-menu"|class="[^"]*acct-wrap/],
+    ['hesap menüsü', /class="acct-menu"|class="[^"]*acct-wrap|class="drawer-acct"|d-acct-block|data-cikis/],
     ['bildirim rozeti', /class="hb-badge"|head-bell/],
     ['gizli tarif paneli', /id="cookmode"|id="rdActbar"|id="rdSharePop"/],
     ['canlı tarif meta', /<meta[^>]*(property|name)="(og|twitter):[^"]*"[^>]*content="[^"]*Balkabağı Püresi Tarifi/],
