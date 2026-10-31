@@ -1,0 +1,32 @@
+{
+  "aciklama": "Tur 2 öncesine göre bilinçli boyut değişiklikleri. Her satırın gerekçesi var; yeni satır yalnız kullanıcı onaylı değişiklik için eklenir.",
+  "kurallar": [
+    { "sayfa": "*", "sinif": "kd-ust__menu", "gerekce": "Tema seçici alt menüye eklendi (kullanıcı EK'i)" },
+    { "sayfa": "*", "sinif": "kd-dhaplar", "gerekce": "Evre besin matrisi sekmeli bileşen (kullanıcı EK'i)" },
+    { "sayfa": "*", "sinif": "kd-dhap", "gerekce": "Evre besin matrisi sekmeli bileşen (kullanıcı EK'i)" },
+    { "sayfa": "*", "sinif": "kd-myilserit", "gerekce": "Mevsim ay adları blok bazına alındı (site turu bulgusu)" },
+    { "sayfa": "*", "sinif": "kd-gorundu", "gerekce": "Giriş animasyonu durum sınıfı; medyanı sayfadaki öğe karışımından gelir, tek tek kart sınıfları ayrıca ölçülüyor" },
+    { "sayfa": "kids-tarifler.html", "sinif": "kd-secim", "gerekce": "Alerjen filtresi veride geçen her alerjeni kapsıyor (filtre doğruluğu); seçenek sayısı arttı, chip boyutu aynı" },
+    { "sayfa": "kids-rehber-ogurme-mi-bogulma-mi.html", "sinif": "kd-hero", "genislik": 1024, "gerekce": "Taban SVG kapağı 976×732 tam genişlikte büyüyordu; ortak 4:3 hero kutusuna girdi, küçülme" },
+    { "sayfa": "kids-rehber-ogurme-mi-bogulma-mi.html", "sinif": "kd-hero__izgara", "genislik": 1024, "gerekce": "Taban SVG kapağı 976×732 tam genişlikte büyüyordu; ortak 4:3 hero kutusuna girdi, küçülme" },
+    { "sayfa": "kids-arac-alerjen-takip.html", "sinif": "kd-at-alt", "genislik": 1024, "gerekce": "Boşluk tokenı ile not ve eylemler tek satıra sığdı; küçülme, kart büyümedi" },
+    { "sayfa": "kids-arac-hazir-mi.html", "sinif": "kd-bolum", "gerekce": "Bilgi bölümüne başlık ve zebra ritmi eklendi (boyut dışı görsel dil); .kd-hm-bilgi kartları tabanda" },
+    { "sayfa": "kids-donem-0-6-ay.html", "sinif": "kd-bolum", "genislik": 390, "gerekce": "Sekmeli besin matrisi bölümleri kısalttı (kullanıcı EK'i); medyan küçüldü, büyüme değil" },
+    { "sayfa": "kids-donem-0-6-ay.html", "sinif": "kd-bolum", "genislik": 768, "gerekce": "Sekmeli besin matrisi bölümleri kısalttı (kullanıcı EK'i); medyan küçüldü, büyüme değil" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mpanel", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-acik", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mpanel__bas", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mkahraman", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mkahraman__gorsel", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-myil", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mbilgiler", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mbilgi", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mbebek", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtezgah", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtezgah__liste", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-murun", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
+    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif__izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" }
+  ]
+}
