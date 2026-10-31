@@ -121,8 +121,8 @@
   ];
 
   /* ---------- DOM ---------- */
-  var kok, btn, kucult, sekme, menu, balon, balonIc, sahne, video, ogeler = [];
-  var D = { durum: 'idle', menu: false, balon: false, gizli: false, mesgul: false, tiklar: [], sonSurpriz: -1e9, surprizSay: 0, ortamZaman: 0, kirpZaman: 0, tepkiZaman: 0, videoHazir: false, navPay: -1, kaldir: 0 };
+  var kok, btn, kucult, sekme, yakala, menu, balon, balonIc, sahne, video, ogeler = [];
+  var D = { durum: 'idle', menu: false, balon: false, gizli: false, mesgul: false, tiklar: [], sonSurpriz: -1e9, surprizSay: 0, ortamZaman: 0, kirpZaman: 0, tepkiZaman: 0, videoHazir: false, navPay: -1, kaldir: 0, guvenli: 0, poz: null, dar: false };
 
   function el(etiket, ozellik, ic) {
     var e = document.createElement(etiket);
@@ -153,14 +153,16 @@
     balonIc = balon.querySelector('.kd-pt__balon-ic');
     sekme = el('button', { type: 'button', class: 'kd-pt-sekme', 'aria-label': "Pütür'ü göster", title: "Pütür'ü göster", hidden: '' }, miniSvg());
 
+    yakala = el('div', { class: 'kd-pt-yakala', 'aria-hidden': 'true', hidden: '' });
     kok.appendChild(balon); kok.appendChild(menu); kok.appendChild(btn); kok.appendChild(kucult); kok.appendChild(sahne);
-    document.body.appendChild(kok); document.body.appendChild(sekme);
+    document.body.appendChild(kok); document.body.appendChild(sekme); document.body.appendChild(yakala);
 
     var t = oku(ANAHTAR); if (t && t.gizli) gizle(true, true);
     renkGuncelle(); if (DK() && DK().dinle) DK().dinle(renkGuncelle);
     new MutationObserver(renkGuncelle).observe(document.documentElement, { attributes: true, attributeFilter: ['data-kd-tema'] });
 
     btn.addEventListener('click', tikla);
+    yakala.addEventListener('click', tikla);
     btn.addEventListener('pointerenter', function () { if (D.durum === 'idle' && !D.mesgul && !D.menu) kok.classList.add('kd-pt--ilgi'); });
     btn.addEventListener('pointerleave', function () { kok.classList.remove('kd-pt--ilgi'); });
     btn.addEventListener('focus', yerlesimIste); btn.addEventListener('blur', yerlesimIste);
@@ -198,22 +200,61 @@
     if (kolon) { var r = kolon.getBoundingClientRect(); sol = r.left + (parseFloat(getComputedStyle(kolon).paddingLeft) || 0); }
     D.dar = btn.offsetWidth + kok.offsetLeft + 6 > sol;                         // sol boşluğa sığmıyorsa içerikle kesişir
   }
-  function altindaEtkilesim() {                          // tam boy Pütür bir bağın ya da düğmenin ortasını örter mi? (sayfa düzeninden bağımsız)
-    var l = kok.offsetLeft, u = kok.offsetTop, boy = btn.offsetWidth, n = document.querySelectorAll('a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]');
+  function etkilesimMerkezleri() {                       // ekrandaki bağ/düğme ortaları (sayfa düzeninden ve ızgara sınıflarından bağımsız)
+    var n = document.querySelectorAll('a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]'), out = [];
     for (var i = 0; i < n.length; i++) {
       var e = n[i]; if (kok.contains(e) || e === sekme) continue;
       var r = e.getBoundingClientRect(); if (r.width < 8 || r.height < 8) continue;
       var x = r.left + r.width / 2, y = r.top + r.height / 2;
-      if (x < l - 2 || x > l + boy + 2 || y < u - 2 || y > u + boy + 2) continue;
-      if (getComputedStyle(e).visibility !== 'hidden') return true;
+      if (x < 0 || y < 0 || x >= innerWidth || y >= innerHeight) continue;
+      var c = getComputedStyle(e); if (c.visibility === 'hidden' || c.display === 'none' || +c.opacity <= .05) continue;
+      out.push({ x: x, y: y });
     }
-    return false;
+    return out;
   }
+  function bosMu(m, x0, y0, x1, y1) { for (var i = 0; i < m.length; i++) if (m[i].x >= x0 && m[i].x <= x1 && m[i].y >= y0 && m[i].y <= y1) return false; return true; }
+  function altindaEtkilesim() {                          // tam boy Pütür bir bağın ya da düğmenin ortasını örter mi?
+    var l = kok.offsetLeft, u = kok.offsetTop, boy = btn.offsetWidth;
+    return !bosMu(etkilesimMerkezleri(), l - 2, u - 2, l + boy + 2, u + boy + 2);
+  }
+  /* Dar ekranda animasyon ve menü için konum: zıplamanın süpürdüğü alan bir bağın/düğmenin ortasına değmesin.
+     Önce tam boy (gerekirse yukarı kayarak), olmazsa kenarda. Oranlar kareden ölçüldü: video tepesi boyun %36'sı yukarı çıkar. */
+  function guvenliKonum() {
+    var m = etkilesimMerkezleri(), boy = btn.offsetWidth, l = kok.offsetLeft, u = kok.offsetTop - D.kaldir;
+    var H = boy * .36, pay = boy * .08, ust = ustSinir() + 8, kenarSag = boy * .6, enIyi = null;
+    var dinlenme = kok.classList.contains('kd-pt--kenar') ? [0, kenarSag] : [l, l + boy];
+    function dene(kenar, ek) {
+      var x0 = kenar ? 0 : l - pay, x1 = kenar ? kenarSag : l + boy + pay;
+      for (var dy = 0; dy <= boy * 3 && u - dy - H >= ust; dy += 6) {
+        if (!bosMu(m, dinlenme[0], u - dy, dinlenme[1], u + boy)) return;      // yukarı kayarken yolda bir öğe var
+        if (bosMu(m, x0, u - dy - H, x1, u - dy + boy)) { if (!enIyi || dy + ek < enIyi.c) enIyi = { kenar: kenar, dy: dy, c: dy + ek }; return; }
+      }
+    }
+    dene(false, 0); dene(true, boy * 1.5);
+    return enIyi || { kenar: true, dy: 0 };
+  }
+  function hedefKutu() {                                 // geçiş bitmeden, Pütür'ün varacağı kutu
+    var boy = btn.offsetWidth, kenar = kok.classList.contains('kd-pt--kenar');
+    var left = kenar ? -boy * .4 : kok.offsetLeft, top = kok.offsetTop - D.kaldir - D.guvenli;
+    return { left: left, top: top, right: left + boy, bottom: top + boy, width: boy, height: boy };
+  }
+  /* Pütür güvenli konuma kayarken hızlı dokunuşlar boşa gitmesin: dinlenme yerini animasyon boyunca tutar */
+  function yakalaGoster(r) {
+    if (!D.dar) return;
+    var sol = Math.max(0, r.left);
+    yakala.style.cssText = 'left:' + sol + 'px;top:' + r.top + 'px;width:' + (r.right - sol) + 'px;height:' + r.height + 'px';
+    yakala.hidden = false;
+  }
+  function yakalaGizle() { yakala.hidden = true; }
   function yerlesim() {
     if (D.gizli) return;
     var acik = D.menu || D.balon || D.mesgul || btn.matches(':focus-visible');
-    var kenar = D.dar && !acik && ((window.scrollY || 0) > 48 || altindaEtkilesim());
+    if (acik && D.dar) { if (!D.poz) D.poz = guvenliKonum(); } else D.poz = null;  // açık kaldıkça konum sabit: menü kaymaz
+    var kenar = D.dar && (D.poz ? D.poz.kenar : ((window.scrollY || 0) > 48 || altindaEtkilesim()));
     kok.classList.toggle('kd-pt--kenar', kenar);
+    var guvenli = D.poz ? D.poz.dy : 0;
+    if (guvenli !== D.guvenli) { D.guvenli = guvenli; kok.style.setProperty('--pt-guvenli', guvenli + 'px'); }
+    if (D.poz) return;
     // footer perdesi açıldıysa yasal bağlara ve telif satırına binmez: üstüne çıkar
     var boy = btn.offsetWidth, ust = kok.offsetTop, alt = ust + boy, sag = kenar ? boy * .6 : kok.offsetLeft + boy, kaldir = 0;
     var ana = document.querySelector('.page-main'), anaAlt = ana ? ana.getBoundingClientRect().bottom : 0;
@@ -308,12 +349,13 @@
   function tepki() {
     kok.classList.remove('kd-pt--ilgi');
     if (azalt()) { menuAc(); return; }
+    yakalaGoster(btn.getBoundingClientRect());
     D.mesgul = true; yerlesim(); durum('tepki');
     var bitir = function () {
       clearTimeout(D.tepkiZaman); if (D.durum !== 'tepki') return;
       var fark = performance.now() - (D.tiklar[D.tiklar.length - 1] || 0);
       if (D.tiklar.length >= 2 && fark < 420) { D.tepkiZaman = setTimeout(bitir, 420 - fark); return; }   // hızlı tık sürüyorsa menü açılmaz
-      videoKapat();
+      videoKapat(); yakalaGizle();
       D.mesgul = false; durum('idle'); menuAc();
     };
     D.tepkiZaman = setTimeout(bitir, 1600);                                     // SVG/CSS zıplaması (putur.css: pt-zipla)
@@ -357,12 +399,13 @@
     if (D.menu) menuKapat(false);
     if (D.balon) balonKapat(false);
     kok.classList.remove('kd-pt--ilgi', 'kd-pt--selam');
+    if (yakala.hidden) yakalaGoster(btn.getBoundingClientRect());
     D.mesgul = true; D.sonSurpriz = performance.now(); D.surprizSay++;
     kok.setAttribute('data-surpriz', String(D.surprizSay));
     durum('surpriz'); yerlesim();
     var karakter = btn.querySelector('.kd-pt__karakter');
     var bitti = function () {
-      sahne.innerHTML = '';
+      sahne.innerHTML = ''; yakalaGizle();
       D.mesgul = false; durum('idle'); yerlesim();
       if (!azalt()) selamVer();
     };
@@ -373,26 +416,41 @@
       tek.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 1300, easing: 'ease-in-out' });
       setTimeout(bitti, 1350); return;
     }
-    // 1) hafif şişip yumuşakça "pıt" (0–360 ms)
+    // 1) hafif şişip yumuşakça "pıt" (0–360 ms); kenardaysa şişmez, yanındaki öğeye taşmaz
+    var kenarda = kok.classList.contains('kd-pt--kenar');
     karakter.animate([
       { transform: 'scale(1)', opacity: 1 },
-      { transform: 'scale(1.08, .94)', opacity: 1, offset: .4 },
-      { transform: 'scale(1.14)', opacity: .9, offset: .7 },
+      { transform: kenarda ? 'scale(1.02, .96)' : 'scale(1.08, .94)', opacity: 1, offset: .4 },
+      { transform: kenarda ? 'scale(1.03)' : 'scale(1.14)', opacity: .9, offset: .7 },
       { transform: 'scale(.3)', opacity: 0 }
     ], { duration: 360, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' });
     // 2) parçalar süzülür (280–1000), 3) geri toplanır (1000–1560); sol ve alt kenardan taşmaz
-    var b = btn.getBoundingClientRect(), mx = b.width / 2, my = b.height * .55;
+    var b = hedefKutu(), mx = b.width / 2, my = b.height * .55, merkezler = etkilesimMerkezleri();
     var sekiller = ['yildiz', 'kalp', 'parilti', 'nokta', 'yildiz', 'parilti', 'kalp', 'parilti', 'nokta', 'yildiz', 'kalp', 'parilti', 'nokta', 'parilti'];
-    var yaricap = Math.max(84, b.width * 1.25);
+    var yaricap = Math.max(84, b.width * 1.25), ox = b.left + mx, oy = b.top + my;
+    function yolTemiz(dx, dy, boy) {                                            // parçanın yolu bir bağın/düğmenin ortasından geçmesin
+      for (var t = .15; t <= 1.01; t += .085) {
+        var pay = (boy * .8 + 4) * (.35 + .65 * Math.min(1, t / .5)), x = ox + dx * t, y = oy + (dy - 14) * t;
+        if (!bosMu(merkezler, x - pay, y - pay, x + pay, y + pay)) return false;
+      }
+      return true;
+    }
+    function hedefSec(i, boy) {
+      for (var d = 0; d < 28; d++) {
+        var aci = (-105 + ((i + d * 5) % sekiller.length) / (sekiller.length - 1) * 130 + (Math.random() * 14 - 7)) * Math.PI / 180;
+        var r = yaricap * (.55 + (((i + d) * 37) % 10) / 22) * (d > 14 ? .7 : 1);
+        var dx = Math.cos(aci) * r, dy = Math.sin(aci) * r - 10;
+        dx = Math.min(Math.max(dx, boy - ox), innerWidth - ox - boy);
+        dy = Math.max(Math.min(dy, innerHeight - oy - boy), boy + 14 - oy);
+        if (yolTemiz(dx, dy, boy)) return [dx, dy];
+      }
+      return null;                                                              // güvenli yol yoksa bu parça hiç çıkmaz
+    }
     sekiller.forEach(function (sk, i) {
       var boy = sk === 'nokta' ? 9 + (i % 3) * 2 : 15 + (i * 7) % 9;
-      var p = parca(sk, R[i % R.length], boy);
+      var hedef = hedefSec(i, boy); if (!hedef) return;
+      var p = parca(sk, R[i % R.length], boy), dx = hedef[0], dy = hedef[1];
       p.style.left = mx + 'px'; p.style.top = my + 'px';
-      var aci = (-105 + (i / (sekiller.length - 1)) * 130 + (Math.random() * 14 - 7)) * Math.PI / 180;
-      var r = yaricap * (.55 + ((i * 37) % 10) / 22);
-      var dx = Math.cos(aci) * r, dy = Math.sin(aci) * r - 10;
-      dx = Math.max(dx, boy - (b.left + mx)); dx = Math.min(dx, innerWidth - (b.left + mx) - boy);
-      dy = Math.min(dy, innerHeight - (b.top + my) - boy);
       var don = (i % 2 ? 1 : -1) * (40 + (i * 23) % 70);
       p.animate([
         { transform: 'translate(-50%,-50%) translate(0,0) scale(.2) rotate(0deg)', opacity: 0 },
@@ -407,8 +465,8 @@
     setTimeout(function () {
       var don = karakter.animate([
         { transform: 'scale(.3)', opacity: 0 },
-        { transform: 'scale(1.1, .92)', opacity: 1, offset: .55 },
-        { transform: 'scale(.96, 1.04)', opacity: 1, offset: .8 },
+        { transform: kenarda ? 'scale(1.02, .97)' : 'scale(1.1, .92)', opacity: 1, offset: .55 },
+        { transform: kenarda ? 'scale(.98, 1.02)' : 'scale(.96, 1.04)', opacity: 1, offset: .8 },
         { transform: 'scale(1)', opacity: 1 }
       ], { duration: 480, easing: 'cubic-bezier(.25,1,.5,1)', fill: 'forwards' });
       don.onfinish = function () { karakter.getAnimations().forEach(function (a) { a.cancel(); }); };
@@ -455,7 +513,7 @@
     return alt;
   }
   function konumla() {                                   // dörtte bir yay: Pütür'ün üstünden sağına; sığmazsa iki sütun
-    var hb = btn.getBoundingClientRect(), s = hb.width || 72, n = ogeler.length;
+    var hb = hedefKutu(), s = hb.width || 72, n = ogeler.length;
     var dar = innerWidth <= 640, h = dar ? 42 : 44;
     kok.style.setProperty('--pt-oge', h + 'px');
     var cx = s / 2, cy = s / 2, ikon = 22;                                      // ikon merkezi yay üstünde
@@ -478,6 +536,7 @@
         y = cy - bb * (1 - t) - h / 2;
         var tasma = hb.left + x + b.offsetWidth + 8 - innerWidth;
         if (tasma > 0) x -= tasma;
+        x = Math.max(x, 6 - hb.left);                                           // Pütür kenardayken yay ekranda kalır
         b.style.setProperty('--x', x.toFixed(1) + 'px'); b.style.setProperty('--y', y.toFixed(1) + 'px');
       }
     }
@@ -513,9 +572,10 @@
   /* ---------- Balon (cevap) ---------- */
   var sonSecenek = null;
   function balonSinirla() {
-    var hb = btn.getBoundingClientRect(), dar = innerWidth <= 640;
+    var hb = hedefKutu(), dar = innerWidth <= 640;
     var alan = (dar ? hb.top - 12 : hb.bottom - 2) - ustSinir() - 8;
     kok.style.setProperty('--pt-balon-max', Math.max(180, Math.round(alan)) + 'px');
+    kok.style.setProperty('--pt-balon-sol', Math.max(0, kok.offsetLeft - hb.left) + 'px');
   }
   function sec(kod) {
     sonSecenek = kod;

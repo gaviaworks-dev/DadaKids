@@ -18,26 +18,31 @@ html[data-kd-tema="kiz"] .kd-pt { --pt-ikinci: var(--kd-sari-o, #FFDF7E); }
   position: fixed; left: var(--pt-sol); bottom: calc(var(--pt-alt) + var(--pt-nav, 0px) + env(safe-area-inset-bottom, 0px));
   width: var(--pt-boy); height: var(--pt-boy); z-index: 85; color: #3A2E2A;
   font-family: var(--font, "Gilroy", system-ui, sans-serif); font-size: 15px; line-height: 1.45;
-  transform: translateY(calc(-1 * var(--pt-kaldir, 0px)));                      /* footer telif satırının üstüne çıkar */
-  transition: transform .34s var(--pt-yumusak), bottom .24s var(--pt-yumusak);
+  /* dikey (transform): footer payı + güvenli konum · yatay (translate): kenara çekilme.
+     Açılırken önce yukarı sonra yana, çekilirken önce yana sonra aşağı: yol bir öğenin ortasından geçmez */
+  transform: translateY(calc(-1 * (var(--pt-kaldir, 0px) + var(--pt-guvenli, 0px)))); translate: 0 0;
+  transition: transform .2s var(--pt-yumusak), translate .2s var(--pt-yumusak) .16s, bottom .24s var(--pt-yumusak);
   -webkit-tap-highlight-color: transparent;
 }
-.kd-pt[hidden], .kd-pt [hidden], .kd-pt-sekme[hidden] { display: none !important; }
+.kd-pt[hidden], .kd-pt [hidden], .kd-pt-sekme[hidden], .kd-pt-yakala[hidden] { display: none !important; }
 .kd-pt *, .kd-pt *::before, .kd-pt *::after { box-sizing: border-box; }
 .kd-pt button, .kd-pt input { font: inherit; color: inherit; }
 .kd-pt button { cursor: pointer; }
 .kd-pt :focus-visible, .kd-pt-sekme:focus-visible { outline: 3px solid var(--pt-halka); outline-offset: 2px; }
 
 /* Dar ekranda sayfa kayarken kenara çekilir: içerik sütununu örtmez, yüzü görünür kalır */
-.kd-pt--kenar { transform: translate(calc(-1 * var(--pt-sol) - var(--pt-boy) * .4), calc(-1 * var(--pt-kaldir, 0px))); }
+.kd-pt--kenar { translate: calc(-1 * var(--pt-sol) - var(--pt-boy) * .4) 0; transition: translate .2s var(--pt-yumusak), transform .2s var(--pt-yumusak) .16s, bottom .24s var(--pt-yumusak); }
+.kd-pt--kenar .kd-pt__kucult { left: calc(var(--pt-boy) * .4 + 2px); }
+.kd-pt-yakala { position: fixed; z-index: 84; background: none; touch-action: manipulation; }
 .kd-pt--kenar .kd-pt__karakter { transform: rotate(9deg); }
 
 /* ---------- Karakter ---------- */
 .kd-pt__btn { position: absolute; inset: 0; padding: 0; border: 0; background: none; border-radius: 50%; touch-action: manipulation; }
+.kd-pt__btn > * { pointer-events: none; }                                       /* tık alanı düğme kutusudur; dönen/ölçeklenen iç kutular taşmaz */
 .kd-pt__karakter { position: absolute; inset: 0; display: block; transition: transform .34s var(--pt-yumusak); }
 .kd-pt__golge { position: absolute; left: 11%; right: 11%; bottom: 1%; height: 7%; border-radius: 50%; background: #4A3A34; opacity: .11; transition: opacity .25s; }
 .kd-pt__parilti { position: absolute; inset: -14%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--pt-vurgu) 62%, transparent), transparent 76%); opacity: 0; transform: scale(.82); transition: opacity .3s, transform .3s var(--pt-yumusak); pointer-events: none; }
-.kd-pt__svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(0 2px 3px rgba(74, 58, 52, .16)); }
+.kd-pt__svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; pointer-events: none; filter: drop-shadow(0 2px 3px rgba(74, 58, 52, .16)); }
 .kd-pt__video { position: absolute; left: -56.67%; top: -107.7%; width: 213.33%; height: auto; aspect-ratio: 1; max-width: none; opacity: 0; pointer-events: none; }
 .kd-pt--video .kd-pt__video { opacity: 1; }
 .kd-pt--video .kd-pt__svg { visibility: hidden; }
@@ -289,7 +294,7 @@ html[data-kd-tema="kiz"] .kd-pt { --pt-ikinci: var(--kd-sari-o, #FFDF7E); }
 @media (max-width: 640px) {
   .kd-pt, .kd-pt-sekme { --pt-boy: 60px; --pt-sol: 8px; --pt-alt: 8px; }
   .kd-pt__oge { font-size: 14px; gap: 8px; padding-right: 13px; }
-  .kd-pt__balon { left: 0; bottom: calc(100% + 12px); width: min(356px, calc(100vw - 2 * var(--pt-sol))); transform-origin: 28px 100%; }
+  .kd-pt__balon { left: var(--pt-balon-sol, 0px); bottom: calc(100% + 12px); width: min(356px, calc(100vw - 2 * var(--pt-sol))); transform-origin: 28px 100%; }
   .kd-pt__balon::before { left: 26px; bottom: -7px; box-shadow: inset -1.5px -1.5px 0 #F0E3D6; clip-path: polygon(100% 0, 0 100%, 100% 100%); }
   .kd-pt__chip { min-width: 0; }
   html.kd-pt-acik .to-top { opacity: 0 !important; pointer-events: none !important; }

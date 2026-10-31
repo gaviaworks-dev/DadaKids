@@ -1,6 +1,7 @@
 // Pütür kapısı: maskot asistanı tüm Kids sayfalarında görünür mü, hiçbir şeyi örtüyor mu, akışları doğru mu?
 // Ölçülenler (1440 · 768 · 390 · 320): görünürlük · yukarı-çık / alt menü / footer telif / çerez bandı çakışması ·
 // tıklanabilir öğe erişimi · menü aç/kapa ve yay sınırları · 6 seçeneğin hedefi · sürpriz (bir kez, menü açılmadan, geri gelir) ·
+// tepki ve sürpriz sırasında kare kare etkileşimli öğe örtme (SVG, parçalar, video alfası; gerçek sayfa ve yapay düğme) ·
 // reduced-motion · klavye · gizle/göster · tema-evre rengi · video · filtre paneli ve tarih seçici · sayfa içi JS hatası.
 // Kullanım: node araclar/putur-kapisi.mjs [sayfa...]
 //   TABAN=http://localhost:9000/   doğrulanacak yayın (başka port / canlı)
@@ -74,6 +75,61 @@ const OLCUM = () => {
     if (u && u.closest('.kd-pt')) out.ortu.push((e.tagName + '.' + (e.className || '') + ' ' + (e.getAttribute('aria-label') || e.textContent || '').trim()).slice(0, 46));
   });
   return out;
+};
+
+/* Kare kaydedici: tepki/sürpriz boyunca her animasyon karesinde etkileşimli öğelerin ortası örtülüyor mu?
+   Ölçülen örtücüler: Pütür düğmesi (elementFromPoint), görünen karakter parçaları, uçan pastel parçalar, videoda gerçek alfa.
+   Menü açılınca durur: menünün kendisi kullanıcının açtığı katmandır, ölçüm dışıdır. */
+const IZ_BASLAT = () => {
+  const W = innerWidth, H = innerHeight;
+  const merkezler = [...document.querySelectorAll('a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]')].map((e) => {
+    if (e.closest('.kd-pt') || e.closest('.kd-pt-sekme') || e.closest('.kd-pt-yakala')) return null;
+    const r = e.getBoundingClientRect(); if (r.width < 8 || r.height < 8) return null;
+    const x = r.left + r.width / 2, y = r.top + r.height / 2; if (x < 0 || y < 0 || x >= W || y >= H) return null;
+    const c = getComputedStyle(e); if (c.display === 'none' || c.visibility === 'hidden' || +c.opacity <= .05) return null;
+    return { x, y, e, ad: (e.getAttribute('aria-label') || e.textContent || e.tagName).trim().slice(0, 24) };
+  }).filter(Boolean);
+  const iz = { kare: 0, video: 0, ihlal: {}, calis: true, merkez: merkezler.length };
+  const ihlal = (m, kaynak) => { const k = kaynak + ': ' + m.ad; iz.ihlal[k] = (iz.ihlal[k] || 0) + 1; };
+  const tuval = document.createElement('canvas'); tuval.width = 240; tuval.height = 240;
+  const cx = tuval.getContext('2d', { willReadFrequently: true });
+  const icinde = (r, m, pay = 0) => m.x >= r.left - pay && m.x <= r.right + pay && m.y >= r.top - pay && m.y <= r.bottom + pay;
+  function kare() {
+    if (!iz.calis) return;
+    if (!document.querySelector('#kdPtMenu').hidden) { iz.calis = false; return; }
+    iz.kare++;
+    const kok = document.querySelector('.kd-pt'), karakter = kok.querySelector('.kd-pt__karakter'), video = kok.querySelector('.kd-pt__video');
+    const videoda = kok.classList.contains('kd-pt--video');
+    const dugme = kok.querySelector('.kd-pt__btn').getBoundingClientRect();
+    merkezler.forEach((m) => {
+      if (icinde(dugme, m)) ihlal(m, 'düğme');
+      const u = document.elementFromPoint(m.x, m.y);
+      if (u && u.closest('.kd-pt, .kd-pt-yakala') && !u.closest('.kd-pt__menu, .kd-pt__balon')) ihlal(m, 'elementFromPoint[' + (u.getAttribute('class') || u.tagName) + ']');
+    });
+    if (videoda && video) {
+      iz.video++;
+      const r = video.getBoundingClientRect(); cx.clearRect(0, 0, 240, 240); cx.drawImage(video, 0, 0, 240, 240);
+      merkezler.forEach((m) => { if (!icinde(r, m)) return; const px = Math.floor((m.x - r.left) / r.width * 240), py = Math.floor((m.y - r.top) / r.height * 240); if (cx.getImageData(px, py, 1, 1).data[3] > 40) ihlal(m, 'video'); });
+    } else if (+getComputedStyle(karakter).opacity > .05) {
+      kok.querySelectorAll('.pt-egim > path, .pt-bukle path, .pt-ayak-sol, .pt-ayak-sag, .pt-kol ellipse').forEach((p) => { const r = p.getBoundingClientRect(); merkezler.forEach((m) => { if (icinde(r, m)) ihlal(m, 'karakter'); }); });
+    }
+    kok.querySelectorAll('.kd-pt__parca').forEach((p) => { if (+getComputedStyle(p).opacity <= .1) return; const r = p.getBoundingClientRect(); merkezler.forEach((m) => { if (icinde(r, m)) ihlal(m, 'parça'); }); });
+    requestAnimationFrame(kare);
+  }
+  window.__ptIz = iz; requestAnimationFrame(kare);
+};
+const IZ_BITIR = () => { const iz = window.__ptIz; iz.calis = false; const k = document.querySelector('.kd-pt'); return { kare: iz.kare, video: iz.video, merkez: iz.merkez, ihlal: iz.ihlal, surpriz: k.getAttribute('data-surpriz'), menu: !document.querySelector('#kdPtMenu').hidden }; };
+const ihlalYazi = (iz) => Object.entries(iz.ihlal).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, n]) => `${k} (${n} kare)`).join(' | ');
+
+/* Yapay düğmeler: düzenden bağımsızlık için Pütür'ün üstüne, zıplama yoluna ve yanına konur */
+const YAPAY = () => {
+  const k = document.querySelector('.kd-pt'), l = k.offsetLeft, u = k.offsetTop, boy = k.offsetWidth;
+  [[l + boy / 2, u + boy / 2], [l + boy / 2, u - boy * .3], [l + boy + 34, u + boy / 2]].forEach(([x, y], i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = 'yapay ' + (i + 1); b.setAttribute('data-yapay', i);
+    b.style.cssText = `position:fixed;z-index:30;margin:0;padding:0;left:${x - 22}px;top:${y - 14}px;width:44px;height:28px;font-size:10px`;
+    document.body.appendChild(b);
+  });
+  dispatchEvent(new Event('resize'));
 };
 
 const jsHata = [];
@@ -304,6 +360,42 @@ for (const w of GENISLIK) {
   await s.waitForTimeout(500);
   kontrol(`${w} sürpriz: bekleme süresinde tekrar oynamaz`, (await s.evaluate(() => document.querySelector('.kd-pt').getAttribute('data-surpriz'))) === '1');
   await s.close();
+
+  // Tepki ve sürpriz anı: dar ekranda kareler boyunca etkileşimli öğelerin ortası örtülmez
+  if (w <= 768) for (const [ad, yol, yapay] of [['kids-tarifler üst', 'kids-tarifler.html', false], ['yapay düğme', 'kids.html', true]]) {
+    for (const tur of ['tepki', 'sürpriz']) {
+      const a = await acSayfa(bag, yol, jsHata);
+      await a.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+      if (yapay) await a.evaluate(YAPAY);
+      await a.waitForTimeout(520);
+      const [ax, ay] = await merkez(a, '.kd-pt__btn');
+      await a.evaluate(IZ_BASLAT);
+      if (tur === 'tepki') { await a.mouse.click(ax, ay); await bekleMenu(a, 3600); await a.waitForTimeout(120); }
+      else { for (let i = 0; i < 6; i++) { await a.mouse.click(ax, ay); await a.waitForTimeout(90); } await a.waitForTimeout(2300); }
+      const iz = await a.evaluate(IZ_BITIR);
+      kontrol(`${w} ${ad} ${tur}: animasyon gerçekten ölçüldü`, iz.kare >= 30 && iz.merkez > 0 && (tur === 'tepki' ? iz.menu : iz.surpriz === '1'), JSON.stringify({ kare: iz.kare, merkez: iz.merkez, menu: iz.menu, surpriz: iz.surpriz }));
+      kontrol(`${w} ${ad} ${tur}: etkileşimli öğelerin ortası hiçbir karede örtülmüyor`, Object.keys(iz.ihlal).length === 0, ihlalYazi(iz));
+      if (tur === 'tepki') {
+        const m = await a.evaluate(() => { const b = document.querySelector('.kd-pt__btn').getBoundingClientRect(), W = innerWidth; const og = [...document.querySelectorAll('.kd-pt__oge')].map((e) => e.getBoundingClientRect()); return { ekranDisi: og.filter((r) => r.left < 2 || r.right > W - 2 || r.top < 0).length, btn: [b.left, b.top, b.right, b.bottom].map(Math.round) }; });
+        kontrol(`${w} ${ad} tepki sonrası: menü ekranda`, m.ekranDisi === 0, JSON.stringify(m));
+      }
+      await a.close();
+    }
+  }
+  // Aynı an, video yolunda: gerçek alfa kanalıyla
+  if (w <= 768 && existsSync(join(AGAC, 'varlik/kids/putur'))) {
+    const vb = await tarayici.newContext({ viewport: { width: w, height: BOY[w] || 900 } });
+    const a = await acSayfa(vb, 'kids-tarifler.html', jsHata);
+    await a.waitForFunction(() => document.querySelector('.kd-pt').getAttribute('data-video') === 'hazir', null, { timeout: 8000 }).catch(() => {});
+    await a.evaluate(() => scrollTo({ top: 0, behavior: 'instant' })); await a.waitForTimeout(520);
+    const [ax, ay] = await merkez(a, '.kd-pt__btn');
+    await a.evaluate(IZ_BASLAT);
+    await a.mouse.click(ax, ay); await bekleMenu(a, 4200); await a.waitForTimeout(120);
+    const iz = await a.evaluate(IZ_BITIR);
+    kontrol(`${w} kids-tarifler üst video: alfa ile ölçüldü`, iz.video >= 20, JSON.stringify({ video: iz.video, kare: iz.kare }));
+    kontrol(`${w} kids-tarifler üst video: etkileşimli öğelerin ortası örtülmüyor`, Object.keys(iz.ihlal).length === 0, ihlalYazi(iz));
+    await a.close(); await vb.close();
+  }
 
   // Düzenden bağımsızlık: sayfa en üstteyken Pütür'ün altına bir düğme gelirse kenara çekilir (dar ekran)
   {
