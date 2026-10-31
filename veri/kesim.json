@@ -1,0 +1,437 @@
+[
+ {
+  "slug": "havuc",
+  "ad": "Havuç",
+  "grup": "sebze",
+  "sekil": "cubuk",
+  "renk": "#F28C28",
+  "ikon": "havuc",
+  "risk": "yuksek",
+  "pisirme": "Çiğ havuç serttir; bebeklere yumuşayana kadar pişirilmiş olarak verilir.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Buharda ya da haşlayarak tamamen yumuşatın, kalın çubuklar hâlinde verin.",
+    "boyut": "Yetişkin parmağı boyunda ve kalınlığında",
+    "ipucu": "Ezilme testinden geçmeli: parmaklarınız arasında kolayca ezilmeli."
+   },
+   "9-12": {
+    "nasil": "Pişmiş havucu küçük, yumuşak küplere kesin ya da çiğ havucu ince rendeleyin.",
+    "boyut": "Nohut büyüklüğünde küpler",
+    "ipucu": "Kıskaç tutuşunu çalıştırmak için tabağa birkaç küp koyun."
+   },
+   "12+": {
+    "nasil": "Pişmiş olarak küp ya da dilim; çiğ verecekseniz ince rendeleyin.",
+    "boyut": "Küçük lokmalık parçalar",
+    "ipucu": "Çiğ havuç çubuğu ve halka dilimleri 4 yaşına kadar boğulma riski taşır."
+   }
+  },
+  "asla": "Çiğ havuç çubuğu, sert havuç halkası ya da yarı pişmiş parçalar vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "elma",
+  "ad": "Elma",
+  "grup": "meyve",
+  "sekil": "yumusak-dilim",
+  "renk": "#E8483B",
+  "ikon": "elma",
+  "risk": "orta",
+  "pisirme": "Çiğ elma serttir; pişirilir ya da ince rendelenir.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Kabuğunu soyup dilimleri buharda ya da fırında yumuşatın; ya da püre yapın.",
+    "boyut": "Yetişkin parmağı boyunda yumuşak dilimler",
+    "ipucu": "Çiğ verecekseniz yalnız ince rendelenmiş olarak."
+   },
+   "9-12": {
+    "nasil": "Pişmiş küçük parçalar ya da ince rendelenmiş çiğ elma.",
+    "boyut": "Nohut büyüklüğünde",
+    "ipucu": "Rendelenmiş elmayı yoğurda karıştırabilirsiniz."
+   },
+   "12+": {
+    "nasil": "Çok ince dilimler ya da rendelenmiş; pişmiş parçalar.",
+    "boyut": "Kâğıt inceliğinde dilimler",
+    "ipucu": "Kalın çiğ dilimler ve kabuk parçaları boğazda takılabilir."
+   }
+  },
+  "asla": "Kalın çiğ elma dilimi ya da sert elma parçası vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "muz",
+  "ad": "Muz",
+  "grup": "meyve",
+  "sekil": "cubuk",
+  "renk": "#F6D55C",
+  "ikon": "muz",
+  "risk": "dusuk",
+  "pisirme": "Çiğ olarak; olgun ve yumuşak olanı seçin.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Muzu ikiye bölüp kabuğunun bir kısmını tutamak olarak bırakın ya da boyuna üçe ayırın.",
+    "boyut": "Yetişkin parmağı boyunda",
+    "ipucu": "Kaygan gelirse dış yüzeyini ince öğütülmüş yulafla kaplayın."
+   },
+   "9-12": {
+    "nasil": "Küçük parçalara kesin ya da ezin.",
+    "boyut": "Nohut büyüklüğünde",
+    "ipucu": "Kıskaç tutuşunu çalıştırır."
+   },
+   "12+": {
+    "nasil": "Boyuna ikiye bölüp yarım ay dilimleyin.",
+    "boyut": "Küçük lokmalık dilimler",
+    "ipucu": "Ağzını doldurmadan küçük ısırıklar almaya teşvik edin."
+   }
+  },
+  "asla": "Olgunlaşmamış sert muz vermeyin; ağzına birden çok parça doldurmasına izin vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "avokado",
+  "ad": "Avokado",
+  "grup": "meyve",
+  "sekil": "yumusak-dilim",
+  "renk": "#7FB069",
+  "ikon": "avokado",
+  "risk": "dusuk",
+  "pisirme": "Çiğ olarak; parmakla bastırınca iz kalan olgun avokado seçin.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Kalın dilimler hâlinde ya da çatalla ezilmiş verin.",
+    "boyut": "Yetişkin parmağı boyunda kalın dilim",
+    "ipucu": "Dilimin bir kısmında kabuğu bırakmak kavramayı kolaylaştırır."
+   },
+   "9-12": {
+    "nasil": "Küçük küpler.",
+    "boyut": "Nohut büyüklüğünde",
+    "ipucu": "Kaygan küpleri yakalamak bebeğin el becerisini geliştirir."
+   },
+   "12+": {
+    "nasil": "Küp ya da dilim.",
+    "boyut": "Küçük lokmalık parçalar",
+    "ipucu": "Ekmeğe sürülerek de sunulabilir."
+   }
+  },
+  "asla": "Olgunlaşmamış sert avokado vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "uzum",
+  "ad": "Üzüm",
+  "grup": "meyve",
+  "sekil": "yuvarlak",
+  "renk": "#7B4B94",
+  "ikon": "uzum",
+  "risk": "yuksek",
+  "pisirme": "Çiğ olarak; yıkanmış ve çekirdekli ise çekirdeği çıkarılmış.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Boyuna dörde bölün ve parmağınızla bastırarak yassılaştırın.",
+    "boyut": "Dörtte bir, ezilmiş",
+    "ipucu": "Asla şerit ya da bütün hâlde vermeyin."
+   },
+   "9-12": {
+    "nasil": "Boyuna dörde bölün.",
+    "boyut": "Dörtte bir",
+    "ipucu": "Büyük üzümleri sekize bölebilirsiniz."
+   },
+   "12+": {
+    "nasil": "Boyuna dörde bölmeye devam edin.",
+    "boyut": "Dörtte bir",
+    "ipucu": "4 yaşına kadar bütün ya da yalnız ikiye bölünmüş üzüm vermeyin."
+   }
+  },
+  "asla": "4 yaşından önce bütün ya da enine kesilmiş üzüm vermeyin.",
+  "ezilmeTesti": false
+ },
+ {
+  "slug": "kiraz-domates",
+  "ad": "Kiraz domates",
+  "grup": "sebze",
+  "sekil": "yuvarlak",
+  "renk": "#E63946",
+  "ikon": "domates",
+  "risk": "yuksek",
+  "pisirme": "Çiğ ya da fırında pişmiş; pişirmek kabuğu yumuşatır.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Boyuna dörde bölün ve bastırarak yassılaştırın.",
+    "boyut": "Dörtte bir, ezilmiş",
+    "ipucu": "Kabuğu sert gelirse kısa süre fırınlayın."
+   },
+   "9-12": {
+    "nasil": "Boyuna dörde bölün.",
+    "boyut": "Dörtte bir",
+    "ipucu": "Salata ve makarnaya eklemeden önce de dörde bölün."
+   },
+   "12+": {
+    "nasil": "Boyuna dörde bölmeye devam edin.",
+    "boyut": "Dörtte bir",
+    "ipucu": "4 yaşına kadar bütün verilmez."
+   }
+  },
+  "asla": "4 yaşından önce bütün kiraz domates vermeyin.",
+  "ezilmeTesti": false
+ },
+ {
+  "slug": "brokoli",
+  "ad": "Brokoli",
+  "grup": "sebze",
+  "sekil": "cicek",
+  "renk": "#4C9A2A",
+  "ikon": "brokoli",
+  "risk": "dusuk",
+  "pisirme": "Buharda ya da haşlayarak yumuşayana kadar pişirilir.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Sapı uzun bırakılmış büyük çiçekler; sap tutamak olur.",
+    "boyut": "Avuç içi büyüklüğünde çiçek",
+    "ipucu": "Sapı çatalla kolayca delinmeli."
+   },
+   "9-12": {
+    "nasil": "Küçük çiçeklere ayırın.",
+    "boyut": "Nohut-fındık büyüklüğünde",
+    "ipucu": "Omlet ve pilavların içine de doğrayabilirsiniz."
+   },
+   "12+": {
+    "nasil": "Küçük çiçekler, aile yemeğinden.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Çiğ brokoli için çocuğunuzun çiğneme becerisini gözetin."
+   }
+  },
+  "asla": "Çiğ ya da yarı pişmiş sert brokoli parçaları vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "salatalik",
+  "ad": "Salatalık",
+  "grup": "sebze",
+  "sekil": "cubuk",
+  "renk": "#9BC53D",
+  "ikon": "salatalik",
+  "risk": "orta",
+  "pisirme": "Çiğ olarak; kabuğu soyulur.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Kabuğunu soyup ısırarak koparamayacağı kadar uzun ve kalın çubuklar hâlinde ya da ince rendelenmiş verin.",
+    "boyut": "Yetişkin elinden uzun, kalın çubuk",
+    "ipucu": "Çubuktan parça koparırsa ince rendelenmiş hâle geçin."
+   },
+   "9-12": {
+    "nasil": "İnce rendelenmiş ya da çok ince şeritler.",
+    "boyut": "Kibrit çöpü inceliğinde",
+    "ipucu": "Yoğurtla karıştırıp cacık gibi sunabilirsiniz (tuzsuz)."
+   },
+   "12+": {
+    "nasil": "Kabuksuz ince yarım ay dilimler.",
+    "boyut": "İnce dilimler",
+    "ipucu": "Kalın yuvarlak dilimler yerine yarım ay tercih edin."
+   }
+  },
+  "asla": "Kalın yuvarlak salatalık dilimi ya da küçük sert küpler vermeyin.",
+  "ezilmeTesti": false
+ },
+ {
+  "slug": "cilek",
+  "ad": "Çilek",
+  "grup": "meyve",
+  "sekil": "yuvarlak",
+  "renk": "#E5383B",
+  "ikon": "cilek",
+  "risk": "orta",
+  "pisirme": "Çiğ olarak; iyice yıkanmış.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Ezin ya da büyük, olgun çileği boyuna dörde bölüp bastırarak yassılaştırın.",
+    "boyut": "Dörtte bir, ezilmiş",
+    "ipucu": "Küçük ve sert çilekleri mutlaka ezin."
+   },
+   "9-12": {
+    "nasil": "Küçük parçalara kesin.",
+    "boyut": "Nohut büyüklüğünde",
+    "ipucu": "Yoğurdun üzerine ezerek de koyabilirsiniz."
+   },
+   "12+": {
+    "nasil": "Boyuna dörde bölün ya da ince dilimleyin.",
+    "boyut": "Dörtte bir ya da ince dilim",
+    "ipucu": "Küçük çocuklarda bütün çilek yerine kesilmiş tercih edin."
+   }
+  },
+  "asla": "Küçük ve sert çileği bütün vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "karpuz",
+  "ad": "Karpuz",
+  "grup": "meyve",
+  "sekil": "yumusak-dilim",
+  "renk": "#F25F5C",
+  "ikon": "karpuz",
+  "risk": "dusuk",
+  "pisirme": "Çiğ olarak; çekirdekleri ayıklanır.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Çekirdeksiz, parmak boyunda çubuklar ya da kabuğa yakın üçgen dilimler.",
+    "boyut": "Yetişkin parmağı boyunda",
+    "ipucu": "Kabuk kısmı tutamak olarak işe yarar ama bebeğin kabuğu kemirmesine izin vermeyin."
+   },
+   "9-12": {
+    "nasil": "Çekirdeksiz küçük parçalar.",
+    "boyut": "Nohut-fındık büyüklüğünde",
+    "ipucu": "Suludur; önlük işe yarar."
+   },
+   "12+": {
+    "nasil": "Çekirdeksiz küçük dilimler.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Siyah çekirdekleri ayıklamaya devam edin."
+   }
+  },
+  "asla": "Çekirdeklerini ayıklamadan vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "tavuk",
+  "ad": "Tavuk",
+  "grup": "protein",
+  "sekil": "et",
+  "renk": "#E9C46A",
+  "ikon": null,
+  "risk": "orta",
+  "pisirme": "Ortası tamamen beyazlayana kadar pişirilir; nemli kalması için haşlama ya da sulu pişirme tercih edilir.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Püre yapın ya da lif yönünde, parmak boyunda nemli şeritler kesin.",
+    "boyut": "Yetişkin parmağı boyunda şerit",
+    "ipucu": "Bebek şeridi emer ve kemirir; küçük parça koparırsa didiklenmiş hâle geçin."
+   },
+   "9-12": {
+    "nasil": "İnce didikleyin ve sosla ya da yoğurtla nemlendirin.",
+    "boyut": "İnce lifler, küçük parçalar",
+    "ipucu": "But eti göğüsten daha yumuşak ve nemlidir."
+   },
+   "12+": {
+    "nasil": "Küçük ve ince parçalar.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Kuru ve iri parçalar boğazda takılabilir; yanında sos ya da çorba olsun."
+   }
+  },
+  "asla": "Az pişmiş tavuk, kuru ve iri parçalar ya da kemikli küçük parçalar vermeyin.",
+  "ezilmeTesti": false
+ },
+ {
+  "slug": "kofte",
+  "ad": "Köfte (kıyma)",
+  "grup": "protein",
+  "sekil": "et",
+  "renk": "#9C6644",
+  "ikon": null,
+  "risk": "orta",
+  "pisirme": "İçi pembe kalmayacak şekilde tamamen pişirilir; fırında ya da sulu pişirme yumuşak tutar.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Parmak boyunda, yassı ve oval yumuşak köfteler yapın ya da kıymayı sebze püresine karıştırın.",
+    "boyut": "Yetişkin parmağı boyunda",
+    "ipucu": "Rendelenmiş sebze eklemek köfteyi nemli tutar."
+   },
+   "9-12": {
+    "nasil": "Köfteyi küçük parçalara bölün ya da ufalayın.",
+    "boyut": "Nohut büyüklüğünde parçalar",
+    "ipucu": "Sert, kuru kenarları ayıklayın."
+   },
+   "12+": {
+    "nasil": "Küçük köfteleri ikiye ya da dörde bölün.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Top şeklinde bütün köfte yerine bölünmüş köfte verin."
+   }
+  },
+  "asla": "İçi pembe, sert ya da kuru köfte ve bütün yuvarlak köfte vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "yumurta",
+  "ad": "Yumurta",
+  "grup": "protein",
+  "sekil": "yumurta",
+  "renk": "#FFD166",
+  "ikon": null,
+  "risk": "dusuk",
+  "pisirme": "Sarısı ve beyazı tamamen katılaşana kadar pişirilir.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Haşlanmış yumurtayı boyuna dörde bölün ya da ezin; omleti parmak şeritlerine kesin.",
+    "boyut": "Dörtte bir ya da parmak şeridi",
+    "ipucu": "Kuru sarıyı biraz anne sütü ya da suyla nemlendirin."
+   },
+   "9-12": {
+    "nasil": "Küçük parçalar ya da omlet kareleri.",
+    "boyut": "Nohut büyüklüğünde",
+    "ipucu": "Sebzeli omlet hem alerjen tanıtımı hem sebze için iyi bir yoldur."
+   },
+   "12+": {
+    "nasil": "Dilim, küçük parçalar ya da omlet.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Haşlanmış yumurtayı bütün vermek yerine dilimleyin."
+   }
+  },
+  "asla": "Az pişmiş, sarısı akan yumurta vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "makarna",
+  "ad": "Makarna",
+  "grup": "tahil",
+  "sekil": "cubuk",
+  "renk": "#F4D35E",
+  "ikon": null,
+  "risk": "dusuk",
+  "pisirme": "Paketteki süreden biraz uzun, tamamen yumuşayana kadar haşlanır; tuz eklenmez.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Burgu, kalem gibi bebeğin kavrayabileceği büyük şekiller seçin; ya da küçük makarnayı ezin.",
+    "boyut": "Bebek yumruğundan taşan büyük şekiller",
+    "ipucu": "Sosla kaplamak kavramayı kolaylaştırır."
+   },
+   "9-12": {
+    "nasil": "Kısa makarna ya da küçük parçalara kesilmiş makarna.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Arpa şehriye ve küçük makarnalar kaşıkla yeme pratiği sağlar."
+   },
+   "12+": {
+    "nasil": "Aile porsiyonundan; uzun makarnayı kısa parçalara kesin.",
+    "boyut": "Küçük lokmalık",
+    "ipucu": "Fırın makarnanın kurumuş sert kenarlarını ayıklayın."
+   }
+  },
+  "asla": "Az pişmiş, sert (al dente) makarna vermeyin.",
+  "ezilmeTesti": true
+ },
+ {
+  "slug": "peynir",
+  "ad": "Peynir (pastörize)",
+  "grup": "sut-urunu",
+  "sekil": "kup",
+  "renk": "#FFF3B0",
+  "ikon": null,
+  "risk": "orta",
+  "pisirme": "Yalnız pastörize sütten yapılmış peynirler; beyaz peynirin tuzu suda bekletilerek azaltılır.",
+  "asamalar": {
+   "6-8": {
+    "nasil": "Lor peyniri ya da rendelenmiş kaşar; yemeğe karıştırılmış ya da eritilmiş.",
+    "boyut": "Rendelenmiş",
+    "ipucu": "Tuzlu peynirleri az kullanın; lor daha az tuzludur."
+   },
+   "9-12": {
+    "nasil": "İnce dilimler ya da rendelenmiş.",
+    "boyut": "İnce dilim, küçük parça",
+    "ipucu": "Eritilmiş peynir omlet ve makarnada iyi bağlayıcıdır."
+   },
+   "12+": {
+    "nasil": "İnce dilim ya da ince çubuklar.",
+    "boyut": "İnce dilim",
+    "ipucu": "Sert peyniri iri küp yerine ince dilim olarak verin."
+   }
+  },
+  "asla": "İri ve sert peynir küpleri, pastörize olmayan ya da küflü yumuşak peynir vermeyin.",
+  "ezilmeTesti": false
+ }
+]
