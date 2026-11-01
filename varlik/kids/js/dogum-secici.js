@@ -1,5 +1,5 @@
 /* =====================================================================
-   DADA KIDS — doğum ayı / tahmini doğum ayı seçici (sahibi: tarih, bağımlılıksız)
+   DADA GASTRO KIDS — doğum ayı / tahmini doğum ayı seçici (sahibi: v2-hub, bağımlılıksız)
    Markup: src/kids/dogum.mjs → dogumSecici(). Her [data-kd-dogum] için kurulur.
    · Yıl: role=radiogroup (oklar seçer, APG) · Ay: role=grid (oklar gezer, Enter/Boşluk seçer)
    · Form içinde input[name="evre"] varsa: sonuç → evre çipi seçilir (change olayı ile, kids.js senkron);
@@ -119,7 +119,7 @@
       var temizle = '<button type="button" class="kd-ds__temizle" data-kd-ds-temizle>Seçimi temizle</button>';
       if (s.tur === 'bos') {
         ana = d.mod === 'gebelik' ? 'Tahmini doğum yılını, sonra ayını seçin; kaçıncı haftada olduğunuzu birlikte bulalım.' : 'Doğum yılını, sonra ayını seçin; evresini birlikte bulalım.';
-        tetikMetin = d.mod === 'gebelik' ? 'Tahmini doğum ayını seçin' : 'Doğum ayını seçin';
+        tetikMetin = d.mod === 'gebelik' ? 'Tahmini doğum ayını seçin' : (kok.getAttribute('data-tetik-bos') || 'Doğum ayını seçin');
       } else if (s.tur === 'ay') {
         ana = d.y + ' — şimdi ' + (d.mod === 'gebelik' ? 'tahmini doğum ayını' : 'doğum ayını') + ' seçin.';
         tetikMetin = d.y + ' · ayı seçin';
@@ -134,7 +134,7 @@
       } else if (s.tur === 'buyuk') {
         renk = 'uyari';
         ana = 'Minikiniz <b>3 yaşını geçmiş</b> görünüyor.';
-        alt = 'Dada Kids 3 yaşa kadar; Dada Gastro\'nun <a class="kd-bag" href="tarifler.html">aile tariflerine</a> göz atın.';
+        alt = 'Dada Gastro Kids 3 yaşa kadar; Dada Gastro\'nun <a class="kd-bag" href="tarifler.html">aile tariflerine</a> göz atın.';
         btn = '<a class="kd-btn kd-btn--kucuk kd-btn--hafif" href="tarifler.html">Aile tarifleri <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' + temizle;
         kisa = '3 yaş üstü';
         tetikMetin = (d.y === 'once' ? 'Daha önce' : AYLAR[d.m - 1] + ' ' + d.y) + ' · 3 yaş üstü';

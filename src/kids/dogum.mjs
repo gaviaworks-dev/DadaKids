@@ -1,9 +1,10 @@
-// Doğum ayı / tahmini doğum ayı seçici — tek, yeniden kullanılabilir bileşen (sahibi: tarih)
+// Doğum ayı / tahmini doğum ayı seçici — tek, yeniden kullanılabilir bileşen (sahibi: v2-hub)
 // Kapalı başlar: düğme masaüstünde popover, mobilde alt sayfa açar; dışarıdan: document 'kd-dogum-ac' olayı.
 // Davranış: varlik/kids/js/dogum-secici.js · stil: varlik/kids/css/dogum-secici.css
 // Kullanım (sayfa modülü): import { dogumSecici } from '../dogum.mjs'; ... ${dogumSecici(o)} ; css/js: ['dogum-secici']
 // Form içinde input[name="evre"] radyoları varsa evre çipleriyle kendiliğinden senkron olur (hamilelik → tahmini doğum ayı modu).
 // Saklama: yalnız bu tarayıcı, localStorage 'dadakids.dogum.v1' = {y, m, mod} (try/catch); hiçbir yere gönderilmez.
+// kompakt: true → başlık yalnız ekran okuyucuya, tetik küçük bir metin bağı (hub hero'daki dönem çubuğunun yanında).
 
 export const AYLAR = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const KISA = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
@@ -40,16 +41,16 @@ const SVG_AC = '<svg class="kd-ds__ikon" viewBox="0 0 24 24" width="22" height="
 export const MEVSIM_SVG = {
   kis: `${SVG_AC}<path d="${karYolu()}" fill="none" stroke="#6FA6DA" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="2.1" fill="#CFE5FA" stroke="#6FA6DA" stroke-width="1.2"/></svg>`,
   ilkbahar: `${SVG_AC}<g fill="#F9C3D4" stroke="#E68AA9" stroke-width="1">${cicekYapraklari()}</g><circle cx="12" cy="12" r="2.9" fill="#FFD35C" stroke="#E9A92A" stroke-width="1"/><circle cx="11" cy="11.4" r=".9" fill="#fff" opacity=".8"/></svg>`,
-  yaz: `${SVG_AC}<path d="${gunesIsinlari()}" stroke="#F2B230" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="5.4" fill="#FFD866" stroke="#F2B230" stroke-width="1.2"/><circle cx="10.3" cy="11.3" r=".75" fill="#7A5500"/><circle cx="13.7" cy="11.3" r=".75" fill="#7A5500"/><path d="M10.4 13.3q1.6 1.4 3.2 0" fill="none" stroke="#7A5500" stroke-width="1" stroke-linecap="round"/><circle cx="9.2" cy="13" r=".8" fill="#FFA98A" opacity=".8"/><circle cx="14.8" cy="13" r=".8" fill="#FFA98A" opacity=".8"/></svg>`,
+  yaz: `${SVG_AC}<path d="${gunesIsinlari()}" stroke="#F2B230" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="5.4" fill="#FFD866" stroke="#F2B230" stroke-width="1.2"/></svg>`,
   sonbahar: `${SVG_AC}<path d="M5.5 18.5C5.2 10.6 10.4 5.4 19 5.2c.2 8.5-5 13.6-13.5 13.3Z" fill="#FFBE8A" stroke="#E2874A" stroke-width="1.2" stroke-linejoin="round"/><path d="M5.5 18.5 15.2 8.8M9.4 14.6l-.3-3M11.9 12.1l-.2-2.6M9.4 14.6l3 .2M11.9 12.1l2.7.2M5.5 18.5 3.6 20.4" fill="none" stroke="#C96B2C" stroke-width="1.1" stroke-linecap="round"/></svg>`,
 };
 
 /**
  * Bileşen markup'ı. Yıl çipleri tarayıcıda o günün tarihine göre çizilir (statik sayfa yıllar sonra da doğru kalsın).
  * @param {object} o ortak yardımcılar (EVRE, evreSayfasi, esc)
- * @param {{id?: string, baslik?: string, aciklama?: string}} opts
+ * @param {{id?: string, baslik?: string, aciklama?: string, kompakt?: boolean, tetik?: string}} opts
  */
-export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.' } = {}) {
+export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.', kompakt = false, tetik = 'Doğum ayını seçin' } = {}) {
   const { esc } = o;
   const evreVeri = Object.fromEntries(Object.entries(o.EVRE).map(([k, e]) => [k, { ad: e.ad, kisa: e.kisa, renk: e.renk, aralik: e.aralik, sayfa: o.evreSayfasi(k) }]));
   const satirlar = [0, 1, 2].map((r) => `<div role="row" class="kd-ds__satir">${[0, 1, 2, 3].map((c) => {
@@ -58,12 +59,14 @@ export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını se�
   }).join('')}</div>`).join('');
   const kalem = (yol) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="${yol}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  return `<div class="kd-ds" data-kd-dogum data-mod="dogum" id="${id}" aria-live="off" data-evre='${esc(JSON.stringify(evreVeri))}'>
- <div class="kd-ds__bas">
-  <span class="kd-ds__baslik" id="${id}Baslik" data-kd-ds-baslik data-dogum="${esc(baslik)}" data-gebelik="ya da tahmini doğum ayını seçin">${esc(baslik)}</span>
+  const takvim = '<svg class="kd-ds__ikon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 7h16v13H4zM4 11h16M8 4v5M16 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const gebelikBaslik = kompakt ? 'Tahmini doğum ayı' : 'ya da tahmini doğum ayını seçin';
+  return `<div class="kd-ds${kompakt ? ' kd-ds--kompakt' : ''}" data-kd-dogum data-mod="dogum" id="${id}" aria-live="off" data-tetik-bos="${esc(tetik)}" data-evre='${esc(JSON.stringify(evreVeri))}'>
+ <div class="kd-ds__bas${kompakt ? ' kd-gizli' : ''}">
+  <span class="kd-ds__baslik" id="${id}Baslik" data-kd-ds-baslik data-dogum="${esc(baslik)}" data-gebelik="${esc(gebelikBaslik)}">${esc(baslik)}</span>
  </div>
  <button type="button" class="kd-ds__ac" aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}Panel">
-  <span class="kd-ds__ac-ikon">${MEVSIM_SVG.ilkbahar}</span><span class="kd-ds__ac-metin" data-kd-ds-tetik>Doğum ayını seçin</span>${kalem('M9 6l6 6-6 6')}
+  <span class="kd-ds__ac-ikon">${kompakt ? takvim : MEVSIM_SVG.ilkbahar}</span><span class="kd-ds__ac-metin" data-kd-ds-tetik>${esc(tetik)}</span>${kompakt ? '' : kalem('M9 6l6 6-6 6')}
  </button>
  <div class="kd-ds__perde" data-kd-ds-perde hidden></div>
  <div class="kd-ds__panel" id="${id}Panel" role="dialog" aria-labelledby="${id}Baslik" tabindex="-1">
