@@ -1,4 +1,4 @@
-/* Dada Kids — Rehber: hub'da evre süzgeci · makalede "Bu sayfada" etkin bölüm vurgusu */
+/* Dada Gastro Kids — Rehber: hub'da evre süzgeci · makalede "Bu sayfada" etkin bölüm vurgusu */
 (function () {
   'use strict';
   var $ = function (s, k) { return (k || document).querySelector(s); };

@@ -1,4 +1,4 @@
-/* Dada Kids — Dönemler: evre şeridinde aktif evreyi görünür alana kaydır + sekmeler (hamilelik alt bölümleri) */
+/* Dada Gastro Kids — Dönemler: evre şeridinde aktif evreyi görünür alana kaydır + sekmeler (hamilelik alt bölümleri) */
 (function () {
   'use strict';
   var $$ = function (s, k) { return Array.prototype.slice.call((k || document).querySelectorAll(s)); };

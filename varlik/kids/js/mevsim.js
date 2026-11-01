@@ -1,10 +1,11 @@
-/* Dada Kids — Mevsimsel Takvim: ay sekmeleri (varsayılan: bu ay), oklar, klavye, #ay-N bağlantıları, tür süzgeci */
+/* Dada Gastro Kids — Mevsim Takvimi: ay sekmeleri (varsayılan: bu ay), oklar, klavye, #ay-N bağlantıları, tür süzgeci */
 (function () {
   'use strict';
   var $ = function (s, k) { return (k || document).querySelector(s); };
   var $$ = function (s, k) { return Array.prototype.slice.call((k || document).querySelectorAll(s)); };
 
   var kap = $('.kd-mevsim');
+  var kaplar = $$('.kd-mevsim');
   var serit = $('.kd-may__serit');
   if (!kap || !serit) return;
   var sekmeler = $$('[role="tab"]', serit);
@@ -34,8 +35,8 @@
       var acik = n === i;
       s.setAttribute('aria-selected', String(acik));
       s.tabIndex = acik ? 0 : -1;
-      var p = document.getElementById(s.getAttribute('aria-controls'));
-      if (p) p.classList.toggle('kd-acik', acik);
+      // E7: bir ayın tezgâh ve ürün panelleri ayrı bölümlerde; ikisi birlikte açılır
+      $$('.kd-mpanel[data-ay="' + sekmeAy(s) + '"]').forEach(function (p) { p.classList.toggle('kd-acik', acik); });
     });
     var s = sekmeler[i];
     seritOrtala(s);
@@ -45,8 +46,7 @@
       history.replaceState(null, '', u.pathname + u.search + u.hash);
     }
     // yeni panelin kartları görünsün (kids.js .kd-gir gözlemcisi gizli panelleri kaçırabilir)
-    var p2 = document.getElementById(s.getAttribute('aria-controls'));
-    if (p2) $$('.kd-gir', p2).forEach(function (e) { e.classList.add('kd-gorundu'); });
+    $$('.kd-mpanel[data-ay="' + sekmeAy(s) + '"] .kd-gir').forEach(function (e) { e.classList.add('kd-gorundu'); });
     turKontrol();
   }
 
@@ -87,7 +87,7 @@
   // Tür süzgeci
   var turDugmeler = $$('.kd-mtur .kd-chip');
   function turKontrol() {
-    var tur = kap.getAttribute('data-tur') || '';
+    var tur = kaplar[kaplar.length - 1].getAttribute('data-tur') || '';
     $$('.kd-mpanel').forEach(function (p) {
       var bos = $('.kd-mtezgah__bos', p);
       if (!bos) return;
@@ -96,14 +96,14 @@
     });
   }
   function turSec(tur) {
-    if (tur) kap.setAttribute('data-tur', tur); else kap.removeAttribute('data-tur');
+    kaplar.forEach(function (k) { if (tur) k.setAttribute('data-tur', tur); else k.removeAttribute('data-tur'); });
     turDugmeler.forEach(function (b) { b.setAttribute('aria-pressed', String((b.getAttribute('data-tur') || '') === tur)); });
     turKontrol();
   }
   turDugmeler.forEach(function (b) {
     b.addEventListener('click', function () {
       var t = b.getAttribute('data-tur') || '';
-      turSec((kap.getAttribute('data-tur') || '') === t ? '' : t);
+      turSec((kaplar[kaplar.length - 1].getAttribute('data-tur') || '') === t ? '' : t);
     });
   });
   $$('.kd-mtur-sifirla').forEach(function (b) { b.addEventListener('click', function () { turSec(''); }); });

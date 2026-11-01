@@ -1,4 +1,4 @@
-/* Dada Kids — DSÖ büyüme persentili (sahibi: araçlar kolu)
+/* Dada Gastro Kids — DSÖ büyüme persentili (sahibi: araçlar kolu)
    Veri: veri/who-lms.json (çalışma anında). LMS: z = ((X/M)^L − 1)/(L·S); L=0 → ln(X/M)/S. Persentil = Φ(z).
    Hiçbir değer saklanmaz. */
 (function () {

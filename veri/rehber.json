@@ -259,7 +259,7 @@
   "ozet": "Öğürme, ek gıdaya geçen bebeklerde sık görülen ve koruyucu bir reflekstir; boğulma ise sessiz ve acil bir durumdur. İkisini nasıl ayırt edeceğinizi ve boğulma riskini nasıl azaltacağınızı anlatıyoruz.",
   "okumaDk": 5,
   "kapak": null,
-  "ikon": "parilti",
+  "ikon": "kalkan",
   "evreler": [
    "6-8-ay",
    "9-12-ay",
@@ -503,6 +503,234 @@
    {
     "ad": "CDC — When, What, and How to Introduce Solid Foods",
     "url": "https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/when-what-and-how-to-introduce-solid-foods.html"
+   }
+  ]
+ },
+ {
+  "slug": "yasakli-gidalar",
+  "baslik": "1 yaş öncesi verilmeyecek besinler",
+  "ozet": "Tuz, rafine şeker, bal, ana içecek olarak inek sütü, bütün kuruyemiş ve sert yuvarlak besinler, işlenmiş et ve kafein: neden ertelendikleri ve yerine ne sunulabileceği.",
+  "okumaDk": 6,
+  "kapak": null,
+  "ikon": "uyari",
+  "evreler": [
+   "0-6-ay",
+   "6-8-ay",
+   "9-12-ay"
+  ],
+  "ozetTablo": {
+   "baslik": "Bir bakışta: ne, neden, ne zaman?",
+   "sutunlar": [
+    {
+     "anahtar": "besin",
+     "baslik": "Besin"
+    },
+    {
+     "anahtar": "neden",
+     "baslik": "Neden verilmez?"
+    },
+    {
+     "anahtar": "zaman",
+     "baslik": "Ne zaman?"
+    },
+    {
+     "anahtar": "yerine",
+     "baslik": "Yerine"
+    }
+   ],
+   "satirlar": [
+    {
+     "besin": "Eklenmiş tuz",
+     "neden": "Bebeğin böbrekleri fazla tuzu atamaz.",
+     "zaman": "12 aydan önce yemeğe tuz eklenmez; sonrasında da çok sınırlı.",
+     "yerine": "Taze otlar, limon, hafif baharatlar"
+    },
+    {
+     "besin": "Rafine şeker, pekmez, şekerli içecekler",
+     "neden": "Diş çürüğüne zemin hazırlar, tatlıya alışkanlık yapar; besin değeri yoktur.",
+     "zaman": "Ana akım rehberler 2 yaşına kadar eklenmiş şeker önermez.",
+     "yerine": "Olgun meyve, meyve püresi"
+    },
+    {
+     "besin": "Bal",
+     "neden": "Bebek botulizmine yol açabilen bakteri sporları taşıyabilir.",
+     "zaman": "12 aydan önce hiç; pişmiş ya da yemeğe karıştırılmış olarak da.",
+     "yerine": "Tatlandırmaya gerek yok"
+    },
+    {
+     "besin": "İnek sütü (ana içecek olarak)",
+     "neden": "Demiri azdır; anne sütü ya da formül mamanın yerini alır.",
+     "zaman": "12 aydan sonra ana içecek olabilir.",
+     "yerine": "Anne sütü ya da formül mama; pişirmede az süt, yoğurt, peynir"
+    },
+    {
+     "besin": "Bütün ya da kırık kuruyemiş",
+     "neden": "Sert ve küçüktür; soluk yolunu tıkayabilir.",
+     "zaman": "5 yaşına kadar bütün ya da iri parça verilmez.",
+     "yerine": "İnceltilmiş, pürüzsüz ezmesi"
+    },
+    {
+     "besin": "Sert ve yuvarlak besinler",
+     "neden": "Üzüm, çeri domates, zeytin, patlamış mısır, çiğ havuç dilimi boğulma riski taşır.",
+     "zaman": "Yuvarlak besinler 4 yaşına kadar bütün verilmez.",
+     "yerine": "Boyuna dörde bölmek, pişirip yumuşatmak, rendelemek"
+    },
+    {
+     "besin": "İşlenmiş et ve çok tuzlu ürünler",
+     "neden": "Sucuk, salam, sosis, pastırma, hazır çorba ve bulyon çok tuz ve katkı içerir.",
+     "zaman": "Bebeklere önerilmez.",
+     "yerine": "Evde tuzsuz pişirilmiş et, tavuk, balık"
+    },
+    {
+     "besin": "Çay, kahve, kola, enerji içeceği",
+     "neden": "Kafein içerir; çay demir emilimini azaltabilir.",
+     "zaman": "Bebek ve küçük çocuklara önerilmez.",
+     "yerine": "Anne sütü ya da formül mama; 6. aydan itibaren su"
+    }
+   ]
+  },
+  "bolumler": [
+   {
+    "baslik": "Bu liste neden var?",
+    "ikon": "kalkan",
+    "paragraflar": [
+     "İlk yıl, bebeğin böbreklerinin, sindirim sisteminin, bağışıklığının ve çiğneme becerisinin hızla geliştiği dönemdir. Bazı besinler bu gelişim tamamlanana kadar ertelenir; bazıları ise yalnız belirli bir biçimde (ezilmiş, inceltilmiş, dörde bölünmüş) sunulur.",
+     "Aşağıdaki liste DSÖ, NHS, AAP ve T.C. Sağlık Bakanlığı rehberlerinin uzlaştığı genel ilkeleri özetler. Bebeğinize özel bir durum varsa (erken doğum, alerji öyküsü, kronik hastalık) zamanlamayı çocuk doktorunuzla birlikte belirleyin."
+    ]
+   },
+   {
+    "baslik": "Tuz",
+    "ikon": "kase",
+    "paragraflar": [
+     "Bebeğin böbrekleri fazla tuzu vücuttan atabilecek olgunlukta değildir. Bu yüzden 12 aydan önce yemeğe tuz eklenmez; aile yemeğinden ayrılan porsiyon tuz atılmadan önce ayrılır. 1 yaşından sonra da tuz çok sınırlı tutulur.",
+     "Tuzun büyük kısmı tuzluktan değil, hazır ürünlerden gelir. Etiketi okuyun ve şu ürünleri bebeğin tabağına koymayın:"
+    ],
+    "maddeler": [
+     "Bulyon ve et suyu tabletleri, hazır çorba ve soslar",
+     "Salça, turşu, salamura zeytin",
+     "Tuzlu beyaz peynir ve kaşar (tuzsuz ya da az tuzlu peynir seçin)",
+     "Cips, kraker, tuzlu atıştırmalıklar"
+    ]
+   },
+   {
+    "baslik": "Rafine şeker ve şekerli içecekler",
+    "ikon": "kasik",
+    "paragraflar": [
+     "Eklenmiş şeker bebeğe enerji dışında bir şey kazandırmaz; diş çürüğüne zemin hazırlar ve tatlı tada alışkanlığı artırır. Ana akım rehberler 2 yaşından önce yemek ve içeceklere şeker eklenmemesini önerir.",
+     "DSÖ'nün serbest şeker tanımına yalnız toz şeker değil, pekmez gibi şuruplar, bal ve meyve suyu da girer. Meyve suyu 12 aydan önce önerilmez; meyve bütün ya da püre olarak verilir."
+    ],
+    "maddeler": [
+     "Şekerli bisküvi, gofret, hazır puding ve tatlılar",
+     "Meyve suyu, gazlı ve şekerli içecekler",
+     "Tatlandırmak için olgun muz, elma ya da armut püresi yeterlidir"
+    ]
+   },
+   {
+    "baslik": "Bal",
+    "ikon": "uyari",
+    "paragraflar": [
+     "Bal, bebeklerde botulizm denen ciddi bir hastalığa yol açabilen bakteri sporları taşıyabilir. Bir yaşından küçük bebeğin bağırsağı bu sporlara karşı henüz yeterince korunaklı değildir.",
+     "Bu nedenle bal 12 aydan önce hiç verilmez: tadımlık bir kaşık, yemeğe ya da tatlıya karıştırılmış veya pişirilmiş olarak da. Emziğe bal sürmek de aynı riski taşır. 1 yaşından sonra bal verilebilir; ancak o da bir şekerdir ve sınırlı tutulur."
+    ]
+   },
+   {
+    "baslik": "İnek sütü: ana içecek olarak değil",
+    "ikon": "biberon",
+    "paragraflar": [
+     "İnek sütü 12 aydan önce ana içecek olarak verilmez. Demir içeriği düşüktür ve bebeğin anne sütü ya da formül mamayla alması gereken besinlerin yerini alır. Keçi ve koyun sütü için de aynı kural geçerlidir.",
+     "Bu, sütün hiç kullanılamayacağı anlamına gelmez: 6. aydan itibaren pişirmede (lapa, püre) az miktarda pastörize süt kullanılabilir; pastörize yoğurt ve az tuzlu peynir ek gıda olarak sunulabilir. 12 aydan sonra pastörize tam yağlı inek sütü ana içecek olabilir."
+    ],
+    "maddeler": [
+     "Pastörize edilmemiş (çiğ, açık) süt bebek ve küçük çocuklara verilmez",
+     "Bitkisel içecekler anne sütü ya da formül mamanın yerine geçmez; pirinç içeceği 5 yaşından önce önerilmez"
+    ]
+   },
+   {
+    "baslik": "Bütün kuruyemiş ve sert, yuvarlak besinler",
+    "ikon": "bicak-tahta",
+    "paragraflar": [
+     "Küçük, sert ve yuvarlak besinler çocuğun soluk yoluna tam oturacak boyuttadır. Bütün ya da kırık kuruyemişler 5 yaşına kadar verilmez. Yer fıstığı ve diğer kuruyemişlerin alerjen olarak tanıtılması önemlidir; bunu pürüzsüz ezmeyi inceltip püreye karıştırarak yapın.",
+     "Üzüm, çeri domates ve zeytin gibi yuvarlak besinler 4 yaşına kadar bütün verilmez; boyuna dörde bölünür. Sert çiğ sebze ve meyveler pişirilerek yumuşatılır ya da ince rendelenir. Besin besin kesim boyutları Güvenli Kesim sayfasında."
+    ],
+    "maddeler": [
+     "Bütün ya da iri parça fındık, fıstık, badem, ceviz",
+     "Patlamış mısır, sert şeker, sakız",
+     "Bütün üzüm, çeri domates, zeytin, yaban mersini",
+     "Çiğ havuç ya da elma dilimi, sosis halkası"
+    ]
+   },
+   {
+    "baslik": "İşlenmiş et ve çok tuzlu ürünler",
+    "ikon": "tabak-bolmeli",
+    "paragraflar": [
+     "Sucuk, salam, sosis, pastırma ve benzeri işlenmiş etler çok tuz ve katkı maddesi içerir; bebeklere önerilmez. Sosis gibi yuvarlak dilimler ayrıca boğulma riski taşır.",
+     "Protein için evde tuzsuz pişirilmiş kırmızı et, tavuk, iyi pişmiş yumurta, kılçıksız balık ve baklagiller tercih edilir."
+    ]
+   },
+   {
+    "baslik": "Kafein: çay, kahve, kola",
+    "ikon": "uyari",
+    "paragraflar": [
+     "Çay, kahve, kola ve enerji içecekleri kafein içerir ve bebeklere verilmez. Çaydaki maddeler besinlerdeki demirin emilimini de azaltabilir; bu yüzden \"açık çay\" da bebek için uygun bir içecek değildir.",
+     "Bitki çayları da önerilmez: süt alımının yerini alabilir ve bazı bitkilerin bebeklerde güvenliği yeterince bilinmez."
+    ]
+   },
+   {
+    "baslik": "Peki ne içmeli?",
+    "ikon": "biberon",
+    "paragraflar": [
+     "İlk 6 ayda bebeğin ihtiyacı olan tek içecek anne sütü ya da formül mamadır. Ek gıdaya geçişle birlikte öğünlerde açık bir bardaktan birkaç yudum su sunulabilir.",
+     "12 aydan sonra ana içecekler su ve pastörize tam yağlı süttür; anne sütü dilediğiniz sürece devam edebilir."
+    ]
+   }
+  ],
+  "kutu": {
+   "tur": "uyari",
+   "baslik": "Şüphede kaldığınızda",
+   "metin": "Etiketinde tuz, şeker, bal ya da kafein olan bir ürünü bebeğinize vermeden önce çocuk doktorunuza ya da çocuk diyetisyeninize sorun. Boğulma acil durumdur: 112'yi arayın; bebek ilk yardımını resmi bir kursta uygulamalı öğrenin."
+  },
+  "ilgiliTarifler": [
+   "firin-elma-armut-puresi",
+   "yogurtlu-seftali-ezmesi",
+   "fistik-ezmeli-yulaf-lapasi",
+   "tavuklu-sebze-puresi"
+  ],
+  "kaynaklar": [
+   {
+    "ad": "WHO — Guideline for complementary feeding of infants and young children 6–23 months (2023)",
+    "url": "https://www.who.int/publications/i/item/9789240081864"
+   },
+   {
+    "ad": "T.C. Sağlık Bakanlığı — Türkiye Beslenme Rehberi (TÜBER) 2022",
+    "url": "https://hsgm.saglik.gov.tr/depo/birimler/saglikli-beslenme-ve-hareketli-hayat-db/Dokumanlar/Rehberler/Turkiye_Beslenme_Rehber_TUBER_2022_min.pdf"
+   },
+   {
+    "ad": "NHS — Foods and drinks to avoid giving babies",
+    "url": "https://www.nhs.uk/best-start-in-life/baby/weaning/safe-weaning/food-and-drinks-to-avoid/"
+   },
+   {
+    "ad": "NHS — What to feed your baby from around 6 months",
+    "url": "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/"
+   },
+   {
+    "ad": "NHS — Choking and gagging on food",
+    "url": "https://www.nhs.uk/best-start-in-life/baby/weaning/safe-weaning/choking-and-gagging-on-food/"
+   },
+   {
+    "ad": "AAP HealthyChildren — Starting Solid Foods",
+    "url": "https://www.healthychildren.org/English/ages-stages/baby/feeding-nutrition/Pages/Starting-Solid-Foods.aspx"
+   },
+   {
+    "ad": "AAP HealthyChildren — Choking Prevention",
+    "url": "https://www.healthychildren.org/English/health-issues/injuries-emergencies/Pages/Choking-Prevention.aspx"
+   },
+   {
+    "ad": "CDC — Choking Hazards",
+    "url": "https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/choking-hazards.html"
+   },
+   {
+    "ad": "AAP HealthyChildren — Why Formula Instead of Cow's Milk?",
+    "url": "https://www.healthychildren.org/English/ages-stages/baby/formula-feeding/Pages/Why-Formula-Instead-of-Cows-Milk.aspx"
    }
   ]
  }

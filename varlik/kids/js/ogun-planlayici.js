@@ -1,4 +1,4 @@
-/* Dada Kids — Haftalık öğün planlayıcı (sahibi: araçlar kolu)
+/* Dada Gastro Kids — Haftalık öğün planlayıcı (sahibi: araçlar kolu)
    Veri: sayfaya gömülü #kdTarifVeri (derlemede). Kalıcılık: localStorage "dadakids.ogunPlani.v1" (try/catch). */
 (function () {
   'use strict';
@@ -10,6 +10,12 @@
   var TARIF = [];
   try { TARIF = JSON.parse(veriEl.textContent || '[]') || []; } catch (e) { TARIF = []; }
   var T = {}; TARIF.forEach(function (t) { T[t.s] = t; });
+  // Yaş rozeti + kıvam göstergesi: ortak bileşenlerin derlemede gömülen HTML'i (#kdRozetVeri) — kartlarla aynı biçim
+  var KIVAM_HTML = {};
+  try { KIVAM_HTML = (JSON.parse((document.getElementById('kdRozetVeri') || {}).textContent || '{}') || {}).kivam || {}; } catch (e) { KIVAM_HTML = {}; }
+  function rozetHtml(t) {
+    return '<span class="kd-pl-slot__meta"><span class="kd-age-badge" data-yas="' + t.y + '" title="' + t.y + '. aydan itibaren uygun">+' + t.y + ' AY</span>' + (KIVAM_HTML[t.k] || '') + '</span>';
+  }
   var KOVALAR = [6, 8, 9, 12, 18, 24];
   var KOVA_AD = { 6: '+6 Ay', 8: '+8 Ay', 9: '+9 Ay', 12: '+12 Ay', 18: '+18 Ay', 24: '2–3 Yaş' };
   var GUNLER = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
@@ -129,7 +135,7 @@
     var id = 'pl-' + k;
     return '<div class="kd-pl-slot" data-slot="' + k + '"' + (t ? ' data-dolu' : '') + '>' +
       '<span class="kd-pl-slot__ogun" aria-hidden="true">' + s.ad + '</span>' +
-      (t ? '<a class="kd-pl-slot__tarif" href="' + esc(href(t.s)) + '"><span class="kd-pl-slot__resim">' + (t.g ? '<img src="' + esc(t.g) + '" alt="" width="56" height="42" loading="lazy" decoding="async">' : '') + '</span><span class="kd-pl-slot__ad">' + esc(t.a) + '<span class="kd-gizli"> (' + esc(etiket) + ')</span></span></a>'
+      (t ? '<a class="kd-pl-slot__tarif" href="' + esc(href(t.s)) + '"><span class="kd-pl-slot__resim">' + (t.g ? '<img src="' + esc(t.g) + '" alt="" width="56" height="42" loading="lazy" decoding="async">' : '') + '</span><span class="kd-pl-slot__ad"><span class="kd-pl-slot__adm">' + esc(t.a) + '</span><span class="kd-gizli"> (' + esc(etiket) + ')</span>' + rozetHtml(t) + '</span></a>'
         : '<span class="kd-pl-slot__bos">' + (s.k === 'ara' && d.yas < 9 ? 'İsteğe bağlı' : 'Boş') + '</span>') +
       '<span class="kd-pl-slot__kontrol">' +
       '<label class="kd-gizli" for="' + id + '">' + esc(etiket) + ' için tarif seç</label>' +
@@ -243,7 +249,7 @@
   });
   $('[data-pl-kopyala]').addEventListener('click', function () {
     var b = this;
-    var metin = 'Dada Kids alışveriş listesi (' + KOVA_AD[d.yas] + ')\n' + $$('[data-pl-malz] li').map(function (li) { return '- ' + li.querySelector('b').textContent + (li.querySelector('.kd-pl-malz__kez') ? ' ' + li.querySelector('.kd-pl-malz__kez').textContent : ''); }).join('\n');
+    var metin = 'Dada Gastro Kids alışveriş listesi (' + KOVA_AD[d.yas] + ')\n' + $$('[data-pl-malz] li').map(function (li) { return '- ' + li.querySelector('b').textContent + (li.querySelector('.kd-pl-malz__kez') ? ' ' + li.querySelector('.kd-pl-malz__kez').textContent : ''); }).join('\n');
     var tamam = function () { b.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> Kopyalandı'; duyur('Liste panoya kopyalandı.'); setTimeout(function () { b.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i> Listeyi kopyala'; }, 2200); };
     var olmadi = function () { b.textContent = 'Kopyalanamadı — yazdırmayı deneyin'; };
     try { navigator.clipboard.writeText(metin).then(tamam, olmadi); } catch (e) { olmadi(); }

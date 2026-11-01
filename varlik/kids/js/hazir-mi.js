@@ -1,4 +1,4 @@
-/* Dada Kids — Ek gıdaya hazır mı? (sahibi: araçlar kolu) · bağımlılıksız, depolama yok */
+/* Dada Gastro Kids — Ek gıdaya hazır mı? (sahibi: araçlar kolu) · bağımlılıksız, depolama yok */
 (function () {
   'use strict';
   var form = document.getElementById('kdHazirMi');

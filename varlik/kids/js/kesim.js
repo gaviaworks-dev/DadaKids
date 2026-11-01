@@ -1,4 +1,4 @@
-/* Dada Kids — Güvenli Kesim: canlı arama (Türkçe duyarsız) + grup / risk süzgeci + #besin bağlantıları */
+/* Dada Gastro Kids — Güvenli Kesim: canlı arama (Türkçe duyarsız) + grup / risk süzgeci + #besin bağlantıları */
 (function () {
   'use strict';
   var $ = function (s, k) { return (k || document).querySelector(s); };

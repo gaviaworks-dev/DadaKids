@@ -1,35 +1,22 @@
-// Dada Kids — Araçlar (sahibi: araçlar kolu)
+// Dada Gastro Kids — Araçlar (sahibi: araçlar kolu)
 // kids-araclar.html (hub) · kids-arac-hazir-mi.html · kids-arac-alerjen-takip.html
 // kids-arac-ogun-planlayici.html · kids-arac-persentil.html
-/* ---------- Tur 2: görsel varlık denetimi + bölüm ritmi (sayfalar kolu; 4 modülde aynı küçük yardımcılar) ---------- */
-import { existsSync } from 'node:fs';
-const KOK = new URL('../../../', import.meta.url).pathname;
-const illusVar = (k) => ['webp', 'svg', 'png'].some((u) => existsSync(`${KOK}varlik/kids/illus/${k}.${u}`));
-const urunVar = (k) => existsSync(`${KOK}varlik/kids/svg/urun/${k}.svg`);
-const DESEN = ['nokta', 'bulut', 'konfeti'];
-const zemin = (renk) => (renk ? `color-mix(in srgb, var(--kd-${renk}-a) 62%, var(--kd-krem))` : 'var(--kd-krem)');
-/** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (zebra + desen); aralarına dalga/bulut ayırıcı.
- *  Her bölüm (z) => html; z, section etiketinin class değerine eklenecek metindir (zebra ise data-renk'i de taşır). */
-function ritim(o, bolumler, renkler, { zebraIle = true } = {}) {
+/* ---------- V2: düz bölüm ritmi (karakter, süs ve dalga geçişi yok) ---------- */
+/** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (düz zemin). Her bölüm (z) => html; z section class'ına eklenir. */
+function ritim(bolumler, renkler, { zebraIle = true } = {}) {
   const dolu = bolumler.filter((b) => b && b(''));
-  let html = ''; let onceki = null; let oncekiDesen = '';
-  dolu.forEach((b, i) => {
+  return dolu.map((b, i) => {
     const zebra = (i % 2 === 0) === zebraIle ? renkler[Math.floor(i / 2) % renkler.length] : null;
-    const desen = zebra ? DESEN[Math.floor(i / 2) % DESEN.length] : '';
-    if (i > 0 || zebra) html += `<div class="kd-gecis${onceki ? ` kd-zebra kd-desen--${oncekiDesen}` : ''}"${onceki ? ` data-renk="${onceki}"` : ''}>${o.ayirici(i % 2 ? 'bulut' : 'dalga', zemin(zebra))}</div>\n`;
-    html += b(zebra ? ` kd-zebra kd-desen--${desen}" data-renk="${zebra}` : '') + '\n';
-    onceki = zebra; oncekiDesen = desen;
-  });
-  return html;
+    return b(zebra ? ` kd-zebra" data-renk="${zebra}` : '');
+  }).join('\n');
 }
-
-const ARAC_ILLUS = { 'hazir-mi': 'arac-hazir-mi', 'alerjen-takip': 'arac-alerjen', 'ogun-planlayici': 'arac-ogun', 'persentil': 'arac-persentil' };
 
 export default async function (o) {
   const { esc, ikon, veri } = o;
-  const ipucu = (poz, html, sinif = '') => `<div class="kd-rehberci kd-ipucu kd-gir ${sinif}">${o.maskot(poz, { boy: 104 }) || `<span class="kd-ipucu__yedek" aria-hidden="true">${ikon('parilti', 40)}</span>`}<p class="kd-baloncuk"><b>Pütür'ün notu:</b> ${html}</p></div>`;
-  const aracIllus = (a, alt = '', boy = 480) => (illusVar(ARAC_ILLUS[a.kod]) ? o.illus(ARAC_ILLUS[a.kod], alt, { boy }) : '');
-  const bosGorsel = (anahtar = 'bos-durum') => `${illusVar(anahtar) ? o.illus(anahtar, '', { boy: 200, sinif: 'kd-ar-bos__illus' }) : ''}${o.maskot('uyku', { boy: 72, sinif: 'kd-ar-bos__maskot' })}`;
+  /** Sade bilgi notu (karakter/balon yok). */
+  const not = (html, sinif = '') => `<p class="kd-kutu kd-not ${sinif}"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${html}</span></p>`;
+  /** Hero + güvenlik şeridi (o.hero serit:true desteklemiyorsa elle eklenir; çift basılmaz). */
+  const hero = (s) => { const h = o.hero({ ...s, serit: true }); return h.includes('kd-guvenlik-serit') ? h : h + '\n' + o.guvenlikSeridi(); };
   const ok = '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
   const fa = (ad, ek = 'solid') => `<i class="fa-${ek} fa-${ad}" aria-hidden="true"></i>`;
 
@@ -48,17 +35,12 @@ export default async function (o) {
       maddeler: ['0–36 ay, kız ve erkek', 'Grafik ve tablo görünümü', 'Hiçbir veri kaydedilmez'] },
   ];
   const A = Object.fromEntries(ARACLAR.map((a) => [a.kod, a]));
-  const kirinti = (ad) => [['Dada Kids', 'kids.html'], ['Araçlar', 'kids-araclar.html'], [ad]];
+  const kirinti = (ad) => [['Dada Gastro Kids', 'kids.html'], ['Araçlar', 'kids-araclar.html'], [ad]];
 
-  // Araç sayfası kahramanının sağ tarafı: büyük pastel ikon rozeti
-  const aracRozet = (a, ek = '') => (illusVar(ARAC_ILLUS[a.kod]) ? `<div class="kd-hero__gorsel kd-ar-hero-illus" data-renk="${a.renk}">${aracIllus(a, `${a.ad} aracını anlatan sevimli illüstrasyon`, 560)}</div>` : `<div class="kd-ar-rozet" data-renk="${a.renk}" aria-hidden="true">
-   <span class="kd-ar-rozet__daire">${ikon(a.ikon, 96)}</span>
-   <span class="kd-ar-rozet__nokta kd-ar-rozet__nokta--1"></span><span class="kd-ar-rozet__nokta kd-ar-rozet__nokta--2"></span><span class="kd-ar-rozet__nokta kd-ar-rozet__nokta--3"></span>
-   <span class="kd-ar-rozet__sus kd-yuz">${ikon('parilti', 44)}</span>
-   ${ek}
-  </div>`);
+  // Araç sayfası kahramanının sağ tarafı: sade çizgisel ikon paneli (araçlar için gerçekçi foto yok; karar: tasks/kids-ui-tur2.md)
+  const aracRozet = (a) => `<div class="kd-ar-hero-ikon" data-renk="${a.renk}" aria-hidden="true"><span class="kd-ar-hero-ikon__kare">${ikon(a.ikon, 96)}</span><span class="kd-ar-hero-ikon__etiket">${esc(a.tur)}</span></div>`;
 
-  const aracHero = (a, { baslik, giris, eylemler = '', ek = '' }) => o.hero({
+  const aracHero = (a, { baslik, giris, eylemler = '', ek = '' }) => hero({
     renk: a.renk, kucuk: true, kirinti: kirinti(a.ad), ust: { metin: a.tur, ikon: a.ikon }, baslik, giris, eylemler, ek, sag: aracRozet(a),
   });
 
@@ -67,43 +49,40 @@ export default async function (o) {
   const digerAraclar = (haric) => (z) => `<section class="kd-bolum kd-ar-diger${z}">
  <div class="wrap">
   <h2 class="kd-ar-diger__baslik">Diğer araçlar</h2>
-  <div class="kd-ar-diger__liste">${ARACLAR.filter((a) => a.kod !== haric).map((a) => `<a class="kd-ar-mini" href="${a.href}" data-renk="${a.renk}"><span class="kd-ar-mini__ikon${illusVar(ARAC_ILLUS[a.kod]) ? ' kd-ar-mini__ikon--illus' : ''}">${aracIllus(a, '', 120) || ikon(a.ikon, 30)}</span><span><b>${esc(a.ad)}</b><small>${esc(a.tur)}</small></span>${ok}</a>`).join('')}</div>
+  <div class="kd-ar-diger__liste">${ARACLAR.filter((a) => a.kod !== haric).map((a) => `<a class="kd-ar-mini" href="${a.href}" data-renk="${a.renk}"><span class="kd-ar-mini__ikon">${ikon(a.ikon, 30)}</span><span><b>${esc(a.ad)}</b><small>${esc(a.tur)}</small></span>${ok}</a>`).join('')}</div>
  </div>
 </section>`;
 
   /* =====================================================================
      1 · HUB
      ===================================================================== */
-  const hubKart = (a, i) => `<article class="kd-kart kd-ar-kart kd-gir" data-renk="${a.renk}" style="--kd-gecikme:${i * 70}ms">
-  <div class="kd-ar-kart__ust">
-   ${illusVar(ARAC_ILLUS[a.kod]) ? `<span class="kd-ar-kart__ikon kd-ar-kart__ikon--illus">${aracIllus(a, '', 168)}</span>` : `<span class="kd-ar-kart__ikon">${ikon(a.ikon, 52)}</span>`}
-   <span class="kd-ar-kart__tur">${esc(a.tur)}<small>${fa('clock', 'regular')} ${esc(a.sure)}</small></span>
-  </div>
-  <h3><a href="${a.href}">${esc(a.ad)}</a></h3>
-  <p>${esc(a.ac)}</p>
+  const hubKart = (a, i) => `<article class="kd-kart kd-ar-kart kd-ikonlu kd-gir" data-renk="${a.renk}" style="--kd-gecikme:${i * 70}ms">
+  <span class="kd-ar-kart__ikon kd-ikonlu__ikon">${ikon(a.ikon, 52)}</span>
+  <h3 class="kd-ikonlu__baslik"><a href="${a.href}">${esc(a.ad)}</a></h3>
+  <span class="kd-ar-kart__tur kd-ikonlu__rozet">${esc(a.tur)}<small>${fa('clock', 'regular')} ${esc(a.sure)}</small></span>
+  <p class="kd-ikonlu__metin">${esc(a.ac)}</p>
   <ul class="kd-ar-kart__maddeler">${a.maddeler.map((m) => `<li>${fa('check')}<span>${esc(m)}</span></li>`).join('')}</ul>
   <span class="kd-btn kd-ar-kart__ac" aria-hidden="true">Aç ${ok}</span>
  </article>`;
 
   const hubKolaj = `<div class="kd-ar-kolaj" aria-hidden="true">
-  ${ARACLAR.map((a, i) => `<span class="kd-ar-kolaj__kare kd-ar-kolaj__kare--${i + 1}" data-renk="${a.renk}">${ikon(a.ikon, 64)}</span>`).join('')}
-  <span class="kd-ar-kolaj__sus kd-yuz">${ikon('parilti', 48)}</span>
+  ${ARACLAR.map((a, i) => `<span class="kd-ar-kolaj__kare kd-ar-kolaj__kare--${i + 1}" data-renk="${a.renk}">${ikon(a.ikon, 56)}<small>${esc(a.tur)}</small></span>`).join('')}
  </div>`;
 
   const hub = {
     dosya: 'kids-araclar.html', aktif: 'araclar', css: ['araclar'], js: [],
-    baslik: 'Araçlar — Dada Kids',
+    baslik: 'Araçlar — Dada Gastro Kids',
     aciklama: 'Ek gıdaya hazır mı kontrol listesi, 3 günlük alerjen gözlemi, haftalık öğün planlayıcı ve DSÖ büyüme persentili hesaplayıcı.',
-    main: o.sayfa(`${o.hero({
-      renk: 'mavi', kirinti: [['Dada Kids', 'kids.html'], ['Araçlar']], ust: { metin: 'Araçlar', ikon: 'arac' },
+    main: o.sayfa(`${hero({
+      renk: 'mavi', kirinti: [['Dada Gastro Kids', 'kids.html'], ['Araçlar']], ust: { metin: 'Araçlar', ikon: 'arac' },
       baslik: 'Beslenme yolculuğunda küçük yardımcılar',
       giris: 'İlk kaşıktan aile sofrasına; hazır olma işaretleri, alerjen gözlemi, haftalık plan ve büyüme takibi için dört sade araç. Hepsi tarayıcınızda çalışır, hesap gerekmez.',
       eylemler: `<a class="kd-btn" href="#araclar">Araçları gör ${fa('arrow-down')}</a>`,
-      sag: illusVar('hero-araclar') ? `<div class="kd-hero__gorsel kd-ar-hero-illus">${o.illus('hero-araclar', 'Kontrol listesi, takvim, tabak ve cetvelle çevrili sevimli bir mutfak masası illüstrasyonu', { boy: 640 })}</div>` : hubKolaj,
+      sag: hubKolaj,
     })}
-${ritim(o, [(z) => `<section class="kd-bolum${z}" id="araclar">
+${ritim([(z) => `<section class="kd-bolum${z}" id="araclar">
  <div class="wrap">
-  ${o.bolumBasi({ ust: '4 araç', ikonAd: 'arac', renk: 'mavi', baslik: 'Hangisine ihtiyacınız var?', alt: 'Her araç bir soruya odaklanır. Sonuçlar bilgilendirme amaçlıdır; kararları çocuk doktorunuzla birlikte verin.', sag: ipucu('merhaba', 'Hepsi tarayıcınızda çalışır, hesap gerekmez. Birini seçin, birlikte bakalım!', 'kd-ipucu--sag') })}
+  ${o.bolumBasi({ ust: '4 araç', ikonAd: 'arac', renk: 'mavi', baslik: 'Hangisine ihtiyacınız var?', alt: 'Her araç bir soruya odaklanır. Sonuçlar bilgilendirme amaçlıdır; kararları çocuk doktorunuzla birlikte verin.' })}
   <div class="kd-ar-izgara kd-hizali kd-hizali--5">${ARACLAR.map(hubKart).join('\n')}</div>
  </div>
 </section>`, (z) => `<section class="kd-bolum${z}">
@@ -112,14 +91,14 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="araclar">
    <div class="kd-ar-guven__metin">
     <h2>Bu araçlar nasıl çalışır?</h2>
     <ul>
-     <li>${fa('stethoscope')}<span><b>Tanı koymaz.</b> Sonuçlar genel rehberlere dayanan bilgilendirmedir; yerine geçtiği bir muayene yoktur.</span></li>
-     <li>${fa('mobile-screen')}<span><b>Veriler cihazınızda kalır.</b> Alerjen gözlemi ve öğün planı yalnız bu tarayıcıda saklanır; persentil hesaplayıcı hiçbir şey kaydetmez.</span></li>
-     <li>${fa('book-open')}<span><b>Kaynaklar açık.</b> DSÖ, AAP, NHS ve ASCIA gibi ana akım rehberlerin uzlaştığı bilgiler kullanılır.</span></li>
+     <li class="kd-ikonlu"><i class="fa-solid fa-stethoscope kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Tanı koymaz.</b><span class="kd-ikonlu__metin">Sonuçlar genel rehberlere dayanan bilgilendirmedir; yerine geçtiği bir muayene yoktur.</span></li>
+     <li class="kd-ikonlu"><i class="fa-solid fa-mobile-screen kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Veriler cihazınızda kalır.</b><span class="kd-ikonlu__metin">Alerjen gözlemi ve öğün planı yalnız bu tarayıcıda saklanır; persentil hesaplayıcı hiçbir şey kaydetmez.</span></li>
+     <li class="kd-ikonlu"><i class="fa-solid fa-book-open kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Kaynaklar açık.</b><span class="kd-ikonlu__metin">DSÖ, AAP, NHS ve ASCIA gibi ana akım rehberlerin uzlaştığı bilgiler kullanılır.</span></li>
     </ul>
    </div>
    <div class="kd-ar-guven__yan">${o.onay()}${o.ornek('Araçlardaki metinler ve eşikler prototip için hazırlanmıştır; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.')}</div>
   </div>
-  ${ipucu('kalp', 'Sonuçlar bir sohbet başlangıcıdır; kararları çocuk doktorunuzla birlikte verin.', 'kd-ar-guven-not')}
+  ${not('Sonuçlar bir sohbet başlangıcıdır; kararları çocuk doktorunuzla birlikte verin.', 'kd-ar-guven-not')}
  </div>
 </section>`], ['mavi'])}`, 'araclar'),
   };
@@ -137,23 +116,23 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}" id="araclar">
   const hm = A['hazir-mi'];
   const isaretKart = (s, i) => `<li class="kd-hm-isaret">
    <input type="checkbox" id="hm-${s.kod}" name="isaret" value="${s.kod}">
-   <label for="hm-${s.kod}">
-    <span class="kd-hm-isaret__no" aria-hidden="true">${i + 1}</span>
-    <span class="kd-hm-isaret__ikon" aria-hidden="true">${fa(s.fa)}</span>
-    <span class="kd-hm-isaret__metin"><b>${esc(s.baslik)}</b><small>${esc(s.metin)}</small></span>
-    <span class="kd-hm-isaret__kutu" aria-hidden="true">${fa('check')}</span>
+   <label for="hm-${s.kod}" class="kd-ikonlu">
+    <span class="kd-hm-isaret__ikon kd-ikonlu__ikon" aria-hidden="true"><span class="kd-hm-isaret__no">${i + 1}</span>${fa(s.fa)}</span>
+    <b class="kd-ikonlu__baslik">${esc(s.baslik)}</b>
+    <span class="kd-hm-isaret__kutu kd-ikonlu__rozet" aria-hidden="true">${fa('check')}</span>
+    <small class="kd-hm-isaret__metin kd-ikonlu__metin">${esc(s.metin)}</small>
    </label>
   </li>`;
 
   const hazirMi = {
     dosya: 'kids-arac-hazir-mi.html', aktif: 'araclar', css: ['araclar'], js: ['hazir-mi'],
-    baslik: 'Ek gıdaya hazır mı? Kontrol listesi — Dada Kids',
+    baslik: 'Ek gıdaya hazır mı? Kontrol listesi — Dada Gastro Kids',
     aciklama: 'Bebeğiniz katı gıdaya hazır mı? Sık anılan beş hazır olma işaretini işaretleyin, çocuk doktorunuzla konuşmadan önce birlikte gözden geçirin.',
     main: o.sayfa(`${aracHero(hm, {
       baslik: 'Ek gıdaya hazır mı?',
       giris: 'Hazır olma tek bir tarihle değil, birkaç işaretin bir araya gelmesiyle anlaşılır. Bebeğinizde gördüklerinizi işaretleyin; sonuç bir tanı değil, doktorunuzla konuşmak için bir başlangıç noktasıdır.',
     })}
-${ritim(o, [(z) => `<section class="kd-bolum${z}">
+${ritim([(z) => `<section class="kd-bolum${z}">
  <div class="wrap">
   ${noscript}
   <form class="kd-hm" id="kdHazirMi" data-renk="seftali" data-denge-serbest="sonuç paneli yapışkan, liste kaydırılırken yanında kalır" novalidate>
@@ -190,7 +169,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
  </div>
 </section>`, (z) => `<section class="kd-bolum${z}">
  <div class="wrap">
-  ${o.bolumBasi({ ust: 'Bilmekte fayda var', ikonAd: 'kitap', renk: 'seftali', baslik: 'Sık karıştırılanlar', sag: ipucu('kasik', 'Her bebek kendi hızında hazır olur. Birkaç hafta beklemek de gayet olağan.', 'kd-ipucu--sag') })}
+  ${o.bolumBasi({ ust: 'Bilmekte fayda var', ikonAd: 'kitap', renk: 'seftali', baslik: 'Sık karıştırılanlar', alt: 'Her bebek kendi hızında hazır olur; birkaç hafta beklemek de olağandır.' })}
   <div class="kd-hm-bilgi">
    <div class="kd-kutu kd-gir" data-renk="sari">
     <h3>${fa('lightbulb')} Hazır olma işareti sanılanlar</h3>
@@ -227,21 +206,19 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
 
   const alerjenTakip = {
     dosya: 'kids-arac-alerjen-takip.html', aktif: 'araclar', css: ['araclar'], js: ['alerjen-takip'],
-    baslik: '3 günlük gözlem: alerjen tanıştırma takipçisi — Dada Kids',
+    baslik: '3 günlük gözlem: alerjen tanıştırma takipçisi — Dada Gastro Kids',
     aciklama: 'Yeni bir alerjeni tanıştırırken üç gün boyunca gözlemlerinizi kaydedin. Yaygın bir uygulama; kesin tıbbi kural değil. Kayıtlar yalnız bu cihazda tutulur.',
     main: o.sayfa(`${aracHero(at, {
       baslik: '3 günlük gözlem',
       giris: 'Yeni bir alerjeni tanıştırırken birkaç gün gözlem yapmak <b>yaygın bir uygulamadır; kesin bir tıbbi kural değildir.</b> Bu takipçi gözlemlerinizi düzenli tutmanıza ve doktorunuzla paylaşmanıza yardım eder.',
       eylemler: '<a class="kd-btn" href="#atYeni">Gözlem başlat ' + fa('arrow-down') + '</a>',
     })}
-${ritim(o, [(z) => `<section class="kd-bolum${z}">
+${ritim([(z) => `<section class="kd-bolum${z}">
  <div class="wrap kd-at-ust">
-  <div class="kd-ar-acil" role="note" aria-labelledby="atAcilBaslik">
-   <span class="kd-ar-acil__ikon" aria-hidden="true">${fa('phone')}</span>
-   <div>
-    <h2 id="atAcilBaslik">Acil belirtiler: hemen 112</h2>
-    <p>Nefes darlığı ya da hırıltı, yüzde, dudaklarda veya dilde şişme, vücuda yayılan kurdeşen, solukluk ya da belirgin halsizlik görürseniz beklemeden <a href="tel:112"><b>112</b></a>'yi arayın.</p>
-   </div>
+  <div class="kd-ar-acil kd-ikonlu" role="note" aria-labelledby="atAcilBaslik">
+   <span class="kd-ar-acil__ikon kd-ikonlu__ikon" aria-hidden="true">${fa('phone')}</span>
+   <h2 id="atAcilBaslik" class="kd-ikonlu__baslik">Acil belirtiler: hemen 112</h2>
+    <p class="kd-ikonlu__metin">Nefes darlığı ya da hırıltı, yüzde, dudaklarda veya dilde şişme, vücuda yayılan kurdeşen, solukluk ya da belirgin halsizlik görürseniz beklemeden <a href="tel:112"><b>112</b></a>'yi arayın.</p>
   </div>
   <div class="kd-kutu kd-at-cerceve" data-renk="mavi">
    <h3>${ikon('kalkan', 26)} Gözlem, alerjenleri geciktirmek için bir neden değildir</h3>
@@ -251,8 +228,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
 </section>`, (z) => `<section class="kd-bolum${z}">
  <div class="wrap">
   ${noscript}
-  <template data-at-bos-gorsel>${bosGorsel('bos-durum')}</template>
-  ${ipucu('buyutec', 'Bir seferde tek bir yeni alerjen tanıştırın; tolere ettiklerini haftada birkaç kez sofrada tutmayı unutmayın.', 'kd-at-ipucu')}
+  ${not('Bir seferde tek bir yeni alerjen tanıştırın; tolere ettiklerini haftada birkaç kez sofrada tutmayı unutmayın.', 'kd-at-ipucu')}
   <div class="kd-at" id="kdAlerjen" data-renk="pembe">
    <p class="kd-ar-depo-not" data-at-depo-yok hidden role="status">${fa('triangle-exclamation')} <span>Tarayıcınız bu sayfada kayıt tutmaya izin vermiyor. Takipçi çalışır, ancak sayfayı kapatınca kayıtlar silinir.</span></p>
    <div class="kd-at__izgara">
@@ -361,17 +337,18 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
 
   const ogunPlanlayici = {
     dosya: 'kids-arac-ogun-planlayici.html', aktif: 'araclar', css: ['araclar'], js: ['ogun-planlayici'],
-    baslik: 'Haftalık öğün planlayıcı — Dada Kids',
+    baslik: 'Haftalık öğün planlayıcı — Dada Gastro Kids',
     aciklama: 'Bebeğinizin yaşına uygun Kids tarifleriyle 7 günlük öğün planı yapın; istemediğiniz alerjenleri dışarıda bırakın, alışveriş listesini yazdırın.',
     main: o.sayfa(`${aracHero(op, {
       baslik: 'Haftalık öğün planlayıcı',
       giris: 'Yaşı seçin, öğünleri Kids tarifleriyle doldurun ya da önerilere bırakın. Alışveriş listesi siz planladıkça kendiliğinden oluşur.',
       eylemler: '<a class="kd-btn" href="#plAyar">Planlamaya başla ' + fa('arrow-down') + '</a>',
     })}
-${ritim(o, [(z) => `<section class="kd-bolum${z}">
+${ritim([(z) => `<section class="kd-bolum${z}">
  <div class="wrap">
   ${noscript}
-  ${ipucu('sef', 'Bebeğiniz bir tarifi sevmediyse birkaç gün sonra yeniden deneyin; yeni tatlar çoğu zaman birkaç denemede kabul edilir.', 'kd-pl-ipucu-putur')}
+  ${not('Bebeğiniz bir tarifi sevmediyse birkaç gün sonra yeniden deneyin; yeni tatlar çoğu zaman birkaç denemede kabul edilir.', 'kd-pl-not-ust')}
+  <script type="application/json" id="kdRozetVeri">${jsonGom({ kivam: Object.fromEntries(Object.keys(o.KIVAM_GOSTERGE).map((k) => [k, o.kivamGostergesi(k)])) })}</script>
   <script type="application/json" id="kdTarifVeri">${jsonGom(planVeri)}</script>
   <div class="kd-pl" id="kdPlanlayici" data-renk="mint">
    <p class="kd-ar-depo-not" data-pl-depo-yok hidden role="status">${fa('triangle-exclamation')} <span>Tarayıcınız bu sayfada kayıt tutmaya izin vermiyor. Plan çalışır, ancak sayfayı kapatınca silinir.</span></p>
@@ -399,7 +376,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
     <p class="kd-pl-ipucu" data-pl-ipucu aria-live="polite"></p>
    </div>
    <div class="kd-ar-yazdir kd-pl-yazdir">
-    <div class="kd-ar-yazdir__bas"><b>Dada Kids · Haftalık öğün planı</b><span data-pl-yazdir-ozet></span></div>
+    <div class="kd-ar-yazdir__bas"><b>Dada Gastro Kids · Haftalık öğün planı</b><span data-pl-yazdir-ozet></span></div>
     <div class="kd-pl-tablo" data-pl-izgara aria-live="polite"></div>
     <section class="kd-ar-panel kd-pl-liste" aria-labelledby="plListeBaslik">
      <div class="kd-pl-liste__bas">
@@ -428,13 +405,13 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
 
   const persentil = {
     dosya: 'kids-arac-persentil.html', aktif: 'araclar', css: ['araclar'], js: ['persentil'],
-    baslik: 'Büyüme persentili hesaplayıcı (DSÖ) — Dada Kids',
+    baslik: 'Büyüme persentili hesaplayıcı (DSÖ) — Dada Gastro Kids',
     aciklama: 'DSÖ Çocuk Büyüme Standartlarına göre 0–36 ay için kilo, boy ve baş çevresi persentili. Grafik ve tablo görünümü; hiçbir veri kaydedilmez.',
     main: o.sayfa(`${aracHero(pr, {
       baslik: 'Büyüme persentili',
       giris: 'Ölçümlerinizi girin; bebeğinizin aynı yaştaki çocuklarla karşılaştırmasını DSÖ büyüme standartlarına göre görün. Tek bir ölçümden çok <b>zaman içindeki eğilim</b> önemlidir.',
     })}
-${ritim(o, [(z) => `<section class="kd-bolum${z}">
+${ritim([(z) => `<section class="kd-bolum${z}">
  <div class="wrap">
   ${noscript}
   <div class="kd-pr" id="kdPersentil" data-renk="mavi">
@@ -463,7 +440,7 @@ ${ritim(o, [(z) => `<section class="kd-bolum${z}">
    <div class="kd-pr-sag">
    <div class="kd-pr-sonuc" data-pr-sonuc>
     <div class="kd-pr-bos" data-pr-bos>
-     ${illusVar('bos-durum') ? `<span class="kd-ar-bos">${bosGorsel('bos-durum')}</span>` : `<span class="kd-pr-bos__ikon" aria-hidden="true">${fa('chart-line')}</span>`}
+     <span class="kd-pr-bos__ikon" aria-hidden="true">${fa('chart-line')}</span>
      <h2>Sonuçlar burada görünecek</h2>
      <p>Cinsiyet, doğum tarihi ve en az bir ölçüm girip <b>Hesapla</b>'ya dokunun.</p>
     </div>

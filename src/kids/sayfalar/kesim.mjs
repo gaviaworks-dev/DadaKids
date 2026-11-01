@@ -1,4 +1,4 @@
-// Dada Kids — Güvenli Kesim atlası (sahibi: kesim kolu)
+// Dada Gastro Kids — Güvenli Kesim atlası (sahibi: kesim kolu)
 // Veri: veri/kesim.json  [{slug, ad, grup, renk, ikon, risk, pisirme, asamalar:{"6-8","9-12","12+":{nasil, boyut, ipucu, cizim}}, asla, ezilmeTesti}]
 // Çizimler: aşağıdaki KESIM_CIZIM (besin başına elle kurgulanmış SVG). Derleme sırasında
 // varlik/kids/svg/kesim/<slug>.svg (bütün besin) ve <slug>-{6-8,9-12,12}.svg (aşamalar) olarak yazılır.
@@ -95,11 +95,11 @@ function kamaD(L, H) { return `M${f(-L / 2)} ${f(H * 0.28)}C${f(-L * 0.3)} ${f(-
 const PARMAK = `<g class="kd-kparmak"><ellipse cx="183" cy="138" rx="16" ry="3" fill="${INK}" opacity=".06"/><path d="M170 141V86a12 12 0 0 1 24 0v55" fill="#FDE8DA" stroke="${INK}" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/><path d="M176 87.5a6 6 0 0 1 12 0v5.5a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3z" fill="#FFF6F1" stroke="${INK}" stroke-opacity=".38" stroke-width="1.5"/><path d="M175.5 117q6.5 2.6 13 0M177 122q5 1.8 10 0" fill="none" stroke="${INK}" stroke-opacity=".28" stroke-width="1.4" stroke-linecap="round"/><path d="M173.5 92v12" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/></g>`;
 
 function sahne(n, ic, baslik = '') {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="200" height="140"${baslik ? ` role="img" aria-label="${baslik}"` : ''}><rect x="1" y="1" width="198" height="138" rx="16" fill="${ZEMIN[n]}"/><path d="M14 132H158" stroke="${INK}" stroke-opacity=".06" stroke-width="2" stroke-linecap="round"/>${ic}${PARMAK}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="200" height="140"${baslik ? ` role="img" aria-label="${baslik}"` : ''}><rect x="1" y="1" width="198" height="138" rx="8" fill="${ZEMIN[n]}"/><path d="M14 132H158" stroke="${INK}" stroke-opacity=".06" stroke-width="2" stroke-linecap="round"/>${ic}${PARMAK}</svg>`;
 }
 
-/* ---------- küçük kawaii yüz (yalnız bütün besin) ---------- */
-const yuz = (x, y, s = 1) => `<g transform="translate(${f(x)} ${f(y)}) scale(${s})"><ellipse cx="-9" cy="4.5" rx="3.6" ry="2.3" fill="#F48FA0" opacity=".55"/><ellipse cx="9" cy="4.5" rx="3.6" ry="2.3" fill="#F48FA0" opacity=".55"/><circle cx="-5.5" cy="0" r="2.2" fill="${INK}"/><circle cx="5.5" cy="0" r="2.2" fill="${INK}"/><circle cx="-4.8" cy="-.8" r=".7" fill="#fff"/><circle cx="6.2" cy="-.8" r=".7" fill="#fff"/><path d="M-2.6 3.6q2.6 2.6 5.2 0" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/></g>`;
+/* ---------- V2: besin çizimlerinde yüz yok (profesyonel FoodTech dili); çağrılar boş döner ---------- */
+const yuz = () => '';
 const butunKap = (ic) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80"><ellipse cx="40" cy="72" rx="24" ry="4" fill="${INK}" opacity=".08"/>${ic}</svg>`;
 
 /* =====================================================================
@@ -514,19 +514,19 @@ export default async function kesim(o) {
     <p>Bu besinler küçük çocukların soluk yolu genişliğine yakın boyuttadır. Neden riskli olduklarını ve yerine ne yapabileceğinizi bilmek yeterli.</p>
    </div>
    <ul class="kd-kbogulma__liste">
-    ${TEHLIKELER.map((t, i) => `<li class="kd-gir" style="--kd-gecikme:${i * 60}ms">
-     <span class="kd-kbogulma__svg">${yasakSvg(t.tur)}</span>
-     <div>
-      <h3>${esc(t.ad)}</h3>
+    ${TEHLIKELER.map((t, i) => `<li class="kd-ikonlu kd-gir" style="--kd-gecikme:${i * 60}ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon">${yasakSvg(t.tur)}</span>
+     <h3 class="kd-ikonlu__baslik">${esc(t.ad)}</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
       <span class="kd-kbogulma__yas"><i class="fa-regular fa-clock" aria-hidden="true"></i> ${esc(t.yas)}</span>
       <p><b>Neden?</b> ${esc(t.neden)}</p>
       <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> ${esc(t.yerine)}${t.slug && sluglar.has(t.slug) ? ` <a class="kd-bag" href="#${t.slug}">Kesimi göster</a>` : ''}</span></p>
      </div>
     </li>`).join('')}
-    <li class="kd-kbogulma__bilgi kd-gir" style="--kd-gecikme:${TEHLIKELER.length * 60}ms">
-     <span class="kd-kbogulma__svg" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span>
-     <div>
-      <h3>Ezilme testi</h3>
+    <li class="kd-kbogulma__bilgi kd-ikonlu kd-gir" style="--kd-gecikme:${TEHLIKELER.length * 60}ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span>
+     <h3 class="kd-ikonlu__baslik">Ezilme testi</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
       <span class="kd-kbogulma__yas"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> Vermeden önce deneyin</span>
       <p>Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</p>
       <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Her besinin kartında boyut ve kesim çizimi var. <a class="kd-bag" href="#atlas">Atlasa git</a></span></p>
@@ -560,19 +560,26 @@ export default async function kesim(o) {
    <nav aria-label="Besin dizini"><ul>${atlas.map((x) => `<li><a class="kd-chip" href="#${esc(x.slug)}">${esc(x.ad)}</a></li>`).join('')}</ul></nav>
   </details>`;
 
-  const illus = o.illus ? o.illus('hero-kesim', 'Kesme tahtasında yaşa göre kesilmiş meyve ve sebzeler', { yedek: 'kesim-tahtasi', sinif: 'kd-khero__illus' }) : o.sahne('kesim-tahtasi', '');
-  const maskot = o.maskot ? o.maskot('bicak', { boy: 96, sinif: 'kd-khero__maskot' }) : '';
   const ornekSlug = KESIM_CIZIM.havuc ? 'havuc' : Object.keys(KESIM_CIZIM)[0];
+  const ornek = atlas.find((x) => x.slug === ornekSlug) || {};
+  const ornekAd = ornek.ad || 'Havuç';
+  // Hero: atlastan bir besinin üç aşaması yan yana (aynı ölçek; çizgisel çizim, süs yok)
+  const heroAsamalar = `<div class="kd-khero"><p class="kd-khero__bas">${esc(ornekAd)}: üç aşama, aynı ölçek</p><ol class="kd-khero__asamalar">${ASAMALAR.map((a, i) => {
+    const v = (ornek.asamalar || {})[a.anahtar] || {};
+    const alt = `${a.ad}: ${ornekAd} · ${v.cizim || v.boyut || v.nasil || ''}`;
+    return `<li data-renk="${a.renk}"><figure><img src="${SVG_KLASOR}/${ornekSlug}-${ASAMA_DOSYA[i]}.svg" width="200" height="140" alt="${esc(alt)}" decoding="async"${i ? ' loading="lazy"' : ''}><figcaption><b>${a.ad}</b><small>${esc(v.boyut || a.beceri)}</small></figcaption></figure></li>`;
+  }).join('')}</ol></div>`;
 
+  const hero = (s) => { const h = o.hero({ ...s, serit: true }); return h.includes('kd-guvenlik-serit') ? h : h + '\n' + o.guvenlikSeridi(); };
   const main = o.sayfa(`
-${o.hero({
+${hero({
   renk: 'mint',
-  kirinti: [['Tarifler', 'tarifler.html'], ['Dada Kids', 'kids.html'], ['Güvenli Kesim']],
+  kirinti: [['Tarifler', 'tarifler.html'], ['Dada Gastro Kids', 'kids.html'], ['Güvenli Kesim']],
   ust: { metin: 'Güvenli kesim atlası', ikon: 'bicak-tahta' },
   baslik: 'Her besin, her yaşta<br>doğru boyutta',
   giris: `${atlas.length} besin için üç aşamalı kesim: 6–8 ay avuçla kavrar, 9–12 ay iki parmakla tutar, 12 ay sonrası ısırıp çiğner. Çizimlere bakın, parmak ucunuzla kıyaslayın, gönül rahatlığıyla hazırlayın.`,
   eylemler: `<a class="kd-btn" href="#atlas"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Besin arayın</a><a class="kd-btn kd-btn--hafif" href="#bogulma-bas">Asla bütün verilmeyenler</a>`,
-  sag: `<div class="kd-khero">${illus}${maskot}<figure class="kd-khero__ornek"><img src="${SVG_KLASOR}/${ornekSlug}-6-8.svg" width="200" height="140" alt="Örnek: 6–8 ay için parmak boyunda, pişmiş havuç çubukları ve yetişkin parmak ucu ölçeği" decoding="async"><figcaption>6–8 ay · parmak boyu, pişmiş</figcaption></figure></div>`,
+  sag: heroAsamalar,
 })}
 ${tehlikePaneli}
 <section class="kd-bolum" id="atlas" aria-labelledby="atlas-bas">
@@ -587,7 +594,6 @@ ${tehlikePaneli}
   ${o.bosDurum({ baslik: 'Bu aramayla eşleşen besin yok', metin: 'Yazımı kontrol edin ya da filtreleri temizleyin. Aradığınız besin henüz atlasta olmayabilir.', id: 'kesim-bos' })}
  </div>
 </section>
-${o.ayirici ? o.ayirici('dalga', '#fff') : ''}
 <section class="kd-bolum kd-bolum--beyaz" aria-labelledby="devam-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Devam edin', ikonAd: 'kitap', renk: 'pembe', baslik: '<span id="devam-bas">Kesimden sonrası</span>' })}
@@ -597,7 +603,7 @@ ${o.ayirici ? o.ayirici('dalga', '#fff') : ''}
      ['kids-arac-hazir-mi.html', 'liste', 'Ek gıdaya hazır mı?', 'Oturma, baş kontrolü ve ilgi: hazırlık belirtilerini işaretleyin.', 'mint'],
      ['kids-donemler.html', 'takvim', 'Evrelere göre beslenme', 'Her evrede kıvam, odak besinler ve uygun tarifler.', 'mavi'],
      ['kids-tarifler.html', 'kase', 'Parmak gıda tarifleri', 'Kesim kurallarına uygun, yaşa göre süzülen tarifler.', 'seftali'],
-   ].map(([h, i, b, m, r]) => `<a class="kd-kart kd-modul kd-gir" href="${h}" data-renk="${r}"><span class="kd-modul__ikon">${ikon(i, 40)}</span><h3>${b}</h3><p>${m}</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`).join('')}
+   ].map(([h, i, b, m, r]) => `<a class="kd-kart kd-modul kd-ikonlu kd-gir" href="${h}" data-renk="${r}"><span class="kd-modul__ikon kd-ikonlu__ikon">${ikon(i, 40)}</span><h3 class="kd-ikonlu__baslik">${b}</h3><p class="kd-ikonlu__metin">${m}</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`).join('')}
   </div>
  </div>
 </section>
@@ -605,7 +611,7 @@ ${o.ayirici ? o.ayirici('dalga', '#fff') : ''}
 
   return [{
     dosya: 'kids-guvenli-kesim.html',
-    baslik: 'Güvenli Kesim: besin besin 6–8 ay, 9–12 ay, 12 ay+ | Dada Kids',
+    baslik: 'Güvenli Kesim: besin besin 6–8 ay, 9–12 ay, 12 ay+ | Dada Gastro Kids',
     aciklama: 'Bebek ve küçük çocuklar için besin besin güvenli kesim rehberi: aynı ölçekte çizilmiş üç aşama, boğulma riski, asla bütün verilmeyen besinler.',
     aktif: 'kesim',
     css: ['kesim'],

@@ -1,4 +1,4 @@
-/* Dada Kids — 3 günlük gözlem / alerjen tanıştırma takipçisi (sahibi: araçlar kolu)
+/* Dada Gastro Kids — 3 günlük gözlem / alerjen tanıştırma takipçisi (sahibi: araçlar kolu)
    Bağımlılıksız. Kalıcılık: localStorage "dadakids.alerjenTakip.v1" — her erişim try/catch;
    depolama yoksa bellek içinde çalışır ve küçük bir not gösterir. alert/confirm/prompt yok. */
 (function () {
@@ -259,7 +259,7 @@
       }).join('');
       return '<tr><th scope="row">' + esc(k.ad) + '</th><td>' + esc(goster(k.bas, true)) + '</td>' + gunler + '<td>' + esc(k.sonuc ? SONUC_AD[k.sonuc] : 'Gözlemde') + '</td><td>' + (k.sonuc === 'tolere' ? esc(goster(sonVerilme(k), true)) : '—') + '</td></tr>';
     }).join('');
-    $('[data-at-ozet]').innerHTML = '<div class="kd-ar-yazdir__bas"><b>Dada Kids · Alerjen tanıştırma gözlem özeti</b><span>Yazdırma: ' + esc(goster(bugun())) + '</span></div>' +
+    $('[data-at-ozet]').innerHTML = '<div class="kd-ar-yazdir__bas"><b>Dada Gastro Kids · Alerjen tanıştırma gözlem özeti</b><span>Yazdırma: ' + esc(goster(bugun())) + '</span></div>' +
       (l.length ? '<table class="kd-ar-tablo"><thead><tr><th scope="col">Besin</th><th scope="col">Başlangıç</th><th scope="col">Gün 1</th><th scope="col">Gün 2</th><th scope="col">Gün 3</th><th scope="col">Sonuç</th><th scope="col">Son verilme</th></tr></thead><tbody>' + satir + '</tbody></table>' : '<p>Henüz kayıt yok.</p>') +
       '<p class="kd-ar-yazdir__not">Ebeveyn gözlem notlarıdır; tanı değildir. "3 günlük gözlem" yaygın bir uygulamadır, kesin tıbbi kural değildir. Acil belirtilerde 112. Örnek içerik — uzman onayı bekliyor.</p>';
   }
