@@ -1,18 +1,29 @@
-// Boyut + denge kapısı: tur 2 öncesine (e8ac2b6) göre kapsayıcı/kart boyutu değişen sayfa ve iki kolonda büyük yükseklik farkı kırmızıdır.
-// Taban: ayrı sunulan eski sürüm (TABAN_ESKI). Bilinçli değişiklikler araclar/boyut-istisna.json dosyasında gerekçesiyle listelenir.
-// Kullanım: TABAN_ESKI=http://localhost:8772/DadaKids/ node araclar/boyut-kapisi.mjs [sayfa...]   (TABAN=… ile canlıda) · GENISLIK=1440,390
+// Boyut + denge kapısı: v1 dondurulmuş kopyasına (/v1/) göre kapsayıcı/kart boyutu değişen sayfa ve iki kolonda büyük yükseklik farkı kırmızıdır.
+// Taban: TABAN_ESKI (varsayılan http://localhost:8765/DadaKids/v1/). Bilinçli değişiklikler araclar/boyut-istisna.json dosyasında gerekçesiyle listelenir;
+// istisnada "eksen": "h" yalnız yüksekliği serbest bırakır — genişlik yine ölçülür (kart/görsel/kapsayıcı genişliği büyümez);
+// "yon": "kucul" yalnız küçülmeyi serbest bırakır (büyüme yine kırmızı).
+// Kullanım: node araclar/boyut-kapisi.mjs [sayfa...]   (TABAN=… ile canlıda, TABAN_ESKI=… başka taban) · GENISLIK=1440,390
 import { chromium } from 'playwright';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 const TABAN = process.env.TABAN || 'http://localhost:8765/DadaKids/';
-const ESKI = process.env.TABAN_ESKI || 'http://localhost:8772/DadaKids/';
+const ESKI = process.env.TABAN_ESKI || 'http://localhost:8765/DadaKids/v1/';
 const GENISLIK = (process.env.GENISLIK || '1440,1024,768,390').split(',').map(Number);
 const DENGE_PX = Number(process.env.DENGE_PX || 96), DENGE_ORAN = Number(process.env.DENGE_ORAN || 0.12);
 const W_TOL = 0.05, H_TOL = 0.18;   // genişlik %5, yükseklik %18 (metin satırı oynamalarını yutar)
-const SAYFALAR = process.argv.slice(2).length ? process.argv.slice(2) : readdirSync('.').filter((f) => /^kids(-.+)?\.html$/.test(f));
-const ISTISNA = existsSync('araclar/boyut-istisna.json') ? JSON.parse(readFileSync('araclar/boyut-istisna.json', 'utf8')).kurallar : [];
-const istisna = (s, sinif, w) => ISTISNA.some((k) => (k.sinif === sinif || k.sinif === '*') && (k.sayfa === '*' || k.sayfa === s) && (!k.genislik || k.genislik === w));
+const SAYFALAR = process.argv.slice(2).length ? process.argv.slice(2) : [...readdirSync('.').filter((f) => /^kids(-.+)?\.html$/.test(f)), 'kids-tarif.html?t=balkabagi-puresi'];
+const ISTISNA_YOL = process.env.ISTISNA || 'araclar/boyut-istisna.json';   // ISTISNA=… başka kökten koşarken (dondurulmuş kopya) ana ağaçtaki listeyi kullan
+const ISTISNA = existsSync(ISTISNA_YOL) ? JSON.parse(readFileSync(ISTISNA_YOL, 'utf8')).kurallar : [];
+// sinif "kd-hub-donem*" → önek eşleşmesi
+// kural.taban: kural yalnız TABAN_ESKI bu metni içeriyorsa geçerli (ör. "8774" → Ek revize, taban V2 dondurulmuş kopya)
+// kural.sayfa "kids-donem-*" → önek eşleşmesi
+const sayfaEs = (k, s) => k.sayfa === '*' || k.sayfa === s || s.split('?')[0] === k.sayfa || (k.sayfa.endsWith('*') && s.startsWith(k.sayfa.slice(0, -1)));
+const tabanEs = (k) => !k.taban || ESKI.includes(k.taban);
+const sinifEs = (k, sinif) => k.sinif === sinif || k.sinif === '*' || (k.sinif.endsWith('*') && sinif.startsWith(k.sinif.slice(0, -1)));
+// eksen: yok → genişlik + yükseklik serbest; 'h' → yalnız yükseklik serbest (genişlik yine ölçülür)
+const istisna = (s, sinif, w, eksen = 'wh') => ISTISNA.some((k) => !k.yon && tabanEs(k) && sinifEs(k, sinif) && sayfaEs(k, s) && (!k.genislik || k.genislik === w) && (!k.eksen || eksen === k.eksen));
 // kart/kapsayıcı sayılan sınıflar: sınıf adının kendisi yerleşim taşır; metin ve rozet öğeleri elenir
-const ELE = /(__baslik|__metin|__ozet|__aciklama|__ad$|__sen|__etiket|baloncuk|rozet|chip|^kd-gir|^kd-ikon|kd-illus|kd-ornek|kd-onay|kd-hero__sus|^kd-pt|kd-zebra|kd-desen|kd-gecis|kd-ayirici|kd-rbas|kd-yuz|kd-btn|kd-dugme)/;
+const ELE = /(__baslik|__metin|__ozet|__aciklama|__ad$|__sen|__etiket|baloncuk|rozet|chip|^kd-gir|^kd-ikon|kd-ornek|kd-onay|kd-zebra|kd-gecis|kd-rbas|kd-btn|kd-dugme|kd-age-badge|kd-kivam|kd-kiler-ekle|kd-guven-rozet|kd-inceleyen|kd-yardim|^kd-pt)/;
+// V2'de kaldırılan süs öğeleri (illus, maskot, hero__sus, kd-yuz, ayırıcı, desen, Pütür) yeni sürümde yok → `!yeni[k]` ile zaten atlanır.
 const olc = () => {
   const m = new Map();
   document.querySelectorAll('.kd-sayfa [class]').forEach((e) => {
@@ -26,7 +37,7 @@ const olc = () => {
 const denge = ({ DENGE_PX, DENGE_ORAN }) => {
   const out = [];
   document.querySelectorAll('.kd-sayfa *').forEach((p) => {
-    if (p.closest('svg') || p.closest('.kd-pt') || p.hasAttribute('data-denge-serbest')) return;
+    if (p.closest('svg') || p.closest('[class*="kd-yardim"], [class*="kd-pt"]') || p.hasAttribute('data-denge-serbest')) return;
     const pb = p.getBoundingClientRect(); if (pb.width < 680) return;
     const c = [...p.children].filter((x) => { const s = getComputedStyle(x); return s.display !== 'none' && s.position !== 'absolute' && s.position !== 'fixed' && x.getBoundingClientRect().height > 80; });
     if (c.length !== 2) return; const [a, b] = c.map((x) => x.getBoundingClientRect());
@@ -49,7 +60,10 @@ for (const w of GENISLIK) {
     if (eski) for (const k of Object.keys(eski)) {
       if (!yeni[k] || ELE.test(k) || istisna(s, k, w)) continue;
       const [ew, eh] = eski[k], [yw, yh] = yeni[k]; const dw = Math.abs(yw - ew) / ew, dh = Math.abs(yh - eh) / eh;
-      if (dw > W_TOL || (dh > H_TOL && Math.abs(yh - eh) > 24)) sorun.push(`.${k} ${ew}×${eh} → ${yw}×${yh}`);
+      const hSerbest = istisna(s, k, w, 'h');
+      // yon:"kucul" istisnası yalnız küçülmeyi serbest bırakır (genişlik ve yükseklik büyümezse geçer)
+      if (yw <= ew * (1 + W_TOL) && yh <= eh * (1 + H_TOL) && ISTISNA.some((r) => r.yon === 'kucul' && tabanEs(r) && sinifEs(r, k) && sayfaEs(r, s) && (!r.genislik || r.genislik === w) && (r.eksen !== 'h' || dw <= W_TOL))) continue;
+      if (dw > W_TOL || (!hSerbest && dh > H_TOL && Math.abs(yh - eh) > 24)) sorun.push(`.${k} ${ew}×${eh} → ${yw}×${yh}${hSerbest ? ' (yükseklik istisnalı, genişlik değişti)' : ''}`);
     }
     if (w >= 900) for (const d of await p.evaluate(denge, { DENGE_PX, DENGE_ORAN })) if (!istisna(s, 'denge', w)) sorun.push('DENGE ' + d);
     n++; if (sorun.length) kirmizi++;

@@ -6,7 +6,7 @@
 //  · footer: tepesine kaydırınca elementFromPoint footer döner, tepe ve telif satırı tam görünür, üstünü içerik örtmez,
 //    son bölümle arasında boş şerit yok
 //  · öneri şeridi ([data-izgara-oneri]): açık tarif listede yok, satır tam (masaüstü 4, tablet 2'nin katı, mobil kaydırma)
-// Sekmeler ([role=tab]), kapalı <details> ve aria-pressed süzgeçleri de açılarak ölçülür. `.kd-pt*` (Pütür) ölçüm dışıdır.
+// Sekmeler ([role=tab]), kapalı <details> ve aria-pressed süzgeçleri de açılarak ölçülür. Yüzen yardım düğmesi/menüsü (`.kd-yardim*`, `[data-kd-yardim]`, V2'de Pütür'ün yerine) ölçüm dışıdır.
 // Bilinçli istisna: öğeye data-izgara-serbest="gerekçe" konur; bu öğe ölçülmez ama sayılır ve raporda yazılır.
 // Hedefli ölçüm için kartın parçasına data-izgara-rol="baslik|meta|cta" konabilir.
 // Kullanım: node araclar/izgara-kapisi.mjs [sayfa...]   (TABAN=… canlıda, GENISLIK=1440,390 alt küme)
@@ -38,7 +38,7 @@ function olcum(TOL) {
   const px = (s) => parseFloat(s) || 0;
   document.querySelectorAll('[data-izgara-serbest]').forEach((e) => { if (gorunur(e)) out.serbest.push(`${ad(e)}: ${e.getAttribute('data-izgara-serbest')}`); });
   const adaylar = [...document.querySelectorAll('.kd-sayfa *')].filter((e) => {
-    if (e.closest('svg') || e.closest('[class*="kd-pt"]') || e.closest('[data-izgara-serbest]') || !gorunur(e)) return false;
+    if (e.closest('svg') || e.closest('[class*="kd-yardim"], [data-kd-yardim], [class*="kd-pt"]') || e.closest('[data-izgara-serbest]') || !gorunur(e)) return false;
     const c = getComputedStyle(e);
     return c.display === 'grid' || c.display === 'inline-grid' || (c.display === 'flex' && c.flexWrap === 'wrap');
   });
@@ -171,7 +171,7 @@ for (const w of GENISLIK) {
     birlestir(await sayfa.evaluate(olcum, TOL_PX));
     // süzgeçler: görünür aria-pressed düğmeleri tek tek açılıp kapanır (kart sayısı değişince yarım satır kalmasın)
     if (!s.startsWith('kids-arac')) {
-      const dugme = await sayfa.evaluate(() => [...document.querySelectorAll('.kd-sayfa button[aria-pressed]')].filter((b) => !b.closest('.kd-tema-sec') && !b.closest('[class*="kd-pt"]') && b.getBoundingClientRect().width > 0).map((b, i) => { b.setAttribute('data-izgara-f', i); return i; }));
+      const dugme = await sayfa.evaluate(() => [...document.querySelectorAll('.kd-sayfa button[aria-pressed]')].filter((b) => !b.closest('.kd-tema-sec') && !b.closest('[class*="kd-yardim"], [data-kd-yardim], [class*="kd-pt"]') && b.getBoundingClientRect().width > 0).map((b, i) => { b.setAttribute('data-izgara-f', i); return i; }));
       for (const i of dugme) {
         await sayfa.evaluate((n) => document.querySelector(`[data-izgara-f="${n}"]`).click(), i);
         await sayfa.waitForTimeout(40);
@@ -187,14 +187,19 @@ for (const w of GENISLIK) {
       const headerAlt = () => { const h = document.querySelector('header.header'); if (!h) return 0; const b = h.getBoundingClientRect(); return b.bottom > 0 && getComputedStyle(h).visibility !== 'hidden' ? b.bottom : 0; };
       const icinde = (e) => !!e && (e === f || f.contains(e));
       const yukle = async (y) => { scrollTo(0, y); await bekle(120); };
+      // perde footer (Gastro altbilgi-perde, ≥641px'te position:fixed): footer'ın tepesi, sayfa sonunda ana içeriğin
+      // altından açılan yerdir → sona kaydırıp açılan kenarı ölç. Akıştaki footer: tepesinin 200px üstüne kaydır.
+      const perde = getComputedStyle(f).position === 'fixed';
       const tepeY = f.getBoundingClientRect().top + scrollY;
-      await yukle(Math.max(0, tepeY - 200));
+      await yukle(perde ? document.documentElement.scrollHeight : Math.max(0, tepeY - 200));
+      if (perde) await bekle(200);
       let fr = f.getBoundingClientRect();
+      if (perde) { const m = document.querySelector('.page-main')?.getBoundingClientRect(); const acik = m ? Math.max(fr.top, m.bottom) : fr.top; fr = { top: acik, bottom: fr.bottom }; }
       // tepe: footer'ın üst kenarı pencerede ise üstünde içerik yok
       for (const x of [.08, .5, .92]) {
         const px_ = innerWidth * x, py = Math.min(innerHeight - 2, Math.max(headerAlt() + 2, fr.top + 6));
         const e = document.elementFromPoint(px_, py);
-        if (fr.top < innerHeight - 8 && e && !icinde(e) && !e.closest('[class*="kd-pt"]') && !e.closest('.bottom-nav') && fr.top >= 0 && py >= fr.top) sorun.push(`tepe örtülü (${e.tagName}.${String(e.className).slice(0, 24)})`);
+        if (fr.top < innerHeight - 8 && e && !icinde(e) && !e.closest('[class*="kd-yardim"], [data-kd-yardim], [class*="kd-pt"]') && !e.closest('.bottom-nav') && fr.top >= 0 && py >= fr.top) sorun.push(`tepe örtülü (${e.tagName}.${String(e.className).slice(0, 24)})`);
       }
       // telif satırı: sonuna kaydır
       await yukle(document.documentElement.scrollHeight);
@@ -206,7 +211,7 @@ for (const w of GENISLIK) {
         const b = t.getBoundingClientRect();
         if (b.top < 0 || b.bottom > innerHeight + 1) sorun.push(`telif pencere dışı (${Math.round(b.top)}-${Math.round(b.bottom)})`);
         const e = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
-        if (!icinde(e) && !(e && e.closest('[class*="kd-pt"]'))) sorun.push(`telif örtülü (${e ? e.tagName + '.' + String(e.className).slice(0, 24) : 'yok'})`);
+        if (!icinde(e) && !(e && e.closest('[class*="kd-yardim"], [data-kd-yardim], [class*="kd-pt"]'))) sorun.push(`telif örtülü (${e ? e.tagName + '.' + String(e.className).slice(0, 24) : 'yok'})`);
       }
       if (fr.bottom < innerHeight - 1) sorun.push(`footer altında boşluk ${Math.round(innerHeight - fr.bottom)}px`);
       const sayfaAlt = document.querySelector('.kd-sayfa')?.getBoundingClientRect().bottom;

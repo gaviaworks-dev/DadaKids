@@ -1,7 +1,13 @@
 // Kabuk paritesi: prototip sayfası ↔ canlı donör; header/nav/footer/alt çubuk geometrisi + temel computed style.
 // Tolerans 4px. Footer'ın y'si içerik uzunluğuna bağlı olduğundan footer'da yalnız x/genişlik/yükseklik ölçülür.
 // Kullanım: node araclar/parite.mjs   (önce: node araclar/sunucu.mjs)
+// CANLI YÜK KORUMASI (1 Kas: dadagastro.com kesintisi): canlı ölçümler rapor/tmp/parite-canli.json önbelleğinden okunur.
+// Canlıya yalnız PARITE_CANLI=1 ile ve önbellek yoksa gidilir; her URL × genişlik tek kez, sayfalar arası ≥3 sn bekleme.
 import { chromium } from 'playwright';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+const ONBELLEK = 'rapor/tmp/parite-canli.json';
+let onbellek = {}; try { onbellek = JSON.parse(readFileSync(ONBELLEK, 'utf8')); } catch {}
+const CANLI_IZIN = process.env.PARITE_CANLI === '1';
 const YEREL = process.env.TABAN || 'http://localhost:8765/DadaKids/';   // TABAN=… ile izole ağaç ya da canlı
 const D = 'https://dadagastro.com/tarif/balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin'; // Kids kabuğunun donörü
 const CIFTLER = [
@@ -39,7 +45,13 @@ for (const [w, h] of [[1440, 900], [390, 844]]) {
   const bag = await t.newContext({ viewport: { width: w, height: h } });
   const a = await bag.newPage(), b = await bag.newPage();
   for (const [yerel, canli] of CIFTLER) {
-    const [ra, rb] = [await olc(a, YEREL + yerel), await olc(b, canli)];
+    const anahtar = `${w}|${canli}`;
+    if (!onbellek[anahtar]) {
+      if (!CANLI_IZIN) { console.error(`parite: ${anahtar} önbellekte yok; canlıya gitmek için PARITE_CANLI=1 (canlı yükü: dikkatli)`); process.exit(2); }
+      onbellek[anahtar] = await olc(b, canli); await b.waitForTimeout(3000);
+      mkdirSync('rapor/tmp', { recursive: true }); writeFileSync(ONBELLEK, JSON.stringify(onbellek));
+    }
+    const [ra, rb] = [await olc(a, YEREL + yerel), onbellek[anahtar]];
     const satir = [];
     SECICILER.forEach(([s, alan], i) => {
       const p = ra[i], c = rb[i];
@@ -47,7 +59,10 @@ for (const [w, h] of [[1440, 900], [390, 844]]) {
       if (!p || !c) { satir.push(`${s}: ${p ? 'canlıda yok' : 'prototipte yok'}`); return; }
       if (p.gorunur !== c.gorunur) { satir.push(`${s}: görünürlük ${p.gorunur}≠${c.gorunur}`); return; }
       if (!p.gorunur) return;
+      // E10 (Ek revize 1 Kas): Kids sayfalarında footer'dan "Tarifini Paylaş" bağı kaldırıldı → footer yüksekliği bilinçli farklı (x/w yine ölçülür)
+      const e10 = /^kids/.test(yerel) && s.startsWith('footer');
       for (const k of alan.replace('xywh', 'xywh').split('')) {
+        if (e10 && k === 'h') continue;
         const anahtar = k === 'w' ? 'w' : k === 'h' ? 'h' : k;
         const fark = Math.abs(p[anahtar] - c[anahtar]);
         if (fark > TOL) satir.push(`${s} ${k}: ${p[anahtar].toFixed(0)} ↔ ${c[anahtar].toFixed(0)}`);

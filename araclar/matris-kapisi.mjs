@@ -1,12 +1,13 @@
 // Matris kapısı: evre sayfalarındaki sekmeli besin bileşeni evre verisiyle birebir mi?
 // Her evre sayfasında (derlenmiş HTML) sekme sayıları (data-sayi), panel kart sırası (data-besin) ve kart adları
 // veri/evreler.json uygun/dikkat/henuz + veri/besinler.json ile karşılaştırılır. Uyuşmazlıkta çıkış kodu 1.
+// Ek revize: kart sınıfı "kd-mkart kd-ikonlu", ad "kd-mkart__ad kd-ikonlu__baslik" (ek sınıflara izin verilir).
 // İstisna: 0–6 ay'da veride boş olan uygun/dikkat gruplarına sayfa evre notu kartı koyar ([data-kd-ek], data-besin yok).
 // Kullanım: node araclar/matris-kapisi.mjs [sayfa.html ...]   (varsayılan: 5 evre sayfası, depo kökünde)
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
-const KOK = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const KOK = process.env.KOK || path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');   // KOK=… dondurulmuş kopya
 const evreler = JSON.parse(readFileSync(path.join(KOK, 'veri/evreler.json'), 'utf8')).evreler;
 const besinler = new Map(JSON.parse(readFileSync(path.join(KOK, 'veri/besinler.json'), 'utf8')).besinler.map((b) => [b.slug, b]));
 const TURLER = ['uygun', 'dikkat', 'henuz'];
@@ -36,7 +37,7 @@ for (const dosya of dosyalar) {
     const pSon = TURLER.slice(TURLER.indexOf(tur) + 1).map((t) => kap.indexOf(`id="besinler-panel-${t}"`)).find((i) => i > 0) ?? kap.indexOf('</section>');
     if (pBas < 0) { sorun.push(`${tur}: panel yok`); continue; }
     const panel = kap.slice(pBas, pSon);
-    const kartlar = [...panel.matchAll(/<li class="kd-mkart"([^>]*)>[\s\S]*?<b class="kd-mkart__ad">([\s\S]*?)<\/b>/g)].map((m) => ({ slug: ozellik(m[1], 'data-besin'), ek: ozellik(m[1], 'data-kd-ek'), ad: coz(m[2]) }));
+    const kartlar = [...panel.matchAll(/<li class="kd-mkart(?:\s[^"]*)?"([^>]*)>[\s\S]*?<b class="kd-mkart__ad[^"]*">([\s\S]*?)<\/b>/g)].map((m) => ({ slug: ozellik(m[1], 'data-besin'), ek: ozellik(m[1], 'data-kd-ek'), ad: coz(m[2]) }));
     const sluglar = kartlar.filter((k) => k.slug !== null).map((k) => k.slug);
     const ekler = kartlar.filter((k) => k.slug === null);
     if (!sekmeM) sorun.push(`${tur}: sekme yok`);

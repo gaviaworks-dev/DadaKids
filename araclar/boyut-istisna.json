@@ -1,61 +1,514 @@
 {
-  "aciklama": "Tur 2 öncesine göre bilinçli boyut değişiklikleri. Her satırın gerekçesi var; yeni satır yalnız kullanıcı onaylı değişiklik için eklenir.",
+  "aciklama": "V2 (REV-2026-DK01) bilinçli boyut değişiklikleri; taban v1 dondurulmuş kopyası (/v1/). Her satırın gerekçesi var; yeni satır yalnız sözleşmede bilinçli değişen bileşen için eklenir. \"eksen\": \"h\" yalnız yüksekliği serbest bırakır: kart/görsel ve kapsayıcı GENİŞLİĞİ yine ölçülür, büyümez. Tur 2 dönemi istisnaları (taban e8ac2b6) v1'in içinde olduğundan kaldırıldı (git geçmişinde).",
   "kurallar": [
-    { "sayfa": "*", "sinif": "kd-ust__menu", "gerekce": "Tema seçici alt menüye eklendi (kullanıcı EK'i)" },
-    { "sayfa": "*", "sinif": "kd-dhaplar", "gerekce": "Evre besin matrisi sekmeli bileşen (kullanıcı EK'i)" },
-    { "sayfa": "*", "sinif": "kd-dhap", "gerekce": "Evre besin matrisi sekmeli bileşen (kullanıcı EK'i)" },
-    { "sayfa": "*", "sinif": "kd-myilserit", "gerekce": "Mevsim ay adları blok bazına alındı (site turu bulgusu)" },
-    { "sayfa": "*", "sinif": "kd-gorundu", "gerekce": "Giriş animasyonu durum sınıfı; medyanı sayfadaki öğe karışımından gelir, tek tek kart sınıfları ayrıca ölçülüyor" },
-    { "sayfa": "kids-tarifler.html", "sinif": "kd-secim", "gerekce": "Alerjen filtresi veride geçen her alerjeni kapsıyor (filtre doğruluğu); seçenek sayısı arttı, chip boyutu aynı" },
-    { "sayfa": "kids-rehber-ogurme-mi-bogulma-mi.html", "sinif": "kd-hero", "genislik": 1024, "gerekce": "Taban SVG kapağı 976×732 tam genişlikte büyüyordu; ortak 4:3 hero kutusuna girdi, küçülme" },
-    { "sayfa": "kids-rehber-ogurme-mi-bogulma-mi.html", "sinif": "kd-hero__izgara", "genislik": 1024, "gerekce": "Taban SVG kapağı 976×732 tam genişlikte büyüyordu; ortak 4:3 hero kutusuna girdi, küçülme" },
-    { "sayfa": "kids-arac-alerjen-takip.html", "sinif": "kd-at-alt", "genislik": 1024, "gerekce": "Boşluk tokenı ile not ve eylemler tek satıra sığdı; küçülme, kart büyümedi" },
-    { "sayfa": "kids-donemler.html", "sinif": "kd-bolum", "genislik": 1440, "gerekce": "Bölüm dolgusu ritim ayırıcısıyla küçüldü; evre kartı 218×222 tabanda" },
-    { "sayfa": "kids-rehber-alerjen-tanitimi.html", "sinif": "kd-bolum", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-alerjen-tanitimi.html", "sinif": "kd-izgara", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-alerjen-tanitimi.html", "sinif": "kd-rilgili", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-alerjen-tanitimi.html", "sinif": "kd-kaydir-mobil", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-blw-temelleri.html", "sinif": "kd-bolum", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-blw-temelleri.html", "sinif": "kd-izgara", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-blw-temelleri.html", "sinif": "kd-rilgili", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-blw-temelleri.html", "sinif": "kd-kaydir-mobil", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-ek-gidaya-gecis.html", "sinif": "kd-bolum", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-ek-gidaya-gecis.html", "sinif": "kd-izgara", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-ek-gidaya-gecis.html", "sinif": "kd-rilgili", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-rehber-ek-gidaya-gecis.html", "sinif": "kd-kaydir-mobil", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids.html", "sinif": "kd-izgara", "genislik": 1024, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif", "genislik": 768, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-izgara", "genislik": 768, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif__izgara", "genislik": 768, "gerekce": "3 sütunda dördüncü öneri kartı gizli, satır tam (yarım satır kuralı); kart boyu tabanda, küçülme" },
-    { "sayfa": "kids-arac-persentil.html", "sinif": "kd-pr-son", "genislik": 1440, "gerekce": "Denge: alttaki örnek/lisans notu ve ölçüm notu sağ kolona alındı; içerik aynı, yalnız yeri değişti" },
-    { "sayfa": "kids-arac-persentil.html", "sinif": "kd-pr", "genislik": 1024, "gerekce": "Denge: alttaki örnek/lisans notu ve ölçüm notu sağ kolona alındı; içerik aynı, yalnız yeri değişti" },
-    { "sayfa": "kids-arac-persentil.html", "sinif": "kd-pr", "genislik": 768, "gerekce": "Denge: alttaki örnek/lisans notu ve ölçüm notu sağ kolona alındı; içerik aynı, yalnız yeri değişti" },
-    { "sayfa": "kids-arac-persentil.html", "sinif": "kd-pr", "genislik": 390, "gerekce": "Denge: alttaki örnek/lisans notu ve ölçüm notu sağ kolona alındı; içerik aynı, yalnız yeri değişti" },
-    { "sayfa": "kids.html", "sinif": "kd-hub-profil__yan", "genislik": 1440, "gerekce": "Denge: sağ kolona seçili evrenin iki tarifi eklendi (FAZ 3 talimatı), kolon sol kartla eşit" },
-    { "sayfa": "kids-arac-hazir-mi.html", "sinif": "kd-bolum", "gerekce": "Bilgi bölümüne başlık ve zebra ritmi eklendi (boyut dışı görsel dil); .kd-hm-bilgi kartları tabanda" },
-    { "sayfa": "kids-donem-0-6-ay.html", "sinif": "kd-bolum", "genislik": 390, "gerekce": "Sekmeli besin matrisi bölümleri kısalttı (kullanıcı EK'i); medyan küçüldü, büyüme değil" },
-    { "sayfa": "kids-donem-0-6-ay.html", "sinif": "kd-bolum", "genislik": 768, "gerekce": "Sekmeli besin matrisi bölümleri kısalttı (kullanıcı EK'i); medyan küçüldü, büyüme değil" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mpanel", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-acik", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mpanel__bas", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mkahraman", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mkahraman__gorsel", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-myil", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mbilgiler", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mbilgi", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mbebek", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtezgah", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtezgah__liste", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-murun", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mtarif__izgara", "genislik": 390, "gerekce": "Taban 390px'te 1002px yatay taşıyordu (ay şeridi düzeltmesi öncesi); taşma giderildi, tabanla kıyas anlamsız" },
-    { "sayfa": "kids-donem-0-6-ay.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
-    { "sayfa": "kids-donem-1-3-yas.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
-    { "sayfa": "kids-donem-6-8-ay.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
-    { "sayfa": "kids-donem-9-12-ay.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
-    { "sayfa": "kids-donem-hamilelik.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
-    { "sayfa": "kids-donemler.html", "sinif": "kd-dguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" },
-    { "sayfa": "kids-mevsim.html", "sinif": "kd-mguven", "genislik": 390, "gerekce": "Onay kutusu ile ipucu arası boşluk mobilde --kd-s5 (24px, kullanıcı isteği); büyüyen yalnız kart olmayan taşıyıcı, onay ve ipucu boyutu aynı" }
+    {
+      "sayfa": "*",
+      "sinif": "kd-ust__menu",
+      "gerekce": "V2 madde 3-5: Kids menü barı yeniden kuruldu (\"Ana Sayfa\" metni yerine ev ikonu, mini Dada Gastro Kids logosu, \"Mevsim Takvimi\"); mobilde yatay kayan şerit"
+    },
+    {
+      "sayfa": "*",
+      "sinif": "kd-gorundu",
+      "gerekce": "Giriş animasyonu durum sınıfı; medyanı sayfadaki öğe karışımından gelir, kart sınıfları ayrıca ölçülüyor (tur 2'den taşındı)"
+    },
+    {
+      "sayfa": "*",
+      "sinif": "kd-tarif",
+      "eksen": "h",
+      "gerekce": "V2 madde 9-10: tarif kartı alt satırı kıvam göstergesi + Bebek Kilerime Ekle düğmesi (o.tarifKart); kart genişliği aynı"
+    },
+    {
+      "sayfa": "*",
+      "sinif": "kd-kart",
+      "eksen": "h",
+      "gerekce": "V2 madde 9-10: tarif kartı alt satırı kıvam göstergesi + kiler düğmesi; kd-kart tarif kartının taban sınıfı, genişlik aynı"
+    },
+    {
+      "sayfa": "*",
+      "sinif": "kd-kart__govde",
+      "eksen": "h",
+      "gerekce": "V2 madde 9-10: kart gövdesine kıvam + kiler satırı eklendi; genişlik aynı"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hero",
+      "eksen": "h",
+      "gerekce": "V2 madde 6-7: hub hero'ya iki düğmenin altına yaş barı (5 seçenek) ve güven rozeti eklendi; hero genişliği aynı"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hero__izgara",
+      "eksen": "h",
+      "gerekce": "V2 madde 6-7: hub hero yaş barı + güven rozeti; genişlik aynı"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hero__metin",
+      "eksen": "h",
+      "gerekce": "V2 madde 6-7: hub hero yaş barı + güven rozeti metin kolonunda; genişlik aynı"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-hero",
+      "eksen": "h",
+      "gerekce": "V2 madde 6-8: hub hero'ya yaş barı + güven rozeti eklendi; genişlik aynı"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-tarif",
+      "genislik": 390,
+      "yon": "kucul",
+      "gerekce": "Hub vitrini mobilde yatay kaydırmalı tarif şeridi (diğer tarif şeritleriyle aynı bileşen); v1'deki tek sütun önizleme farklı bileşendi. Yalnız küçülme serbest (358→240), büyüme kırmızı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-kart",
+      "genislik": 390,
+      "yon": "kucul",
+      "gerekce": "Hub vitrini mobilde yatay kaydırmalı tarif şeridi (diğer tarif şeritleriyle aynı bileşen); v1'deki tek sütun önizleme farklı bileşendi. Yalnız küçülme serbest (358→240), büyüme kırmızı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-tarif__medya",
+      "genislik": 390,
+      "yon": "kucul",
+      "gerekce": "Hub vitrini mobilde yatay kaydırmalı tarif şeridi (diğer tarif şeritleriyle aynı bileşen); v1'deki tek sütun önizleme farklı bileşendi. Yalnız küçülme serbest (358→240), büyüme kırmızı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-kart__govde",
+      "genislik": 390,
+      "yon": "kucul",
+      "gerekce": "Hub vitrini mobilde yatay kaydırmalı tarif şeridi (diğer tarif şeritleriyle aynı bileşen); v1'deki tek sütun önizleme farklı bileşendi. Yalnız küçülme serbest (358→240), büyüme kırmızı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-bolum",
+      "eksen": "h",
+      "gerekce": "PDF madde 6: hub vitrin bölümü seçili döneme göre tarifler + güvenli kesim şeması + besinler panellerini içeriyor (içerik eklemesi, denge için büyütme değil). Yalnız yükseklik; genişlik ölçülür. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-dortlu",
+      "eksen": "h",
+      "gerekce": "PDF madde 6: hub vitrin bölümü seçili döneme göre tarifler + güvenli kesim şeması + besinler panellerini içeriyor (içerik eklemesi, denge için büyütme değil). Yalnız yükseklik; genişlik ölçülür. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-izgara",
+      "eksen": "h",
+      "gerekce": "PDF madde 6: hub vitrin bölümü seçili döneme göre tarifler + güvenli kesim şeması + besinler panellerini içeriyor (içerik eklemesi, denge için büyütme değil). Yalnız yükseklik; genişlik ölçülür. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-bas",
+      "eksen": "h",
+      "gerekce": "PDF madde 6: hub vitrin bölümü seçili döneme göre tarifler + güvenli kesim şeması + besinler panellerini içeriyor (içerik eklemesi, denge için büyütme değil). Yalnız yükseklik; genişlik ölçülür. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-donem*",
+      "genislik": 1440,
+      "gerekce": "Beyar Ek revize E11: \"Bebeğinizin dönemi\" widget'ı bölüm boyunca tam genişlik (588→1176, bilinçli genişleme; yalnız bu öğe ve alt öğeleri). Lead onayı 2026-11-01.",
+      "taban": "8774"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-modul",
+      "yon": "kucul",
+      "eksen": "h",
+      "gerekce": "Beyar Ek revize E5: ikonlu kart hizası (ikon + başlık tek satır) modül kartını kısalttı (230→176); yalnız yükseklik küçülmesi, genişlik ölçülür. Lead onayı 2026-11-01.",
+      "taban": "8774"
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-moduller",
+      "yon": "kucul",
+      "eksen": "h",
+      "gerekce": "Beyar Ek revize E5: ikonlu kart hizası modül ızgarasını kısalttı; yalnız yükseklik küçülmesi, genişlik ölçülür. Lead onayı 2026-11-01.",
+      "taban": "8774"
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-filtre",
+      "gerekce": "Beyar Ek revize E2: masaüstü filtre sütunu 280→300px (filtre düğmeleri tutarlı boyut, alerjen iki sütun); yalnız bu sayfa. Lead onayı 2026-11-01.",
+      "taban": "8774"
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mtab__liste",
+      "taban": "8774",
+      "gerekce": "Ek revize E4: besin sekme şeridi kapsayıcı tam genişlik, üç eşit sekme (genişlik büyümesi serbest; yalnız bu iki öğe). Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-msekme",
+      "taban": "8774",
+      "gerekce": "Ek revize E4: besin sekme şeridi kapsayıcı tam genişlik, üç eşit sekme (genişlik büyümesi serbest; yalnız bu iki öğe). Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mtab",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E4+E5: matris kartları akordeonsuz/hep açık, ikon+ad üst satırda → ızgara yükselir. Yalnız yükseklik; kd-mkart__govde genişlik büyümesi kırmızı kalır. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mtab__paneller",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E4+E5: matris kartları akordeonsuz/hep açık, ikon+ad üst satırda → ızgara yükselir. Yalnız yükseklik; kd-mkart__govde genişlik büyümesi kırmızı kalır. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mpanel",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E4+E5: matris kartları akordeonsuz/hep açık, ikon+ad üst satırda → ızgara yükselir. Yalnız yükseklik; kd-mkart__govde genişlik büyümesi kırmızı kalır. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mizgara",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E4+E5: matris kartları akordeonsuz/hep açık, ikon+ad üst satırda → ızgara yükselir. Yalnız yükseklik; kd-mkart__govde genişlik büyümesi kırmızı kalır. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mkart",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E4+E5: matris kartları akordeonsuz/hep açık, ikon+ad üst satırda → ızgara yükselir. Yalnız yükseklik; kd-mkart__govde genişlik büyümesi kırmızı kalır. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mkart__govde",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E4+E5: matris kartları akordeonsuz/hep açık, ikon+ad üst satırda → ızgara yükselir. Yalnız yükseklik; kd-mkart__govde genişlik büyümesi kırmızı kalır. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dhaplar",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: günlük haplar ikon+etiket üst satır, değer alt satırda ikon hizasından. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dhap",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: günlük haplar ikon+etiket üst satır, değer alt satırda ikon hizasından. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dbakis",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: günlük haplar ikon+etiket üst satır, değer alt satırda ikon hizasından. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dbakis__ic",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: günlük haplar ikon+etiket üst satır, değer alt satırda ikon hizasından. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-modul",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart ve ızgara kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dyardim",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart ve ızgara kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-izgara",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart ve ızgara kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dortlu",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart ve ızgara kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-hizali",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart ve ızgara kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-guvenli-kesim.html",
+      "sinif": "kd-kbogulma__yerine",
+      "taban": "8774",
+      "gerekce": "Ek revize E5: \"Yerine:\" kutusu ikonun sol hizasından kartın sağına kadar (genişlik büyümesi serbest; yalnız bu öğe). Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-guvenli-kesim.html",
+      "sinif": "kd-modul",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-guvenli-kesim.html",
+      "sinif": "kd-izgara",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-guvenli-kesim.html",
+      "sinif": "kd-dortlu",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: kd-modul.kd-ikonlu — ikon başlığın yanına çıktı, kart kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-araclar.html",
+      "sinif": "kd-ar-guven",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: \"nasıl çalışır\" maddeleri ikon+başlık üst satır, metin alt satır. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-arac-hazir-mi.html",
+      "sinif": "kd-hm",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: hazır mı işaretleri ikon+başlık+kutucuk üst satır, açıklama alt satır. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-arac-hazir-mi.html",
+      "sinif": "kd-hm__sol",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: hazır mı işaretleri ikon+başlık+kutucuk üst satır, açıklama alt satır. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-arac-hazir-mi.html",
+      "sinif": "kd-ar-panel",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: hazır mı işaretleri ikon+başlık+kutucuk üst satır, açıklama alt satır. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-arac-hazir-mi.html",
+      "sinif": "kd-hm-liste",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: hazır mı işaretleri ikon+başlık+kutucuk üst satır, açıklama alt satır. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-arac-hazir-mi.html",
+      "sinif": "kd-hm-isaret",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5: hazır mı işaretleri ikon+başlık+kutucuk üst satır, açıklama alt satır. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mevsim",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E7: mevsim tezgâhı ve ürünler ayrı bölüm; tezgâh bölümü kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mpaneller",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E7: mevsim tezgâhı ve ürünler ayrı bölüm; tezgâh bölümü kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mpanel",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E7: mevsim tezgâhı ve ürünler ayrı bölüm; tezgâh bölümü kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-acik",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E7: mevsim tezgâhı ve ürünler ayrı bölüm; tezgâh bölümü kısaldı. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-rehber-*",
+      "sinif": "kd-rhero-ikon",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "Ek revize E5 bağlı denge: fotoğrafsız makale hero'sunda boş ikon kutusu yerine \"Bu yazıda/Bu listede\" listesi. Yalnız yükseklik. Lead onayı 2026-11-01; kaynak rapor/tmp/ek/boyut8774.txt (taban 8774)."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-secim",
+      "gerekce": "Ek revize E2 (v2-tarif): tek boy satırlı filtre seçenekleri (yükseklik 67→126) + onaylı filtre sütunu 280→300 (1440'ta 244→264). Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-bolum",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-liste",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-tl-sonuc",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-izgara",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-tl-izgara",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-cta-kart",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-tl-cta",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10 (v2-tarif): tarif kartı alt satırı (kıvam + kiler) uzadı; liste/ızgara yükseldi, genişlikler aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "*",
+      "sinif": "kd-tarif__alt",
+      "eksen": "h",
+      "gerekce": "V2 madde 9–10: kıvam + \"Bebek Kilerime Ekle\" satırı; container query ile geniş kartta tek satır 49px, dar kartta 77px (PDF etiketleri kısaltılamaz). Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-mkart__govde",
+      "gerekce": "İç metin bloğu genişledi, dış kart/kapsayıcı genişliği aynı (illüstrasyon kalktı; ölçüldü: v1 / 8774 / ana ağaç dış genişlikler eşit) — kural ihlali değil. Dış .kd-mkart 282/315/358 aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-kutu",
+      "gerekce": "İç metin bloğu genişledi, dış kart/kapsayıcı genişliği aynı (illüstrasyon kalktı; ölçüldü: v1 / 8774 / ana ağaç dış genişlikler eşit) — kural ihlali değil. Dış .wrap aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-not",
+      "gerekce": "İç metin bloğu genişledi, dış kart/kapsayıcı genişliği aynı (illüstrasyon kalktı; ölçüldü: v1 / 8774 / ana ağaç dış genişlikler eşit) — kural ihlali değil. Dış .wrap aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-arac-alerjen-takip.html",
+      "sinif": "kd-kutu",
+      "gerekce": "İç metin bloğu genişledi, dış kart/kapsayıcı genişliği aynı (illüstrasyon kalktı; ölçüldü: v1 / 8774 / ana ağaç dış genişlikler eşit) — kural ihlali değil. Dış .wrap aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mpanel__bas-metin",
+      "gerekce": "İç metin bloğu genişledi, dış kart/kapsayıcı genişliği aynı (illüstrasyon kalktı; ölçüldü: v1 / 8774 / ana ağaç dış genişlikler eşit) — kural ihlali değil. Dış .kd-mpanel__bas 1176/976/358 aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-guvenli-kesim.html",
+      "sinif": "kd-kbogulma__yerine",
+      "gerekce": "Ek revize E5: \"Yerine:\" kutusu ikon sol hizasından kartın sağına; İç metin bloğu genişledi, dış kart/kapsayıcı genişliği aynı (illüstrasyon kalktı; ölçüldü: v1 / 8774 / ana ağaç dış genişlikler eşit) — kural ihlali değil. Dış kart 359/450/330 aynı. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-hero",
+      "taban": "8774",
+      "yon": "kucul",
+      "gerekce": "V2 kırmızısının düzeltmesi (v2-tarif): tarifler hero görseli 8774'teki 520×390 büyümesinden v1 boyutuna (≤293 @1024) döndü; yalnız küçülme serbest. Lead bildirimi 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-hero__izgara",
+      "taban": "8774",
+      "yon": "kucul",
+      "gerekce": "V2 kırmızısının düzeltmesi (v2-tarif): tarifler hero görseli 8774'teki 520×390 büyümesinden v1 boyutuna (≤293 @1024) döndü; yalnız küçülme serbest. Lead bildirimi 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-hero__gorsel",
+      "taban": "8774",
+      "yon": "kucul",
+      "gerekce": "V2 kırmızısının düzeltmesi (v2-tarif): tarifler hero görseli 8774'teki 520×390 büyümesinden v1 boyutuna (≤293 @1024) döndü; yalnız küçülme serbest. Lead bildirimi 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarifler.html",
+      "sinif": "kd-tl-foto",
+      "taban": "8774",
+      "yon": "kucul",
+      "gerekce": "V2 kırmızısının düzeltmesi (v2-tarif): tarifler hero görseli 8774'teki 520×390 büyümesinden v1 boyutuna (≤293 @1024) döndü; yalnız küçülme serbest. Lead bildirimi 2026-11-01."
+    },
+    {
+      "sayfa": "kids-arac-alerjen-takip.html",
+      "sinif": "kd-ar-acil",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "E5 ikon-kart hizası (açıklama ikon solundan ayrı satır): ikon+başlık üst satır, metin alt satırda; 107→139. Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    },
+    {
+      "sayfa": "kids-rehber.html",
+      "sinif": "kd-rilke",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "E5 ikon-kart hizası (açıklama ikon solundan ayrı satır): her ilke maddesi 62→88 (ikon+başlık satırı, metin alt satır). Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dsonraki",
+      "taban": "8774",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "E5 ikon-kart hizası (açıklama ikon solundan ayrı satır): önceki/sonraki evre kartı 160→126 (görsel 88→64, açıklama tek satır). Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dsonraki__kart",
+      "taban": "8774",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "E5 ikon-kart hizası (açıklama ikon solundan ayrı satır): önceki/sonraki evre kartı 160→126. Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    },
+    {
+      "sayfa": "kids-rehber-yasakli-gidalar.html",
+      "sinif": "kd-hero",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "E5 bağlı denge: fotoğrafsız makale hero'sunda sağ kolon boş ikon kutusundan (245) ikonlu \"Bu listede\" listesine (410) dönüştü; .kd-hero__metin 295 aynı, padding/font büyümesi yok. Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    },
+    {
+      "sayfa": "kids-rehber-yasakli-gidalar.html",
+      "sinif": "kd-hero__izgara",
+      "taban": "8774",
+      "eksen": "h",
+      "gerekce": "E5 bağlı denge: fotoğrafsız makale hero'sunda sağ kolon boş ikon kutusundan (245) ikonlu \"Bu listede\" listesine (410) dönüştü; .kd-hero__metin 295 aynı, padding/font büyümesi yok. Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    }
   ]
 }

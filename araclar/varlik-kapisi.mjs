@@ -38,9 +38,14 @@ for (const w of GENISLIK) {
         if (/^H/.test(e.tagName) && e.scrollWidth > e.clientWidth + 2 && getComputedStyle(e).overflow !== 'visible') out.kesik.push(e.tagName + ' yatay kırpık: ' + e.textContent.trim().slice(0, 30));
         if (b.right > innerWidth + 1 || b.left < -1) out.kesik.push((e.tagName + ' ekran dışı: ' + (e.textContent || '').trim().slice(0, 24)));
       });
-      // görselsiz bölüm: her Kids bölümünde en az bir görsel öğe (img/svg/video, FA ikonu sayılmaz)
+      // görselsiz bölüm: her Kids İÇERİK bölümünde en az bir görsel öğe (img/svg/video, FA ikonu sayılmaz).
+      // V2 (lead kararı 2026-11-01): profesyonel dil metin-only yardımcı bölümleri kabul eder → tema / güven / araç durumu /
+      // araç açıklama bölümleri muaf: .kd-tema-alan, .kd-dguven-bolum, #atSuren, güven/açıklama kutusu taşıyan bölüm
+      // (.kd-ar-guven, .kd-mguven, .kd-dguven, .kd-onay), ya da data-varlik-serbest="gerekçe".
+      const YARDIMCI = '.kd-tema-alan, .kd-dguven-bolum, #atSuren, [data-varlik-serbest]';
       document.querySelectorAll('.kd-sayfa section').forEach((sec) => {
         if (sec.closest('[hidden]') || sec.getBoundingClientRect().height < 80) return;
+        if (sec.matches(YARDIMCI) || sec.querySelector('.kd-ar-guven, .kd-mguven, .kd-dguven, .kd-onay')) { out.muaf = (out.muaf || 0) + 1; return; }
         const var_ = [...sec.querySelectorAll('img, video, svg')].some((g) => { const b = g.getBoundingClientRect(); return b.width >= 16 && b.height >= 16 && !g.closest('i'); });
         if (!var_) out.gorselsiz.push((sec.id || sec.className || 'section').slice(0, 40));
       });
@@ -83,5 +88,5 @@ for (const w of GENISLIK) {
   await bag.close();
 }
 await tarayici.close();
-console.log(`\n${olcum - hata}/${olcum} ölçüm yeşil`);
+console.log(`\n${olcum - hata}/${olcum} ölçüm yeşil · yardımcı bölüm muafiyeti: tema/güven/araç durumu/araç açıklama (V2 kararı)`);
 process.exit(hata ? 1 : 0);

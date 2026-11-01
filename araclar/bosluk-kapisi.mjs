@@ -1,6 +1,6 @@
 // Boşluk kapısı: akıştaki metin bloğu ile ardından gelen kutu/kart, ve kutu ile ardından gelen buton/metin arası dikey boşluk ölçülür.
 // Eşik ESIK_PX (varsayılan 16). Kutu: kendi zemini, çerçevesi ya da gölgesi olan öğe (tam genişlik bant sayılmaz).
-// Muaf: kart içi satırlar (bilgi kutusu ya da iç içe kutu taşımıyorsa), chip listeleri, gizli öğeler (hidden, kapalı details, kapalı popover), .kd-pt*.
+// Muaf: kart içi satırlar (bilgi kutusu ya da iç içe kutu taşımıyorsa), chip listeleri, gizli öğeler (hidden, kapalı details, kapalı popover), yüzen yardım düğmesi/menüsü (.kd-yardim*, V2'de Pütür'ün yerine).
 // Bilinçli istisna: öğeye ya da üst bloğuna data-bosluk-serbest; kapı sonunda sayısını yazar.
 // Kullanım: node araclar/bosluk-kapisi.mjs [sayfa...]   (TABAN=… ile canlıda) · GENISLIK=1440,390 · ESIK_PX=16
 // Tarama kipleri (kapı değil, elle denetim): DETAY_AC=1 tüm details'i açar · GIZLI_AC=1 hidden öğeleri gösterir · KART_ICI=1 kart içi satırları da ölçer.
@@ -83,9 +83,9 @@ const olc = ({ ESIK, KART_ICI }) => {
   const serbest = (e) => e.closest('[data-bosluk-serbest]');
   const sorunlar = [], serbestler = new Set(); let cift = 0;
   document.querySelectorAll('.kd-sayfa, .kd-sayfa *').forEach((p) => {
-    if (p.closest('svg, .kd-ust, .kd-pt, [class*="kd-pt"], .kd-pt__sahne') || gizli(p)) return;
+    if (p.closest('svg, .kd-ust, [class*="kd-yardim"], [data-kd-yardim], [class*="kd-pt"]') || gizli(p)) return;
     if (p.children.length < 2) return;
-    const c = gorunenCocuk(p).filter((x) => !(typeof x.className === 'string' && /(^|\s)kd-pt/.test(x.className)));
+    const c = gorunenCocuk(p).filter((x) => !(typeof x.className === 'string' && /(^|\s)kd-(yardim|pt)/.test(x.className)));
     if (c.length < 2) return;
     const r = c.map((x) => x.getBoundingClientRect());
     c.forEach((b, i) => {

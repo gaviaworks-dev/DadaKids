@@ -1,4 +1,4 @@
-// Davranış kapısı v2 — kullanıcı yüzeyinden gerçek tıklamalarla (kısayol yok) + statik taramalar.
+// Davranış kapısı (V2 uyarlaması: profil formu → yaş barı, logo harfleri → mega "Dada Gastro Kids" kilidi) — kullanıcı yüzeyinden gerçek tıklamalarla (kısayol yok) + statik taramalar.
 // Kullanım: node araclar/davranis.mjs   (önce: node araclar/sunucu.mjs)
 import { chromium } from 'playwright';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
@@ -33,15 +33,8 @@ ok(yildiz.length === 0, 'Kids içeriğinde yıldız/puan yok' + (yildiz.length ?
 const ornekYok = kidsSayfalari.filter((f) => !readFileSync(f, 'utf8').includes('Örnek içerik — uzman onayı bekliyor'));
 ok(ornekYok.length === 0, 'her Kids sayfasında "Örnek içerik — uzman onayı bekliyor"' + (ornekYok.length ? ': eksik → ' + ornekYok.join(', ') : ''));
 
-// Logo tek kaynak: header'daki ve hub hero'daki "kids" harfleri + figürler aynı bileşenden (işaretleme birebir)
-{
-  const h = readFileSync('kids.html', 'utf8');
-  const parca = (kaynak) => { const i = kaynak.indexOf('<g class="kd-logo-harfler"'); if (i < 0) return ''; const j = kaynak.indexOf('</svg>', i); return kaynak.slice(i, j).replace(/\s+/g, ' ').replace(/(cocuk-\w+)-(?:header|hero)\.webp/g, '$1.webp').replace(/<\/g>\s*$/, ''); };
-  const bas = h.indexOf('<header'), basSon = h.indexOf('</header>');
-  const header = parca(h.slice(bas, basSon));
-  const hi = h.indexOf('kd-hub-logo'); const hero = parca(h.slice(hi, h.indexOf('</svg>', hi) + 6));
-  ok(header && hero && header === hero, 'logo tek kaynak: header ve hero "kids" + figür işaretlemesi aynı (' + header.length + ' karakter)');
-}
+// V2: eski "logo tek kaynak" (kids harfleri + çocuk figürleri) denetimi kalktı — figürler kaldırıldı; yerine mega şeridi
+// "Dada Gastro Kids" kilidi (bölüm 7) ve isim taraması (v2-kapisi g) var.
 
 /* ---------- Tarayıcı ---------- */
 const t = await chromium.launch();
@@ -50,35 +43,36 @@ const jsHata = []; p.on('pageerror', (e) => jsHata.push(e.message));
 const cerez = async () => { try { await p.click('#cookieReject', { timeout: 1200 }); } catch {} };
 const gor = async (sec) => { await p.$eval(sec, (e) => e.scrollIntoView({ block: 'center' })); await p.waitForTimeout(250); };
 
-// 1 · Hub profil adımı
+// 1 · Hub yaş barı (V2 madde 6; profil formu kalktı). Ayrıntılı ölçüm: araclar/v2-kapisi.mjs (d).
 await p.goto(T + 'kids.html', { waitUntil: 'networkidle' }); await cerez();
-await gor('.kd-profil button[type=submit]'); await p.click('.kd-profil button[type=submit]');
-ok(await p.isVisible('[data-kd-uyari]'), 'evre seçilmeden Uygula → uyarı');
-await p.click('#kdProfil label:has(input[value="hamilelik"])');
-ok(await p.isVisible('[data-kd-bilinmiyor]'), 'hamilelikte "Henüz bilmiyoruz" görünür');
-await p.click('#kdProfil label:has(input[value="9-12-ay"])');
-ok(!(await p.isVisible('[data-kd-bilinmiyor]')), '9–12 ayda "Henüz bilmiyoruz" gizli');
-ok(await p.isChecked('#kdProfil input[name=c][value="belirtilmedi"]'), 'varsayılan cinsiyet: Belirtmek istemiyorum');
-await p.click('#kdProfil label:has(input[name=c][value="kiz"])');
-await p.click('.kd-profil button[type=submit]');
-ok(await p.getAttribute('html', 'data-kd-tema') === 'kiz', 'Kız → html[data-kd-tema=kiz]');
-const u = new URL(p.url());
-ok(u.searchParams.get('evre') === '9-12-ay' && u.searchParams.get('c') === 'kiz', 'adres ?evre=9-12-ay&c=kiz');
-const bag = await p.getAttribute('.kd-ust__menu a[href^="kids-tarifler"]', 'href');
-ok(bag.includes('evre=9-12-ay') && bag.includes('c=kiz'), 'alt menü bağları profili taşır: ' + bag);
-const on = await p.$$eval('#kdOnizleme .kd-tarif:not([hidden])', (k) => k.map((x) => +x.dataset.yas));
-ok(on.length === 4 && on.every((y) => y <= 9), 'hub önizleme: 4 tarif, hepsi ≤ +9 → ' + on);
-ok(await p.getAttribute('.kd-evre[data-evre="9-12-ay"]', 'aria-current') === 'true', 'evre kartı "Sizin evreniz"');
-ok((await p.getAttribute('[data-kd-tumu]', 'href')).startsWith('kids-tarifler.html?yas=9'), '"Tümünü gör" → kids-tarifler.html?yas=9');
+const yasSec = (ad) => p.locator('.kd-hero').locator('button, [role=radio], a, label').filter({ hasText: new RegExp('^\\s*' + ad.replace('-', '[-–]') + '\\s*$') }).first();
+ok(await yasSec('9-12 Ay').count() === 1, 'hero yaş barında "9-12 Ay" seçeneği var');
+if (await yasSec('9-12 Ay').count()) {
+  await yasSec('9-12 Ay').click(); await p.waitForTimeout(400);
+  const u = new URL(p.url());
+  ok(u.searchParams.get('evre') === '9-12-ay', 'yaş barı → adres ?evre=9-12-ay');
+  const bag = await p.getAttribute('.kd-ust a[href^="kids-tarifler"]', 'href').catch(() => '');
+  ok((bag || '').includes('evre=9-12-ay'), 'alt menü bağları seçili evreyi taşır: ' + bag);
+  const on = await p.$$eval('.kd-sayfa .kd-tarif', (k) => k.filter((x) => x.getBoundingClientRect().width > 0 && !x.closest('.kd-hero')).map((x) => +x.dataset.yas));
+  ok(on.length > 0 && on.every((y) => y <= 12), 'hub vitrini: 9-12 Ay → tarifler ≤ +12 → ' + on);
+  const evreKart = await p.$('.kd-evre[data-evre="9-12-ay"]');
+  if (evreKart) ok(await evreKart.getAttribute('aria-current') === 'true', 'evre kartı "Sizin evreniz"');
+  const tumu = await p.getAttribute('[data-kd-tumu]', 'href').catch(() => null);
+  if (tumu !== null) ok(tumu.startsWith('kids-tarifler.html?yas='), '"Tümünü gör" seçili yaşa süzülü açılır: ' + tumu);
+  await p.goto(T + 'kids.html', { waitUntil: 'networkidle' }); await p.waitForTimeout(300);
+  const secili = await yasSec('9-12 Ay').evaluate((e) => ['aria-pressed', 'aria-checked', 'aria-current', 'aria-selected'].some((a) => ['true', 'page'].includes(e.getAttribute(a))) || !!e.querySelector('input:checked'));
+  ok(secili, 'yaş seçimi yeniden yüklemede korunur (localStorage)');
+}
 
 // 2 · Tema yalnız vurgu tonunu kaydırır; rozet/uyarı/evre renkleri sabit; Gastro turuncusu yok
 const renk = async () => p.evaluate(() => ({
-  rozet: getComputedStyle(document.querySelector('.kd-yas')).backgroundColor,
+  rozet: getComputedStyle([...document.querySelectorAll('.kd-age-badge, .kd-yas')].find((e) => e.getBoundingClientRect().width > 0)).backgroundColor,
   ornek: getComputedStyle(document.querySelector('.kd-ornek')).backgroundColor,
   evre: getComputedStyle(document.querySelector('.kd-evre[data-evre="6-8-ay"]')).backgroundColor,
   btn: getComputedStyle(document.querySelector('.kd-hero .kd-btn')).backgroundColor,
 }));
-await p.waitForTimeout(500);
+await p.goto(T + 'kids.html?evre=9-12-ay&c=kiz', { waitUntil: 'networkidle' }); await p.waitForTimeout(500);
+ok(await p.getAttribute('html', 'data-kd-tema') === 'kiz', '?c=kiz → html[data-kd-tema=kiz]');
 const kiz = await renk();
 await p.goto(T + 'kids.html?evre=9-12-ay&c=erkek', { waitUntil: 'networkidle' }); await p.waitForTimeout(500); const erkek = await renk();
 await p.goto(T + 'kids.html?evre=9-12-ay&c=belirtilmedi', { waitUntil: 'networkidle' }); await p.waitForTimeout(500); const notr = await renk();
@@ -160,9 +154,10 @@ for (const [g, taban] of Object.entries(MEGA_TABAN)) {
     const m = await p.evaluate(() => {
       const k = (s) => document.querySelector(s).getBoundingClientRect();
       const serit = k('.kd-mega-serit'), kat = k('.mega-cats'), kart = k('.mega-feat .mega-find');
-      return { yuk: k('.mega').height, sagKart: document.querySelectorAll('.mega-find.kd-mega, .mega-feat .kd-mega-serit').length, ust: serit.top - kat.bottom, sol: Math.abs(serit.left - kat.left), sag: Math.abs(serit.right - kat.right), alt: Math.abs(serit.bottom - kart.bottom), bag: [...document.querySelectorAll('.kd-mega-serit__chip')].map((a) => a.getAttribute('href')) };
+      return { yuk: k('.mega').height, sagKart: document.querySelectorAll('.mega-find.kd-mega, .mega-feat .kd-mega-serit').length, ust: serit.top - kat.bottom, sol: Math.abs(serit.left - kat.left), sag: Math.abs(serit.right - kat.right), alt: Math.abs(serit.bottom - kart.bottom), bag: [...document.querySelectorAll('.kd-mega-serit__chip')].map((a) => a.getAttribute('href')), kilit: (() => { const sr = document.querySelector('.kd-mega-serit'); return [sr.innerText, ...[...sr.querySelectorAll('[aria-label], img[alt], svg title')].map((x) => x.getAttribute('aria-label') || x.getAttribute('alt') || x.textContent)].join(' ').replace(/\s+/g, ' '); })() };
     });
     ok(m.sagKart === 0, `sağ kolonda kd-mega kartı yok ${s}@${g}`);
+    ok(/Dada Gastro Kids/.test(m.kilit) && !/Dada Kids/i.test(m.kilit), `mega şeridinde "Dada Gastro Kids" kilidi ${s}@${g}: "${m.kilit.slice(0, 60)}"`);
     ok(m.ust >= 0 && m.sol <= 1 && m.sag <= 1, `şerit .mega-cats altında tam genişlik ${s}@${g} (üst boşluk ${m.ust}, sol ${m.sol}, sağ ${m.sag})`);
     ok(m.alt <= 1, `şerit ve "Dolapta Ne Var?" alt hizada ${s}@${g} (fark ${m.alt})`);
     ok(m.bag.length > 0 && m.bag.every((h) => h.includes('kids-tarifler.html?yas=')), `chip bağları kids-tarifler.html?yas= ${s}@${g}: ${m.bag.length} chip`);
@@ -189,7 +184,9 @@ await p.setViewportSize({ width: 1440, height: 900 });
   await m.locator('#hamburger').click(); await m.waitForTimeout(450);
   await m.locator('#drawer .d-has-sub .d-toggle').first().click(); await m.waitForTimeout(450);
   const r = await m.evaluate(() => { const a = [...document.querySelectorAll('#drawer .d-sub a')].find((x) => x.getAttribute('href') === 'kids.html'); if (!a) return false; const b = a.getBoundingClientRect(); return a.contains(document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2)); });
-  ok(r === true, '390 çekmecede Tarifler altında Dada Kids girişi görünür');
+  ok(r === true, '390 çekmecede Tarifler altında Dada Gastro Kids girişi görünür');
+  const ad = await m.evaluate(() => [...document.querySelectorAll('#drawer .d-sub a')].find((x) => x.getAttribute('href') === 'kids.html')?.textContent.replace(/\s+/g, ' ').trim() || '');
+  ok(ad.length > 0 && !/Dada Kids/i.test(ad), `çekmece girişi adı "Dada Gastro Kids" (Dada Kids değil): "${ad}"`);
   await m.context().close();
 }
 ok(jsHata.length === 0, 'JS hatası yok' + (jsHata.length ? ': ' + jsHata.slice(0, 3).join(' | ') : ''));
