@@ -44,7 +44,7 @@ Kurallar: soru yok. Push izni yalnız bu repo/main, force push yok, `git add -A`
 Ajanlar (1 Kas ~13:15 başladı; sözleşme tasks/v2-sozlesme.md): v2-cekirdek, v2-hub, v2-sayfalar, v2-tarif, v2-kapi. Ortak bileşen imzaları ortak.mjs sonunda + veri/uzman-onay.json (lead yazdı). Compact sonrası: ListAgents ile bak; biteni tikle; hepsi bitince v2-kapi'ye "son koşu" gönder.
 V2 kapsamı (sahip ajan parantezde):
 - ◐ 1 (çekirdek bitti; sayfa ajanları sürüyor) İsim "Dada Gastro Kids" her yerde + logo: Gastro kurumsal logo aynen + sade pastel "kids" rozeti; dağınık harfler ve figürler kalkar (v2-cekirdek)
-- ◐ 2 (cekirdek+hub+sayfalar bitti; v2-tarif sürüyor) Çizgi film/maskot temizliği: logo figürleri, hero bulut/yıldız, Pütür, maskot/kawaii illüstrasyon, ayırıcı dalga/bulut, desenler → gerçekçi foto / çizgisel ikon. Pütür'ün 6 işlevi → karaktersiz "Yardım" butonu + menü (v2-cekirdek ortak; v2-hub, v2-sayfalar, v2-tarif kendi sayfaları)
+- ◐ 2 (cekirdek+hub+sayfalar bitti; v2-tarif sürüyor) Çizgi film/maskot temizliği: logo figürleri, hero bulut/yıldız, Pütür, maskot/kawaii illüstrasyon, ayırıcı dalga/bulut, desenler → gerçekçi foto / çizgisel ikon. Pütür'ün 6 işlevi → karaktersiz "Yardım" butonu + menü (E14: Pütür de geri geliyor) (v2-cekirdek ortak; v2-hub, v2-sayfalar, v2-tarif kendi sayfaları)
 - ☑ 3 (v2-cekirdek) Kids alt menüsü: "Ana Sayfa" → yalnız ev ikonu (aria-label "Dada Gastro Kids ana sayfa") (v2-cekirdek)
 - ☑ 4 (v2-cekirdek; mobil: Yardım ikon, mini kilit 64px, 390 yapışık 2,6 kalem, 320 1,9 — mini kilit spec gereği korunuyor) Sticky: üstte Gastro menüsü + Kids menüsü; aşağı kaydırınca ana menü gizlenir, tek katman: mini logo + ev | kategoriler; yukarıda geri gelir; mobil yatay kaydırma; reduced-motion animasyonsuz (v2-cekirdek)
 - ◐ 5 (cekirdek+hub+sayfalar bitti) "Mevsim" → "Mevsim Takvimi" (menü, başlık, breadcrumb, bağlar) (v2-cekirdek + sayfa ajanları)
@@ -66,6 +66,7 @@ Ek revize 1 Kasım — atandı (cekirdek E1,E3,E5 ortak .kd-ikonlu,E8,E9,E10 kab
 - ☐ E9 Gastro ana sayfası Kids widget'ı dikeyde kompakt (mobil dahil) (v2-cekirdek)
 - ☐ E10 Kids'te kullanıcı tarif ekleme CTA'sı yok; tarif detayında yazar "Dada Gastro Kids Editörü" (v2-cekirdek kabuk; v2-tarif detay)
 - ☐ E11 kids.html: "Bebeğiniz kaç aylık?" tam genişlik, "Size özel bir Kids" altına (V2'de profil formu hero yaş barına dönüştü → uygulanabilir kısmı) (v2-hub)
+- ☐ E14 (Beyar ek kararı) Pütür KALIYOR — V2 madde 2'ye istisna (logo figürleri/diğer çizgi film öğeleri kalkık). kids-v1 sürümünden geri; çift tık (≈400 ms) → surpriz parıltı (~2 sn, el sallar), tek tık → menü ~250 ms gecikmeli, sürpriz sonrası 9 sn bekleme, touch-action: manipulation; putur-kapisi geri + genişletilmiş; Yardım düğmesi de kalır (v2-putur; build: v2-cekirdek; v2-kapisi a/b/j uyarlaması: v2-kapi)
 - ☐ E12 Kapılar: segment tam genişlik, akordeon yok, ikon/başlık/açıklama hizası (±2px), footer perde, Bebek Tarifleri yönlendirmesi, Kids'te tarif ekleme CTA'sı yok (v2-kapi)
 - ☐ E13 Önce/sonra 1440+390 her madde için → yayın (V2 ile birlikte)
 - ☐ 12 Kapılar: maskot yok, radius ≤8, sticky, yaş barı, rozet/kıvam her kartta, sahte onay yok + eski kapıların V2'ye uyumu (v2-kapi)
