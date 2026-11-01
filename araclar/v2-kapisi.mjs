@@ -2,7 +2,7 @@
 // kids-tarif.html?t=balkabagi-puresi; index.html ve tarifler.html yalnız Kids öğeleri için (a, b, f, g).
 // Denetimler:
 //  a maskot/çizgi film yok (maskot/ illus/ logo/cocuk- yolları, süs/yüz/ayırıcı/desen öğeleri, Fredoka). Pütür serbest (Beyar ek kararı: kalıyor).
-//  b köşe yarıçapı ≤ 8px (Kids öğeleri; daire istisnası: |w−h| ≤ 2 ve r ≥ min/2 − 1; boyasız öğe — zemin/çerçeve/gölge/kırpma yok — sayılmaz)
+//  b köşe yarıçapı Dada Gastro ölçeğinde (Beyar 1 Kas: Gastro token'ları --radius-sm 8 / -md 12 / -lg 16 / -xl 24, rozet 6, 2/4/11; ≤ 24px, pill yok) (Kids öğeleri; daire istisnası: |w−h| ≤ 2 ve r ≥ min/2 − 1; boyasız öğe — zemin/çerçeve/gölge/kırpma yok — sayılmaz)
 //  c sticky: üstte Gastro header + altında .kd-ust; 900px aşağı → header gizli, .kd-ust top≈0, mini logo + ev ikonu; 250px yukarı → header geri;
 //    reducedMotion'da geçiş 0; 390'da kategori şeridi yatay kayar, sayfa taşmaz; menü sırası ve ev bağı
 //  d yaş barı (kids.html)        e tarif kartı rozet/kıvam/kiler düğmesi     f sahte onay yok + bekliyor rozetleri
@@ -84,12 +84,15 @@ function statik({ kids, sayfaAd, onayli, w }) {
     const r = e.getBoundingClientRect(); if (r.width <= 0 || r.height <= 0) continue;
     const kos = ['TopLeft', 'TopRight', 'BottomRight', 'BottomLeft'].map((k) => c['border' + k + 'Radius']);
     const ham = kos.map((v) => rpx(v, r.width));
-    if (Math.max(...ham) <= 8.5) continue;
+    const OLCEK = [0, 2, 4, 6, 8, 11, 12, 16, 24];
+    const olcekte = (x) => OLCEK.some((o) => Math.abs(o - x) <= 0.5);
+    if (ham.every((x) => x <= 8.5 && olcekte(x))) continue;
     if (!boyali(e, c) || !gorunur(e)) continue;
     const yarim = Math.min(r.width, r.height) / 2;
     const etkin = ham.map((x) => Math.min(x, yarim));
-    if (Math.max(...etkin) <= 8.5) continue;
     if (Math.abs(r.width - r.height) <= 2 && etkin.every((x) => x >= yarim - 1)) continue;  // daire: ikon/avatar
+    const hap = etkin.some((x) => x >= yarim - 1) && Math.max(...ham) > 24.5;
+    if (!hap && ham.every((x) => x <= 24.5 && (olcekte(x) || x >= yarim - 1))) continue;  // Gastro ölçeği (kısa öğede yarıçap kırpılabilir)
     // Pütür karakter gövdesi / gölge / parıltı daireleri muaf; Pütür menü/balon/chip/düğme/rozet/arama kutusu denetimde kalır
     if (e.closest('[class*="kd-pt"]')) { const ad = (typeof e.className === 'string' ? e.className : '') + ' ' + e.tagName; if (!/menu|balon|chip|btn|dugme|düğme|rozet|arama|input/i.test(ad) && !/^(BUTTON|INPUT|A|TEXTAREA|SELECT)$/.test(e.tagName) && (/^(IMG|VIDEO|CANVAS|SVG|PICTURE)$/i.test(e.tagName) || /govde|gövde|golge|gölge|parilti|parıltı|zemin|karakter|sahne|beden|figur|daire|isik|hale/i.test(ad))) continue; }
     // Gastro paritesi: Gastro bileşen sınıfını taşıyan Kids girişi (ör. a.subcat.kd-subcat) Kids-dışı kardeşleriyle aynı yarıçaptaysa Gastro'nundur
@@ -97,7 +100,7 @@ function statik({ kids, sayfaAd, onayli, w }) {
     if (gs && !e.closest('.kd-sayfa') && [...document.getElementsByClassName(gs)].some((x) => x !== e && !kdTok(x) && getComputedStyle(x).borderTopLeftRadius === c.borderTopLeftRadius)) continue;
     yuvarlak.push(`${KISA(e)} ${kos.join('/')} (${Math.round(r.width)}×${Math.round(r.height)})`);
   }
-  if (yuvarlak.length) out.b.push(`radius > 8px: ${yuvarlak.length} öğe → ${yuvarlak.slice(0, 4).join(' | ')}`);
+  if (yuvarlak.length) out.b.push(`radius Gastro ölçeği dışında (pill/ >24px/ ölçek dışı): ${yuvarlak.length} öğe → ${yuvarlak.slice(0, 4).join(' | ')}`);
 
   /* f, g · metin kümeleri ("Amerikan Pediatri Akademisi" gibi kaynak adı serbest; "pediatrist" ünvanı yasak) */
   const ozellikMetni = (kume) => kume.flatMap((e) => ['aria-label', 'aria-description', 'title', 'alt', 'placeholder'].map((a) => e.getAttribute(a)).filter(Boolean));
@@ -170,17 +173,11 @@ function statik({ kids, sayfaAd, onayli, w }) {
   out.kart = kartlar.length;
   for (const [m, l] of eh) out.e.push(`${m}: ${l.length}/${kartlar.length} kart (${[...new Set(l)].slice(0, 2).join(', ')})`);
 
-  /* f · bekliyor rozetleri */
   const hero = document.querySelector('.kd-sayfa section.kd-hero') || [...document.querySelectorAll('.kd-sayfa section')].find((s) => s.querySelector('h1'));
-  if (!onayli && sayfaAd === 'kids.html') {
-    const r = hero && hero.querySelector('[data-kd-onay="bekliyor"]');
-    if (!r || !gorunur(r)) out.f.push('hub hero: [data-kd-onay="bekliyor"] rozeti yok');
-    else { const t = norm(r.textContent); if (!t.includes('Uzman onayı bekliyor') || !t.includes('Çocuk doktoru & çocuk diyetisyeni incelemesi')) out.f.push(`hub rozet metni: "${t.slice(0, 80)}"`); }
-  }
-  if (!onayli && (/^kids-rehber-.+\.html$/.test(sayfaAd) || sayfaAd.startsWith('kids-tarif.html'))) {
-    const r = [...document.querySelectorAll('.kd-inceleyen')].filter(gorunur);
-    if (!r.length) out.f.push('.kd-inceleyen yok');
-    else if (!r.every((x) => norm(x.textContent).includes('İnceleme bekliyor'))) out.f.push(`.kd-inceleyen metni: "${norm(r[0].textContent).slice(0, 60)}"`);
+  /* f · onaysızken rozet alanı gizli (Beyar 1 Kas N1: "bekliyor" rozetleri/notları kaldırıldı; bileşen kodda, onayli:true iken açılır) */
+  if (!onayli) {
+    const r = [...document.querySelectorAll('[data-kd-onay], .kd-guven-rozet, .kd-inceleyen, .kd-ornek, .kd-onay')].filter((x) => gorunur(x) && !x.closest('[hidden]'));
+    if (r.length) out.f.push(`onaysızken güven/örnek öğesi görünür ${r.length}: ${r.slice(0, 2).map((x) => norm(x.textContent).slice(0, 50)).join(' | ')}`);
   }
 
   /* h · güvenlik şeridi */
@@ -467,7 +464,7 @@ if (HARF.includes('h') && sec('kids.html')) { const r = await (await t.newContex
 await t.close();
 
 /* ---------- rapor ---------- */
-const AD = { a: 'maskot/çizgi film yok', b: 'radius ≤ 8px', c: 'sticky + menü', d: 'yaş barı', e: 'tarif kartı rozet/kıvam/kiler', f: 'sahte onay yok', g: 'isim + Mevsim Takvimi', h: 'güvenlik şeridi', i: 'kiler', j: 'yardım düğmesi' };
+const AD = { a: 'maskot/çizgi film yok', b: 'radius Gastro ölçeğinde', c: 'sticky + menü', d: 'yaş barı', e: 'tarif kartı rozet/kıvam/kiler', f: 'sahte onay yok + onaysız rozet gizli', g: 'isim + Mevsim Takvimi', h: 'güvenlik şeridi', i: 'kiler', j: 'yardım düğmesi' };
 console.log(`V2 kapısı · TABAN=${TABAN} · genişlik ${GENISLIK.join(',')} · j ${J_GENISLIK.join(',')} · uzman onayı ${ONAYLI ? 'VAR' : 'yok'}\n`);
 for (const h of Object.keys(AD)) {
   const l = sonuc.filter((x) => x.harf === h); if (!l.length) continue;

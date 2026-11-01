@@ -509,6 +509,167 @@
       "taban": "8774",
       "eksen": "h",
       "gerekce": "E5 bağlı denge: fotoğrafsız makale hero'sunda sağ kolon boş ikon kutusundan (245) ikonlu \"Bu listede\" listesine (410) dönüştü; .kd-hero__metin 295 aynı, padding/font büyümesi yok. Lead onayı 2026-11-01; ölçüldü (8774 ↔ ana ağaç)."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-dsss",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas: SSS tek-açık akordeon, varsayılan hepsi kapalı → cevaplar kapalıyken bölüm kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-sss",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas: SSS tek-açık akordeon, varsayılan hepsi kapalı → cevaplar kapalıyken bölüm kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-donem-*",
+      "sinif": "kd-sss__liste",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas: SSS tek-açık akordeon, varsayılan hepsi kapalı → cevaplar kapalıyken bölüm kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-rehber*",
+      "sinif": "kd-rtoc",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-tarif*",
+      "sinif": "kd-td-yan",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-rehber*",
+      "sinif": "kd-rsonu",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-arac-persentil.html",
+      "sinif": "kd-pr-son",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mguven",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-guven",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-guven__yan",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-arac-hazir-mi.html",
+      "sinif": "kd-hm__sag",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids*",
+      "sinif": "kd-hero__izgara",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids*",
+      "sinif": "kd-hero",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor / İnceleyen uzman: İnceleme bekliyor' notları ve onaysız güven rozeti kaldırıldı → kapsayıcı yalnız kısalır (yalnız küçülme). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-rehber.html",
+      "sinif": "denge",
+      "gerekce": "Beyar 1 Kas (N1): kolondaki not/güven kutusu kaldırıldı; denge için büyütme yasak olduğundan kolon kısa kalır (içerik çıkarma kaynaklı dengesizlik). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "denge",
+      "gerekce": "Beyar 1 Kas (N1): kolondaki not/güven kutusu kaldırıldı; denge için büyütme yasak olduğundan kolon kısa kalır (içerik çıkarma kaynaklı dengesizlik). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-arac-persentil.html",
+      "sinif": "kd-pr-sag",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor' notları ve onaysız uzman kutusu kaldırıldı → kapsayıcı yalnız kısalır. Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-arac*",
+      "sinif": "kd-ar-guven",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor' notları ve onaysız uzman kutusu kaldırıldı → kapsayıcı yalnız kısalır. Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-donem*",
+      "sinif": "kd-dguven-bolum",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor' notları ve onaysız uzman kutusu kaldırıldı → kapsayıcı yalnız kısalır. Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-donem*",
+      "sinif": "kd-dguven",
+      "eksen": "h",
+      "yon": "kucul",
+      "gerekce": "Beyar 1 Kas (N1): 'Örnek içerik / uzman onayı bekliyor' notları ve onaysız uzman kutusu kaldırıldı → kapsayıcı yalnız kısalır. Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-rehber-ogurme-mi-bogulma-mi.html",
+      "sinif": "kd-hero*",
+      "eksen": "h",
+      "gerekce": "Foto turu (Yasin Bey kararı): makaleye gerçek kapak fotoğrafı eklendi; hero kardeş makalelerle aynı ölçüde (BLW 960, alerjen 936, yasaklı 907 @1024). Yalnız yükseklik. Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-kesim",
+      "eksen": "h",
+      "genislik": 1440,
+      "gerekce": "Beyar EK denge: içerikle doldurma. Vitrin kesim + besin kartları yan yana eşit boy (stretch); besin kartına 'Dönem rehberine git' CTA'sı eklendi, kesim kartının boşluğu 5. kesim örneğiyle (veri/kesim.json) doldu. Yalnız yan yana düzende (≤1136 tek sütun, 5. örnek gizli → taban boyu). Genişlik aynı."
+    },
+    {
+      "sayfa": "kids.html",
+      "sinif": "kd-hub-kesim__liste",
+      "eksen": "h",
+      "genislik": 1440,
+      "gerekce": "Beyar EK denge: içerikle doldurma. 5. kesim örneği (avokado, veri/kesim.json) yalnız yan yana düzende; genişlik aynı."
+    },
+    {
+      "sayfa": "kids-donem*",
+      "sinif": "kd-not",
+      "genislik": 768,
+      "gerekce": "Beyar 1 Kas (N1): güven bölümünde yanındaki 'Uzman onayı bekliyor' kutusu kaldırıldı; tek kalan not satırın tamamını kullanır (kutu büyütülmedi, komşu kaldırıldı; metin satırı 640px sınırında). Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-donem*",
+      "sinif": "kd-kutu",
+      "genislik": 768,
+      "gerekce": "Beyar 1 Kas (N1): güven bölümünde yanındaki 'Uzman onayı bekliyor' kutusu kaldırıldı; tek kalan not satırın tamamını kullanır (kutu büyütülmedi, komşu kaldırıldı; metin satırı 640px sınırında). Lead kararı 2026-11-01."
     }
   ]
 }
