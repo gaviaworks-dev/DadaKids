@@ -9,9 +9,11 @@ const dizi = (x) => (Array.isArray(x) ? x.filter((v) => v !== null && v !== unde
 const insanca = (s) => String(s).replace(/-/g, ' ').replace(/^./, (c) => c.toLocaleUpperCase('tr'));
 
 /* ---------- V2: görsel varlık denetimi + düz bölüm ritmi (karakter, süs ve dalga geçişi yok) ---------- */
+import { sss as sssBilesen } from '../sss.mjs';
 import { existsSync } from 'node:fs';
 const KOK = new URL('../../../', import.meta.url).pathname;
-const urunVar = (k) => existsSync(`${KOK}varlik/kids/svg/urun/${k}.svg`);
+// Foto turu: o.urun() gerçek ürün fotoğrafı basar (foto-urun: varlik/kids/gorsel/urun/<ad>-k.webp); fotoğrafı olmayan üründe yedek görsel kullanılır
+const urunVar = (k) => !!k && existsSync(`${KOK}varlik/kids/gorsel/urun/${k}-k.webp`);
 /** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (düz zemin). Her bölüm (z) => html; z section class'ına eklenir. */
 function ritim(bolumler, renkler, { zebraIle = true } = {}) {
   const dolu = bolumler.filter((b) => b && b(''));
@@ -154,10 +156,17 @@ export default async function donemler(o) {
     henuz: { ikon: () => svg64('<path d="M22 8h20l14 14v20L42 56H22L8 42V22z" fill="#F7B8CB"/><path d="M22 32h20" stroke-width="4"/>', 28), bebek: ['Henüz erken', 'Açılış yaşı gelmedi'], hamile: ['Kaçınılır', 'Bu dönemde önerilmez'] },
   };
   const filtreGrubu = (b) => FILTRE_GRUP[b.grup] || 'diger';
+  // Foto turu: ürün fotoğrafı olmayan besinde gerçek fotoğraf (varlik/kids/gorsel/bolum/besin/<slug>.webp; tarif/yasaklı gıda
+  // fotoğraflarından kırpım ya da yeni üretim). Aynı türdeki besinler ortak fotoğrafı paylaşır.
+  const BESIN_ORTAK = { 'meyve-suyu': 'icecek', 'bitki-cayi': 'icecek', 'cay': 'icecek', 'karaciger': 'hamile-cig', 'ciy-yumurta': 'hamile-cig', 'ciy-et': 'hamile-cig', 'yuksek-civali-balik': 'hamile-cig', 'alkol': 'hamile-kafein', 'kafein': 'hamile-kafein', 'pastorize-olmayan-peynir': 'hamile-kafein', 'pastorize-olmayan-sut': 'hamile-kafein' };
+  const besinFoto = (slug) => { if (!slug) return ''; const y = `varlik/kids/gorsel/bolum/besin/${BESIN_ORTAK[slug] || slug}.webp`; return existsSync(`${KOK}${y}`) ? y : ''; };
   function besinGorsel(b, tur) {
     const u = b.slug ? (URUN_ESLE[b.slug] || b.slug) : '';
     if (u && urunVar(u)) return o.urun(u, 40);
+    const bf = besinFoto(b.slug);
+    if (bf) return `<img class="kd-foto-ikon__img" src="${bf}" alt="" aria-hidden="true" width="96" height="96" loading="lazy" decoding="async">`;
     if (GRUP_SVG[b.grup]) return svg64(GRUP_SVG[b.grup]);
+    if (!b.slug && tur === 'uygun') return `<img class="kd-foto-ikon__img" src="varlik/kids/gorsel/bolum/odak-anne-sutu.webp" alt="" aria-hidden="true" width="160" height="160" loading="lazy" decoding="async">`;   // 0–6 ay: anne sütü / formül
     if (!b.slug) return ikon(tur === 'uygun' ? 'biberon' : 'takvim', 36);
     return ikon('kase', 36);
   }
@@ -258,6 +267,12 @@ export default async function donemler(o) {
   }
 
   /* ---------- Beslenme + kıvam ---------- */
+  // Denge (Beyar EK): iki panel eşit boyda; listesi kısa kalan panelin altı ilgili sayfaya bağ satırıyla dolar (yalnız mevcut sayfalar)
+  const DIKILI_BAG = {
+    '0-6-ay': { panel: 'kivam', baglar: [['kids-arac-hazir-mi.html', 'Ek gıdaya hazır mı? aracı'], ['kids-rehber-ek-gidaya-gecis.html', 'Ek gıdaya geçiş rehberi']] },
+    '6-8-ay': { panel: 'beslenme', baglar: [['kids-rehber-alerjen-tanitimi.html', 'Alerjen tanıtımı rehberi']] },
+  };
+  const dikiliBag = (kod, panel) => { const b = DIKILI_BAG[kod]; return b && b.panel === panel ? `<div class="kd-dpanel__baglar">${b.baglar.map(([href, metin]) => `<a class="kd-bag" href="${href}">${esc(metin)} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`).join('')}</div>` : ''; };
   function beslenmeBolumu(kod, z = '') {
     const e = v(kod);
     const beslenme = dizi(e.beslenme);
@@ -269,8 +284,8 @@ export default async function donemler(o) {
   ${o.bolumBasi({ ust: 'Bu evrede', ikonAd: EVRE[kod].ikon, renk: EVRE[kod].renk, baslik: `<span id="beslenme-bas">Beslenme ve ${hamile ? 'dikkat edilecekler' : 'kıvam'}</span>` })}
   ${o.ornek()}
   <div class="kd-dikili">
-   ${beslenme.length ? `<article class="kd-dpanel kd-gir"><h3><span class="kd-dpanel__ikon">${ikon('kase', 26)}</span>Beslenme</h3>${liste(beslenme)}</article>` : ''}
-   ${kivam.length ? `<article class="kd-dpanel kd-dpanel--dikkat kd-gir"><h3><span class="kd-dpanel__ikon">${ikon(hamile ? 'kalp' : 'kasik', 26)}</span>${hamile ? 'Dikkat' : 'Kıvam & dikkat'}</h3>${liste(kivam)}</article>` : ''}
+   ${beslenme.length ? `<article class="kd-dpanel kd-gir"><h3><span class="kd-dpanel__ikon">${ikon('kase', 26)}</span>Beslenme</h3>${liste(beslenme)}${dikiliBag(kod, 'beslenme')}</article>` : ''}
+   ${kivam.length ? `<article class="kd-dpanel kd-dpanel--dikkat kd-gir"><h3><span class="kd-dpanel__ikon">${ikon(hamile ? 'kalp' : 'kasik', 26)}</span>${hamile ? 'Dikkat' : 'Kıvam & dikkat'}</h3>${liste(kivam)}${dikiliBag(kod, 'kivam')}</article>` : ''}
   </div>
  </div>
 </section>`;
@@ -298,17 +313,19 @@ export default async function donemler(o) {
     return `<section class="kd-bolum${z}" aria-labelledby="odak-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Odak besinler', ikonAd: 'kase', renk: EVRE[kod].renk, baslik: '<span id="odak-bas">Bu evrede öne çıkanlar</span>', alt: e.odak ? esc(e.odak) : '' })}
-  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4 kd-dodaklar" data-renk="${EVRE[kod].renk}">${odak.map(kart).join('')}${odak.length % 4 === 3 ? o.ctaKart({ href: '#besinler', ikonAd: 'liste', baslik: 'Tüm besinler', metin: kod === 'hamilelik' ? 'Bu dönemde hangi besinin nasıl tüketileceğini tek listede görün.' : 'Bu evrede hangi besinin nasıl hazırlanacağını tek listede görün.', etiket: 'Besin listesi', renk: EVRE[kod].renk, sinif: 'kd-dodak-cta' }) : ''}</div>
+  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4 kd-dodaklar" data-renk="${EVRE[kod].renk}">${odak.map(kart).join('')}${odak.length % 4 === 3 ? o.ctaKart({ href: '#besinler', ikonAd: 'liste', gorsel: 'bolum/mevsim', baslik: 'Tüm besinler', metin: kod === 'hamilelik' ? 'Bu dönemde hangi besinin nasıl tüketileceğini tek listede görün.' : 'Bu evrede hangi besinin nasıl hazırlanacağını tek listede görün.', etiket: 'Besin listesi', renk: EVRE[kod].renk, sinif: 'kd-dodak-cta' }) : ''}</div>
  </div>
 </section>`;
   }
 
   function odakGorsel(ad, ornekler) {
-    const OZEL = { 'anne sütü': 'biberon', 'formül mama': 'biberon', 'd vitamini': 'kalkan', 'alerjenler': 'uyari', 'demir': 'kase', 'iyot': 'kase', 'çinko': 'tabak-bolmeli', 'kalsiyum': 'kase' };
+    // Foto turu: ürün fotoğrafı (urun) yoksa konuya uygun gerçek fotoğraf (varlik/kids/gorsel/bolum/odak-*)
+    const OZEL = { 'anne sütü': 'odak-anne-sutu', 'formül mama': 'odak-formul', 'd vitamini': 'odak-d-vitamini', 'alerjenler': 'rehber-alerjen', 'demir': 'odak-demir', 'iyot': 'odak-iyot', 'çinko': 'odak-cinko', 'kalsiyum': 'odak-kalsiyum', 'lif': 'kivam-aile' };
     const sl = (t) => String(t).toLocaleLowerCase('tr').replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const u = ornekler.map(sl).find(urunVar);
     if (u) return o.urun(u, 56, '');
-    return ikon(OZEL[String(ad).toLocaleLowerCase('tr')] || 'kase', 44);
+    const f = OZEL[String(ad).toLocaleLowerCase('tr')];
+    return f ? o.fotoIkon(`bolum/${f}`) : ikon('kase', 44);
   }
 
   /* ---------- Hamilelik alt bölümleri (sekmeler; JS yoksa kartlar) ---------- */
@@ -333,8 +350,8 @@ export default async function donemler(o) {
   }
 
   /* ---------- Tarifler / alternatif ---------- */
-  function yardimKart(href, ikonAd, baslik, metin, renk) {
-    return `<a class="kd-kart kd-modul kd-ikonlu kd-dyardim kd-gir" href="${href}" data-renk="${renk}"><span class="kd-modul__ikon kd-ikonlu__ikon">${ikon(ikonAd, 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3><p class="kd-ikonlu__metin">${esc(metin)}</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
+  function yardimKart(href, ikonAd, baslik, metin, renk, foto = '') {
+    return `<a class="kd-kart kd-modul kd-ikonlu kd-dyardim kd-gir" href="${href}" data-renk="${renk}"><span class="kd-modul__ikon kd-ikonlu__ikon${foto ? ' kd-foto-ikon' : ''}">${foto ? o.fotoIkon(foto) : ikon(ikonAd, 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3><p class="kd-ikonlu__metin">${esc(metin)}</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
   }
   function tarifBolumu(kod, z = '') {
     const e = EVRE[kod];
@@ -345,16 +362,16 @@ export default async function donemler(o) {
       const ogurme = rehberBul('ogurme', 'bogulma');
       const kartlar = kod === '0-6-ay'
         ? [
-          yardimKart('kids-arac-hazir-mi.html', 'liste', 'Bebeğim ek gıdaya hazır mı?', 'Oturma, baş kontrolü, ilgi: hazırlık belirtilerini adım adım işaretleyin.', 'mint'),
-          yardimKart(rehberHref(ekGida), 'kitap', ekGida?.baslik || 'Ek gıdaya geçiş rehberi', ekGida?.ozet || 'İlk kaşıktan önce bilmeniz gerekenler.', 'seftali'),
-          yardimKart(rehberHref(ogurme || blw), 'kalp', ogurme?.baslik || blw?.baslik || 'Öğürme mi, boğulma mı?', ogurme?.ozet || blw?.ozet || 'Farkı önceden öğrenmek ilk haftaları rahatlatır.', 'pembe'),
-          yardimKart(evreSayfasi('6-8-ay'), 'kasik', 'Sıradaki evre: 6–8 Ay', 'İlk tatlar, ilk tarifler ve kıvam geçişleri.', 'seftali'),
+          yardimKart('kids-arac-hazir-mi.html', 'liste', 'Bebeğim ek gıdaya hazır mı?', 'Oturma, baş kontrolü, ilgi: hazırlık belirtilerini adım adım işaretleyin.', 'mint', 'arac/hazir-mi-kare'),
+          yardimKart(rehberHref(ekGida), 'kitap', ekGida?.baslik || 'Ek gıdaya geçiş rehberi', ekGida?.ozet || 'İlk kaşıktan önce bilmeniz gerekenler.', 'seftali', 'bolum/rehber'),
+          yardimKart(rehberHref(ogurme || blw), 'kalp', ogurme?.baslik || blw?.baslik || 'Öğürme mi, boğulma mı?', ogurme?.ozet || blw?.ozet || 'Farkı önceden öğrenmek ilk haftaları rahatlatır.', 'pembe', 'bolum/rehber-ogurme'),
+          yardimKart(evreSayfasi('6-8-ay'), 'kasik', 'Sıradaki evre: 6–8 Ay', 'İlk tatlar, ilk tarifler ve kıvam geçişleri.', 'seftali', 'bolum/evre-6-8-ay'),
         ]
         : [
-          yardimKart(rehberHref(alerjen), 'kitap', alerjen?.baslik || 'Alerjen tanıtımı', alerjen?.ozet || 'Bebeğinizle ilk alerjen tanışmasına önceden hazırlanın.', 'pembe'),
-          yardimKart(rehberHref(ekGida), 'kase', ekGida?.baslik || 'Ek gıdaya geçiş', ekGida?.ozet || 'Altıncı aya geldiğinizde sizi neler bekliyor?', 'seftali'),
-          yardimKart(evreSayfasi('0-6-ay'), 'biberon', 'Sıradaki evre: 0–6 Ay', 'Anne sütü, formül mama ve hazırlık belirtileri.', 'mavi'),
-          yardimKart('kids-araclar.html', 'arac', 'Araçlar', 'Hazır mı listesi, alerjen takipçisi, öğün planlayıcı ve persentil.', 'mint'),
+          yardimKart(rehberHref(alerjen), 'kitap', alerjen?.baslik || 'Alerjen tanıtımı', alerjen?.ozet || 'Bebeğinizle ilk alerjen tanışmasına önceden hazırlanın.', 'pembe', 'bolum/rehber-alerjen'),
+          yardimKart(rehberHref(ekGida), 'kase', ekGida?.baslik || 'Ek gıdaya geçiş', ekGida?.ozet || 'Altıncı aya geldiğinizde sizi neler bekliyor?', 'seftali', 'bolum/rehber'),
+          yardimKart(evreSayfasi('0-6-ay'), 'biberon', 'Sıradaki evre: 0–6 Ay', 'Anne sütü, formül mama ve hazırlık belirtileri.', 'mavi', 'bolum/evre-0-6-ay'),
+          yardimKart('kids-araclar.html', 'arac', 'Araçlar', 'Hazır mı listesi, alerjen takipçisi, öğün planlayıcı ve persentil.', 'mint', 'bolum/araclar'),
         ];
       return `<section class="kd-bolum${z}" aria-labelledby="yardim-bas">
  <div class="wrap">
@@ -382,11 +399,8 @@ export default async function donemler(o) {
  <div class="wrap kd-dsss">
    ${o.bolumBasi({ ust: 'Sık sorulanlar', ikonAd: 'kitap', renk: EVRE[kod].renk, baslik: '<span id="sss-bas">Aklınıza takılanlar</span>' })}
    ${o.ornek()}
-   <div class="kd-dsss__liste" data-renk="${EVRE[kod].renk}">
-    ${s.map((x) => `<details class="kd-dsss__oge"><summary><span>${esc(x.s)}</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary><div>${dizi(x.c).map((p) => `<p>${esc(p)}</p>`).join('')}</div></details>`).join('')}
-   </div>
+   ${sssBilesen(s.map((x) => ({ s: x.s, c: dizi(x.c) })), { onek: `sss-${kod}`, renk: EVRE[kod].renk, not: not('Sorunuz burada yoksa çocuk doktorunuza sormaktan çekinmeyin; küçük sorular da önemlidir.') })}
  </div>
- <div class="wrap kd-dsss__not">${not('Sorunuz burada yoksa çocuk doktorunuza sormaktan çekinmeyin; küçük sorular da önemlidir.')}</div>
 </section>`;
   }
 
@@ -398,7 +412,7 @@ export default async function donemler(o) {
     const kart = (k, yon) => {
       const e = EVRE[k];
       return `<a class="kd-dsonraki__kart kd-dsonraki__kart--${yon} kd-ikonlu kd-gir" href="${evreSayfasi(k)}" data-renk="${e.renk}">
-   <span class="kd-dsonraki__ikon kd-dsonraki__ikon--foto kd-ikonlu__ikon">${evreGorsel(k, '')}</span>
+   <span class="kd-dsonraki__ikon kd-dsonraki__ikon--foto kd-ikonlu__ikon">${o.fotoIkon(`bolum/evre-${k}`, '', { gen: 176, yuk: 176 })}</span>
    <span class="kd-ikonlu__baslik"><small>${yon === 'ileri' ? 'Sıradaki evre' : 'Önceki evre'}</small><b>${esc(e.ad)}</b></span>
    <i class="fa-solid fa-arrow-${yon === 'ileri' ? 'right' : 'left'} kd-ikonlu__rozet" aria-hidden="true"></i>
    <span class="kd-ikonlu__metin kd-dsonraki__metin">${esc(v(k).slogan || v(k).aralik || e.aralik)}</span>
@@ -408,7 +422,7 @@ export default async function donemler(o) {
  <div class="wrap">
   <div class="kd-dsonraki${onceki ? '' : ' kd-dsonraki--tek'}">
    ${onceki ? kart(onceki, 'geri') : ''}
-   ${sonraki ? kart(sonraki, 'ileri') : `<a class="kd-dsonraki__kart kd-dsonraki__kart--ileri kd-ikonlu kd-gir" href="kids-donemler.html" data-renk="mavi"><span class="kd-dsonraki__ikon kd-ikonlu__ikon">${ikon('takvim', 44)}</span><span class="kd-ikonlu__baslik"><small>Yolculuğun tamamı</small><b>Tüm evrelere dönün</b></span><i class="fa-solid fa-arrow-right kd-ikonlu__rozet" aria-hidden="true"></i><span class="kd-ikonlu__metin kd-dsonraki__metin">Hamilelikten 3 yaşa beş evre</span></a>`}
+   ${sonraki ? kart(sonraki, 'ileri') : `<a class="kd-dsonraki__kart kd-dsonraki__kart--ileri kd-ikonlu kd-gir" href="kids-donemler.html" data-renk="mavi"><span class="kd-dsonraki__ikon kd-dsonraki__ikon--foto kd-ikonlu__ikon">${o.fotoIkon('bolum/donemler')}</span><span class="kd-ikonlu__baslik"><small>Yolculuğun tamamı</small><b>Tüm evrelere dönün</b></span><i class="fa-solid fa-arrow-right kd-ikonlu__rozet" aria-hidden="true"></i><span class="kd-ikonlu__metin kd-dsonraki__metin">Hamilelikten 3 yaşa beş evre</span></a>`}
   </div>
  </div>
 </section>`;
@@ -430,7 +444,7 @@ export default async function donemler(o) {
       const g = gunluk(kod);
       const h = (x) => (x ? esc(x) : '<span class="kd-ikincil">—</span>');
       return `<tr data-renk="${e.renk}">
-     <th scope="row"><a href="${evreSayfasi(kod)}"><span class="kd-dtablo__ikon">${ikon(e.ikon, 26)}</span><span><b>${esc(e.ad)}</b><small>${esc(v(kod).aralik || e.aralik)}</small></span></a></th>
+     <th scope="row"><a href="${evreSayfasi(kod)}"><span class="kd-dtablo__ikon kd-foto-ikon">${o.fotoIkon(`bolum/evre-${kod}`, '', { gen: 176, yuk: 176 })}</span><span><b>${esc(e.ad)}</b><small>${esc(v(kod).aralik || e.aralik)}</small></span></a></th>
      <td data-baslik="Süt">${h(g.sut)}</td>
      <td data-baslik="Ek gıda">${h(g.ekGida)}</td>
      <td data-baslik="Öğün">${h(g.ogun)}</td>
@@ -453,16 +467,16 @@ export default async function donemler(o) {
 
   function kivamYolculugu(z = '') {
     const adim = [
-      { kod: '0-6-ay', svg: '', baslik: 'Yalnız süt', metin: 'Anne sütü ya da formül mama' },
-      { kod: '6-8-ay', svg: 'puruzsuz', baslik: 'Pürüzsüzden ezilmişe', metin: 'Hızla çatal kıvamına ve yumuşak parmak gıdalara' },
-      { kod: '9-12-ay', svg: 'parmak', baslik: 'Pütürlü & parmak gıda', metin: 'Küçük yumuşak parçalar, kıskaç tutuşu' },
-      { kod: '1-3-yas', svg: 'aile', baslik: 'Aile sofrası', metin: 'Tuzsuz ayrılan porsiyon, güvenli kesim' },
+      { kod: '0-6-ay', svg: '', foto: 'bolum/evre-0-6-ay', baslik: 'Yalnız süt', metin: 'Anne sütü ya da formül mama' },
+      { kod: '6-8-ay', svg: 'puruzsuz', foto: 'bolum/kivam-pure', baslik: 'Pürüzsüzden ezilmişe', metin: 'Hızla çatal kıvamına ve yumuşak parmak gıdalara' },
+      { kod: '9-12-ay', svg: 'parmak', foto: 'bolum/kivam-parmak', baslik: 'Pütürlü & parmak gıda', metin: 'Küçük yumuşak parçalar, kıskaç tutuşu' },
+      { kod: '1-3-yas', svg: 'aile', foto: 'bolum/kivam-aile', baslik: 'Aile sofrası', metin: 'Tuzsuz ayrılan porsiyon, güvenli kesim' },
     ];
     return `<section class="kd-bolum${z}" aria-labelledby="kivam-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Kıvam yolculuğu', ikonAd: 'kasik', renk: 'seftali', baslik: '<span id="kivam-bas">Sütten aile sofrasına</span>', alt: 'Kıvam yaşla birlikte adım adım kalınlaşır; bebeğinizin hızını izleyin.' })}
   <ol class="kd-dyol">
-   ${adim.map((a, n) => `<li class="kd-gir" data-renk="${EVRE[a.kod].renk}" style="--kd-gecikme:${n * 90}ms"><span class="kd-dyol__ikon">${a.svg ? o.kivamSvg(a.svg) : ikon('biberon', 34)}</span><small>${esc(EVRE[a.kod].ad)}</small><b>${esc(a.baslik)}</b><span>${esc(a.metin)}</span></li>`).join('')}
+   ${adim.map((a, n) => `<li class="kd-gir" data-renk="${EVRE[a.kod].renk}" style="--kd-gecikme:${n * 90}ms"><span class="kd-dyol__ikon kd-foto-ikon">${o.fotoIkon(a.foto, '', { gen: 128, yuk: 128 })}</span><small>${esc(EVRE[a.kod].ad)}</small><b>${esc(a.baslik)}</b><span>${esc(a.metin)}</span></li>`).join('')}
   </ol>
  </div>
 </section>`;
@@ -503,7 +517,7 @@ ${ritim([
   (z) => `<section class="kd-bolum${z}" id="evreler" aria-labelledby="evre-bas">
  <div class="wrap">
   ${o.bolumBasi({ ust: 'Evreler', ikonAd: 'kalp', renk: 'pembe', baslik: '<span id="evre-bas">Hangi evredesiniz?</span>', alt: 'Her evre sayfasında günlük denge, besin matrisi, uygun tarifler ve sık sorulanlar var.' })}
-  <div class="kd-izgara kd-devreler">${EVRE_SIRA.map(evreKartGorselli).join('')}${o.ctaKart({ href: 'kids-arac-hazir-mi.html', ikonAd: 'liste', baslik: 'Ek gıdaya hazır mı?', metin: 'Evrenizden emin değilseniz hazırlık belirtilerini işaretleyin.', etiket: 'Kontrol listesi', renk: 'mint', sinif: 'kd-evre-cta' })}</div>
+  <div class="kd-izgara kd-devreler">${EVRE_SIRA.map(evreKartGorselli).join('')}${o.ctaKart({ href: 'kids-arac-hazir-mi.html', ikonAd: 'liste', gorsel: 'arac/hazir-mi-kare', baslik: 'Ek gıdaya hazır mı?', metin: 'Evrenizden emin değilseniz hazırlık belirtilerini işaretleyin.', etiket: 'Kontrol listesi', renk: 'mint', sinif: 'kd-evre-cta' })}</div>
  </div>
 </section>`,
   guven,

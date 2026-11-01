@@ -50,10 +50,18 @@ export const yasRozet = (yas, boy = 'm', uzun = false) =>
 /* ---------- İkon / illüstrasyon (görsel kolunun dosyaları) ---------- */
 const _dek = (alt) => (alt ? '' : ' aria-hidden="true"');   // boş alt → dekoratif
 export const ikon = (ad, boy = 24, alt = '') => `<img src="varlik/kids/svg/ui/${ad}.svg" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} loading="lazy" decoding="async">`;
-export const urun = (ad, boy = 40, alt = '') => `<img src="varlik/kids/svg/urun/${ad}.svg" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} loading="lazy" decoding="async">`;
-// V2: sahne illüstrasyonları (parıltılı, kawaii) yerine çizgisel ikon kutusu; imza aynı
-const SAHNE_IKON = { 'bos-kase': 'kase', 'meyve-sepeti': 'sepet', 'kesim-tahtasi': 'bicak-tahta', 'mama-sandalyesi-sahne': 'mama-sandalyesi', 'tabak-parmak-gida': 'tabak-bolmeli' };
-export const sahne = (ad, alt = '') => `<span class="kd-bos__ikon kd-sahne-ikon"${alt ? ` role="img" aria-label="${esc(alt)}"` : ' aria-hidden="true"'}>${ikon(SAHNE_IKON[ad] || 'kase', 40)}</span>`;
+// Foto turu (foto-urun): ürün = gerçek ürün fotoğrafı, yuvarlak kırpım. İki çözünürlük (CSS render × 2):
+// -k 192px (render ≤ 96px: ay seçici, ızgara, hub, dönem) · -b 560px (render ≤ 280px: büyük görsel).
+// Kaynak: varlik/kids/gorsel/urun/<ad>-<k|b>.webp (rapor/tmp/foto/foto-urun/manifest.json).
+export const urunYol = (ad, boy = 40) => `varlik/kids/gorsel/urun/${ad}-${boy > 96 ? 'b' : 'k'}.webp`;
+export const urunVar = (ad) => !!ad && _var(_kok(urunYol(ad)));
+export const urun = (ad, boy = 40, alt = '') => `<img class="kd-urun-foto" src="${urunYol(ad, boy)}" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} style="border-radius:var(--kd-r-daire);object-fit:cover" loading="lazy" decoding="async">`;
+// Foto turu: sahne = küçük kare gerçek fotoğraf (kutu ölçüsü aynı; .kd-foto-ikon CSS'i img'yi kutuya sığdırır). İmza aynı.
+const SAHNE_FOTO = { 'bos-kase': 'bos/bos-kase', 'meyve-sepeti': 'bolum/mevsim', 'kesim-tahtasi': 'bolum/kesim', 'mama-sandalyesi-sahne': 'arac/hazir-mi-kare', 'tabak-parmak-gida': 'bolum/kivam-parmak' };
+/** İkon kutusunun yerine geçen kare/küçük fotoğraf (dekoratifse alt boş). yol: varlik/kids/gorsel/ altı, uzantısız. */
+export const fotoIkon = (yol, alt = '', { gen = 160, yuk = 160 } = {}) =>
+  `<img class="kd-foto-ikon__img" src="varlik/kids/gorsel/${yol}.webp" alt="${esc(alt)}"${_dek(alt)} width="${gen}" height="${yuk}" loading="lazy" decoding="async">`;
+export const sahne = (ad, alt = '') => `<span class="kd-bos__ikon kd-sahne-ikon kd-foto-ikon">${fotoIkon(SAHNE_FOTO[ad] || 'bos/bos-kase', alt, { gen: 128, yuk: 128 })}</span>`;
 export const foto = (yol, alt, { gen = 1200, yuk = 900, oncelik = false } = {}) =>
   `<img src="${yol}" alt="${esc(alt)}"${_dek(alt)} width="${gen}" height="${yuk}" ${oncelik ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
@@ -78,26 +86,28 @@ export function alerjenPilleri(liste = [], { en = 8 } = {}) {  // varsayılan: h
 }
 
 /* ---------- Güven katmanı ---------- */
-export const ornek = (metin = 'Bu sayfadaki beslenme bilgileri prototip için hazırlanmış örneklerdir; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.') =>
-  `<p class="kd-ornek" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><span><b>Örnek içerik — uzman onayı bekliyor.</b> ${metin}</span></p>`;
-export const onay = () => `<div class="kd-onay kd-ikonlu"><span class="kd-onay__ikon kd-ikonlu__ikon"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span><b class="kd-ikonlu__baslik">Uzman onayı bekliyor</b><small class="kd-ikonlu__metin">Çocuk doktoru / çocuk diyetisyeni incelemesi henüz yapılmadı.</small></div>`;
+/* Beyar 1 Kas: "Örnek içerik / uzman onayı bekliyor / tıbbi tavsiye yerine geçmez" türü notlar site genelinde KALDIRILDI.
+   ornek() imzası korunur (çağrılar kırılmasın) ama hiçbir şey basmaz. Onay iddiası YOK: onaylı metinler yalnız veri/uzman-onay.json onayli:true iken çıkar. */
+export const ornek = () => '';
+/** Uzman kutusu: yalnız onaylıyken (veri/uzman-onay.json) görünür; onaysızken boş (bekliyor notu kaldırıldı). */
+export const onay = () => (_onayli() ? `<div class="kd-onay kd-ikonlu"><span class="kd-onay__ikon kd-ikonlu__ikon"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span><b class="kd-ikonlu__baslik">Çocuk doktoru &amp; çocuk diyetisyeni incelemesi</b><small class="kd-ikonlu__metin">İnceleyen: ${_uzmanAdlari()}${ONAY.tarih ? ' · ' + esc(ONAY.tarih) : ''}</small></div>` : '');
 
 /* ---------- Gezinme ---------- */
 export const MODULLER = [
   { kod: 'kids', ad: 'Dada Gastro Kids', kisa: 'Ana Sayfa', href: 'kids.html', ikon: 'kalp', renk: 'pembe', ac: '' },
-  { kod: 'tarifler', ad: 'Kids Tarifleri', kisa: 'Tarifler', href: 'kids-tarifler.html', ikon: 'kase', renk: 'seftali', ac: 'Yaşa, kıvama ve alerjene göre süzülen bebek ve çocuk tarifleri.' },
-  { kod: 'donemler', ad: 'Dönemler', kisa: 'Dönemler', href: 'kids-donemler.html', ikon: 'takvim', renk: 'mavi', ac: 'Hamilelikten 3 yaşa beş evre: beslenme, kıvam, odak besinler.' },
-  { kod: 'kesim', ad: 'Güvenli Kesim', kisa: 'Güvenli Kesim', href: 'kids-guvenli-kesim.html', ikon: 'bicak-tahta', renk: 'mint', ac: 'Besin besin 3 aşamalı kesim: 6–8 ay, 9–12 ay, 12 ay ve sonrası.' },
-  { kod: 'mevsim', ad: 'Mevsim Takvimi', kisa: 'Mevsim Takvimi', href: 'kids-mevsim.html', ikon: 'sepet', renk: 'sari', ac: 'Ayın tezgâhı, ayın kahramanı ve o ayın tarifleri.' },
-  { kod: 'rehber', ad: 'Rehber', kisa: 'Rehber', href: 'kids-rehber.html', ikon: 'kitap', renk: 'pembe', ac: 'Ek gıdaya geçiş, BLW, öğürme ve boğulma farkı, alerjen tanıtımı.' },
-  { kod: 'araclar', ad: 'Araçlar', kisa: 'Araçlar', href: 'kids-araclar.html', ikon: 'arac', renk: 'mavi', ac: 'Hazır mı kontrol listesi, alerjen takipçisi, öğün planlayıcı, persentil.' },
+  { kod: 'tarifler', ad: 'Kids Tarifleri', kisa: 'Tarifler', href: 'kids-tarifler.html', ikon: 'kase', renk: 'seftali', foto: 'bolum/tarifler', ac: 'Yaşa, kıvama ve alerjene göre süzülen bebek ve çocuk tarifleri.' },
+  { kod: 'donemler', ad: 'Dönemler', kisa: 'Dönemler', href: 'kids-donemler.html', ikon: 'takvim', renk: 'mavi', foto: 'bolum/donemler', ac: 'Hamilelikten 3 yaşa beş evre: beslenme, kıvam, odak besinler.' },
+  { kod: 'kesim', ad: 'Güvenli Kesim', kisa: 'Güvenli Kesim', href: 'kids-guvenli-kesim.html', ikon: 'bicak-tahta', renk: 'mint', foto: 'bolum/kesim', ac: 'Besin besin 3 aşamalı kesim: 6–8 ay, 9–12 ay, 12 ay ve sonrası.' },
+  { kod: 'mevsim', ad: 'Mevsim Takvimi', kisa: 'Mevsim Takvimi', href: 'kids-mevsim.html', ikon: 'sepet', renk: 'sari', foto: 'bolum/mevsim', ac: 'Ayın tezgâhı, ayın kahramanı ve o ayın tarifleri.' },
+  { kod: 'rehber', ad: 'Rehber', kisa: 'Rehber', href: 'kids-rehber.html', ikon: 'kitap', renk: 'pembe', foto: 'bolum/rehber', ac: 'Ek gıdaya geçiş, BLW, öğürme ve boğulma farkı, alerjen tanıtımı.' },
+  { kod: 'araclar', ad: 'Araçlar', kisa: 'Araçlar', href: 'kids-araclar.html', ikon: 'arac', renk: 'mavi', foto: 'bolum/araclar', ac: 'Hazır mı kontrol listesi, alerjen takipçisi, öğün planlayıcı, persentil.' },
 ];
 
 /** Eski "dada kids" yazı imi → V2 kilidi (Gastro logosu + kids rozeti). */
 export const yaziIm = (ek = '') => kidsLogoSvg({ sinif: `kd-im ${ek}` });
 
 // Ev ikonu (inline, çizgisel, currentColor): Kids menüsünde "Ana Sayfa" metninin yerine
-const EV_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v10.5h13V9"/><path d="M10 19.5v-5.5h4v5.5"/></svg>';
+const EV_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11.3 3.27a1.1 1.1 0 0 1 1.4 0l8.4 7.06c.78.66.32 1.94-.71 1.94H19v7.63c0 .61-.49 1.1-1.1 1.1h-3.6v-5.4a.9.9 0 0 0-.9-.9h-2.8a.9.9 0 0 0-.9.9V21H6.1c-.61 0-1.1-.49-1.1-1.1v-7.63H3.61c-1.03 0-1.49-1.28-.71-1.94z"/></svg>';
 const YARDIM_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.8"/><path d="M12 17.2v.1"/></svg>';
 
 /**
@@ -191,20 +201,20 @@ export function benzerTarifler(t, hepsi, adet = 4) {
   return [...hepsi.filter((x) => x.slug !== t.slug && x.evre === t.evre), ...komsu].slice(0, adet);
 }
 /** Şeridin boş yuvasını CSS ile dolduran kart: görünürlüğü ve genişliği yalnız boş yuvaya göre belirlenir. */
-export const seriCta = ({ href = 'kids-tarifler.html', renk = 'mint' } = {}) => ctaKart({ href, ikonAd: 'kase', baslik: 'Tüm tarifler', metin: 'Yaşa, kıvama ve alerjene göre süzün.', etiket: 'Tarif listesi', renk, sinif: 'kd-seri-cta' });
+export const seriCta = ({ href = 'kids-tarifler.html', renk = 'mint' } = {}) => ctaKart({ href, ikonAd: 'kase', gorsel: 'bolum/tarifler', baslik: 'Tüm tarifler', metin: 'Yaşa, kıvama ve alerjene göre süzün.', etiket: 'Tarif listesi', renk, sinif: 'kd-seri-cta' });
 /** Dörtlü şerit: masaüstü 4 · tablet 2+2 · mobil yatay kaydırma. Kapı [data-izgara-oneri] üzerinden denetler. */
 export const tarifSeridi = (liste, { sinif = '', gir = true, tumuHref = 'kids-tarifler.html', renk = 'mint', dortlu = true, kaydir = true } = {}) =>
   `<div class="kd-izgara${dortlu ? ' kd-dortlu' : ''}${kaydir ? ' kd-kaydir-mobil' : ''} ${sinif}" data-izgara-oneri>${liste.map((t, n) => tarifKart(t, { sira: n, gir })).join('')}${seriCta({ href: tumuHref, renk })}</div>`;
 /** İçerik sayısı tutmayan ızgarada son yuvayı dolduran yönlendirme kartı (uydurma içerik yok, yalnız yönlendirme). */
-export const ctaKart = ({ href, ikonAd, baslik, metin, etiket, renk = 'mint', sinif = '' }) =>
-  `<a class="kd-kart kd-cta-kart ${sinif}" href="${href}" data-renk="${renk}"><span class="kd-cta-kart__metin kd-ikonlu"><span class="kd-modul__ikon kd-ikonlu__ikon">${ikon(ikonAd, 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3><p class="kd-ikonlu__metin">${esc(metin)}</p></span><span class="kd-kart__alt">${esc(etiket)} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
+export const ctaKart = ({ href, ikonAd, gorsel, baslik, metin, etiket, renk = 'mint', sinif = '' }) =>
+  `<a class="kd-kart kd-cta-kart ${sinif}" href="${href}" data-renk="${renk}"><span class="kd-cta-kart__metin kd-ikonlu"><span class="kd-modul__ikon kd-ikonlu__ikon${gorsel ? ' kd-foto-ikon' : ''}">${gorsel ? fotoIkon(gorsel) : ikon(ikonAd, 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3><p class="kd-ikonlu__metin">${esc(metin)}</p></span><span class="kd-kart__alt">${esc(etiket)} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
 
 /* ---------- Evre kartı ---------- */
 export function evreKart(kod, { metin, gir = true } = {}) {
   const e = EVRE[kod];
   const v = (veri.evreler.evreler || []).find((x) => x.kod === kod) || {};
   return `<a class="kd-evre${gir ? ' kd-gir' : ''}" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false">
- <div class="kd-evre__ust kd-ikonlu"><span class="kd-evre__ikon kd-ikonlu__ikon">${ikon(e.ikon, 34)}</span><div class="kd-ikonlu__baslik"><span class="kd-evre__aralik">${esc(e.etiket)}</span><h3>${esc(e.ad)}</h3></div></div>
+ <div class="kd-evre__ust kd-ikonlu"><span class="kd-evre__ikon kd-ikonlu__ikon kd-foto-ikon">${fotoIkon(`bolum/evre-${kod}`, '', { gen: 176, yuk: 176 })}</span><div class="kd-ikonlu__baslik"><span class="kd-evre__aralik">${esc(e.etiket)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(metin ?? v.slogan ?? v.ozet ?? '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
 </a>`;
@@ -213,7 +223,7 @@ export function evreKart(kod, { metin, gir = true } = {}) {
 /* ---------- Modül kartı ---------- */
 export function modulKart(m, { gir = true } = {}) {
   return `<a class="kd-kart kd-modul kd-ikonlu${gir ? ' kd-gir' : ''}" href="${m.href}" data-renk="${m.renk}">
- <span class="kd-modul__ikon kd-ikonlu__ikon">${ikon(m.ikon, 40)}</span>
+ <span class="kd-modul__ikon kd-ikonlu__ikon${m.foto ? ' kd-foto-ikon' : ''}">${m.foto ? fotoIkon(m.foto) : ikon(m.ikon, 40)}</span>
  <h3 class="kd-ikonlu__baslik">${esc(m.ad)}</h3>
  <p class="kd-ikonlu__metin">${esc(m.ac)}</p>
  <span class="kd-kart__alt">Keşfet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
@@ -221,7 +231,7 @@ export function modulKart(m, { gir = true } = {}) {
 }
 
 export function bosDurum({ baslik = 'Sonuç bulunamadı', metin = '', id = '' } = {}) {
-  return `<div class="kd-bos"${id ? ` id="${id}"` : ''} hidden><div class="kd-ikonlu kd-bos__ust"><span class="kd-bos__ikon kd-ikonlu__ikon">${ikon('kase', 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3>${metin ? `<p class="kd-ikonlu__metin">${esc(metin)}</p>` : ''}</div><div class="kd-bos__oneriler"></div></div>`;
+  return `<div class="kd-bos"${id ? ` id="${id}"` : ''} hidden><div class="kd-ikonlu kd-bos__ust"><span class="kd-bos__ikon kd-ikonlu__ikon kd-foto-ikon">${fotoIkon('bos/bos-kase', '', { gen: 128, yuk: 128 })}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3>${metin ? `<p class="kd-ikonlu__metin">${esc(metin)}</p>` : ''}</div><div class="kd-bos__oneriler"></div></div>`;
 }
 
 /* =====================================================================
@@ -260,9 +270,10 @@ const _gastroLogo = (() => {
     return s.slice(ac, j).replace(/<title>[\s\S]*?<\/title>/g, '');
   } catch { return ''; }
 })();
-// Rozet: mint pastel zemin, koyu mint yazı (kontrast 6,4:1), köşe 24 birim (en büyük kullanımda ≤ 8px).
-const ROZET = { x: 2712, y: 300, g: 452, h: 222, r: 24, zemin: '#DDF4EA', yazi: '#17684C' };
-const _rozet = () => `<g class="kd-logo-rozet" aria-hidden="true"><rect x="${ROZET.x}" y="${ROZET.y}" width="${ROZET.g}" height="${ROZET.h}" rx="${ROZET.r}" fill="${ROZET.zemin}"/><text x="${ROZET.x + ROZET.g / 2}" y="${ROZET.y + 160}" text-anchor="middle" fill="${ROZET.yazi}" font-family="KdGilroy, GilroyBd, Gilroy, system-ui, sans-serif" font-weight="700" font-size="188" textLength="${ROZET.g - 116}" lengthAdjust="spacingAndGlyphs">kids</text></g>`;
+// "kids": v1'deki renkli harfler (pembe/mavi/turuncu/yeşil), düz (döndürme yok), Gilroy ExtraBold; zemin/rozet kutusu yok (Beyar 1 Kas).
+const KIDS_HARF = [['k', '#D4557C'], ['i', '#3F82C4'], ['d', '#D9783A'], ['s', '#23906C']];
+const ROZET = { x: 2700, y: 300, g: 470, h: 222 };
+const _rozet = () => `<text class="kd-logo-rozet" aria-hidden="true" x="${ROZET.x}" y="${ROZET.y + 196}" font-family="GilroyXB, Gilroy, sans-serif" font-weight="800" font-size="250" textLength="${ROZET.g}" lengthAdjust="spacingAndGlyphs">${KIDS_HARF.map(([h, r]) => `<tspan fill="${r}">${h}</tspan>`).join('')}</text>`;
 
 /** Eski header grubu (dağınık "kids" + figürler) V2'de yok: header logosu değişmez. */
 export const kidsLogoGrup = () => '';
@@ -282,14 +293,15 @@ export function kidsLogoSvg({ sinif = '', etiket = 'Dada Gastro Kids' } = {}) {
 export const ONAY = await jsonOku('veri/uzman-onay.json', { onayli: false, uzmanlar: [], tarih: null });
 const _onayli = () => ONAY.onayli === true && Array.isArray(ONAY.uzmanlar) && ONAY.uzmanlar.length > 0;
 const _uzmanAdlari = () => ONAY.uzmanlar.map((u) => `${esc(u.ad)}${u.unvan ? ', ' + esc(u.unvan) : ''}`).join(' · ');
-/** Hero güven rozeti. Onaysız: "Uzman onayı bekliyor — Çocuk doktoru & çocuk diyetisyeni incelemesi". */
+/** Hero güven rozeti: yalnız onaylıyken görünür (veri/uzman-onay.json tek bayrak); onaysızken boş. */
 export function guvenRozeti({ sinif = '' } = {}) {
   if (_onayli()) return `<p class="kd-guven-rozet kd-guven-rozet--onayli ${sinif}" data-kd-onay="onayli"><span class="kd-guven-rozet__ikon" aria-hidden="true"></span><span><b>Çocuk Doktoru &amp; Çocuk Diyetisyeni Onaylı Bilgiler</b><small>İnceleyen: ${_uzmanAdlari()}${ONAY.tarih ? ' · ' + esc(ONAY.tarih) : ''}</small></span></p>`;
-  return `<p class="kd-guven-rozet ${sinif}" data-kd-onay="bekliyor"><span class="kd-guven-rozet__ikon" aria-hidden="true"></span><span><b>Uzman onayı bekliyor</b><small>Çocuk doktoru &amp; çocuk diyetisyeni incelemesi</small></span></p>`;
+  return '';  // onaysızken rozet alanı gizli (Beyar 1 Kas); onay gelince veri/uzman-onay.json onayli:true → yukarıdaki satır
 }
-/** Makale / tarif sayfası: "İnceleyen uzman" alanı. Onaysız: "İnceleme bekliyor". */
+/** Makale / tarif sayfası: "İnceleyen uzman" alanı; yalnız onaylıyken görünür. */
 export function inceleyenUzman({ sinif = '' } = {}) {
-  const deger = _onayli() ? `${_uzmanAdlari()}${ONAY.tarih ? ` <span class="kd-ikincil">· ${esc(ONAY.tarih)}</span>` : ''}` : 'İnceleme bekliyor';
+  if (!_onayli()) return '';  // onaysızken "İnceleme bekliyor" satırı gizli (Beyar 1 Kas)
+  const deger = `${_uzmanAdlari()}${ONAY.tarih ? ` <span class="kd-ikincil">· ${esc(ONAY.tarih)}</span>` : ''}`;
   return `<p class="kd-inceleyen ${sinif}" data-kd-onay="${_onayli() ? 'onayli' : 'bekliyor'}"><span class="kd-inceleyen__etiket">İnceleyen uzman</span> <span class="kd-inceleyen__deger">${deger}</span></p>`;
 }
 /** Hero altı kalıcı güvenlik şeridi (kapatılamaz). */

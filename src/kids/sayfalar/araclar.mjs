@@ -21,24 +21,30 @@ export default async function (o) {
   const fa = (ad, ek = 'solid') => `<i class="fa-${ek} fa-${ad}" aria-hidden="true"></i>`;
 
   const ARACLAR = [
-    { kod: 'hazir-mi', href: 'kids-arac-hazir-mi.html', ad: 'Ek gıdaya hazır mı?', ikon: 'mama-sandalyesi', renk: 'seftali', tur: 'Kontrol listesi', sure: '1 dakika',
+    { kod: 'hazir-mi', href: 'kids-arac-hazir-mi.html', ad: 'Ek gıdaya hazır mı?', ikon: 'mama-sandalyesi', renk: 'seftali', tur: 'Kontrol listesi', sure: '1 dakika', foto: 'hazir-mi',
+      fotoAlt: 'Gün ışığı alan mutfakta boş ahşap bebek sandalyesi; tablasında şeftali rengi kase ve kaşık, arkalığında pamuklu önlük',
       ac: 'Beş işaretle bebeğinizin katı gıdaya hazır olup olmadığını birlikte gözden geçirin.',
       maddeler: ['Sık anılan 5 hazır olma işareti', 'Tanı değil, sohbet başlatıcı', 'Rehber ve ilk tariflere köprü'] },
-    { kod: 'alerjen-takip', href: 'kids-arac-alerjen-takip.html', ad: '3 günlük gözlem', ikon: 'takvim', renk: 'pembe', tur: 'Alerjen takipçisi', sure: 'Her gün 1 dakika',
+    { kod: 'alerjen-takip', href: 'kids-arac-alerjen-takip.html', ad: '3 günlük gözlem', ikon: 'takvim', renk: 'pembe', tur: 'Alerjen takipçisi', sure: 'Her gün 1 dakika', foto: 'alerjen',
+      fotoAlt: 'Krem keten üzerinde yan yana üç küçük kasede ezilmiş haşlanmış yumurta ve yumuşak bebek kaşığı',
       ac: 'Yeni bir alerjeni tanıştırırken üç gün boyunca gözlemlerinizi kısa notlarla kaydedin.',
       maddeler: ['9 yaygın alerjen ya da kendi besininiz', 'Gün gün belirti notları', 'Düzenli devam hatırlatıcısı'] },
-    { kod: 'ogun-planlayici', href: 'kids-arac-ogun-planlayici.html', ad: 'Haftalık öğün planlayıcı', ikon: 'tabak-bolmeli', renk: 'mint', tur: 'Planlayıcı', sure: '5 dakika',
+    { kod: 'ogun-planlayici', href: 'kids-arac-ogun-planlayici.html', ad: 'Haftalık öğün planlayıcı', ikon: 'tabak-bolmeli', renk: 'mint', tur: 'Planlayıcı', sure: '5 dakika', foto: 'ogun',
+      fotoAlt: 'Ahşap masada pastel bölmeli saklama kaplarında haftalık bebek öğünleri: sebze püreleri, brokoli, muz dilimleri ve tahıl lapası',
       ac: 'Yaşa uygun Kids tarifleriyle 7 günlük plan yapın, alışveriş listesi kendiliğinden çıksın.',
       maddeler: ['Yaşa ve öğüne göre tarifler', 'Tek tıkla çeşitli öneriler', 'Yazdırılabilir alışveriş listesi'] },
-    { kod: 'persentil', href: 'kids-arac-persentil.html', ad: 'Büyüme persentili', ikon: 'cetvel', renk: 'mavi', tur: 'Hesaplayıcı', sure: '2 dakika',
+    { kod: 'persentil', href: 'kids-arac-persentil.html', ad: 'Büyüme persentili', ikon: 'cetvel', renk: 'mavi', tur: 'Hesaplayıcı', sure: '2 dakika', foto: 'persentil',
+      fotoAlt: 'Krem keten üzerinde üst üste katlanmış pastel bebek zıbınları, örgü patikler ve pamuklu bere',
       ac: 'DSÖ büyüme standartlarına göre kilo, boy ve baş çevresinin yaşıtlarıyla karşılaştırması.',
       maddeler: ['0–36 ay, kız ve erkek', 'Grafik ve tablo görünümü', 'Hiçbir veri kaydedilmez'] },
   ];
   const A = Object.fromEntries(ARACLAR.map((a) => [a.kod, a]));
   const kirinti = (ad) => [['Dada Gastro Kids', 'kids.html'], ['Araçlar', 'kids-araclar.html'], [ad]];
 
-  // Araç sayfası kahramanının sağ tarafı: sade çizgisel ikon paneli (araçlar için gerçekçi foto yok; karar: tasks/kids-ui-tur2.md)
-  const aracRozet = (a) => `<div class="kd-ar-hero-ikon" data-renk="${a.renk}" aria-hidden="true"><span class="kd-ar-hero-ikon__kare">${ikon(a.ikon, 96)}</span><span class="kd-ar-hero-ikon__etiket">${esc(a.tur)}</span></div>`;
+  // Araç fotoğrafı (foto turu): kare ve 4:3 kırpımlar varlik/kids/gorsel/arac/ altında; kutu ölçüleri ikon panosuyla aynı
+  const aracFoto = (a, { kare = false, alt = '', gen = kare ? 352 : 640, yuk = kare ? 352 : 480 } = {}) => o.foto(`varlik/kids/gorsel/arac/${a.foto}${kare ? '-kare' : ''}.webp`, alt, { gen, yuk });
+  // Araç sayfası kahramanının sağ tarafı: aynı 4:3 kutuda gerçek fotoğraf + tür etiketi
+  const aracRozet = (a) => `<div class="kd-ar-hero-ikon kd-ar-hero-foto" data-renk="${a.renk}">${aracFoto(a, { alt: a.fotoAlt })}<span class="kd-ar-hero-ikon__etiket" aria-hidden="true">${esc(a.tur)}</span></div>`;
 
   const aracHero = (a, { baslik, giris, eylemler = '', ek = '' }) => hero({
     renk: a.renk, kucuk: true, kirinti: kirinti(a.ad), ust: { metin: a.tur, ikon: a.ikon }, baslik, giris, eylemler, ek, sag: aracRozet(a),
@@ -49,7 +55,7 @@ export default async function (o) {
   const digerAraclar = (haric) => (z) => `<section class="kd-bolum kd-ar-diger${z}">
  <div class="wrap">
   <h2 class="kd-ar-diger__baslik">Diğer araçlar</h2>
-  <div class="kd-ar-diger__liste">${ARACLAR.filter((a) => a.kod !== haric).map((a) => `<a class="kd-ar-mini" href="${a.href}" data-renk="${a.renk}"><span class="kd-ar-mini__ikon">${ikon(a.ikon, 30)}</span><span><b>${esc(a.ad)}</b><small>${esc(a.tur)}</small></span>${ok}</a>`).join('')}</div>
+  <div class="kd-ar-diger__liste">${ARACLAR.filter((a) => a.kod !== haric).map((a) => `<a class="kd-ar-mini" href="${a.href}" data-renk="${a.renk}"><span class="kd-ar-mini__ikon kd-foto-ikon">${aracFoto(a, { kare: true })}</span><span><b>${esc(a.ad)}</b><small>${esc(a.tur)}</small></span>${ok}</a>`).join('')}</div>
  </div>
 </section>`;
 
@@ -57,7 +63,7 @@ export default async function (o) {
      1 · HUB
      ===================================================================== */
   const hubKart = (a, i) => `<article class="kd-kart kd-ar-kart kd-ikonlu kd-gir" data-renk="${a.renk}" style="--kd-gecikme:${i * 70}ms">
-  <span class="kd-ar-kart__ikon kd-ikonlu__ikon">${ikon(a.ikon, 52)}</span>
+  <span class="kd-ar-kart__ikon kd-ikonlu__ikon kd-foto-ikon">${aracFoto(a, { kare: true })}</span>
   <h3 class="kd-ikonlu__baslik"><a href="${a.href}">${esc(a.ad)}</a></h3>
   <span class="kd-ar-kart__tur kd-ikonlu__rozet">${esc(a.tur)}<small>${fa('clock', 'regular')} ${esc(a.sure)}</small></span>
   <p class="kd-ikonlu__metin">${esc(a.ac)}</p>
@@ -66,7 +72,7 @@ export default async function (o) {
  </article>`;
 
   const hubKolaj = `<div class="kd-ar-kolaj" aria-hidden="true">
-  ${ARACLAR.map((a, i) => `<span class="kd-ar-kolaj__kare kd-ar-kolaj__kare--${i + 1}" data-renk="${a.renk}">${ikon(a.ikon, 56)}<small>${esc(a.tur)}</small></span>`).join('')}
+  ${ARACLAR.map((a, i) => `<span class="kd-ar-kolaj__kare kd-ar-kolaj__kare--${i + 1}" data-renk="${a.renk}">${aracFoto(a, { kare: true })}<small>${esc(a.tur)}</small></span>`).join('')}
  </div>`;
 
   const hub = {
@@ -96,7 +102,7 @@ ${ritim([(z) => `<section class="kd-bolum${z}" id="araclar">
      <li class="kd-ikonlu"><i class="fa-solid fa-book-open kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Kaynaklar açık.</b><span class="kd-ikonlu__metin">DSÖ, AAP, NHS ve ASCIA gibi ana akım rehberlerin uzlaştığı bilgiler kullanılır.</span></li>
     </ul>
    </div>
-   <div class="kd-ar-guven__yan">${o.onay()}${o.ornek('Araçlardaki metinler ve eşikler prototip için hazırlanmıştır; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.')}</div>
+   ${o.onay() ? `<div class="kd-ar-guven__yan">${o.onay()}</div>` : ''}
   </div>
   ${not('Sonuçlar bir sohbet başlangıcıdır; kararları çocuk doktorunuzla birlikte verin.', 'kd-ar-guven-not')}
  </div>

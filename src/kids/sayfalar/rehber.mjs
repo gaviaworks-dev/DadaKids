@@ -36,7 +36,7 @@ export default async function rehber(o) {
   const okuma = (m) => (m.okumaDk ? `<span class="kd-rokuma"><i class="fa-regular fa-clock" aria-hidden="true"></i>${m.okumaDk} dk okuma</span>` : '');
   /** Fotoğrafı olmayan makale: düz zeminli, ortada çizgisel ikon (süs yok). */
   const kapakIkon = (m, i, boy = 64) => `<div class="kd-rkapak-ikon" data-renk="${renk(m, i)}"><span>${ikon(m.ikon || 'kitap', boy)}</span></div>`;
-  const kapak = (m, i, opt = {}) => (m.kapak ? o.foto(m.kapak, opt.alt ?? m.baslik, { gen: 1200, yuk: 900, ...opt }) : kapakIkon(m, i));
+  const kapak = (m, i, opt = {}) => (m.kapak ? o.foto(m.kapak, opt.alt ?? m.baslik, { gen: 1400, yuk: 791, ...opt }) : kapakIkon(m, i));
 
   const kaynakOge = (k) => `<li><a href="${esc(k.url)}" target="_blank" rel="noopener"${/\.tr$/.test(alanAdi(k.url)) ? '' : ' hreflang="en"'}><span>${esc(k.ad)}</span><small>${esc(alanAdi(k.url))} <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></small></a></li>`;
   const kaynakListesi = (liste, ilk = 0) => (ilk && liste.length > ilk + 2
@@ -64,9 +64,11 @@ export default async function rehber(o) {
   for (const m of makaleler) for (const k of dizi(m.kaynaklar)) if (k.url && !gorulen.has(k.url)) { gorulen.add(k.url); tumKaynaklar.push(k); }
 
   // Hero: üç makale fotoğrafından düzenli mozaik (bir büyük + iki küçük; döndürme/süs yok)
-  const fan = makaleler.filter((m) => m.kapak).slice(0, 3);
+  // Mozaik: birbirine benzemeyen üç kapak (öğürme kapağı BLW tabağına çok benzediği için hero'da yok; foto turu kararı)
+  const MOZAIK = ['ek-gidaya-gecis', 'blw-temelleri', 'alerjen-tanitimi'];
+  const fan = [...makaleler.filter((m) => m.kapak && MOZAIK.includes(m.slug)), ...makaleler.filter((m) => m.kapak && !MOZAIK.includes(m.slug))].slice(0, 3);
   const hubSag = fan.length
-    ? `<div class="kd-rmozaik">${fan.map((m, i) => `<a href="${href(m)}" class="kd-rmozaik__oge kd-rmozaik__oge--${i + 1}" data-renk="${renk(m, makaleler.indexOf(m))}">${o.foto(m.kapak, m.baslik, { gen: 800, yuk: 600, oncelik: i === 0 })}<span>${esc(m.baslik.split(/[:(]/)[0].trim())}</span></a>`).join('')}</div>`
+    ? `<div class="kd-rmozaik">${fan.map((m, i) => `<a href="${href(m)}" class="kd-rmozaik__oge kd-rmozaik__oge--${i + 1}" data-renk="${renk(m, makaleler.indexOf(m))}">${o.foto(m.kapak, m.baslik, { gen: 1400, yuk: 791, oncelik: i === 0 })}<span>${esc(m.baslik.split(/[:(]/)[0].trim())}</span></a>`).join('')}</div>`
     : '';
 
   const hub = {
@@ -104,10 +106,10 @@ ${ritim([(z) => `<section class="kd-bolum${z}" id="makaleler" aria-labelledby="m
     <li class="kd-ikonlu"><i class="fa-solid fa-scale-balanced kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Yalnız uzlaşılan bilgi.</b><span class="kd-ikonlu__metin">DSÖ, NHS, AAP, ASCIA ve T.C. Sağlık Bakanlığı'nın ortak noktaları yazılır; tartışmalı değerler "uzman kararı" olarak işaretlenir.</span></li>
     <li class="kd-ikonlu"><i class="fa-solid fa-circle-question kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Gerekçesiz yasak yok.</b><span class="kd-ikonlu__metin">Her kuralın bir satırlık nedeni ve "yerine ne yapılır" önerisi vardır.</span></li>
     <li class="kd-ikonlu"><i class="fa-solid fa-kit-medical kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">İlk yardım adımı yazmayız.</b><span class="kd-ikonlu__metin">Acil durumda 112; ilk yardımı resmi bir kursta uygulamalı öğrenmenizi öneririz.</span></li>
-    <li class="kd-ikonlu"><i class="fa-solid fa-user-doctor kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Uydurma uzman yok.</b><span class="kd-ikonlu__metin">İnceleme yapılana kadar her sayfada "uzman onayı bekliyor" yazar.</span></li>
+    <li class="kd-ikonlu"><i class="fa-solid fa-user-doctor kd-ikonlu__ikon" aria-hidden="true"></i><b class="kd-ikonlu__baslik">Uydurma uzman yok.</b><span class="kd-ikonlu__metin">İnceleyen uzmanın adı yalnız inceleme tamamlanınca yazılır.</span></li>
    </ul>
    ${not('Bir konuda içiniz rahat değilse makaleyi çocuk doktorunuzla birlikte okuyun; sorularınızı not almak işinizi kolaylaştırır.')}
-   <div class="kd-rguven__muhur">${o.ornek()}${o.onay()}</div>
+   ${o.onay() ? `<div class="kd-rguven__muhur">${o.onay()}</div>` : ''}
   </div>
   <aside class="kd-rguven__kaynak" aria-labelledby="kaynak-bas">
    <h3 id="kaynak-bas">${ikon('liste', 22)} Başvurduğumuz kaynaklar</h3>
@@ -203,7 +205,7 @@ ${ritim([(z) => `<section class="kd-bolum${z}" id="makaleler" aria-labelledby="m
     const sonraki = makaleler[(i + 1) % makaleler.length];
     const toc = `<ol>${icindekiler.map(([id, ad]) => `<li><a href="#${id}">${esc(ad)}</a></li>`).join('')}</ol>`;
     const heroSag = m.kapak
-      ? `<div class="kd-hero__gorsel">${o.foto(m.kapak, m.kapakAlt || m.baslik, { gen: 1200, yuk: 900, oncelik: true })}</div>`
+      ? `<div class="kd-hero__gorsel">${o.foto(m.kapak, m.kapakAlt || m.baslik, { gen: 1400, yuk: 791, oncelik: true })}</div>`
       : (() => {
         // Fotoğrafsız makale: ikon + "Bu yazıda" kısa listesi (özet tablonun besinleri ya da bölüm başlıkları)
         const ogeler = (m.ozetTablo ? dizi(m.ozetTablo.satirlar).map((x) => x.besin) : bolumler.map((b) => b.baslik)).filter(Boolean).slice(0, 8);
