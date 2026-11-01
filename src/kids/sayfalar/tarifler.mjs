@@ -3,6 +3,7 @@
 // maskot / illüstrasyon / video / ayırıcı / desen / parıltı yok; hero gerçek fotoğraf; güvenlik şeridi hero'nun hemen altında.
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { dolapBileseni } from '../dolap.mjs';
 
 const KOK = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../..');
 const jsonOku = async (p, yedek) => { try { return JSON.parse(await readFile(path.join(KOK, p), 'utf8')); } catch { return yedek; } };
@@ -22,39 +23,6 @@ export default async function (o) {
   const heroSeritli = (ayar) => { const h = o.hero({ ...ayar, serit: true }); return h.includes('kd-guvenlik-serit') ? h : h + serit(); };
   const KIDS = ['Dada Gastro Kids', 'kids.html'];
 
-  /* ================= "Dolapta Ne Var?" verisi (derlemede; kiler.js okur) ================= */
-  // Sözlük: tarif malzeme anahtarları (kids-tarifler.json malzemeSozlugu) + besinler.json (ad + esAnlamlar) + bebek dolabı (riskli).
-  // Çakışan yazımda öncelik: riskli > tarif sözlüğü > besinler (ör. "süt" yemekteki süte gider; "içecek olarak süt" riskliye).
-  const BESIN_ESLE = { mercimek: 'kirmizi-mercimek', kofte: 'kiyma', balik: 'somon', peynir: 'lor-peyniri' };
-  const kucuk = (s) => String(s || '').toLocaleLowerCase('tr').trim();
-  const sozluk = new Map();   // anahtar → {a, ad, es:Set}
-  const alinan = new Set();   // tüm yazımlar (çakışma önleme)
-  const ekle = (a, ad, esler = []) => {
-    let k = sozluk.get(a);
-    if (!k) { k = { a, ad, es: new Set() }; sozluk.set(a, k); alinan.add(kucuk(ad)); }
-    for (const e of esler) { const x = kucuk(e); if (x && !alinan.has(x)) { alinan.add(x); k.es.add(x); } }
-  };
-  for (const r of DOLAP.riskli || []) ekle(r.anahtar, r.ad, r.esAnlamlar);
-  for (const [a, s] of Object.entries(veri.tarifler.malzemeSozlugu || {})) ekle(a, s.ad, s.esAnlamlar);
-  for (const b of veri.besinler.besinler || []) {
-    if (b.hamilelik) continue;
-    const a = BESIN_ESLE[b.slug] || b.slug;
-    if (RISKLI[b.slug]) { ekle(b.slug, RISKLI[b.slug].ad, b.esAnlamlar || []); continue; }   // riskli kayıt: yazımlar riskliye bağlanır
-    ekle(a, sozluk.get(a)?.ad || b.ad, [b.ad, ...(b.esAnlamlar || [])]);
-  }
-  const istege = (m) => /isteğe bağlı/i.test(m.not || '');
-  const dolapVeri = {
-    temel: ['zeytinyagi'],
-    sozluk: [...sozluk.values()].map((k) => {
-      const r = RISKLI[k.a];
-      return r ? { a: k.a, ad: k.ad, es: [...k.es], r: 1, n: r.neden, m: r.minAy } : { a: k.a, ad: k.ad, es: [...k.es] };
-    }),
-    tarif: Object.fromEntries(T.map((t) => {
-      const g = [], i = [];
-      for (const m of t.malzemeler || []) if (m.anahtar) (istege(m) ? i : g).push(m.anahtar);
-      return [t.slug, { g: [...new Set(g)], i: [...new Set(i)].filter((x) => !g.includes(x)) }];
-    })),
-  };
   const jsonGom = (id, v) => `<script type="application/json" id="${id}">${JSON.stringify(v).replace(/</g, '\\u003c')}</script>`;
   const riskliOzet = Object.fromEntries((DOLAP.riskli || []).map((r) => [r.anahtar, r.ad]));
 
@@ -75,51 +43,8 @@ export default async function (o) {
 
   const heroFoto = `<div class="kd-hero__gorsel kd-tl-foto">${o.foto('varlik/kids/gorsel/bant-kids.webp', 'Pastel kâselerde balkabağı, bezelye, muz ve elma püreleri; yanında muz ve çilek dilimleri', { gen: 1800, yuk: 766, oncelik: true })}</div>`;
 
-  // Açılır/kapanır panel: ≤768px'te varsayılan kapalı, masaüstünde açık (kiler.js); JS yokken gövde açık kalır.
-  const dolapPanel = `<section class="kd-dolap-bolum" id="dolap" aria-labelledby="kdDolapBaslik">
- <div class="wrap">
-  <div class="kd-dolap" id="kdDolap" data-kd-dolap>
-   <h2 class="kd-dolap__baslik" id="kdDolapBaslik"><button class="kd-dolap__ac" type="button" aria-expanded="true" aria-controls="kdDolapGovde" data-kd-dolap-ac><span class="kd-dolap__ad">${o.ikon('sepet', 24)} Dolapta Ne Var?</span><span class="kd-dolap__durum" id="kdDolapDurum">Bebek Dolabı açık</span><svg class="kd-dolap__ok" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h2>
-   <div class="kd-dolap__govde" id="kdDolapGovde">
-   <div class="kd-dolap__bas">
-    <div class="kd-dolap__metin">
-     <p>Evdeki malzemeleri ekleyin; tam yapılabilen tarifler önce, bir malzemesi eksik olanlar sonra gelsin. Yaş, kıvam ve alerjen seçimleriniz geçerli kalır.</p>
-    </div>
-    <label class="kd-dolap__anahtar" for="kdBebekDolabi">
-     <input type="checkbox" id="kdBebekDolabi" role="switch" checked aria-describedby="kdBebekDolabiAc">
-     <span class="kd-dolap__anahtar-iz" aria-hidden="true"></span>
-     <span><b>Bebek Dolabı</b><small id="kdBebekDolabiAc">Tuz, bal, salça, acı baharat gibi riskli malzemeleri dışlar</small></span>
-    </label>
-   </div>
-   <div class="kd-dolap__giris">
-    <label class="kd-dolap__etiket" for="kdDolapGir">Malzeme ekleyin</label>
-    <div class="kd-dolap__alan">
-     <ul class="kd-dolap__cipler" id="kdDolapCipler" aria-label="Dolaptaki malzemeler"></ul>
-     <input id="kdDolapGir" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="kdDolapOneri" aria-describedby="kdDolapIpucu" autocomplete="off" enterkeyhint="done" placeholder="Malzeme yazın (ör. havuç, patates)">
-    </div>
-    <ul class="kd-dolap__oneri" id="kdDolapOneri" role="listbox" aria-label="Malzeme önerileri" hidden></ul>
-    <p class="kd-gizli" id="kdDolapIpucu">Yazdıkça öneriler çıkar; ok tuşlarıyla seçip Enter'a basın. Virgülle birden çok malzeme yazabilirsiniz.</p>
-    <p class="kd-dolap__uyari" id="kdDolapUyari" role="status" aria-live="polite"></p>
-   </div>
-   <div class="kd-dolap__alt">
-    <p class="kd-dolap__ozet" id="kdDolapOzet" aria-live="polite">Dolap boş: tüm tarifler gösteriliyor.</p>
-    <button class="kd-btn kd-btn--hafif kd-btn--kucuk" type="button" data-kd-dolap-temizle hidden>Dolabı temizle</button>
-   </div>
-   <div class="kd-kiler kd-ikonlu" id="kdKiler" tabindex="-1" aria-labelledby="kdKilerBaslik">
-    <span class="kd-ikonlu__ikon">${o.ikon('kase', 20)}</span>
-    <h3 class="kd-ikonlu__baslik" id="kdKilerBaslik">Bebek Kilerim <small id="kdKilerSayi"></small></h3>
-    <div class="kd-ikonlu__rozet kd-kiler__eylem">
-     <button class="kd-btn kd-btn--kucuk" type="button" data-kd-kiler-yukle disabled>Kilerdekileri dolaba yükle</button>
-     <button class="kd-btn kd-btn--hafif kd-btn--kucuk" type="button" data-kd-kiler-bosalt hidden>Kileri boşalt</button>
-    </div>
-    <ul class="kd-kiler__liste kd-ikonlu__ek" id="kdKilerListe" aria-label="Bebek Kilerimdeki malzemeler"></ul>
-    <p class="kd-kiler__bos kd-ikonlu__metin" id="kdKilerBos">Henüz boş. Tarif kartlarındaki “Bebek Kilerime Ekle” düğmesiyle malzemeleri buraya toplayın; sonra tek tıkla dolaba yükleyin.</p>
-   </div>
-   ${o.ornek('Bebek Dolabı listesi ve gerekçeleri örnektir; bebeğinize uygun besinler için çocuk doktorunuza danışın.')}
-   </div>
-  </div>
- </div>
-</section>`;
+  // "Dolapta Ne Var?" — tek kaynak bileşen src/kids/dolap.mjs (sahibi: dolap); burada kompakt, açılır/kapanır hâli; tam hâli kids-bebek-dolabi.html.
+  const dolapPanel = dolapBileseni(o, { kip: 'kompakt' });
 
   const liste = `${heroSeritli({
     renk: 'seftali', kucuk: true,
@@ -163,14 +88,13 @@ ${dolapPanel}
     ${o.ornek('Yaş, kıvam ve alerjen bilgileri prototip için hazırlanmış örneklerdir. Tariflere tuz, şeker ve bal eklenmez.')}
     <div class="kd-izgara kd-tl-izgara" id="kdTarifIzgara">
 ${T.map((t, i) => o.tarifKart(t, { sira: i })).join('\n')}
-${o.ctaKart({ href: 'kids-guvenli-kesim.html', ikonAd: 'bicak-tahta', baslik: 'Malzemeyi yaşa göre kesin', metin: 'Tarifteki besinleri 6–8 ay, 9–12 ay ve 12 ay sonrası için nasıl keseceğinizi adım adım görün.', etiket: 'Güvenli Kesim', renk: 'mint', sinif: 'kd-tl-cta' })}
+${o.ctaKart({ href: 'kids-guvenli-kesim.html', ikonAd: 'bicak-tahta', gorsel: 'bolum/kesim', baslik: 'Malzemeyi yaşa göre kesin', metin: 'Tarifteki besinleri 6–8 ay, 9–12 ay ve 12 ay sonrası için nasıl keseceğinizi adım adım görün.', etiket: 'Güvenli Kesim', renk: 'mint', sinif: 'kd-tl-cta' })}
     </div>
     ${o.bosDurum({ baslik: 'Bu seçimle tarif bulunamadı', metin: 'Aşağıdaki önerilerle sonuçları genişletebilirsiniz.', id: 'kdBos' })}
    </div>
   </div>
  </div>
-</section>
-${jsonGom('kdDolapVeri', dolapVeri)}`;
+</section>`;
 
   /* ================= Detay ================= */
   const evreOf = (t) => EVRE[t.evre] || EVRE[yasEvresi(t.yas)];
