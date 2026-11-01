@@ -30,8 +30,9 @@ const dalga = kidsSayfalari.filter((f) => /Prototipte Dalga|Dalga \d/.test(readF
 ok(dalga.length === 0, '"Prototipte Dalga" boş kartı kalmadı' + (dalga.length ? ': ' + dalga.join(', ') : ''));
 const yildiz = kidsSayfalari.filter((f) => /r-rate|değerlendirme|fa-star[^>]*><\/i>\s*\d/.test(readFileSync(f, 'utf8').split('<main')[1]?.split('</main>')[0] || ''));
 ok(yildiz.length === 0, 'Kids içeriğinde yıldız/puan yok' + (yildiz.length ? ': ' + yildiz.join(', ') : ''));
-const ornekYok = kidsSayfalari.filter((f) => !readFileSync(f, 'utf8').includes('Örnek içerik — uzman onayı bekliyor'));
-ok(ornekYok.length === 0, 'her Kids sayfasında "Örnek içerik — uzman onayı bekliyor"' + (ornekYok.length ? ': eksik → ' + ornekYok.join(', ') : ''));
+// Beyar 1 Kas (N1): "Örnek içerik / uzman onayı bekliyor" notları site genelinden kaldırıldı → hiçbir Kids sayfasında YOK
+const ornekVar = kidsSayfalari.filter((f) => /Örnek içerik|uzman onayı bekliyor/i.test(readFileSync(f, 'utf8').replace(/<!--[\s\S]*?-->/g, '')));
+ok(ornekVar.length === 0, 'hiçbir Kids sayfasında "Örnek içerik / uzman onayı bekliyor" notu yok' + (ornekVar.length ? ': var → ' + ornekVar.join(', ') : ''));
 
 // V2: eski "logo tek kaynak" (kids harfleri + çocuk figürleri) denetimi kalktı — figürler kaldırıldı; yerine mega şeridi
 // "Dada Gastro Kids" kilidi (bölüm 7) ve isim taraması (v2-kapisi g) var.
@@ -67,7 +68,7 @@ if (await yasSec('9-12 Ay').count()) {
 // 2 · Tema yalnız vurgu tonunu kaydırır; rozet/uyarı/evre renkleri sabit; Gastro turuncusu yok
 const renk = async () => p.evaluate(() => ({
   rozet: getComputedStyle([...document.querySelectorAll('.kd-age-badge, .kd-yas')].find((e) => e.getBoundingClientRect().width > 0)).backgroundColor,
-  ornek: getComputedStyle(document.querySelector('.kd-ornek')).backgroundColor,
+  ornek: getComputedStyle(document.querySelector('.kd-guvenlik-serit')).backgroundColor,  // N1: örnek şeridi yok → sabit güvenlik şeridi rengi
   evre: getComputedStyle(document.querySelector('.kd-evre[data-evre="6-8-ay"]')).backgroundColor,
   btn: getComputedStyle(document.querySelector('.kd-hero .kd-btn')).backgroundColor,
 }));
@@ -83,7 +84,7 @@ ok(await p.getAttribute('html', 'data-kd-tema') === 'erkek', 'tema localStorage 
 await p.click('.kd-tema-sec button[data-tema="notr"]');
 ok(!(await p.getAttribute('html', 'data-kd-tema')), 'alt menüdeki seçiciyle nötre dönülür');
 ok(kiz.rozet === erkek.rozet && erkek.rozet === notr.rozet, 'yaş rozeti 3 temada aynı: ' + notr.rozet);
-ok(kiz.ornek === notr.ornek && kiz.evre === erkek.evre && erkek.evre === notr.evre, 'örnek şeridi ve evre rengi 3 temada aynı');
+ok(kiz.ornek === notr.ornek && kiz.evre === erkek.evre && erkek.evre === notr.evre, 'güvenlik şeridi ve evre rengi 3 temada aynı');
 ok(new Set([kiz.btn, erkek.btn, notr.btn]).size === 3, 'birincil düğme vurgu tonu 3 temada farklı: ' + [kiz.btn, erkek.btn, notr.btn].join(' / '));
 ok(![kiz.btn, erkek.btn, notr.btn].some((c) => c === 'rgb(220, 61, 23)' || c === 'rgb(186, 52, 19)'), 'Kids düğmelerinde Gastro turuncusu yok');
 

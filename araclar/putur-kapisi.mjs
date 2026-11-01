@@ -9,9 +9,9 @@
 //              geri toplanıp el sallar · yavaş çift tık (≤400 ms) da sürpriz · sürpriz sonrası 9 sn içinde çift tık sürpriz
 //              başlatmaz (menü normal açılır), 9 sn sonra yeniden başlatır · Enter/Space beklemeden açar · hover menü ·
 //              sürpriz parçaları etkileşimli öğe ortalarını örtmez (kare kare) · azaltılmış hareket · depolama kapalı · gizle/göster · video
-//   arayuz   · touch-action: manipulation (Pütür'ün tıklanabilir alanları; html/body değil) · UI köşe yarıçapı ≤ 8px
+//   arayuz   · touch-action: manipulation (Pütür'ün tıklanabilir alanları; html/body değil) · UI köşe yarıçapı Gastro ölçeğinde
 //              (yalnız karakter gövdesi/gölge/parıltı ve eşit en-boylu ikon daireleri daire) · 6 seçeneğin cevabı ·
-//              "Dada Gastro Kids", "Mevsim Takvimi", "Örnek içerik — uzman onayı bekliyor", Acil yalnız 112 (ilk yardım adımı yok),
+//              "Dada Gastro Kids", "Mevsim Takvimi", "Örnek içerik" notu YOK (Beyar 1 Kas), Acil yalnız 112 (ilk yardım adımı yok),
 //              sahte onay metni yok
 // Kullanım: node araclar/putur-kapisi.mjs [sayfa...]
 //   TABAN=http://localhost:8771/DadaKids/   doğrulanacak yayın (başka port / canlı)
@@ -464,7 +464,8 @@ const YARICAP = () => {
       for (const k of ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius']) {
         const v = c[k]; if (!v || v === '0px') continue;
         const yuzde = /%/.test(v), px = parseFloat(v);
-        const ok = yuzde ? (px === 50 && kare) : px <= 8.01 || (kare && px >= Math.min(gen, yuk) / 2 - .5);
+        // Beyar 1 Kas: köşe = Dada Gastro ölçeği {2,4,6,8,11,12,16,24}, ≤ 24px, pill yok (daire yalnız kare öğede)
+        const ok = yuzde ? (px === 50 && kare) : ([2, 4, 6, 8, 11, 12, 16, 24].some((o) => Math.abs(o - px) <= .51) && px < Math.min(gen, yuk) / 2 - .5) || px <= 8.01 || (kare && px >= Math.min(gen, yuk) / 2 - .5);
         if (!ok) { out.push(`${(e.className && e.className.baseVal === undefined ? e.className : e.tagName)}${ps || ''} ${k.replace('border', '').replace('Radius', '')}=${v} (${Math.round(gen)}×${Math.round(yuk)})`); break; }
       }
     }
@@ -490,7 +491,7 @@ if (BOLUM.has('arayuz')) for (const w of [1440, 390].filter((x) => GENISLIK.incl
   kontrol(`${w} touch-action: sayfa geneli değişmedi (html/body)`, ta.html !== 'manipulation' && ta.body !== 'manipulation', JSON.stringify([ta.html, ta.body]));
   await s.focus('.kd-pt__btn'); await s.keyboard.press('Enter'); await bekleMenu(s); await s.waitForTimeout(650);
   let yr = await s.evaluate(YARICAP);
-  kontrol(`${w} köşe yarıçapı: menü, küçült düğmesi ≤ 8px (daire yalnız ikon dairesi)`, yr.length === 0, yr.slice(0, 4).join(' | '));
+  kontrol(`${w} köşe yarıçapı: menü, küçült düğmesi Gastro ölçeğinde (daire yalnız ikon dairesi)`, yr.length === 0, yr.slice(0, 4).join(' | '));
   const metinler = [await s.evaluate(() => document.querySelector('.kd-pt').innerText + ' ' + [...document.querySelectorAll('.kd-pt [aria-label], .kd-pt-sekme')].map((e) => e.getAttribute('aria-label')).join(' '))];
   const balon = async (kod) => {
     if (!(await menuAcik(s))) { await s.focus('.kd-pt__btn'); await s.keyboard.press('Enter'); await bekleMenu(s); await s.waitForTimeout(650); }
@@ -507,7 +508,7 @@ if (BOLUM.has('arayuz')) for (const w of [1440, 390].filter((x) => GENISLIK.incl
   let t = await ic(); metinler.push(t);
   kontrol(`${w} yaş: 3 yaş üstünde "Dada Gastro Kids 3 yaşa kadar"`, /Dada Gastro Kids 3 yaşa kadar/.test(t), t.slice(0, 160));
   yr = await s.evaluate(YARICAP);
-  kontrol(`${w} köşe yarıçapı: balon, chip, düğme ≤ 8px`, yr.length === 0, yr.slice(0, 4).join(' | '));
+  kontrol(`${w} köşe yarıçapı: balon, chip, düğme Gastro ölçeğinde`, yr.length === 0, yr.slice(0, 4).join(' | '));
   const tb = await s.evaluate(() => [...document.querySelectorAll('.kd-pt__balon button, .kd-pt__balon a')].map((e) => getComputedStyle(e).touchAction));
   kontrol(`${w} touch-action: balon düğmeleri manipulation`, tb.length > 10 && tb.every((v) => v === 'manipulation'), [...new Set(tb)].join(','));
   await kapat();
@@ -516,20 +517,20 @@ if (BOLUM.has('arayuz')) for (const w of [1440, 390].filter((x) => GENISLIK.incl
   await s.fill('#kdPtAra', 'üzüm');
   await s.waitForFunction(() => document.querySelector('.kd-pt__besin'), null, { timeout: 4000 }).catch(() => {});
   t = await ic(); metinler.push(t);
-  kontrol(`${w} besin: üzüm kartı + "Örnek içerik — uzman onayı bekliyor"`, /Üzüm/.test(t) && /Örnek içerik — uzman onayı bekliyor/.test(t), t.slice(0, 160));
+  kontrol(`${w} besin: üzüm kartı, "Örnek içerik / uzman onayı bekliyor" notu YOK (Beyar 1 Kas)`, /Üzüm/.test(t) && !/Örnek içerik|uzman onayı bekliyor/i.test(t), t.slice(0, 160));
   yr = await s.evaluate(YARICAP);
-  kontrol(`${w} köşe yarıçapı: arama kutusu, besin kartı, rozet ≤ 8px`, yr.length === 0, yr.slice(0, 4).join(' | '));
+  kontrol(`${w} köşe yarıçapı: arama kutusu, besin kartı, rozet Gastro ölçeğinde`, yr.length === 0, yr.slice(0, 4).join(' | '));
   await kapat();
   // Tarif: 3 öneri, kart görselleri
   await balon('tarif');
   t = await ic(); metinler.push(t);
   kontrol(`${w} tarif: 3 öneri`, (await s.evaluate(() => document.querySelectorAll('.kd-pt__tarifler a').length)) === 3, t.slice(0, 120));
   yr = await s.evaluate(YARICAP);
-  kontrol(`${w} köşe yarıçapı: tarif listesi ≤ 8px`, yr.length === 0, yr.slice(0, 4).join(' | '));
+  kontrol(`${w} köşe yarıçapı: tarif listesi Gastro ölçeğinde`, yr.length === 0, yr.slice(0, 4).join(' | '));
   await kapat();
   for (const kod of ['alerjen', 'hazir']) {
     await balon(kod); t = await ic(); metinler.push(t);
-    kontrol(`${w} ${kod}: "Örnek içerik — uzman onayı bekliyor"`, /Örnek içerik — uzman onayı bekliyor/.test(t), t.slice(0, 120));
+    kontrol(`${w} ${kod}: "Örnek içerik / uzman onayı bekliyor" notu YOK (Beyar 1 Kas)`, !/Örnek içerik|uzman onayı bekliyor/i.test(t), t.slice(0, 120));
     await kapat();
   }
   // Acil: yalnız 112, ilk yardım adımı yok
@@ -539,13 +540,13 @@ if (BOLUM.has('arayuz')) for (const w of [1440, 390].filter((x) => GENISLIK.incl
   kontrol(`${w} acil: yalnız 112'ye yönlendirir`, acil.tel.length === 1 && acil.tel[0] === 'tel:112' && /112/.test(t), JSON.stringify(acil));
   kontrol(`${w} acil: ilk yardım adımı yok`, !/(sırt|vurun|vurma|karın|bastır|heimlich|ters çevir|parmağı|ağzını açın|kalp masajı|suni solunum)/i.test(t), t.slice(0, 200));
   yr = await s.evaluate(YARICAP);
-  kontrol(`${w} köşe yarıçapı: acil kutusu ≤ 8px`, yr.length === 0, yr.slice(0, 4).join(' | '));
+  kontrol(`${w} köşe yarıçapı: acil kutusu Gastro ölçeğinde`, yr.length === 0, yr.slice(0, 4).join(' | '));
   await kapat();
   // gizli sekme
   await s.hover('.kd-pt__btn').catch(() => {}); await s.waitForTimeout(200);
   await s.evaluate(() => document.querySelector('.kd-pt__kucult').click()); await s.waitForTimeout(150);
   yr = await s.evaluate(YARICAP);
-  kontrol(`${w} köşe yarıçapı: gizli sekme ≤ 8px`, yr.length === 0, yr.slice(0, 4).join(' | '));
+  kontrol(`${w} köşe yarıçapı: gizli sekme Gastro ölçeğinde`, yr.length === 0, yr.slice(0, 4).join(' | '));
   await s.evaluate(() => document.querySelector('.kd-pt-sekme').click());
   const ihlal = [...new Set(metinler.flatMap(METIN_KURAL))];
   kontrol(`${w} V2 metin: "Dada Gastro Kids", "Mevsim Takvimi", sahte onay yok`, ihlal.length === 0, ihlal.join(' | '));
