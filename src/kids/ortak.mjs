@@ -1,4 +1,4 @@
-// Dada Kids — ortak komponent yardımcıları (sahibi: lead).
+// Dada Gastro Kids — ortak komponent yardımcıları (sahibi: v2-cekirdek; imzalar tasks/v2-sozlesme.md).
 // Sayfa modülleri (src/kids/sayfalar/*.mjs) bunları kullanır; burada değişiklik gerekiyorsa lead'e bildirin.
 //
 // Sayfa modülü sözleşmesi:
@@ -43,23 +43,27 @@ export const yasRenk = (yas) => EVRE[yasEvresi(yas)].renk;
 // Tek sistem: yaş bilgisi her yerde "+N Ay" = "N. aydan itibaren" (rozet, filtre, süzme bağı).
 // Evre adı (6–8 Ay) tarifin yaşını değil, Dönemler modülündeki yaşam dönemini anlatır; rozet evre rengini taşır.
 export const yasAciklama = (yas) => `${yas}. aydan itibaren uygun`;
+// V2: eski yasRozet KidsAgeBadge görünümündedir (kd-age-badge); imza aynı, boy yalnız ölçek.
 export const yasRozet = (yas, boy = 'm', uzun = false) =>
-  `<span class="kd-yas kd-yas--${boy}" data-renk="${yasRenk(yas)}" title="${esc(yasAciklama(yas))}">${esc(YAS_ETIKET[yas])}${uzun ? ' için uygundur' : ''}</span>`;
+  `<span class="kd-age-badge kd-yas kd-yas--${boy}" data-yas="${yas}" title="${esc(yasAciklama(yas))}">+${esc(yas)} AY${uzun ? ' için uygundur' : ''}</span>`;
 
 /* ---------- İkon / illüstrasyon (görsel kolunun dosyaları) ---------- */
 const _dek = (alt) => (alt ? '' : ' aria-hidden="true"');   // boş alt → dekoratif
 export const ikon = (ad, boy = 24, alt = '') => `<img src="varlik/kids/svg/ui/${ad}.svg" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} loading="lazy" decoding="async">`;
 export const urun = (ad, boy = 40, alt = '') => `<img src="varlik/kids/svg/urun/${ad}.svg" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} loading="lazy" decoding="async">`;
-export const sahne = (ad, alt = '') => `<img src="varlik/kids/svg/sahne/${ad}.svg" width="240" height="180" alt="${esc(alt)}"${_dek(alt)} loading="lazy" decoding="async">`;
+// V2: sahne illüstrasyonları (parıltılı, kawaii) yerine çizgisel ikon kutusu; imza aynı
+const SAHNE_IKON = { 'bos-kase': 'kase', 'meyve-sepeti': 'sepet', 'kesim-tahtasi': 'bicak-tahta', 'mama-sandalyesi-sahne': 'mama-sandalyesi', 'tabak-parmak-gida': 'tabak-bolmeli' };
+export const sahne = (ad, alt = '') => `<span class="kd-bos__ikon kd-sahne-ikon"${alt ? ` role="img" aria-label="${esc(alt)}"` : ' aria-hidden="true"'}>${ikon(SAHNE_IKON[ad] || 'kase', 40)}</span>`;
 export const foto = (yol, alt, { gen = 1200, yuk = 900, oncelik = false } = {}) =>
   `<img src="${yol}" alt="${esc(alt)}"${_dek(alt)} width="${gen}" height="${yuk}" ${oncelik ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
 /* ---------- Kıvam ---------- */
-const KIVAM_SVG = {
-  puruzsuz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0z" fill="#FFE3D1"/><path d="M6 8.5c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 2.2-1.2 3 0"/></svg>',
-  ezilmis: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0z" fill="#DDF4EA"/><circle cx="7.5" cy="8.3" r="1.5"/><circle cx="12" cy="7.4" r="1.8"/><circle cx="16.4" cy="8.5" r="1.3"/></svg>',
-  parmak: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9.2" y="2.5" width="5.6" height="15" rx="2.8" transform="rotate(28 12 10)" fill="#FFF4CC"/><path d="M5 21h14"/></svg>',
-  aile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="#E4F0FB"/><circle cx="12" cy="13" r="4.5"/><path d="M2.5 4v5M4.5 4v5M3.5 9v11M21 4c-1.5 1-2 3-2 5h2v11"/></svg>',
+const _ks = (ic) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ic}</svg>`;
+const KIVAM_SVG = {   // V2: çizgisel, dolgusuz (kase + doku)
+  puruzsuz: _ks('<path d="M3.5 11h17a8.5 8.5 0 0 1-17 0z"/><path d="M7 8.2c1.3-1 2.7-1 4 0s2.7 1 4 0"/>'),
+  ezilmis: _ks('<path d="M3.5 11h17a8.5 8.5 0 0 1-17 0z"/><path d="M7.5 8.2h.01M11.5 7h.01M15.5 8.2h.01M9.5 4.8h.01M13.8 5h.01"/>'),
+  parmak: _ks('<rect x="9.5" y="3" width="5" height="13" rx="1.5" transform="rotate(25 12 9.5)"/><path d="M4.5 20.5h15"/>'),
+  aile: _ks('<circle cx="12.5" cy="12.5" r="7.5"/><circle cx="12.5" cy="12.5" r="4"/><path d="M2.5 4v4.5M4.5 4v4.5M3.5 8.5V20"/>'),
 };
 export const KIVAM_AD = { puruzsuz: 'Pürüzsüz', ezilmis: 'Çatalla Ezilmiş', parmak: 'Parmak Gıda', aile: 'Aile Sofrası' };
 export const kivamSvg = (k) => KIVAM_SVG[k] || '';
@@ -76,33 +80,50 @@ export function alerjenPilleri(liste = [], { en = 8 } = {}) {  // varsayılan: h
 /* ---------- Güven katmanı ---------- */
 export const ornek = (metin = 'Bu sayfadaki beslenme bilgileri prototip için hazırlanmış örneklerdir; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.') =>
   `<p class="kd-ornek" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><span><b>Örnek içerik — uzman onayı bekliyor.</b> ${metin}</span></p>`;
-export const onay = () => `<div class="kd-onay"><span class="kd-onay__ikon"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span><span><b>Uzman onayı bekliyor</b><small>Çocuk doktoru / çocuk diyetisyeni incelemesi henüz yapılmadı.</small></span></div>`;
+export const onay = () => `<div class="kd-onay kd-ikonlu"><span class="kd-onay__ikon kd-ikonlu__ikon"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span><b class="kd-ikonlu__baslik">Uzman onayı bekliyor</b><small class="kd-ikonlu__metin">Çocuk doktoru / çocuk diyetisyeni incelemesi henüz yapılmadı.</small></div>`;
 
 /* ---------- Gezinme ---------- */
 export const MODULLER = [
-  { kod: 'kids', ad: 'Dada Kids', kisa: 'Ana Sayfa', href: 'kids.html', ikon: 'kalp', renk: 'pembe', ac: '' },
+  { kod: 'kids', ad: 'Dada Gastro Kids', kisa: 'Ana Sayfa', href: 'kids.html', ikon: 'kalp', renk: 'pembe', ac: '' },
   { kod: 'tarifler', ad: 'Kids Tarifleri', kisa: 'Tarifler', href: 'kids-tarifler.html', ikon: 'kase', renk: 'seftali', ac: 'Yaşa, kıvama ve alerjene göre süzülen bebek ve çocuk tarifleri.' },
   { kod: 'donemler', ad: 'Dönemler', kisa: 'Dönemler', href: 'kids-donemler.html', ikon: 'takvim', renk: 'mavi', ac: 'Hamilelikten 3 yaşa beş evre: beslenme, kıvam, odak besinler.' },
   { kod: 'kesim', ad: 'Güvenli Kesim', kisa: 'Güvenli Kesim', href: 'kids-guvenli-kesim.html', ikon: 'bicak-tahta', renk: 'mint', ac: 'Besin besin 3 aşamalı kesim: 6–8 ay, 9–12 ay, 12 ay ve sonrası.' },
-  { kod: 'mevsim', ad: 'Mevsimsel Takvim', kisa: 'Mevsim', href: 'kids-mevsim.html', ikon: 'sepet', renk: 'sari', ac: 'Ayın tezgâhı, ayın kahramanı ve o ayın tarifleri.' },
+  { kod: 'mevsim', ad: 'Mevsim Takvimi', kisa: 'Mevsim Takvimi', href: 'kids-mevsim.html', ikon: 'sepet', renk: 'sari', ac: 'Ayın tezgâhı, ayın kahramanı ve o ayın tarifleri.' },
   { kod: 'rehber', ad: 'Rehber', kisa: 'Rehber', href: 'kids-rehber.html', ikon: 'kitap', renk: 'pembe', ac: 'Ek gıdaya geçiş, BLW, öğürme ve boğulma farkı, alerjen tanıtımı.' },
   { kod: 'araclar', ad: 'Araçlar', kisa: 'Araçlar', href: 'kids-araclar.html', ikon: 'arac', renk: 'mavi', ac: 'Hazır mı kontrol listesi, alerjen takipçisi, öğün planlayıcı, persentil.' },
 ];
 
-export const yaziIm = (ek = '') => `<span class="kd-im ${ek}" aria-label="dada kids"><b>dada</b><span class="kd-im__kids" aria-hidden="true"><span>k</span><span>i</span><span>d</span><span>s</span></span></span>`;
+/** Eski "dada kids" yazı imi → V2 kilidi (Gastro logosu + kids rozeti). */
+export const yaziIm = (ek = '') => kidsLogoSvg({ sinif: `kd-im ${ek}` });
 
+// Ev ikonu (inline, çizgisel, currentColor): Kids menüsünde "Ana Sayfa" metninin yerine
+const EV_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v10.5h13V9"/><path d="M10 19.5v-5.5h4v5.5"/></svg>';
+const YARDIM_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.8"/><path d="M12 17.2v.1"/></svg>';
+
+/**
+ * Kids alt menüsü = yapışkan tek katman (kids.js: aşağı kayınca Gastro header'ı gizlenir, bar top=0'a yapışır).
+ * Sol: mini kilit (yalnız yapışıkken görünür, odaklanmaz) + ev ikonu · orta/sağ: kategoriler (mobilde yatay kaydırma) ·
+ * en sağ: Yardım düğmesi (yardim.js açar; JS yoksa gizli kalır).
+ */
 export function altMenu(aktif) {
-  const linkler = MODULLER.map((m) => `<a href="${m.href}"${m.kod === aktif ? ' aria-current="page"' : ''}>${ikon(m.ikon, 20)}<span>${esc(m.kisa)}</span></a>`).join('');
-  return `<nav class="kd-ust" aria-label="Dada Kids menüsü"><div class="wrap"><div class="kd-ust__menu">${linkler}</div></div></nav>`;  // yazı imi header logosuna taşındı; tema seçiciyi kids.js ekler
+  const ev = MODULLER[0];
+  const evBag = `<a class="kd-ust__ev" href="${ev.href}" aria-label="Dada Gastro Kids ana sayfa"${aktif === ev.kod ? ' aria-current="page"' : ''}>${EV_SVG}</a>`;
+  const linkler = MODULLER.slice(1).map((m) => `<a href="${m.href}"${m.kod === aktif ? ' aria-current="page"' : ''}>${esc(m.kisa)}</a>`).join('');
+  return `<nav class="kd-ust" aria-label="Dada Gastro Kids menüsü"><div class="wrap">`
+    + `<a class="kd-ust__logo" href="${ev.href}" tabindex="-1" aria-hidden="true">${kidsLogoSvg({ sinif: 'kd-ust__logo-svg', etiket: '' })}</a>`
+    + `<div class="kd-ust__menu">${evBag}${linkler}</div>`
+    + `<button type="button" class="kd-yardim-ac" aria-label="Yardım" aria-expanded="false" aria-controls="kdYardim" hidden>${YARDIM_SVG}<span>Yardım</span></button>`
+    + `</div></nav>`;
 }
 
 export const sayfa = (icerik, aktif) => `<div class="kd-sayfa">\n${altMenu(aktif)}\n${icerik}\n</div>`;
 
 export function kirinti(parcalar) {
-  // parcalar: [['Tarifler','tarifler.html'], ['Dada Kids','kids.html'], ['Bu sayfa']]
+  // parcalar: [['Tarifler','tarifler.html'], ['Dada Gastro Kids','kids.html'], ['Bu sayfa']]
   const ok = '<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>';
   const ilk = `<a href="index.html" aria-label="Dada Gastro ana sayfa"><i class="fa-solid fa-house" aria-hidden="true"></i></a>`;
-  return `<nav class="kd-kirinti" aria-label="Sayfa yolu">${ilk}${parcalar.map(([ad, href]) => ok + (href ? `<a href="${href}">${esc(ad)}</a>` : `<b>${esc(ad)}</b>`)).join('')}</nav>`;
+  const AD = { 'Dada Kids': 'Dada Gastro Kids', 'Mevsim': 'Mevsim Takvimi', 'Mevsimsel Takvim': 'Mevsim Takvimi' };   // V2 adları (emniyet ağı)
+  return `<nav class="kd-kirinti" aria-label="Sayfa yolu">${ilk}${parcalar.map(([ad, href]) => { ad = AD[ad] || ad; return ok + (href ? `<a href="${href}">${esc(ad)}</a>` : `<b>${esc(ad)}</b>`); }).join('')}</nav>`;
 }
 
 export function ustYazi(metin, { ikonAd, renk } = {}) {
@@ -110,10 +131,11 @@ export function ustYazi(metin, { ikonAd, renk } = {}) {
 }
 
 /**
- * hero({ renk, kirinti:[...], ust:{metin, ikon}, baslik, giris, eylemler:'html', gorsel:{yol, alt}, sag:'html (gorsel yerine)', kucuk })
+ * hero({ renk, kirinti:[...], ust:{metin, ikon}, baslik, giris, eylemler:'html', gorsel:{yol, alt}, sag:'html (gorsel yerine)', kucuk, serit })
+ * V2: süs yok (parıltı/bulut). serit:true → güvenlik şeridi hero section'ın hemen ardına eklenir.
  */
-export function hero({ renk = 'seftali', kirinti: k = [], ust, baslik, giris, eylemler = '', gorsel, sag, kucuk = false, ek = '' }) {
-  const sagHtml = sag ?? (gorsel ? `<div class="kd-hero__gorsel">${foto(gorsel.yol, gorsel.alt || '', { gen: 1200, yuk: 900, oncelik: true })}<span class="kd-hero__sus kd-hero__sus--1 kd-yuz">${ikon('parilti', 64)}</span></div>` : '');
+export function hero({ renk = 'seftali', kirinti: k = [], ust, baslik, giris, eylemler = '', gorsel, sag, kucuk = false, ek = '', serit = false }) {
+  const sagHtml = sag ?? (gorsel ? `<div class="kd-hero__gorsel">${foto(gorsel.yol, gorsel.alt || '', { gen: 1200, yuk: 900, oncelik: true })}</div>` : '');
   return `<section class="kd-hero${kucuk ? ' kd-hero--kucuk' : ''}" data-renk="${renk}">
  <div class="wrap">
   ${k.length ? kirinti(k) : ''}
@@ -128,7 +150,7 @@ export function hero({ renk = 'seftali', kirinti: k = [], ust, baslik, giris, ey
    ${sagHtml}
   </div>
  </div>
-</section>`;
+</section>${serit ? '\n' + guvenlikSeridi() : ''}`;
 }
 
 export function bolumBasi({ ust, ikonAd, renk, baslik, alt, sag = '' }) {
@@ -138,16 +160,22 @@ export function bolumBasi({ ust, ikonAd, renk, baslik, alt, sag = '' }) {
 /* ---------- Tarif kartı ---------- */
 export const tarifHref = (slug) => `kids-tarif.html?t=${encodeURIComponent(slug)}`;
 export const OGUN_AD = { kahvalti: 'Kahvaltı', ana: 'Öğle · Akşam', ara: 'Ara öğün' };
+/**
+ * Tüm bebek tarif kartlarının tek bileşeni (V2). <article>: başlık bağı ::after ile tüm kartı tıklanır yapar
+ * (uzatılmış bağ); Kiler düğmesi bağın DIŞINDA ve üst katmanda. data-* kids.js katalog filtresi/sıralaması içindir.
+ */
 export function tarifKart(t, { gir = true, sira = 0 } = {}) {
   const ogun = (t.ogun || []).map((o) => OGUN_AD[o]).join(' · ');
-  return `<a class="kd-kart kd-tarif${gir ? ' kd-gir' : ''}" href="${tarifHref(t.slug)}" data-renk="${yasRenk(t.yas)}" data-yas="${t.yas}" data-kivam="${t.kivam}" data-ogun="${(t.ogun || []).join(' ')}" data-alerjen="${(t.alerjenler || []).join(' ')}" data-sure="${t.sureDk ?? 999}" data-ad="${esc(t.ad.toLocaleLowerCase('tr'))}" data-sira="${sira}" style="--kd-gecikme:${Math.min(sira, 8) * 40}ms">
- <div class="kd-tarif__medya">${foto(t.gorsel, `${t.ad}: ${(KIVAM_AD[t.kivam] || '').toLocaleLowerCase('tr')} kıvamda, ${YAS_ETIKET[t.yas]} için örnek tarif fotoğrafı`, { gen: 1200, yuk: 900 })}${yasRozet(t.yas)}</div>
+  const malzeme = (t.malzemeler || []).map((m) => m.anahtar).filter(Boolean).join(' ');
+  return `<article class="kd-kart kd-tarif${gir ? ' kd-gir' : ''}" data-renk="${yasRenk(t.yas)}" data-yas="${t.yas}" data-kivam="${t.kivam}" data-ogun="${(t.ogun || []).join(' ')}" data-alerjen="${(t.alerjenler || []).join(' ')}" data-sure="${t.sureDk ?? 999}" data-ad="${esc(t.ad.toLocaleLowerCase('tr'))}" data-malzeme="${esc(malzeme)}" data-sira="${sira}" style="--kd-gecikme:${Math.min(sira, 8) * 40}ms">
+ <div class="kd-tarif__medya">${foto(t.gorsel, `${t.ad}: ${(KIVAM_GOSTERGE[t.kivam] || '').toLocaleLowerCase('tr')} kıvamda, ${YAS_ETIKET[t.yas]} için örnek tarif fotoğrafı`, { gen: 1200, yuk: 900 })}${kidsAgeBadge(t.yas)}</div>
  <div class="kd-kart__govde">
-  <h3>${esc(t.ad)}</h3>
-  <div class="kd-tarif__olgu">${kivamEtiket(t.kivam)}${alerjenPilleri(t.alerjenler)}</div>
+  <h3><a class="kd-tarif__bag" href="${tarifHref(t.slug)}">${esc(t.ad)}</a></h3>
+  <div class="kd-tarif__olgu">${alerjenPilleri(t.alerjenler)}</div>
   <div class="kd-tarif__meta">${t.sureDk ? `<span><i class="fa-regular fa-clock" aria-hidden="true"></i>${t.sureDk} dk</span>` : ''}${ogun ? `<span><i class="fa-solid fa-utensils" aria-hidden="true"></i>${esc(ogun)}</span>` : ''}</div>
+  <div class="kd-tarif__alt">${kivamGostergesi(t.kivam)}${kilerDugmesi(t)}</div>
  </div>
-</a>`;
+</article>`;
 }
 
 /* ---------- Öneri şeridi: satır her zaman tam ---------- */
@@ -169,14 +197,14 @@ export const tarifSeridi = (liste, { sinif = '', gir = true, tumuHref = 'kids-ta
   `<div class="kd-izgara${dortlu ? ' kd-dortlu' : ''}${kaydir ? ' kd-kaydir-mobil' : ''} ${sinif}" data-izgara-oneri>${liste.map((t, n) => tarifKart(t, { sira: n, gir })).join('')}${seriCta({ href: tumuHref, renk })}</div>`;
 /** İçerik sayısı tutmayan ızgarada son yuvayı dolduran yönlendirme kartı (uydurma içerik yok, yalnız yönlendirme). */
 export const ctaKart = ({ href, ikonAd, baslik, metin, etiket, renk = 'mint', sinif = '' }) =>
-  `<a class="kd-kart kd-cta-kart ${sinif}" href="${href}" data-renk="${renk}"><span class="kd-modul__ikon">${ikon(ikonAd, 40)}</span><span class="kd-cta-kart__metin"><h3>${esc(baslik)}</h3><p>${esc(metin)}</p></span><span class="kd-kart__alt">${esc(etiket)} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
+  `<a class="kd-kart kd-cta-kart ${sinif}" href="${href}" data-renk="${renk}"><span class="kd-cta-kart__metin kd-ikonlu"><span class="kd-modul__ikon kd-ikonlu__ikon">${ikon(ikonAd, 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3><p class="kd-ikonlu__metin">${esc(metin)}</p></span><span class="kd-kart__alt">${esc(etiket)} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>`;
 
 /* ---------- Evre kartı ---------- */
 export function evreKart(kod, { metin, gir = true } = {}) {
   const e = EVRE[kod];
   const v = (veri.evreler.evreler || []).find((x) => x.kod === kod) || {};
   return `<a class="kd-evre${gir ? ' kd-gir' : ''}" href="${evreSayfasi(kod)}" data-renk="${e.renk}" data-evre="${kod}" aria-current="false">
- <div class="kd-evre__ust"><span class="kd-evre__ikon">${ikon(e.ikon, 34)}</span><div><span class="kd-evre__aralik">${esc(e.etiket)}</span><h3>${esc(e.ad)}</h3></div></div>
+ <div class="kd-evre__ust kd-ikonlu"><span class="kd-evre__ikon kd-ikonlu__ikon">${ikon(e.ikon, 34)}</span><div class="kd-ikonlu__baslik"><span class="kd-evre__aralik">${esc(e.etiket)}</span><h3>${esc(e.ad)}</h3></div></div>
  <p>${esc(metin ?? v.slogan ?? v.ozet ?? '')}</p>
  <span class="kd-evre__git">Evreye git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
 </a>`;
@@ -184,48 +212,28 @@ export function evreKart(kod, { metin, gir = true } = {}) {
 
 /* ---------- Modül kartı ---------- */
 export function modulKart(m, { gir = true } = {}) {
-  return `<a class="kd-kart kd-modul${gir ? ' kd-gir' : ''}" href="${m.href}" data-renk="${m.renk}">
- <span class="kd-modul__ikon">${ikon(m.ikon, 40)}</span>
- <h3>${esc(m.ad)}</h3>
- <p>${esc(m.ac)}</p>
+  return `<a class="kd-kart kd-modul kd-ikonlu${gir ? ' kd-gir' : ''}" href="${m.href}" data-renk="${m.renk}">
+ <span class="kd-modul__ikon kd-ikonlu__ikon">${ikon(m.ikon, 40)}</span>
+ <h3 class="kd-ikonlu__baslik">${esc(m.ad)}</h3>
+ <p class="kd-ikonlu__metin">${esc(m.ac)}</p>
  <span class="kd-kart__alt">Keşfet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
 </a>`;
 }
 
 export function bosDurum({ baslik = 'Sonuç bulunamadı', metin = '', id = '' } = {}) {
-  return `<div class="kd-bos"${id ? ` id="${id}"` : ''} hidden>${sahne('bos-kase')}<h3>${esc(baslik)}</h3><p>${esc(metin)}</p><div class="kd-bos__oneriler"></div></div>`;
+  return `<div class="kd-bos"${id ? ` id="${id}"` : ''} hidden><div class="kd-ikonlu kd-bos__ust"><span class="kd-bos__ikon kd-ikonlu__ikon">${ikon('kase', 40)}</span><h3 class="kd-ikonlu__baslik">${esc(baslik)}</h3>${metin ? `<p class="kd-ikonlu__metin">${esc(metin)}</p>` : ''}</div><div class="kd-bos__oneriler"></div></div>`;
 }
 
 /* =====================================================================
-   TUR 2 yardımcıları — illüstrasyon, maskot, ayırıcı, bant/desen, video, tema seçici
+   TUR 2 yardımcıları — video, zebra bant (illüstrasyon/maskot/ayırıcı V2'de boş)
    ===================================================================== */
 import { existsSync as _var } from 'node:fs';
 const _kok = (p) => path.join(KOK, p);
 
-/** Kawaii illüstrasyon (varlik/kids/illus/<key>.webp|.svg). Dosya yoksa sahne SVG'sine ya da boşa düşer (kırık görsel yok). */
-export function illus(key, alt = '', { boy = 480, sinif = '', yedek = 'meyve-sepeti' } = {}) {
-  for (const uz of ['webp', 'svg', 'png']) {
-    const yol = `varlik/kids/illus/${key}.${uz}`;
-    if (_var(_kok(yol))) return `<img class="kd-illus ${sinif}" src="${yol}" width="${boy}" height="${boy}" alt="${esc(alt)}"${alt ? '' : ' aria-hidden="true"'} loading="lazy" decoding="async">`;
-  }
-  return yedek ? `<img class="kd-illus ${sinif}" src="varlik/kids/svg/sahne/${yedek}.svg" width="240" height="180" alt="${esc(alt)}"${alt ? '' : ' aria-hidden="true"'} loading="lazy" decoding="async">` : '';
-}
-
-/** Dada Kids maskotu (varlik/kids/maskot/<poz>.svg). Pozlar: merhaba, kasik, kitap, buyutec, takvim, uyku, kalp, sef, sepet, bicak. */
-export function maskot(poz = 'merhaba', { boy = 120, alt = '', sinif = '' } = {}) {
-  const yol = `varlik/kids/maskot/${poz}.svg`;
-  if (!_var(_kok(yol))) return '';
-  return `<img class="kd-maskot ${sinif}" src="${yol}" width="${boy}" height="${boy}" alt="${esc(alt)}"${alt ? '' : ' aria-hidden="true"'} loading="lazy" decoding="async">`;
-}
-
-/** Bölüm ayırıcı: üstteki bölümün altına konur; `renk` bir sonraki bölümün zemini (CSS değişkeni ya da renk adı). */
-export function ayirici(tip = 'dalga', renk = 'var(--kd-krem)', { ters = false, once = '' } = {}) {
-  const d = {
-    dalga: 'M0,32 C120,8 240,8 360,28 C480,48 600,52 720,34 C840,16 960,10 1080,26 C1200,42 1320,44 1440,30 L1440,64 L0,64 Z',
-    bulut: 'M0,64 L0,40 C40,40 50,18 90,22 C120,4 170,8 190,30 C220,16 260,22 270,40 C300,28 340,30 350,46 C380,30 420,26 440,44 C470,20 520,18 540,40 C570,30 600,32 610,44 C650,24 700,20 720,42 C750,22 800,24 815,42 C845,30 880,30 895,46 C925,24 975,22 990,42 C1020,28 1060,30 1070,44 C1100,20 1150,18 1170,40 C1200,30 1240,32 1250,46 C1280,26 1330,24 1345,42 C1380,32 1420,34 1440,40 L1440,64 Z',
-  }[tip] || '';
-  return `<div class="kd-ayirici${ters ? ' kd-ayirici--ters' : ''}" aria-hidden="true"${once ? ` style="background:${once}"` : ''}><svg viewBox="0 0 1440 64" preserveAspectRatio="none"><path d="${d}" style="fill:${renk}"/></svg></div>`;
-}
+/** V2: kawaii illüstrasyon, maskot ve dalga/bulut ayırıcı YOK. Çağrılar boş döner (emniyet ağı; sayfa ajanları çağrıları kaldırıyor). */
+export const illus = () => '';
+export const maskot = () => '';
+export const ayirici = () => '';
 
 /** Sessiz döngü video: autoplay muted loop playsinline; azaltılmış harekette yalnız poster (kids.js durdurur). */
 export function video(ad, alt = '', { sinif = '' } = {}) {
@@ -239,52 +247,60 @@ export function video(ad, alt = '', { sinif = '' } = {}) {
 export const zebraRenk = (renk) => renk ? `color-mix(in srgb, var(--kd-${renk}-a) 45%, var(--kd-krem))` : 'var(--kd-krem)';
 
 /* =====================================================================
-   Dada Kids LOGO — tek SVG bileşeni (header grubu, bant, hub hero, sade varyant, favicon)
-   "dada" = Gastro logosunun 4 yolu (birebir) · "kids" = oyuncu, hafif dağınık harfler
-   (her harf ±6–12°, zıplayan taban, düzensiz aralık, mevcut renkler) · 2 özgün tel kollu çocuk.
-   Koordinatlar Gastro logo viewBox'ında (921.855 214.449 1721.825 348.042); figürler kutu dışına
-   taşabilir (svg overflow:visible) — logo kutusu/header yüksekliği değişmez.
+   Dada Gastro Kids LOGO — V2: Dada Gastro kurumsal logosu AYNEN + sade pastel "kids" rozeti.
+   Header'da logo değişmez; rozet yalnız CSS (.pg-kids .brand::after, kids.css). Bağımsız kilit
+   (mega şeridi, ana sayfa bandı, hub, yapışkan bar mini logosu) bu SVG'dir. Dağınık harf ve figür yok.
+   Koordinatlar Gastro logo viewBox'ında (921.855 214.449 1721.825 348.042); rozet sağa eklenir.
    ===================================================================== */
-const _dadaYollari = (() => {
+import { readFileSync } from 'node:fs';
+const _gastroLogo = (() => {
   try {
     const s = readFileSync(path.join(KOK, 'src/donor/ana.html'), 'utf8');
-    const i = s.indexOf('<span class="brand-word"><svg'); const j = s.indexOf('</svg>', i);
-    return (s.slice(i, j).split('<g transform=')[0].match(/<path[^>]*>(?:<\/path>)?/g) || []).join('');
+    const i = s.indexOf('<span class="brand-word"><svg'); const ac = s.indexOf('>', s.indexOf('<svg', i)) + 1; const j = s.indexOf('</svg>', ac);
+    return s.slice(ac, j).replace(/<title>[\s\S]*?<\/title>/g, '');
   } catch { return ''; }
 })();
-import { readFileSync } from 'node:fs';
+// Rozet: mint pastel zemin, koyu mint yazı (kontrast 6,4:1), köşe 24 birim (en büyük kullanımda ≤ 8px).
+const ROZET = { x: 2712, y: 300, g: 452, h: 222, r: 24, zemin: '#DDF4EA', yazi: '#17684C' };
+const _rozet = () => `<g class="kd-logo-rozet" aria-hidden="true"><rect x="${ROZET.x}" y="${ROZET.y}" width="${ROZET.g}" height="${ROZET.h}" rx="${ROZET.r}" fill="${ROZET.zemin}"/><text x="${ROZET.x + ROZET.g / 2}" y="${ROZET.y + 160}" text-anchor="middle" fill="${ROZET.yazi}" font-family="KdGilroy, GilroyBd, Gilroy, system-ui, sans-serif" font-weight="700" font-size="188" textLength="${ROZET.g - 116}" lengthAdjust="spacingAndGlyphs">kids</text></g>`;
 
-const KIDS_HARF = [
-  // [harf, x, taban-y, açı, renk] — düzensiz aralık: 14 · 30 · 10
-  ['k', 1812, 498, -8, '#D4557C'],
-  ['i', 1982, 480, 10, '#3F82C4'],
-  ['d', 2078, 505, -6, '#D9783A'],
-  ['s', 2297, 487, 12, '#23906C'],
-];
-const HARF_GEN = { k: 156, i: 66, d: 209, s: 148 };
+/** Eski header grubu (dağınık "kids" + figürler) V2'de yok: header logosu değişmez. */
+export const kidsLogoGrup = () => '';
 
-function _harfler() {
-  return KIDS_HARF.map(([h, x, y, a, renk]) => {
-    const cx = x + HARF_GEN[h] / 2;
-    return `<text x="${x}" y="${y}" fill="${renk}" transform="rotate(${a} ${cx} ${y - 80})">${h}</text>`;
-  }).join('');
+/** "Dada Gastro Kids" kilidi: Gastro logosu + kids rozeti. Renk: CSS color (Gastro logo yolları currentColor). */
+export function kidsLogoSvg({ sinif = '', etiket = 'Dada Gastro Kids' } = {}) {
+  const sonX = ROZET.x + ROZET.g + 8;
+  const vb = `921.855 214.449 ${(sonX - 921.855).toFixed(3)} 348.042`;
+  const erisim = etiket ? `role="img" aria-label="${esc(etiket)}"` : 'aria-hidden="true" focusable="false"';
+  return `<svg class="kd-logo-svg ${sinif}" viewBox="${vb}" ${erisim} xmlns="http://www.w3.org/2000/svg">${_gastroLogo}${_rozet()}</svg>`;
 }
 
-// Logo figürleri (Higgsfield, seçim: tasks/kids-ui-tur2.md): şeffaf WebP. Yerleşim tek; dosya render boyuna göre değişir.
-const LOGO_COCUKLARI = [
-  // [dosya, yan, x, y, genişlik, yükseklik] — logo koordinatı
-  ['salla', 'sol', 650, 167, 256, 408],
-  ['tutun', 'sag', 2402, 138, 366, 408],
-];
-const _cocuklar = (boy) => LOGO_COCUKLARI.map(([ad, yan, x, y, g, h]) => `<g class="kd-logo-cocuk kd-logo-cocuk--${yan}"><image class="kd-cocuk kd-cocuk--${ad}" href="varlik/kids/logo/cocuk-${ad}-${boy}.webp" x="${x}" y="${y}" width="${g}" height="${h}"/></g>`).join('');
-
-/** Header'daki Gastro logosunun içine giren grup (gastro harflerinin yerine geçer). */
-export function kidsLogoGrup({ cocuk = true } = {}) {
-  return `<g class="kd-logo-kids" aria-hidden="true"><g class="kd-logo-harfler" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324">${_harfler()}</g>${cocuk ? _cocuklar('header') : ''}</g>`;
+/* =====================================================================
+   V2 SÖZLEŞMESİ (tasks/v2-sozlesme.md) — bileşen imzaları sabit; görünüm v2-cekirdek'te
+   ===================================================================== */
+/** Uzman onayı tek kaynak: veri/uzman-onay.json. onayli=false iken onay iddiası YOK. */
+export const ONAY = await jsonOku('veri/uzman-onay.json', { onayli: false, uzmanlar: [], tarih: null });
+const _onayli = () => ONAY.onayli === true && Array.isArray(ONAY.uzmanlar) && ONAY.uzmanlar.length > 0;
+const _uzmanAdlari = () => ONAY.uzmanlar.map((u) => `${esc(u.ad)}${u.unvan ? ', ' + esc(u.unvan) : ''}`).join(' · ');
+/** Hero güven rozeti. Onaysız: "Uzman onayı bekliyor — Çocuk doktoru & çocuk diyetisyeni incelemesi". */
+export function guvenRozeti({ sinif = '' } = {}) {
+  if (_onayli()) return `<p class="kd-guven-rozet kd-guven-rozet--onayli ${sinif}" data-kd-onay="onayli"><span class="kd-guven-rozet__ikon" aria-hidden="true"></span><span><b>Çocuk Doktoru &amp; Çocuk Diyetisyeni Onaylı Bilgiler</b><small>İnceleyen: ${_uzmanAdlari()}${ONAY.tarih ? ' · ' + esc(ONAY.tarih) : ''}</small></span></p>`;
+  return `<p class="kd-guven-rozet ${sinif}" data-kd-onay="bekliyor"><span class="kd-guven-rozet__ikon" aria-hidden="true"></span><span><b>Uzman onayı bekliyor</b><small>Çocuk doktoru &amp; çocuk diyetisyeni incelemesi</small></span></p>`;
 }
-
-/** Bağımsız "dada kids" logosu (bant, hub hero, pafta). sade: figürsüz; boy: figür dosyası (hero|header). Renk: CSS color (dada + çizgiler). */
-export function kidsLogoSvg({ sade = false, sinif = '', etiket = 'Dada Kids', boy = 'hero' } = {}) {
-  const vb = sade ? '900 200 1580 380' : '640 120 2140 470';
-  return `<svg class="kd-logo-svg ${sinif}" viewBox="${vb}" role="img" aria-label="${esc(etiket)}" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor">${_dadaYollari}</g><g class="kd-logo-kids kd-logo-kids--acik"><g class="kd-logo-harfler" font-family="GilroyLt, Gilroy, sans-serif" font-weight="300" font-size="324">${_harfler()}</g>${sade ? '' : _cocuklar(boy)}</g></svg>`;
+/** Makale / tarif sayfası: "İnceleyen uzman" alanı. Onaysız: "İnceleme bekliyor". */
+export function inceleyenUzman({ sinif = '' } = {}) {
+  const deger = _onayli() ? `${_uzmanAdlari()}${ONAY.tarih ? ` <span class="kd-ikincil">· ${esc(ONAY.tarih)}</span>` : ''}` : 'İnceleme bekliyor';
+  return `<p class="kd-inceleyen ${sinif}" data-kd-onay="${_onayli() ? 'onayli' : 'bekliyor'}"><span class="kd-inceleyen__etiket">İnceleyen uzman</span> <span class="kd-inceleyen__deger">${deger}</span></p>`;
 }
+/** Hero altı kalıcı güvenlik şeridi (kapatılamaz). */
+export const YASAKLI_REHBER = 'kids-rehber-yasakli-gidalar.html';
+export function guvenlikSeridi() {
+  return `<aside class="kd-guvenlik-serit" role="note" aria-label="1 yaş öncesi güvenlik uyarısı"><div class="wrap"><p><span class="kd-guvenlik-serit__ikon" aria-hidden="true">⚠</span><span>1 yaşından küçük bebeklere tuz, rafine şeker, bal ve inek sütü (ana içecek olarak) verilmemelidir.</span> <a href="${YASAKLI_REHBER}">Yasaklı Gıdalar Rehberini İncele <span aria-hidden="true">→</span></a></p></div></aside>`;
+}
+/** KidsAgeBadge: tarif kartı sol üst, yüksek kontrast, "+N AY". Tek bileşen. */
+export const kidsAgeBadge = (yas) => `<span class="kd-age-badge" data-yas="${yas}" title="${esc(yasAciklama(yas))}">+${yas} AY</span>`;
+/** Kıvam göstergesi: kart altında. Etiketler sabit. */
+export const KIVAM_GOSTERGE = { puruzsuz: 'Pürüzsüz Püre', ezilmis: 'Çatalla Ezilmiş', parmak: 'BLW Parmak Gıda', aile: 'Aile Sofrası' };
+export const kivamGostergesi = (k) => `<span class="kd-kivam" data-kivam="${esc(k)}">${KIVAM_SVG[k] || ''}<span>${esc(KIVAM_GOSTERGE[k] || k)}</span></span>`;
+/** Bebek Kilerime Ekle düğmesi (davranış: varlik/kids/js/kiler.js, olay delegasyonu). */
+export const kilerDugmesi = (t) => `<button type="button" class="kd-kiler-ekle" data-kd-kiler-ekle="${esc(t.slug)}" data-ad="${esc(t.ad)}" data-malzeme="${esc((t.malzemeler || []).map((m) => m.anahtar).filter(Boolean).join(' '))}"><span aria-hidden="true">+</span> Bebek Kilerime Ekle</button>`;

@@ -1,10 +1,12 @@
 /* =====================================================================
-   DADA KIDS — ortak davranış v2 (bağımlılıksız, sahibi: lead)
+   DADA GASTRO KIDS — ortak davranış (bağımlılıksız, sahibi: v2-cekirdek)
    Sözleşme (sayfa kolları bunlara güvenebilir):
    · html.kd-js sınıfı · .kd-gir öğeleri görünür alana girince .kd-gorundu alır
    · window.DadaKids = { profil:{evre,c,ay}, EVRE, kova(), profilAyarla(p), dinle(fn) }
    · href'i "kids" ile başlayan bağlar profili taşır (?evre=…&c=…&ay=…) — depolama YOK
-   · --kd-ust-bosluk: Gastro header'ının alt kenarı (yapışkan öğeler için)
+   · --kd-ust-bosluk: görünen Gastro header'ının alt kenarı (yapışkan öğeler için; header gizliyken 0)
+   · Yapışkan Kids barı: aşağı kayınca html.kd-ust-gizli (Gastro header'ı transform ile gizlenir, bar top=0)
+   · Tema rengi kontrolü Kids barında en sağda (Yardım ile); ≤600px Yardım panelinde (DadaKids.temaSecici)
    · Filtre paneli: .kd-filtre-ac[aria-controls=ID] → #ID.kd-filtre, kapat: .kd-filtre__kapat
    ===================================================================== */
 (function () {
@@ -78,24 +80,29 @@
   if (q.has('c') && profil.c) temaYaz(profil.c === 'kiz' || profil.c === 'erkek' ? profil.c : 'notr');
   else { var kayitli = temaOku(); if (kayitli === 'kiz' || kayitli === 'erkek') profil.c = kayitli; }
   temaUygula();
-  function temaSeciciKur() {
-    var menu = $('.kd-ust .wrap'); if (!menu || $('.kd-tema-sec')) return;
-    var kutu = document.createElement('div'); kutu.className = 'kd-tema-sec'; kutu.setAttribute('role', 'group'); kutu.setAttribute('aria-label', 'Tema rengi');
+  /* Tema seçici (Ek revize E1): Kids barında en sağda, Yardım ile sağ grup. ≤600px'te bardan gizli;
+     aynı kontrolün ikinci kopyası Yardım panelinin altında (yardim.js DadaKids.temaSecici() ile ister). Kopyalar eşzamanlı. */
+  function temaSecici(sinif) {
+    var kutu = document.createElement('div'); kutu.className = 'kd-tema-sec ' + (sinif || ''); kutu.setAttribute('role', 'group'); kutu.setAttribute('aria-label', 'Tema rengi');
     [['notr', 'Nötr tema'], ['kiz', 'Pembe tema'], ['erkek', 'Mavi tema']].forEach(function (x) {
       var b = document.createElement('button'); b.type = 'button'; b.dataset.tema = x[0]; b.setAttribute('aria-label', x[1]); b.title = x[1];
       b.innerHTML = '<span aria-hidden="true"></span>'; kutu.appendChild(b);
     });
-    menu.appendChild(kutu);
     var guncelle = function () { var t = (profil.c === 'kiz' || profil.c === 'erkek') ? profil.c : 'notr'; $$('button', kutu).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.tema === t)); }); };
     kutu.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       var t = b.dataset.tema; temaYaz(t);
-      profilAyarla({ c: t === 'notr' ? 'belirtilmedi' : t });
-      guncelle();
+      profilAyarla({ c: t === 'notr' ? 'belirtilmedi' : t });   // dinleyiciler tüm kopyaları günceller
     });
     dinleyiciler.push(guncelle); guncelle();
+    return kutu;
   }
-  window.DadaKids = { profil: profil, EVRE: EVRE, kova: kova, profilAyarla: profilAyarla, dinle: function (fn) { dinleyiciler.push(fn); }, normal: normal, adresiGuncelle: adresiGuncelle };
+  function temaSeciciKur() {
+    var wrap = $('.kd-ust .wrap'); if (!wrap || $('.kd-tema-sec--bar')) return;
+    var y = $('.kd-yardim-ac', wrap);
+    wrap.insertBefore(temaSecici('kd-tema-sec--bar'), y || null);
+  }
+  window.DadaKids = { profil: profil, EVRE: EVRE, kova: kova, profilAyarla: profilAyarla, dinle: function (fn) { dinleyiciler.push(fn); }, normal: normal, adresiGuncelle: adresiGuncelle, temaSecici: temaSecici };
 
   /* ---------- Kart girişi animasyonu ---------- */
   function girisKur() {
@@ -110,20 +117,60 @@
     setTimeout(function () { ogeler.forEach(function (o) { var r = o.getBoundingClientRect(); if (r.top < innerHeight) o.classList.add('kd-gorundu'); }); }, 2000);
   }
 
-  /* ---------- Yapışkan boşluk: Gastro header'ının alt kenarı ---------- */
-  function ustBoslukKur() {
-    var bekliyor = false;
-    function olc() {
-      bekliyor = false; var alt = 0;
-      $$('header.header, .topbar, .ust-bant').forEach(function (el) {
-        var cs = getComputedStyle(el);
-        if (cs.position === 'fixed' || cs.position === 'sticky') { var r = el.getBoundingClientRect(); if (r.bottom > alt && r.top < 200 && r.height > 0) alt = r.bottom; }
+  /* ---------- Yapışkan tek katman: Gastro header'ı + Kids barı ----------
+     Üstte: Gastro header'ı ve bar görünür. Aşağı kaydırınca Gastro header'ı (ve masaüstü üst bandı) yalnız
+     sınıf + transform ile yukarı gizlenir, bar top=0'a yapışır, mini kilit görünür. Yukarı kaydırınca geri gelir.
+     Mega menü / çekmece açıkken ya da header içinde odak varken gizlenmez. Gastro DOM'una öğe eklenmez. */
+  function yapiskanKur() {
+    var kok = document.documentElement, bar = $('.kd-ust');
+    var gastro = $$('header.header, .topbar, .ust-bant').filter(function (e, i, d) { return d.indexOf(e) === i; });
+    var kidsSayfa = document.body.classList.contains('pg-kids') && bar;
+    var alt = 0, gizli = false, sonY = Math.max(0, scrollY), birikim = 0, bekliyor = false;
+    function olc() {                                   // layout alt kenarı: transform'dan bağımsız (top + yükseklik)
+      alt = 0;
+      gastro.forEach(function (el) {
+        var cs = getComputedStyle(el); if (cs.display === 'none' || !el.offsetHeight) return;
+        if (cs.position === 'fixed' || cs.position === 'sticky') alt = Math.max(alt, (parseFloat(cs.top) || 0) + el.offsetHeight);
       });
-      document.documentElement.style.setProperty('--kd-ust-bosluk', Math.max(0, Math.round(alt)) + 'px');
+      alt = Math.round(alt); kok.style.setProperty('--kd-gastro-alt', alt + 'px'); uygula();
     }
-    function iste() { if (!bekliyor) { bekliyor = true; requestAnimationFrame(olc); } }
-    addEventListener('scroll', iste, { passive: true }); addEventListener('resize', iste);
+    function uygula() { kok.style.setProperty('--kd-ust-bosluk', (gizli ? 0 : alt) + 'px'); kok.classList.toggle('kd-ust-gizli', gizli); }
+    function acikMi() { return !!document.querySelector('.has-mega:hover, .has-mega:focus-within, .drawer.open, header.header:focus-within, .topbar:focus-within'); }
+    function ayarla(yeni) { if (yeni !== gizli) { gizli = yeni; birikim = 0; uygula(); } }
+    function kaydir() {
+      bekliyor = false;
+      var y = Math.max(0, scrollY), dy = y - sonY; sonY = y;
+      if (!kidsSayfa) return;
+      if (y <= alt + 24 || acikMi()) { ayarla(false); return; }
+      birikim = (dy > 0) === (birikim > 0) ? birikim + dy : dy;  // yön değişince sıfırdan say: titreme yok
+      if (birikim > 10) ayarla(true); else if (birikim < -10) ayarla(false);
+    }
+    addEventListener('scroll', function () { if (!bekliyor) { bekliyor = true; requestAnimationFrame(kaydir); } }, { passive: true });
+    addEventListener('resize', olc);
+    gastro.forEach(function (el) { el.addEventListener('focusin', function () { ayarla(false); }); });
     olc(); setTimeout(olc, 400);
+    if (kidsSayfa) kaydir();
+  }
+
+  /* Bar mobilde yatay kayar: aktif kalem görünür alana (sayfa kaydırılmadan) */
+  function menuAktifKur() {
+    var m = $('.kd-ust__menu'); if (!m) return;
+    function tasma() {                                 // kenar solması yalnız o yönde kaydırılacak içerik varken
+      var sag = m.scrollLeft + m.clientWidth < m.scrollWidth - 2, sol = m.scrollLeft > 2;
+      m.classList.toggle('kd-tasma-sag', sag); m.classList.toggle('kd-tasma-sol', sol);
+    }
+    m.addEventListener('scroll', tasma, { passive: true }); addEventListener('resize', tasma);
+    var lg = $('.kd-ust__logo'); if (lg) lg.addEventListener('transitionend', tasma);
+    new MutationObserver(tasma).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    tasma();
+    var a = $('[aria-current="page"]:not(.kd-ust__ev)', m); if (!a) return;
+    function goster() {
+      var mr = m.getBoundingClientRect(), ar = a.getBoundingClientRect();
+      if (ar.left < mr.left + 8 || ar.right > mr.right - 8) m.scrollLeft += (ar.left + ar.width / 2) - (mr.left + mr.width / 2);
+    }
+    goster(); addEventListener('resize', goster);
+    m.addEventListener('transitionend', goster);
+    var bar = $('.kd-ust__logo'); if (bar) bar.addEventListener('transitionend', function (e) { if (e.propertyName === 'max-width') goster(); });
   }
 
   /* ---------- Filtre paneli (mobil alt sayfa) ---------- */
@@ -139,72 +186,6 @@
     });
   }
 
-  /* ---------- Hub: profil kutusu + evre vurgusu + tarif önizlemesi ---------- */
-  function hubKur() {
-    var kutu = $('#kdProfil');
-    if (kutu) {
-      var form = $('.kd-profil__form', kutu), bil = $('[data-kd-bilinmiyor]', kutu), tarih = $('#kdDogum', kutu);
-      var bilGoster = function () {
-        var ev = (form.querySelector('input[name="evre"]:checked') || {}).value, hamile = ev === 'hamilelik';
-        bil.hidden = !hamile;
-        if (!hamile) { var r = bil.querySelector('input'); if (r.checked) { r.checked = false; form.querySelector('input[name="c"][value="belirtilmedi"]').checked = true; } }
-        if (tarih && tarih.closest('.kd-profil__tarih')) tarih.closest('.kd-profil__tarih').hidden = hamile;
-      };
-      var doldur = function () {
-        if (profil.evre) { var e = form.querySelector('input[name="evre"][value="' + profil.evre + '"]'); if (e) e.checked = true; }
-        var c = form.querySelector('input[name="c"][value="' + (profil.c || 'belirtilmedi') + '"]'); if (c) c.checked = true;
-        bilGoster();
-      };
-      var ozet = function () {
-        var ev = EVRE[profil.evre];
-        $('[data-kd-ozet-evre]', kutu).textContent = ev.ad + (profil.ay !== null ? ' · ' + profil.ay + '. ay' : '');
-        $('[data-kd-ozet-c]', kutu).textContent = 'Cinsiyet: ' + CINSIYET[profil.c || 'belirtilmedi'];
-        var ik = $('.kd-profil__ozet-ikon', kutu); ik.setAttribute('data-renk', ev.renk); ik.querySelector('img').src = 'varlik/kids/svg/ui/' + ev.ikon + '.svg';
-        kutu.setAttribute('data-durum', 'ozet');
-      };
-      form.addEventListener('change', function (e) {
-        if (tarih && e.target === tarih && tarih.value) {
-          var d = new Date(tarih.value + 'T00:00:00'), b = new Date();
-          var ay = (b.getFullYear() - d.getFullYear()) * 12 + (b.getMonth() - d.getMonth()) - (b.getDate() < d.getDate() ? 1 : 0);
-          if (ay >= 0 && ay <= 36) { form.querySelector('input[name="evre"][value="' + evreAydan(ay) + '"]').checked = true; tarih.setAttribute('data-ay', ay); }
-        } else if (e.target.name === 'evre' && tarih) { tarih.removeAttribute('data-ay'); tarih.value = ''; }
-        bilGoster();
-      });
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var ev = form.querySelector('input[name="evre"]:checked');
-        $('[data-kd-uyari]', kutu).hidden = !!ev; if (!ev) return;
-        profilAyarla({
-          evre: ev.value,
-          c: (form.querySelector('input[name="c"]:checked') || {}).value || 'belirtilmedi',
-          ay: tarih && tarih.hasAttribute('data-ay') && ev.value !== 'hamilelik' ? parseInt(tarih.getAttribute('data-ay'), 10) : null
-        });
-        ozet();
-      });
-      $('.kd-degistir', kutu).addEventListener('click', function () { kutu.removeAttribute('data-durum'); doldur(); var i = form.querySelector('input:checked'); if (i) i.focus(); });
-      doldur(); if (profil.evre) ozet();
-    }
-    var guncelle = function () {
-      // "Sizin evreniz" etiketi yalnız seçili evrenin kartında bulunur (statik işaretlemede tekrar etmez)
-      $$('.kd-evre[data-evre]').forEach(function (k) {
-        var bu = k.getAttribute('data-evre') === profil.evre; k.setAttribute('aria-current', String(bu));
-        var et = $('.kd-evre__sen', k);
-        if (bu && !et) { et = document.createElement('span'); et.className = 'kd-evre__sen'; et.textContent = 'Sizin evreniz'; k.insertBefore(et, k.firstChild); }
-        else if (!bu && et) et.remove();
-      });
-      var iz = $('#kdOnizleme'); if (!iz) return;
-      var kv = kova(), kartlar = $$('.kd-tarif', iz);
-      var uygun = kartlar.filter(function (k) { return kv === null ? +k.dataset.yas === 6 : +k.dataset.yas <= kv; })
-        .sort(function (a, b) { return (+b.dataset.yas - +a.dataset.yas) || (+a.dataset.sira - +b.dataset.sira); });
-      kartlar.forEach(function (k) { k.hidden = true; });
-      uygun.slice(0, 4).forEach(function (k) { k.hidden = false; k.classList.add('kd-gorundu'); iz.appendChild(k); });
-      var bas = $('[data-kd-onizleme-baslik]'); if (bas) bas.textContent = kv !== null ? KOVA_AD[kv] + ' ve öncesi için seçtiklerimiz' : 'Ek gıdaya başlarken ilk tarifler';
-      var tumu = $('[data-kd-tumu]'); if (tumu) { tumu.setAttribute('href', 'kids-tarifler.html' + (kv !== null ? '?yas=' + kv : '')); baglariGuncelle(); }
-      var not = $('[data-kd-erken-not]'); if (not) not.hidden = !(profil.evre === '0-6-ay' || profil.evre === 'hamilelik' || (profil.ay !== null && profil.ay < 6));
-    };
-    dinleyiciler.push(guncelle); guncelle();
-  }
-
   /* ---------- Kids Tarifleri: yaş şeridi + filtreler + arama + sıralama + boş durum ---------- */
   function katalogKur() {
     var iz = $('#kdTarifIzgara'); if (!iz) return;
@@ -214,12 +195,17 @@
     var d = { yas: KOVALAR.indexOf(+bas) > -1 ? +bas : (bas === 'tumu' ? 'tumu' : (kova() || 'tumu')), q: q.get('q') || '', kivam: [], icermez: [], ogun: [], sure: null };
     if (ara) ara.value = d.q;
 
+    function aramaMetni(k) {               // başlık + olgular + kıvam + malzeme anahtarları (düğme metni hariç)
+      if (k._kdAra === undefined) k._kdAra = normal($$('h3, .kd-tarif__olgu, .kd-tarif__meta, .kd-kivam', k).map(function (e) { return e.textContent; }).join(' ') + ' ' + (k.dataset.malzeme || ''));
+      return k._kdAra;
+    }
     function oku() {
       var f = function (n) { return $$('input[name="' + n + '"]:checked', form).map(function (i) { return i.value; }); };
       d.kivam = f('kivam'); d.icermez = f('icermez'); d.ogun = f('ogun');
       var s = $('input[name="sure"]:checked', form); d.sure = s && s.value ? +s.value : null;
     }
     function uyar(k, haric) {
+      var ek = window.KdKatalogEk; if (ek && ek.filtre && !ek.filtre(k)) return false;   // kanca: kiler.js (Bebek Dolabı)
       if (haric !== 'yas' && d.yas !== 'tumu' && +k.dataset.yas > d.yas) return false;
       if (d.kivam.length && d.kivam.indexOf(k.dataset.kivam) < 0) return false;
       var al = k.dataset.alerjen ? k.dataset.alerjen.split(' ') : [];
@@ -229,7 +215,7 @@
       }
       if (d.ogun.length) { var og = k.dataset.ogun.split(' '); if (!d.ogun.some(function (o) { return og.indexOf(o) > -1; })) return false; }
       if (d.sure && +k.dataset.sure > d.sure) return false;
-      if (d.q) { var n = normal(d.q); if (normal(k.dataset.ad).indexOf(n) < 0 && normal(k.textContent).indexOf(n) < 0) return false; }
+      if (d.q) { var n = normal(d.q); if (normal(k.dataset.ad).indexOf(n) < 0 && aramaMetni(k).indexOf(n) < 0) return false; }
       return true;
     }
     function ciz() {
@@ -239,6 +225,7 @@
       if (mod === 'hizli') s.sort(function (a, b) { return a.dataset.sure - b.dataset.sure; });
       if (mod === 'yas') s.sort(function (a, b) { return (b.dataset.yas - a.dataset.yas) || (a.dataset.sira - b.dataset.sira); });
       if (mod === 'az') s.sort(function (a, b) { return a.dataset.ad.localeCompare(b.dataset.ad, 'tr'); });
+      var ek2 = window.KdKatalogEk; if (ek2 && ek2.sira) s.sort(ek2.sira);               // kanca: kiler.js sıralaması
       s.forEach(function (k) { iz.appendChild(k); });
       $$('.kd-yas-chip').forEach(function (c) {
         var v = c.dataset.yas, sayi = kartlar.filter(function (k) { return uyar(k, 'yas') && (v === 'tumu' || +k.dataset.yas <= +v); }).length;
@@ -251,6 +238,7 @@
       bos(n);
       adresiGuncelle({ yas: d.yas === 'tumu' ? null : String(d.yas), q: d.q || null });
     }
+    window.DadaKids.katalogYenile = function () { oku(); ciz(); };                      // kanca: kiler.js dışarıdan yeniden çizer
     function bos(n) {
       var b = $('#kdBos'); if (!b) return; b.hidden = n > 0; if (n > 0) return;
       var on = $('.kd-bos__oneriler', b); on.innerHTML = '';
@@ -289,20 +277,6 @@
     $$('.kd-gir', hedef).forEach(function (o) { o.classList.add('kd-gorundu'); });
   }
 
-  /* Logo: Gastro → Kids bağında "gastro" yerinde "kids"e döner, sonra gidilir; Kids → Gastro'da tersi */
-  function logoKur() {
-    var kidsSayfa = document.body.classList.contains('pg-kids');
-    var brand = $('header .brand'); if (kidsSayfa && brand) brand.setAttribute('aria-label', 'Dada Kids · Dada Gastro ana sayfa');
-    var azalt = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[href]'); if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
-      var h = a.getAttribute('href'); if (/^(https?:|mailto:|tel:|#)/.test(h)) return;
-      var hedefKids = /^kids/.test(h), hedefGastro = /^(index|tarifler)\.html/.test(h);
-      if (azalt) return;
-      if (!kidsSayfa && hedefKids) { e.preventDefault(); document.documentElement.classList.add('kd-logo-kids'); setTimeout(function () { location.href = a.href; }, 420); }
-      else if (kidsSayfa && hedefGastro) { e.preventDefault(); document.body.classList.add('kd-logo-cikis'); setTimeout(function () { location.href = a.href; }, 380); }
-    });
-  }
   function videoKur() {
     var vs = $$('video.kd-video'); if (!vs.length) return;
     var mq = matchMedia('(prefers-reduced-motion: reduce)');
@@ -314,6 +288,6 @@
     $$('.kd-gir').forEach(function (o) { if (o.style.getPropertyValue('--kd-gecikme')) return; var p = o.parentElement; var n = gruplar.get(p) || 0; gruplar.set(p, n + 1); o.style.setProperty('--kd-gecikme', Math.min(n, 6) * 60 + 'ms'); });
   }
 
-  function basla() { temaSeciciKur(); logoKur(); videoKur(); kademeKur(); detayKur(); girisKur(); ustBoslukKur(); filtrePaneliKur(); hubKur(); katalogKur(); baglariGuncelle(); }
+  function basla() { temaSeciciKur(); videoKur(); kademeKur(); detayKur(); girisKur(); yapiskanKur(); menuAktifKur(); filtrePaneliKur(); katalogKur(); baglariGuncelle(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();
 })();

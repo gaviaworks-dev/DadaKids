@@ -22,33 +22,35 @@ function zorunlu(html, eski, yeni, etiket) {
 }
 
 /* ---------- Kabuk eklemeleri (tüm sayfalar) ---------- */
-// Mega menü Dada Kids şeridi: .mega-cats altında tam genişlik (CSS: varlik/kids/css/mega.css).
+// Mega menü Dada Gastro Kids şeridi: .mega-cats altında tam genişlik (CSS: varlik/kids/css/mega.css).
 // Chip'ler yalnız tarif filtresi olan evreler; her evre kendi ilk yaş kovasına gider (kids.js EVRE.kova ile aynı: 6/9/12).
 // Hamilelik ve 0–6 Ay yaş kovası taşımaz (6 aydan önce ek gıda yok), şeritte chip'i yok; Keşfet ile Kids ana sayfasından erişilir.
 const megaChip = (kod) => {
   const e = ortak.EVRE[kod];
   return `<a class="kd-mega-serit__chip" data-renk="${e.renk}" href="kids-tarifler.html?yas=${ortak.YASLAR.find((y) => ortak.yasEvresi(y) === kod)}" aria-label="${esc(e.ad)} tarifleri">${ortak.ikon(e.ikon, 16)}${esc(e.ad)}</a>`;
 };
-const MEGA_SERIT = `<div class="kd-mega-serit" role="group" aria-label="Dada Kids">
-${ortak.kidsLogoSvg({ sinif: 'kd-mega-serit__logo', boy: 'header' })}<span class="kd-mega-serit__metin">Yaşa göre bebek ve çocuk tarifleri</span><span class="kd-mega-serit__chipler">${ortak.EVRE_SIRA.filter((k) => ortak.YASLAR.some((y) => ortak.yasEvresi(y) === k)).map(megaChip).join('')}</span><a class="kd-mega-serit__kesfet" href="kids.html" aria-label="Dada Kids'i keşfet">Keşfet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+const MEGA_SERIT = `<div class="kd-mega-serit" role="group" aria-label="Dada Gastro Kids">
+${ortak.kidsLogoSvg({ sinif: 'kd-mega-serit__logo' })}<span class="kd-mega-serit__metin">Yaşa göre bebek ve çocuk tarifleri</span><span class="kd-mega-serit__chipler">${ortak.EVRE_SIRA.filter((k) => ortak.YASLAR.some((y) => ortak.yasEvresi(y) === k)).map(megaChip).join('')}</span><a class="kd-mega-serit__kesfet" href="kids.html" aria-label="Dada Gastro Kids'i keşfet">Keşfet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
 </div>`;
-const CEKMECE_BAG = `<a href="kids.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> <span>Dada Kids · Bebek &amp; Çocuk</span></a>`;
+const CEKMECE_BAG = `<a href="kids.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> <span>Dada Gastro Kids · Bebek &amp; Çocuk</span></a>`;
 
-// Header logosu: "gastro" harf gruplarını sar + renkli "kids" ekle ("dada" yolları aynı kalır).
-// Kids sayfalarında kids.js html.kd-logo-kids ekler; Gastro sayfalarında Kids bağına tıklayınca dönüşüm oynar.
-const KIDS_LOGO = ortak.kidsLogoGrup();   // tek bileşen: src/kids/ortak.mjs
-function logoDonusumu(html) {
-  return html.replace(/(<span class="brand-word"><svg[^>]*>)([\s\S]*?)(<\/svg>)/g, (t, ac, ic, kap) => {
-    if (ic.includes('kd-logo-gastro')) return t;
-    const i = ic.indexOf('<g transform=');
-    if (i < 0) return t;
-    return ac + ic.slice(0, i) + '<g class="kd-logo-gastro">' + ic.slice(i) + '</g>' + KIDS_LOGO + kap;
-  });
-}
+// V2: header logosu her sayfada Dada Gastro logosu AYNEN kalır (dönüşüm yok). Kids sayfalarında yanındaki
+// "kids" rozeti yalnız CSS'tir (.pg-kids .brand::after, kids.css) → Gastro DOM'una öğe eklenmez.
 
-// Marka yazımı tek biçim: "Dada Gastro" / "Dada Kids" (görünür metin ve aria; URL'lere dokunmaz)
+// Marka yazımı tek biçim: "Dada Gastro" / "Dada Gastro Kids" (görünür metin ve aria; URL'lere dokunmaz — "DadaKids" boşluksuz)
 function markaYazimi(html) {
   return html.replace(/DadaGastro(?![a-z.\/])/g, 'Dada Gastro').replace(/>Dada<\/(b|strong)>Gastro/g, '>Dada</$1> Gastro');
+}
+// V2 emniyet ağı: modüllerden kalan "Dada Kids" görünür adı → "Dada Gastro Kids"
+const kidsAdi = (html) => html.replace(/Dada Kids/g, 'Dada Gastro Kids').replace(/DADA KIDS/g, 'DADA GASTRO KIDS');
+// Ek revize E8: Gastro'nun "Bebek Tarifleri" kategorisi Kids tariflerine gider (href, onclick, tarifler süzgeç satırı).
+// Donör değişmez; tariflerIcerde'den ÖNCE çalışır (yoksa genel kategori kuralı tarifler.html'e çevirirdi).
+const BEBEK_KAT = /https:\/\/dadagastro\.com\/tarifler\/kategori\/bebek-tarifleri(?:\?[^"']*)?/g;
+function bebekKids(html) {
+  html = html.replace(BEBEK_KAT, 'kids-tarifler.html');
+  // tarifler.html sol süzgeç: "Bebek Tarifleri" onay kutusu yerine aynı görünümde bağ (kutucuk yerine ok)
+  return html.replace(/<label class="fct-row\s*">\s*<input type="checkbox" name="kategori\[\]" value="bebek-tarifleri">\s*<span class="cbx"><\/span>([\s\S]*?)<\/label>/,
+    (t, ic) => `<a class="fct-row kd-fct-kids" href="kids-tarifler.html" aria-label="Bebek Tarifleri: Dada Gastro Kids tariflerine git">${ic.trim()}<i class="fa-solid fa-arrow-right kd-fct-kids__ok" aria-hidden="true"></i></a>`);
 }
 // Tarifler mega menüsü ve çekmece Tarifler alt menüsü prototip içinde kalsın (canlı kategori adresleri → tarifler.html)
 function tariflerIcerde(html) {
@@ -56,7 +58,7 @@ function tariflerIcerde(html) {
 }
 
 async function kabukEkle(html, { css = [], js = [] } = {}) {
-  html = tariflerIcerde(markaYazimi(logoDonusumu(html)));
+  html = kidsAdi(tariflerIcerde(bebekKids(markaYazimi(html))));
   html = zorunlu(html, /<div class="mega-feat">/, (t) => `${MEGA_SERIT}\n${t}`, 'mega-feat');
   html = zorunlu(html, /(<div class="d-sub">\s*<a href="tarifler\.html">[\s\S]*?<\/a>)/, `$1\n ${CEKMECE_BAG}`, 'çekmece');
   const cssEk = [`<link rel="stylesheet" href="varlik/kids/kids.css?v=${SURUM}">`, `<link rel="stylesheet" href="varlik/kids/css/mega.css?v=${SURUM}">`];
@@ -70,11 +72,12 @@ async function kabukEkle(html, { css = [], js = [] } = {}) {
 
 const YAYIN = 'https://gaviaworks-dev.github.io/DadaKids/';
 /** Sayfaya özel kimlik: title + description + og + twitter (canlı sayfanın meta'ları temizlikte silinir). */
-function basliklar(html, baslik, aciklama, { dosya = '', gorsel = 'varlik/kids/gorsel/hero-mutfak.webp', tur = 'website' } = {}) {
+function basliklar(html, baslik, aciklama, { dosya = '', gorsel = 'varlik/kids/gorsel/hero-mutfak.webp', tur = 'website', site = 'Dada Gastro Kids (prototip)' } = {}) {
+  baslik = kidsAdi(baslik); aciklama = kidsAdi(aciklama);
   html = html.replace(/<meta (property|name)="(og:[^"]*|twitter:[^"]*|description)"[^>]*>\s*/g, '');
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(baslik)}</title>
 <meta name="description" content="${esc(aciklama)}">
-<meta property="og:site_name" content="Dada Kids · Dada Gastro (prototip)">
+<meta property="og:site_name" content="${esc(site)}">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:type" content="${tur}">
 <meta property="og:url" content="${YAYIN}${dosya}">
@@ -87,7 +90,7 @@ function basliklar(html, baslik, aciklama, { dosya = '', gorsel = 'varlik/kids/g
 <meta name="twitter:image" content="${YAYIN}${gorsel}">`);
   return html;
 }
-const yorum = (donor, not) => `<!-- Dada Kids prototipi · ${not} · donör: ${donor} · araclar/build.mjs ile üretildi, elle düzenlenmez -->\n`;
+const yorum = (donor, not) => `<!-- Dada Gastro Kids prototipi · ${not} · donör: ${donor} · araclar/build.mjs ile üretildi, elle düzenlenmez -->\n`;
 
 /* ---------- Kids sayfası kabuğu: Gastro tarif detayı (açık, düz header) ---------- */
 const KABUK_HAM = kabukTemizle(await oku('src/donor/tarif-balkabagi.html'));
@@ -96,28 +99,29 @@ async function kidsSayfasi({ dosya, baslik, aciklama, main, css = [], js = [], g
   const a = html.indexOf('<main'); const ac = html.indexOf('>', a) + 1; const b = html.indexOf('</main>', ac);
   html = html.slice(0, ac) + '\n' + main + '\n' + html.slice(b);   // tarif detayına özgü betikler taşınmaz
   html = html.replace(/<body([^>]*) class="([^"]*)"/, (t, n, s) => `<body${n} class="pg-kids ${s.replace('pg-tarif-detay', '').trim()}"`);
-  // Kids içinde logo Kids ana sayfasına gider; Kids favicon'u
-  html = html.replace(/(<a class="(?:brand|drawer-brand)" href=")index\.html(" aria-label=")[^"]*"/g, '$1kids.html$2Dada Kids ana sayfa"');
-  html = html.replace(/<link rel="(?:shortcut )?icon"[^>]*>/g, '').replace('</title>', '</title>\n<link rel="icon" type="image/svg+xml" href="varlik/kids/logo/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="varlik/kids/logo/favicon-32.png"><link rel="apple-touch-icon" href="varlik/kids/logo/apple-touch-icon.png">');
+  // Kids içinde logo Kids ana sayfasına gider. Favicon: Gastro'nun kendisi (dikey, ayrı marka değil — karar: tasks/kids-ui-tur2.md V2)
+  html = html.replace(/(<a class="(?:brand|drawer-brand)" href=")index\.html(" aria-label=")[^"]*"/g, '$1kids.html$2Dada Gastro Kids ana sayfa"');
   html = basliklar(html, baslik, aciklama, { dosya, gorsel });
-  // Pütür asistanı tüm Kids sayfalarında (dosyalar varsa)
-  return yorum('https://dadagastro.com (kabuk: tarif detayı)', 'Kids sayfası') + await kabukEkle(html, { css: [...css, 'putur'], js: [...js, 'putur'] });
+  // Ek revize E10: Kids'te kullanıcı tarif ekleme CTA'sı yok (kabukta yalnız footer "Tarifini Paylaş"; Gastro sayfalarında kalır)
+  html = html.replace(/\s*<a href="https:\/\/dadagastro\.com\/tarif-ekle"[^>]*>[^<]*<\/a>/g, '');
+  // Yardım menüsü (sticky barda, karaktersiz) + Pütür (Beyar kararı: V2 maskot temizliğine istisna; aynı 6 işlev) + Bebek Kilerim — dosyalar varsa
+  return yorum('https://dadagastro.com (kabuk: tarif detayı)', 'Kids sayfası') + await kabukEkle(html, { css: [...css, 'yardim', 'putur', 'kiler'], js: [...js, 'yardim', 'putur', 'kiler'] });
 }
 
 /* ---------- index.html — Gastro ana sayfa + Kids bandı (kapı A) ---------- */
 function kidsBandi() {
   const chip = ortak.EVRE_SIRA.map((k) => `<a class="kd-chip" data-renk="${ortak.EVRE[k].renk}" href="kids.html?evre=${k}">${ortak.ikon(ortak.EVRE[k].ikon, 18)}${esc(ortak.EVRE[k].ad)}</a>`).join('');
-  return `<section class="kd-bant-sec" aria-label="Dada Kids">
+  return `<section class="kd-bant-sec" aria-label="Dada Gastro Kids">
  <div class="wrap">
   <div class="kd-bant">
    <a class="kd-bant__gorsel" href="kids.html" tabindex="-1" aria-hidden="true"><img src="varlik/kids/gorsel/bant-kids.webp" alt="" width="240" height="240" loading="lazy" decoding="async"></a>
    <div class="kd-bant__metin">
-    ${ortak.kidsLogoSvg({ sinif: 'kd-bant__logo', boy: 'header' })}
+    ${ortak.kidsLogoSvg({ sinif: 'kd-bant__logo' })}
     <b class="kd-bant__baslik">Bebeğiniz kaç aylık?</b>
     <p>Hamilelikten 3 yaşa; yaşa uygun tarifler, güvenli kesim ve beslenme rehberi.</p>
     <div class="kd-bant__chipler">${chip}</div>
    </div>
-   <a class="kd-btn" href="kids.html">Dada Kids'e Git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+   <a class="kd-btn" href="kids.html">Dada Gastro Kids'e git <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
   </div>
  </div>
 </section>`;
@@ -125,22 +129,22 @@ function kidsBandi() {
 async function indexSayfasi() {
   let html = kabukTemizle(await oku('src/donor/ana.html'));
   html = zorunlu(html, /(<section class="findbar-sec">[\s\S]*?<\/section>)/, `$1\n${kidsBandi()}`, 'findbar-sec');
-  html = basliklar(html, 'Dada Gastro ana sayfası + Dada Kids bandı (prototip)', 'Dada Gastro ana sayfasının prototip kopyası; Dada Kids giriş bandı eklenmiştir.', { dosya: 'index.html', gorsel: 'varlik/kids/gorsel/bant-kids.webp' });
+  html = basliklar(html, 'Dada Gastro ana sayfası + Dada Gastro Kids bandı (prototip)', 'Dada Gastro ana sayfasının prototip kopyası; Dada Gastro Kids giriş bandı eklenmiştir.', { dosya: 'index.html', gorsel: 'varlik/kids/gorsel/bant-kids.webp', site: 'Dada Gastro (prototip)' });
   return yorum('https://dadagastro.com/', 'yalnız Kids bandı eklendi (kapı A)') + await kabukEkle(html);
 }
 
 /* ---------- tarifler.html — Gastro tarif listesi + Kids chip'i (kapı B) ---------- */
 async function tariflerSayfasi() {
   let html = kabukTemizle(await oku('src/donor/tarifler.html'));
-  html = zorunlu(html, /(<span class="lbl">Popüler:<\/span>)/, `$1\n <a class="chip kd-chip-gastro" href="kids-tarifler.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> Dada Kids</a>`, 'lh-chips');
+  html = zorunlu(html, /(<span class="lbl">Popüler:<\/span>)/, `$1\n <a class="chip kd-chip-gastro" href="kids-tarifler.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> Dada Gastro Kids</a>`, 'lh-chips');
   html = zorunlu(html, /(<div class="subcat-track[^>]*>\s*<a class="subcat\s+active[\s\S]*?<\/a>)/,
-    `$1\n <a class="subcat kd-subcat" href="kids-tarifler.html">\n <span class="sc-ico" style="background-image:url('varlik/kids/gorsel/tarif/avokado-muz-ezmesi.webp')"></span>\n <span><b>Bebek &amp; Çocuk</b><span>Dada Kids</span></span>\n </a>`, 'subcat-track');
-  html = basliklar(html, 'Tarifler — Dada Gastro (prototip, Dada Kids girişli)', 'Dada Gastro tarif listesinin prototip kopyası; Dada Kids chip\'i ve alt kategori kalemi eklenmiştir.', { dosya: 'tarifler.html' });
-  return yorum('https://dadagastro.com/tarifler', 'yalnız Dada Kids chip\'i ve alt kategori kalemi eklendi (kapı B)') + await kabukEkle(html);
+    `$1\n <a class="subcat kd-subcat" href="kids-tarifler.html">\n <span class="sc-ico" style="background-image:url('varlik/kids/gorsel/tarif/avokado-muz-ezmesi.webp')"></span>\n <span><b>Bebek &amp; Çocuk</b><span>Dada Gastro Kids</span></span>\n </a>`, 'subcat-track');
+  html = basliklar(html, 'Tarifler — Dada Gastro (prototip, Dada Gastro Kids girişli)', 'Dada Gastro tarif listesinin prototip kopyası; Dada Gastro Kids chip\'i ve alt kategori kalemi eklenmiştir.', { dosya: 'tarifler.html', site: 'Dada Gastro (prototip)' });
+  return yorum('https://dadagastro.com/tarifler', 'yalnız Dada Gastro Kids chip\'i ve alt kategori kalemi eklendi (kapı B)') + await kabukEkle(html);
 }
 
 /* ---------- Eski adresler → yönlendirme ---------- */
-const yonlendir = (hedef) => `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${hedef}"><title>Dada Kids</title></head><body><p>Bu sayfa taşındı: <a href="${hedef}">${hedef}</a></p></body></html>\n`;
+const yonlendir = (hedef) => `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${hedef}"><title>Dada Gastro Kids</title></head><body><p>Bu sayfa taşındı: <a href="${hedef}">${hedef}</a></p></body></html>\n`;
 
 /* ---------- Derle ---------- */
 const istenen = process.argv.slice(2);
