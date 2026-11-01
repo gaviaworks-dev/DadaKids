@@ -288,6 +288,36 @@
     $$('.kd-gir').forEach(function (o) { if (o.style.getPropertyValue('--kd-gecikme')) return; var p = o.parentElement; var n = gruplar.get(p) || 0; gruplar.set(p, n + 1); o.style.setProperty('--kd-gecikme', Math.min(n, 6) * 60 + 'ms'); });
   }
 
-  function basla() { temaSeciciKur(); videoKur(); kademeKur(); detayKur(); girisKur(); yapiskanKur(); menuAktifKur(); filtrePaneliKur(); katalogKur(); baglariGuncelle(); }
+  /* SSS — tek-açık akordeon (src/kids/sss.mjs): varsayılan hepsi kapalı; yenisi açılınca açık olan kapanır; #<soru-id> ile açılır */
+  function sssKur() {
+    var gruplar = document.querySelectorAll('[data-kd-sss]'); if (!gruplar.length) return;
+    function ayarla(oge, acik) {
+      var d = oge.querySelector('.kd-sss__dugme'); if (!d) return;
+      d.setAttribute('aria-expanded', String(acik));
+      if (acik) oge.setAttribute('data-acik', ''); else oge.removeAttribute('data-acik');
+    }
+    function ac(oge, kaydir) {
+      var grup = oge.closest('[data-kd-sss]');
+      grup.querySelectorAll('.kd-sss__oge[data-acik]').forEach(function (x) { if (x !== oge) ayarla(x, false); });
+      ayarla(oge, true);
+      if (kaydir) { try { oge.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } catch (e) { oge.scrollIntoView(); } }
+    }
+    gruplar.forEach(function (g) {
+      g.querySelectorAll('.kd-sss__oge').forEach(function (o) { ayarla(o, false); });
+      g.addEventListener('click', function (e) {
+        var d = e.target.closest('.kd-sss__dugme'); if (!d || !g.contains(d)) return;
+        var oge = d.closest('.kd-sss__oge');
+        if (oge.hasAttribute('data-acik')) ayarla(oge, false); else ac(oge, false);
+      });
+    });
+    function hashAc() {
+      var h = decodeURIComponent((location.hash || '').slice(1)); if (!h) return;
+      var el = document.getElementById(h); if (!el) return;
+      var oge = el.closest('.kd-sss__oge'); if (oge) ac(oge, true);
+    }
+    hashAc(); window.addEventListener('hashchange', hashAc);
+  }
+
+  function basla() { temaSeciciKur(); sssKur(); videoKur(); kademeKur(); detayKur(); girisKur(); yapiskanKur(); menuAktifKur(); filtrePaneliKur(); katalogKur(); baglariGuncelle(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();
 })();
