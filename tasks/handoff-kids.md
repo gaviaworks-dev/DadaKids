@@ -71,7 +71,7 @@ Sözleşme: tasks/foto-sozlesme.md · ajanlar (1 Kas ~16:45): foto-kesim (F4, 17
 - ☑ (foto-genel 50 kr) F1 Rehber kartları + makale kapakları (ek gıda, BLW, öğürme/boğulma, alerjen, yasaklı gıdalar…)
 - ☑ F2 (foto-urun: 35 ürün -k/-b + 12 kahraman sahnesi, 63,75 kr, 4 elendi; svg/urun silindi) Mevsim Takvimi: ayın kahramanı büyük görsel + ürün görselleri gerçek foto; ay seçici küçük ikonları yuvarlak kırpılmış gerçek ürün fotoğrafı
 - ☑ (foto-genel 50 kr) F3 Araçlar kartları, Dönemler/evre kartları, hub bölümleri, boş durum, Bebek Dolabı, yaş seçici çevresi
-- ☑ F4 (foto-kesim: 45 aşama + 15 kart + 5 tehlike foto, 152,5 kr, 10 elendi; 6-8 ay ezilmiş aşama görselleri olduğu gibi kalır, açık madde yok — Beyar 2 Kas) Güvenli Kesim: her besin 3 aşama gerçek foto (aynı besin/tabak/zemin, aşamaya göre doğru kesim+boyut, metinle birebir; yetişkin eli ölçek olabilir; doğruluk > sevimlilik)
+- ☑ F4 (foto-kesim: 45 aşama + 15 kart + 5 tehlike foto, 152,5 kr, 10 elendi; 6-8 ay üzüm/kiraz domates/çilek ezilmiş aşama görselleri 2 Kas'ta yeniden üretildi (10 kr), açık madde yok) Güvenli Kesim: her besin 3 aşama gerçek foto (aynı besin/tabak/zemin, aşamaya göre doğru kesim+boyut, metinle birebir; yetişkin eli ölçek olabilir; doğruluk > sevimlilik)
 - ☑ (foto-genel 50 kr) F5 Tarif kartlarında görselsiz/illüstrasyonlu her yer
 - ☑ F6 (sss-not, varlik, v2 yeşil; 62b30c7 canlı) Kapılar: illüstrasyon/cartoon dosya referansı 0 (eski SVG/PNG illüstrasyon), her görselin alt metni dolu, kesim aşama görselleri metinle uyumlu → yeşilse push → Pages doğrula
 - ☐ F7 Rapor: önce/sonra paftası (Rehber, Mevsim, Güvenli Kesim'den 2 besin, hub), stil tarifi metni, kredi harcaması, elenen görsel sayısı
