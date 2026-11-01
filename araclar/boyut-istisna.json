@@ -675,6 +675,11 @@
       "sayfa": "kids-tarifler*",
       "sinif": "kd-dolap*",
       "gerekce": "Beyar EK (1 Kas): 'Dolapta Ne Var?' yeniden tasarımı — Gastro dolap sayfası akışıyla kategorili fotoğraflı malzeme kartları, seçilenler şeridi ve iki grup sonuç (yeni bileşen, büyütme değil). Lead onayı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-urun-foto",
+      "gerekce": "Beyar 1 Kas: kalın halka (iç boşluk) yerine ince dış halka token'ı; fotoğraf aynı boyuttaki daireyi tam doldurur ('görsel küçülmesin'). Kahraman dairesi kutusu değişmedi (280/240/234), yalnız içindeki fotoğraf 16px büyüdü. Lead kararı 2026-11-01."
     }
   ]
 }
