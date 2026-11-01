@@ -274,9 +274,9 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-at-gecmis .kd-at-geri { margin: 0; flex: none; }
 
 .kd-at-alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kd-s3) var(--kd-s4); margin-top: var(--kd-s5); padding: var(--kd-s4) calc(var(--kd-s4) + var(--kd-s1)); border-radius: var(--kd-r-l); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
-.kd-at-alt__not { display: flex; gap: var(--kd-s2); align-items: flex-start; margin: 0; font-size: 14px; max-width: 640px; }
+.kd-at-alt__not { display: flex; gap: var(--kd-s2); align-items: flex-start; margin: 0; font-size: 14px; flex: 1 1 400px; max-width: 640px; }
 .kd-at-alt__not i { color: var(--kd-mint-k); margin-top: 3px; }
-.kd-at-alt__eylem { display: flex; flex-wrap: wrap; gap: var(--kd-s2); }
+.kd-at-alt__eylem { display: flex; flex-wrap: wrap; gap: var(--kd-s2); flex: none; }
 .kd-at-alt .kd-ar-sil-onay { flex-basis: 100%; margin-top: 0; }
 .kd-at-son { --kd-kutu-dis: 0; display: grid; gap: var(--kd-s5); margin-top: var(--kd-s5); }
 .kd-at-son__bag { margin: 0; font-size: 14.5px; }
