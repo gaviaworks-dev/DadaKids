@@ -41,7 +41,7 @@ Ajan kolları (dosya sahipliği; iki ajan aynı dosyaya yazmaz):
 Canlı: v2 (güncel) https://gaviaworks-dev.github.io/DadaKids/v2/kids.html · v1 (dondurulmuş) …/DadaKids/v1/kids.html · kök → /v2/ (query+hash). Son push 7a2c2a2.
 Son tur: ☑ B4 Pütür "Merhaba!" ≤480px yalnız Pütür'ün üstünde/kenarında, içerikle çakışırsa gösterilmez, kaydırınca gizlenir (putur.js) + araclar/merhaba-kapisi.mjs (canlı 390/320 48/48; önceki sürümde 0/24 kırmızıydı).
 Kapılar (16 + merhaba): serit, sss-not, font, dolap, denge, v2, ek, putur, davranis, parite (önbellek), matris, varlik, izgara, bosluk, tema, boyut (TABAN_ESKI=…/v2/ önceki yayın), merhaba — son yayında hepsi yeşil.
-Karar: Kids bar kategori ikonları gelmez, menü metin + ev ikonu (Beyar 2 Kas). SONRA: Güvenli Kesim 6–8 ay üzüm / kiraz domates / çilek "ezilmiş" aşaması için gerçek fotoğraf çekimi (YZ iki denemede ezilmiş görünümü veremedi; kesim doğru, metin talimatı veriyor). · Mevsim Pixar iptal (141,5 kr harcandı; pilot dosyaları rapor/tmp/foto/mevsim-pixar) · Higgsfield bakiyesi 616,88.
+Karar: Kids bar kategori ikonları gelmez, menü metin + ev ikonu (Beyar 2 Kas). · Mevsim Pixar iptal (141,5 kr harcandı; pilot dosyaları rapor/tmp/foto/mevsim-pixar) · Higgsfield bakiyesi 616,88.
 Ajanlar: hepsi kapatıldı (v2-kapi, foto-kesim, foto-urun, foto-genel, dolap, font, denge, mevsim-stil).
 
 ## ⚙ YAYIN YÖNTEMİ (1 Kas'tan itibaren, GEÇERLİ)
@@ -71,7 +71,7 @@ Sözleşme: tasks/foto-sozlesme.md · ajanlar (1 Kas ~16:45): foto-kesim (F4, 17
 - ☑ (foto-genel 50 kr) F1 Rehber kartları + makale kapakları (ek gıda, BLW, öğürme/boğulma, alerjen, yasaklı gıdalar…)
 - ☑ F2 (foto-urun: 35 ürün -k/-b + 12 kahraman sahnesi, 63,75 kr, 4 elendi; svg/urun silindi) Mevsim Takvimi: ayın kahramanı büyük görsel + ürün görselleri gerçek foto; ay seçici küçük ikonları yuvarlak kırpılmış gerçek ürün fotoğrafı
 - ☑ (foto-genel 50 kr) F3 Araçlar kartları, Dönemler/evre kartları, hub bölümleri, boş durum, Bebek Dolabı, yaş seçici çevresi
-- ☑ F4 (foto-kesim: 45 aşama + 15 kart + 5 tehlike foto, 152,5 kr, 10 elendi; açık: 6-8 ay üzüm/kiraz domates/çilek 'ezilmiş' görünümü → gerçek çekim önerisi) Güvenli Kesim: her besin 3 aşama gerçek foto (aynı besin/tabak/zemin, aşamaya göre doğru kesim+boyut, metinle birebir; yetişkin eli ölçek olabilir; doğruluk > sevimlilik)
+- ☑ F4 (foto-kesim: 45 aşama + 15 kart + 5 tehlike foto, 152,5 kr, 10 elendi; 6-8 ay ezilmiş aşama görselleri olduğu gibi kalır, açık madde yok — Beyar 2 Kas) Güvenli Kesim: her besin 3 aşama gerçek foto (aynı besin/tabak/zemin, aşamaya göre doğru kesim+boyut, metinle birebir; yetişkin eli ölçek olabilir; doğruluk > sevimlilik)
 - ☑ (foto-genel 50 kr) F5 Tarif kartlarında görselsiz/illüstrasyonlu her yer
 - ☑ F6 (sss-not, varlik, v2 yeşil; 62b30c7 canlı) Kapılar: illüstrasyon/cartoon dosya referansı 0 (eski SVG/PNG illüstrasyon), her görselin alt metni dolu, kesim aşama görselleri metinle uyumlu → yeşilse push → Pages doğrula
 - ☐ F7 Rapor: önce/sonra paftası (Rehber, Mevsim, Güvenli Kesim'den 2 besin, hub), stil tarifi metni, kredi harcaması, elenen görsel sayısı
