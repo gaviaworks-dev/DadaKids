@@ -173,7 +173,7 @@ export function tarifKart(t, { gir = true, sira = 0 } = {}) {
   <h3><a class="kd-tarif__bag" href="${tarifHref(t.slug)}">${esc(t.ad)}</a></h3>
   <div class="kd-tarif__olgu">${alerjenPilleri(t.alerjenler)}</div>
   <div class="kd-tarif__meta">${t.sureDk ? `<span><i class="fa-regular fa-clock" aria-hidden="true"></i>${t.sureDk} dk</span>` : ''}${ogun ? `<span><i class="fa-solid fa-utensils" aria-hidden="true"></i>${esc(ogun)}</span>` : ''}</div>
-  <div class="kd-tarif__alt">${kivamGostergesi(t.kivam)}${kilerDugmesi(t)}</div>
+  <div class="kd-tarif__alt"><div class="kd-tarif__alt-ic">${kivamGostergesi(t.kivam)}${kilerDugmesi(t)}</div></div>
  </div>
 </article>`;
 }

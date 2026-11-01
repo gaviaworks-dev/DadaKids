@@ -541,15 +541,16 @@ article.kd-tarif { cursor: pointer; }
 .kd-tarif__bag:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .kd-tarif__bag:focus-visible { outline: none; }
 .kd-tarif:has(.kd-tarif__bag:focus-visible) { outline: 3px solid var(--kd-tema); outline-offset: 3px; }
-.kd-tarif__alt { display: flex; flex-direction: column; align-items: stretch; gap: var(--kd-s2); margin-top: auto; padding-top: var(--kd-s3); border-top: 1px solid var(--kd-cizgi); }   /* her kartta aynı iki satır: kıvam · düğme (yükseklik sabit, ızgara hizası) */
+.kd-tarif__alt { margin-top: auto; padding-top: var(--kd-s3); border-top: 1px solid var(--kd-cizgi); container-type: inline-size; container-name: kd-tarif-alt; }   /* sorgu kabı: kartın kendisi değil (subgrid bozulmasın) */
+.kd-tarif__alt-ic { display: flex; flex-direction: column; align-items: stretch; gap: var(--kd-s2); }   /* dar kart: iki satır (kıvam · düğme), her kartta aynı yükseklik */
 .kd-tarif__alt .kd-kivam { min-height: 20px; }
 .kd-tarif__alt .kd-kiler-ekle { position: relative; z-index: 2; justify-content: center; width: 100%; }
-/* Yer varsa (en uzun kıvam 133px + düğme 155px) tek satır: kart genişliğine göre, aynı ızgara satırındaki kartlar eşit genişlikte olduğundan hiza korunur */
-.kd-tarif .kd-kart__govde { container-type: inline-size; container-name: kd-tarif; }
-@container kd-tarif (min-width: 330px) {
-  .kd-tarif__alt { flex-direction: row; align-items: center; justify-content: space-between; }
+/* Yer varsa (≥ 300px: en uzun kıvam 133px + düğme 155px + 8) tek satır; aynı ızgara satırındaki kartlar eşit genişlikte, hiza korunur */
+@container kd-tarif-alt (min-width: 300px) {
+  .kd-tarif__alt-ic { flex-direction: row; align-items: center; justify-content: space-between; }
   .kd-tarif__alt .kd-kiler-ekle { width: auto; flex: none; }
 }
+
 
 /* Kıvam göstergesi: çizgisel ikon + sabit etiket */
 .kd-kivam { display: inline-flex; align-items: center; gap: 6px; color: var(--kd-murekkep); font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
