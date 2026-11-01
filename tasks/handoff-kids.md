@@ -42,6 +42,7 @@ Kaynak: "/Users/gaviaworks/Desktop/Dada Gastro Kids Kapsamlı Revizyon Doküman�
 Kurallar: soru yok. Push izni yalnız bu repo/main, force push yok, `git add -A` yok, staged kontrol her commit'te, concern başına ayrı commit. Gastro header/footer yapısı korunur (yalnız sticky davranışı değişir), nav'a DADA KIDS eklenmez. Tıbbi içerik "Örnek içerik — uzman onayı bekliyor". SAHTE ONAY YASAK ("Pediatrist" kullanılmaz). Yayın: izole worktree scratchpad/yayin → kapılar TABAN=http://localhost:8771/DadaKids/ → push → ana ağaçta `git reset --mixed`.
 - ☑ 0 putur5 durduruldu (yarım iş rapor/tmp/putur/bekleyen2/) · v1 donduruldu: tag `kids-v1` = 478be10, statik kopya `v1/` → 6a1e4cc (push edildi) · canlı v1: https://gaviaworks-dev.github.io/DadaKids/v1/kids.html
 Ajanlar (1 Kas ~13:15 başladı; sözleşme tasks/v2-sozlesme.md): v2-cekirdek, v2-hub, v2-sayfalar, v2-tarif, v2-kapi. Ortak bileşen imzaları ortak.mjs sonunda + veri/uzman-onay.json (lead yazdı). Compact sonrası: ListAgents ile bak; biteni tikle; hepsi bitince v2-kapi'ye "son koşu" gönder.
+⚠ CANLI YÜK (1 Kas 14:40): dadagastro.com 11:06–11:14 UTC kesinti; parite koşularımız canlıya ~2000 istek atmış (mobil oturum bildirdi, "bitti" diyene kadar canlıya koşu YOK). araclar/parite.mjs artık önbellek (rapor/tmp/parite-canli.json) okur; canlıya yalnız PARITE_CANLI=1 (yasak, mobil oturum izin verene kadar). Yerel sayfalar dış istek atmıyor (doğrulandı). Parite sonucu raporda "beklemede — canlı yük koruması".
 V2 kapsamı (sahip ajan parantezde):
 - ◐ 1 (çekirdek bitti; sayfa ajanları sürüyor) İsim "Dada Gastro Kids" her yerde + logo: Gastro kurumsal logo aynen + sade pastel "kids" rozeti; dağınık harfler ve figürler kalkar (v2-cekirdek)
 - ◐ 2 (cekirdek+hub+sayfalar bitti; v2-tarif sürüyor) Çizgi film/maskot temizliği: logo figürleri, hero bulut/yıldız, Pütür, maskot/kawaii illüstrasyon, ayırıcı dalga/bulut, desenler → gerçekçi foto / çizgisel ikon. Pütür'ün 6 işlevi → karaktersiz "Yardım" butonu + menü (E14: Pütür de geri geliyor) (v2-cekirdek ortak; v2-hub, v2-sayfalar, v2-tarif kendi sayfaları)
@@ -55,21 +56,21 @@ V2 kapsamı (sahip ajan parantezde):
 - ☐ 10 Kiler & Dolap: "Dolapta Ne Var?" Bebek Dolabı filtresi (riskli liste veri dosyasında) + "[+] Bebek Kilerime Ekle" kart ve detayda (localStorage, bildirim) (v2-tarif)
 - ☐ 11 Radius ≤8px token'larla (pill yok; avatar/ikon dairesi hariç) (v2-cekirdek token + herkes kendi CSS'i)
 Ek revize 1 Kasım — atandı (cekirdek E1,E3,E5 ortak .kd-ikonlu,E8,E9,E10 kabuk · sayfalar E4,E5,E6,E7 · tarif E2,E10 detay · hub E11 · kapi E12 k–q); V2 son koşusu 8774 kopyasına karşı (Beyar; V2 ile birlikte, çelişirse V2 geçerli; site geneli kural). "Önce" tabanı: V2 anlık kopyası scratchpad/ek-once → http://localhost:8774/DadaKids/ (ana ağaç değişmeden önce alındı).
-- ☐ E1 Tema/renk seçici Kids alt menüde en sağa yaslı (menü öğeleri ortada) (v2-cekirdek)
-- ☐ E2 Kids Tarifleri filtre paneli: grup başlıkları kalın; filtre düğmeleri tutarlı boyut, net seçili durum (v2-tarif)
-- ☐ E3 Footer perde (altbilgi-perde) tüm Kids sayfalarında çalışır; hiçbir bölüm footer'ı örtmez (v2-cekirdek)
-- ☐ E4 Dönemler: Rahatça/Dikkat/Kaçınılır segmenti tam genişlik, eşit sekmeler; kartlar akordeon değil (ok yok, hep açık), satırda eşit yükseklik (v2-sayfalar)
-- ☐ E5 İkonlu kart hizası: üst satır ikon + başlık (+rozet sağda); açıklama ikonun sol hizasından tam genişlik. Önce: Güvenli Kesim 1 kart önce/sonra rapor/tmp/ (v2-cekirdek ortak kalıp + ortak kartlar; v2-sayfalar evre/kesim; v2-hub hub)
-- ☐ E6 Mevsim Takvimi: "Türkiye geneli için yaklaşık takvim…" notunun ilk cümlesi kalın (v2-sayfalar)
-- ☐ E7 Mevsim Takvimi: "Kasım tezgâhı" ve "Kasım ürünleri" ayrı section, aralarında yumuşak zemin geçişi (v2-sayfalar)
-- ☐ E8 Gastro "Bebek Tarifleri" kategorisi → kids-tarifler.html (mega menü + kategori listesi dahil) (v2-cekirdek)
-- ☐ E9 Gastro ana sayfası Kids widget'ı dikeyde kompakt (mobil dahil) (v2-cekirdek)
-- ☐ E10 Kids'te kullanıcı tarif ekleme CTA'sı yok; tarif detayında yazar "Dada Gastro Kids Editörü" (v2-cekirdek kabuk; v2-tarif detay)
-- ☐ E11 kids.html: "Bebeğiniz kaç aylık?" tam genişlik, "Size özel bir Kids" altına (V2'de profil formu hero yaş barına dönüştü → uygulanabilir kısmı) (v2-hub)
-- ☐ E14 (Beyar ek kararı) Pütür KALIYOR — V2 madde 2'ye istisna (logo figürleri/diğer çizgi film öğeleri kalkık). kids-v1 sürümünden geri; çift tık (≈400 ms) → surpriz parıltı (~2 sn, el sallar), tek tık → menü ~250 ms gecikmeli, sürpriz sonrası 9 sn bekleme, touch-action: manipulation; putur-kapisi geri + genişletilmiş; Yardım düğmesi de kalır (v2-putur; build: v2-cekirdek; v2-kapisi a/b/j uyarlaması: v2-kapi)
+- ☑ E1 (cekirdek) Tema/renk seçici Kids alt menüde en sağa yaslı (menü öğeleri ortada) (v2-cekirdek)
+- ☑ E2 (tarif) Kids Tarifleri filtre paneli: grup başlıkları kalın; filtre düğmeleri tutarlı boyut, net seçili durum (v2-tarif)
+- ☑ E3 (cekirdek; 10 sayfa × 1440/390 footer örtülmüyor) Footer perde (altbilgi-perde) tüm Kids sayfalarında çalışır; hiçbir bölüm footer'ı örtmez (v2-cekirdek)
+- ☑ E4 (sayfalar) Dönemler: Rahatça/Dikkat/Kaçınılır segmenti tam genişlik, eşit sekmeler; kartlar akordeon değil (ok yok, hep açık), satırda eşit yükseklik (v2-sayfalar)
+- ☑ E5 (hepsi; 229 satır ±2px; rapor/tmp/ek/kesim-kart-once-sonra.png) İkonlu kart hizası: üst satır ikon + başlık (+rozet sağda); açıklama ikonun sol hizasından tam genişlik. Önce: Güvenli Kesim 1 kart önce/sonra rapor/tmp/ (v2-cekirdek ortak kalıp + ortak kartlar; v2-sayfalar evre/kesim; v2-hub hub)
+- ☑ E6 (sayfalar) Mevsim Takvimi: "Türkiye geneli için yaklaşık takvim…" notunun ilk cümlesi kalın (v2-sayfalar)
+- ☑ E7 (sayfalar) Mevsim Takvimi: "Kasım tezgâhı" ve "Kasım ürünleri" ayrı section, aralarında yumuşak zemin geçişi (v2-sayfalar)
+- ☑ E8 (cekirdek: index kategori kartı + tarifler süzgeci; mega/çekmecede kategori yok) Gastro "Bebek Tarifleri" kategorisi → kids-tarifler.html (mega menü + kategori listesi dahil) (v2-cekirdek)
+- ☑ E9 (cekirdek: 1440 190→118, 390 416→204) Gastro ana sayfası Kids widget'ı dikeyde kompakt (mobil dahil) (v2-cekirdek)
+- ☑ E10 (cekirdek footer 'Tarifini Paylaş' Kids'te kalktı; tarif detay yazar 'Dada Gastro Kids Editörü') Kids'te kullanıcı tarif ekleme CTA'sı yok; tarif detayında yazar "Dada Gastro Kids Editörü" (v2-cekirdek kabuk; v2-tarif detay)
+- ☑ E11 (hub: dönem barı hero'da tam genişlik satır; kaç aylık formu/Size özel V2'de kalkmıştı) kids.html: "Bebeğiniz kaç aylık?" tam genişlik, "Size özel bir Kids" altına (V2'de profil formu hero yaş barına dönüştü → uygulanabilir kısmı) (v2-hub)
+- ◐ E14 (v2-putur: kapı gerçek build'de 2732/2732, v1'e karşı 2511/2732 kırmızı; dizüstü 1366/1280 görünürlük düzeltmesi sürüyor) (Beyar ek kararı) Pütür KALIYOR — V2 madde 2'ye istisna (logo figürleri/diğer çizgi film öğeleri kalkık). kids-v1 sürümünden geri; çift tık (≈400 ms) → surpriz parıltı (~2 sn, el sallar), tek tık → menü ~250 ms gecikmeli, sürpriz sonrası 9 sn bekleme, touch-action: manipulation; putur-kapisi geri + genişletilmiş; Yardım düğmesi de kalır (v2-putur; build: v2-cekirdek; v2-kapisi a/b/j uyarlaması: v2-kapi)
 - ☐ E12 Kapılar: segment tam genişlik, akordeon yok, ikon/başlık/açıklama hizası (±2px), footer perde, Bebek Tarifleri yönlendirmesi, Kids'te tarif ekleme CTA'sı yok (v2-kapi)
 - ☐ E13 Önce/sonra 1440+390 her madde için → yayın (V2 ile birlikte)
-- ☐ 12 Kapılar: maskot yok, radius ≤8, sticky, yaş barı, rozet/kıvam her kartta, sahte onay yok + eski kapıların V2'ye uyumu (v2-kapi)
+- ◐ 12 (V2 son koşu bitti: rapor/tmp/v2/kapilar.txt; düzeltme turu: parite rozet absolute + tarifKart alt satır → cekirdek; izgara Δ → sayfalar/hub/tarif; tarifler hero 1024 boyut → tarif; varlik görselsiz kuralı içerik bölümlerine daraltıldı; boyut iç metin genişlemesi/yükseklik → gerekçeli istisna) Kapılar: maskot yok, radius ≤8, sticky, yaş barı, rozet/kıvam her kartta, sahte onay yok + eski kapıların V2'ye uyumu (v2-kapi)
 - ☐ 13 Yayın: concern commit'leri → push → Pages → canlı kapılar
 - ☐ 14 Rapor: 11 madde "yapıldı + kanıt" tablosu, v1/v2 önce-sonra 1440+390, sticky GIF, kararlar; SABAH-RAPORU-kids.md güncelle → DUR
 
