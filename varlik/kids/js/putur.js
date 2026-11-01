@@ -1,14 +1,16 @@
 /* =====================================================================
-   DADA KIDS — Pütür asistanı (sahibi: putur kolu, bağımlılıksız)
+   DADA GASTRO KIDS — Pütür asistanı (sahibi: v2-putur, bağımlılıksız; V2'de Beyar kararıyla kalan tek karakter)
    · Sol altta sabit <button aria-label="Pütür'e sor">; küçült/gizle → localStorage 'dadakids.putur.v1' (try/catch)
    · Durum makinesi (data-durum): idle · okuma · gezinti · arama · hover · dusunme · anlatma · tepki · surpriz
      Öncelik: surpriz > tepki > menü/balon (anlatma, dusunme) > arama > okuma > gezinti > idle; taban(): dönülecek durum
      Bağlam: scroll yönüne bakış (data-bakis), rehber makalesinde okuma, arama kutusu/filtre, hareketsizlikte gezinti
-     Masaüstü: imleçle menü (200 ms aç, 400 ms kapat), tık sabitler. Klavye: odakla açılır. Dokunmatik: dokunuş.
+     Masaüstü: imleçle menü (200 ms aç, 400 ms kapat), tık sabitler. Klavye: odakla / Enter / Space bekletmeden açılır. Dokunmatik: dokunuş.
      Sekme görünmezken animasyon ve zamanlayıcılar durur
    · Dar ekranda sayfa kayınca kenara çekilir (kd-pt--kenar); mobil alt menünün üstünde durur
-   · Tek tık: sevinç zıplaması (şeffaf video varsa video, yoksa SVG/CSS) → radyal menü (6 seçenek)
-   · ~5 hızlı tık: Pütür pastel yıldız/kalp/parıltıya dönüşüp geri toplanır (bekleme süreli, menü açılmaz)
+   · Tek tık: ikinci tık gelmezse 250 ms sonra radyal menü (6 seçenek) açılır, Pütür aynı anda sevinçle zıplar
+     (şeffaf video varsa video, yoksa SVG/CSS)
+   · Çift tık / çift dokunuş (iki tık arası ≤ 400 ms): Pütür pastel yıldız/kalp/parıltıya dönüşüp geri toplanır, el sallar
+     (~2 sn, menü açılmaz). Sürpriz sonrası 9 sn içinde çift tık yeniden sürpriz başlatmaz; tek tık gibi menüyü açar
    · Cevaplar kural tabanlı, sitenin kendi verisinden (veri/*.json, çalışma anında fetch)
    · Tema (html[data-kd-tema]) + profil evresi (data-renk) Pütür'ün vurgu ve parıltı rengini boyar
    · prefers-reduced-motion: duruk poz, yalnız solma
@@ -19,7 +21,7 @@
 
   var ANAHTAR = 'dadakids.putur.v1';
   var DOGUM_ANAHTAR = 'dadakids.dogum.v1';             // tarih seçici ile aynı şema {y, m, mod}
-  var SURPRIZ_TIK = 5, SURPRIZ_PENCERE = 1700, SURPRIZ_BEKLEME = 9000;
+  var CIFT_PENCERE = 400, TEK_BEKLE = 250, SURPRIZ_BEKLEME = 9000;   // çift tık aralığı · tek tık kararı · sürpriz sonrası bekleme (ms)
   var VIDEO = window.__kdPuturVideo === undefined ? { webm: 'varlik/kids/putur/zipla-{r}.webm', hevc: 'varlik/kids/putur/zipla-{r}-hevc.mp4' } : window.__kdPuturVideo;   // {r}: şerit rengi
   var azaltMq = matchMedia('(prefers-reduced-motion: reduce)');
   var hoverMq = matchMedia('(hover: hover) and (pointer: fine)');
@@ -130,7 +132,7 @@
 
   /* ---------- DOM ---------- */
   var kok, btn, kucult, sekme, yakala, kopru, menu, balon, balonIc, sahne, video, ogeler = [];
-  var D = { durum: 'idle', menu: false, balon: false, gizli: false, mesgul: false, tiklar: [], sonSurpriz: -1e9, surprizSay: 0, ortamZaman: 0, kirpZaman: 0, tepkiZaman: 0, videoHazir: false, navPay: -1, kaldir: 0, guvenli: 0, poz: null, dar: false, sabit: false, odakAcik: false, odakSus: false, hoverZaman: 0, kapanZaman: 0, hareket: 0, sonGezinti: -1e9, sonEl: 0, okuyor: false, okumaBas: 0, sonY: 0, sonT: 0, bakisZaman: 0, aramaOdak: false, durdu: false, surprizBitir: null, tepkiBitir: null };
+  var D = { durum: 'idle', menu: false, balon: false, gizli: false, mesgul: false, ilkTik: -1e9, tekZaman: 0, sonSurpriz: -1e9, surprizSay: 0, ortamZaman: 0, kirpZaman: 0, tepkiZaman: 0, videoHazir: false, navPay: -1, kaldir: 0, guvenli: 0, poz: null, dar: false, sabit: false, odakAcik: false, odakSus: false, hoverZaman: 0, kapanZaman: 0, hareket: 0, sonGezinti: -1e9, sonEl: 0, okuyor: false, okumaBas: 0, sonY: 0, sonT: 0, bakisZaman: 0, aramaOdak: false, durdu: false, surprizBitir: null, tepkiBitir: null };
 
   function el(etiket, ozellik, ic) {
     var e = document.createElement(etiket);
@@ -180,10 +182,12 @@
       D.sabit = true; D.odakAcik = true; menuAc(false);
     });
     btn.addEventListener('blur', yerlesimIste);
+    addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') D.imlec = performance.now(); }, { passive: true });
     kok.addEventListener('pointerenter', function (e) {                         // imleç: 200 ms sonra menü
       if (e.pointerType !== 'mouse' || !hoverMq.matches) return;
       clearTimeout(D.kapanZaman);
-      if (!D.menu && !D.mesgul && !D.balon) D.hoverZaman = setTimeout(hoverAc, 200);
+      // Pütür'ün kendisi imlecin altına kaydıysa (zıplama, sürpriz, kenardan çıkma) menü açılmaz: imleç gerçekten hareket etmeli
+      if (!D.menu && !D.mesgul && !D.balon && performance.now() - (D.imlec || 0) < 120) D.hoverZaman = setTimeout(hoverAc, 200);
     });
     kok.addEventListener('pointerleave', function (e) {                         // imleç çıktı: 400 ms sonra kapan
       if (e.pointerType !== 'mouse') return;
@@ -192,7 +196,12 @@
     });
     kucult.addEventListener('click', function () { gizle(true); });
     sekme.addEventListener('click', function () { gizle(false); });
-    menu.addEventListener('click', function (e) { var b = e.target.closest('[data-secenek]'); if (b) sec(b.getAttribute('data-secenek')); });
+    menu.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-secenek]'); if (!b) return;
+      // çift tıkın ikinci tıkı, yeni açılan menünün seçeneğine denk geldiyse seçenek değil sürpriz (Pütür kenardayken menü imlecin altında açılır)
+      if (e.detail && performance.now() - D.ilkTik <= CIFT_PENCERE) { tikla(e); return; }
+      sec(b.getAttribute('data-secenek'));
+    });
     menu.addEventListener('keydown', menuTus);
     balon.addEventListener('click', balonTik);
     document.addEventListener('keydown', function (e) {
@@ -223,7 +232,14 @@
     ['pointermove', 'pointerdown', 'keydown', 'touchstart'].forEach(function (o) { addEventListener(o, function () { D.hareket = performance.now(); }, { passive: true }); });
     D.hareket = performance.now(); D.okumaBas = D.hareket;
     addEventListener('resize', function () { olc(); yerlesimIste(); if (D.menu) konumla(); if (D.balon) balonSinirla(); });
-    addEventListener('scroll', function () { yerlesimIste(); scrollIzle(); }, { passive: true });
+    addEventListener('scroll', function () {                           // kayarken yer sabit; durunca engele göre yerleşir
+      D.kayiyor = true; clearTimeout(D.kayZaman); D.kayZaman = setTimeout(function () { D.kayiyor = false; yerlesimIste(); }, 110);
+      yerlesimIste(); scrollIzle();
+    }, { passive: true });
+    // sayfadaki giriş animasyonu (kd-gir) ya da geçiş bitince öğe yerine oturur: Pütür'ün yeri yeniden ölçülür (seyreltilmiş)
+    var oturZaman = 0;
+    function oturdu(e) { if (kok.contains(e.target) || D.kayiyor) return; clearTimeout(oturZaman); oturZaman = setTimeout(yerlesimIste, 80); }
+    document.addEventListener('animationend', oturdu, true); document.addEventListener('transitionend', oturdu, true);
     olc(); yerlesim(); setTimeout(function () { olc(); yerlesim(); }, 450);
     addEventListener('load', function () { olc(); yerlesim(); });
     if ('requestIdleCallback' in window) requestIdleCallback(videoHazirla, { timeout: 2500 }); else setTimeout(videoHazirla, 1200);
@@ -246,10 +262,23 @@
     if (pay !== D.navPay) { D.navPay = pay; document.documentElement.style.setProperty('--kd-pt-nav', pay + 'px'); }
     var kolon = document.querySelector('.kd-sayfa .wrap'), sol = 0;
     if (kolon) { var r = kolon.getBoundingClientRect(); sol = r.left + (parseFloat(getComputedStyle(kolon).paddingLeft) || 0); }
-    var boy = btn.offsetWidth, istenen = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pt-sol')) || 32, etkin = istenen;
-    if (istenen + boy + 8 > sol && sol - boy - 8 >= 10) etkin = sol - boy - 8;  // sütuna girmeden sığıyorsa biraz içeri al
-    kok.style.setProperty('--pt-sol-etkin', etkin + 'px');
-    D.dar = etkin + boy + 6 > sol;                                              // sığmıyorsa içerikle kesişir: kenara çekilir
+    var kokCss = getComputedStyle(document.documentElement);
+    D.boyAsil = parseFloat(kokCss.getPropertyValue('--pt-boy')) || 112;          // genişliğe göre asıl boy (112/96/76/68)
+    D.solIstenen = parseFloat(kokCss.getPropertyValue('--pt-sol')) || 32; D.kolonSol = sol;
+    D.derin = Math.max(12, sol - 4); kok.style.setProperty('--pt-derin', D.derin + 'px');
+    var gecerli = D.boy && D.boy < D.boyAsil;
+    boyUygula(gecerli ? D.boy : D.boyAsil, gecerli && D.dinlenme ? D.dinlenme.sol : null, gecerli && D.dinlenme && D.dinlenme.yasli);
+  }
+  /* Boy: asıl boy yer bulamazsa (geniş ekranda) 96 → 76 → 68 denenir; küçük Pütür çoğu dizüstünde sol boşluğa tam sığar.
+     Sol mesafe ve "dar" (içerik sütunuyla kesişir) boya göre hesaplanır. */
+  var KUCUK = [96, 76, 68];
+  function solEtkin(s) { var e = D.solIstenen; if (e + s + 8 > D.kolonSol && D.kolonSol - s - 8 >= 10) e = D.kolonSol - s - 8; return e; }   // sütuna girmeden sığıyorsa biraz içeri al
+  function darMi(s) { return solEtkin(s) + s + 6 > D.kolonSol; }                // sığmıyorsa içerikle kesişir: kenara çekilir
+  function boyUygula(s, sol, yasli) {
+    if (s !== D.boy) { D.boy = s; if (s === D.boyAsil) kok.style.removeProperty('--pt-boy'); else kok.style.setProperty('--pt-boy', s + 'px'); kok.toggleAttribute('data-kucuk', s !== D.boyAsil); }
+    var l = sol == null ? solEtkin(s) : sol;
+    kok.style.setProperty('--pt-sol-etkin', l + 'px');
+    D.dar = !yasli && l + s + 6 > D.kolonSol;                                   // yaslı: sütunun soluna değmeden durur
   }
   function etkilesimMerkezleri() {                       // ekrandaki bağ/düğme ortaları (sayfa düzeninden ve ızgara sınıflarından bağımsız)
     var n = document.querySelectorAll('a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]'), out = [];
@@ -265,9 +294,81 @@
   }
   function bosKutu(m, x0, y0, x1, y1) { for (var i = 0; i < m.length; i++) if (m[i].l < x1 && m[i].r > x0 && m[i].t < y1 && m[i].b > y0) return false; return true; }
   function bosMu(m, x0, y0, x1, y1) { for (var i = 0; i < m.length; i++) if (m[i].x >= x0 && m[i].x <= x1 && m[i].y >= y0 && m[i].y <= y1) return false; return true; }
-  function altindaEtkilesim() {                          // tam boy Pütür bir bağın ya da düğmenin ortasını örter mi?
-    var l = kok.offsetLeft, u = kok.offsetTop, boy = btn.offsetWidth;
-    return !bosKutu(etkilesimMerkezleri(), l - 2, u - 2, l + boy + 2, u + boy + 2);
+  /* Engeller: dinlenme alanında okunan ya da dokunulan şey. Sayfa düzeninden ve ızgara sınıflarından bağımsız:
+     etkileşimli öğe kutuları + bölge 10 px ızgarayla örneklenir (elementsFromPoint); değen öğe ve ataları için metin satırı kutuları,
+     etiket/chip kutuları (zemini ya da kenarlığı olan küçük metinli kutu) toplanır. Görsel ve kart zemini engel değil. Kapı aynı tanımı ölçer. */
+  var SATIR_ETKILESIM = 'a[href], button, input:not([type=hidden]), select, summary, [role=button], [role=radio], [role=tab]';
+  function etiketKutusu(e) {
+    var r = e.getBoundingClientRect(); if (r.width > innerWidth * .6 || r.height > 90 || !e.textContent.trim()) return null;
+    var c = getComputedStyle(e), a = /rgba\([^)]*,\s*([\d.]+)\)/.exec(c.backgroundColor);
+    var zemin = c.backgroundColor !== 'transparent' && (!a || +a[1] > .05), cizgi = parseFloat(c.borderTopWidth) > 0 && c.borderTopStyle !== 'none' && !/,\s*0\)$/.test(c.borderTopColor) && c.borderTopColor !== 'transparent';
+    return zemin || cizgi || c.backgroundImage !== 'none' ? r : null;
+  }
+  /* V2 sayfa başı öğeleri adıyla da engel: geniş olanlarda (ör. güvenlik şeridi, dar ekranda güven rozeti) kutu yerine metin satırları
+     ve içindeki bağlar; dar olanlarda kutunun tamamı (rozetin çerçevesi de örtülmesin). Kapı aynı listeyi ölçer. */
+  var V2_ENGEL = '.kd-ust, .kd-kirinti > *, .kd-ust-yazi, .kd-hub-donem__secenek, .kd-guven-rozet, .kd-guvenlik-serit p > *';
+  function v2Engeller(ekle, y0, y1) {
+    var n = document.querySelectorAll(V2_ENGEL);
+    for (var i = 0; i < n.length; i++) {
+      var e = n[i], r = e.getBoundingClientRect(); if (r.width < 1 || r.bottom < y0 || r.top > y1) continue;
+      var c = getComputedStyle(e); if (c.display === 'none' || c.visibility === 'hidden' || +c.opacity <= .05) continue;
+      if (e.matches('.kd-ust') || r.width <= innerWidth * .6) { ekle(r); continue; }
+      var z = document.createRange(); z.selectNodeContents(e); var q = z.getClientRects(); for (var t = 0; t < q.length; t++) ekle(q[t]);
+      Array.prototype.forEach.call(e.querySelectorAll('a, button'), function (a) { ekle(a.getBoundingClientRect()); });
+    }
+  }
+  function engelKutulari(x0, y0, x1, y1) {
+    var out = etkilesimMerkezleri(), gorulen = new Set(), xs = [], ys = [], v;
+    function ekle(r) { if (r.width > 1 && r.height > 1) out.push({ l: r.left, t: r.top, r: r.right, b: r.bottom }); }
+    v2Engeller(ekle, y0, y1);
+    x0 = Math.max(0, x0); y0 = Math.max(0, y0); x1 = Math.min(innerWidth - 1, x1); y1 = Math.min(innerHeight - 1, y1);
+    for (v = x0; v < x1; v += 10) xs.push(v); xs.push(x1);
+    for (v = y0; v < y1; v += 10) ys.push(v); ys.push(y1);
+    for (var i = 0; i < xs.length; i++) for (var j = 0; j < ys.length; j++) {
+      var yig = document.elementsFromPoint(xs[i], ys[j]), e = null;
+      for (var k = 0; k < yig.length; k++) if (!kok.contains(yig[k]) && yig[k] !== yakala && yig[k] !== sekme) { e = yig[k]; break; }
+      for (; e && e !== document.body && e !== document.documentElement && !gorulen.has(e); e = e.parentElement) {
+        gorulen.add(e);
+        if (e.closest('.bottom-nav')) break;
+        for (var n = e.firstChild; n; n = n.nextSibling) if (n.nodeType === 3 && n.textContent.trim()) {
+          var z = document.createRange(); z.selectNodeContents(n); var q = z.getClientRects(); for (var t = 0; t < q.length; t++) ekle(q[t]);
+        }
+        if (e.matches(SATIR_ETKILESIM)) ekle(e.getBoundingClientRect());     // ortası ekran dışında kalan öğe de
+        var et = etiketKutusu(e); if (et) ekle(et);
+      }
+    }
+    return out;
+  }
+  /* Dinlenme konumu (her genişlik): EK'teki boyut ve yer yalnız altında engel varsa değişir.
+     Sayfa üstteyken: tam boy (gerekirse engelden kurtulacak kadar yukarıda) > kenarda > derin kenar (yalnız sol boşluk kadar).
+     Sayfa kaymışken: dar ekranda tam boy yok (içerik sütunu sürekli geçer); kayarken yer değişmez, durunca engele göre kenar ya da derin. */
+  function dinlenmeKonum() {
+    var kayik = (window.scrollY || 0) > 48;
+    var genis = innerWidth > 640;                                               // dizüstü/tablet: kaydırınca da tam görünür olabilir
+    if (kayik && D.kayiyor && D.dinlenme) return D.dar && !genis ? { kenar: true, derin: !!D.dinlenme.derin, dy: 0, boy: D.boyAsil } : D.dinlenme;
+    // alt kenar boydan bağımsız (bottom ile sabit): her boy için üst = alt - boy
+    var boy = D.boyAsil, alt = kok.offsetTop + btn.offsetWidth - D.kaldir, ust = ustSinir() + 8, p = 1;
+    var boylar = genis ? [boy].concat(KUCUK.filter(function (s) { return s < boy; })) : [boy];
+    var x1 = 0, y0 = boy * 3; boylar.forEach(function (s, i) { x1 = Math.max(x1, solEtkin(s) + s); if (i) y0 = Math.max(y0, Math.min(s * 4, 280) + s); });   // aranan en geniş/en yüksek alan
+    var e = engelKutulari(0, alt - y0 - 12, x1 + 12, alt + 12), dy;
+    function tamDene(s, l) {
+      var u = alt - s, yukari = kayik && (s === boy || !genis) ? 0 : s === boy ? s * 2 : Math.min(s * 4, 280);   // küçük boy geniş ekranda (kaymışken de) en çok 4 boy yukarıdaki boş yere kalkabilir
+      if (kayik && darMi(s) && !genis) return null;                             // telefonda kayarken sütunla kesişen tam boy yok (sütun sürekli geçer)
+      for (dy = 0; dy <= yukari && u - dy >= ust; dy += 6) if (bosKutu(e, l - p, u - dy - p, l + s + p, u - dy + s + p)) return { kenar: false, dy: dy, boy: s, sol: l };
+      return null;
+    }
+    var tam = tamDene(boy, solEtkin(boy)), kenar = null, u0 = alt - boy, yk = kayik ? 0 : boy * 2;
+    for (dy = 0; dy <= yk && u0 - dy >= ust; dy += 6) if (bosKutu(e, 0, u0 - dy - p, boy * .5 + p, u0 - dy + boy + p)) { kenar = { kenar: true, dy: dy, boy: boy }; break; }
+    if (tam && (!kenar || tam.dy <= kenar.dy + boy * .75)) return tam;   // tam boy, kenara göre ~¾ boy yukarı kaymaya değer
+    for (var i = 1; i < boylar.length; i++) {                                   // geniş ekranda: küçülüp tam görünür (önce kendi sol mesafesi, sonra kenara yakın 4 px)
+      var k = tamDene(boylar[i], solEtkin(boylar[i])) || (solEtkin(boylar[i]) > 4 ? tamDene(boylar[i], 4) : null); if (k) return k;
+    }
+    // son çare (geniş ekran): sol boşluğa yaslı, sütuna değmeden; en az %82'si ekranda (ör. 1280'de sütun 52 px'te: 62 px, 11 px dışarıda)
+    if (genis) {
+      var sy = Math.min(68, Math.floor((D.kolonSol - 1) / .82));
+      if (sy >= 56) { var ya = tamDene(sy, D.kolonSol - 1 - sy); if (ya) { ya.yasli = true; return ya; } }
+    }
+    return kenar || { kenar: true, derin: true, dy: 0, boy: boy };
   }
   /* Dar ekranda animasyon ve menü için konum: zıplamanın süpürdüğü alan bir bağın/düğmenin ortasına değmesin.
      Önce tam boy (gerekirse yukarı kayarak; hiçbir öğe kutusuna binmeden), olmazsa kenarda (öğe ortalarına değmeden). Oranlar kareden ölçüldü: video tepesi boyun %36'sı yukarı çıkar. */
@@ -287,7 +388,7 @@
   }
   function hedefKutu() {                                 // geçiş bitmeden, Pütür'ün varacağı kutu
     var boy = btn.offsetWidth, kenar = kok.classList.contains('kd-pt--kenar');
-    var left = kenar ? -boy * .5 : kok.offsetLeft, top = kok.offsetTop - D.kaldir - D.guvenli;
+    var left = kenar ? (kok.classList.contains('kd-pt--derin') ? D.derin - boy : -boy * .5) : kok.offsetLeft, top = kok.offsetTop - D.kaldir - D.guvenli;
     return { left: left, top: top, right: left + boy, bottom: top + boy, width: boy, height: boy };
   }
   /* Pütür güvenli konuma kayarken hızlı dokunuşlar boşa gitmesin: dinlenme yerini animasyon boyunca tutar */
@@ -301,10 +402,15 @@
   function yerlesim() {
     if (D.gizli) return;
     var acik = D.menu || D.balon || D.mesgul || btn.matches(':focus-visible');
-    if (acik && D.dar) { if (!D.poz) D.poz = guvenliKonum(); } else D.poz = null;  // açık kaldıkça konum sabit: menü kaymaz
-    var kenar = D.dar && (D.poz ? D.poz.kenar : ((window.scrollY || 0) > 48 || altindaEtkilesim()));
+    if (acik && D.dar) {                                                        // açık kaldıkça konum sabit: menü kaymaz
+      // imleçle açık menüde Pütür imlecin altından kaçmaz; tıklanınca güvenli konuma geçer
+      if (!D.poz) D.poz = D.menu && !D.sabit ? { hover: true, kenar: kok.classList.contains('kd-pt--kenar'), derin: kok.classList.contains('kd-pt--derin'), dy: D.guvenli } : guvenliKonum();
+    } else D.poz = null;
+    if (!D.poz && !(acik && D.dinlenme)) { D.dinlenme = dinlenmeKonum(); boyUygula(D.dinlenme.boy || D.boyAsil, D.dinlenme.sol, D.dinlenme.yasli); }   // açıkken yer ve boy sabit
+    var durak = D.poz || D.dinlenme, kenar = durak.kenar;
     kok.classList.toggle('kd-pt--kenar', kenar);
-    var guvenli = D.poz ? D.poz.dy : 0;
+    kok.classList.toggle('kd-pt--derin', !!durak.derin);
+    var guvenli = durak.dy;
     if (guvenli !== D.guvenli) { D.guvenli = guvenli; kok.style.setProperty('--pt-guvenli', guvenli + 'px'); }
     if (D.poz) return;
     // footer perdesi açıldıysa yasal bağlara ve telif satırına binmez: üstüne çıkar
@@ -473,47 +579,70 @@
     }
   }
 
-  /* ---------- Tık: tek tık tepkisi + hızlı tık sürprizi ---------- */
+  /* ---------- Tık: tek tık → menü (250 ms bekleyerek), çift tık → sürpriz ---------- */
   function butonaOdak() {                                // programdan odak menüyü yeniden açmasın
     D.odakSus = true; btn.focus({ preventScroll: true });
     setTimeout(function () { D.odakSus = false; }, 0);
   }
+  /* Fare çift tıkı ve dokunmatik çift dokunuş aynı yoldan gelir (click). Yerel dblclick kullanılmaz: dokunmatikte güvenilmez.
+     İlk tık 250 ms bekletilir; bu sürede ikinci tık gelirse sürpriz. 250–400 ms arasında gelen ikinci tık da çift sayılır:
+     o anda açılmaya başlamış menü kapanır, sürpriz oynar. */
   function tikla(e) {
     clearTimeout(D.hoverZaman);
+    if (e && e.detail === 0) { tekIptal(); klavyeTik(); return; }              // Enter/Space: bekletmeden
+    if (D.gizli || D.durum === 'surpriz') return;                              // sürpriz sürerken tıklar yok sayılır
     var simdi = performance.now();
-    D.tiklar = D.tiklar.filter(function (t) { return simdi - t < SURPRIZ_PENCERE; }); D.tiklar.push(simdi);
-    if (D.durum === 'surpriz') return;                                          // sürpriz sürerken tıklar yok sayılır
-    if (D.tiklar.length >= SURPRIZ_TIK && simdi - D.sonSurpriz > SURPRIZ_BEKLEME) { D.tiklar = []; surpriz(); return; }
-    if (D.mesgul) return;                                                       // zıplama sürüyor: tık sayılır, başka şey olmaz
-    var klavye = e && e.detail === 0;
+    if (simdi - D.ilkTik <= CIFT_PENCERE) {                      // çiftin ikinci tıkı
+      var bekliyordu = !!D.tekZaman; tekIptal(); D.ilkTik = -1e9;
+      if (simdi - D.sonSurpriz > SURPRIZ_BEKLEME) { surpriz(); return; }
+      if (!bekliyordu) return;                                                 // bekleme süresinde: ilk tık menüyü zaten açtı, ikinci kapatmasın
+      tekTik(); return;                                                        // bekleme süresinde çift tık = tek tık
+    }
+    D.ilkTik = simdi;
+    D.tekZaman = setTimeout(function () { D.tekZaman = 0; tekTik(); }, TEK_BEKLE);
+  }
+  function tekIptal() { clearTimeout(D.tekZaman); D.tekZaman = 0; }
+  function klavyeTik() {
+    if (D.durum === 'surpriz' || D.gizli) return;
+    if (D.menu) { D.sabit = true; D.odakAcik = true; kok.removeAttribute('data-hover'); ogeler[0].focus(); return; }   // açık menüye Enter: içine gir
+    if (D.mesgul) return;
+    if (D.balon) balonKapat(false);
+    D.sabit = true; D.odakAcik = true;
+    kok.classList.remove('kd-pt--ilgi'); yerlesim(); menuAc();
+  }
+  function tekTik() {
+    if (D.gizli || D.durum === 'surpriz') return;
     if (D.menu) {
-      if (klavye) { D.sabit = true; D.odakAcik = true; ogeler[0].focus(); return; }   // odakla açık menüye Enter: içine gir
-      if (!D.sabit) {                                                           // hover ile açık: kapatmadan sabitle ve zıpla
+      if (!D.sabit) {                                                           // imleçle açık: kapatmadan sabitle ve zıpla
         D.sabit = true; kok.removeAttribute('data-hover');
-        if (!azalt()) tepki(true);
+        if (!azalt() && !D.mesgul) tepki(true);
         return;
       }
+      if (D.durum === 'tepki' && D.tepkiBitir) D.tepkiBitir();                   // zıplarken de kapatılabilir
       menuKapat(true); return;
     }
+    if (D.mesgul) return;
     if (D.balon) balonKapat(false);
-    D.sabit = true; D.odakAcik = !!klavye;
-    if (klavye) { kok.classList.remove('kd-pt--ilgi'); yerlesim(); menuAc(); return; }   // klavye: bekletmeden aç
-    tepki();
-  }
-
-  function tepki(menuAcik) {
+    D.sabit = true; D.odakAcik = false;
     kok.classList.remove('kd-pt--ilgi');
     if (azalt()) { menuAc(); return; }
+    tepki(false);
+  }
+
+  /* Tek tık tepkisi: menü hemen açılır, Pütür aynı anda sevinçle zıplar (menü açıkken başlarsa yalnız zıplar) */
+  function tepki(menuAcik) {
+    kok.classList.remove('kd-pt--ilgi');
+    if (azalt()) { if (!menuAcik) menuAc(); return; }
     yakalaGoster(btn.getBoundingClientRect()); merhabaGizle();
+    if (D.poz && D.poz.hover) D.poz = null;
     D.mesgul = true; yerlesim(); durum('tepki');
+    if (!menuAcik) menuAc(!D.durdu); else konumla();
     var bitir = function () {
       clearTimeout(D.tepkiZaman); if (D.durum !== 'tepki') return;
-      var fark = performance.now() - (D.tiklar[D.tiklar.length - 1] || 0);
-      if (!D.durdu && D.tiklar.length >= 2 && fark < 420) { D.tepkiZaman = setTimeout(bitir, 420 - fark); return; }   // hızlı tık sürüyorsa menü açılmaz
       D.tepkiBitir = null;
       videoKapat(); yakalaGizle();
       D.mesgul = false; durum(taban());
-      if (!menuAcik) menuAc(!D.durdu);
+      if (D.menu) konumla();
     };
     D.tepkiBitir = bitir;
     D.tepkiZaman = setTimeout(bitir, 1600);                                     // SVG/CSS zıplaması (putur.css: pt-zipla)
@@ -559,6 +688,7 @@
     kok.classList.remove('kd-pt--ilgi', 'kd-pt--selam');
     if (yakala.hidden) yakalaGoster(btn.getBoundingClientRect());
     merhabaGizle();
+    if (D.poz && D.poz.hover) D.poz = null;
     D.mesgul = true; D.sonSurpriz = performance.now(); D.surprizSay++;
     kok.setAttribute('data-surpriz', String(D.surprizSay));
     durum('surpriz'); yerlesim();
@@ -887,7 +1017,7 @@
         var b = new Date(), ay = (b.getFullYear() - secim.y) * 12 + (b.getMonth() + 1 - secim.m);
         if (ay < 0) { sonuc.innerHTML = ''; return; }
         if (ay > 36) {
-          sonuc.innerHTML = '<p><b>3 yaşını geçmiş.</b> Dada Kids 3 yaşa kadar eşlik ediyor; aile tarifleri Dada Gastro\'da.</p>' + dugme('tarifler.html', 'Dada Gastro tarifleri', true);
+          sonuc.innerHTML = '<p><b>3 yaşını geçmiş.</b> Dada Gastro Kids 3 yaşa kadar eşlik ediyor; aile tarifleri Dada Gastro\'da.</p>' + dugme('tarifler.html', 'Dada Gastro tarifleri', true);
           return;
         }
         var ev = evreAydan(ay), e = EVRE()[ev] || {};
