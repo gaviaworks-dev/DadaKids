@@ -4,7 +4,7 @@
      (yapışkan katmanla birlikte hareket eder, sayfa başı öğelerinin ve footer'ın üstüne kendiliğinden binmez)
    · 6 işlev: Kaç aylık · Besin güvenli mi · Ne pişirsem · Alerjen · Ek gıdaya hazır mı · Acil (112'ye yönlendirir, ilk yardım adımı yok)
    · Cevaplar kural tabanlı, sitenin kendi verisinden (veri/*.json, çalışma anında fetch); tıbbi cevaplarda
-     "Örnek içerik — uzman onayı bekliyor"
+     (eski "bekliyor" notu kaldırıldı, Beyar 1 Kas)
    · Klavye: Tab, Enter; Esc kapatır ve odak düğmeye döner; ok tuşları seçenekler arasında. aria-expanded.
    · Depolama yalnız doğum tarihi için (dadakids.dogum.v1, try/catch). prefers-reduced-motion: animasyon yok (CSS)
    ===================================================================== */
@@ -60,7 +60,7 @@
   }
 
   /* ---------- Cevaplar (kural tabanlı, site verisi) ---------- */
-  var ORNEK = '<p class="kd-yd__ornek">Örnek içerik — uzman onayı bekliyor</p>';
+  var ORNEK = '';  // Beyar 1 Kas: örnek içerik notu kaldırıldı (acil/112 yönlendirmesi kalır)
   function baslik(m) { return '<h3 class="kd-yd__baslik">' + m + '</h3>'; }
   function dugme(href, metin, ikincil) { return '<a class="kd-yd__dugme' + (ikincil ? ' kd-yd__dugme--ikincil' : '') + '" href="' + esc(href) + '">' + metin + '</a>'; }
   function evreAdi(kod) { var e = EVRE()[kod]; return e ? e.ad : kod; }

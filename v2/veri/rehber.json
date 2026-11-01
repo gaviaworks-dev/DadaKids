@@ -5,6 +5,7 @@
   "ozet": "Ek gıdaya ne zaman ve nasıl başlanacağını, ilk haftalarda neler sunulacağını adım adım anlatıyoruz. Amaç kusursuz bir program değil, bebeğinizin kendi temposunda yeni tatlarla tanışması.",
   "okumaDk": 7,
   "kapak": "varlik/kids/gorsel/rehber-ek-gida.webp",
+  "kapakAlt": "Krem keten üzerinde şeftali rengi silikon kasede pürüzsüz turuncu sebze püresi ve yumuşak bebek kaşığı",
   "ikon": "kasik",
   "evreler": [
    "0-6-ay",
@@ -120,6 +121,7 @@
   "ozet": "BLW'de bebek püre yerine yumuşak parmak gıdalarla, kendi eliyle yemeye başlar. Yöntemin nasıl uygulandığını, güvenlik ve demir konusunda nelere dikkat edileceğini özetledik.",
   "okumaDk": 6,
   "kapak": "varlik/kids/gorsel/rehber-blw.webp",
+  "kapakAlt": "Mint bölmeli tabakta parmak boyunda yumuşak havuç çubukları, brokoli çiçekleri ve kalın avokado dilimleri",
   "ikon": "tabak-bolmeli",
   "evreler": [
    "6-8-ay",
@@ -258,7 +260,8 @@
   "baslik": "Öğürme mi, Boğulma mı?",
   "ozet": "Öğürme, ek gıdaya geçen bebeklerde sık görülen ve koruyucu bir reflekstir; boğulma ise sessiz ve acil bir durumdur. İkisini nasıl ayırt edeceğinizi ve boğulma riskini nasıl azaltacağınızı anlatıyoruz.",
   "okumaDk": 5,
-  "kapak": null,
+  "kapak": "varlik/kids/gorsel/rehber/ogurme-bogulma.webp",
+  "kapakAlt": "Boş mama sandalyesinin tablasında mint tabakta güvenli kesilmiş parmak besinler: uzun havuç çubukları, muz, kalın avokado dilimleri ve saplı brokoli",
   "ikon": "kalkan",
   "evreler": [
    "6-8-ay",
@@ -401,6 +404,7 @@
   "ozet": "Yumurta, yer fıstığı gibi yaygın alerjenleri bebeklikte erken ve düzenli tanıştırmak, bazı besin alerjilerinin riskini azaltabilir. Nasıl başlayacağınızı, nelere dikkat edeceğinizi ve ne zaman yardım isteyeceğinizi özetledik.",
   "okumaDk": 7,
   "kapak": "varlik/kids/gorsel/rehber-alerjen.webp",
+  "kapakAlt": "Pastel kaselerde küçük porsiyonlarda yumurta, fıstık ezmesi, yoğurt ve tahin; yanlarında bebek kaşıkları",
   "ikon": "kalp",
   "evreler": [
    "6-8-ay",
@@ -511,7 +515,8 @@
   "baslik": "1 yaş öncesi verilmeyecek besinler",
   "ozet": "Tuz, rafine şeker, bal, ana içecek olarak inek sütü, bütün kuruyemiş ve sert yuvarlak besinler, işlenmiş et ve kafein: neden ertelendikleri ve yerine ne sunulabileceği.",
   "okumaDk": 6,
-  "kapak": null,
+  "kapak": "varlik/kids/gorsel/rehber/yasakli-gidalar.webp",
+  "kapakAlt": "Mutfak masasında bir arada: bal kavanozu, tuz, kesme şeker, bütün fındıklar, bütün üzüm ve cherry domatesler, bir şişe inek sütü",
   "ikon": "uyari",
   "evreler": [
    "0-6-ay",
