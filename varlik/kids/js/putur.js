@@ -917,7 +917,7 @@
   }
 
   /* ---------- Cevaplar (kural tabanlı, site verisi) ---------- */
-  var ORNEK = '<p class="kd-pt__ornek">Örnek içerik — uzman onayı bekliyor</p>';
+  var ORNEK = '';  // Beyar 1 Kas: örnek içerik notu kaldırıldı (acil/112 yönlendirmesi kalır)
   function baslik(m) { return '<h2 class="kd-pt__baslik">' + m + '</h2>'; }
   function dugme(href, metin, ikincil) { return '<a class="kd-pt__dugme' + (ikincil ? ' kd-pt__dugme--ikincil' : '') + '" href="' + esc(href) + '">' + metin + '</a>'; }
   function evreAdi(kod) { var e = EVRE()[kod]; return e ? e.ad : kod; }
