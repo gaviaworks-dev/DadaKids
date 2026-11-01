@@ -2,6 +2,9 @@
 // Veri: veri/mevsim.json {_not, aylar:[{ay, ad, kahraman:{ikon,ad,neden,secim,saklama,bebekIcin}, urunler:[{ikon,ad,tur,minAy,durum,uzmanNotu?}]}]}
 // 12 ayın paneli statik basılır; varlik/kids/js/mevsim.js bu ayı seçer ve aylar arasında geçiş yapar.
 
+import { existsSync } from 'node:fs';
+const sahneVar = (yol) => existsSync(new URL(`../../../${yol}`, import.meta.url));
+
 const MEVSIM = (ay) => (ay === 12 || ay <= 2 ? { ad: 'Kış', renk: 'mavi', key: 'kis' } : ay <= 5 ? { ad: 'İlkbahar', renk: 'mint', key: 'ilkbahar' } : ay <= 8 ? { ad: 'Yaz', renk: 'sari', key: 'yaz' } : { ad: 'Sonbahar', renk: 'seftali', key: 'sonbahar' });
 const AY_KISA = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
 const AY_AD = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
@@ -101,6 +104,29 @@ export default async function mevsim(o) {
     </li>`;
   }
 
+  /* ---------- Ayın kahramanı görseli: 12 kahramanın kendi sahne çekimi (bütün + bebeğe uygun kesik hâl) ----------
+     varlik/kids/gorsel/urun/<ikon>-sahne.webp (560px, render ≤ 280px); yoksa ürünün büyük çekimi (urun(…, 280)). */
+  const SAHNE_ALT = {
+    portakal: 'Bütün portakal ve zarı ayıklanmış portakal dilimleri',
+    pirasa: 'Taze pırasa ve ince halka doğranmış pırasa',
+    brokoli: 'Buharda pişmiş brokoli çiçekleri',
+    enginar: 'Bütün enginar ve temizlenmiş enginar kalpleri',
+    cilek: 'Bütün çilekler ve dörde bölünmüş çilekler',
+    kiraz: 'Saplı kirazlar ve çekirdeği çıkarılıp dörde bölünmüş kirazlar',
+    karpuz: 'Kabuklu karpuz dilimi ve çekirdeksiz karpuz çubukları',
+    seftali: 'Bütün şeftali ve kabuğu soyulmuş şeftali dilimleri',
+    incir: 'Bütün incirler ve dörde bölünmüş incirler',
+    balkabagi: 'Bütün balkabağı ve buharda pişmiş balkabağı dilimleri',
+    ayva: 'Bütün ayva ve fırında yumuşatılmış ayva dilimleri',
+    havuc: 'Yeşillikli havuçlar ve buharda pişmiş havuç çubukları',
+  };
+  const kahramanGorsel = (kh) => {
+    const yol = `varlik/kids/gorsel/urun/${kh.ikon}-sahne.webp`;
+    return SAHNE_ALT[kh.ikon] && sahneVar(yol)
+      ? `<img class="kd-urun-foto" src="${yol}" width="280" height="280" alt="${esc(SAHNE_ALT[kh.ikon])}" loading="lazy" decoding="async">`
+      : urun(kh.ikon, 280, kh.ad);
+  };
+
   /* ---------- Ay paneli ---------- */
   function panel(a) {
     const mv = MEVSIM(a.ay);
@@ -109,7 +135,13 @@ export default async function mevsim(o) {
     const turler = [...new Set(urunler.map((u) => u.tur).filter(Boolean))];
     const tarifListe = ayTarifleri(a);
     const zirvede = urunler.filter((u) => u.durum === 'zirvede').length;
-    const kart = (baslik, ikonAd, govde) => (govde ? `<div class="kd-mbilgi"><h4>${ikon(ikonAd, 22)}${baslik}</h4>${govde}</div>` : '');
+    const kart = (baslik, ikonAd, govde, ek = '') => (govde ? `<div class="kd-mbilgi"><h4>${ikon(ikonAd, 22)}${baslik}</h4>${govde}${ek}</div>` : '');
+    // Denge (Beyar EK): "Nasıl seçilir?" / "Saklama" yan yana eşit boy; metni belirgin kısa kalan (≥40 karakter) kutunun altı mevcut sayfaya bağ satırıyla dolar
+    const khKesim = kh.ad ? kesimBul(kh) : null;
+    const mbBag = khKesim ? `<a class="kd-bag kd-mbilgi__bag" href="kids-guvenli-kesim.html#${esc(khKesim.slug)}">${esc(kh.ad)} nasıl kesilir? <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`
+      : tarifListe.length ? `<a class="kd-bag kd-mbilgi__bag" href="#ay-${a.ay}-urun">${esc(a.ad || AY_AD[a.ay - 1])} ürünleriyle tarifler <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`
+      : `<a class="kd-bag kd-mbilgi__bag" href="kids-guvenli-kesim.html">Güvenli kesim rehberi <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`;
+    const mbFark = (kh.secim || '').length - (kh.saklama || '').length;
     return `<section class="kd-mpanel" id="ay-${a.ay}" role="tabpanel" aria-labelledby="ay-sekme-${a.ay}" data-ay="${a.ay}" data-renk="${mv.renk}" tabindex="-1">
   <header class="kd-mpanel__bas">
    <div class="kd-mpanel__bas-metin"><span class="kd-mpanel__mevsim">${esc(mv.ad)}</span><h2>${esc(a.ad || AY_AD[a.ay - 1])} tezgâhı</h2>
@@ -118,15 +150,15 @@ export default async function mevsim(o) {
   ${kh.ad ? `<article class="kd-mkahraman" aria-labelledby="kh-${a.ay}">
    <div class="kd-mkahraman__gorsel">
     <span class="kd-mkahraman__rozet">${ikon('takvim', 20)} ${esc(a.ad || AY_AD[a.ay - 1])} ayının kahramanı</span>
-    <span class="kd-mkahraman__daire">${urun(kh.ikon, 200, kh.ad)}</span>
+    <span class="kd-mkahraman__daire">${kahramanGorsel(kh)}</span>
    </div>
    <div class="kd-mkahraman__metin">
     <h3 id="kh-${a.ay}">${esc(kh.ad)}</h3>
     ${kh.neden ? `<p class="kd-mkahraman__neden">${esc(kh.neden)}</p>` : ''}
     ${yilCubugu(kh.ikon, kh.ad)}
     <div class="kd-mbilgiler">
-     ${kart('Nasıl seçilir?', 'sepet', kh.secim ? `<p>${esc(kh.secim)}</p>` : '')}
-     ${kart('Saklama', 'kase', kh.saklama ? `<p>${esc(kh.saklama)}</p>` : '')}
+     ${kart('Nasıl seçilir?', 'sepet', kh.secim ? `<p>${esc(kh.secim)}</p>` : '', mbFark <= -40 ? mbBag : '')}
+     ${kart('Saklama', 'kase', kh.saklama ? `<p>${esc(kh.saklama)}</p>` : '', mbFark >= 40 ? mbBag : '')}
     </div>
     ${kh.bebekIcin ? `<div class="kd-mbilgi kd-mbilgi--bebek"><h4>${ikon('kasik', 22)}Bebeğinize nasıl sunulur?</h4>${bebekIcin(kh.bebekIcin)}</div>` : ''}
    </div>
@@ -188,7 +220,7 @@ export default async function mevsim(o) {
     </article>`;
   }).join('');
 
-  // Hero: altı ürünlük sade ikon panosu (mevsim için gerçekçi ürün fotoğrafı yok; karar: tasks/kids-ui-tur2.md)
+  // Hero: altı ürünlük pano — her biri gerçek ürün fotoğrafı (yuvarlak kırpım); etiketler mevsimi taşır (karar: tasks/kids-ui-tur2.md "Foto turu kararları (foto-urun)")
   const HERO_URUN = [['cilek', 'Çilek', 'İlkbahar'], ['bezelye', 'Bezelye', 'İlkbahar'], ['karpuz', 'Karpuz', 'Yaz'], ['domates', 'Domates', 'Yaz'], ['balkabagi', 'Balkabağı', 'Sonbahar'], ['mandalina', 'Mandalina', 'Kış']];
   const heroSag = `<ul class="kd-mhero-pano" aria-label="Mevsim örnekleri">${HERO_URUN.map(([u, ad, mv]) => `<li><span class="kd-mhero-pano__ikon">${urun(u, 56, '')}</span><b>${ad}</b><small>${mv}</small></li>`).join('')}</ul>`;
 
@@ -199,7 +231,6 @@ export default async function mevsim(o) {
    <div class="kd-may__serit" role="tablist" aria-label="Aylar">${seciciSekme}</div>
    <button type="button" class="kd-may__ok" data-yon="1" aria-label="Sonraki ay"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
   </div>
-  ${o.ornek('Yaş rozetleri ve sunum önerileri prototip için hazırlanmış örneklerdir; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.')}
   <div class="kd-mpaneller">${aylar.map(panel).join('\n')}</div>
  </div>
 </section>`;
