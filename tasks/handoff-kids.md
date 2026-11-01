@@ -43,17 +43,31 @@ Kurallar: soru yok. Push izni yalnız bu repo/main, force push yok, `git add -A`
 - ☑ 0 putur5 durduruldu (yarım iş rapor/tmp/putur/bekleyen2/) · v1 donduruldu: tag `kids-v1` = 478be10, statik kopya `v1/` → 6a1e4cc (push edildi) · canlı v1: https://gaviaworks-dev.github.io/DadaKids/v1/kids.html
 Ajanlar (1 Kas ~13:15 başladı; sözleşme tasks/v2-sozlesme.md): v2-cekirdek, v2-hub, v2-sayfalar, v2-tarif, v2-kapi. Ortak bileşen imzaları ortak.mjs sonunda + veri/uzman-onay.json (lead yazdı). Compact sonrası: ListAgents ile bak; biteni tikle; hepsi bitince v2-kapi'ye "son koşu" gönder.
 V2 kapsamı (sahip ajan parantezde):
-- ☐ 1 İsim "Dada Gastro Kids" her yerde + logo: Gastro kurumsal logo aynen + sade pastel "kids" rozeti; dağınık harfler ve figürler kalkar (v2-cekirdek)
-- ☐ 2 Çizgi film/maskot temizliği: logo figürleri, hero bulut/yıldız, Pütür, maskot/kawaii illüstrasyon, ayırıcı dalga/bulut, desenler → gerçekçi foto / çizgisel ikon. Pütür'ün 6 işlevi → karaktersiz "Yardım" butonu + menü (v2-cekirdek ortak; v2-hub, v2-sayfalar, v2-tarif kendi sayfaları)
-- ☐ 3 Kids alt menüsü: "Ana Sayfa" → yalnız ev ikonu (aria-label "Dada Gastro Kids ana sayfa") (v2-cekirdek)
-- ☐ 4 Sticky: üstte Gastro menüsü + Kids menüsü; aşağı kaydırınca ana menü gizlenir, tek katman: mini logo + ev | kategoriler; yukarıda geri gelir; mobil yatay kaydırma; reduced-motion animasyonsuz (v2-cekirdek)
-- ☐ 5 "Mevsim" → "Mevsim Takvimi" (menü, başlık, breadcrumb, bağlar) (v2-cekirdek + sayfa ajanları)
-- ☐ 6 Hub hero: iki butonun altında yaş barı [Hamilelik][0-6 Ay][6-8 Ay][9-12 Ay][1-3 Yaş] → vitrin (ilk tarifler, kesim şeması, besinler) anında filtre; URL + localStorage (try/catch) (v2-hub)
-- ☐ 7 Güven rozeti: "Uzman onayı bekliyor — Çocuk doktoru & çocuk diyetisyeni incelemesi"; config bayrağıyla tek yerden onaylı metin + uzman adı/tarih; makale/tarif "İnceleyen uzman: İnceleme bekliyor" (v2-cekirdek bileşen; yerleşim sayfa ajanları)
-- ☐ 8 Hero altı güvenlik şeridi + Yasaklı Gıdalar Rehberi sayfası (örnek içerik) (v2-cekirdek bileşen; v2-sayfalar rehber sayfası)
-- ☐ 9 KidsAgeBadge sol üst + kıvam göstergesi (Pürüzsüz Püre / Çatalla Ezilmiş / BLW Parmak Gıda) her tarif kartında, tek bileşen (v2-cekirdek)
+- ◐ 1 (çekirdek bitti; sayfa ajanları sürüyor) İsim "Dada Gastro Kids" her yerde + logo: Gastro kurumsal logo aynen + sade pastel "kids" rozeti; dağınık harfler ve figürler kalkar (v2-cekirdek)
+- ◐ 2 (cekirdek+hub+sayfalar bitti; v2-tarif sürüyor) Çizgi film/maskot temizliği: logo figürleri, hero bulut/yıldız, Pütür, maskot/kawaii illüstrasyon, ayırıcı dalga/bulut, desenler → gerçekçi foto / çizgisel ikon. Pütür'ün 6 işlevi → karaktersiz "Yardım" butonu + menü (v2-cekirdek ortak; v2-hub, v2-sayfalar, v2-tarif kendi sayfaları)
+- ☑ 3 (v2-cekirdek) Kids alt menüsü: "Ana Sayfa" → yalnız ev ikonu (aria-label "Dada Gastro Kids ana sayfa") (v2-cekirdek)
+- ☑ 4 (v2-cekirdek; mobil: Yardım ikon, mini kilit 64px, 390 yapışık 2,6 kalem, 320 1,9 — mini kilit spec gereği korunuyor) Sticky: üstte Gastro menüsü + Kids menüsü; aşağı kaydırınca ana menü gizlenir, tek katman: mini logo + ev | kategoriler; yukarıda geri gelir; mobil yatay kaydırma; reduced-motion animasyonsuz (v2-cekirdek)
+- ◐ 5 (cekirdek+hub+sayfalar bitti) "Mevsim" → "Mevsim Takvimi" (menü, başlık, breadcrumb, bağlar) (v2-cekirdek + sayfa ajanları)
+- ☑ 6 (v2-hub bitti; yerelde bosluk 4/4, Playwright: bar/vitrin/URL/localStorage/depolama kapalı ✓; rapor/tmp/v2/hub/) Hub hero: iki butonun altında yaş barı [Hamilelik][0-6 Ay][6-8 Ay][9-12 Ay][1-3 Yaş] → vitrin (ilk tarifler, kesim şeması, besinler) anında filtre; URL + localStorage (try/catch) (v2-hub)
+- ◐ 7 (bileşen+hub+rehber bitti; tarif detayı v2-tarif) Güven rozeti: "Uzman onayı bekliyor — Çocuk doktoru & çocuk diyetisyeni incelemesi"; config bayrağıyla tek yerden onaylı metin + uzman adı/tarih; makale/tarif "İnceleyen uzman: İnceleme bekliyor" (v2-cekirdek bileşen; yerleşim sayfa ajanları)
+- ◐ 8 (şerit+yasaklı gıdalar makalesi bitti; kaynak bağları 8/9 200, CDC 403 bot engeli) Hero altı güvenlik şeridi + Yasaklı Gıdalar Rehberi sayfası (örnek içerik) (v2-cekirdek bileşen; v2-sayfalar rehber sayfası)
+- ☑ 9 (v2-cekirdek tarifKart article; kapı doğrulayacak) KidsAgeBadge sol üst + kıvam göstergesi (Pürüzsüz Püre / Çatalla Ezilmiş / BLW Parmak Gıda) her tarif kartında, tek bileşen (v2-cekirdek)
 - ☐ 10 Kiler & Dolap: "Dolapta Ne Var?" Bebek Dolabı filtresi (riskli liste veri dosyasında) + "[+] Bebek Kilerime Ekle" kart ve detayda (localStorage, bildirim) (v2-tarif)
 - ☐ 11 Radius ≤8px token'larla (pill yok; avatar/ikon dairesi hariç) (v2-cekirdek token + herkes kendi CSS'i)
+Ek revize 1 Kasım — atandı (cekirdek E1,E3,E5 ortak .kd-ikonlu,E8,E9,E10 kabuk · sayfalar E4,E5,E6,E7 · tarif E2,E10 detay · hub E11 · kapi E12 k–q); V2 son koşusu 8774 kopyasına karşı (Beyar; V2 ile birlikte, çelişirse V2 geçerli; site geneli kural). "Önce" tabanı: V2 anlık kopyası scratchpad/ek-once → http://localhost:8774/DadaKids/ (ana ağaç değişmeden önce alındı).
+- ☐ E1 Tema/renk seçici Kids alt menüde en sağa yaslı (menü öğeleri ortada) (v2-cekirdek)
+- ☐ E2 Kids Tarifleri filtre paneli: grup başlıkları kalın; filtre düğmeleri tutarlı boyut, net seçili durum (v2-tarif)
+- ☐ E3 Footer perde (altbilgi-perde) tüm Kids sayfalarında çalışır; hiçbir bölüm footer'ı örtmez (v2-cekirdek)
+- ☐ E4 Dönemler: Rahatça/Dikkat/Kaçınılır segmenti tam genişlik, eşit sekmeler; kartlar akordeon değil (ok yok, hep açık), satırda eşit yükseklik (v2-sayfalar)
+- ☐ E5 İkonlu kart hizası: üst satır ikon + başlık (+rozet sağda); açıklama ikonun sol hizasından tam genişlik. Önce: Güvenli Kesim 1 kart önce/sonra rapor/tmp/ (v2-cekirdek ortak kalıp + ortak kartlar; v2-sayfalar evre/kesim; v2-hub hub)
+- ☐ E6 Mevsim Takvimi: "Türkiye geneli için yaklaşık takvim…" notunun ilk cümlesi kalın (v2-sayfalar)
+- ☐ E7 Mevsim Takvimi: "Kasım tezgâhı" ve "Kasım ürünleri" ayrı section, aralarında yumuşak zemin geçişi (v2-sayfalar)
+- ☐ E8 Gastro "Bebek Tarifleri" kategorisi → kids-tarifler.html (mega menü + kategori listesi dahil) (v2-cekirdek)
+- ☐ E9 Gastro ana sayfası Kids widget'ı dikeyde kompakt (mobil dahil) (v2-cekirdek)
+- ☐ E10 Kids'te kullanıcı tarif ekleme CTA'sı yok; tarif detayında yazar "Dada Gastro Kids Editörü" (v2-cekirdek kabuk; v2-tarif detay)
+- ☐ E11 kids.html: "Bebeğiniz kaç aylık?" tam genişlik, "Size özel bir Kids" altına (V2'de profil formu hero yaş barına dönüştü → uygulanabilir kısmı) (v2-hub)
+- ☐ E12 Kapılar: segment tam genişlik, akordeon yok, ikon/başlık/açıklama hizası (±2px), footer perde, Bebek Tarifleri yönlendirmesi, Kids'te tarif ekleme CTA'sı yok (v2-kapi)
+- ☐ E13 Önce/sonra 1440+390 her madde için → yayın (V2 ile birlikte)
 - ☐ 12 Kapılar: maskot yok, radius ≤8, sticky, yaş barı, rozet/kıvam her kartta, sahte onay yok + eski kapıların V2'ye uyumu (v2-kapi)
 - ☐ 13 Yayın: concern commit'leri → push → Pages → canlı kapılar
 - ☐ 14 Rapor: 11 madde "yapıldı + kanıt" tablosu, v1/v2 önce-sonra 1440+390, sticky GIF, kararlar; SABAH-RAPORU-kids.md güncelle → DUR
@@ -81,7 +95,7 @@ Kapsam:
 - ☑ Besin matrisi sekmeli (donemler.mjs, matris-kapisi.mjs; önce rapor/tmp/matris-once, sonra rapor/tmp/matris-sonra)
 - ☑ (f) Site turu: ☑ güven metni ☑ oturum/hesap menüsü/Çıkış ☑ mevsim ay adları ☑ logo→kids.html, Tarifler → prototip içi ☑ marka yazımı ☑ alt metin kapısı ☑ trimester etiketi ☑ "Sizin evreniz" yalnız seçili kartta (JS ekler; statik HTML'de yok)
 - ☐ (d) Izgara/hizalama/meta/footer: yarım satır yok, öneri şeridi 4'e tamam, subgrid hizası, öğün ikonu, footer görünürlüğü + izgara-kapisi.mjs + genel tarama listesi kids-ui-tur2.md + önce/sonra (kesim, dönemler, tarif × 1440/768/390)
-- ☐ (e) Pütür: sol altta, state'ler, tek tık Higgsfield zıplama, ~5 tık parıltı, radial menü 6 seçenek, erişilebilirlik, putur-kapisi.mjs. Yarım JS: rapor/tmp/putur-yarim/putur.js (612 satır, sözdizimi tam; CSS/varlık/kapı yok; derlemeden çekildi, commit edilmedi)
+- ☐ (e) Pütür: sol altta, state'ler, tek tık Higgsfield zıplama, ~5 tık parıltı, radial menü 6 seçenek, erişilebilirlik, putur-kapisi.mjs (V2'de silindi). Yarım JS: rapor/tmp/putur-yarim/putur.js (612 satır, sözdizimi tam; CSS/varlık/kapı yok; derlemeden çekildi, commit edilmedi)
 - ☐ Tam kapılar → commit → push → Pages → canlı kapılar → son rapor
 
 - ☑ EK logo figürleri: Higgsfield Aday 1, tek bileşen, favicon sade (kids-ui-tur2.md §8); Pütür ve ızgara ayrı push (yayın worktree'si: temiz HEAD + yalnız kendi dosyaları)
@@ -102,7 +116,7 @@ Kapsam:
 
 Ajan kolları (git yalnız lead'de; iki ajan aynı dosyaya yazmaz):
 - `izgara3`: src/kids/ortak.mjs, src/kids/sayfalar/*.mjs, varlik/kids/kids.css, varlik/kids/css/*.css (putur.css ve dogum-secici.css HARİÇ), varlik/kids/js/kesim.js|mevsim.js|rehber.js|donem.js|hub.js, araclar/izgara-kapisi.mjs, rapor/tmp/izgara/** · build yalnız bu kolda
-- `putur3`: varlik/kids/css/putur.css, varlik/kids/js/putur.js, varlik/kids/putur/**, araclar/putur-kapisi.mjs, rapor/tmp/putur/** · ≤300 kr · build çalıştırmaz
+- `putur3`: varlik/kids/css/putur.css, varlik/kids/js/putur.js, varlik/kids/putur/**, araclar/putur-kapisi.mjs (V2'de silindi), rapor/tmp/putur/** · ≤300 kr · build çalıştırmaz
 - lead: kids.js, build.mjs, temizle.mjs, varlik-kapisi/davranis/parite/tema kapıları, handoff, kids-ui-tur2.md (ajan notlarını birleştirir), git · sunucu 8765 ortak
 
 <!-- eski ayrıntı notları git geçmişinde: 0c244cf öncesi handoff -->
