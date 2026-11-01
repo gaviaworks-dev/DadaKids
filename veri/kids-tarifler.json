@@ -7,7 +7,8 @@
   "ogun": "kahvalti | ana | ara",
   "alerjenler": "gluten | sut | yumurta | yerfistigi | sertkabuklu | susam | balik | soya (içerdikleri)",
   "sonraki": "{slug, metin} — bir sonraki evrede bu tarif/besin nasıl büyür",
-  "malzemeler": "[{miktar, ad, not, anahtar}] — anahtar: alışveriş listesi gruplaması için normalize ad; null = su, pişirme suyu, anne sütü/formül gibi alışveriş dışı kalemler"
+  "malzemeler": "[{miktar, ad, not, anahtar}] — anahtar: alışveriş listesi gruplaması için normalize ad; null = su, pişirme suyu, anne sütü/formül gibi alışveriş dışı kalemler",
+  "malzemeSozlugu": "anahtar → {ad, esAnlamlar}: \"Dolapta Ne Var?\" otomatik tamamlamasının tek kaynağı; tarif malzemelerindeki her anahtar burada bulunur. Riskli malzemeler ayrıca veri/bebek-dolabi.json'dadır."
  },
  "etiketler": {
   "kivam": {
@@ -38,6 +39,280 @@
    "12": "+12 Ay",
    "18": "+18 Ay",
    "24": "2–3 Yaş"
+  }
+ },
+ "malzemeSozlugu": {
+  "armut": {
+   "ad": "Armut",
+   "esAnlamlar": []
+  },
+  "sehriye": {
+   "ad": "Arpa şehriye",
+   "esAnlamlar": [
+    "şehriye"
+   ]
+  },
+  "avokado": {
+   "ad": "Avokado",
+   "esAnlamlar": []
+  },
+  "balkabagi": {
+   "ad": "Balkabağı",
+   "esAnlamlar": [
+    "bal kabağı",
+    "helvacı kabağı"
+   ]
+  },
+  "bezelye": {
+   "ad": "Bezelye",
+   "esAnlamlar": [
+    "dondurulmuş bezelye"
+   ]
+  },
+  "brokoli": {
+   "ad": "Brokoli",
+   "esAnlamlar": []
+  },
+  "bulgur": {
+   "ad": "Bulgur",
+   "esAnlamlar": [
+    "ince bulgur",
+    "köftelik bulgur",
+    "pilavlık bulgur"
+   ]
+  },
+  "cilek": {
+   "ad": "Çilek",
+   "esAnlamlar": []
+  },
+  "dereotu": {
+   "ad": "Dereotu",
+   "esAnlamlar": [
+    "dere otu"
+   ]
+  },
+  "domates": {
+   "ad": "Domates",
+   "esAnlamlar": []
+  },
+  "domates-salcasi": {
+   "ad": "Domates salçası",
+   "esAnlamlar": [
+    "salça"
+   ]
+  },
+  "elma": {
+   "ad": "Elma",
+   "esAnlamlar": []
+  },
+  "fistik-ezmesi": {
+   "ad": "Fıstık ezmesi (şekersiz)",
+   "esAnlamlar": [
+    "fıstık ezmesi",
+    "yer fıstığı ezmesi"
+   ]
+  },
+  "havuc": {
+   "ad": "Havuç",
+   "esAnlamlar": []
+  },
+  "kabak": {
+   "ad": "Kabak",
+   "esAnlamlar": [
+    "sakız kabağı"
+   ]
+  },
+  "kasar": {
+   "ad": "Kaşar peyniri",
+   "esAnlamlar": [
+    "kaşar",
+    "rendelenmiş kaşar"
+   ]
+  },
+  "kirmizi-biber": {
+   "ad": "Kırmızı biber (tatlı)",
+   "esAnlamlar": [
+    "kırmızı dolma biber",
+    "kapya biber",
+    "tatlı kırmızı biber"
+   ]
+  },
+  "kirmizi-mercimek": {
+   "ad": "Kırmızı mercimek",
+   "esAnlamlar": [
+    "mercimek"
+   ]
+  },
+  "kiyma": {
+   "ad": "Kıyma",
+   "esAnlamlar": [
+    "dana kıyma",
+    "kuzu kıyma",
+    "köftelik kıyma"
+   ]
+  },
+  "kimyon": {
+   "ad": "Kimyon",
+   "esAnlamlar": []
+  },
+  "kuru-maya": {
+   "ad": "Kuru maya",
+   "esAnlamlar": [
+    "maya"
+   ]
+  },
+  "dana-kusbasi": {
+   "ad": "Kuşbaşı dana eti",
+   "esAnlamlar": [
+    "kuşbaşı",
+    "dana eti",
+    "dana kuşbaşı",
+    "et"
+   ]
+  },
+  "limon": {
+   "ad": "Limon",
+   "esAnlamlar": [
+    "limon suyu"
+   ]
+  },
+  "lor-peyniri": {
+   "ad": "Lor peyniri",
+   "esAnlamlar": [
+    "lor",
+    "beyaz peynir",
+    "peynir"
+   ]
+  },
+  "makarna": {
+   "ad": "Makarna",
+   "esAnlamlar": [
+    "burgu makarna",
+    "kalem makarna",
+    "kelebek makarna"
+   ]
+  },
+  "maydanoz": {
+   "ad": "Maydanoz",
+   "esAnlamlar": []
+  },
+  "muz": {
+   "ad": "Muz",
+   "esAnlamlar": []
+  },
+  "nohut": {
+   "ad": "Nohut",
+   "esAnlamlar": [
+    "haşlanmış nohut"
+   ]
+  },
+  "patates": {
+   "ad": "Patates",
+   "esAnlamlar": []
+  },
+  "pirinc": {
+   "ad": "Pirinç",
+   "esAnlamlar": [
+    "baldo pirinç",
+    "osmancık pirinç"
+   ]
+  },
+  "sogan": {
+   "ad": "Soğan",
+   "esAnlamlar": [
+    "kuru soğan"
+   ]
+  },
+  "somon": {
+   "ad": "Somon",
+   "esAnlamlar": [
+    "balık",
+    "somon fileto"
+   ]
+  },
+  "sut": {
+   "ad": "Süt (yemekte)",
+   "esAnlamlar": [
+    "süt",
+    "inek sütü"
+   ]
+  },
+  "seftali": {
+   "ad": "Şeftali",
+   "esAnlamlar": []
+  },
+  "tahin": {
+   "ad": "Tahin",
+   "esAnlamlar": [
+    "susam ezmesi"
+   ]
+  },
+  "tarcin": {
+   "ad": "Tarçın",
+   "esAnlamlar": []
+  },
+  "tatli-patates": {
+   "ad": "Tatlı patates",
+   "esAnlamlar": [
+    "batat"
+   ]
+  },
+  "tavuk": {
+   "ad": "Tavuk",
+   "esAnlamlar": [
+    "tavuk göğsü",
+    "tavuk but",
+    "tavuk eti"
+   ]
+  },
+  "taze-fasulye": {
+   "ad": "Taze fasulye",
+   "esAnlamlar": [
+    "fasulye",
+    "çalı fasulyesi"
+   ]
+  },
+  "tereyagi": {
+   "ad": "Tereyağı",
+   "esAnlamlar": []
+  },
+  "un": {
+   "ad": "Un",
+   "esAnlamlar": [
+    "buğday unu",
+    "tam buğday unu"
+   ]
+  },
+  "yaban-mersini": {
+   "ad": "Yaban mersini",
+   "esAnlamlar": [
+    "blueberry"
+   ]
+  },
+  "yogurt": {
+   "ad": "Yoğurt",
+   "esAnlamlar": [
+    "sade yoğurt",
+    "süzme yoğurt"
+   ]
+  },
+  "yulaf": {
+   "ad": "Yulaf ezmesi",
+   "esAnlamlar": [
+    "yulaf",
+    "ince yulaf"
+   ]
+  },
+  "yumurta": {
+   "ad": "Yumurta",
+   "esAnlamlar": []
+  },
+  "zeytinyagi": {
+   "ad": "Zeytinyağı",
+   "esAnlamlar": [
+    "zeytin yağı",
+    "sızma zeytinyağı"
+   ]
   }
  },
  "tarifler": [

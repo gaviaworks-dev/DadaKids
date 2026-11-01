@@ -1,0 +1,105 @@
+/* Bebek Kilerim + "Dolapta Ne Var?" (sahibi: v2-tarif) — tüm Kids sayfalarında yüklenir.
+   Köşe yarıçapı yalnız var(--kd-r-*) (≤ 8px); pill yok. Düğmenin temel görünümü (.kd-kiler-ekle) v2-cekirdek'te. */
+
+/* Kiler düğmesi: "Kilerde ✓" durumu */
+.kd-kiler-ekle[data-kd-kilerde] { background: var(--kd-mint-a, #DDF4EA); color: var(--kd-mint-k, #1D6B50); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--kd-mint-k, #1D6B50) 45%, transparent); }
+
+/* Onay bildirimi (role=status) */
+.kd-kiler-bildirim { position: fixed; left: 50%; bottom: var(--kd-s5); z-index: 1200; width: max-content; max-width: min(520px, calc(100vw - 32px)); transform: translate(-50%, 12px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s; }
+.kd-kiler-bildirim.kd-acik { transform: translate(-50%, 0); opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .2s ease, transform .2s ease; }
+.kd-kiler-bildirim p { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--kd-s2) var(--kd-s4); padding: var(--kd-s3) var(--kd-s4); border-radius: var(--kd-r-m); background: var(--kd-murekkep, #3A2E2A); color: #fff; font-size: 14.5px; font-weight: 700; line-height: 1.4; box-shadow: 0 12px 28px -12px rgba(30, 20, 15, .55); }
+.kd-kiler-bildirim a { color: #fff; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.kd-kiler-bildirim a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; border-radius: var(--kd-r-s); }
+
+/* Kartta dolap eşleşme etiketi */
+.kd-dolap-durum { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; margin: 0 0 var(--kd-s2); padding: 4px 8px; border-radius: var(--kd-r-s); font-size: 12.5px; font-weight: 800; line-height: 1.2; background: var(--kd-mint-a, #DDF4EA); color: var(--kd-mint-k, #1D6B50); }
+.kd-dolap-durum[data-durum="eksik"] { background: var(--kd-sari-a, #FFF4CC); color: var(--kd-sari-k, #7A5A00); }
+.kd-dolap-durum small { font-weight: 700; opacity: .85; }
+
+/* ---------- "Dolapta Ne Var?" paneli ---------- */
+.kd-dolap-bolum { padding-top: var(--kd-s5); }
+.kd-dolap { --kd-kutu-dis: 0; display: grid; gap: var(--kd-s5); padding: var(--kd-s5); border-radius: var(--kd-r-l); background: #fff; box-shadow: var(--kd-golge), inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-dolap__bas { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--kd-s4) var(--kd-s5); }
+.kd-dolap__metin { flex: 1 1 420px; min-width: 0; }
+.kd-dolap__metin p { margin: 0; color: var(--kd-ikincil); max-width: 62ch; }
+/* Açılır/kapanır başlık satırı */
+.kd-dolap .kd-dolap__baslik { margin: 0; font-size: 1.35rem; line-height: 1.25; }
+.kd-dolap__ac { display: flex; flex-wrap: wrap; align-items: center; gap: var(--kd-s1) var(--kd-s4); width: 100%; margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.kd-dolap__ad { display: inline-flex; align-items: center; gap: var(--kd-s2); }
+.kd-dolap__durum { flex: 1 1 auto; font-size: 13.5px; font-weight: 700; color: var(--kd-ikincil); }
+.kd-dolap__ok { flex: none; margin-left: auto; color: var(--kd-ikincil); }
+.kd-dolap--hazir .kd-dolap__ok { transition: transform .18s; }   /* ilk durum animasyonsuz */
+.kd-dolap__ac[aria-expanded="true"] .kd-dolap__ok { transform: rotate(180deg); }
+.kd-dolap__ac:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 4px; border-radius: var(--kd-r-s); }
+.kd-dolap__govde { display: grid; gap: var(--kd-s5); }
+.kd-dolap__govde[hidden] { display: none !important; }
+
+/* Bebek Dolabı anahtarı (role=switch) — köşeli iz */
+.kd-dolap__anahtar { position: relative; display: inline-flex; align-items: flex-start; gap: var(--kd-s3); flex: 0 1 300px; cursor: pointer; padding: var(--kd-s3); border-radius: var(--kd-r-m); background: var(--kd-krem-2, #FBEFE3); }
+.kd-dolap__anahtar input { position: absolute; opacity: 0; width: 44px; height: 26px; margin: 0; top: var(--kd-s3); left: var(--kd-s3); cursor: pointer; }
+.kd-dolap__anahtar-iz { flex: none; position: relative; width: 44px; height: 26px; border-radius: var(--kd-r-s); background: var(--kd-cizgi); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--kd-murekkep) 25%, transparent); transition: background .18s; }
+.kd-dolap__anahtar-iz::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: var(--kd-r-s); background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .25); transition: transform .18s; }
+.kd-dolap__anahtar input:checked + .kd-dolap__anahtar-iz { background: var(--kd-mint-k, #1D6B50); }
+.kd-dolap__anahtar input:checked + .kd-dolap__anahtar-iz::after { transform: translateX(18px); }
+.kd-dolap__anahtar input:focus-visible + .kd-dolap__anahtar-iz { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+.kd-dolap__anahtar b { display: block; font-size: 15px; }
+.kd-dolap__anahtar small { display: block; font-size: 12.5px; color: var(--kd-ikincil); line-height: 1.35; margin-top: 2px; }
+
+/* Malzeme girişi + çipler + öneri listesi */
+.kd-dolap__giris { position: relative; display: grid; gap: var(--kd-s2); }
+.kd-dolap__etiket { font-weight: 800; font-size: 14px; }
+.kd-dolap__alan { display: flex; flex-wrap: wrap; align-items: center; gap: var(--kd-s2); min-height: 52px; padding: 7px var(--kd-s2) 7px var(--kd-s3); border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); cursor: text; }
+.kd-dolap__alan:focus-within { box-shadow: inset 0 0 0 2px var(--kd-tema); }
+.kd-dolap__cipler, .kd-kiler__liste { display: contents; list-style: none; margin: 0; padding: 0; }
+.kd-kiler__liste { display: flex; flex-wrap: wrap; gap: var(--kd-s2); }
+.kd-dolap__cip { display: inline-flex; align-items: center; gap: 2px; max-width: 100%; padding: 0 0 0 10px; border-radius: var(--kd-r-s); background: var(--kd-krem-2, #FBEFE3); color: var(--kd-murekkep); font-size: 14px; font-weight: 700; line-height: 1.2; box-shadow: inset 0 0 0 1px var(--kd-cizgi); }
+.kd-dolap__cip > span { padding-block: 7px; overflow-wrap: anywhere; }
+.kd-dolap__cip small { font-weight: 700; font-size: 11.5px; color: var(--kd-uyari-k); }
+.kd-dolap__cip button { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: var(--kd-r-s); background: transparent; color: inherit; font: inherit; font-size: 18px; line-height: 1; cursor: pointer; }
+.kd-dolap__cip button:hover { background: color-mix(in srgb, var(--kd-murekkep) 10%, transparent); }
+.kd-dolap__cip button:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: -1px; }
+.kd-dolap__cip--riskli { background: var(--kd-uyari-a); box-shadow: inset 0 0 0 1px var(--kd-uyari-c); }
+.kd-dolap__cip--disi > span { opacity: .6; text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.kd-dolap__cip--disi small { text-decoration: none; display: inline-block; }
+.kd-dolap__alan input { flex: 1 1 180px; min-width: 0; min-height: 36px; padding: 6px 4px; border: 0; background: transparent; font: inherit; font-size: 15px; color: var(--kd-murekkep); }
+.kd-dolap__alan input:focus { outline: none; }
+.kd-dolap__oneri { position: absolute; z-index: 40; top: calc(100% - var(--kd-s2)); left: 0; right: 0; max-height: 320px; overflow: auto; margin: var(--kd-s1) 0 0; padding: var(--kd-s1); list-style: none; border-radius: var(--kd-r-m); background: #fff; box-shadow: 0 16px 32px -14px rgba(40, 25, 15, .4), inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-dolap__oneri [role="option"] { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px var(--kd-s3); padding: 10px 12px; border-radius: var(--kd-r-s); cursor: pointer; font-weight: 700; }
+.kd-dolap__oneri [role="option"] small { font-weight: 600; color: var(--kd-ikincil); }
+.kd-dolap__oneri [role="option"]:hover, .kd-dolap__oneri [aria-selected="true"] { background: var(--kd-krem-2, #FBEFE3); box-shadow: inset 3px 0 0 var(--kd-tema); }
+.kd-dolap__oneri .kd-dolap__secenek--riskli { color: var(--kd-ikincil); cursor: not-allowed; }
+.kd-dolap__oneri .kd-dolap__secenek--riskli > span { opacity: .7; }
+.kd-dolap__oneri small.kd-dolap__risk { color: var(--kd-uyari-k); font-weight: 800; font-size: 12px; }
+.kd-dolap__uyari { margin: 0; font-size: 14px; font-weight: 700; color: var(--kd-uyari-k); }
+.kd-dolap__cipler[hidden], .kd-kiler__liste[hidden], .kd-kiler__bos[hidden] { display: none !important; }
+
+.kd-dolap__alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kd-s3) var(--kd-s4); }
+.kd-dolap__ozet { margin: 0; font-weight: 700; flex: 1 1 320px; }
+
+/* Bebek Kilerim */
+.kd-kiler { display: grid; gap: var(--kd-s3); padding: var(--kd-s4); border-radius: var(--kd-r-m); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); scroll-margin-top: calc(var(--kd-ust-bosluk, 0px) + 140px); }
+.kd-kiler:focus { outline: none; }
+.kd-kiler:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 3px; }
+.kd-kiler.kd-ikonlu { column-gap: var(--kd-s3); row-gap: var(--kd-s3); }   /* E5 ortak kalıp: ikon + başlık, eylemler sağda; liste ikonun sol hizasından */
+.kd-kiler .kd-ikonlu__ikon img { display: block; }
+.kd-kiler .kd-ikonlu__baslik { font-size: 1.05rem; }
+.kd-kiler .kd-ikonlu__baslik small { font-weight: 700; color: var(--kd-ikincil); font-size: 13px; }
+.kd-kiler__eylem { display: flex; flex-wrap: wrap; gap: var(--kd-s2); }
+.kd-kiler__eylem .kd-btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
+.kd-kiler__liste .kd-dolap__cip { background: #fff; }
+.kd-kiler__bos { margin: 0; font-size: 14px; color: var(--kd-ikincil); }
+
+@media (max-width: 640px) {
+  .kd-dolap-bolum { padding-top: var(--kd-s4); }
+  .kd-dolap { padding: var(--kd-s4); gap: 20px; }
+  .kd-dolap .kd-dolap__baslik { font-size: 1.2rem; }
+  .kd-dolap__govde { gap: 20px; }
+  .kd-dolap__anahtar { flex-basis: 100%; }
+  .kd-kiler .kd-kiler__eylem { grid-column: 1 / -1; justify-self: stretch; }
+  .kd-kiler__eylem .kd-btn { flex: 1 1 100%; }
+  .kd-kiler-bildirim { bottom: var(--kd-s4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kd-kiler-bildirim, .kd-kiler-bildirim.kd-acik { transition: none; transform: translate(-50%, 0); }
+  .kd-dolap__anahtar-iz, .kd-dolap__anahtar-iz::after, .kd-dolap--hazir .kd-dolap__ok { transition: none; }
+}
