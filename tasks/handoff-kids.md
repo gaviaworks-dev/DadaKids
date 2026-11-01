@@ -37,7 +37,27 @@ Ajan kolları (dosya sahipliği; iki ajan aynı dosyaya yazmaz):
 - **Kredi:** tur 2 başlangıç 4771,93 (hesap başka oturumla paylaşımlı → kendi harcamamızı manifest'ten say)
 - **Kararlar (kids-ui-tur2.md §4'e taşınacak):** yaş rozeti biçimi tek: "+N Ay" (2–3 Yaş → +24 Ay) · başlık fontu Fredoka (OFL, kendi barındırma), gövde Gilroy · maskot "Pütür" (krem kase karakteri) · ortak.mjs: illus/maskot/ayirici/video yardımcıları eklendi
 
-## ▶ ŞU AN — GECE OTONOM (1 Kas, Beyar uyuyor; compact sonrası YALNIZ buradan devam)
+## ▶ ŞU AN — V2 (REV-2026-DK01, 1 Kas; FULL OTONOM, compact sonrası YALNIZ buradan devam)
+Kaynak: "/Users/gaviaworks/Desktop/Dada Gastro Kids Kapsamlı Revizyon Dokümanı.pdf" (yönetim kararı; önceki tur kararlarıyla çelişirse bu geçerli). Görev metni: Beyar'ın V2 mesajı (11 madde + kapılar + rapor).
+Kurallar: soru yok. Push izni yalnız bu repo/main, force push yok, `git add -A` yok, staged kontrol her commit'te, concern başına ayrı commit. Gastro header/footer yapısı korunur (yalnız sticky davranışı değişir), nav'a DADA KIDS eklenmez. Tıbbi içerik "Örnek içerik — uzman onayı bekliyor". SAHTE ONAY YASAK ("Pediatrist" kullanılmaz). Yayın: izole worktree scratchpad/yayin → kapılar TABAN=http://localhost:8771/DadaKids/ → push → ana ağaçta `git reset --mixed`.
+- ☑ 0 putur5 durduruldu (yarım iş rapor/tmp/putur/bekleyen2/) · v1 donduruldu: tag `kids-v1` = 478be10, statik kopya `v1/` → 6a1e4cc (push edildi) · canlı v1: https://gaviaworks-dev.github.io/DadaKids/v1/kids.html
+V2 kapsamı (sahip ajan parantezde):
+- ☐ 1 İsim "Dada Gastro Kids" her yerde + logo: Gastro kurumsal logo aynen + sade pastel "kids" rozeti; dağınık harfler ve figürler kalkar (v2-cekirdek)
+- ☐ 2 Çizgi film/maskot temizliği: logo figürleri, hero bulut/yıldız, Pütür, maskot/kawaii illüstrasyon, ayırıcı dalga/bulut, desenler → gerçekçi foto / çizgisel ikon. Pütür'ün 6 işlevi → karaktersiz "Yardım" butonu + menü (v2-cekirdek ortak; v2-hub, v2-sayfalar, v2-tarif kendi sayfaları)
+- ☐ 3 Kids alt menüsü: "Ana Sayfa" → yalnız ev ikonu (aria-label "Dada Gastro Kids ana sayfa") (v2-cekirdek)
+- ☐ 4 Sticky: üstte Gastro menüsü + Kids menüsü; aşağı kaydırınca ana menü gizlenir, tek katman: mini logo + ev | kategoriler; yukarıda geri gelir; mobil yatay kaydırma; reduced-motion animasyonsuz (v2-cekirdek)
+- ☐ 5 "Mevsim" → "Mevsim Takvimi" (menü, başlık, breadcrumb, bağlar) (v2-cekirdek + sayfa ajanları)
+- ☐ 6 Hub hero: iki butonun altında yaş barı [Hamilelik][0-6 Ay][6-8 Ay][9-12 Ay][1-3 Yaş] → vitrin (ilk tarifler, kesim şeması, besinler) anında filtre; URL + localStorage (try/catch) (v2-hub)
+- ☐ 7 Güven rozeti: "Uzman onayı bekliyor — Çocuk doktoru & çocuk diyetisyeni incelemesi"; config bayrağıyla tek yerden onaylı metin + uzman adı/tarih; makale/tarif "İnceleyen uzman: İnceleme bekliyor" (v2-cekirdek bileşen; yerleşim sayfa ajanları)
+- ☐ 8 Hero altı güvenlik şeridi + Yasaklı Gıdalar Rehberi sayfası (örnek içerik) (v2-cekirdek bileşen; v2-sayfalar rehber sayfası)
+- ☐ 9 KidsAgeBadge sol üst + kıvam göstergesi (Pürüzsüz Püre / Çatalla Ezilmiş / BLW Parmak Gıda) her tarif kartında, tek bileşen (v2-cekirdek)
+- ☐ 10 Kiler & Dolap: "Dolapta Ne Var?" Bebek Dolabı filtresi (riskli liste veri dosyasında) + "[+] Bebek Kilerime Ekle" kart ve detayda (localStorage, bildirim) (v2-tarif)
+- ☐ 11 Radius ≤8px token'larla (pill yok; avatar/ikon dairesi hariç) (v2-cekirdek token + herkes kendi CSS'i)
+- ☐ 12 Kapılar: maskot yok, radius ≤8, sticky, yaş barı, rozet/kıvam her kartta, sahte onay yok + eski kapıların V2'ye uyumu (v2-kapi)
+- ☐ 13 Yayın: concern commit'leri → push → Pages → canlı kapılar
+- ☐ 14 Rapor: 11 madde "yapıldı + kanıt" tablosu, v1/v2 önce-sonra 1440+390, sticky GIF, kararlar; SABAH-RAPORU-kids.md güncelle → DUR
+
+## Gece otonom (arşiv; V2 ile kapandı) (1 Kas, Beyar uyuyor; compact sonrası YALNIZ buradan devam)
 Kurallar: soru yok, onay yok. Push izni yalnız bu repo/main, force push yok, `git add -A` yok, staged kontrol her commit'te. Yayın yöntemi: izole worktree (scratchpad/yayin) temiz HEAD + yalnız ilgili dosyalar → kapılar `TABAN=http://localhost:8771/DadaKids/` → commit → push → ana ağaçta `git reset --mixed <sha>`. Takılan işi bırak, canlıdaki çalışan hali koru, kararı buraya yaz.
 Canlı son: 478be10 (spacing).
 - ☑ Spacing (`bosluk6`): 478be10 — yerelde bosluk 92/92, boyut 42/42, davranış, varlık 46/46; CANLI 478be10: bosluk 92/92, boyut 84/84 (4 genişlik), ızgara 128/128, varlık 115/115 (5 genişlik), davranış, parite 14/14
