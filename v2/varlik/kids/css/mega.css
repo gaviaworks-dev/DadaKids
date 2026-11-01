@@ -1,0 +1,66 @@
+/* Tarifler mega menüsü: Dada Gastro Kids şeridi (araclar/build.mjs MEGA_SERIT).
+   Tüm sayfalarda yüklenir; Gastro sayfalarında data-kd-tema yok, nötr tema token'ları geçerli.
+   Izgara: sol sütunda kategoriler + şerit, sağ sütunda iki satırı kaplayan öne çıkan kolon.
+   Şerit satırı ile "Dolapta Ne Var?" kartı aynı hizada; görsel kalan yüksekliği doldurur.
+   Üst sınır: mega yüksekliği eski düzeni (1240+: 410px, 1025: 368px) aşmaz, bkz. araclar/davranis.mjs. */
+
+.mega .mega-grid { grid-template-rows: auto auto; row-gap: var(--kd-s3, 12px); align-items: stretch; }
+.mega .mega-cats { grid-column: 1; grid-row: 1; }
+.mega .mega-feat { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; }
+.mega .mega-feat .mf-fig { flex: 1 1 auto; min-height: 0; aspect-ratio: auto; }
+.mega .mega-feat .mega-find { flex: none; margin-top: var(--kd-s3, 12px); }
+
+.kd-mega-serit {
+  grid-column: 1; grid-row: 2; position: relative; display: flex; align-items: center; gap: var(--kd-s3, 12px);
+  min-width: 0; min-height: 58px; padding: var(--kd-s1, 4px) var(--kd-s4, 16px);
+  border-radius: var(--kd-r-l, 8px); background: var(--kd-tema-a, #E1F3EE);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--kd-tema, #1F7A68) 24%, transparent);
+  color: var(--kd-murekkep, #3A2E2A); font-family: var(--kd-font, inherit); transition: box-shadow .18s ease;
+}
+.kd-mega-serit:hover { box-shadow: inset 0 0 0 1.5px var(--kd-tema, #1F7A68); }
+.kd-mega-serit__logo { flex: none; width: 150px; }
+.kd-mega-serit__metin { flex: 1 1 0; min-width: 0; font-size: 13.5px; font-weight: 600; line-height: 1.2; }
+.kd-mega-serit__chipler { flex: none; display: flex; gap: var(--kd-s1, 4px); }
+
+/* .nav a (Gastro) dolgu, konum ve hover'ını ezer: mega <nav> içinde olduğu için özgüllük bilerek yüksek */
+.nav .kd-mega-serit .kd-mega-serit__chip {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: var(--kd-s1, 4px);
+  min-height: 32px; padding: var(--kd-s1, 4px) 10px; border-radius: var(--kd-r-m, 6px); background: #fff;
+  color: var(--kd-murekkep, #3A2E2A); font-size: 13px; font-weight: 700; line-height: 1.1;
+}
+.nav .kd-mega-serit .kd-mega-serit__chip:hover { background: var(--r-o, #fff); color: var(--kd-murekkep, #3A2E2A); }
+.kd-mega-serit__chip img { flex: none; width: 16px; height: 16px; }
+
+/* Keşfet: ::after tüm şeridi tıklanır yapar; chip'ler z-index ile üstte kalır */
+.nav .kd-mega-serit .kd-mega-serit__kesfet {
+  position: static; flex: none; display: inline-flex; align-items: center; gap: var(--kd-s1, 4px); padding: var(--kd-s1, 4px);
+  border-radius: var(--kd-r-m, 6px); background: transparent; color: var(--kd-tema, #1F7A68); font-size: 14px; font-weight: 800;
+}
+.nav .kd-mega-serit .kd-mega-serit__kesfet:hover { background: transparent; color: var(--kd-tema, #1F7A68); }
+.kd-mega-serit__kesfet::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.nav .kd-mega-serit .kd-mega-serit__kesfet i { margin: 0; font-size: 12px; opacity: 1; transition: transform .2s ease; }
+.kd-mega-serit:hover .kd-mega-serit__kesfet i { transform: translateX(3px); }
+
+/* Kabuk, üst bant üzerindeki bağlarda odak halkasını beyaza çeker; açık zeminde görünür kalması için ezilir */
+.header .ana-menu .mega .kd-mega-serit a:focus-visible { outline: 3px solid var(--kd-tema, #1F7A68); outline-offset: 2px; }
+
+/* 1025–1239: eski mega görsel oranı nedeniyle daha kısaydı (1025'te 368px); şerit dolgusu daraltılarak aynı yüksekliğe sığar */
+@media (max-width: 1239.98px) {
+  .mega { padding-block: var(--kd-s4, 16px); }
+  .mega .mega-grid { row-gap: var(--kd-s2, 8px); }
+  .mega .mega-feat .mega-find { margin-top: var(--kd-s2, 8px); min-height: 48px; padding-block: var(--kd-s1, 4px); }
+  .kd-mega-serit { min-height: 48px; gap: var(--kd-s2, 8px); padding-inline: var(--kd-s3, 12px); }
+  .kd-mega-serit__logo { width: 118px; }
+  .kd-mega-serit__metin { font-size: 12.5px; }
+  .nav .kd-mega-serit .kd-mega-serit__chip { padding-inline: var(--kd-s2, 8px); font-size: 12.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kd-mega-serit, .nav .kd-mega-serit .kd-mega-serit__kesfet i { transition: none; }
+  .kd-mega-serit:hover .kd-mega-serit__kesfet i { transform: none; }
+}
+
+/* Ek revize E8: tarifler.html süzgecinde "Bebek Tarifleri" satırı Kids tariflerine bağ (araclar/build.mjs bebekKids) */
+a.fct-row.kd-fct-kids { color: inherit; text-decoration: none; }
+.kd-fct-kids .ft { flex: 1; min-width: 0; }
+.kd-fct-kids__ok { flex: none; font-size: 11px; color: var(--tomato, #DC3D17); }

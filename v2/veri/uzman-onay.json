@@ -1,0 +1,6 @@
+{
+  "_not": "Tek bayrak: uzman incelemesi tamamlanınca onayli=true yapın ve uzman/unvan/tarih alanlarını doldurun. false iken hiçbir sayfada onay iddiası görünmez.",
+  "onayli": false,
+  "uzmanlar": [],
+  "tarih": null
+}

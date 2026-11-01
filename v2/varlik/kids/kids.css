@@ -1,0 +1,676 @@
+/* =====================================================================
+   DADA GASTRO KIDS — tasarım sistemi (V2: REV-2026-DK01)
+   Gastro header/footer olduğu gibi kalır; Kids içerik alanı (.kd-sayfa) Dada Gastro'nun
+   çocuk/bebek dikeyidir: krem zemin, pastel vurgular, ölçülü köşeler (≤ 8px), sade gölgeler,
+   Gastro tipografisi (Gilroy). Maskot, süs, desen, dalga ayırıcı yok.
+   Kontrast: mürekkep/krem 12.4:1 · pastel dolgu üstünde mürekkep ≥ 7.9:1 ·
+   evre koyu tonu kendi açık zemininde ≥ 5.6:1 · beyaz/tema ≥ 5.2:1.
+   Sınıf öneki: kd-   (sayfa kollarının ek CSS'i: varlik/kids/css/<kol>.css)
+   ===================================================================== */
+
+/* Kids yazı ailesi: Gastro'nun Gilroy dosyaları, ağırlığa göre gerçek kesim (Gastro'da "Gilroy" yalnız 500 kesimli →
+   700/800 sahte kalın çıkıyordu). Ayrı ad (KdGilroy): Gastro sayfalarının kendi fontu değişmez. 300 Light · 400–600 Medium · 700–900 ExtraBold */
+@font-face { font-family: "KdGilroy"; src: url("../gastro/varliklar/fonts/gilroy/Gilroy-Light.woff2") format("woff2"); font-weight: 100 399; font-style: normal; font-display: swap; }
+@font-face { font-family: "KdGilroy"; src: url("../gastro/varliklar/fonts/gilroy/Gilroy-Medium.woff2") format("woff2"); font-weight: 400 649; font-style: normal; font-display: swap; }
+@font-face { font-family: "KdGilroy"; src: url("../gastro/varliklar/fonts/gilroy/Gilroy-ExtraBold.woff2") format("woff2"); font-weight: 650 900; font-style: normal; font-display: swap; }
+
+:root {
+  --kd-font: "KdGilroy", "Gilroy", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --kd-krem: #FFF8F0;
+  --kd-krem-2: #FFF1E4;
+  --kd-beyaz: #FFFFFF;
+  --kd-murekkep: #3A2E2A;
+  --kd-ikincil: #6B5A52;
+  --kd-cizgi: #F0E3D6;
+  --kd-golge: 0 1px 2px rgba(58, 46, 42, .06), 0 4px 14px -8px rgba(58, 46, 42, .16);
+  --kd-golge-yuksek: 0 2px 4px rgba(58, 46, 42, .06), 0 12px 28px -14px rgba(58, 46, 42, .24);
+  /* V2 köşe ölçeği (sözleşme): en çok 8px; daire yalnız eşit en-boy ikon/avatar */
+  --kd-r-s: 4px; --kd-r-m: 6px; --kd-r-l: 8px; --kd-r-xl: 8px; --kd-r-tam: 6px; --kd-r-daire: 50%;
+
+  /* Evre renkleri — her evre sabit: açık (zemin) · orta (dolgu) · koyu (metin/ikon) */
+  --kd-pembe-a: #FDE8EF; --kd-pembe-o: #F7B8CB; --kd-pembe-k: #9E2F58;   /* Hamilelik */
+  --kd-mavi-a:  #E4F0FB; --kd-mavi-o:  #AFD3F5; --kd-mavi-k:  #245A8C;   /* 0–6 ay   */
+  --kd-seftali-a: #FFEBDD; --kd-seftali-o: #FFC4A3; --kd-seftali-k: #9A4415; /* 6–8 ay */
+  --kd-mint-a:  #DDF4EA; --kd-mint-o:  #A6E3CB; --kd-mint-k:  #17684C;   /* 9–12 ay  */
+  --kd-sari-a:  #FFF4CC; --kd-sari-o:  #FFDF7E; --kd-sari-k:  #7A5500;   /* 1–3 yaş  */
+
+  /* Uyarı (temadan bağımsız) */
+  --kd-uyari-a: #FFF1E0; --kd-uyari-k: #8A3B00; --kd-uyari-c: #F6C58F;
+  --kd-tehlike-a: #FDECEC; --kd-tehlike-k: #A1261F;
+  --kd-uygun-a: #E3F5EC; --kd-uygun-k: #16653F;
+
+  /* Tema (cinsiyet seçimi yalnız bu tonu kaydırır) */
+  --kd-tema: #1F7A68;      /* nötr: Kids nane-yeşili */
+  --kd-tema-a: #E1F3EE;
+}
+html[data-kd-tema="kiz"]   { --kd-tema: #B03A64; --kd-tema-a: #FCE6EE; }
+html[data-kd-tema="erkek"] { --kd-tema: #2F6497; --kd-tema-a: #E3EEF9; }
+
+/* Evre rengi seçici: data-renk="pembe|mavi|seftali|mint|sari" */
+[data-renk="pembe"]   { --r-a: var(--kd-pembe-a);   --r-o: var(--kd-pembe-o);   --r-k: var(--kd-pembe-k); }
+[data-renk="mavi"]    { --r-a: var(--kd-mavi-a);    --r-o: var(--kd-mavi-o);    --r-k: var(--kd-mavi-k); }
+[data-renk="seftali"] { --r-a: var(--kd-seftali-a); --r-o: var(--kd-seftali-o); --r-k: var(--kd-seftali-k); }
+[data-renk="mint"]    { --r-a: var(--kd-mint-a);    --r-o: var(--kd-mint-o);    --r-k: var(--kd-mint-k); }
+[data-renk="sari"]    { --r-a: var(--kd-sari-a);    --r-o: var(--kd-sari-o);    --r-k: var(--kd-sari-k); }
+
+/* Gastro'nun görüş formu sunucuya POST eder; prototipte bağlanamaz → gizli (yalan yüzey yok) */
+.feedback-tab, .fb-rail { display: none !important; }
+
+/* ---------------------------------------------------------------------
+   1 · Sayfa zemini ve tipografi
+   --------------------------------------------------------------------- */
+.pg-kids { background: var(--kd-krem); }
+.pg-kids .page-main { background: var(--kd-krem); }
+.kd-sayfa { padding-top: var(--header-offset, 112px); background: var(--kd-krem); color: var(--kd-murekkep); font-family: var(--kd-font); overflow-x: clip; }
+.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa h4 { color: var(--kd-murekkep); letter-spacing: -.01em; }
+.kd-sayfa h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); line-height: 1.08; margin: 0; }
+.kd-sayfa h2 { font-size: clamp(1.5rem, 1.15rem + 1.4vw, 2.1rem); line-height: 1.15; margin: 0; }
+.kd-sayfa h3 { font-size: 1.15rem; line-height: 1.25; margin: 0; }
+.kd-sayfa p { line-height: 1.6; }
+.kd-sayfa a { color: inherit; }
+.kd-sayfa :focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 3px; border-radius: var(--kd-r-s); }
+.kd-sayfa img { max-width: 100%; height: auto; display: block; }
+.kd-ikincil { color: var(--kd-ikincil); }
+.kd-gizli { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.kd-sayfa [hidden], .kd-bant [hidden] { display: none !important; }
+
+/* ---------------------------------------------------------------------
+   2 · Kids menü barı — tek yapışkan katman (davranış: kids.js yapiskanKur)
+   Üstte: Gastro header'ı + bar (top = --kd-ust-bosluk). Aşağı kayınca html.kd-ust-gizli:
+   Gastro header'ı yalnız transform ile yukarı çekilir, bar top=0'a kayar, mini kilit görünür.
+   Yükseklik 61px (mobil 55px) sabit: sayfa kollarının yapışkan ofsetleri buna göre.
+   --------------------------------------------------------------------- */
+.kd-ust { position: sticky; top: var(--kd-ust-bosluk, 0px); z-index: 40; background: color-mix(in srgb, var(--kd-krem) 94%, transparent); backdrop-filter: saturate(1.2) blur(10px); -webkit-backdrop-filter: saturate(1.2) blur(10px); border-bottom: 1px solid var(--kd-cizgi); transition: top .28s cubic-bezier(.2, .7, .2, 1), box-shadow .28s ease; }
+.kd-ust .wrap { display: flex; align-items: center; gap: var(--kd-s3); min-height: 60px; }
+html.kd-ust-gizli .kd-ust { box-shadow: 0 6px 16px -12px rgba(58, 46, 42, .35); }
+.kd-ust__logo { flex: none; display: flex; align-items: center; max-width: 0; margin-right: calc(var(--kd-s3) * -1); opacity: 0; overflow: hidden; color: var(--tomato, #DC3D17); text-decoration: none; visibility: hidden; transition: max-width .28s ease, opacity .2s ease, margin .28s ease, visibility 0s linear .28s; }
+.kd-ust__logo-svg { display: block; width: 132px; height: auto; flex: none; }
+html.kd-ust-gizli .kd-ust__logo { max-width: 140px; margin-right: 0; opacity: 1; visibility: visible; transition-delay: 0s; }
+.kd-ust__menu { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding: 6px 2px; scroll-padding-inline: var(--kd-s6); }
+.kd-ust__menu::-webkit-scrollbar { display: none; }
+.kd-ust__menu > a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--kd-r-m); font-size: 14.5px; font-weight: 700; line-height: 1; text-decoration: none; color: var(--kd-murekkep); white-space: nowrap; transition: background-color .18s ease, color .18s ease; }
+.kd-ust__menu > .kd-ust__ev { justify-content: center; min-width: 44px; padding: 0; margin-right: auto; }
+.kd-ust__ev svg { display: block; width: 22px; height: 22px; }
+.kd-ust__menu > a:hover { background: var(--kd-krem-2); }
+.kd-ust__menu > a[aria-current="page"] { background: var(--kd-tema-a); color: var(--kd-tema); box-shadow: inset 0 -2px 0 var(--kd-tema); }
+.kd-ust__menu > a:focus-visible, .kd-ust__logo:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: -3px; }
+/* Yardım düğmesi (yardim.js açar; JS yoksa hidden kalır) */
+.kd-yardim-ac { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid var(--kd-cizgi); border-radius: var(--kd-r-m); background: #fff; color: var(--kd-murekkep); font: inherit; font-size: 14px; font-weight: 700; line-height: 1; cursor: pointer; transition: background-color .18s ease, border-color .18s ease; }
+.kd-yardim-ac[hidden] { display: none; }
+.kd-yardim-ac svg { flex: none; color: var(--kd-tema); }
+.kd-yardim-ac:hover { background: var(--kd-krem-2); }
+.kd-yardim-ac[aria-expanded="true"] { background: var(--kd-tema-a); border-color: color-mix(in srgb, var(--kd-tema) 45%, transparent); }
+.kd-yardim-ac:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+/* Gastro header'ı gizlenince (yalnız Kids sayfaları; DOM'a öğe eklenmez, yalnız transform) */
+.pg-kids header.header, .pg-kids .topbar { transition: transform .28s cubic-bezier(.2, .7, .2, 1); }
+html.kd-ust-gizli .pg-kids header.header, html.kd-ust-gizli .pg-kids .topbar { transform: translateY(calc(-1 * var(--kd-gastro-alt, 120px) - 8px)); }
+@media (max-width: 640px) {
+  .kd-ust .wrap { gap: var(--kd-s2); min-height: 54px; }
+  .kd-ust__logo-svg { width: 84px; }
+  html.kd-ust-gizli .kd-ust__logo { max-width: 88px; }
+  .kd-ust__menu { padding: 5px 0; }
+  .kd-ust__menu > a { padding: 0 10px; font-size: 13.5px; }
+  .kd-yardim-ac { min-height: 44px; padding: 0 10px; }
+}
+/* ≤600: kompakt bar — Yardım yalnız ikon (44×44, aria-label), mini kilit ~64px, kategorilere yer */
+@media (max-width: 600px) {
+  .kd-yardim-ac { width: 44px; min-width: 44px; padding: 0; justify-content: center; }
+  .kd-yardim-ac span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .kd-ust__logo-svg { width: 64px; }
+  html.kd-ust-gizli .kd-ust__logo { max-width: 64px; }
+  .kd-ust__menu > .kd-ust__ev { min-width: 44px; width: 44px; }
+  .kd-ust .wrap { gap: 6px; }
+  .kd-ust__menu { gap: 0; }
+  .kd-ust__menu > a { padding: 0 8px; }
+}
+/* Yatay taşmada kenar solması: kaydırılabilir yön ipucu (kids.js menuAktifKur sınıfları) */
+.kd-ust__menu.kd-tasma-sag { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+.kd-ust__menu.kd-tasma-sol { -webkit-mask-image: linear-gradient(90deg, transparent, #000 28px); mask-image: linear-gradient(90deg, transparent, #000 28px); }
+.kd-ust__menu.kd-tasma-sol.kd-tasma-sag { -webkit-mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent); }
+@media (prefers-reduced-motion: reduce) {
+  .kd-ust, .kd-ust__logo, .pg-kids header.header, .pg-kids .topbar, .kd-ust__menu > a, .kd-yardim-ac { transition: none !important; }
+}
+
+/* ---------------------------------------------------------------------
+   3 · Butonlar, chip'ler, rozetler, etiketler
+   --------------------------------------------------------------------- */
+.kd-btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 12px 22px; border-radius: var(--kd-r-m); border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; background: var(--kd-tema); color: #fff !important; box-shadow: none; transition: background-color .18s ease, box-shadow .18s ease; }
+.kd-btn:hover { background: color-mix(in srgb, var(--kd-tema) 86%, #000); }
+.kd-btn--hafif { background: #fff; color: var(--kd-murekkep) !important; box-shadow: inset 0 0 0 1px var(--kd-cizgi); }
+.kd-btn--hafif:hover { background: var(--kd-krem-2); }
+.kd-btn--kucuk { min-height: 38px; padding: 8px 14px; font-size: 14px; }
+.kd-bag { font-weight: 800; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--kd-tema) 60%, transparent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.kd-bag:hover { text-decoration-color: var(--kd-tema); }
+
+.kd-chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: var(--kd-r-tam); background: var(--r-a, var(--kd-krem-2)); color: var(--kd-murekkep); font: inherit; font-size: 14px; font-weight: 700; line-height: 1.1; text-decoration: none; border: 0; white-space: nowrap; cursor: pointer; transition: transform .18s, background .2s; }
+a.kd-chip:hover, button.kd-chip:hover { background: var(--r-o, var(--kd-cizgi)); }
+.kd-chip img { width: 18px; height: 18px; }
+.kd-chip--dolu { background: var(--r-o, var(--kd-cizgi)); }
+.kd-chip[aria-pressed="true"], .kd-chip[aria-checked="true"] { background: var(--r-o, var(--kd-tema-a)); box-shadow: inset 0 0 0 2px var(--r-k, var(--kd-tema)); }
+
+/* Seçilebilir chip (radio/checkbox) */
+.kd-secim { display: flex; flex-wrap: wrap; gap: 8px; }
+.kd-secim label { position: relative; cursor: pointer; }
+.kd-secim input { position: absolute; opacity: 0; inset: 0; cursor: pointer; margin: 0; }
+.kd-secim span { display: inline-flex; align-items: center; gap: 7px; padding: 10px 15px; border-radius: var(--kd-r-tam); background: var(--r-a, #fff); color: var(--kd-murekkep); font-size: 14px; font-weight: 700; line-height: 1; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); transition: background .18s, box-shadow .18s, transform .18s; }
+.kd-secim label:hover span { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--kd-murekkep) 30%, transparent); }
+.kd-secim input:checked + span { background: var(--r-o, var(--kd-tema-a)); box-shadow: inset 0 0 0 2px var(--r-k, var(--kd-tema)); }
+.kd-secim input:checked + span::before { content: ""; width: 8px; height: 8px; border-radius: var(--kd-r-daire); background: var(--r-k, var(--kd-tema)); }
+.kd-secim input:focus-visible + span { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+.kd-secim span img { width: 18px; height: 18px; }
+
+/* Eski yaş rozeti (o.yasRozet) = KidsAgeBadge görünümü (bkz. V2 bileşenleri); yalnız ölçek sınıfları */
+.kd-age-badge.kd-yas--s { font-size: 12px; padding: 5px 8px; }
+.kd-age-badge.kd-yas--m { font-size: 14px; padding: 7px 10px; }
+.kd-age-badge.kd-yas--l { font-size: clamp(15px, .9rem + .4vw, 18px); padding: 9px 14px; }
+
+.kd-etiket { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: var(--kd-r-tam); background: var(--kd-krem-2); color: var(--kd-murekkep); font-size: 13px; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+.kd-etiket svg, .kd-etiket img { width: 18px; height: 18px; flex: none; }
+.kd-alerjen { display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: var(--kd-r-tam); font-size: 12.5px; font-weight: 700; line-height: 1.1; background: var(--kd-uyari-a); color: var(--kd-uyari-k); box-shadow: inset 0 0 0 1px var(--kd-uyari-c); white-space: nowrap; }
+.kd-alerjen--yok { background: var(--kd-uygun-a); color: var(--kd-uygun-k); box-shadow: none; }
+
+/* ---------------------------------------------------------------------
+   4 · Bölümler, hero, ızgaralar
+   --------------------------------------------------------------------- */
+.kd-bolum { padding-block: clamp(40px, 5vw, 72px); }
+.kd-bolum--beyaz { background: #fff; }
+.kd-bolum--sikisik { padding-block: clamp(24px, 3vw, 40px); }
+.kd-bas { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
+.kd-bas > div { max-width: 720px; }
+.kd-bas p { margin: 10px 0 0; color: var(--kd-ikincil); font-size: 1.05rem; }
+.kd-ust-yazi { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; padding: 6px 12px; border-radius: var(--kd-r-tam); background: var(--r-a, var(--kd-tema-a)); color: var(--r-k, var(--kd-tema)); font-size: 13px; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
+.kd-ust-yazi img { width: 18px; height: 18px; }
+
+.kd-kirinti { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--kd-ikincil); margin-bottom: 18px; }
+.kd-kirinti a { text-decoration: none; font-weight: 600; }
+.kd-kirinti a:hover { text-decoration: underline; }
+.kd-kirinti b { color: var(--kd-murekkep); }
+.kd-kirinti i { font-size: 10px; opacity: .6; }
+
+.kd-hero { position: relative; isolation: isolate; padding-block: clamp(24px, 3.5vw, 48px) clamp(36px, 5vw, 72px); background: var(--kd-krem); overflow: hidden; }
+.kd-hero__izgara { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.kd-hero__metin .kd-giris { font-size: clamp(1.02rem, .95rem + .3vw, 1.18rem); color: var(--kd-ikincil); margin: 14px 0 0; max-width: 560px; }
+.kd-hero__eylem { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.kd-hero__gorsel { position: relative; isolation: isolate; }
+.kd-hero__gorsel > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--kd-r-l); box-shadow: var(--kd-golge); background: var(--r-a, var(--kd-krem-2)); }
+.kd-hero--kucuk .kd-hero__izgara { grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); }
+
+.kd-izgara { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(var(--kd-min, 260px), 100%), 1fr)); gap: clamp(14px, 1.6vw, 22px); }
+.kd-izgara--2 { --kd-min: 360px; }
+.kd-izgara--k { --kd-min: 200px; }
+.kd-kaydir { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(var(--kd-min, 240px), 1fr); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 16px; margin: -4px; scrollbar-width: thin; }
+.kd-kaydir > * { scroll-snap-align: start; }
+
+/* ---------------------------------------------------------------------
+   5 · Kartlar
+   --------------------------------------------------------------------- */
+.kd-kart { position: relative; display: flex; flex-direction: column; background: #fff; border-radius: var(--kd-r-l); box-shadow: inset 0 0 0 1px var(--kd-cizgi), var(--kd-golge); overflow: hidden; transition: box-shadow .2s ease; text-decoration: none; color: inherit; }
+a.kd-kart:hover, .kd-kart--tik:hover, article.kd-tarif:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--kd-murekkep) 22%, transparent), var(--kd-golge-yuksek); }
+.kd-kart__govde { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.kd-kart__govde p { margin: 0; color: var(--kd-ikincil); font-size: 14.5px; line-height: 1.5; }
+.kd-kart__alt { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; font-weight: 800; }
+
+/* Tarif kartı */
+.kd-tarif__medya { position: relative; aspect-ratio: 4 / 3; background: var(--r-a, var(--kd-krem-2)); overflow: hidden; }
+.kd-tarif__medya img { width: 100%; height: 100%; object-fit: cover; }
+.kd-tarif__medya .kd-age-badge { position: absolute; top: 12px; left: 12px; z-index: 2; }
+.kd-tarif__olgu { display: flex; flex-wrap: wrap; gap: 6px; }
+.kd-tarif h3 { font-size: 1.12rem; }
+.kd-tarif__meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--kd-ikincil); font-weight: 600; }
+.kd-tarif__meta i { margin-right: 4px; }
+
+/* Modül kartı */
+.kd-modul { padding: 22px; gap: 12px; background: #fff; }
+.kd-modul__ikon { width: 64px; height: 64px; border-radius: var(--kd-r-l); display: grid; place-items: center; background: var(--r-a, var(--kd-krem-2)); }
+.kd-modul__ikon img { width: 40px; height: 40px; }
+.kd-modul h3 { font-size: 1.2rem; }
+.kd-modul p { margin: 0; color: var(--kd-ikincil); font-size: 14.5px; }
+.kd-modul .kd-kart__alt { color: var(--r-k, var(--kd-tema)); padding-top: 6px; }
+
+/* Evre kartı */
+.kd-evre { background: var(--r-a); border-radius: var(--kd-r-l); padding: 20px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; transition: box-shadow .2s ease; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--r-o) 80%, transparent); }
+.kd-evre:hover { box-shadow: inset 0 0 0 1.5px var(--r-k), var(--kd-golge); }
+.kd-evre[aria-current="true"] { box-shadow: inset 0 0 0 3px var(--r-k), var(--kd-golge); }
+.kd-evre__ust { display: flex; align-items: center; gap: 12px; }
+.kd-evre__ikon { width: 52px; height: 52px; border-radius: var(--kd-r-l); background: #fff; display: grid; place-items: center; flex: none; }
+.kd-evre__ikon img { width: 34px; height: 34px; }
+.kd-evre__aralik { font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--r-k); }
+.kd-evre h3 { font-size: 1.15rem; }
+.kd-evre p { margin: 0; font-size: 14px; color: var(--kd-murekkep); }
+.kd-evre__git { margin-top: auto; font-weight: 800; font-size: 14px; color: var(--r-k); display: inline-flex; gap: 6px; align-items: center; }
+.kd-evre__sen { align-self: flex-start; font-size: 12px; font-weight: 800; padding: 4px 9px; border-radius: var(--kd-r-tam); background: #fff; color: var(--r-k); }
+.kd-evre:not([aria-current="true"]) .kd-evre__sen { display: none; }
+
+/* ---------------------------------------------------------------------
+   6 · Örnek içerik, uzman mührü, kutular, boş durum
+   --------------------------------------------------------------------- */
+.kd-ornek { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border-radius: var(--kd-r-m); background: var(--kd-uyari-a); color: var(--kd-uyari-k); box-shadow: inset 0 0 0 1px var(--kd-uyari-c); font-size: 14px; line-height: 1.5; margin: 0; }
+/* Bilgi kutularının dış boşluğu tek yerde: metin akışında üstten ve alttan --kd-s5. Izgara/esnek taşıyıcılar boşluğu gap ile verir ve --kd-kutu-dis: 0 ile bu payı kapatır. */
+.kd-ornek, .kd-onay { margin-block: var(--kd-kutu-dis, var(--kd-s5)); }
+.kd-ornek:first-child, .kd-onay:first-child { margin-top: 0; }
+.kd-ornek:last-child, .kd-onay:last-child { margin-bottom: 0; }
+.kd-ornek i { margin-top: 3px; }
+.kd-onay { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--kd-r-m); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-onay__ikon { width: 44px; height: 44px; border-radius: var(--kd-r-daire); display: grid; place-items: center; background: var(--kd-uyari-a); color: var(--kd-uyari-k); font-size: 18px; flex: none; }
+.kd-onay b { display: block; font-size: 15px; }
+.kd-onay small { display: block; font-size: 13px; color: var(--kd-ikincil); }
+.kd-kutu { padding: 18px 20px; border-radius: var(--kd-r-m); background: var(--r-a, var(--kd-krem-2)); }
+.kd-kutu h3, .kd-kutu h4 { margin: 0 0 6px; display: flex; gap: 8px; align-items: center; }
+.kd-kutu p { margin: 0; }
+.kd-kutu--uyari { background: var(--kd-uyari-a); color: var(--kd-uyari-k); }
+.kd-kutu--uyari h3, .kd-kutu--uyari h4 { color: var(--kd-uyari-k); }
+.kd-kutu--tehlike { background: var(--kd-tehlike-a); color: var(--kd-tehlike-k); }
+.kd-kutu--tehlike h3, .kd-kutu--tehlike h4 { color: var(--kd-tehlike-k); }
+.kd-bos { display: grid; justify-items: center; text-align: center; gap: 10px; padding: 36px 16px; border-radius: var(--kd-r-l); background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-bos__ikon { width: 64px; height: 64px; flex: none; display: grid; place-items: center; border-radius: var(--kd-r-l); background: var(--kd-krem-2); }
+.kd-bos__ikon img { width: 40px; height: 40px; }
+.kd-bos p { margin: 0; color: var(--kd-ikincil); }
+.kd-bos__oneriler { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+/* ---------------------------------------------------------------------
+   7 · Filtre düzeni (liste sayfaları)
+   --------------------------------------------------------------------- */
+.kd-liste { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 28px; align-items: start; }
+.kd-filtre { position: sticky; top: calc(var(--kd-ust-bosluk, 0px) + 76px); background: #fff; border-radius: var(--kd-r-l); box-shadow: var(--kd-golge); padding: 18px; display: grid; gap: 18px; max-height: calc(100vh - var(--kd-ust-bosluk, 0px) - 96px); overflow: auto; overscroll-behavior: contain; }
+.kd-filtre form { display: grid; gap: 20px; }
+.kd-filtre fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.kd-filtre legend { font-weight: 800; font-size: 14px; margin-bottom: 10px; padding: 0; }
+.kd-filtre .kd-secim span { padding: 8px 12px; font-size: 13.5px; }
+.kd-filtre__ust { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.kd-filtre__ust h2 { font-size: 1.15rem; }
+.kd-filtre__kapat { display: none; }
+.kd-ara { position: relative; }
+.kd-ara input { width: 100%; font: inherit; font-size: 15px; padding: 13px 16px 13px 44px; border-radius: var(--kd-r-tam); border: 0; background: #fff; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi), var(--kd-golge); color: var(--kd-murekkep); }
+.kd-ara input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--kd-tema), var(--kd-golge); }
+.kd-ara > i { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); color: var(--kd-ikincil); }
+.kd-sonuc-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0; }
+.kd-sonuc-bar > b { font-size: 1.05rem; }
+.kd-sonuc-bar > div { display: flex; gap: 8px; align-items: center; }
+.kd-sec { font: inherit; font-weight: 700; font-size: 14px; padding: 11px 38px 11px 15px; border-radius: var(--kd-r-tam); border: 0; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%233A2E2A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 15px center; box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); appearance: none; -webkit-appearance: none; color: var(--kd-murekkep); cursor: pointer; }
+.kd-filtre-ac { display: none; }
+.kd-perde { display: none; }
+.kd-serit { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px; }
+.kd-serit::-webkit-scrollbar { display: none; }
+.kd-serit > * { flex: none; }
+
+/* ---------------------------------------------------------------------
+   8 · Profil kutusu (hub)
+   --------------------------------------------------------------------- */
+.kd-profil { background: #fff; border-radius: var(--kd-r-l); padding: 22px; box-shadow: var(--kd-golge-yuksek); }
+.kd-profil h2 { font-size: 1.3rem; margin: 0 0 4px; }
+.kd-profil__alt { margin: 0 0 14px; color: var(--kd-ikincil); font-size: 14px; }
+.kd-profil fieldset { border: 0; padding: 0; margin: 0 0 14px; }
+.kd-profil legend { font-size: 13px; font-weight: 800; margin-bottom: 8px; padding: 0; }
+.kd-profil__tarih { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--kd-ikincil); margin-bottom: 14px; flex-wrap: wrap; }
+.kd-profil__tarih input { font: inherit; color: var(--kd-murekkep); padding: 9px 12px; border: 0; border-radius: var(--kd-r-s); box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); background: #fff; }
+.kd-profil__not { font-size: 12.5px; color: var(--kd-ikincil); margin: 12px 0 0; }
+.kd-profil[data-durum="ozet"] .kd-profil__form { display: none; }
+.kd-profil:not([data-durum="ozet"]) .kd-profil__ozet { display: none; }
+.kd-profil__ozet { display: flex; align-items: center; gap: 14px; }
+.kd-profil__ozet-ikon { width: 56px; height: 56px; border-radius: var(--kd-r-l); display: grid; place-items: center; background: var(--r-a, var(--kd-tema-a)); flex: none; }
+.kd-profil__ozet-ikon img { width: 36px; height: 36px; }
+.kd-profil__ozet b { display: block; font-size: 1.1rem; }
+.kd-profil__ozet small { color: var(--kd-ikincil); font-size: 13px; }
+.kd-degistir { margin-left: auto; background: none; border: 0; cursor: pointer; font: inherit; font-weight: 800; font-size: 14px; color: var(--kd-tema); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; padding: 6px 2px; }
+
+/* ---------------------------------------------------------------------
+   9 · Ana sayfa bandı (Gastro içinde Kids kimliği)
+   --------------------------------------------------------------------- */
+.kd-bant-sec { padding-block: 8px 28px; background: var(--bg-white, #fff); } /* komşu Gastro bölümleri beyaz; gövdenin gri zemini şerit olarak görünmesin */
+.kd-bant { position: relative; isolation: isolate; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 18px 28px; padding: 22px 26px; border-radius: var(--kd-r-l); background: linear-gradient(100deg, #FFF6EE 0%, #F3F8F5 100%); color: var(--kd-murekkep); overflow: hidden; box-shadow: inset 0 0 0 1px #EFE4D8; font-family: var(--kd-font); }
+.kd-bant__gorsel { width: 120px; height: 120px; border-radius: var(--kd-r-l); overflow: hidden; flex: none; }
+.kd-bant__gorsel img { width: 100%; height: 100%; object-fit: cover; object-position: 80% 50%; display: block; }
+.kd-bant__metin { min-width: 0; }
+.kd-bant__baslik { display: block; font-size: 19px; font-weight: 800; margin: 8px 0 2px; color: var(--kd-murekkep); }
+.kd-bant__metin p { margin: 0; font-size: 14.5px; color: var(--kd-ikincil); }
+.kd-bant__chipler { display: flex; gap: 8px; margin-top: 12px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.kd-bant__chipler::-webkit-scrollbar { display: none; }
+.kd-bant__chipler .kd-chip { background: var(--r-o); flex: none; }
+
+/* ---------------------------------------------------------------------
+   10 · Mikro animasyon (kart girişi) — azaltılmış hareket tercihine saygı
+   --------------------------------------------------------------------- */
+.kd-js .kd-gir { opacity: 0; transform: translateY(16px); transition: opacity .36s cubic-bezier(.25,1,.5,1), transform .36s cubic-bezier(.25,1,.5,1); transition-delay: var(--kd-gecikme, 0s); }
+.kd-js .kd-gir.kd-gorundu { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .kd-js .kd-gir { opacity: 1; transform: none; transition: none; }
+  .kd-kart, .kd-btn, .kd-chip, .kd-evre, .kd-tarif__medya img, .kd-secim span, .kd-filtre { transition: none !important; }
+}
+
+/* ---------------------------------------------------------------------
+   11 · Duyarlı
+   --------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .kd-hero__izgara, .kd-hero--kucuk .kd-hero__izgara { grid-template-columns: 1fr; }
+  .kd-hero__gorsel { max-width: 620px; }
+  .kd-liste { grid-template-columns: 1fr; }
+  .kd-filtre { position: fixed; inset: auto 0 0 0; top: auto; max-height: 84vh; border-radius: var(--kd-r-l) var(--kd-r-l) 0 0; z-index: 1200; transform: translateY(105%); transition: transform .3s ease; box-shadow: 0 -20px 50px -20px rgba(0,0,0,.35); padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
+  .kd-filtre.kd-acik { transform: none; }
+  .kd-filtre__kapat { display: inline-flex; }
+  .kd-filtre-ac { display: inline-flex; }
+  .kd-perde.kd-acik { display: block; position: fixed; inset: 0; background: rgba(40, 28, 22, .35); z-index: 1100; }
+  .kd-bant { grid-template-columns: auto minmax(0, 1fr); }
+  .kd-bant > .kd-btn { grid-column: 1 / -1; justify-self: start; }
+}
+@media (max-width: 640px) {
+  .kd-kart__govde { padding: 14px 16px 16px; }
+  .kd-bant { grid-template-columns: 1fr; padding: 18px; gap: 14px; }
+  .kd-bant__gorsel { width: 100%; height: 140px; border-radius: var(--kd-r-l); }
+  .kd-bant > .kd-btn { width: 100%; }
+  .kd-izgara--k { --kd-min: 150px; }
+}
+
+/* =====================================================================
+   TUR 2 — spacing ölçeği · başlık fontu · bölüm ritmi · maskot · hareket · tema v3 · logo
+   ===================================================================== */
+:root {
+  /* tek spacing ölçeği */
+  --kd-s1: 4px; --kd-s2: 8px; --kd-s3: 12px; --kd-s4: 16px; --kd-s5: 24px; --kd-s6: 32px; --kd-s7: 48px; --kd-s8: 64px; --kd-s9: 96px;
+  --kd-baslik: var(--kd-font);   /* V2: Gastro tipografisi, gerçek kalın kesim (KdGilroy 700 = Gilroy ExtraBold) */
+  --kd-gecis: .35s cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Tema v3: cinsiyet seçimi tüm Kids zeminini çok hafif çevirir (krem taban korunur); evre/uyarı renkleri sabit */
+html[data-kd-tema="kiz"]   { --kd-krem: #FFF6F4; --kd-krem-2: #FDEDEC; --kd-cizgi: #F4DFE0; }
+html[data-kd-tema="erkek"] { --kd-krem: #F7F8FC; --kd-krem-2: #EEF2FA; --kd-cizgi: #DFE5F1; }
+.kd-sayfa, .kd-hero, .kd-bolum, .kd-zebra { transition: background-color var(--kd-gecis), color var(--kd-gecis); }
+
+/* Başlık tipografisi: Dada Gastro ile aynı (Gilroy 700) */
+.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa .kd-baslik { font-family: var(--kd-baslik); font-weight: 700; letter-spacing: -.01em; }
+
+/* Bölüm ritmi: çok açık evre bantları (zebra). V2: desen ve dalga/bulut ayırıcı yok */
+.kd-zebra { position: relative; background-color: color-mix(in srgb, var(--r-a, var(--kd-krem-2)) 45%, var(--kd-krem)); }
+.kd-zebra:not([data-renk]) { background-color: var(--kd-krem-2); }
+/* İpucu kutusu (eski maskot balonu; V2'de maskotsuz, sade not) */
+.kd-rehberci { display: flex; align-items: flex-end; gap: var(--kd-s3); }
+.kd-baloncuk { position: relative; background: #fff; border-radius: var(--kd-r-l); padding: var(--kd-s4) var(--kd-s5); box-shadow: inset 0 0 0 1px var(--kd-cizgi); font-size: 15px; line-height: 1.5; color: var(--kd-murekkep); max-width: 520px; }
+.kd-baloncuk b { font-family: var(--kd-baslik); font-weight: 700; }
+
+/* İllüstrasyon + video */
+.kd-illus { display: block; width: 100%; height: auto; }
+/* Kare illüstrasyon hero'da: kutu tabandaki 4:3 ölçüde kalır, görsel kırpılmadan ortalanır */
+.kd-hero__gorsel.kd-dhero-illus, .kd-hero__gorsel.kd-rhero-illus { display: flex; justify-content: center; aspect-ratio: 4 / 3; }
+.kd-hero__gorsel.kd-dhero-illus::after, .kd-hero__gorsel.kd-rhero-illus::after { display: none; }
+.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-rhero-illus > img { width: auto; max-width: 100%; height: 100%; aspect-ratio: 1; object-fit: contain; background: transparent; box-shadow: var(--kd-golge); border-radius: var(--kd-r-l); }
+/* Kompakt ipucu: güven şeridi gibi dar bantlarda bandın boyunu uzatmaz */
+.kd-rehberci.kd-ipucu--kompakt { align-items: center; }
+.kd-rehberci.kd-ipucu--kompakt .kd-baloncuk { margin: 0; padding: var(--kd-s2) var(--kd-s3); max-width: 640px; font-size: 14px; line-height: 1.45; }
+@media (max-width: 640px) {
+  .kd-rehberci.kd-ipucu--kompakt { gap: var(--kd-s2); }
+  .kd-rehberci.kd-ipucu--kompakt .kd-baloncuk b { display: none; }
+}
+/* Başlık yanı ipucu yalnız geniş ekranda: dar ekranda bölüm başını uzatmaz */
+@media (max-width: 1024px) { .kd-bas .kd-ipucu--sag { display: none; } }
+.kd-video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; background: var(--kd-krem-2); }
+
+
+/* alt bölüm başlıklarında konuya özel küçük ikon (görselsiz düz metin bloğu kalmasın) */
+.kd-rbas { display: flex; align-items: center; gap: var(--kd-s3); }
+.kd-rbas > img { width: 32px; height: 32px; flex: none; padding: 4px; border-radius: var(--kd-r-m); background: var(--r-a, var(--kd-krem-2)); }
+.kd-ar-panel__baslik img, .kd-dmatris__ikon img { width: 28px; height: 28px; }
+
+/* ---------------------------------------------------------------------
+   Dada Gastro Kids kilidi — Gastro logosu AYNEN + "kids" rozeti
+   Header: logo değişmez; rozet yalnız CSS ::after (Gastro DOM'una öğe eklenmez; ad aria-label'da).
+   Bağımsız kilit (mega şeridi, bant, hub, bar mini logosu): ortak.mjs kidsLogoSvg().
+   --------------------------------------------------------------------- */
+.kd-logo-svg { display: block; height: auto; color: var(--tomato, #DC3D17); }
+.pg-kids .header .brand { position: relative; }
+.pg-kids .header .brand::after, .pg-kids .drawer-brand::after {
+  content: "kids"; flex: none; align-self: center; display: inline-flex; align-items: center; margin-left: 8px; padding: 3px 7px 4px;
+  border-radius: var(--kd-r-m); background: #DDF4EA; color: #17684C; font-family: var(--kd-font);
+  font-size: 13px; font-weight: 700; line-height: 1; letter-spacing: .01em; text-transform: lowercase;
+}
+.pg-kids .drawer-brand { display: inline-flex; align-items: center; }
+/* Header rozeti akış dışında (parite: .brand kutusu ve nav konumu Gastro ile birebir): logonun sağ-altında, "gastro"nun altına iner */
+.pg-kids .header .brand::after { position: absolute; right: 0; top: calc(100% - 3px); margin: 0; padding: 2px 6px 3px; font-size: 11.5px; letter-spacing: .02em; pointer-events: none; }
+@media (max-width: 640px) { .pg-kids .header .brand::after { top: calc(100% - 4px); padding: 2px 5px; font-size: 11px; } }
+.kd-hub-logo { width: clamp(240px, 20vw + 120px, 400px); margin-bottom: var(--kd-s4); }
+.kd-bant__logo { width: 220px; margin-bottom: var(--kd-s1); }
+@media (max-width: 480px) { .kd-bant__logo { width: 190px; } }
+
+/* ---------------------------------------------------------------------
+   Tema simetrisi (tur 2 ek): pembe = mavinin karşılığı. Eski pembe zemin token'ları mavinin yarısı
+   kadar ve kremle aynı sıcak tonda değişiyordu (ΔE krem 3,2 · mavi 6,7) → görünmüyordu.
+   Yeni pembe lila-fuşya: zemin ΔE ≈ mavi, Hamilelik pembesi/şeftaliden ayrık, beyaz/tema 6,2:1.
+   Her iki tema aynı yüzeyleri değiştirir: zemin, bant (krem karışımı), çizgi, gölge tonu, hero zemini,
+   alt menü aktif sekme, butonlar, seçili chip'ler. Evre ve uyarı renkleri sabit.
+   --------------------------------------------------------------------- */
+:root { --kd-golge-ton: rgba(90, 60, 40, .22); }
+html[data-kd-tema="kiz"]   { --kd-krem: #FDF2FA; --kd-krem-2: #F8E2F3; --kd-cizgi: #EDD5E9; --kd-tema: #A23585; --kd-tema-a: #F5DEF2; --kd-golge-ton: rgba(162, 53, 133, .22); }
+html[data-kd-tema="erkek"] { --kd-krem: #F5F8FD; --kd-krem-2: #E6EEFA; --kd-cizgi: #D8E2F2; --kd-tema: #2F6497; --kd-tema-a: #DCE9F9; --kd-golge-ton: rgba(47, 100, 151, .22); }
+:root { --kd-golge: 0 1px 2px rgba(58, 46, 42, .06), 0 4px 14px -8px var(--kd-golge-ton); --kd-golge-yuksek: 0 2px 4px rgba(58, 46, 42, .06), 0 12px 28px -14px var(--kd-golge-ton); }
+.kd-hero { background: linear-gradient(180deg, color-mix(in srgb, var(--r-a, var(--kd-krem-2)) 55%, var(--kd-krem)) 0%, var(--kd-krem) 100%); }
+.pg-kids, .pg-kids .page-main, .kd-sayfa, .kd-hero, .kd-zebra, .kd-kart, .kd-chip, .kd-secim span { transition: background-color .45s ease, background .45s ease, color .3s ease, box-shadow .45s ease, border-color .45s ease; }
+@media (prefers-reduced-motion: reduce) { .pg-kids, .pg-kids .page-main, .kd-sayfa, .kd-hero, .kd-zebra, .kd-kart, .kd-btn, .kd-chip, .kd-secim span { transition: none !important; } }
+/* ---------------------------------------------------------------------
+   Izgara sistemi: yarım satır yok, kart içi satırlar hizalı, sütun sayısı ve kart boyu değişmez.
+   Kural sırası: içerikle doldur (öneri şeridi 4'e tamam) → yönlendirme kartı (.kd-cta-kart) →
+   son satırı ortala. Denetim: araclar/izgara-kapisi.mjs
+   --------------------------------------------------------------------- */
+:root { --kd-izgara-bosluk: clamp(14px, 1.6vw, 22px); }
+
+/* Footer perdesi (Ek revize E3): Gastro'daki gibi çalışır — ≥641px'te footer sabit perde (portal-*.css, z 1),
+   #pageMain (z 2, opak krem) kaydıkça altından açılır; footer pencereden uzunsa altbilgi-perde.js akışa alır.
+   Kids yalnız alt çubuk dolgusunu sıfırlar (son bölümle footer arasında krem şerit kalmasın). */
+.pg-kids #pageMain { padding-bottom: 0; }
+.pg-kids .page-main { background: var(--kd-krem); }
+
+/* Dörtlü ızgara: .kd-izgara'nın otomatik sayısıyla aynı (4 / 3 / 2 / 1). 3 sütunda altı izli ızgara.
+   Tarif şeridinde boş yuvayı "Tüm tarifler" kartı tamamlar, 3 sütunda tek kalan kart gizlenir (satır tam);
+   diğer ızgaralarda tek kalan kart aynı genişlikte ortalanır. */
+.kd-dortlu { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.kd-seri-cta { display: none; order: 1; justify-content: center; }
+.kd-seri-cta .kd-kart__alt { margin-top: 0; }
+@media (min-width: 1160px) {
+  .kd-dortlu:has(> :nth-child(4n + 1 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; grid-column: span 3; }
+  .kd-dortlu:has(> :nth-child(4n + 2 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; grid-column: span 2; }
+  .kd-dortlu:has(> :nth-child(4n + 3 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; }
+}
+@media (min-width: 856px) and (max-width: 1159px) {
+  .kd-dortlu { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .kd-dortlu > * { grid-column: span 2; }
+  .kd-dortlu:not([data-izgara-oneri]) > :last-child:nth-child(3n + 1) { grid-column: 3 / span 2; }
+  .kd-dortlu[data-izgara-oneri] > :nth-child(4 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden])) { display: none; }
+  .kd-dortlu:has(> :nth-child(3n + 2 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; grid-column: span 2; }
+}
+@media (max-width: 855px) { .kd-dortlu { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 641px) and (max-width: 855px) {
+  .kd-dortlu:has(> :nth-child(2n + 1 of .kd-tarif:not([hidden])):nth-last-child(1 of .kd-tarif:not([hidden]))) > .kd-seri-cta { display: flex; }
+}
+@media (max-width: 640px) {
+  .kd-dortlu { grid-template-columns: minmax(0, 1fr); }
+  .kd-kaydir-mobil { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(240px, 80%); overflow-x: auto; scroll-snap-type: x mandatory; padding: var(--kd-s1) var(--kd-s1) var(--kd-s3); margin: calc(var(--kd-s1) * -1); scrollbar-width: thin; }
+  .kd-kaydir-mobil > * { scroll-snap-align: start; }
+}
+
+/* Yönlendirme kartı: ızgaranın son yuvasını doldurur */
+.kd-cta-kart { padding: var(--kd-s5); gap: var(--kd-s3); background: var(--r-a, var(--kd-krem-2)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--r-o, var(--kd-cizgi)) 70%, transparent); }
+.kd-cta-kart h3 { font-size: 1.15rem; }
+.kd-cta-kart p { margin: var(--kd-s1) 0 0; color: var(--kd-murekkep); font-size: 14.5px; line-height: 1.5; }
+.kd-cta-kart .kd-modul__ikon { background: #fff; }
+.kd-cta-kart .kd-kart__alt { color: var(--r-k, var(--kd-tema)); justify-content: flex-start; }
+
+/* Kart içi hizalama: aynı satırdaki kartlar başlık/chip/meta satırlarını paylaşır (subgrid).
+   Subgrid iç boşluğu üst ızgaranın satır boşluğundan küçük olamayacağından satır boşluğu karta alt pay olarak taşınır. */
+@supports (grid-template-rows: subgrid) {
+  .kd-izgara:has(> .kd-tarif), .kd-izgara:has(> .kd-evre) { row-gap: 0; margin-bottom: calc(var(--kd-izgara-bosluk) * -1); }
+  .kd-izgara > .kd-tarif { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; margin-bottom: var(--kd-izgara-bosluk); }
+  .kd-izgara > .kd-tarif > .kd-kart__govde { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: var(--kd-s2); align-items: start; }
+  .kd-izgara > .kd-cta-kart { margin-bottom: var(--kd-izgara-bosluk); }
+  .kd-izgara:has(> .kd-tarif) > .kd-cta-kart { grid-row: span 5; }
+  .kd-izgara > .kd-evre { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: var(--kd-s2); margin-bottom: var(--kd-izgara-bosluk); }
+  .kd-izgara:has(> .kd-evre) > .kd-cta-kart { grid-row: span 3; }
+  /* genel: <ızgara class="kd-hizali kd-hizali--N"> N satırı paylaşır; .kd-kart__govde iç satırları da subgrid olur */
+  .kd-sayfa .kd-hizali { row-gap: 0; margin-bottom: calc(var(--kd-hizali-bosluk, var(--kd-izgara-bosluk)) * -1); }
+  .kd-sayfa .kd-hizali > * { display: grid; grid-row: span var(--kd-satir); grid-template-rows: subgrid; row-gap: var(--kd-satir-bosluk, var(--kd-s2)); margin-bottom: var(--kd-hizali-bosluk, var(--kd-izgara-bosluk)); }
+  .kd-sayfa .kd-hizali > * > .kd-kart__govde { display: grid; grid-row: span var(--kd-govde-satir); grid-template-rows: subgrid; row-gap: var(--kd-satir-bosluk, var(--kd-s2)); }
+  .kd-sayfa .kd-hizali > .kd-cta-kart { display: flex; grid-template-rows: none; }
+  .kd-hizali--4 { --kd-satir: 4; --kd-govde-satir: 3; }
+  .kd-hizali--5 { --kd-satir: 5; --kd-govde-satir: 4; }
+  @media (max-width: 640px) {
+    .kd-kaydir-mobil:has(> .kd-tarif) { margin-bottom: 0; }
+    .kd-kaydir-mobil > .kd-tarif { margin-bottom: 0; }
+  }
+}
+
+/* Evre kartı: üst blok her kartta aynı yerde; "Sizin evreniz" etiketi akışa girmez, hizayı oynatmaz */
+.kd-evre { position: relative; }
+.kd-evre__ust { min-width: 0; align-self: start; align-items: flex-start; }
+.kd-evre__ust > div { min-width: 0; }
+.kd-evre__aralik { display: block; letter-spacing: .02em; margin-bottom: 2px; }
+.kd-evre__aralik { text-transform: none; letter-spacing: 0; white-space: nowrap; line-height: 1.3; }   /* üst etiket her kartta tek satır */
+.kd-evre__sen { position: absolute; top: var(--kd-s2); right: var(--kd-s2); z-index: 2; box-shadow: var(--kd-golge); }
+.kd-evre__git { align-self: end; }
+
+/* Kapalı mobil çekmecenin gölgesi sağ kenara sızmasın (Gastro kabuğu değişmedi, yalnız Kids sayfaları) */
+.pg-kids .drawer:not(.open) { box-shadow: none; }
+
+/* =====================================================================
+   V2 bileşenleri (tasks/v2-sozlesme.md · ortak.mjs imzaları) — görünüm
+   ===================================================================== */
+
+/* KidsAgeBadge: kart sol üst, koyu mürekkep zemin + beyaz yazı (13,1:1). o.yasRozet de bu görünümde. */
+.kd-age-badge { display: inline-flex; align-items: center; gap: 4px; padding: 6px 9px; border-radius: var(--kd-r-s); background: var(--kd-murekkep); color: #fff; font-family: var(--kd-font); font-size: 13px; font-weight: 800; letter-spacing: .04em; line-height: 1; text-transform: uppercase; white-space: nowrap; box-shadow: 0 1px 2px rgba(0, 0, 0, .18); }
+
+/* Tarif kartı (article): başlık bağı uzatılmış (::after tüm kart), Kiler düğmesi bağın dışında ve üstte */
+article.kd-tarif { cursor: pointer; }
+.kd-tarif h3 { font-size: 1.08rem; line-height: 1.3; }
+.kd-tarif__bag { color: inherit; text-decoration: none; }
+.kd-tarif__bag::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.kd-tarif__bag:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.kd-tarif__bag:focus-visible { outline: none; }
+.kd-tarif:has(.kd-tarif__bag:focus-visible) { outline: 3px solid var(--kd-tema); outline-offset: 3px; }
+.kd-tarif__alt { margin-top: auto; padding-top: var(--kd-s3); border-top: 1px solid var(--kd-cizgi); container-type: inline-size; container-name: kd-tarif-alt; }   /* sorgu kabı: kartın kendisi değil (subgrid bozulmasın) */
+.kd-tarif__alt-ic { display: flex; flex-direction: column; align-items: stretch; gap: var(--kd-s2); }   /* dar kart: iki satır (kıvam · düğme), her kartta aynı yükseklik */
+.kd-tarif__alt .kd-kivam { min-height: 20px; }
+.kd-tarif__alt .kd-kiler-ekle { position: relative; z-index: 2; justify-content: center; width: 100%; }
+/* Yer varsa (≥ 300px: en uzun kıvam 133px + düğme 155px + 8) tek satır; aynı ızgara satırındaki kartlar eşit genişlikte, hiza korunur */
+@container kd-tarif-alt (min-width: 300px) {
+  .kd-tarif__alt-ic { flex-direction: row; align-items: center; justify-content: space-between; }
+  .kd-tarif__alt .kd-kiler-ekle { width: auto; flex: none; }
+}
+
+
+/* Kıvam göstergesi: çizgisel ikon + sabit etiket */
+.kd-kivam { display: inline-flex; align-items: center; gap: 6px; color: var(--kd-murekkep); font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.kd-kivam svg { flex: none; width: 18px; height: 18px; color: var(--kd-ikincil); }
+
+/* Bebek Kilerime Ekle (davranış: js/kiler.js; durum görünümü: css/kiler.css) */
+.kd-kiler-ekle { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; padding: 0 10px; border: 1px solid var(--kd-cizgi); border-radius: var(--kd-r-m); background: #fff; color: var(--kd-murekkep); font: inherit; font-size: 13px; font-weight: 700; line-height: 1; white-space: nowrap; cursor: pointer; transition: background-color .18s ease, border-color .18s ease; }
+.kd-kiler-ekle > span[aria-hidden] { font-size: 16px; font-weight: 700; color: var(--kd-tema); }
+.kd-kiler-ekle:hover { background: var(--kd-krem-2); border-color: color-mix(in srgb, var(--kd-murekkep) 25%, transparent); }
+.kd-kiler-ekle:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+@media (pointer: coarse) { .kd-kiler-ekle { min-height: 44px; } }
+
+/* Güven rozeti (hero): bekliyor = nötr/uyarı tonu (onay iddiası yok) · onaylı = yeşil ve kalkan */
+.kd-guven-rozet { display: inline-flex; align-items: center; gap: var(--kd-s3); max-width: 100%; margin: var(--kd-s4) 0 0; padding: 10px 14px 10px 10px; border-radius: var(--kd-r-l); background: #fff; box-shadow: inset 0 0 0 1px var(--kd-uyari-c); line-height: 1.3; }
+.kd-guven-rozet__ikon { flex: none; width: 32px; height: 32px; border-radius: var(--kd-r-m); background: var(--kd-uyari-a) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238A3B00' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M12 7.5V12l3 2'/%3E%3C/svg%3E") center / 20px no-repeat; }
+.kd-guven-rozet b { display: block; font-size: 14.5px; font-weight: 800; color: var(--kd-murekkep); }
+.kd-guven-rozet small { display: block; margin-top: 2px; font-size: 13px; color: var(--kd-ikincil); }
+.kd-guven-rozet--onayli { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--kd-uygun-k) 35%, transparent); background: var(--kd-uygun-a); }
+.kd-guven-rozet--onayli .kd-guven-rozet__ikon { background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316653F' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9.5-4.1-1.9-7-5.3-7-9.5V6z'/%3E%3Cpath d='M8.8 12.2l2.2 2.2 4.2-4.4'/%3E%3C/svg%3E") center / 20px no-repeat; }
+
+/* İnceleyen uzman (makale / tarif) */
+.kd-inceleyen { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: var(--kd-s3) 0 0; padding-left: 10px; border-left: 3px solid var(--kd-uyari-c); font-size: 14px; line-height: 1.4; }
+.kd-inceleyen__etiket { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--kd-ikincil); }
+.kd-inceleyen__deger { font-weight: 700; color: var(--kd-uyari-k); }
+.kd-inceleyen[data-kd-onay="onayli"] { border-left-color: var(--kd-uygun-k); }
+.kd-inceleyen[data-kd-onay="onayli"] .kd-inceleyen__deger { color: var(--kd-murekkep); }
+
+/* 1 yaş öncesi güvenlik şeridi: hero'nun hemen altı, kalıcı, ince (kırmızı ton, 5,9:1) */
+.kd-guvenlik-serit { position: relative; z-index: 1; background: var(--kd-tehlike-a); color: var(--kd-tehlike-k); border-block: 1px solid color-mix(in srgb, var(--kd-tehlike-k) 18%, transparent); }
+.kd-guvenlik-serit p { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0; padding-block: 11px; font-size: 14.5px; font-weight: 600; line-height: 1.45; }
+.kd-guvenlik-serit p > span:not(.kd-guvenlik-serit__ikon) { flex: 1 1 320px; min-width: 0; }
+.kd-guvenlik-serit__ikon { flex: none; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: var(--kd-r-m); background: #fff; font-size: 15px; line-height: 1; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--kd-tehlike-k) 22%, transparent); }
+.kd-guvenlik-serit a { flex: none; font-weight: 800; color: var(--kd-tehlike-k); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; white-space: nowrap; }
+.kd-guvenlik-serit a:hover { text-decoration-thickness: 3px; }
+.kd-guvenlik-serit a:focus-visible { outline: 3px solid var(--kd-tehlike-k); outline-offset: 2px; border-radius: var(--kd-r-s); }
+@media (max-width: 640px) {
+  .kd-guvenlik-serit p { align-items: flex-start; font-size: 14px; padding-block: 10px; }
+  .kd-guvenlik-serit p > span:not(.kd-guvenlik-serit__ikon) { flex-basis: calc(100% - 40px); }
+  .kd-guvenlik-serit a { margin-left: 38px; white-space: normal; }
+}
+
+/* Tema rengi (Ek revize E1): Kids barında en sağda, Yardım ile sağ grup (kids.js temaSeciciKur).
+   ≤600px bardan gizli; aynı kontrol Yardım panelinin altında (.kd-tema-sec--panel). */
+.kd-tema-sec { flex: none; display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--kd-cizgi); border-radius: var(--kd-r-m); background: #fff; }
+.kd-tema-sec button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--kd-r-s); background: transparent; cursor: pointer; transition: background-color .18s ease, box-shadow .18s ease; }
+.kd-tema-sec button > span { width: 16px; height: 16px; border-radius: var(--kd-r-daire); box-shadow: inset 0 0 0 1px rgba(58, 46, 42, .25); }
+.kd-tema-sec button[data-tema="notr"] > span { background: linear-gradient(135deg, #A6E3CB 50%, #FFC4A3 50%); }
+.kd-tema-sec button[data-tema="kiz"] > span { background: #F7B8CB; }
+.kd-tema-sec button[data-tema="erkek"] > span { background: #AFD3F5; }
+.kd-tema-sec button:hover { background: var(--kd-krem-2); }
+.kd-tema-sec button[aria-pressed="true"] { background: var(--kd-tema-a); box-shadow: inset 0 0 0 1.5px var(--kd-tema); }
+.kd-tema-sec button:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 1px; }
+@media (pointer: coarse) { .kd-tema-sec--panel button { width: 44px; height: 44px; } }
+@media (max-width: 600px) { .kd-tema-sec--bar { display: none; } }
+/* Bar düzeni: ev solda, kategoriler ortada, tema + Yardım sağ grup */
+.kd-ust__menu > a:not(.kd-ust__ev):last-child { margin-right: auto; }
+@media (prefers-reduced-motion: reduce) { .kd-kiler-ekle, .kd-tema-sec button { transition: none; } }
+
+/* =====================================================================
+   Ek revize E5 — ikonlu kart ortak kalıbı (site geneli)
+   Üst satır: ikon + başlık (+ rozet sağda). Açıklama ve alt kutular bir alt satırda
+   İKONUN SOL HİZASINDAN başlar, kartın sağına kadar akar.
+   Kullanım: <div class="kd-ikonlu"><span class="kd-ikonlu__ikon">…</span><h3 class="kd-ikonlu__baslik">…</h3>
+             <span class="kd-ikonlu__rozet">…</span><p class="kd-ikonlu__metin">…</p><div class="kd-ikonlu__ek">…</div></div>
+   ===================================================================== */
+.kd-ikonlu { display: grid; grid-template-columns: auto 1fr auto; column-gap: 12px; row-gap: 8px; align-items: center; }
+.kd-ikonlu__ikon { grid-column: 1; }
+.kd-ikonlu__baslik { grid-column: 2; margin: 0; min-width: 0; }
+.kd-ikonlu__rozet { grid-column: 3; justify-self: end; }
+.kd-ikonlu:not(:has(> .kd-ikonlu__rozet)) > .kd-ikonlu__baslik { grid-column: 2 / -1; }   /* rozet yoksa başlık sağa kadar */
+.kd-ikonlu > :not(.kd-ikonlu__ikon, .kd-ikonlu__baslik, .kd-ikonlu__rozet) { grid-column: 1 / -1; }   /* sınıfsız diğer çocuklar da alt satırda tam genişlik */
+.kd-ikonlu__metin, .kd-ikonlu__ek { grid-column: 1 / -1; margin: 0; min-width: 0; }
+
+/* E5 kalıbının ortak kartlara uygulanması (ortak.mjs: evreKart, modulKart, ctaKart, bosDurum, onay) */
+.kd-modul.kd-ikonlu { grid-template-rows: auto 1fr auto; align-content: start; align-items: center; }
+.kd-modul.kd-ikonlu > .kd-ikonlu__metin { align-self: start; }
+.kd-modul.kd-ikonlu .kd-modul__ikon, .kd-cta-kart .kd-ikonlu .kd-modul__ikon { width: 48px; height: 48px; }
+.kd-modul.kd-ikonlu .kd-modul__ikon img, .kd-cta-kart .kd-ikonlu .kd-modul__ikon img { width: 28px; height: 28px; }
+.kd-modul.kd-ikonlu > .kd-kart__alt { padding-top: 0; }
+.kd-cta-kart__metin.kd-ikonlu p { margin: 0; }
+.kd-devreler > .kd-evre-cta .kd-ikonlu__baslik, .kd-hub-evreler > .kd-evre-cta .kd-ikonlu__baslik { grid-column: 1 / -1; }   /* ikon gizli olduğu kalıplar */
+.kd-evre__ust.kd-ikonlu { align-items: start; }   /* iki satırlık evre adında başlık kaymasın (izgara) */
+.kd-onay.kd-ikonlu { display: grid; row-gap: 2px; }
+.kd-onay.kd-ikonlu b, .kd-onay.kd-ikonlu small { display: block; }
+.kd-bos { justify-items: stretch; text-align: left; }
+.kd-bos__ust { width: min(100%, 560px); justify-self: center; }
+.kd-bos__oneriler { justify-content: flex-start; width: min(100%, 560px); justify-self: center; }
+
+/* =====================================================================
+   Ek revize E9 — Gastro ana sayfası Kids bandı dikeyde kompakt (içerik aynı)
+   Masaüstü: görsel 80px · logo + başlık tek satırda · açıklama · chip'ler · düğme sağda.
+   ≤1024: düğme metin sütununda chip'lerin yanında. ≤640: görsel 56px kare (logo yanında), düğme tam genişlik ince.
+   ===================================================================== */
+.kd-bant-sec { padding-block: 4px 20px; }
+.kd-bant { gap: 10px 20px; padding: 14px 20px; }
+.kd-bant__gorsel { width: 80px; height: 80px; }
+.kd-bant__metin { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 14px; row-gap: 2px; }
+.kd-bant__metin > .kd-bant__logo { width: 168px; margin: 0; }
+.kd-bant__baslik { margin: 0; font-size: 17px; line-height: 1.25; }
+.kd-bant__metin > p, .kd-bant__metin > .kd-bant__chipler { grid-column: 1 / -1; }
+.kd-bant__metin p { font-size: 14px; line-height: 1.45; }
+.kd-bant__chipler { margin-top: 8px; gap: 6px; }
+.kd-bant__chipler .kd-chip { padding: 6px 10px; font-size: 13px; }
+.kd-bant__chipler .kd-chip img { width: 16px; height: 16px; }
+.kd-bant > .kd-btn { min-height: 44px; padding: 10px 18px; font-size: 14.5px; }
+@media (max-width: 1024px) {
+  .kd-bant { grid-template-columns: auto minmax(0, 1fr); }
+  .kd-bant > .kd-btn { grid-column: 2; justify-self: start; margin-top: -2px; }
+}
+@media (max-width: 640px) {
+  .kd-bant { grid-template-columns: 56px minmax(0, 1fr); align-items: start; gap: 10px 12px; padding: 12px 14px; }
+  .kd-bant__gorsel { width: 56px; height: 56px; }
+  .kd-bant { row-gap: 4px; }
+  .kd-bant__metin { display: contents; }                       /* görsel solda; chip'ler ve düğme görselin sol hizasından tam genişlik */
+  .kd-bant__gorsel { grid-column: 1; grid-row: 1 / span 3; align-self: start; }
+  .kd-bant__metin > .kd-bant__logo, .kd-bant__baslik, .kd-bant__metin > p { grid-column: 2; }
+  .kd-bant__metin > .kd-bant__logo { width: 150px; }
+  .kd-bant__baslik { font-size: 16px; }
+  .kd-bant__metin p { font-size: 13.5px; }
+  .kd-bant__metin > .kd-bant__chipler { grid-column: 1 / -1; margin-top: 6px; }
+  .kd-bant > .kd-btn { margin-top: 6px; }
+  .kd-bant > .kd-btn { grid-column: 1 / -1; width: 100%; min-height: 44px; margin-top: 0; }
+}

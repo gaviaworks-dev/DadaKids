@@ -1,0 +1,1141 @@
+{
+ "_not": "Türkiye geneli için yaklaşık takvim; bölgeye, rakıma ve yılın havasına göre değişir. Seracılık nedeniyle birçok ürün yıl boyu bulunur. Mevsiminde ürün seçmek lezzet, ekonomi, çeşitlilik ve yerel üreticiyi destekleme açısından avantajlıdır; bir güvenlik gerekliliği değildir. Dondurulmuş sebze ve meyveler de iyi bir alternatiftir; bebekler için pişirerek kullanın. ÖRNEK İÇERİK — uzman onayı bekliyor.",
+ "_sema": {
+  "minAy": "pişmiş ya da uygun şekilde hazırlanmış (ezilmiş, dörde bölünmüş vb.) formun yaygın olarak sunulduğu en erken ay",
+  "durum": "zirvede | mevsiminde",
+  "uzmanNotu": "kaynakların farklı yaş verdiği ürünlerde; temkinli değer yazıldı, rozet yaşını uzman belirleyecek",
+  "kahraman": "Ayın Kahramanı: o ay öne çıkan, bol ve ekonomik ürün. 'En besleyici' gibi üstünlük iddiası taşımaz."
+ },
+ "aylar": [
+  {
+   "ay": 1,
+   "ad": "Ocak",
+   "kahraman": {
+    "ikon": "portakal",
+    "ad": "Portakal",
+    "neden": "Kışın en bol ve ekonomik meyvelerinden biridir. C vitamini içerir; demirden zengin bir yemeğin yanında sunulması demirin emilimine yardımcı olur.",
+    "secim": "Eline göre ağır, kabuğu parlak ve sıkı olanı seçin. Yumuşamış ya da küflenmiş noktası olanı almayın.",
+    "saklama": "Serin bir yerde 1 hafta, buzdolabının sebzeliğinde 2–3 hafta dayanır.",
+    "bebekIcin": "6–8 ay: zarları ve çekirdekleri ayıklanmış dilimleri ezerek ya da büyük bir dilimi emmesi için verin. 9–12 ay: zarsız, küçük parçalar. 1–3 yaş: zarsız dilimler; suyu yerine meyvenin kendisini tercih edin."
+   },
+   "urunler": [
+    {
+     "ikon": "portakal",
+     "ad": "Portakal",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "elma",
+     "ad": "Elma",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "muz",
+     "ad": "Muz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "avokado",
+     "ad": "Avokado",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kivi",
+     "ad": "Kivi",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "brokoli",
+     "ad": "Brokoli",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "karnabahar",
+     "ad": "Karnabahar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "pirasa",
+     "ad": "Pırasa",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kereviz",
+     "ad": "Kereviz (kök)",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "pancar",
+     "ad": "Pancar",
+     "tur": "sebze",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Pancar da ıspanak gibi nitrat içeren sebzelerdendir. Kaynaklar farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek."
+    },
+    {
+     "ikon": "ispanak",
+     "ad": "Ispanak",
+     "tur": "yesillik",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Ispanak doğal olarak nitrat içerir. Kaynaklar 6 ile 9 ay arasında farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek. Pişmiş ıspanağı bekletmeden tüketin, tekrar tekrar ısıtmayın."
+    }
+   ]
+  },
+  {
+   "ay": 2,
+   "ad": "Şubat",
+   "kahraman": {
+    "ikon": "pirasa",
+    "ad": "Pırasa",
+    "neden": "Kış sofralarının tanıdık sebzesidir; pişince yumuşar ve hafif tatlı bir tat alır. Çorba, zeytinyağlı ve köfteye kolayca girer.",
+    "secim": "Beyaz kısmı uzun, yaprakları canlı yeşil ve dik olanları seçin. Sararmış ya da yumuşamış uçlardan kaçının.",
+    "saklama": "Yıkamadan, kâğıt havluya sarıp buzdolabında 1 haftaya kadar saklayın. Toprak aralarına girdiği için kullanmadan önce yapraklarını açarak iyice yıkayın.",
+    "bebekIcin": "6–8 ay: iyice pişmiş, püre ya da patatesle ezilmiş. 9–12 ay: küçük doğranmış, yumuşak pişmiş; yemeklerin içinde. 1–3 yaş: aile zeytinyağlısından tuzsuz porsiyon."
+   },
+   "urunler": [
+    {
+     "ikon": "pirasa",
+     "ad": "Pırasa",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "elma",
+     "ad": "Elma",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "muz",
+     "ad": "Muz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "avokado",
+     "ad": "Avokado",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "mandalina",
+     "ad": "Mandalina",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "portakal",
+     "ad": "Portakal",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kivi",
+     "ad": "Kivi",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "brokoli",
+     "ad": "Brokoli",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "karnabahar",
+     "ad": "Karnabahar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kereviz",
+     "ad": "Kereviz (kök)",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "ispanak",
+     "ad": "Ispanak",
+     "tur": "yesillik",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Ispanak doğal olarak nitrat içerir. Kaynaklar 6 ile 9 ay arasında farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek. Pişmiş ıspanağı bekletmeden tüketin, tekrar tekrar ısıtmayın."
+    }
+   ]
+  },
+  {
+   "ay": 3,
+   "ad": "Mart",
+   "kahraman": {
+    "ikon": "brokoli",
+    "ad": "Brokoli",
+    "neden": "Kış sonunda hâlâ mevsimindedir. Lif, C vitamini ve folat içerir; sapı doğal bir tutamak olduğu için parmak gıdaya uygundur.",
+    "secim": "Çiçekleri sıkı, koyu yeşil ve sararmamış olanı seçin; sapı diri olmalı.",
+    "saklama": "Buzdolabında delikli poşette 3–5 gün. Dondurulmuş brokoli de iyi bir seçenektir; yumuşayana kadar pişirin.",
+    "bebekIcin": "6–8 ay: buharda yumuşamış, sapı uzun büyük çiçekler. 9–12 ay: küçük çiçekler ya da doğranmış. 1–3 yaş: makarna, omlet ve pilavın içinde."
+   },
+   "urunler": [
+    {
+     "ikon": "brokoli",
+     "ad": "Brokoli",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "muz",
+     "ad": "Muz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "avokado",
+     "ad": "Avokado",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "portakal",
+     "ad": "Portakal",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kivi",
+     "ad": "Kivi",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "karnabahar",
+     "ad": "Karnabahar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "pirasa",
+     "ad": "Pırasa",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "enginar",
+     "ad": "Enginar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kereviz",
+     "ad": "Kereviz (kök)",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "pancar",
+     "ad": "Pancar",
+     "tur": "sebze",
+     "minAy": 9,
+     "durum": "mevsiminde",
+     "uzmanNotu": "Pancar da ıspanak gibi nitrat içeren sebzelerdendir. Kaynaklar farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek."
+    },
+    {
+     "ikon": "ispanak",
+     "ad": "Ispanak",
+     "tur": "yesillik",
+     "minAy": 9,
+     "durum": "mevsiminde",
+     "uzmanNotu": "Ispanak doğal olarak nitrat içerir. Kaynaklar 6 ile 9 ay arasında farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek. Pişmiş ıspanağı bekletmeden tüketin, tekrar tekrar ısıtmayın."
+    }
+   ]
+  },
+  {
+   "ay": 4,
+   "ad": "Nisan",
+   "kahraman": {
+    "ikon": "enginar",
+    "ad": "Enginar",
+    "neden": "İlkbaharın simge sebzelerinden biridir ve kısa bir mevsimi vardır. Pişmiş enginar kalbi yumuşacık olur, lif içerir.",
+    "secim": "Yaprakları sıkı kapanmış, ağır ve parlak yeşil olanları seçin. Pazarda temizlenmiş enginar kalbi de bulunur.",
+    "saklama": "Temizlenmiş enginarı kararmaması için limonlu suda bekletin, aynı gün pişirin. Haşlanmış enginar kalbi buzdolabında 2 gün dayanır.",
+    "bebekIcin": "6–8 ay: iyice pişmiş enginar kalbini patatesle püre yapın. 9–12 ay: yumuşak pişmiş küçük parçalar. 1–3 yaş: aile zeytinyağlısından, sert yaprak uçları olmadan."
+   },
+   "urunler": [
+    {
+     "ikon": "enginar",
+     "ad": "Enginar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "muz",
+     "ad": "Muz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "cilek",
+     "ad": "Çilek",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "portakal",
+     "ad": "Portakal",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "bezelye",
+     "ad": "Bezelye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "pirasa",
+     "ad": "Pırasa",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "ispanak",
+     "ad": "Ispanak",
+     "tur": "yesillik",
+     "minAy": 9,
+     "durum": "mevsiminde",
+     "uzmanNotu": "Ispanak doğal olarak nitrat içerir. Kaynaklar 6 ile 9 ay arasında farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek. Pişmiş ıspanağı bekletmeden tüketin, tekrar tekrar ısıtmayın."
+    }
+   ]
+  },
+  {
+   "ay": 5,
+   "ad": "Mayıs",
+   "kahraman": {
+    "ikon": "cilek",
+    "ad": "Çilek",
+    "neden": "Mayıs, açık tarla çileğinin en bol olduğu aydır; fiyatı düşer, tadı artar. C vitamini içerir ve yoğurda doğal tatlılık katar.",
+    "secim": "Kırmızı rengi sapına kadar yayılmış, parlak ve kokulu olanları seçin. Ezik ve küflü olanları ayıklayın.",
+    "saklama": "Yıkamadan, tek kat hâlinde buzdolabında 1–2 gün. Yemeden hemen önce yıkayın. Fazlasını yıkayıp, sapını alıp dondurabilirsiniz.",
+    "bebekIcin": "6–8 ay: çatalla ezilmiş ya da büyük, olgun çileği dörde bölüp bastırarak. 9–12 ay: küçük parçalar. 1–3 yaş: dörde bölünmüş ya da ince dilimlenmiş."
+   },
+   "urunler": [
+    {
+     "ikon": "cilek",
+     "ad": "Çilek",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kayisi",
+     "ad": "Kayısı",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kiraz",
+     "ad": "Kiraz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kabak",
+     "ad": "Kabak",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "patates",
+     "ad": "Patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "bezelye",
+     "ad": "Bezelye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "salatalik",
+     "ad": "Salatalık",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "enginar",
+     "ad": "Enginar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    }
+   ]
+  },
+  {
+   "ay": 6,
+   "ad": "Haziran",
+   "kahraman": {
+    "ikon": "kiraz",
+    "ad": "Kiraz",
+    "neden": "Haziran kirazın en bol olduğu aydır. Tatlı ve suludur; doğru hazırlandığında yaz ara öğünlerine renk katar.",
+    "secim": "Sapı yeşil ve taze, kabuğu parlak ve sıkı olanları seçin. Yumuşamış ve çatlamış olanlardan kaçının.",
+    "saklama": "Yıkamadan buzdolabında 3–5 gün. Yemeden önce yıkayın.",
+    "bebekIcin": "Her yaşta önce çekirdeğini ve sapını mutlaka çıkarın. 6–8 ay: çekirdeksiz, boyuna dörde bölünmüş ve ezilmiş. 9–12 ay ve 1–3 yaş: çekirdeksiz ve boyuna dörde bölünmüş; 4 yaşına kadar bütün verilmez."
+   },
+   "urunler": [
+    {
+     "ikon": "kiraz",
+     "ad": "Kiraz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "seftali",
+     "ad": "Şeftali",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kayisi",
+     "ad": "Kayısı",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "cilek",
+     "ad": "Çilek",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "karpuz",
+     "ad": "Karpuz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "erik",
+     "ad": "Erik",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kabak",
+     "ad": "Kabak",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "patates",
+     "ad": "Patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "bezelye",
+     "ad": "Bezelye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "taze-fasulye",
+     "ad": "Taze fasulye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "domates",
+     "ad": "Domates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "salatalik",
+     "ad": "Salatalık",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    }
+   ]
+  },
+  {
+   "ay": 7,
+   "ad": "Temmuz",
+   "kahraman": {
+    "ikon": "karpuz",
+    "ad": "Karpuz",
+    "neden": "Yazın sıcak günlerinde serinletici ve suludur. Yumuşak dokusu sayesinde parmak gıda olarak kolayca sunulur.",
+    "secim": "Eline göre ağır, toprağa değen yüzü sarımsı olan ve tıklatınca tok ses veren karpuzu seçin.",
+    "saklama": "Kesilmemiş karpuz serin yerde birkaç gün dayanır. Kesildikten sonra üzeri kapalı olarak buzdolabında 3–4 gün saklayın.",
+    "bebekIcin": "6–8 ay: çekirdekleri ayıklanmış, parmak boyunda çubuklar ya da kabuğa yakın üçgen dilimler. 9–12 ay: çekirdeksiz küçük parçalar. 1–3 yaş: çekirdeksiz küçük dilimler."
+   },
+   "urunler": [
+    {
+     "ikon": "karpuz",
+     "ad": "Karpuz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "seftali",
+     "ad": "Şeftali",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kayisi",
+     "ad": "Kayısı",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kiraz",
+     "ad": "Kiraz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "erik",
+     "ad": "Erik",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kavun",
+     "ad": "Kavun",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "uzum",
+     "ad": "Üzüm",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kabak",
+     "ad": "Kabak",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "patates",
+     "ad": "Patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "taze-fasulye",
+     "ad": "Taze fasulye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "domates",
+     "ad": "Domates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "salatalik",
+     "ad": "Salatalık",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    }
+   ]
+  },
+  {
+   "ay": 8,
+   "ad": "Ağustos",
+   "kahraman": {
+    "ikon": "seftali",
+    "ad": "Şeftali",
+    "neden": "Ağustos şeftalinin en tatlı olduğu aylardandır. Olgun şeftali yumuşaktır ve pişirmeden ezilebilir.",
+    "secim": "Hoş kokulu, parmakla hafifçe bastırınca esneyen olanları seçin. Yeşilimsi ve taş gibi sert olanlar olgunlaşmamıştır.",
+    "saklama": "Sert şeftaliyi oda sıcaklığında 1–2 gün olgunlaştırın; olgunlaşınca buzdolabında 2–3 gün saklayın.",
+    "bebekIcin": "6–8 ay: kabuğu soyulmuş, ezilmiş ya da büyük dilimler. 9–12 ay: kabuksuz küçük parçalar. 1–3 yaş: dilimler; kabuğu sorun çıkarırsa soyun."
+   },
+   "urunler": [
+    {
+     "ikon": "seftali",
+     "ad": "Şeftali",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "elma",
+     "ad": "Elma",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "armut",
+     "ad": "Armut",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "karpuz",
+     "ad": "Karpuz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "erik",
+     "ad": "Erik",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kavun",
+     "ad": "Kavun",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "uzum",
+     "ad": "Üzüm",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "incir",
+     "ad": "İncir",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kabak",
+     "ad": "Kabak",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "taze-fasulye",
+     "ad": "Taze fasulye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "domates",
+     "ad": "Domates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "biber",
+     "ad": "Biber",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    }
+   ]
+  },
+  {
+   "ay": 9,
+   "ad": "Eylül",
+   "kahraman": {
+    "ikon": "incir",
+    "ad": "İncir",
+    "neden": "Eylül taze incirin mevsimidir. Olgun incir yumuşak ve tatlıdır; lif içerir.",
+    "secim": "Yumuşak ama ezilmemiş, kabuğu hafif çatlamış ve sapında tatlı bir damla olanlar olgundur.",
+    "saklama": "Çok hassastır: buzdolabında tek kat hâlinde 1–2 gün içinde tüketin.",
+    "bebekIcin": "6–8 ay: kabuğu soyulmuş, ezilmiş olgun incir. 9–12 ay: küçük parçalar. 1–3 yaş: dörde bölünmüş taze incir; kuru inciri küçük doğrayın ve yumuşatın."
+   },
+   "urunler": [
+    {
+     "ikon": "incir",
+     "ad": "İncir",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "elma",
+     "ad": "Elma",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "armut",
+     "ad": "Armut",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "seftali",
+     "ad": "Şeftali",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "karpuz",
+     "ad": "Karpuz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "uzum",
+     "ad": "Üzüm",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "balkabagi",
+     "ad": "Balkabağı",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "tatli-patates",
+     "ad": "Tatlı patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "kabak",
+     "ad": "Kabak",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "patates",
+     "ad": "Patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "taze-fasulye",
+     "ad": "Taze fasulye",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "biber",
+     "ad": "Biber",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    }
+   ]
+  },
+  {
+   "ay": 10,
+   "ad": "Ekim",
+   "kahraman": {
+    "ikon": "balkabagi",
+    "ad": "Balkabağı",
+    "neden": "Sonbaharda pazarların vazgeçilmezidir. Pişince kadifemsi olur; A vitamini öncülü beta-karoten içerir.",
+    "secim": "Ağır, kabuğu sert ve lekesiz olanı seçin. Dilim alıyorsanız eti canlı turuncu olmalı.",
+    "saklama": "Kesilmemiş balkabağı serin ve kuru yerde haftalarca dayanır. Kesileni streç filme sarıp buzdolabında 4–5 gün saklayın; pişmiş püreyi dondurabilirsiniz.",
+    "bebekIcin": "6–8 ay: pürüzsüz püre ya da yumuşak pişmiş kalın çubuklar. 9–12 ay: pişmiş küçük küpler. 1–3 yaş: çorba, fırın sebze ve aile yemeklerinde."
+   },
+   "urunler": [
+    {
+     "ikon": "balkabagi",
+     "ad": "Balkabağı",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "elma",
+     "ad": "Elma",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "armut",
+     "ad": "Armut",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "mandalina",
+     "ad": "Mandalina",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "ayva",
+     "ad": "Ayva",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "uzum",
+     "ad": "Üzüm",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "incir",
+     "ad": "İncir",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "nar",
+     "ad": "Nar",
+     "tur": "meyve",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Taneler küçük ve serttir. Bazı kaynaklar 6. aydan itibaren taneleri ezerek ya da suyunu yemeğe katarak önerir, bazıları kıskaç tutuşunun gelişmesini bekler. Rozet yaşını uzman belirleyecek."
+    },
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "tatli-patates",
+     "ad": "Tatlı patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "brokoli",
+     "ad": "Brokoli",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "patates",
+     "ad": "Patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    }
+   ]
+  },
+  {
+   "ay": 11,
+   "ad": "Kasım",
+   "kahraman": {
+    "ikon": "ayva",
+    "ad": "Ayva",
+    "neden": "Kasım ayvanın en bol olduğu aydır. Çiğken sert ve buruk olsa da pişince yumuşar ve kendiliğinden tatlanır.",
+    "secim": "Sarı, kokulu ve lekesiz olanları seçin. Tüyleri bez ile silinebilir.",
+    "saklama": "Serin bir yerde 1–2 hafta dayanır. Pişmiş ayva püresini dondurabilirsiniz.",
+    "bebekIcin": "Çiğ ayva her yaşta serttir; mutlaka pişirin. 6–8 ay: fırında ya da haşlanmış ayva püresi. 9–12 ay: yumuşak pişmiş küçük parçalar. 1–3 yaş: şekersiz fırın ayva dilimleri."
+   },
+   "urunler": [
+    {
+     "ikon": "ayva",
+     "ad": "Ayva",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "elma",
+     "ad": "Elma",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "armut",
+     "ad": "Armut",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "muz",
+     "ad": "Muz",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "avokado",
+     "ad": "Avokado",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "mandalina",
+     "ad": "Mandalina",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "nar",
+     "ad": "Nar",
+     "tur": "meyve",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Taneler küçük ve serttir. Bazı kaynaklar 6. aydan itibaren taneleri ezerek ya da suyunu yemeğe katarak önerir, bazıları kıskaç tutuşunun gelişmesini bekler. Rozet yaşını uzman belirleyecek."
+    },
+    {
+     "ikon": "balkabagi",
+     "ad": "Balkabağı",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "tatli-patates",
+     "ad": "Tatlı patates",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "brokoli",
+     "ad": "Brokoli",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "karnabahar",
+     "ad": "Karnabahar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    }
+   ]
+  },
+  {
+   "ay": 12,
+   "ad": "Aralık",
+   "kahraman": {
+    "ikon": "havuc",
+    "ad": "Havuç",
+    "neden": "Kış boyunca kolay bulunan, ekonomik ve tatlımsı bir sebzedir. Beta-karoten içerir; püreden köfteye pek çok tarife girer.",
+    "secim": "Sert, düz, parlak turuncu ve çatlaksız olanları seçin. Yapraklı alıyorsanız yaprakları canlı olmalı.",
+    "saklama": "Yapraklarını kesip buzdolabında poşette 2–3 hafta saklayın.",
+    "bebekIcin": "6–8 ay: yumuşayana kadar pişmiş kalın çubuklar ya da püre. 9–12 ay: pişmiş küçük küpler. 1–3 yaş: pişmiş; çiğ verecekseniz 4 yaşına kadar ince rendeleyin."
+   },
+   "urunler": [
+    {
+     "ikon": "havuc",
+     "ad": "Havuç",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "avokado",
+     "ad": "Avokado",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "mandalina",
+     "ad": "Mandalina",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "portakal",
+     "ad": "Portakal",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kivi",
+     "ad": "Kivi",
+     "tur": "meyve",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "balkabagi",
+     "ad": "Balkabağı",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "mevsiminde"
+    },
+    {
+     "ikon": "brokoli",
+     "ad": "Brokoli",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "karnabahar",
+     "ad": "Karnabahar",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "pirasa",
+     "ad": "Pırasa",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "kereviz",
+     "ad": "Kereviz (kök)",
+     "tur": "sebze",
+     "minAy": 6,
+     "durum": "zirvede"
+    },
+    {
+     "ikon": "pancar",
+     "ad": "Pancar",
+     "tur": "sebze",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Pancar da ıspanak gibi nitrat içeren sebzelerdendir. Kaynaklar farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek."
+    },
+    {
+     "ikon": "ispanak",
+     "ad": "Ispanak",
+     "tur": "yesillik",
+     "minAy": 9,
+     "durum": "zirvede",
+     "uzmanNotu": "Ispanak doğal olarak nitrat içerir. Kaynaklar 6 ile 9 ay arasında farklı yaşlar veriyor; temkinli değer yazıldı. Rozet yaşını uzman belirleyecek. Pişmiş ıspanağı bekletmeden tüketin, tekrar tekrar ısıtmayın."
+    }
+   ]
+  }
+ ]
+}

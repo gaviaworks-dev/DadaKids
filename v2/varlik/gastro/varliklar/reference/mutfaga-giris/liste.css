@@ -1,0 +1,79 @@
+
+
+.rd-crumb{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:18px 0 14px;font-size:13px;font-weight:500;color:var(--muted)}
+.rd-crumb a{color:var(--muted);transition:.18s}
+.rd-crumb a:hover{color:var(--tomato)}
+.rd-crumb i{font-size:9px;color:#c7c7c7}
+.rd-crumb b{color:var(--slate);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px}
+
+
+.lst-top{
+  position:relative;padding-top:128px;
+  background-image:linear-gradient(90deg,rgba(28,25,18,.93),rgba(33,30,22,.72)),
+    url('../../img/mutfaga-giris-liste.jpg');
+  background-size:cover;background-position:center;
+}
+.lst-top .wrap{position:relative}
+.lst-top .rd-crumb{color:#c9c3b8}
+.lst-top .rd-crumb a{color:#c9c3b8}
+.lst-top .rd-crumb a:hover{color:#ea8b74}
+.lst-top .rd-crumb i{color:rgba(255,255,255,.4)}
+.lst-top .rd-crumb b{color:#fff}
+.lst-hero .eyebrow{color:#f1b1a2}
+.lst-hero .eyebrow::before{background:var(--tomato)}
+.lst-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:44px;align-items:end;padding:10px 0 42px}
+.lst-hero h1{color:#fff;font-size:44px;margin:14px 0 12px;letter-spacing:-.03em;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.lst-hero h1 .accent{color:#e87f66;white-space:nowrap}
+.lst-hero .lead{color:#e7edf1;font-weight:500;font-size:15.5px;max-width:560px;text-shadow:0 1px 14px rgba(0,0,0,.3)}
+.lst-hero .lh-main{min-width:0}
+.lst-stats{display:flex;flex-direction:column;gap:16px;padding-left:38px;border-left:1px solid rgba(255,255,255,.18)}
+.lst-stats .st b{display:block;font-size:29px;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.1}
+.lst-stats .st span{font-size:12.5px;color:#c9c3b8;font-weight:500}
+
+
+.topics-sec{padding:52px 0 74px;background:var(--bg-cream)}
+
+
+.lvl{font-size:11px;font-weight:700;padding:6px 11px;border-radius:var(--radius-sm);letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px}
+.lvl i{font-size:10px}
+.lvl-baslangic{background:rgba(255,255,255,.94);color:var(--slate)}
+.lvl-baslangic i{color:var(--tomato)}
+.lvl-orta{background:var(--tomato);color:#fff}
+.lvl-ileri{background:rgba(20,18,12,.82);color:#fff;backdrop-filter:blur(4px)}
+
+
+.disc-card:hover h3{color:var(--tomato)}
+.disc-fig--empty{display:flex;align-items:center;justify-content:center;background:var(--bg-cream);color:var(--muted);font-size:28px}
+
+
+.next-sec{background:var(--bg-white);padding:54px 0 64px}
+.next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.next-card{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px 22px;transition:.25s var(--ease)}
+.next-card:hover{transform:translateY(-3px);border-color:var(--tomato);box-shadow:var(--sh-sm)}
+.next-card .nx-ico{flex:none;width:44px;height:44px;border-radius:var(--radius-md);background:var(--tomato-tint);color:var(--tomato);display:grid;place-items:center;font-size:18px}
+.next-card b{display:block;font-size:15.5px;font-weight:700;color:var(--slate)}
+.next-card span{display:block;font-size:12.5px;color:var(--muted);font-weight:500;margin-top:2px}
+.next-card .nx-go{margin-left:auto;color:var(--muted);font-size:13px;transition:.2s var(--ease)}
+.next-card:hover .nx-go{color:var(--tomato);transform:translateX(3px)}
+
+
+@media (max-width:1024px){
+  .lst-hero{grid-template-columns:1fr;align-items:start;gap:22px;padding-bottom:32px}
+  .lst-stats{flex-direction:row;gap:34px;padding-left:0;border-left:none;padding-top:18px;border-top:1px solid rgba(255,255,255,.18)}
+  
+  .disc-grid{grid-template-columns:1fr 1fr;gap:22px}
+  .next-grid{grid-template-columns:1fr}
+}
+
+@media (max-width:640px){
+  .rd-crumb{padding:14px 0 10px;font-size:12px}
+  .lst-top{padding-top:74px}
+  .lst-hero{padding:2px 0 26px}
+  .lst-hero h1{font-size:29px}
+  .lst-hero .lead{font-size:14.5px}
+  .lst-stats{gap:10px}
+  .lst-stats .st{flex:1}
+  .topics-sec{padding:36px 0 50px}
+  .disc-grid{grid-template-columns:1fr;gap:20px}
+  .next-sec{padding:38px 0 46px}
+}

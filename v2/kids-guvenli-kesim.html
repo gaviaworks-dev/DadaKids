@@ -1,0 +1,961 @@
+<!-- Dada Gastro Kids prototipi · Kids sayfası · donör: https://dadagastro.com (kabuk: tarif detayı) · araclar/build.mjs ile üretildi, elle düzenlenmez -->
+<!-- donör: https://dadagastro.com/tarif/balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin · alındı: 2026-10-31 · araclar/snapshot.mjs -->
+<!DOCTYPE html>
+<html lang="tr"><head>
+<meta name="robots" content="noindex, nofollow"><meta name="dada-dil-adresleri" content="{&quot;tr&quot;:&quot;/tarif/balkabagi-puresi-6-ay-ve-uzeri-bebekler-icin&quot;,&quot;en&quot;:&quot;/en/recipes/pumpkin-puree-for-babies-6-months-and-older&quot;,&quot;de&quot;:&quot;/de/rezepte/kuerbispueree-fuer-babys-ab-6-monaten&quot;,&quot;ru&quot;:&quot;/ru/retsepty/tykvennoe-pyure-dlya-detey-ot-6-mesyatsev&quot;}"><meta name="dada-yollar" content="{&quot;ad&quot;:{&quot;g-arama.html&quot;:&quot;/ara&quot;,&quot;g-giris.html&quot;:&quot;/giris&quot;,&quot;g-404.html&quot;:&quot;/404&quot;,&quot;g-hata-403.html&quot;:&quot;/403&quot;,&quot;g-hata-500.html&quot;:&quot;/500&quot;,&quot;g-bakim.html&quot;:&quot;/bakim&quot;,&quot;g-cevrimdisi.html&quot;:&quot;/cevrimdisi&quot;,&quot;g-oturum-suresi-doldu.html&quot;:&quot;/oturum-suresi-doldu&quot;,&quot;anasayfa.html&quot;:&quot;/&quot;,&quot;tarifler.html&quot;:&quot;/tarifler&quot;,&quot;tarifler__kategori__tatli.html&quot;:&quot;/tarifler/kategori/tatli&quot;,&quot;tarif__laz-boregi-karadeniz-usulu-muhallebili-tatli-borek.html&quot;:&quot;/tarif/laz-boregi-karadeniz-usulu-muhallebili-tatli-borek&quot;,&quot;bugun-ne-pisirsem.html&quot;:&quot;/bugun-ne-pisirsem&quot;,&quot;dolapta-ne-var.html&quot;:&quot;/dolapta-ne-var&quot;,&quot;puf-noktalari.html&quot;:&quot;/puf-noktalari&quot;,&quot;puf-noktalari__papatya-cayi-nasil-demlenir.html&quot;:&quot;/puf-noktalari/papatya-cayi-nasil-demlenir&quot;,&quot;mutfak-sirlari.html&quot;:&quot;/mutfak-sirlari&quot;,&quot;mutfaga-giris.html&quot;:&quot;/mutfaga-giris&quot;,&quot;mutfaga-giris__rota.html&quot;:&quot;/mutfaga-giris/rota&quot;,&quot;mutfaga-giris__konu__sunum-ve-servis.html&quot;:&quot;/mutfaga-giris/konu/sunum-ve-servis&quot;,&quot;mutfaga-giris__tavada-pisirme-teknikleri.html&quot;:&quot;/mutfaga-giris/tavada-pisirme-teknikleri&quot;,&quot;mutfak-ansiklopedisi.html&quot;:&quot;/mutfak-ansiklopedisi&quot;,&quot;mutfak-ansiklopedisi__acai.html&quot;:&quot;/mutfak-ansiklopedisi/acai&quot;,&quot;mutfak-sozlugu.html&quot;:&quot;/mutfak-sozlugu&quot;,&quot;mutfak-sozlugu__al-dente.html&quot;:&quot;/mutfak-sozlugu/al-dente&quot;,&quot;olcu-birimleri.html&quot;:&quot;/olcu-birimleri&quot;,&quot;sofra-duzeni.html&quot;:&quot;/sofra-duzeni&quot;,&quot;sofra-duzeni__gunluk-sofra-duzeni.html&quot;:&quot;/sofra-duzeni/gunluk-sofra-duzeni&quot;,&quot;video-mutfagi.html&quot;:&quot;/video-mutfagi&quot;,&quot;video-mutfagi__seriler.html&quot;:&quot;/video-mutfagi/seriler&quot;,&quot;video-mutfagi__seri__sef-teknikleri.html&quot;:&quot;/video-mutfagi/seri/sef-teknikleri&quot;,&quot;sefler.html&quot;:&quot;/sefler&quot;,&quot;sefler__burcu.oymen.html&quot;:&quot;/sefler/burcu.oymen&quot;,&quot;onur-listesi.html&quot;:&quot;/onur-listesi&quot;,&quot;pro.html&quot;:&quot;/pro&quot;,&quot;reklam-ver.html&quot;:&quot;/marka-is-birlikleri&quot;,&quot;hakkimizda.html&quot;:&quot;/hakkimizda&quot;,&quot;iletisim.html&quot;:&quot;/iletisim&quot;,&quot;kunye.html&quot;:&quot;/kunye&quot;,&quot;yasal.html&quot;:&quot;/yasal&quot;,&quot;yasal__kvkk.html&quot;:&quot;/yasal/kvkk&quot;,&quot;giris.html&quot;:&quot;/giris&quot;,&quot;register.html&quot;:&quot;/kayit&quot;,&quot;tarif-ekle.html&quot;:&quot;/tarif-ekle&quot;,&quot;puf-noktasi-ekle.html&quot;:&quot;/puf-noktasi-ekle&quot;,&quot;marka-is-birlikleri.html&quot;:&quot;/marka-is-birlikleri&quot;,&quot;index.html&quot;:&quot;/&quot;},&quot;onek&quot;:[[&quot;mutfak-ansiklopedisi__&quot;,&quot;/mutfak-ansiklopedisi/&quot;],[&quot;mutfaga-giris__konu__&quot;,&quot;/mutfaga-giris/konu/&quot;],[&quot;video-mutfagi__seri__&quot;,&quot;/video-mutfagi/seri/&quot;],[&quot;tarifler__kategori__&quot;,&quot;/tarifler/kategori/&quot;],[&quot;yasal-v1.html?metin=&quot;,&quot;/yasal/&quot;],[&quot;mutfak-sozlugu__&quot;,&quot;/mutfak-sozlugu/&quot;],[&quot;puf-noktalari__&quot;,&quot;/puf-noktalari/&quot;],[&quot;mutfaga-giris__&quot;,&quot;/mutfaga-giris/&quot;],[&quot;video-mutfagi__&quot;,&quot;/video-mutfagi/&quot;],[&quot;sofra-duzeni__&quot;,&quot;/sofra-duzeni/&quot;],[&quot;sefler__&quot;,&quot;/sefler/&quot;],[&quot;tarif__&quot;,&quot;/tarif/&quot;],[&quot;yasal__&quot;,&quot;/yasal/&quot;]]}"><link rel="stylesheet" href="varlik/gastro/kabuk/kabuk-kimlik.css"><link rel="stylesheet" href="varlik/gastro/kabuk/zil-sayaci.css"><link rel="stylesheet" href="varlik/gastro/kabuk/baslik-zemin.css"><link rel="stylesheet" href="varlik/gastro/kabuk/kart-standart.css"><link rel="stylesheet" href="varlik/gastro/kabuk/baslik-revize.css"><link rel="stylesheet" href="varlik/gastro/kabuk/banner-standart.css"><link rel="stylesheet" href="varlik/gastro/kabuk/magaza-rozeti.css"><link rel="stylesheet" href="varlik/gastro/kabuk/altbilgi-marka.css"><script src="varlik/gastro/kabuk/avatar-yedek.js"></script><script src="varlik/gastro/kabuk/yer-tutucu.js" defer></script><link rel="stylesheet" href="varlik/gastro/kabuk/ust-serit-inert.css"><script src="varlik/gastro/kabuk/depo-kapisi.js"></script><script src="varlik/gastro/kabuk/dada-kabuk.js"></script><link rel="stylesheet" href="varlik/gastro/kabuk/gorus-ek.css"><link rel="stylesheet" href="varlik/gastro/kabuk/basari-bildirimi.css"><script src="varlik/gastro/kabuk/cekmece-alt-menu.js" defer></script><link rel="stylesheet" href="varlik/gastro/kabuk/cekmece-alt-menu.css"><script src="varlik/gastro/gastro/gorsel-hazirla.js" data-azami-bayt="10485760" data-azami-piksel="16000000" data-azami-kenar="8000" defer></script><link rel="stylesheet" href="varlik/gastro/f6/tarif-bildirim.css"><script src="varlik/gastro/kabuk/px-kaydirma.js" defer></script><script src="varlik/gastro/kabuk/baslik-zemin.js"></script>
+<meta name="dada-sayi-kurallari" content="{&quot;birimler&quot;:[[1000000,&quot;Mn&quot;],[1000,&quot;B&quot;]],&quot;ondalik_sinir&quot;:10,&quot;ondalik_ayrac&quot;:&quot;,&quot;,&quot;binlik_ayrac&quot;:&quot;.&quot;,&quot;ara&quot;:&quot; &quot;}"><script src="varlik/gastro/gastro/sayi-kisaltma.js" defer></script><link rel="stylesheet" href="varlik/gastro/f4/gastro-belge.css"><script src="varlik/gastro/f4/gastro-belge.js" defer></script><link rel="stylesheet" href="varlik/gastro/kabuk/cerez-bandi.css">
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Güvenli Kesim: besin besin 6–8 ay, 9–12 ay, 12 ay+ | Dada Gastro Kids</title>
+<meta name="description" content="Bebek ve küçük çocuklar için besin besin güvenli kesim rehberi: aynı ölçekte çizilmiş üç aşama, boğulma riski, asla bütün verilmeyen besinler.">
+<meta property="og:site_name" content="Dada Gastro Kids (prototip)">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gaviaworks-dev.github.io/DadaKids/v2/kids-guvenli-kesim.html">
+<meta property="og:title" content="Güvenli Kesim: besin besin 6–8 ay, 9–12 ay, 12 ay+ | Dada Gastro Kids">
+<meta property="og:description" content="Bebek ve küçük çocuklar için besin besin güvenli kesim rehberi: aynı ölçekte çizilmiş üç aşama, boğulma riski, asla bütün verilmeyen besinler.">
+<meta property="og:image" content="https://gaviaworks-dev.github.io/DadaKids/v2/varlik/kids/gorsel/hero-mutfak.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Güvenli Kesim: besin besin 6–8 ay, 9–12 ay, 12 ay+ | Dada Gastro Kids">
+<meta name="twitter:description" content="Bebek ve küçük çocuklar için besin besin güvenli kesim rehberi: aynı ölçekte çizilmiş üç aşama, boğulma riski, asla bütün verilmeyen besinler.">
+<meta name="twitter:image" content="https://gaviaworks-dev.github.io/DadaKids/v2/varlik/kids/gorsel/hero-mutfak.webp">
+
+    <link rel="shortcut icon" type="image/x-icon" href="varlik/gastro/varliklar/favicon.ico">
+    <link rel="stylesheet" href="varlik/gastro/varliklar/fontawesome/css/all.min.css">
+            
+        <link rel="preload" as="style" href="varlik/gastro/varliklar/build/assets/tokens-n1Tp8NEY.css"><link rel="preload" as="style" href="varlik/gastro/varliklar/build/assets/portal-DQfW7by7.css"><link rel="preload" as="style" href="varlik/gastro/varliklar/build/assets/kart-fMfp465y.css"><link rel="preload" as="style" href="varlik/gastro/varliklar/build/assets/parallax-S2t5vFDm.css"><link rel="modulepreload" as="script" href="varlik/gastro/varliklar/build/assets/app-Dsop9IcY.js"><link rel="modulepreload" as="script" href="varlik/gastro/varliklar/build/assets/portal-Co4op6F_.js"><link rel="modulepreload" as="script" href="varlik/gastro/varliklar/build/assets/parallax-DWpYIxig.js"><link rel="stylesheet" href="varlik/gastro/varliklar/build/assets/tokens-n1Tp8NEY.css"><link rel="stylesheet" href="varlik/gastro/varliklar/build/assets/portal-DQfW7by7.css"><link rel="stylesheet" href="varlik/gastro/varliklar/build/assets/kart-fMfp465y.css"><link rel="stylesheet" href="varlik/gastro/varliklar/build/assets/parallax-S2t5vFDm.css"><script type="module" src="varlik/gastro/varliklar/build/assets/app-Dsop9IcY.js"></script><script type="module" src="varlik/gastro/varliklar/build/assets/portal-Co4op6F_.js"></script><script type="module" src="varlik/gastro/varliklar/build/assets/parallax-DWpYIxig.js"></script>        
+            <link rel="icon" type="image/png" sizes="192x192" href="varlik/gastro/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="varlik/gastro/apple-touch-icon.png">
+<link rel="stylesheet" href="varlik/gastro/varliklar/reference/tarif-detay/tarif-detay.css">
+            <link rel="stylesheet" href="varlik/gastro/f6/icerik-bloklari.css">
+    
+<link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-kabuk.css">
+  <link rel="stylesheet" href="varlik/gastro/kanon/alt-cubuk.css">
+  <link rel="stylesheet" href="varlik/gastro/kanon/hero.css">
+  <link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-hero.css">
+  <link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-p3.css">
+  <link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-p4.css">
+  <link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-p4-m.css">
+  <link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-p5.css">
+  <link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/dm-p5-l.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/p1/tarif-malzeme.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/alisveris/tarif-liste.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/p1/tarif-pisirme.css">
+  <link rel="stylesheet" href="varlik/gastro/gastro/alt-eylem-cubugu.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/p1/tarif-liste-veri.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/tur5/tarif-tek-h1.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/tur5/metin-yasla.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/tur7/t-adim-metin.css">
+  <link rel="stylesheet" href="varlik/gastro/revize/tur9/r-tarif-detay.css">
+<link rel="stylesheet" href="varlik/gastro/gastro/altbilgi-perde.css">
+<link rel="stylesheet" href="varlik/gastro/revize/tur7/p-pencere.css" data-pencere-kalibi>
+<link rel="stylesheet" href="varlik/kids/kids.css?v=mvxv182q">
+<link rel="stylesheet" href="varlik/kids/css/mega.css?v=mvxv182q">
+<link rel="stylesheet" href="varlik/kids/css/kesim.css?v=mvxv182q">
+<link rel="stylesheet" href="varlik/kids/css/yardim.css?v=mvxv182q">
+<link rel="stylesheet" href="varlik/kids/css/putur.css?v=mvxv182q">
+<link rel="stylesheet" href="varlik/kids/css/kiler.css?v=mvxv182q">
+</head>
+
+<body data-fit-hero-kind="detay" class="pg-kids ">
+    <div class="topbar ust-bant">
+  <div class="wrap kap">
+    <div class="tb-left">
+      <a href="tarifler.html"><i class="fa-solid fa-utensils" style="color:var(--marka)"></i> 6.346 denenmiş tarif</a>
+      <span class="tb-div"></span>
+      <div class="tb-soc">
+        <a href="https://www.instagram.com/dada.gastro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/dadagastrocom" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://x.com/dadagastrocom" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+    <div class="tb-right">
+      <nav class="brand-switch" aria-label="Dada dünyaları">
+        <a class="bs-item bs-gastro is-active" href="index.html" aria-current="page"><i class="fa-solid fa-utensils"></i><span class="bs-name"><span class="bd">dada</span><span class="sf">gastro</span></span></a>
+                <a class="bs-item bs-fit" href="https://dadafit.com.tr" title="DadaFit" data-eco="fit" target="_blank" rel="noopener"><i class="fa-solid fa-dumbbell"></i><span class="bs-name"><span class="bd">dada</span><span class="sf">fit</span></span></a>
+                <a class="bs-item bs-diet" href="https://dadadiet.com" title="DadaDiet" data-eco="diet" target="_blank" rel="noopener"><i class="fa-solid fa-heart-pulse"></i><span class="bs-name"><span class="bd">dada</span><span class="sf">diet</span></span></a>
+                <a class="bs-item bs-gourmet" href="https://dadagourmet.com" title="DadaGourmet" data-eco="gourmet" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot"></i><span class="bs-name"><span class="bd">dada</span><span class="sf">gourmet</span></span></a>
+      </nav>
+      <div class="tb-lang" id="tbLang">
+        <button class="tb-lang-btn" id="tbLangBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Dil menüsü — site Türkçe">
+          <i class="fa-solid fa-globe" aria-hidden="true"></i><span lang="en">EN</span>
+        </button>
+        <div class="tb-lang-menu" id="tbLangMenu" role="menu">
+          <button type="button" role="menuitemradio" aria-checked="true" class="active" data-lang="tr">TR <span>Türkçe</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="en">EN <span>English</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="de">DE <span>Deutsch</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="ru">RU <span>Русский</span></button>
+          <template data-dil-yok="en"><p class="tb-lang-note is-vurgu" role="status" data-dil-yok-not="en"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Bu sayfa henüz İngilizce yayımlanmadı.</span></p></template>
+          <template data-dil-yok="de"><p class="tb-lang-note is-vurgu" role="status" data-dil-yok-not="de"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Bu sayfa henüz Almanca yayımlanmadı.</span></p></template>
+          <template data-dil-yok="ru"><p class="tb-lang-note is-vurgu" role="status" data-dil-yok-not="ru"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Bu sayfa henüz Rusça yayımlanmadı.</span></p></template>
+        </div>
+      </div>
+<script src="varlik/gastro/f7/dil-menusu.js" data-acik-diller="tr,en,de,ru" defer></script>
+    </div>
+  </div>
+</div>
+    <header class="header kabuk-basi">
+  <div class="h-top">
+    <div class="wrap kap">
+      <a class="brand" href="kids.html" aria-label="Dada Gastro Kids ana sayfa">
+                <span class="brand-word"><svg class="gastro-word-mark" viewBox="921.855 214.449 1721.825 348.042" role="img" aria-label="Dada Gastro" xmlns="http://www.w3.org/2000/svg"><title>Dada Gastro</title><path fill="currentColor" fill-rule="nonzero" d="M 1668.214844 361.792969 C 1690.148438 361.792969 1704.765625 378.71875 1704.765625 399.109375 C 1704.765625 419.113281 1690.148438 436.042969 1668.214844 436.042969 C 1646.289062 436.042969 1631.671875 419.113281 1631.671875 399.109375 C 1631.671875 378.71875 1646.289062 361.792969 1668.214844 361.792969 M 1656.675781 501.054688 C 1678.988281 501.054688 1696.304688 493.746094 1708.613281 481.050781 L 1708.613281 495.285156 L 1774.011719 495.285156 L 1774.011719 398.722656 C 1774.011719 339.863281 1729.769531 296.777344 1668.214844 296.777344 C 1608.207031 296.777344 1562.425781 342.941406 1562.425781 398.722656 C 1562.425781 454.890625 1600.507812 501.054688 1656.675781 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1454.691406 362.179688 C 1476.625 362.179688 1491.242188 379.105469 1491.242188 399.109375 C 1491.242188 419.5 1476.625 436.039062 1454.691406 436.039062 C 1432.765625 436.039062 1418.148438 419.5 1418.148438 399.109375 C 1418.148438 379.105469 1432.765625 362.179688 1454.691406 362.179688 M 1454.691406 501.054688 C 1516.246094 501.054688 1560.488281 458.351562 1560.488281 399.492188 L 1560.488281 214.449219 L 1491.242188 214.449219 L 1491.242188 307.933594 C 1479.3125 301.394531 1465.082031 297.164062 1450.847656 297.164062 C 1389.679688 297.164062 1348.902344 337.941406 1348.902344 399.492188 C 1348.902344 455.273438 1394.683594 501.054688 1454.691406 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1241.167969 361.792969 C 1263.101562 361.792969 1277.71875 378.71875 1277.71875 399.109375 C 1277.71875 419.113281 1263.101562 436.042969 1241.167969 436.042969 C 1219.242188 436.042969 1204.625 419.113281 1204.625 399.109375 C 1204.625 378.71875 1219.242188 361.792969 1241.167969 361.792969 M 1229.628906 501.054688 C 1251.945312 501.054688 1269.257812 493.746094 1281.566406 481.050781 L 1281.566406 495.285156 L 1346.96875 495.285156 L 1346.96875 398.722656 C 1346.96875 339.863281 1302.722656 296.777344 1241.167969 296.777344 C 1181.160156 296.777344 1135.378906 342.941406 1135.378906 398.722656 C 1135.378906 454.890625 1173.464844 501.054688 1229.628906 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1027.648438 362.179688 C 1049.578125 362.179688 1064.199219 379.105469 1064.199219 399.109375 C 1064.199219 419.5 1049.578125 436.039062 1027.648438 436.039062 C 1005.722656 436.039062 991.101562 419.5 991.101562 399.109375 C 991.101562 379.105469 1005.722656 362.179688 1027.648438 362.179688 M 1027.648438 501.054688 C 1089.203125 501.054688 1133.445312 458.351562 1133.445312 399.492188 L 1133.445312 214.449219 L 1064.199219 214.449219 L 1064.199219 307.933594 C 1052.265625 301.394531 1038.039062 297.164062 1023.800781 297.164062 C 962.636719 297.164062 921.855469 337.941406 921.855469 399.492188 C 921.855469 455.273438 967.636719 501.054688 1027.648438 501.054688 "></path><g transform="translate(1804.507685,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 -6.3125 C 157.984375 26.21875 135.859375 46.765625 99.53125 46.765625 C 71.40625 46.765625 52.453125 37.28125 42.96875 18.015625 L 24.640625 28.4375 C 37.59375 54.03125 62.5625 66.984375 99.53125 66.984375 C 121.328125 66.984375 139.96875 60.34375 155.453125 47.390625 C 170.9375 34.4375 178.84375 16.4375 178.84375 -6.3125 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(1988.081594,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 0 L 178.84375 0 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(2171.655502,495.506687)"><path fill="currentColor" d="M 38.546875 -116.59375 C 38.546875 -132.703125 53.71875 -141.546875 71.71875 -141.546875 C 91 -141.546875 103.640625 -134.28125 109.640625 -119.4375 L 127.015625 -129.546875 C 117.859375 -149.453125 97.3125 -161.78125 71.71875 -161.78125 C 56.25 -161.78125 43.28125 -157.359375 32.859375 -148.828125 C 22.75 -140.296875 17.6875 -129.546875 17.6875 -116.59375 C 17.6875 -82.46875 50.875 -75.203125 77.40625 -68.5625 C 95.421875 -63.828125 109.953125 -55.921875 109.953125 -41.703125 C 109.953125 -24.328125 94.15625 -16.4375 73.625 -16.4375 C 52.453125 -16.4375 36.34375 -26.546875 30.328125 -42.96875 L 12.640625 -32.546875 C 21.171875 -11.0625 43.28125 3.796875 73.625 3.796875 C 90.359375 3.796875 104.265625 -0.3125 114.703125 -8.84375 C 125.4375 -17.375 130.8125 -28.125 130.8125 -41.703125 C 130.8125 -75.828125 97.640625 -83.09375 71.09375 -89.734375 C 53.078125 -94.46875 38.546875 -102.375 38.546875 -116.59375 Z M 38.546875 -116.59375 "></path></g><g transform="translate(2291.405091,495.506687)"><path fill="currentColor" d="M 105.84375 -157.984375 L 60.34375 -157.984375 L 60.34375 -202.21875 L 39.5 -195.90625 L 39.5 -157.984375 L 6.3125 -157.984375 L 6.3125 -137.765625 L 39.5 -137.765625 L 39.5 -42.03125 C 39.5 -5.375 61.609375 6.640625 105.84375 0 L 105.84375 -18.328125 C 75.515625 -17.0625 60.34375 -14.84375 60.34375 -42.03125 L 60.34375 -137.765625 L 105.84375 -137.765625 Z M 105.84375 -157.984375 "></path></g><g transform="translate(2392.512923,495.506687)"><path fill="currentColor" d="M 42.96875 -157.984375 L 22.125 -157.984375 L 22.125 0 L 42.96875 0 L 42.96875 -87.84375 C 42.96875 -124.171875 64.140625 -140.296875 92.890625 -140.296875 L 92.890625 -160.515625 C 69.203125 -160.515625 52.765625 -151.03125 42.96875 -131.765625 Z M 42.96875 -157.984375 "></path></g><g transform="translate(2464.836619,495.506687)"><path fill="currentColor" d="M 154.515625 -19.90625 C 170.625 -36.015625 178.84375 -55.609375 178.84375 -79 C 178.84375 -102.375 170.625 -121.96875 154.515625 -137.765625 C 138.390625 -153.875 118.796875 -161.78125 95.734375 -161.78125 C 72.671875 -161.78125 52.765625 -153.875 36.65625 -137.765625 C 20.53125 -121.96875 12.640625 -102.375 12.640625 -79 C 12.640625 -55.609375 20.53125 -36.015625 36.65625 -19.90625 C 52.765625 -4.109375 72.671875 3.796875 95.734375 3.796875 C 118.796875 3.796875 138.390625 -4.109375 154.515625 -19.90625 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g></svg></span></a>
+      <nav class="nav ana-menu" aria-label="Dada Gastro ana menü">
+<div class="nav-item has-mega">
+            <a href="tarifler.html" class="">Tarifler <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+            <div class="mega rk-ortak-mega">
+                <div class="wrap">
+                    <div class="mega-grid">
+                        <div class="mega-cats">
+                                                                                <a href="tarifler.html" data-slug="/sebze" title="Sebze"><i class="fa-solid fa-carrot" aria-hidden="true"></i> <span>Sebze<small>357 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/kirmizi-et" title="Kırmızı Et"><i class="fa-solid fa-cow" aria-hidden="true"></i> <span>Kırmızı Et<small>343 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/meze" title="Meze"><i class="fa-solid fa-shrimp" aria-hidden="true"></i> <span>Meze<small>273 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/atistirmalik" title="Atıştırmalık"><i class="fa-solid fa-cheese" aria-hidden="true"></i> <span>Atıştırmalık<small>247 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/kahvaltilik" title="Kahvaltılık"><i class="fa-solid fa-egg" aria-hidden="true"></i> <span>Kahvaltılık<small>249 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/balik-ve-deniz-urunleri" title="Balık ve Deniz Ürünleri"><i class="fa-solid fa-fish" aria-hidden="true"></i> <span>Balık ve Deniz Ürünleri<small>268 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/corba" title="Çorba"><i class="fa-solid fa-bowl-food" aria-hidden="true"></i> <span>Çorba<small>281 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/tavuk-ve-hindi" title="Tavuk ve Hindi"><i class="fa-solid fa-drumstick-bite" aria-hidden="true"></i> <span>Tavuk ve Hindi<small>250 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/pilav" title="Pilav"><i class="fa-solid fa-bowl-rice" aria-hidden="true"></i> <span>Pilav<small>234 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/tatli" title="Tatlı"><i class="fa-solid fa-ice-cream" aria-hidden="true"></i> <span>Tatlı<small>290 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/sandvic-burger-ve-durum" title="Sandviç, Burger ve Dürüm"><i class="fa-solid fa-burger" aria-hidden="true"></i> <span>Sandviç, Burger ve Dürüm<small>192 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/meyve-tarifleri" title="Meyve Tarifleri"><i class="fa-solid fa-apple-whole" aria-hidden="true"></i> <span>Meyve Tarifleri<small>209 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/icecek" title="İçecek"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> <span>İçecek<small>209 tarif</small></span></a>
+                                                                                <a href="tarifler.html" data-slug="/kofte-ve-kebap" title="Köfte ve Kebap"><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i> <span>Köfte ve Kebap<small>251 tarif</small></span></a>
+<a class="mega-cat-all" href="tarifler.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> <span>Tüm Tarifler<small>6.346 tarif</small></span><i class="fa-solid fa-arrow-right mca-arrow" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="kd-mega-serit" role="group" aria-label="Dada Gastro Kids">
+<svg class="kd-logo-svg kd-mega-serit__logo" viewBox="921.855 214.449 2250.145 348.042" role="img" aria-label="Dada Gastro Kids" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="nonzero" d="M 1668.214844 361.792969 C 1690.148438 361.792969 1704.765625 378.71875 1704.765625 399.109375 C 1704.765625 419.113281 1690.148438 436.042969 1668.214844 436.042969 C 1646.289062 436.042969 1631.671875 419.113281 1631.671875 399.109375 C 1631.671875 378.71875 1646.289062 361.792969 1668.214844 361.792969 M 1656.675781 501.054688 C 1678.988281 501.054688 1696.304688 493.746094 1708.613281 481.050781 L 1708.613281 495.285156 L 1774.011719 495.285156 L 1774.011719 398.722656 C 1774.011719 339.863281 1729.769531 296.777344 1668.214844 296.777344 C 1608.207031 296.777344 1562.425781 342.941406 1562.425781 398.722656 C 1562.425781 454.890625 1600.507812 501.054688 1656.675781 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1454.691406 362.179688 C 1476.625 362.179688 1491.242188 379.105469 1491.242188 399.109375 C 1491.242188 419.5 1476.625 436.039062 1454.691406 436.039062 C 1432.765625 436.039062 1418.148438 419.5 1418.148438 399.109375 C 1418.148438 379.105469 1432.765625 362.179688 1454.691406 362.179688 M 1454.691406 501.054688 C 1516.246094 501.054688 1560.488281 458.351562 1560.488281 399.492188 L 1560.488281 214.449219 L 1491.242188 214.449219 L 1491.242188 307.933594 C 1479.3125 301.394531 1465.082031 297.164062 1450.847656 297.164062 C 1389.679688 297.164062 1348.902344 337.941406 1348.902344 399.492188 C 1348.902344 455.273438 1394.683594 501.054688 1454.691406 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1241.167969 361.792969 C 1263.101562 361.792969 1277.71875 378.71875 1277.71875 399.109375 C 1277.71875 419.113281 1263.101562 436.042969 1241.167969 436.042969 C 1219.242188 436.042969 1204.625 419.113281 1204.625 399.109375 C 1204.625 378.71875 1219.242188 361.792969 1241.167969 361.792969 M 1229.628906 501.054688 C 1251.945312 501.054688 1269.257812 493.746094 1281.566406 481.050781 L 1281.566406 495.285156 L 1346.96875 495.285156 L 1346.96875 398.722656 C 1346.96875 339.863281 1302.722656 296.777344 1241.167969 296.777344 C 1181.160156 296.777344 1135.378906 342.941406 1135.378906 398.722656 C 1135.378906 454.890625 1173.464844 501.054688 1229.628906 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1027.648438 362.179688 C 1049.578125 362.179688 1064.199219 379.105469 1064.199219 399.109375 C 1064.199219 419.5 1049.578125 436.039062 1027.648438 436.039062 C 1005.722656 436.039062 991.101562 419.5 991.101562 399.109375 C 991.101562 379.105469 1005.722656 362.179688 1027.648438 362.179688 M 1027.648438 501.054688 C 1089.203125 501.054688 1133.445312 458.351562 1133.445312 399.492188 L 1133.445312 214.449219 L 1064.199219 214.449219 L 1064.199219 307.933594 C 1052.265625 301.394531 1038.039062 297.164062 1023.800781 297.164062 C 962.636719 297.164062 921.855469 337.941406 921.855469 399.492188 C 921.855469 455.273438 967.636719 501.054688 1027.648438 501.054688 "></path><g transform="translate(1804.507685,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 -6.3125 C 157.984375 26.21875 135.859375 46.765625 99.53125 46.765625 C 71.40625 46.765625 52.453125 37.28125 42.96875 18.015625 L 24.640625 28.4375 C 37.59375 54.03125 62.5625 66.984375 99.53125 66.984375 C 121.328125 66.984375 139.96875 60.34375 155.453125 47.390625 C 170.9375 34.4375 178.84375 16.4375 178.84375 -6.3125 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(1988.081594,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 0 L 178.84375 0 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(2171.655502,495.506687)"><path fill="currentColor" d="M 38.546875 -116.59375 C 38.546875 -132.703125 53.71875 -141.546875 71.71875 -141.546875 C 91 -141.546875 103.640625 -134.28125 109.640625 -119.4375 L 127.015625 -129.546875 C 117.859375 -149.453125 97.3125 -161.78125 71.71875 -161.78125 C 56.25 -161.78125 43.28125 -157.359375 32.859375 -148.828125 C 22.75 -140.296875 17.6875 -129.546875 17.6875 -116.59375 C 17.6875 -82.46875 50.875 -75.203125 77.40625 -68.5625 C 95.421875 -63.828125 109.953125 -55.921875 109.953125 -41.703125 C 109.953125 -24.328125 94.15625 -16.4375 73.625 -16.4375 C 52.453125 -16.4375 36.34375 -26.546875 30.328125 -42.96875 L 12.640625 -32.546875 C 21.171875 -11.0625 43.28125 3.796875 73.625 3.796875 C 90.359375 3.796875 104.265625 -0.3125 114.703125 -8.84375 C 125.4375 -17.375 130.8125 -28.125 130.8125 -41.703125 C 130.8125 -75.828125 97.640625 -83.09375 71.09375 -89.734375 C 53.078125 -94.46875 38.546875 -102.375 38.546875 -116.59375 Z M 38.546875 -116.59375 "></path></g><g transform="translate(2291.405091,495.506687)"><path fill="currentColor" d="M 105.84375 -157.984375 L 60.34375 -157.984375 L 60.34375 -202.21875 L 39.5 -195.90625 L 39.5 -157.984375 L 6.3125 -157.984375 L 6.3125 -137.765625 L 39.5 -137.765625 L 39.5 -42.03125 C 39.5 -5.375 61.609375 6.640625 105.84375 0 L 105.84375 -18.328125 C 75.515625 -17.0625 60.34375 -14.84375 60.34375 -42.03125 L 60.34375 -137.765625 L 105.84375 -137.765625 Z M 105.84375 -157.984375 "></path></g><g transform="translate(2392.512923,495.506687)"><path fill="currentColor" d="M 42.96875 -157.984375 L 22.125 -157.984375 L 22.125 0 L 42.96875 0 L 42.96875 -87.84375 C 42.96875 -124.171875 64.140625 -140.296875 92.890625 -140.296875 L 92.890625 -160.515625 C 69.203125 -160.515625 52.765625 -151.03125 42.96875 -131.765625 Z M 42.96875 -157.984375 "></path></g><g transform="translate(2464.836619,495.506687)"><path fill="currentColor" d="M 154.515625 -19.90625 C 170.625 -36.015625 178.84375 -55.609375 178.84375 -79 C 178.84375 -102.375 170.625 -121.96875 154.515625 -137.765625 C 138.390625 -153.875 118.796875 -161.78125 95.734375 -161.78125 C 72.671875 -161.78125 52.765625 -153.875 36.65625 -137.765625 C 20.53125 -121.96875 12.640625 -102.375 12.640625 -79 C 12.640625 -55.609375 20.53125 -36.015625 36.65625 -19.90625 C 52.765625 -4.109375 72.671875 3.796875 95.734375 3.796875 C 118.796875 3.796875 138.390625 -4.109375 154.515625 -19.90625 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g class="kd-logo-rozet" aria-hidden="true"><rect x="2712" y="300" width="452" height="222" rx="24" fill="#DDF4EA"/><text x="2938" y="460" text-anchor="middle" fill="#17684C" font-family="KdGilroy, GilroyBd, Gilroy, system-ui, sans-serif" font-weight="700" font-size="188" textLength="336" lengthAdjust="spacingAndGlyphs">kids</text></g></svg><span class="kd-mega-serit__metin">Yaşa göre bebek ve çocuk tarifleri</span><span class="kd-mega-serit__chipler"><a class="kd-mega-serit__chip" data-renk="seftali" href="kids-tarifler.html?yas=6" aria-label="6–8 Ay tarifleri"><img src="varlik/kids/svg/ui/kasik.svg" width="16" height="16" alt="" aria-hidden="true" loading="lazy" decoding="async">6–8 Ay</a><a class="kd-mega-serit__chip" data-renk="mint" href="kids-tarifler.html?yas=9" aria-label="9–12 Ay tarifleri"><img src="varlik/kids/svg/ui/tabak-bolmeli.svg" width="16" height="16" alt="" aria-hidden="true" loading="lazy" decoding="async">9–12 Ay</a><a class="kd-mega-serit__chip" data-renk="sari" href="kids-tarifler.html?yas=12" aria-label="1–3 Yaş tarifleri"><img src="varlik/kids/svg/ui/yurumeye-baslayan.svg" width="16" height="16" alt="" aria-hidden="true" loading="lazy" decoding="async">1–3 Yaş</a></span><a class="kd-mega-serit__kesfet" href="kids.html" aria-label="Dada Gastro Kids'i keşfet">Keşfet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+</div>
+<div class="mega-feat">
+                <a class="mf-fig" href="https://dadagastro.com/tarif/yesil-mercimek-salatasi-soganli-limonlu-ferah-tarif"  style="background-image:url('varlik/gastro/varliklar/media/1838/thumb.webp')" >
+                                    <span class="r-chip"><i class="fa-solid fa-star" aria-hidden="true"></i> Haftanın Tarifi</span>
+                                    <h4>Yeşil Mercimek Salatası | Soğanlı Limonlu Ferah Tarif</h4>
+                                </a>                                                                            <a class="mega-find" href="https://dadagastro.com/dolapta-ne-var"><span class="mf-ico"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i></span><span class="mf-body"><b>Dolapta Ne Var?</b><small>Dolabındakilerle ne pişersin?</small></span><i class="fa-solid fa-arrow-right mf-arr" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                                            <div class="nav-item">
+            <a href="https://dadagastro.com/bugun-ne-pisirsem" class="">Ne Pişirsem?
+                                                </a>
+                                        </div>
+                                                                            <div class="nav-item">
+            <a href="https://dadagastro.com/dolapta-ne-var" class="">Dolapta Ne Var?
+                                                </a>
+                                        </div>
+                                                                            <div class="nav-item">
+            <a href="https://dadagastro.com/puf-noktalari" class="">Püf Noktaları
+                                                </a>
+                                        </div>
+                                                                            <div class="nav-item">
+            <a href="https://dadagastro.com/mutfak-sirlari" class="">Mutfak Sırları
+                                                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                                </a>
+                                                <div class="dropdown">
+                                                                <a href="https://dadagastro.com/mutfaga-giris"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span>Mutfağa Giriş<small>Sıfırdan temel teknikler</small></span></a>
+                                                                        <div class="nav-div"></div>
+                                                                                                            <a href="https://dadagastro.com/mutfak-ansiklopedisi"><i class="fa-solid fa-seedling" aria-hidden="true"></i> <span>Mutfak Ansiklopedisi<small>Malzemeleri tanı: faydası, kullanımı</small></span></a>
+                                                                        <div class="nav-div"></div>
+                                                                                                            <a href="https://dadagastro.com/mutfak-sozlugu"><i class="fa-solid fa-book-open" aria-hidden="true"></i> <span>Sözlük<small>Mutfak terimleri</small></span></a>
+                                                                        <div class="nav-div"></div>
+                                                                                                            <a href="https://dadagastro.com/olcu-birimleri"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <span>Ölçü Birimleri<small>Bardak, kaşık, gram</small></span></a>
+                                                                        <div class="nav-div"></div>
+                                                                                                            <a href="https://dadagastro.com/sofra-duzeni"><i class="fa-solid fa-utensils" aria-hidden="true"></i> <span>Sofra Düzeni<small>Günlük &amp; davet sofra kurulumu</small></span></a>
+                                                                                                    </div>
+                                        </div>
+      </nav>
+      <div class="head-actions">
+        <button class="icon-btn ikon-dugme" aria-label="Ara" onclick="location.href='https://dadagastro.com/ara'"><i class="fa-solid fa-magnifying-glass"></i></button>
+        
+        <button class="btn-login" onclick="location.href='https://dadagastro.com/giris'"><i class="fa-solid fa-user"></i> Giriş Yap</button>
+        
+        <button class="icon-btn ikon-dugme hamburger" id="hamburger" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </div>
+</header>
+    
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer" aria-label="Mobil menü" data-revize="d10">
+  <div class="drawer-head">
+    <a class="drawer-brand" href="kids.html" aria-label="Dada Gastro Kids ana sayfa"><svg class="gastro-word-mark" viewBox="921.855 214.449 1721.825 348.042" role="img" aria-label="Dada Gastro" xmlns="http://www.w3.org/2000/svg"><title>Dada Gastro</title><path fill="currentColor" fill-rule="nonzero" d="M 1668.214844 361.792969 C 1690.148438 361.792969 1704.765625 378.71875 1704.765625 399.109375 C 1704.765625 419.113281 1690.148438 436.042969 1668.214844 436.042969 C 1646.289062 436.042969 1631.671875 419.113281 1631.671875 399.109375 C 1631.671875 378.71875 1646.289062 361.792969 1668.214844 361.792969 M 1656.675781 501.054688 C 1678.988281 501.054688 1696.304688 493.746094 1708.613281 481.050781 L 1708.613281 495.285156 L 1774.011719 495.285156 L 1774.011719 398.722656 C 1774.011719 339.863281 1729.769531 296.777344 1668.214844 296.777344 C 1608.207031 296.777344 1562.425781 342.941406 1562.425781 398.722656 C 1562.425781 454.890625 1600.507812 501.054688 1656.675781 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1454.691406 362.179688 C 1476.625 362.179688 1491.242188 379.105469 1491.242188 399.109375 C 1491.242188 419.5 1476.625 436.039062 1454.691406 436.039062 C 1432.765625 436.039062 1418.148438 419.5 1418.148438 399.109375 C 1418.148438 379.105469 1432.765625 362.179688 1454.691406 362.179688 M 1454.691406 501.054688 C 1516.246094 501.054688 1560.488281 458.351562 1560.488281 399.492188 L 1560.488281 214.449219 L 1491.242188 214.449219 L 1491.242188 307.933594 C 1479.3125 301.394531 1465.082031 297.164062 1450.847656 297.164062 C 1389.679688 297.164062 1348.902344 337.941406 1348.902344 399.492188 C 1348.902344 455.273438 1394.683594 501.054688 1454.691406 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1241.167969 361.792969 C 1263.101562 361.792969 1277.71875 378.71875 1277.71875 399.109375 C 1277.71875 419.113281 1263.101562 436.042969 1241.167969 436.042969 C 1219.242188 436.042969 1204.625 419.113281 1204.625 399.109375 C 1204.625 378.71875 1219.242188 361.792969 1241.167969 361.792969 M 1229.628906 501.054688 C 1251.945312 501.054688 1269.257812 493.746094 1281.566406 481.050781 L 1281.566406 495.285156 L 1346.96875 495.285156 L 1346.96875 398.722656 C 1346.96875 339.863281 1302.722656 296.777344 1241.167969 296.777344 C 1181.160156 296.777344 1135.378906 342.941406 1135.378906 398.722656 C 1135.378906 454.890625 1173.464844 501.054688 1229.628906 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1027.648438 362.179688 C 1049.578125 362.179688 1064.199219 379.105469 1064.199219 399.109375 C 1064.199219 419.5 1049.578125 436.039062 1027.648438 436.039062 C 1005.722656 436.039062 991.101562 419.5 991.101562 399.109375 C 991.101562 379.105469 1005.722656 362.179688 1027.648438 362.179688 M 1027.648438 501.054688 C 1089.203125 501.054688 1133.445312 458.351562 1133.445312 399.492188 L 1133.445312 214.449219 L 1064.199219 214.449219 L 1064.199219 307.933594 C 1052.265625 301.394531 1038.039062 297.164062 1023.800781 297.164062 C 962.636719 297.164062 921.855469 337.941406 921.855469 399.492188 C 921.855469 455.273438 967.636719 501.054688 1027.648438 501.054688 "></path><g transform="translate(1804.507685,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 -6.3125 C 157.984375 26.21875 135.859375 46.765625 99.53125 46.765625 C 71.40625 46.765625 52.453125 37.28125 42.96875 18.015625 L 24.640625 28.4375 C 37.59375 54.03125 62.5625 66.984375 99.53125 66.984375 C 121.328125 66.984375 139.96875 60.34375 155.453125 47.390625 C 170.9375 34.4375 178.84375 16.4375 178.84375 -6.3125 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(1988.081594,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 0 L 178.84375 0 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(2171.655502,495.506687)"><path fill="currentColor" d="M 38.546875 -116.59375 C 38.546875 -132.703125 53.71875 -141.546875 71.71875 -141.546875 C 91 -141.546875 103.640625 -134.28125 109.640625 -119.4375 L 127.015625 -129.546875 C 117.859375 -149.453125 97.3125 -161.78125 71.71875 -161.78125 C 56.25 -161.78125 43.28125 -157.359375 32.859375 -148.828125 C 22.75 -140.296875 17.6875 -129.546875 17.6875 -116.59375 C 17.6875 -82.46875 50.875 -75.203125 77.40625 -68.5625 C 95.421875 -63.828125 109.953125 -55.921875 109.953125 -41.703125 C 109.953125 -24.328125 94.15625 -16.4375 73.625 -16.4375 C 52.453125 -16.4375 36.34375 -26.546875 30.328125 -42.96875 L 12.640625 -32.546875 C 21.171875 -11.0625 43.28125 3.796875 73.625 3.796875 C 90.359375 3.796875 104.265625 -0.3125 114.703125 -8.84375 C 125.4375 -17.375 130.8125 -28.125 130.8125 -41.703125 C 130.8125 -75.828125 97.640625 -83.09375 71.09375 -89.734375 C 53.078125 -94.46875 38.546875 -102.375 38.546875 -116.59375 Z M 38.546875 -116.59375 "></path></g><g transform="translate(2291.405091,495.506687)"><path fill="currentColor" d="M 105.84375 -157.984375 L 60.34375 -157.984375 L 60.34375 -202.21875 L 39.5 -195.90625 L 39.5 -157.984375 L 6.3125 -157.984375 L 6.3125 -137.765625 L 39.5 -137.765625 L 39.5 -42.03125 C 39.5 -5.375 61.609375 6.640625 105.84375 0 L 105.84375 -18.328125 C 75.515625 -17.0625 60.34375 -14.84375 60.34375 -42.03125 L 60.34375 -137.765625 L 105.84375 -137.765625 Z M 105.84375 -157.984375 "></path></g><g transform="translate(2392.512923,495.506687)"><path fill="currentColor" d="M 42.96875 -157.984375 L 22.125 -157.984375 L 22.125 0 L 42.96875 0 L 42.96875 -87.84375 C 42.96875 -124.171875 64.140625 -140.296875 92.890625 -140.296875 L 92.890625 -160.515625 C 69.203125 -160.515625 52.765625 -151.03125 42.96875 -131.765625 Z M 42.96875 -157.984375 "></path></g><g transform="translate(2464.836619,495.506687)"><path fill="currentColor" d="M 154.515625 -19.90625 C 170.625 -36.015625 178.84375 -55.609375 178.84375 -79 C 178.84375 -102.375 170.625 -121.96875 154.515625 -137.765625 C 138.390625 -153.875 118.796875 -161.78125 95.734375 -161.78125 C 72.671875 -161.78125 52.765625 -153.875 36.65625 -137.765625 C 20.53125 -121.96875 12.640625 -102.375 12.640625 -79 C 12.640625 -55.609375 20.53125 -36.015625 36.65625 -19.90625 C 52.765625 -4.109375 72.671875 3.796875 95.734375 3.796875 C 118.796875 3.796875 138.390625 -4.109375 154.515625 -19.90625 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g></svg></a>
+    <button class="drawer-close" id="drawerClose" aria-label="Menüyü kapat"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav class="drawer-nav">
+    <div class="d-item d-has-sub">
+      <div class="d-row">
+        <a class="d-link" href="tarifler.html"><i class="fa-solid fa-book-open"></i> Tarifler</a>
+        <button class="d-toggle" type="button" aria-expanded="false" aria-label="Tarifler alt menüsü"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+      <div class="d-sub">
+
+        <a href="tarifler.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> <span>Tüm Tarifler</span></a>
+ <a href="kids.html"><i class="fa-solid fa-baby" aria-hidden="true"></i> <span>Dada Gastro Kids · Bebek &amp; Çocuk</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-carrot" aria-hidden="true"></i> <span>Sebze</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-cow" aria-hidden="true"></i> <span>Kırmızı Et</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-shrimp" aria-hidden="true"></i> <span>Meze</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-cheese" aria-hidden="true"></i> <span>Atıştırmalık</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-egg" aria-hidden="true"></i> <span>Kahvaltılık</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-fish" aria-hidden="true"></i> <span>Balık ve Deniz Ürünleri</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-bowl-food" aria-hidden="true"></i> <span>Çorba</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-drumstick-bite" aria-hidden="true"></i> <span>Tavuk ve Hindi</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-bowl-rice" aria-hidden="true"></i> <span>Pilav</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-ice-cream" aria-hidden="true"></i> <span>Tatlı</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-burger" aria-hidden="true"></i> <span>Sandviç, Burger ve Dürüm</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-apple-whole" aria-hidden="true"></i> <span>Meyve Tarifleri</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> <span>İçecek</span></a>
+        <a href="tarifler.html"><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i> <span>Köfte ve Kebap</span></a>      <span data-rk-week-mobil hidden></span></div>
+    </div>
+    <div class="d-item"><a class="d-link" href="https://dadagastro.com/bugun-ne-pisirsem"><i class="fa-solid fa-utensils"></i> Ne Pişirsem?</a></div>
+    <div class="d-item"><a class="d-link" href="https://dadagastro.com/dolapta-ne-var"><i class="fa-solid fa-basket-shopping"></i> Dolapta Ne Var?</a></div>
+    <div class="d-item"><a class="d-link" href="https://dadagastro.com/puf-noktalari"><i class="fa-solid fa-lightbulb"></i> Püf Noktaları</a></div>
+    <div class="d-item d-has-sub">
+      <div class="d-row">
+        <a class="d-link" href="https://dadagastro.com/mutfak-sirlari"><i class="fa-solid fa-mortar-pestle"></i> Mutfak Sırları</a>
+        <button class="d-toggle" type="button" aria-expanded="false" aria-label="Mutfak Sırları alt menüsü"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+      <div class="d-sub">
+        <a href="https://dadagastro.com/mutfaga-giris"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span>Mutfağa Giriş</span></a>
+        <a href="https://dadagastro.com/mutfak-ansiklopedisi"><i class="fa-solid fa-seedling" aria-hidden="true"></i> <span>Mutfak Ansiklopedisi</span></a>
+        <a href="https://dadagastro.com/mutfak-sozlugu"><i class="fa-solid fa-book-open" aria-hidden="true"></i> <span>Sözlük</span></a>
+        <a href="https://dadagastro.com/olcu-birimleri"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <span>Ölçü Birimleri</span></a>
+        <a href="https://dadagastro.com/sofra-duzeni"><i class="fa-solid fa-utensils" aria-hidden="true"></i> <span>Sofra Düzeni</span></a>
+      </div>
+    </div>
+    
+  </nav>
+  <div class="drawer-foot">
+    <button class="btn btn-primary drawer-login" style="width:100%" onclick="location.href='https://dadagastro.com/giris'"><i class="fa-solid fa-user"></i> Giriş Yap</button>
+    
+    <div class="drawer-lang" id="drawerLang">
+      <button class="drawer-lang-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+        <span class="drawer-lang-label"><i class="fa-solid fa-globe"></i> Dil</span>
+        <span class="drawer-lang-cur"><span lang="en">EN</span> <i class="fa-solid fa-chevron-down"></i></span>
+      </button>
+      <div class="drawer-lang-list" role="menu">
+        <button type="button" role="menuitemradio" aria-checked="true" class="active" data-lang="tr"><b>TR</b> Türkçe</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-lang="en"><b>EN</b> English</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-lang="de"><b>DE</b> Deutsch</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-lang="ru"><b>RU</b> Русский</button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+    
+                    
+
+    <main class="page-main" id="pageMain" style="margin-bottom: 518px;">
+<div class="kd-sayfa">
+<nav class="kd-ust" aria-label="Dada Gastro Kids menüsü"><div class="wrap"><a class="kd-ust__logo" href="kids.html" tabindex="-1" aria-hidden="true"><svg class="kd-logo-svg kd-ust__logo-svg" viewBox="921.855 214.449 2250.145 348.042" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="nonzero" d="M 1668.214844 361.792969 C 1690.148438 361.792969 1704.765625 378.71875 1704.765625 399.109375 C 1704.765625 419.113281 1690.148438 436.042969 1668.214844 436.042969 C 1646.289062 436.042969 1631.671875 419.113281 1631.671875 399.109375 C 1631.671875 378.71875 1646.289062 361.792969 1668.214844 361.792969 M 1656.675781 501.054688 C 1678.988281 501.054688 1696.304688 493.746094 1708.613281 481.050781 L 1708.613281 495.285156 L 1774.011719 495.285156 L 1774.011719 398.722656 C 1774.011719 339.863281 1729.769531 296.777344 1668.214844 296.777344 C 1608.207031 296.777344 1562.425781 342.941406 1562.425781 398.722656 C 1562.425781 454.890625 1600.507812 501.054688 1656.675781 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1454.691406 362.179688 C 1476.625 362.179688 1491.242188 379.105469 1491.242188 399.109375 C 1491.242188 419.5 1476.625 436.039062 1454.691406 436.039062 C 1432.765625 436.039062 1418.148438 419.5 1418.148438 399.109375 C 1418.148438 379.105469 1432.765625 362.179688 1454.691406 362.179688 M 1454.691406 501.054688 C 1516.246094 501.054688 1560.488281 458.351562 1560.488281 399.492188 L 1560.488281 214.449219 L 1491.242188 214.449219 L 1491.242188 307.933594 C 1479.3125 301.394531 1465.082031 297.164062 1450.847656 297.164062 C 1389.679688 297.164062 1348.902344 337.941406 1348.902344 399.492188 C 1348.902344 455.273438 1394.683594 501.054688 1454.691406 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1241.167969 361.792969 C 1263.101562 361.792969 1277.71875 378.71875 1277.71875 399.109375 C 1277.71875 419.113281 1263.101562 436.042969 1241.167969 436.042969 C 1219.242188 436.042969 1204.625 419.113281 1204.625 399.109375 C 1204.625 378.71875 1219.242188 361.792969 1241.167969 361.792969 M 1229.628906 501.054688 C 1251.945312 501.054688 1269.257812 493.746094 1281.566406 481.050781 L 1281.566406 495.285156 L 1346.96875 495.285156 L 1346.96875 398.722656 C 1346.96875 339.863281 1302.722656 296.777344 1241.167969 296.777344 C 1181.160156 296.777344 1135.378906 342.941406 1135.378906 398.722656 C 1135.378906 454.890625 1173.464844 501.054688 1229.628906 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1027.648438 362.179688 C 1049.578125 362.179688 1064.199219 379.105469 1064.199219 399.109375 C 1064.199219 419.5 1049.578125 436.039062 1027.648438 436.039062 C 1005.722656 436.039062 991.101562 419.5 991.101562 399.109375 C 991.101562 379.105469 1005.722656 362.179688 1027.648438 362.179688 M 1027.648438 501.054688 C 1089.203125 501.054688 1133.445312 458.351562 1133.445312 399.492188 L 1133.445312 214.449219 L 1064.199219 214.449219 L 1064.199219 307.933594 C 1052.265625 301.394531 1038.039062 297.164062 1023.800781 297.164062 C 962.636719 297.164062 921.855469 337.941406 921.855469 399.492188 C 921.855469 455.273438 967.636719 501.054688 1027.648438 501.054688 "></path><g transform="translate(1804.507685,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 -6.3125 C 157.984375 26.21875 135.859375 46.765625 99.53125 46.765625 C 71.40625 46.765625 52.453125 37.28125 42.96875 18.015625 L 24.640625 28.4375 C 37.59375 54.03125 62.5625 66.984375 99.53125 66.984375 C 121.328125 66.984375 139.96875 60.34375 155.453125 47.390625 C 170.9375 34.4375 178.84375 16.4375 178.84375 -6.3125 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(1988.081594,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 0 L 178.84375 0 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(2171.655502,495.506687)"><path fill="currentColor" d="M 38.546875 -116.59375 C 38.546875 -132.703125 53.71875 -141.546875 71.71875 -141.546875 C 91 -141.546875 103.640625 -134.28125 109.640625 -119.4375 L 127.015625 -129.546875 C 117.859375 -149.453125 97.3125 -161.78125 71.71875 -161.78125 C 56.25 -161.78125 43.28125 -157.359375 32.859375 -148.828125 C 22.75 -140.296875 17.6875 -129.546875 17.6875 -116.59375 C 17.6875 -82.46875 50.875 -75.203125 77.40625 -68.5625 C 95.421875 -63.828125 109.953125 -55.921875 109.953125 -41.703125 C 109.953125 -24.328125 94.15625 -16.4375 73.625 -16.4375 C 52.453125 -16.4375 36.34375 -26.546875 30.328125 -42.96875 L 12.640625 -32.546875 C 21.171875 -11.0625 43.28125 3.796875 73.625 3.796875 C 90.359375 3.796875 104.265625 -0.3125 114.703125 -8.84375 C 125.4375 -17.375 130.8125 -28.125 130.8125 -41.703125 C 130.8125 -75.828125 97.640625 -83.09375 71.09375 -89.734375 C 53.078125 -94.46875 38.546875 -102.375 38.546875 -116.59375 Z M 38.546875 -116.59375 "></path></g><g transform="translate(2291.405091,495.506687)"><path fill="currentColor" d="M 105.84375 -157.984375 L 60.34375 -157.984375 L 60.34375 -202.21875 L 39.5 -195.90625 L 39.5 -157.984375 L 6.3125 -157.984375 L 6.3125 -137.765625 L 39.5 -137.765625 L 39.5 -42.03125 C 39.5 -5.375 61.609375 6.640625 105.84375 0 L 105.84375 -18.328125 C 75.515625 -17.0625 60.34375 -14.84375 60.34375 -42.03125 L 60.34375 -137.765625 L 105.84375 -137.765625 Z M 105.84375 -157.984375 "></path></g><g transform="translate(2392.512923,495.506687)"><path fill="currentColor" d="M 42.96875 -157.984375 L 22.125 -157.984375 L 22.125 0 L 42.96875 0 L 42.96875 -87.84375 C 42.96875 -124.171875 64.140625 -140.296875 92.890625 -140.296875 L 92.890625 -160.515625 C 69.203125 -160.515625 52.765625 -151.03125 42.96875 -131.765625 Z M 42.96875 -157.984375 "></path></g><g transform="translate(2464.836619,495.506687)"><path fill="currentColor" d="M 154.515625 -19.90625 C 170.625 -36.015625 178.84375 -55.609375 178.84375 -79 C 178.84375 -102.375 170.625 -121.96875 154.515625 -137.765625 C 138.390625 -153.875 118.796875 -161.78125 95.734375 -161.78125 C 72.671875 -161.78125 52.765625 -153.875 36.65625 -137.765625 C 20.53125 -121.96875 12.640625 -102.375 12.640625 -79 C 12.640625 -55.609375 20.53125 -36.015625 36.65625 -19.90625 C 52.765625 -4.109375 72.671875 3.796875 95.734375 3.796875 C 118.796875 3.796875 138.390625 -4.109375 154.515625 -19.90625 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g class="kd-logo-rozet" aria-hidden="true"><rect x="2712" y="300" width="452" height="222" rx="24" fill="#DDF4EA"/><text x="2938" y="460" text-anchor="middle" fill="#17684C" font-family="KdGilroy, GilroyBd, Gilroy, system-ui, sans-serif" font-weight="700" font-size="188" textLength="336" lengthAdjust="spacingAndGlyphs">kids</text></g></svg></a><div class="kd-ust__menu"><a class="kd-ust__ev" href="kids.html" aria-label="Dada Gastro Kids ana sayfa"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v10.5h13V9"/><path d="M10 19.5v-5.5h4v5.5"/></svg></a><a href="kids-tarifler.html">Tarifler</a><a href="kids-donemler.html">Dönemler</a><a href="kids-guvenli-kesim.html" aria-current="page">Güvenli Kesim</a><a href="kids-mevsim.html">Mevsim Takvimi</a><a href="kids-rehber.html">Rehber</a><a href="kids-araclar.html">Araçlar</a></div><button type="button" class="kd-yardim-ac" aria-label="Yardım" aria-expanded="false" aria-controls="kdYardim" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.8"/><path d="M12 17.2v.1"/></svg><span>Yardım</span></button></div></nav>
+
+<section class="kd-hero" data-renk="mint">
+ <div class="wrap">
+  <nav class="kd-kirinti" aria-label="Sayfa yolu"><a href="index.html" aria-label="Dada Gastro ana sayfa"><i class="fa-solid fa-house" aria-hidden="true"></i></a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><a href="tarifler.html">Tarifler</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><a href="kids.html">Dada Gastro Kids</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><b>Güvenli Kesim</b></nav>
+  <div class="kd-hero__izgara">
+   <div class="kd-hero__metin">
+    <span class="kd-ust-yazi" data-renk="mint"><img src="varlik/kids/svg/ui/bicak-tahta.svg" width="18" height="18" alt="" aria-hidden="true" loading="lazy" decoding="async">Güvenli kesim atlası</span>
+    <h1>Her besin, her yaşta<br>doğru boyutta</h1>
+    <p class="kd-giris">15 besin için üç aşamalı kesim: 6–8 ay avuçla kavrar, 9–12 ay iki parmakla tutar, 12 ay sonrası ısırıp çiğner. Çizimlere bakın, parmak ucunuzla kıyaslayın, gönül rahatlığıyla hazırlayın.</p>
+    <div class="kd-hero__eylem"><a class="kd-btn" href="#atlas"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Besin arayın</a><a class="kd-btn kd-btn--hafif" href="#bogulma-bas">Asla bütün verilmeyenler</a></div>
+    
+   </div>
+   <div class="kd-khero"><p class="kd-khero__bas">Havuç: üç aşama, aynı ölçek</p><ol class="kd-khero__asamalar"><li data-renk="seftali"><figure><img src="varlik/kids/svg/kesim/havuc-6-8.svg" width="200" height="140" alt="6–8 ay: Havuç · İki kalın, buharda yumuşatılmış havuç çubuğu (yetişkin parmağı boyunda)" decoding="async"><figcaption><b>6–8 ay</b><small>Yetişkin parmağı boyunda ve kalınlığında</small></figcaption></figure></li><li data-renk="mint"><figure><img src="varlik/kids/svg/kesim/havuc-9-12.svg" width="200" height="140" alt="9–12 ay: Havuç · Pişmiş, nohut büyüklüğünde küpler ve ince rendelenmiş havuç" decoding="async" loading="lazy"><figcaption><b>9–12 ay</b><small>Nohut büyüklüğünde (~1 cm) küpler</small></figcaption></figure></li><li data-renk="sari"><figure><img src="varlik/kids/svg/kesim/havuc-12.svg" width="200" height="140" alt="12 ay +: Havuç · Pişmiş ince yarım ay dilimler ve ince rendelenmiş havuç" decoding="async" loading="lazy"><figcaption><b>12 ay +</b><small>İnce yarım ay dilim (~2 cm), küçük lokma</small></figcaption></figure></li></ol></div>
+  </div>
+ </div>
+</section>
+<aside class="kd-guvenlik-serit" role="note" aria-label="1 yaş öncesi güvenlik uyarısı"><div class="wrap"><p><span class="kd-guvenlik-serit__ikon" aria-hidden="true">⚠</span><span>1 yaşından küçük bebeklere tuz, rafine şeker, bal ve inek sütü (ana içecek olarak) verilmemelidir.</span> <a href="kids-rehber-yasakli-gidalar.html">Yasaklı Gıdalar Rehberini İncele <span aria-hidden="true">→</span></a></p></div></aside>
+<section class="kd-bolum kd-bolum--sikisik" aria-labelledby="bogulma-bas">
+ <div class="wrap">
+  <div class="kd-kbogulma">
+   <div class="kd-kbogulma__bas">
+    <span class="kd-kbogulma__rozet"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Boğulma riski</span>
+    <h2 id="bogulma-bas">Asla bütün vermeyin</h2>
+    <p>Bu besinler küçük çocukların soluk yolu genişliğine yakın boyuttadır. Neden riskli olduklarını ve yerine ne yapabileceğinizi bilmek yeterli.</p>
+   </div>
+   <ul class="kd-kbogulma__liste">
+    <li class="kd-ikonlu kd-gir" style="--kd-gecikme:0ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon"><svg viewBox="0 0 72 72" aria-hidden="true" focusable="false"><circle cx="36" cy="36" r="34" fill="#fff"/><g stroke="#4A3A34" stroke-width="1.8"><circle cx="30" cy="27" r="9" fill="#A57AC8"/><circle cx="44" cy="31" r="9" fill="#B489D4"/><circle cx="36" cy="43" r="9" fill="#A57AC8"/></g><path d="M37 18q3-7 9-8" stroke="#4A3A34" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="27" cy="24" r="2.4" fill="#fff" opacity=".6"/><circle cx="36" cy="36" r="30" fill="none" stroke="#D2453A" stroke-width="4.5"/><path d="M15 57L57 15" stroke="#D2453A" stroke-width="4.5" stroke-linecap="round"/></svg></span>
+     <h3 class="kd-ikonlu__baslik">Bütün üzüm</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-clock" aria-hidden="true"></i> 4 yaşına kadar bütün verilmez</span>
+      <p><b>Neden?</b> Yuvarlak ve kaygan; soluk yolunu tam olarak tıkayabilir.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> Boyuna dörde bölün; küçük bebeklerde ayrıca hafifçe ezin. <a class="kd-bag" href="#uzum">Kesimi göster</a></span></p>
+     </div>
+    </li><li class="kd-ikonlu kd-gir" style="--kd-gecikme:60ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon"><svg viewBox="0 0 72 72" aria-hidden="true" focusable="false"><circle cx="36" cy="36" r="34" fill="#fff"/><g stroke="#4A3A34" stroke-width="1.8"><circle cx="30" cy="36" r="11" fill="#E85A4F"/><circle cx="46" cy="34" r="10" fill="#F2685C"/></g><path d="M26 25l4 3 4-3M42 24l4 3 4-3" stroke="#4E9A55" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="26" cy="32" r="2.4" fill="#fff" opacity=".6"/><circle cx="36" cy="36" r="30" fill="none" stroke="#D2453A" stroke-width="4.5"/><path d="M15 57L57 15" stroke="#D2453A" stroke-width="4.5" stroke-linecap="round"/></svg></span>
+     <h3 class="kd-ikonlu__baslik">Kiraz (çeri) domates</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-clock" aria-hidden="true"></i> 4 yaşına kadar bütün verilmez</span>
+      <p><b>Neden?</b> Üzüm gibi yuvarlak ve kaygandır; kabuğu da kayar.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> Boyuna dörde bölün; yaban mersini ve zeytin için de aynısını yapın. <a class="kd-bag" href="#kiraz-domates">Kesimi göster</a></span></p>
+     </div>
+    </li><li class="kd-ikonlu kd-gir" style="--kd-gecikme:120ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon"><svg viewBox="0 0 72 72" aria-hidden="true" focusable="false"><circle cx="36" cy="36" r="34" fill="#fff"/><g stroke="#4A3A34" stroke-width="1.8"><path d="M22 40c0-9 6-16 12-16s12 7 12 16-6 12-12 12-12-3-12-12z" fill="#C48A55"/><ellipse cx="46" cy="30" rx="8" ry="10" fill="#D9A066" transform="rotate(25 46 30)"/></g><path d="M28 30q6-3 12 0" stroke="#8C5E36" stroke-width="1.4" fill="none"/><circle cx="36" cy="36" r="30" fill="none" stroke="#D2453A" stroke-width="4.5"/><path d="M15 57L57 15" stroke="#D2453A" stroke-width="4.5" stroke-linecap="round"/></svg></span>
+     <h3 class="kd-ikonlu__baslik">Bütün kuruyemiş</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-clock" aria-hidden="true"></i> 5 yaşına kadar bütün ya da iri parça verilmez</span>
+      <p><b>Neden?</b> Fındık, fıstık, badem ve ceviz sert ve küçüktür; çiğnenmeden yutulabilir.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> Şekersiz-tuzsuz ezmesini sulandırıp püreye karıştırın ya da çok ince sürün.</span></p>
+     </div>
+    </li><li class="kd-ikonlu kd-gir" style="--kd-gecikme:180ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon"><svg viewBox="0 0 72 72" aria-hidden="true" focusable="false"><circle cx="36" cy="36" r="34" fill="#fff"/><g stroke="#4A3A34" stroke-width="1.6" fill="#FFF7DC"><circle cx="28" cy="34" r="7"/><circle cx="36" cy="27" r="7"/><circle cx="43" cy="35" r="7"/><circle cx="35" cy="41" r="7"/></g><circle cx="36" cy="34" r="3" fill="#F4C542"/><circle cx="46" cy="44" r="2.4" fill="#F4C542"/><circle cx="36" cy="36" r="30" fill="none" stroke="#D2453A" stroke-width="4.5"/><path d="M15 57L57 15" stroke="#D2453A" stroke-width="4.5" stroke-linecap="round"/></svg></span>
+     <h3 class="kd-ikonlu__baslik">Patlamış mısır</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-clock" aria-hidden="true"></i> Küçük çocuklara önerilmez</span>
+      <p><b>Neden?</b> Sert taneler ve kabuk parçaları nefesle birlikte soluk yoluna kaçabilir.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> Ağızda kolayca yumuşayan atıştırmalıklar: pişmiş sebze çubukları, olgun meyve.</span></p>
+     </div>
+    </li><li class="kd-ikonlu kd-gir" style="--kd-gecikme:240ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon"><svg viewBox="0 0 72 72" aria-hidden="true" focusable="false"><circle cx="36" cy="36" r="34" fill="#fff"/><g stroke="#4A3A34" stroke-width="1.8"><rect x="16" y="31" width="40" height="11" rx="5" fill="#FFA65F" transform="rotate(-18 36 36)"/></g><path d="M52 24q5-4 9-2M52 26q5 0 8 4" stroke="#4E9A55" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="36" cy="36" r="30" fill="none" stroke="#D2453A" stroke-width="4.5"/><path d="M15 57L57 15" stroke="#D2453A" stroke-width="4.5" stroke-linecap="round"/></svg></span>
+     <h3 class="kd-ikonlu__baslik">Sert çiğ sebze ve meyve</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-clock" aria-hidden="true"></i> Çiğneme becerisi gelişene kadar iri sert parça yok</span>
+      <p><b>Neden?</b> Çiğ havuç ya da elma dilimi gibi sert parçalar kopar ve çiğnenemeden yutulabilir.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><b>Yerine:</b> Yumuşayana kadar pişirin ya da ince rendeleyin. <a class="kd-bag" href="#havuc">Kesimi göster</a></span></p>
+     </div>
+    </li>
+    <li class="kd-kbogulma__bilgi kd-ikonlu kd-gir" style="--kd-gecikme:300ms">
+     <span class="kd-kbogulma__svg kd-ikonlu__ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span>
+     <h3 class="kd-ikonlu__baslik">Ezilme testi</h3>
+     <div class="kd-ikonlu__metin kd-kbogulma__govde">
+      <span class="kd-kbogulma__yas"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> Vermeden önce deneyin</span>
+      <p>Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</p>
+      <p class="kd-kbogulma__yerine"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Her besinin kartında boyut ve kesim çizimi var. <a class="kd-bag" href="#atlas">Atlasa git</a></span></p>
+      <small class="kd-kbogulma__ornek">Örnek içerik — uzman onayı bekliyor</small>
+     </div>
+    </li>
+   </ul>
+   <div class="kd-kbogulma__acil">
+    <span class="kd-kbogulma__112" aria-hidden="true">112</span>
+    <p><b>Boğulma acil durumdur: hemen 112'yi arayın.</b> Bebek ve çocuk ilk yardımını bir kitaptan değil, resmi bir kursta uygulamalı öğrenin. <a class="kd-bag" href="https://www.kizilay.org.tr/" target="_blank" rel="noopener">Türk Kızılay ilk yardım eğitimleri</a> · <a class="kd-bag" href="https://www.healthychildren.org/English/health-issues/injuries-emergencies/Pages/Choking-Prevention.aspx" target="_blank" rel="noopener" hreflang="en">AAP: boğulmayı önleme</a></p>
+   </div>
+  </div>
+ </div>
+</section>
+<section class="kd-bolum" id="atlas" aria-labelledby="atlas-bas">
+ <div class="wrap">
+  <div class="kd-bas"><div><span class="kd-ust-yazi" data-renk="mint"><img src="varlik/kids/svg/ui/bicak-tahta.svg" width="18" height="18" alt="" aria-hidden="true" loading="lazy" decoding="async">Atlas</span><h2><span id="atlas-bas">Besin besin kesim rehberi</span></h2><p>Arayın, gruba ya da boğulma riskine göre süzün. Her kartın bağlantısını paylaşabilirsiniz.</p></div></div>
+  <div class="kd-kust"><p class="kd-ornek" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><span><b>Örnek içerik — uzman onayı bekliyor.</b> Kesim önerileri ana akım rehberlerin (AAP, NHS) genel ilkelerine göre hazırlanmış örneklerdir; çocuk doktoru / çocuk diyetisyeni onayından geçmeden yayına alınmaz.</span></p><div class="kd-onay kd-ikonlu"><span class="kd-onay__ikon kd-ikonlu__ikon"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span><b class="kd-ikonlu__baslik">Uzman onayı bekliyor</b><small class="kd-ikonlu__metin">Çocuk doktoru / çocuk diyetisyeni incelemesi henüz yapılmadı.</small></div></div>
+  <div class="kd-kokuma">
+   <div class="kd-kokuma__metin"><h3>Kartlar nasıl okunur?</h3><p>Her besin üç aşamada, aynı ölçekte çizildi. Çizimin sağındaki parmak <b>yetişkin parmak ucu ölçeği</b>; parçaların boyunu onunla kıyaslayın. Buhar çizgisi olan parçalar pişmiş, üstü kırmızı çizili olanlar o yaşta verilmez.</p></div>
+   <ul class="kd-kokuma__asamalar"><li data-renk="seftali"><b>6–8 ay</b><small>Avuç kavrama</small></li><li data-renk="mint"><b>9–12 ay</b><small>Kıskaç tutuşu</small></li><li data-renk="sari"><b>12 ay +</b><small>Isırma & çiğneme</small></li></ul>
+   <svg class="kd-kokuma__parmak" viewBox="164 70 34 72" aria-hidden="true" focusable="false"><g class="kd-kparmak"><ellipse cx="183" cy="138" rx="16" ry="3" fill="#4A3A34" opacity=".06"/><path d="M170 141V86a12 12 0 0 1 24 0v55" fill="#FDE8DA" stroke="#4A3A34" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/><path d="M176 87.5a6 6 0 0 1 12 0v5.5a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3z" fill="#FFF6F1" stroke="#4A3A34" stroke-opacity=".38" stroke-width="1.5"/><path d="M175.5 117q6.5 2.6 13 0M177 122q5 1.8 10 0" fill="none" stroke="#4A3A34" stroke-opacity=".28" stroke-width="1.4" stroke-linecap="round"/><path d="M173.5 92v12" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/></g></svg>
+  </div>
+  <div class="kd-karac">
+   <div class="kd-ara"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label class="kd-gizli" for="kesim-ara">Besin arayın</label><input id="kesim-ara" type="search" placeholder="Besin arayın: üzüm, havuç, brokoli…" autocomplete="off" spellcheck="false" enterkeyhint="search"></div>
+   <div class="kd-karac__satir"><span class="kd-karac__etiket" id="grup-etiket">Grup</span><div class="kd-serit" role="group" aria-labelledby="grup-etiket" data-kd-filtre="grup"><button type="button" class="kd-chip" data-grup="" aria-pressed="true">Tümü<span class="kd-ksayi">15</span></button><button type="button" class="kd-chip" data-grup="meyve" aria-pressed="false">Meyve<span class="kd-ksayi">6</span></button><button type="button" class="kd-chip" data-grup="sebze" aria-pressed="false">Sebze<span class="kd-ksayi">4</span></button><button type="button" class="kd-chip" data-grup="protein" aria-pressed="false">Protein<span class="kd-ksayi">3</span></button><button type="button" class="kd-chip" data-grup="tahil" aria-pressed="false">Tahıl<span class="kd-ksayi">1</span></button><button type="button" class="kd-chip" data-grup="sut-urunu" aria-pressed="false">Süt ürünü<span class="kd-ksayi">1</span></button></div></div>
+   <div class="kd-karac__satir"><span class="kd-karac__etiket" id="risk-etiket">Boğulma riski</span><div class="kd-serit" role="group" aria-labelledby="risk-etiket" data-kd-filtre="risk"><button type="button" class="kd-chip" data-risk="" aria-pressed="true">Hepsi<span class="kd-ksayi">15</span></button><button type="button" class="kd-chip kd-chip--risk" data-risk="dusuk" aria-pressed="false"><i class="fa-solid fa-circle-check" aria-hidden="true"></i>Düşük<span class="kd-ksayi">6</span></button><button type="button" class="kd-chip kd-chip--risk" data-risk="orta" aria-pressed="false"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>Orta<span class="kd-ksayi">6</span></button><button type="button" class="kd-chip kd-chip--risk" data-risk="yuksek" aria-pressed="false"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Yüksek<span class="kd-ksayi">3</span></button></div></div>
+  </div>
+  <details class="kd-kdizin">
+   <summary><span><img src="varlik/kids/svg/ui/liste.svg" width="22" height="22" alt="" aria-hidden="true" loading="lazy" decoding="async"> Tüm besinler (A–Z)</span><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+   <nav aria-label="Besin dizini"><ul><li><a class="kd-chip" href="#avokado">Avokado</a></li><li><a class="kd-chip" href="#brokoli">Brokoli</a></li><li><a class="kd-chip" href="#cilek">Çilek</a></li><li><a class="kd-chip" href="#elma">Elma</a></li><li><a class="kd-chip" href="#havuc">Havuç</a></li><li><a class="kd-chip" href="#karpuz">Karpuz</a></li><li><a class="kd-chip" href="#kiraz-domates">Kiraz domates</a></li><li><a class="kd-chip" href="#kofte">Köfte (kıyma)</a></li><li><a class="kd-chip" href="#makarna">Makarna</a></li><li><a class="kd-chip" href="#muz">Muz</a></li><li><a class="kd-chip" href="#peynir">Peynir (pastörize)</a></li><li><a class="kd-chip" href="#salatalik">Salatalık</a></li><li><a class="kd-chip" href="#tavuk">Tavuk</a></li><li><a class="kd-chip" href="#uzum">Üzüm</a></li><li><a class="kd-chip" href="#yumurta">Yumurta</a></li></ul></nav>
+  </details>
+  <div class="kd-sonuc-bar"><b role="status" aria-live="polite"><span id="kesim-sayi">15</span> besin gösteriliyor</b><button type="button" class="kd-btn kd-btn--hafif kd-btn--kucuk" id="kesim-temizle" hidden><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Filtreleri temizle</button></div>
+  <div class="kd-katlas" id="kesim-liste"><article class="kd-kesim kd-gir" id="avokado" data-besin="avokado" data-grup="meyve" data-risk="dusuk" data-ara="avokado meyve" aria-labelledby="k-avokado" style="--kd-gecikme:0ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="meyve"><img src="varlik/kids/svg/kesim/avokado.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-avokado">Avokado</h3><small>Meyve</small></div>
+   <span class="kd-krisk" data-risk="dusuk"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Düşük</span></span>
+   <a class="kd-kesim__bag" href="#avokado" aria-label="Avokado kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ olarak; parmakla bastırınca iz kalan olgun avokado seçin.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Avokado: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/avokado-6-8.svg" width="200" height="140" alt="6–8 ay: Avokado · Biri kabuğu tutamak olarak bırakılmış iki kalın avokado dilimi" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda kalın dilim</span></p>
+      <p class="kd-kasama__nasil">Kalın dilimler hâlinde ya da çatalla ezilmiş verin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Dilimin bir kısmında kabuğu bırakmak kavramayı kolaylaştırır.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/avokado-9-12.svg" width="200" height="140" alt="9–12 ay: Avokado · Nohut büyüklüğünde avokado küpleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Küçük küpler.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kaygan küpleri yakalamak bebeğin el becerisini geliştirir.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/avokado-12.svg" width="200" height="140" alt="12 ay +: Avokado · İki ince avokado dilimi ve lokmalık küpler" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokma (~1,5 cm)</span></p>
+      <p class="kd-kasama__nasil">İnce dilim ya da lokmalık küp.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Ekmeğe sürülerek de sunulabilir.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Olgunlaşmamış sert avokado vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="brokoli" data-besin="brokoli" data-grup="sebze" data-risk="dusuk" data-ara="brokoli sebze" aria-labelledby="k-brokoli" style="--kd-gecikme:50ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="sebze"><img src="varlik/kids/svg/kesim/brokoli.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-brokoli">Brokoli</h3><small>Sebze</small></div>
+   <span class="kd-krisk" data-risk="dusuk"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Düşük</span></span>
+   <a class="kd-kesim__bag" href="#brokoli" aria-label="Brokoli kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Buharda ya da haşlayarak yumuşayana kadar pişirilir.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Brokoli: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/brokoli-6-8.svg" width="200" height="140" alt="6–8 ay: Brokoli · Sapı tutamak olarak uzun bırakılmış iki büyük, pişmiş brokoli çiçeği" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Avuç içi büyüklüğünde çiçek</span></p>
+      <p class="kd-kasama__nasil">Sapı uzun bırakılmış büyük çiçekler; sap tutamak olur.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Sapı çatalla kolayca delinmeli.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/brokoli-9-12.svg" width="200" height="140" alt="9–12 ay: Brokoli · Nohut-fındık büyüklüğünde küçük pişmiş çiçekler" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut-fındık büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Küçük çiçeklere ayırın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Omlet ve pilavların içine de doğrayabilirsiniz.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/brokoli-12.svg" width="200" height="140" alt="12 ay +: Brokoli · Lokmalık pişmiş brokoli çiçekleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokma (~1,5–2 cm)</span></p>
+      <p class="kd-kasama__nasil">Yumuşak pişmiş, lokmalık küçük çiçekler; aile yemeğinden.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Çiğ brokoli için çocuğunuzun çiğneme becerisini gözetin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Çiğ ya da yarı pişmiş sert brokoli parçaları vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="cilek" data-besin="cilek" data-grup="meyve" data-risk="orta" data-ara="cilek meyve" aria-labelledby="k-cilek" style="--kd-gecikme:100ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="meyve"><img src="varlik/kids/svg/kesim/cilek.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-cilek">Çilek</h3><small>Meyve</small></div>
+   <span class="kd-krisk" data-risk="orta"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Orta</span></span>
+   <a class="kd-kesim__bag" href="#cilek" aria-label="Çilek kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ olarak; iyice yıkanmış.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Çilek: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/cilek-6-8.svg" width="200" height="140" alt="6–8 ay: Çilek · Boyuna ikiye bölünüp bastırılarak yassılaştırılmış büyük çilek yarımları" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Büyük çileğin yarısı, bastırılıp yassılaştırılmış</span></p>
+      <p class="kd-kasama__nasil">Büyük ve olgun çileği boyuna ikiye bölüp parmağınızla bastırarak yassılaştırın ya da çatalla ezin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Küçük ve sert çilekleri mutlaka ezin.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/cilek-9-12.svg" width="200" height="140" alt="9–12 ay: Çilek · Nohut büyüklüğünde çilek parçaları" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Küçük parçalara kesin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Yoğurdun üzerine ezerek de koyabilirsiniz.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/cilek-12.svg" width="200" height="140" alt="12 ay +: Çilek · Boyuna dörde bölünmüş çilekler ve ince çilek dilimleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Dörtte bir ya da ince dilim</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölün ya da ince dilimleyin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Küçük çocuklarda bütün çilek yerine kesilmiş tercih edin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Küçük ve sert çileği bütün vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="elma" data-besin="elma" data-grup="meyve" data-risk="orta" data-ara="elma meyve" aria-labelledby="k-elma" style="--kd-gecikme:150ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="meyve"><img src="varlik/kids/svg/kesim/elma.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-elma">Elma</h3><small>Meyve</small></div>
+   <span class="kd-krisk" data-risk="orta"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Orta</span></span>
+   <a class="kd-kesim__bag" href="#elma" aria-label="Elma kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ elma serttir; pişirilir ya da ince rendelenir.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Elma: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/elma-6-8.svg" width="200" height="140" alt="6–8 ay: Elma · Kabuğu soyulmuş, pişirilip yumuşatılmış iki kalın elma dilimi" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda yumuşak dilimler</span></p>
+      <p class="kd-kasama__nasil">Kabuğunu soyup dilimleri buharda ya da fırında yumuşatın; ya da püre yapın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Çiğ verecekseniz yalnız ince rendelenmiş olarak.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/elma-9-12.svg" width="200" height="140" alt="9–12 ay: Elma · Pişmiş küçük elma parçaları ve ince rendelenmiş çiğ elma" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Pişmiş küçük parçalar ya da ince rendelenmiş çiğ elma.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Rendelenmiş elmayı yoğurda karıştırabilirsiniz.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/elma-12.svg" width="200" height="140" alt="12 ay +: Elma · Kâğıt inceliğinde çiğ elma dilimleri ve rendelenmiş elma" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Kâğıt inceliğinde dilimler</span></p>
+      <p class="kd-kasama__nasil">Kabuğu soyulmuş çiğ elmayı kâğıt inceliğinde dilimleyin ya da ince rendeleyin; pişmiş elmayı küçük parçalar hâlinde verebilirsiniz.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kalın çiğ dilimler ve kabuk parçaları boğazda takılabilir.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Kalın çiğ elma dilimi ya da sert elma parçası vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="havuc" data-besin="havuc" data-grup="sebze" data-risk="yuksek" data-ara="havuc sebze" aria-labelledby="k-havuc" style="--kd-gecikme:0ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="sebze"><img src="varlik/kids/svg/kesim/havuc.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-havuc">Havuç</h3><small>Sebze</small></div>
+   <span class="kd-krisk" data-risk="yuksek"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Yüksek</span></span>
+   <a class="kd-kesim__bag" href="#havuc" aria-label="Havuç kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ havuç serttir; bebeklere yumuşayana kadar pişirilmiş olarak verilir.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Havuç: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/havuc-6-8.svg" width="200" height="140" alt="6–8 ay: Havuç · İki kalın, buharda yumuşatılmış havuç çubuğu (yetişkin parmağı boyunda)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda ve kalınlığında</span></p>
+      <p class="kd-kasama__nasil">Buharda ya da haşlayarak tamamen yumuşatın, kalın çubuklar hâlinde verin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Ezilme testinden geçmeli: parmaklarınız arasında kolayca ezilmeli.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/havuc-9-12.svg" width="200" height="140" alt="9–12 ay: Havuç · Pişmiş, nohut büyüklüğünde küpler ve ince rendelenmiş havuç" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm) küpler</span></p>
+      <p class="kd-kasama__nasil">Pişmiş havucu küçük, yumuşak küplere kesin ya da çiğ havucu ince rendeleyin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kıskaç tutuşunu çalıştırmak için tabağa birkaç küp koyun.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/havuc-12.svg" width="200" height="140" alt="12 ay +: Havuç · Pişmiş ince yarım ay dilimler ve ince rendelenmiş havuç" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>İnce yarım ay dilim (~2 cm), küçük lokma</span></p>
+      <p class="kd-kasama__nasil">Pişmiş havucu ince yarım ay dilimlere ya da küçük parçalara kesin; çiğ verecekseniz ince rendeleyin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Çiğ havuç çubuğu ve halka dilimleri 4 yaşına kadar boğulma riski taşır.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Çiğ havuç çubuğu, sert havuç halkası ya da yarı pişmiş parçalar vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="karpuz" data-besin="karpuz" data-grup="meyve" data-risk="dusuk" data-ara="karpuz meyve" aria-labelledby="k-karpuz" style="--kd-gecikme:50ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="meyve"><img src="varlik/kids/svg/kesim/karpuz.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-karpuz">Karpuz</h3><small>Meyve</small></div>
+   <span class="kd-krisk" data-risk="dusuk"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Düşük</span></span>
+   <a class="kd-kesim__bag" href="#karpuz" aria-label="Karpuz kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ olarak; çekirdekleri ayıklanır.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Karpuz: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/karpuz-6-8.svg" width="200" height="140" alt="6–8 ay: Karpuz · Kabuğa yakın üçgen dilim ve parmak boyunda çekirdeksiz karpuz çubuğu" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda</span></p>
+      <p class="kd-kasama__nasil">Çekirdeksiz, parmak boyunda çubuklar ya da kabuğa yakın üçgen dilimler.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kabuk kısmı tutamak olarak işe yarar ama bebeğin kabuğu kemirmesine izin vermeyin.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/karpuz-9-12.svg" width="200" height="140" alt="9–12 ay: Karpuz · Küçük, çekirdeksiz karpuz küpleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut-fındık büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Çekirdeksiz küçük parçalar.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Suludur; önlük işe yarar.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/karpuz-12.svg" width="200" height="140" alt="12 ay +: Karpuz · Kabuksuz, lokmalık küçük üçgen karpuz dilimleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokma (~1,5 cm)</span></p>
+      <p class="kd-kasama__nasil">Çekirdeksiz, kabuksuz küçük dilimler.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Siyah çekirdekleri ayıklamaya devam edin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Çekirdeklerini ayıklamadan vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="kiraz-domates" data-besin="kiraz-domates" data-grup="sebze" data-risk="yuksek" data-ara="kiraz domates sebze ceri domates cherry domates ceri domates cherry domates domates" aria-labelledby="k-kiraz-domates" style="--kd-gecikme:100ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="sebze"><img src="varlik/kids/svg/kesim/kiraz-domates.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-kiraz-domates">Kiraz domates</h3><small>Sebze</small></div>
+   <span class="kd-krisk" data-risk="yuksek"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Yüksek</span></span>
+   <a class="kd-kesim__bag" href="#kiraz-domates" aria-label="Kiraz domates kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ ya da fırında pişmiş; pişirmek kabuğu yumuşatır.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Kiraz domates: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/kiraz-domates-6-8.svg" width="200" height="140" alt="6–8 ay: Kiraz domates · Boyuna dörde bölünüp yassılaştırılmış kiraz domates parçaları" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Boyuna dörtte bir, bastırılıp yassılaştırılmış</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölün ve bastırarak yassılaştırın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kabuğu sert gelirse kısa süre fırınlayın.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/kiraz-domates-9-12.svg" width="200" height="140" alt="9–12 ay: Kiraz domates · Boyuna dörde bölünmüş iki kiraz domates (8 parça)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Boyuna dörtte bir</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölün.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Salata ve makarnaya eklemeden önce de dörde bölün.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/kiraz-domates-12.svg" width="200" height="140" alt="12 ay +: Kiraz domates · Boyuna dörde bölünmüş kiraz domatesler; bütün domates üstü çizili (4 yaşına kadar verilmez)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Boyuna dörtte bir</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölmeye devam edin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>4 yaşına kadar bütün verilmez.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> 4 yaşından önce bütün kiraz domates vermeyin.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="kofte" data-besin="kofte" data-grup="protein" data-risk="orta" data-ara="kofte (kiyma) protein kiyma kirmizi et dana kiyma kuzu kiyma" aria-labelledby="k-kofte" style="--kd-gecikme:150ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="protein"><img src="varlik/kids/svg/kesim/kofte.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-kofte">Köfte (kıyma)</h3><small>Protein</small></div>
+   <span class="kd-krisk" data-risk="orta"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Orta</span></span>
+   <a class="kd-kesim__bag" href="#kofte" aria-label="Köfte (kıyma) kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> İçi pembe kalmayacak şekilde tamamen pişirilir; fırında ya da sulu pişirme yumuşak tutar.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Köfte (kıyma): yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/kofte-6-8.svg" width="200" height="140" alt="6–8 ay: Köfte (kıyma) · Parmak boyunda, yassı ve oval iki yumuşak köfte" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda</span></p>
+      <p class="kd-kasama__nasil">Parmak boyunda, yassı ve oval yumuşak köfteler yapın ya da kıymayı sebze püresine karıştırın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Rendelenmiş sebze eklemek köfteyi nemli tutar.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/kofte-9-12.svg" width="200" height="140" alt="9–12 ay: Köfte (kıyma) · Nohut büyüklüğünde ufalanmış köfte parçaları" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm) parçalar</span></p>
+      <p class="kd-kasama__nasil">Köfteyi küçük parçalara bölün ya da ufalayın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Sert, kuru kenarları ayıklayın.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/kofte-12.svg" width="200" height="140" alt="12 ay +: Köfte (kıyma) · İkiye ve dörde bölünmüş küçük köfteler; bütün yuvarlak köfte üstü çizili" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokmalık</span></p>
+      <p class="kd-kasama__nasil">Küçük köfteleri ikiye ya da dörde bölün.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Top şeklinde bütün köfte yerine bölünmüş köfte verin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> İçi pembe, sert ya da kuru köfte ve bütün yuvarlak köfte vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="makarna" data-besin="makarna" data-grup="tahil" data-risk="dusuk" data-ara="makarna tahil sehriye eriste" aria-labelledby="k-makarna" style="--kd-gecikme:0ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="tahil"><img src="varlik/kids/svg/kesim/makarna.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-makarna">Makarna</h3><small>Tahıl</small></div>
+   <span class="kd-krisk" data-risk="dusuk"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Düşük</span></span>
+   <a class="kd-kesim__bag" href="#makarna" aria-label="Makarna kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Paketteki süreden biraz uzun, tamamen yumuşayana kadar haşlanır; tuz eklenmez.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Makarna: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/makarna-6-8.svg" width="200" height="140" alt="6–8 ay: Makarna · Bebeğin avucundan taşan büyük burgu ve kalem makarna" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Bebek yumruğundan taşan büyük şekiller</span></p>
+      <p class="kd-kasama__nasil">Burgu, kalem gibi bebeğin kavrayabileceği büyük şekiller seçin; ya da küçük makarnayı ezin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Sosla kaplamak kavramayı kolaylaştırır.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/makarna-9-12.svg" width="200" height="140" alt="9–12 ay: Makarna · Küçük parçalara kesilmiş kalem makarna ve küçük deniz kabuğu makarna" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokma (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Küçük deniz kabuğu gibi kısa makarnalar ya da küçük parçalara kesilmiş kalem makarna.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Arpa şehriye ve küçük makarnalar kaşıkla yeme pratiği sağlar.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/makarna-12.svg" width="200" height="140" alt="12 ay +: Makarna · Kısa parçalara kesilmiş spagetti ve kalem makarna" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Kısa parçalar (~3–4 cm)</span></p>
+      <p class="kd-kasama__nasil">Aile porsiyonundan; uzun makarnayı kısa parçalara kesin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Fırın makarnanın kurumuş sert kenarlarını ayıklayın.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Az pişmiş, sert (al dente) makarna vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="muz" data-besin="muz" data-grup="meyve" data-risk="dusuk" data-ara="muz meyve" aria-labelledby="k-muz" style="--kd-gecikme:50ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="meyve"><img src="varlik/kids/svg/kesim/muz.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-muz">Muz</h3><small>Meyve</small></div>
+   <span class="kd-krisk" data-risk="dusuk"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Düşük</span></span>
+   <a class="kd-kesim__bag" href="#muz" aria-label="Muz kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ olarak; olgun ve yumuşak olanı seçin.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Muz: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/muz-6-8.svg" width="200" height="140" alt="6–8 ay: Muz · Kabuğu tutamak olarak bırakılmış yarım muz ve boyuna ayrılmış iki muz parçası" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda</span></p>
+      <p class="kd-kasama__nasil">Muzu ikiye bölüp kabuğunun bir kısmını tutamak olarak bırakın ya da boyuna üçe ayırın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kaygan gelirse dış yüzeyini ince öğütülmüş yulafla kaplayın.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/muz-9-12.svg" width="200" height="140" alt="9–12 ay: Muz · Nohut büyüklüğünde muz parçaları ve bir kaşık ezilmiş muz" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Küçük parçalara kesin ya da ezin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kıskaç tutuşunu çalıştırır.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/muz-12.svg" width="200" height="140" alt="12 ay +: Muz · Boyuna ikiye bölünüp dilimlenmiş yarım ay muz dilimleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokmalık yarım ay dilimler</span></p>
+      <p class="kd-kasama__nasil">Boyuna ikiye bölüp yarım ay dilimleyin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Ağzını doldurmadan küçük ısırıklar almaya teşvik edin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Olgunlaşmamış sert muz vermeyin; ağzına birden çok parça doldurmasına izin vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="peynir" data-besin="peynir" data-grup="sut-urunu" data-risk="orta" data-ara="peynir (pastorize) sut-urunu beyaz peynir kasar lor" aria-labelledby="k-peynir" style="--kd-gecikme:100ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="sut-urunu"><img src="varlik/kids/svg/kesim/peynir.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-peynir">Peynir (pastörize)</h3><small>Süt ürünü</small></div>
+   <span class="kd-krisk" data-risk="orta"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Orta</span></span>
+   <a class="kd-kesim__bag" href="#peynir" aria-label="Peynir (pastörize) kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Yalnız pastörize sütten yapılmış peynirler; beyaz peynirin tuzu suda bekletilerek azaltılır.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Peynir (pastörize): yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/peynir-6-8.svg" width="200" height="140" alt="6–8 ay: Peynir (pastörize) · Lor peyniri ve ince rendelenmiş kaşar (yemeğe karıştırmak için)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Rendelenmiş</span></p>
+      <p class="kd-kasama__nasil">Lor peyniri ya da rendelenmiş kaşar; yemeğe karıştırılmış ya da eritilmiş.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Tuzlu peynirleri az kullanın; lor daha az tuzludur.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/peynir-9-12.svg" width="200" height="140" alt="9–12 ay: Peynir (pastörize) · İnce peynir dilimi, küçük ince parçalar ve rendelenmiş kaşar" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>İnce dilim, küçük parça (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">İnce dilimler ya da küçük ince parçalar; rendelenmiş de olur.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Eritilmiş peynir omlet ve makarnada iyi bağlayıcıdır.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/peynir-12.svg" width="200" height="140" alt="12 ay +: Peynir (pastörize) · İnce peynir çubukları ve ince bir dilim" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>İnce çubuk ya da ince dilim</span></p>
+      <p class="kd-kasama__nasil">İnce dilim ya da ince çubuklar.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Sert peyniri iri küp yerine ince dilim olarak verin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> İri ve sert peynir küpleri, pastörize olmayan ya da küflü yumuşak peynir vermeyin.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="salatalik" data-besin="salatalik" data-grup="sebze" data-risk="orta" data-ara="salatalik sebze hiyar" aria-labelledby="k-salatalik" style="--kd-gecikme:150ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="sebze"><img src="varlik/kids/svg/kesim/salatalik.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-salatalik">Salatalık</h3><small>Sebze</small></div>
+   <span class="kd-krisk" data-risk="orta"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Orta</span></span>
+   <a class="kd-kesim__bag" href="#salatalik" aria-label="Salatalık kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ olarak; kabuğu soyulur.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Salatalık: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/salatalik-6-8.svg" width="200" height="140" alt="6–8 ay: Salatalık · Kabuğu soyulmuş uzun, kalın salatalık çubuğu ve biraz ince rendelenmiş salatalık" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağından uzun (~9–10 cm), kalın çubuk</span></p>
+      <p class="kd-kasama__nasil">Kabuğunu soyup ısırarak koparamayacağı kadar uzun ve kalın çubuklar hâlinde ya da ince rendelenmiş verin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Çubuktan parça koparırsa ince rendelenmiş hâle geçin.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/salatalik-9-12.svg" width="200" height="140" alt="9–12 ay: Salatalık · Kibrit çöpü inceliğinde salatalık şeritleri ve ince rendelenmiş salatalık" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Kibrit çöpü inceliğinde şerit ya da rende</span></p>
+      <p class="kd-kasama__nasil">İnce rendelenmiş ya da çok ince şeritler.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Yoğurtla karıştırıp cacık gibi sunabilirsiniz (tuzsuz).</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/salatalik-12.svg" width="200" height="140" alt="12 ay +: Salatalık · Kabuksuz ince yarım ay salatalık dilimleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>İnce yarım ay dilimler</span></p>
+      <p class="kd-kasama__nasil">Kabuksuz ince yarım ay dilimler.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kalın yuvarlak dilimler yerine yarım ay tercih edin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Kalın yuvarlak salatalık dilimi ya da küçük sert küpler vermeyin.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="tavuk" data-besin="tavuk" data-grup="protein" data-risk="orta" data-ara="tavuk protein tavuk gogsu tavuk but" aria-labelledby="k-tavuk" style="--kd-gecikme:0ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="protein"><img src="varlik/kids/svg/kesim/tavuk.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-tavuk">Tavuk</h3><small>Protein</small></div>
+   <span class="kd-krisk" data-risk="orta"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Orta</span></span>
+   <a class="kd-kesim__bag" href="#tavuk" aria-label="Tavuk kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Ortası tamamen beyazlayana kadar pişirilir; nemli kalması için haşlama ya da sulu pişirme tercih edilir.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Tavuk: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/tavuk-6-8.svg" width="200" height="140" alt="6–8 ay: Tavuk · Lif yönünde kesilmiş, parmak boyunda üç nemli tavuk şeridi" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Yetişkin parmağı boyunda şerit</span></p>
+      <p class="kd-kasama__nasil">Püre yapın ya da lif yönünde, parmak boyunda nemli şeritler kesin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Bebek şeridi emer ve kemirir; küçük parça koparırsa didiklenmiş hâle geçin.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/tavuk-9-12.svg" width="200" height="140" alt="9–12 ay: Tavuk · İnce didiklenmiş tavuk ve yanında nemlendirmek için yoğurt" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>İnce lifler, küçük parçalar</span></p>
+      <p class="kd-kasama__nasil">İnce didikleyin ve sosla ya da yoğurtla nemlendirin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>But eti göğüsten daha yumuşak ve nemlidir.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/tavuk-12.svg" width="200" height="140" alt="12 ay +: Tavuk · Lokmalık küçük tavuk parçaları" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Küçük lokma (~1,5 cm)</span></p>
+      <p class="kd-kasama__nasil">Küçük ve ince parçalar; sosla nemli tutun.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kuru ve iri parçalar boğazda takılabilir; yanında sos ya da çorba olsun.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Az pişmiş tavuk, kuru ve iri parçalar ya da kemikli küçük parçalar vermeyin.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="uzum" data-besin="uzum" data-grup="meyve" data-risk="yuksek" data-ara="uzum meyve kuru uzum uzum tanesi" aria-labelledby="k-uzum" style="--kd-gecikme:50ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="meyve"><img src="varlik/kids/svg/kesim/uzum.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-uzum">Üzüm</h3><small>Meyve</small></div>
+   <span class="kd-krisk" data-risk="yuksek"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Yüksek</span></span>
+   <a class="kd-kesim__bag" href="#uzum" aria-label="Üzüm kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Çiğ olarak; yıkanmış ve çekirdekli ise çekirdeği çıkarılmış.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Üzüm: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/uzum-6-8.svg" width="200" height="140" alt="6–8 ay: Üzüm · Boyuna dörde bölünüp yassılaştırılmış iki üzüm (8 parça)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Boyuna dörtte bir, bastırılıp yassılaştırılmış</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölün ve parmağınızla bastırarak yassılaştırın.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Asla bütün ya da enine ikiye kesilmiş vermeyin.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/uzum-9-12.svg" width="200" height="140" alt="9–12 ay: Üzüm · Boyuna dörde bölünmüş üç üzüm (12 parça)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Boyuna dörtte bir</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölün.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Büyük üzümleri sekize bölebilirsiniz.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/uzum-12.svg" width="200" height="140" alt="12 ay +: Üzüm · Boyuna dörde bölünmüş üzümler; bütün ve enine yarım üzüm üstü çizili (4 yaşına kadar verilmez)" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Boyuna dörtte bir</span></p>
+      <p class="kd-kasama__nasil">Boyuna dörde bölmeye devam edin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>4 yaşına kadar bütün ya da yalnız ikiye bölünmüş üzüm vermeyin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> 4 yaşından önce bütün ya da enine kesilmiş üzüm vermeyin.</span></p></footer>
+ </article>
+<article class="kd-kesim kd-gir" id="yumurta" data-besin="yumurta" data-grup="protein" data-risk="dusuk" data-ara="yumurta protein haslanmis yumurta omlet" aria-labelledby="k-yumurta" style="--kd-gecikme:100ms">
+  <header class="kd-kesim__bas">
+   <span class="kd-kesim__ikon" data-grup="protein"><img src="varlik/kids/svg/kesim/yumurta.svg" width="56" height="56" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
+   <div class="kd-kesim__ad"><h3 id="k-yumurta">Yumurta</h3><small>Protein</small></div>
+   <span class="kd-krisk" data-risk="dusuk"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span><span class="kd-krisk__on">Boğulma riski: </span>Düşük</span></span>
+   <a class="kd-kesim__bag" href="#yumurta" aria-label="Yumurta kartının bağlantısı" title="Bu kartın bağlantısı"><i class="fa-solid fa-link" aria-hidden="true"></i></a>
+  </header>
+  <p class="kd-kesim__pisirme"><i class="fa-solid fa-fire-burner" aria-hidden="true"></i><span><b>Hazırlık:</b> Sarısı ve beyazı tamamen katılaşana kadar pişirilir.</span></p>
+  <ol class="kd-kesim__asamalar kd-hizali kd-hizali--5" aria-label="Yumurta: yaşa göre kesim"><li class="kd-kasama" data-asama="6-8" data-renk="seftali">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">6–8 ay</span><small>Avuç kavrama</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/yumurta-6-8.svg" width="200" height="140" alt="6–8 ay: Yumurta · Boyuna dörde bölünmüş haşlanmış yumurta ve parmak boyunda omlet şeridi" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Dörtte bir ya da parmak şeridi</span></p>
+      <p class="kd-kasama__nasil">Haşlanmış yumurtayı boyuna dörde bölün ya da ezin; omleti parmak şeritlerine kesin.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Kuru sarıyı biraz anne sütü ya da suyla nemlendirin.</span></p>
+    </li><li class="kd-kasama" data-asama="9-12" data-renk="mint">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">9–12 ay</span><small>Kıskaç tutuşu</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/yumurta-9-12.svg" width="200" height="140" alt="9–12 ay: Yumurta · Doğranmış haşlanmış yumurta (ak ve sarı) ve küçük omlet kareleri" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Nohut büyüklüğünde (~1 cm)</span></p>
+      <p class="kd-kasama__nasil">Doğranmış haşlanmış yumurta ya da küçük omlet kareleri.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Sebzeli omlet hem alerjen tanıtımı hem sebze için iyi bir yoldur.</span></p>
+    </li><li class="kd-kasama" data-asama="12+" data-renk="sari">
+      <div class="kd-kasama__ust"><span class="kd-kasama__yas">12 ay +</span><small>Isırma & çiğneme</small></div>
+      <figure class="kd-kasama__sekil"><img src="varlik/kids/svg/kesim/yumurta-12.svg" width="200" height="140" alt="12 ay +: Yumurta · Haşlanmış yumurta dilimleri ve lokmalık omlet parçaları" loading="lazy" decoding="async"></figure>
+      <p class="kd-kasama__boyut"><i class="fa-solid fa-ruler" aria-hidden="true"></i><span><span class="kd-gizli">Boyut: </span>Dilim ya da küçük lokma (~1,5 cm)</span></p>
+      <p class="kd-kasama__nasil">Haşlanmış yumurta dilimleri, küçük parçalar ya da omlet.</p>
+      <p class="kd-kasama__ipucu"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Haşlanmış yumurtayı bütün vermek yerine dilimleyin.</span></p>
+    </li></ol>
+  <p class="kd-kesim__olcek"><i class="fa-regular fa-hand-point-up" aria-hidden="true"></i> Çizimlerin sağındaki parmak: yetişkin parmak ucu ölçeği (üç aşamada aynı boyut).</p>
+  <footer class="kd-kesim__alt"><p class="kd-kesim__asla"><span class="kd-kesim__asla-ikon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span><span><b>Asla:</b> Az pişmiş, sarısı akan yumurta vermeyin.</span></p><p class="kd-kesim__ezilme"><span class="kd-kesim__ezilme-ikon" aria-hidden="true"><i class="fa-solid fa-hand-back-fist"></i></span><span><b>Ezilme testi</b> Pişmiş parçayı başparmağınızla işaret parmağınız arasında hafifçe bastırın; kolayca eziliyorsa bebeğiniz için yeterince yumuşaktır.</span></p></footer>
+ </article></div>
+  <div class="kd-bos" id="kesim-bos" hidden><div class="kd-ikonlu kd-bos__ust"><span class="kd-bos__ikon kd-ikonlu__ikon"><img src="varlik/kids/svg/ui/kase.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><h3 class="kd-ikonlu__baslik">Bu aramayla eşleşen besin yok</h3><p class="kd-ikonlu__metin">Yazımı kontrol edin ya da filtreleri temizleyin. Aradığınız besin henüz atlasta olmayabilir.</p></div><div class="kd-bos__oneriler"></div></div>
+ </div>
+</section>
+<section class="kd-bolum kd-bolum--beyaz" aria-labelledby="devam-bas">
+ <div class="wrap">
+  <div class="kd-bas"><div><span class="kd-ust-yazi" data-renk="pembe"><img src="varlik/kids/svg/ui/kitap.svg" width="18" height="18" alt="" aria-hidden="true" loading="lazy" decoding="async">Devam edin</span><h2><span id="devam-bas">Kesimden sonrası</span></h2></div></div>
+  <div class="kd-izgara kd-dortlu kd-hizali kd-hizali--4">
+   <a class="kd-kart kd-modul kd-ikonlu kd-gir" href="kids-rehber.html" data-renk="pembe"><span class="kd-modul__ikon kd-ikonlu__ikon"><img src="varlik/kids/svg/ui/kitap.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><h3 class="kd-ikonlu__baslik">Öğürme mi, boğulma mı?</h3><p class="kd-ikonlu__metin">Farkı önceden öğrenmek ilk haftaları çok rahatlatır.</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a><a class="kd-kart kd-modul kd-ikonlu kd-gir" href="kids-arac-hazir-mi.html" data-renk="mint"><span class="kd-modul__ikon kd-ikonlu__ikon"><img src="varlik/kids/svg/ui/liste.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><h3 class="kd-ikonlu__baslik">Ek gıdaya hazır mı?</h3><p class="kd-ikonlu__metin">Oturma, baş kontrolü ve ilgi: hazırlık belirtilerini işaretleyin.</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a><a class="kd-kart kd-modul kd-ikonlu kd-gir" href="kids-donemler.html" data-renk="mavi"><span class="kd-modul__ikon kd-ikonlu__ikon"><img src="varlik/kids/svg/ui/takvim.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><h3 class="kd-ikonlu__baslik">Evrelere göre beslenme</h3><p class="kd-ikonlu__metin">Her evrede kıvam, odak besinler ve uygun tarifler.</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a><a class="kd-kart kd-modul kd-ikonlu kd-gir" href="kids-tarifler.html" data-renk="seftali"><span class="kd-modul__ikon kd-ikonlu__ikon"><img src="varlik/kids/svg/ui/kase.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><h3 class="kd-ikonlu__baslik">Parmak gıda tarifleri</h3><p class="kd-ikonlu__metin">Kesim kurallarına uygun, yaşa göre süzülen tarifler.</p><span class="kd-kart__alt">Aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
+  </div>
+ </div>
+</section>
+
+</div>
+</main>
+
+    
+
+    
+
+    <footer class="footer orange">
+    <div class="wrap">
+        <div class="foot-grid">
+            <div class="foot-brand">
+                <div class="foot-lockup">
+                    <span class="fl-word"><svg class="gastro-word-mark" viewBox="921.855 214.449 1721.825 348.042" role="img" aria-label="Dada Gastro" xmlns="http://www.w3.org/2000/svg"><title>Dada Gastro</title><path fill="currentColor" fill-rule="nonzero" d="M 1668.214844 361.792969 C 1690.148438 361.792969 1704.765625 378.71875 1704.765625 399.109375 C 1704.765625 419.113281 1690.148438 436.042969 1668.214844 436.042969 C 1646.289062 436.042969 1631.671875 419.113281 1631.671875 399.109375 C 1631.671875 378.71875 1646.289062 361.792969 1668.214844 361.792969 M 1656.675781 501.054688 C 1678.988281 501.054688 1696.304688 493.746094 1708.613281 481.050781 L 1708.613281 495.285156 L 1774.011719 495.285156 L 1774.011719 398.722656 C 1774.011719 339.863281 1729.769531 296.777344 1668.214844 296.777344 C 1608.207031 296.777344 1562.425781 342.941406 1562.425781 398.722656 C 1562.425781 454.890625 1600.507812 501.054688 1656.675781 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1454.691406 362.179688 C 1476.625 362.179688 1491.242188 379.105469 1491.242188 399.109375 C 1491.242188 419.5 1476.625 436.039062 1454.691406 436.039062 C 1432.765625 436.039062 1418.148438 419.5 1418.148438 399.109375 C 1418.148438 379.105469 1432.765625 362.179688 1454.691406 362.179688 M 1454.691406 501.054688 C 1516.246094 501.054688 1560.488281 458.351562 1560.488281 399.492188 L 1560.488281 214.449219 L 1491.242188 214.449219 L 1491.242188 307.933594 C 1479.3125 301.394531 1465.082031 297.164062 1450.847656 297.164062 C 1389.679688 297.164062 1348.902344 337.941406 1348.902344 399.492188 C 1348.902344 455.273438 1394.683594 501.054688 1454.691406 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1241.167969 361.792969 C 1263.101562 361.792969 1277.71875 378.71875 1277.71875 399.109375 C 1277.71875 419.113281 1263.101562 436.042969 1241.167969 436.042969 C 1219.242188 436.042969 1204.625 419.113281 1204.625 399.109375 C 1204.625 378.71875 1219.242188 361.792969 1241.167969 361.792969 M 1229.628906 501.054688 C 1251.945312 501.054688 1269.257812 493.746094 1281.566406 481.050781 L 1281.566406 495.285156 L 1346.96875 495.285156 L 1346.96875 398.722656 C 1346.96875 339.863281 1302.722656 296.777344 1241.167969 296.777344 C 1181.160156 296.777344 1135.378906 342.941406 1135.378906 398.722656 C 1135.378906 454.890625 1173.464844 501.054688 1229.628906 501.054688 "></path><path fill="currentColor" fill-rule="nonzero" d="M 1027.648438 362.179688 C 1049.578125 362.179688 1064.199219 379.105469 1064.199219 399.109375 C 1064.199219 419.5 1049.578125 436.039062 1027.648438 436.039062 C 1005.722656 436.039062 991.101562 419.5 991.101562 399.109375 C 991.101562 379.105469 1005.722656 362.179688 1027.648438 362.179688 M 1027.648438 501.054688 C 1089.203125 501.054688 1133.445312 458.351562 1133.445312 399.492188 L 1133.445312 214.449219 L 1064.199219 214.449219 L 1064.199219 307.933594 C 1052.265625 301.394531 1038.039062 297.164062 1023.800781 297.164062 C 962.636719 297.164062 921.855469 337.941406 921.855469 399.492188 C 921.855469 455.273438 967.636719 501.054688 1027.648438 501.054688 "></path><g transform="translate(1804.507685,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 -6.3125 C 157.984375 26.21875 135.859375 46.765625 99.53125 46.765625 C 71.40625 46.765625 52.453125 37.28125 42.96875 18.015625 L 24.640625 28.4375 C 37.59375 54.03125 62.5625 66.984375 99.53125 66.984375 C 121.328125 66.984375 139.96875 60.34375 155.453125 47.390625 C 170.9375 34.4375 178.84375 16.4375 178.84375 -6.3125 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(1988.081594,495.506687)"><path fill="currentColor" d="M 157.984375 -127.015625 C 143.453125 -150.078125 122.28125 -161.78125 94.15625 -161.78125 C 71.71875 -161.78125 52.453125 -153.875 36.34375 -137.765625 C 20.53125 -121.640625 12.640625 -102.0625 12.640625 -79 C 12.640625 -55.921875 20.53125 -36.34375 36.34375 -20.21875 C 52.453125 -4.109375 71.71875 3.796875 94.15625 3.796875 C 122.28125 3.796875 143.453125 -7.90625 157.984375 -30.96875 L 157.984375 0 L 178.84375 0 L 178.84375 -157.984375 L 157.984375 -157.984375 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g><g transform="translate(2171.655502,495.506687)"><path fill="currentColor" d="M 38.546875 -116.59375 C 38.546875 -132.703125 53.71875 -141.546875 71.71875 -141.546875 C 91 -141.546875 103.640625 -134.28125 109.640625 -119.4375 L 127.015625 -129.546875 C 117.859375 -149.453125 97.3125 -161.78125 71.71875 -161.78125 C 56.25 -161.78125 43.28125 -157.359375 32.859375 -148.828125 C 22.75 -140.296875 17.6875 -129.546875 17.6875 -116.59375 C 17.6875 -82.46875 50.875 -75.203125 77.40625 -68.5625 C 95.421875 -63.828125 109.953125 -55.921875 109.953125 -41.703125 C 109.953125 -24.328125 94.15625 -16.4375 73.625 -16.4375 C 52.453125 -16.4375 36.34375 -26.546875 30.328125 -42.96875 L 12.640625 -32.546875 C 21.171875 -11.0625 43.28125 3.796875 73.625 3.796875 C 90.359375 3.796875 104.265625 -0.3125 114.703125 -8.84375 C 125.4375 -17.375 130.8125 -28.125 130.8125 -41.703125 C 130.8125 -75.828125 97.640625 -83.09375 71.09375 -89.734375 C 53.078125 -94.46875 38.546875 -102.375 38.546875 -116.59375 Z M 38.546875 -116.59375 "></path></g><g transform="translate(2291.405091,495.506687)"><path fill="currentColor" d="M 105.84375 -157.984375 L 60.34375 -157.984375 L 60.34375 -202.21875 L 39.5 -195.90625 L 39.5 -157.984375 L 6.3125 -157.984375 L 6.3125 -137.765625 L 39.5 -137.765625 L 39.5 -42.03125 C 39.5 -5.375 61.609375 6.640625 105.84375 0 L 105.84375 -18.328125 C 75.515625 -17.0625 60.34375 -14.84375 60.34375 -42.03125 L 60.34375 -137.765625 L 105.84375 -137.765625 Z M 105.84375 -157.984375 "></path></g><g transform="translate(2392.512923,495.506687)"><path fill="currentColor" d="M 42.96875 -157.984375 L 22.125 -157.984375 L 22.125 0 L 42.96875 0 L 42.96875 -87.84375 C 42.96875 -124.171875 64.140625 -140.296875 92.890625 -140.296875 L 92.890625 -160.515625 C 69.203125 -160.515625 52.765625 -151.03125 42.96875 -131.765625 Z M 42.96875 -157.984375 "></path></g><g transform="translate(2464.836619,495.506687)"><path fill="currentColor" d="M 154.515625 -19.90625 C 170.625 -36.015625 178.84375 -55.609375 178.84375 -79 C 178.84375 -102.375 170.625 -121.96875 154.515625 -137.765625 C 138.390625 -153.875 118.796875 -161.78125 95.734375 -161.78125 C 72.671875 -161.78125 52.765625 -153.875 36.65625 -137.765625 C 20.53125 -121.96875 12.640625 -102.375 12.640625 -79 C 12.640625 -55.609375 20.53125 -36.015625 36.65625 -19.90625 C 52.765625 -4.109375 72.671875 3.796875 95.734375 3.796875 C 118.796875 3.796875 138.390625 -4.109375 154.515625 -19.90625 Z M 51.5 -34.4375 C 39.5 -46.765625 33.5 -61.609375 33.5 -79 C 33.5 -96.375 39.5 -111.21875 51.5 -123.234375 C 63.515625 -135.546875 78.359375 -141.546875 95.734375 -141.546875 C 113.109375 -141.546875 127.96875 -135.546875 139.96875 -123.234375 C 151.984375 -111.21875 157.984375 -96.375 157.984375 -79 C 157.984375 -61.609375 151.984375 -46.765625 139.96875 -34.4375 C 127.96875 -22.4375 113.109375 -16.4375 95.734375 -16.4375 C 78.359375 -16.4375 63.515625 -22.4375 51.5 -34.4375 Z M 51.5 -34.4375 "></path></g></svg></span>
+                </div>
+                
+                <p class="foot-tag">Tarifleri, mutfak bilgisini ve insanları aynı sofrada buluşturan gastronomi topluluğu.</p>
+                
+                                <div class="foot-soc">
+                                                                                                <a class="fs-soc" href="https://www.instagram.com/dada.gastro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                                                                                <a class="fs-soc" href="https://www.facebook.com/dadagastrocom" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                                                                                <a class="fs-soc" href="https://x.com/dadagastrocom" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                                                            </div>
+            </div>
+            
+            <div class="foot-col">
+                <h5>Keşfet ve Pişir</h5>
+                <a href="tarifler.html">Tüm Tarifler</a>
+                <a href="https://dadagastro.com/bugun-ne-pisirsem">Bugün Ne Pişirsem?</a>
+                <a href="https://dadagastro.com/dolapta-ne-var">Dolapta Ne Var?</a>
+                <a href="https://dadagastro.com/puf-noktalari">Püf Noktaları</a>
+                <a href="https://dadagastro.com/video-mutfagi">Video Mutfağı</a>
+            </div>
+            
+            <div class="foot-col">
+                <h5>Öğren ve Geliş</h5>
+                                    <a href="https://dadagastro.com/mutfaga-giris">Mutfağa Giriş</a>
+                                <a href="https://dadagastro.com/mutfak-ansiklopedisi">Mutfak Ansiklopedisi</a>
+                <a href="https://dadagastro.com/mutfak-sozlugu">Mutfak Sözlüğü</a>
+                <a href="https://dadagastro.com/olcu-birimleri">Ölçü Birimleri</a>
+                <a href="https://dadagastro.com/sofra-duzeni">Sofra Düzeni</a>
+            </div>
+            
+            <div class="foot-col">
+                <h5>Topluluk ve Paylaş</h5>
+                <a href="https://dadagastro.com/sefler">Şefler</a>
+                <a href="https://dadagastro.com/kayit">Şef Ol</a>
+                <a href="https://dadagastro.com/puf-noktasi-ekle">Püf Noktası Paylaş</a>
+                <a href="https://dadagastro.com/onur-listesi">Onur Listesi</a>
+            </div>
+            
+            <div class="foot-app">
+                <h5>Dada Gastro'yu İndir</h5>
+                <p class="foot-app-lead">Tariflerini mutfakta yanında taşı. Adım adım pişirme, zamanlayıcı ve alışveriş listesi tek uygulamada.</p>
+                <div class="foot-app-btns">
+                                                                <a class="app-btn" href="https://apps.apple.com/tr/app/dada-gastro-digital-kitchen/id6824484742" target="_blank" rel="noopener"><i class="fa-brands fa-apple" aria-hidden="true"></i><span class="ab-tx"><span class="ab-pre">İndir</span><span class="ab-store">App Store</span></span></a>
+                                                                <a class="app-btn" href="https://play.google.com/store/apps/details?id=com.dadagastro.app&amp;hl=tr" target="_blank" rel="noopener"><i class="fa-brands fa-google-play" aria-hidden="true"></i><span class="ab-tx"><span class="ab-pre">İndir</span><span class="ab-store">Google Play</span></span></a>
+                                    </div>
+            </div>
+        </div>
+
+        
+        <nav class="foot-corp" aria-label="Kurumsal">
+            <a href="https://dadagastro.com/hakkimizda">Hakkımızda</a>
+            <span class="sep"></span>
+            <a href="https://dadagastro.com/kunye">Künye</a>
+            <span class="sep"></span>
+            <a href="https://dadagastro.com/iletisim">İletişim</a>
+            <span class="sep"></span>
+            <a href="https://dadagastro.com/hesabim/cozum-merkezi">Çözüm Merkezi</a>
+            <span class="sep"></span>
+            <a href="https://dadagastro.com/iletisim">Öneri ve Şikâyet</a>
+            <span class="sep"></span>
+            <a href="https://dadagastro.com/marka-is-birlikleri">Marka ve Sponsorluk İş Birlikleri</a>
+        </nav>
+
+        
+        <nav class="foot-legal" aria-label="Yasal">
+                                        <a href="https://dadagastro.com/yasal/kullanim-kosullari">Kullanım Koşulları</a>
+                <span class="sep"></span>
+                            <a href="https://dadagastro.com/yasal/topluluk-kurallari">Topluluk Kuralları</a>
+                <span class="sep"></span>
+                            <a href="https://dadagastro.com/yasal/icerik-telif">İçerik ve Telif Politikası</a>
+                <span class="sep"></span>
+                            <a href="https://dadagastro.com/yasal/gizlilik">Gizlilik Politikası</a>
+                <span class="sep"></span>
+                            <a href="https://dadagastro.com/yasal/cerez">Çerez Politikası</a>
+                <span class="sep"></span>
+                            <a href="https://dadagastro.com/yasal/kvkk">KVKK Aydınlatma Metni</a>
+                <span class="sep"></span>
+                            <a href="https://dadagastro.com/yasal/sorumluluk-reddi">Sorumluluk Reddi</a>
+                <span class="sep"></span>
+                        <a href="https://dadagastro.com/yasal">Tüm Yasal Metinler →</a>
+        </nav>
+
+        <div class="foot-bottom">
+            <span class="fb-left">© 2026 <b><span class="bd">Dada</span><span class="sf">Gastro</span></b> · Dada İst Ajans Hizmetleri Ticaret Limited Şirketi · Tüm hakları saklıdır.</span>
+            <a class="foot-sign" href="https://gaviaworks.com" target="_blank" rel="noopener"><span class="gw-code">&lt;/&gt;</span> GaviaWorks</a>
+        </div>
+    </div>
+</footer>
+    <nav class="bottom-nav alt-cubuk" aria-label="Mobil alt navigasyon" data-revize="d11r">
+  <a href="index.html" class="bn-item ac-kalem"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Ana Sayfa</span></a>
+  <a href="tarifler.html" class="bn-item ac-kalem active" aria-current="page"><i class="fa-solid fa-bowl-food" aria-hidden="true"></i><span>Tarifler</span></a>
+  <a href="https://dadagastro.com/bugun-ne-pisirsem" class="bn-item ac-kalem bn-center ac-orta"><span class="bn-fab ac-fab"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span><span>Ne Pişirsem</span></a>
+  <a href="https://dadagastro.com/hesabim/mutfak-defterim" class="bn-item ac-kalem"><i class="fa-solid fa-bookmark" aria-hidden="true"></i><span>Kaydettiklerim</span></a>
+  <a href="https://dadagastro.com/hesabim/ayarlar" id="bnAccount" class="bn-item ac-kalem"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Profil</span></a>
+</nav>
+    
+
+
+
+
+
+
+
+
+
+
+<button class="to-top" id="toTop" type="button" aria-label="Başa dön" data-bc-bar="" data-bc-clear="" style="--bc-lift: 0px;"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+
+
+
+
+
+
+
+    
+    
+
+
+<link rel="stylesheet" href="varlik/gastro/varliklar/reference/shared/bottom-clearance.css">
+<script src="varlik/gastro/varliklar/reference/shared/bottom-clearance.js" defer=""></script>
+<script src="varlik/gastro/gastro/altbilgi-perde.js" defer></script>
+    
+    
+
+
+<script src="varlik/gastro/varliklar/reference/shared/dm-kabuk.js"></script>
+<script src="varlik/kids/kids.js?v=mvxv182q" defer></script>
+<script src="varlik/kids/js/kesim.js?v=mvxv182q" defer></script>
+<script src="varlik/kids/js/yardim.js?v=mvxv182q" defer></script>
+<script src="varlik/kids/js/putur.js?v=mvxv182q" defer></script>
+<script src="varlik/kids/js/kiler.js?v=mvxv182q" defer></script>
+</body></html>
