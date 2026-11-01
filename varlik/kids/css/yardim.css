@@ -15,7 +15,7 @@
 .kd-yardim[hidden] { display: none; }
 .kd-yardim.kd-acik { opacity: 1; transform: none; }
 .kd-yardim__ust { flex: none; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--kd-s3, 12px); padding: 14px 10px 10px 16px; border-bottom: 1px solid var(--kd-cizgi, #F0E3D6); }
-.kd-yardim .kd-yardim__baslik { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.2; letter-spacing: -.01em; color: var(--kd-murekkep, #3A2E2A); }
+.kd-yardim .kd-yardim__baslik { margin: 0; font-size: 17px; font-weight: 800; font-family: var(--kd-font-ekstra); line-height: 1.2; letter-spacing: -.01em; color: var(--kd-murekkep, #3A2E2A); }
 .kd-yardim .kd-yardim__alt { margin: 2px 0 0; font-size: 13px; line-height: 1.35; color: var(--kd-ikincil, #6B5A52); }
 .kd-yardim__kapat { flex: none; display: grid; place-items: center; width: 40px; height: 40px; margin: -6px 0 0; border: 0; border-radius: var(--kd-r-m, 6px); background: transparent; color: var(--kd-murekkep, #3A2E2A); cursor: pointer; }
 .kd-yardim__kapat:hover { background: var(--kd-krem-2, #FFF1E4); }
@@ -28,47 +28,47 @@
 .kd-yardim__ikon { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--kd-r-m, 6px); background: var(--kd-krem-2, #FFF1E4); }
 .kd-yardim__ikon img { display: block; width: 20px; height: 20px; }
 .kd-yardim__metin { min-width: 0; }
-.kd-yardim__metin b { display: block; font-size: 14.5px; font-weight: 700; line-height: 1.25; }
+.kd-yardim__metin b { display: block; font-size: 14.5px; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1.25; }
 .kd-yardim__metin small { display: block; margin-top: 1px; font-size: 12.5px; line-height: 1.3; color: var(--kd-ikincil, #6B5A52); }
 .kd-yardim__secenek[data-secenek="acil"] .kd-yardim__ikon { background: var(--kd-tehlike-a, #FDECEC); }
 .kd-yardim__secenek[data-secenek="acil"] b { color: var(--kd-tehlike-k, #A1261F); }
 .kd-yardim :focus-visible { outline: 3px solid var(--kd-tema, #1F7A68); outline-offset: -2px; }
 .kd-yardim__cevap[hidden] { display: none; }
-.kd-yardim__geri { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; margin: 0 0 4px; padding: 0 8px; border: 0; border-radius: var(--kd-r-m, 6px); background: transparent; color: var(--kd-tema, #1F7A68); font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; }
+.kd-yardim__geri { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; margin: 0 0 4px; padding: 0 8px; border: 0; border-radius: var(--kd-r-m, 6px); background: transparent; color: var(--kd-tema, #1F7A68); font: inherit; font-size: 13.5px; font-weight: 800; font-family: var(--kd-font-ekstra); cursor: pointer; }
 .kd-yardim__geri:hover { background: var(--kd-tema-a, #E1F3EE); }
 .kd-yardim__cevap-ic { padding: 0 8px 6px; }
 
 /* ---------- Cevap içeriği (Pütür cevaplarıyla aynı yapı; sınıf öneki kd-yd__) ---------- */
 .kd-yardim .kd-yardim__cevap-ic p { margin: 0 0 8px; font-size: 14.5px; line-height: 1.5; color: var(--kd-murekkep, #3A2E2A); }
-.kd-yardim .kd-yd__baslik { margin: 0 0 6px; font-size: 17px; font-weight: 800; line-height: 1.25; letter-spacing: -.01em; color: var(--kd-murekkep, #3A2E2A); }
+.kd-yardim .kd-yd__baslik { margin: 0 0 6px; font-size: 17px; font-weight: 800; font-family: var(--kd-font-ekstra); line-height: 1.25; letter-spacing: -.01em; color: var(--kd-murekkep, #3A2E2A); }
 .kd-yd__baslik:focus { outline: none; }
 .kd-yd__yukleniyor { color: var(--kd-ikincil, #6B5A52) !important; }
-.kd-yd__ornek { display: inline-block; margin: 6px 0 4px !important; padding: 4px 8px; border-radius: var(--kd-r-s, 4px); background: var(--kd-uyari-a, #FFF1E0); color: var(--kd-uyari-k, #8A3B00) !important; font-size: 12.5px !important; font-weight: 700; line-height: 1.3 !important; }
+.kd-yd__ornek { display: inline-block; margin: 6px 0 4px !important; padding: 4px 8px; border-radius: var(--kd-r-s, 4px); background: var(--kd-uyari-a, #FFF1E0); color: var(--kd-uyari-k, #8A3B00) !important; font-size: 12.5px !important; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1.3 !important; }
 .kd-yd__kucuk { color: var(--kd-ikincil, #6B5A52) !important; font-size: 13px !important; }
-.kd-yd__bag { padding: 0; border: 0; background: none; color: var(--kd-tema, #1F7A68) !important; font: inherit; font-weight: 800; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; cursor: pointer; }
-.kd-yd__dugme { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 8px 14px; margin: 4px 6px 6px 0; border: 0; border-radius: var(--kd-r-m, 6px); background: var(--kd-tema, #1F7A68); color: #fff !important; font: inherit; font-size: 14px; font-weight: 700; text-decoration: none; line-height: 1.2; cursor: pointer; }
+.kd-yd__bag { padding: 0; border: 0; background: none; color: var(--kd-tema, #1F7A68) !important; font: inherit; font-weight: 800; font-family: var(--kd-font-ekstra); font-size: 14px; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; cursor: pointer; }
+.kd-yd__dugme { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 8px 14px; margin: 4px 6px 6px 0; border: 0; border-radius: var(--kd-r-m, 6px); background: var(--kd-tema, #1F7A68); color: #fff !important; font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); text-decoration: none; line-height: 1.2; cursor: pointer; }
 .kd-yd__dugme:hover { background: color-mix(in srgb, var(--kd-tema, #1F7A68) 86%, #000); }
 .kd-yd__dugme--ikincil { background: #fff; color: var(--kd-murekkep, #3A2E2A) !important; box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); }
 .kd-yd__dugme--ikincil:hover { background: var(--kd-krem-2, #FFF1E4); }
 .kd-yd__dugme--acil { width: 100%; min-height: 50px; background: var(--kd-tehlike-k, #A1261F); font-size: 17px; }
 .kd-yd__dugme--acil:hover { background: #861D17; }
 .kd-yd__satir { display: flex; flex-wrap: wrap; align-items: center; }
-.kd-yd__onay { font-size: 13.5px; font-weight: 700; color: var(--kd-uygun-k, #16653F); }
+.kd-yd__onay { font-size: 13.5px; font-weight: 700; font-family: var(--kd-font-kalin); color: var(--kd-uygun-k, #16653F); }
 .kd-yd__chipler { display: flex; gap: 6px; flex-wrap: wrap; margin: 2px 0 8px; }
 .kd-yd__chipler--ay { display: grid; grid-template-columns: repeat(4, 1fr); }
-.kd-yd__chip { min-height: 40px; min-width: 62px; padding: 4px 8px; border: 1px solid var(--kd-cizgi, #F0E3D6); border-radius: var(--kd-r-m, 6px); background: #fff; color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.kd-yd__chip { min-height: 40px; min-width: 62px; padding: 4px 8px; border: 1px solid var(--kd-cizgi, #F0E3D6); border-radius: var(--kd-r-m, 6px); background: #fff; color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); cursor: pointer; }
 .kd-yd__chip:hover:not(:disabled) { background: var(--kd-krem-2, #FFF1E4); }
 .kd-yd__chip[aria-checked="true"] { border-color: var(--kd-tema, #1F7A68); background: var(--kd-tema-a, #E1F3EE); box-shadow: inset 0 0 0 1px var(--kd-tema, #1F7A68); }
 .kd-yd__chip:disabled { opacity: .4; cursor: not-allowed; }
 .kd-yd__sonuc:not(:empty) { margin: 2px 0 8px; padding: 10px 12px 6px; border-radius: var(--kd-r-l, 8px); background: var(--r-a, var(--kd-krem-2, #FFF1E4)); }
-.kd-yd__etiket { display: block; margin-bottom: 4px; color: var(--kd-ikincil, #6B5A52); font-size: 13.5px; font-weight: 700; }
+.kd-yd__etiket { display: block; margin-bottom: 4px; color: var(--kd-ikincil, #6B5A52); font-size: 13.5px; font-weight: 700; font-family: var(--kd-font-kalin); }
 .kd-yd__ara input { width: 100%; height: 44px; padding: 0 12px; border: 0; border-radius: var(--kd-r-m, 6px); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 16px; }
 .kd-yd__ara input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--kd-tema, #1F7A68); }
 .kd-yd__sonuclar { margin-top: 8px; }
 .kd-yd__besin { margin-bottom: 8px; padding: 10px 12px; border-radius: var(--kd-r-l, 8px); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); }
 .kd-yd__besin p { font-size: 13.5px !important; margin-bottom: 5px !important; }
 .kd-yd__besin-ust { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; font-size: 15px; }
-.kd-yd__rozet { flex: none; padding: 3px 8px; border-radius: var(--kd-r-s, 4px); font-size: 12.5px; font-weight: 800; }
+.kd-yd__rozet { flex: none; padding: 3px 8px; border-radius: var(--kd-r-s, 4px); font-size: 12.5px; font-weight: 800; font-family: var(--kd-font-ekstra); }
 .kd-yd__besin[data-durum="uygun"] .kd-yd__rozet { background: var(--kd-uygun-a, #E3F5EC); color: var(--kd-uygun-k, #16653F); }
 .kd-yd__besin[data-durum="dikkat"] .kd-yd__rozet { background: var(--kd-uyari-a, #FFF1E0); color: var(--kd-uyari-k, #8A3B00); }
 .kd-yd__besin[data-durum="henuz"] .kd-yd__rozet { background: var(--kd-tehlike-a, #FDECEC); color: var(--kd-tehlike-k, #A1261F); }
@@ -85,7 +85,7 @@
 .kd-yd__acil { padding: 10px 12px 8px; border-radius: var(--kd-r-l, 8px); background: var(--kd-tehlike-a, #FDECEC); }
 .kd-yd__acil-metin { color: var(--kd-tehlike-k, #A1261F) !important; font-size: 16px !important; }
 .kd-yardim .kd-yd__acil .kd-yd__baslik { color: var(--kd-tehlike-k, #A1261F); }
-.kd-yd__acil a:not(.kd-yd__dugme) { color: var(--kd-tehlike-k, #A1261F); font-weight: 800; }
+.kd-yd__acil a:not(.kd-yd__dugme) { color: var(--kd-tehlike-k, #A1261F); font-weight: 800; font-family: var(--kd-font-ekstra); }
 
 /* Mobil: barın tam genişliği, altta güvenli alan payı */
 @media (max-width: 640px) {
@@ -95,6 +95,6 @@
 @media (pointer: coarse) { .kd-yardim__geri { min-height: 44px; } .kd-yardim__kapat { width: 44px; height: 44px; } }
 /* Tema rengi (yalnız ≤600px; geniş ekranda bardadır) */
 .kd-yardim__tema { flex: none; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px 10px 16px; border-top: 1px solid var(--kd-cizgi, #F0E3D6); }
-.kd-yardim__tema-ad { font-size: 13.5px; font-weight: 800; color: var(--kd-murekkep, #3A2E2A); }
+.kd-yardim__tema-ad { font-size: 13.5px; font-weight: 800; font-family: var(--kd-font-ekstra); color: var(--kd-murekkep, #3A2E2A); }
 @media (max-width: 600px) { .kd-yardim__tema { display: flex; } }
 @media (prefers-reduced-motion: reduce) { .kd-yardim { transition: none; transform: none; } }
