@@ -1,0 +1,666 @@
+{
+ "_note": "All photos generated with Higgsfield seedream_v5_pro at 2k; 2.5 credits per job. Model chosen after a 3-model test (seedream_v5_pro, nano_banana_pro, flux_2) on balkabagi-puresi.",
+ "modelTest": {
+  "seedream_v5_pro": {
+   "jobId": "acab15e6-c105-457e-b7cc-e6ca644cbd8c",
+   "credits": 2.5
+  },
+  "nano_banana_pro": {
+   "jobId": "7716b144-3615-4fc0-95ee-671a23bc0b90",
+   "credits": 2
+  },
+  "flux_2": {
+   "jobId": "64716a2f-9721-4567-a03d-06dbc1f05be3",
+   "credits": 1.5
+  }
+ },
+ "files": {
+  "varlik/kids/gorsel/hero-mutfak.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "3:2",
+   "prompt": "Wide interior photo of a warm sunlit family kitchen with cream walls, an empty light-wood baby high chair on the right side with a pastel peach bowl and a small baby spoon on its tray, a bowl of fresh fruit on the light wood counter, soft pastel mint and pink accents, sheer curtains, morning sun; the left third of the frame is calm empty negative space of cream wall for headline text; no people. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "73b056b7-5d8e-4a36-bc2d-955430d51134",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "73b056b7-5d8e-4a36-bc2d-955430d51134",
+     "prompt": "Wide interior photo of a warm sunlit family kitchen with cream walls, an empty light-wood baby high chair on the right side with a pastel peach bowl and a small baby spoon on its tray, a bowl of fresh fruit on the light wood counter, soft pastel mint and pink accents, sheer curtains, morning sun; the left third of the frame is calm empty negative space of cream wall for headline text; no people. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 54214
+  },
+  "varlik/kids/gorsel/bant-kids.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "21:9",
+   "prompt": "Top-down flat-lay on a cream linen surface: small baby bowls in pastel peach, mint, pink, baby blue and butter yellow filled with smooth purees (pumpkin, pea, beet-pink yogurt, apple, banana), silicone baby spoons, a folded white cotton bib, a few sliced fruit pieces (banana slices, strawberry halves, pear slices); objects arranged along the right and edges, leaving a calm empty cream area in the middle-left. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "75269133-16f1-4f7d-9a59-66c6f469bf30",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "75269133-16f1-4f7d-9a59-66c6f469bf30",
+     "prompt": "Top-down flat-lay on a cream linen surface: small baby bowls in pastel peach, mint, pink, baby blue and butter yellow filled with smooth purees (pumpkin, pea, beet-pink yogurt, apple, banana), silicone baby spoons, a folded white cotton bib, a few sliced fruit pieces (banana slices, strawberry halves, pear slices); objects arranged along the right and edges, leaving a calm empty cream area in the middle-left. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 34560
+  },
+  "varlik/kids/gorsel/evre-hamilelik.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Still life on a cream table: fresh produce (leafy greens, avocado, oranges, berries, a pear), a clear glass of water, a folded soft muslin cloth, soft blush pink tones, calm and nourishing mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "b0ecebb4-7c73-44d0-88e8-0f3d5addcb08",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "b0ecebb4-7c73-44d0-88e8-0f3d5addcb08",
+     "prompt": "Still life on a cream table: fresh produce (leafy greens, avocado, oranges, berries, a pear), a clear glass of water, a folded soft muslin cloth, soft blush pink tones, calm and nourishing mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 49692
+  },
+  "varlik/kids/gorsel/evre-0-6-ay.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Still life on a cream surface: a baby bottle with milk, a soft folded baby blue muslin cloth, a small knitted soft toy bunny, baby blue and cream tones, tender calm mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "f3c0f1d2-9a09-43bd-ab09-d877433ccfa2",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "f3c0f1d2-9a09-43bd-ab09-d877433ccfa2",
+     "prompt": "Still life on a cream surface: a baby bottle with milk, a soft folded baby blue muslin cloth, a small knitted soft toy bunny, baby blue and cream tones, tender calm mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 38476
+  },
+  "varlik/kids/gorsel/evre-6-8-ay.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Close-up of a first small silicone baby spoon holding smooth peach-colored puree above a pastel peach bowl of puree, soft peach and cream tones, first tastes. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "4814704c-1618-4969-8ff4-3b866a9f7e5c",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "4814704c-1618-4969-8ff4-3b866a9f7e5c",
+     "prompt": "Close-up of a first small silicone baby spoon holding smooth peach-colored puree above a pastel peach bowl of puree, soft peach and cream tones, first tastes. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 33000
+  },
+  "varlik/kids/gorsel/evre-9-12-ay.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down: soft finger foods on a sectioned pastel mint silicone baby plate: soft steamed carrot sticks, steamed broccoli florets with stems, avocado slices, soft banana spears, toast fingers, cream background. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "53f37f9d-b9fb-4af3-b986-8df28278bd8d",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "53f37f9d-b9fb-4af3-b986-8df28278bd8d",
+     "prompt": "Top-down: soft finger foods on a sectioned pastel mint silicone baby plate: soft steamed carrot sticks, steamed broccoli florets with stems, avocado slices, soft banana spears, toast fingers, cream background. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 64416
+  },
+  "varlik/kids/gorsel/evre-1-3-yas.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "A toddler plate with small portions of family food (soft rice, cooked vegetables, small meatball pieces, cucumber sticks) on a butter yellow toddler plate at a sunlit family dining table, adult plates softly blurred in the background, butter yellow and cream tones. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "44e10559-c1d2-4fd6-8799-260df4c53407",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "44e10559-c1d2-4fd6-8799-260df4c53407",
+     "prompt": "A toddler plate with small portions of family food (soft rice, cooked vegetables, small meatball pieces, cucumber sticks) on a butter yellow toddler plate at a sunlit family dining table, adult plates softly blurred in the background, butter yellow and cream tones. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 48724
+  },
+  "varlik/kids/gorsel/tarif/balkabagi-puresi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: smooth bright orange pumpkin puree in a pastel mint bowl with a small baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "c280f016-593b-40be-a71d-9d5262e70e55",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "c280f016-593b-40be-a71d-9d5262e70e55",
+     "prompt": "Top-down overhead food photo: smooth bright orange pumpkin puree in a pastel mint bowl with a small baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 47856
+  },
+  "varlik/kids/gorsel/tarif/havuclu-patates-puresi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: smooth light orange carrot and potato puree in a pastel peach bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "26f35185-cbd2-4ccd-a9f6-fce46b383880",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "26f35185-cbd2-4ccd-a9f6-fce46b383880",
+     "prompt": "45-degree angle food photo: smooth light orange carrot and potato puree in a pastel peach bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 37276
+  },
+  "varlik/kids/gorsel/tarif/avokado-muz-ezmesi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: fork-mashed green avocado and banana in a pastel yellow bowl, half avocado and banana slices beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "15f1ed45-243c-4b1e-8663-115fc35df466",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "15f1ed45-243c-4b1e-8663-115fc35df466",
+     "prompt": "Top-down overhead food photo: fork-mashed green avocado and banana in a pastel yellow bowl, half avocado and banana slices beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 68730
+  },
+  "varlik/kids/gorsel/tarif/firin-elma-armut-puresi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: pale golden baked apple and pear puree in a pastel pink bowl, a few apple slices on the side. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "b1be5c60-1e43-4c93-aec2-5c505bfa97a7",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "b1be5c60-1e43-4c93-aec2-5c505bfa97a7",
+     "prompt": "45-degree angle food photo: pale golden baked apple and pear puree in a pastel pink bowl, a few apple slices on the side. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 31412
+  },
+  "varlik/kids/gorsel/tarif/bebek-mercimek-corbasi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Plain smooth soup with no spice sprinkle, no garnish flakes, no salt or spice dishes in the scene. Top-down overhead food photo: smooth light orange red lentil soup in a small pastel blue bowl with a silicone baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "6e714eda-aa41-4546-83ec-5c5bd458a589",
+   "creditsSpent": 5.0,
+   "attempts": [
+    {
+     "jobId": "2dee87b4-1eb7-4aaa-a9a7-cbc3147b7121",
+     "prompt": "Top-down overhead food photo: smooth light orange red lentil soup in a small pastel blue bowl with a silicone baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "6e714eda-aa41-4546-83ec-5c5bd458a589",
+     "prompt": "Plain smooth soup with no spice sprinkle, no garnish flakes, no salt or spice dishes in the scene. Top-down overhead food photo: smooth light orange red lentil soup in a small pastel blue bowl with a silicone baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 24536
+  },
+  "varlik/kids/gorsel/tarif/fistik-ezmeli-yulaf-lapasi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Creamy oatmeal porridge with smooth peanut butter fully stirred in, giving the porridge a light tan color, with just a faint thin streak on the surface, no blob, no dollop, no swirl pile. 45-degree angle food photo: creamy oatmeal porridge with a thin swirl of smooth peanut butter in a pastel peach bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "d78a9c2e-8632-4259-b72f-fc95ca8e69f4",
+   "creditsSpent": 7.5,
+   "attempts": [
+    {
+     "jobId": "2cbc0ea1-d245-49ef-96bd-b07f95b77a28",
+     "prompt": "45-degree angle food photo: creamy oatmeal porridge with a thin swirl of smooth peanut butter in a pastel peach bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "eb8131d4-fc3b-4b90-9403-35def89cc7cf",
+     "prompt": "The peanut butter is only a very thin, runny, watered-down ribbon stirred into the porridge, no thick dollop. 45-degree angle food photo: creamy oatmeal porridge with a thin swirl of smooth peanut butter in a pastel peach bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    },
+    {
+     "jobId": "d78a9c2e-8632-4259-b72f-fc95ca8e69f4",
+     "prompt": "Creamy oatmeal porridge with smooth peanut butter fully stirred in, giving the porridge a light tan color, with just a faint thin streak on the surface, no blob, no dollop, no swirl pile. 45-degree angle food photo: creamy oatmeal porridge with a thin swirl of smooth peanut butter in a pastel peach bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 29602
+  },
+  "varlik/kids/gorsel/tarif/tatli-patates-cubuklari.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: soft baked sweet potato sticks, thick finger-length strips, on a pastel mint silicone plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "aa38b234-b439-40ff-bbe6-0d3ce980a651",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "aa38b234-b439-40ff-bbe6-0d3ce980a651",
+     "prompt": "Top-down overhead food photo: soft baked sweet potato sticks, thick finger-length strips, on a pastel mint silicone plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 42276
+  },
+  "varlik/kids/gorsel/tarif/buharda-brokoli-cicekleri.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: steamed bright green broccoli florets with long stems as handles on a pastel yellow plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "b1d533f7-d0e8-4695-a388-2ee0085baa48",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "b1d533f7-d0e8-4695-a388-2ee0085baa48",
+     "prompt": "45-degree angle food photo: steamed bright green broccoli florets with long stems as handles on a pastel yellow plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 52568
+  },
+  "varlik/kids/gorsel/tarif/yogurtlu-seftali-ezmesi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: plain white yogurt topped with mashed ripe peach in a pastel pink bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "f8104035-4e6b-4ca2-afb9-7f40698530d0",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "f8104035-4e6b-4ca2-afb9-7f40698530d0",
+     "prompt": "Top-down overhead food photo: plain white yogurt topped with mashed ripe peach in a pastel pink bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 37870
+  },
+  "varlik/kids/gorsel/tarif/tam-pismis-yumurta-ezmesi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: fork-mashed fully hard-boiled egg in a small pastel blue bowl, one halved boiled egg beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "3201b6f7-d351-4984-8abb-ce29e868ee56",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "3201b6f7-d351-4984-8abb-ce29e868ee56",
+     "prompt": "45-degree angle food photo: fork-mashed fully hard-boiled egg in a small pastel blue bowl, one halved boiled egg beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 46628
+  },
+  "varlik/kids/gorsel/tarif/tavuklu-sebze-puresi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: smooth pale chicken, carrot and zucchini puree in a pastel mint bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "c2e4af97-4688-479b-9128-fa63266da36f",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "c2e4af97-4688-479b-9128-fa63266da36f",
+     "prompt": "Top-down overhead food photo: smooth pale chicken, carrot and zucchini puree in a pastel mint bowl, baby spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 33456
+  },
+  "varlik/kids/gorsel/tarif/kabakli-pirinc-lapasi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: soft mashed rice porridge with zucchini flecks in a pastel peach bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "c4327609-5496-4716-98a4-0834b3b0a447",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "c4327609-5496-4716-98a4-0834b3b0a447",
+     "prompt": "45-degree angle food photo: soft mashed rice porridge with zucchini flecks in a pastel peach bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 35474
+  },
+  "varlik/kids/gorsel/tarif/sebzeli-bebek-omleti.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: fluffy fully cooked omelette with grated carrot and zucchini cut into finger strips on a pastel blue plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "b7f68b58-3ffb-43c2-9d67-d6d4386923fb",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "b7f68b58-3ffb-43c2-9d67-d6d4386923fb",
+     "prompt": "Top-down overhead food photo: fluffy fully cooked omelette with grated carrot and zucchini cut into finger strips on a pastel blue plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 49712
+  },
+  "varlik/kids/gorsel/tarif/yumusak-mercimek-koftesi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: small soft oval red lentil and fine bulgur patties (no chili, mild color) on a pastel yellow plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "40aee864-fe28-4d8c-8cb0-935fda108101",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "40aee864-fe28-4d8c-8cb0-935fda108101",
+     "prompt": "45-degree angle food photo: small soft oval red lentil and fine bulgur patties (no chili, mild color) on a pastel yellow plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 42618
+  },
+  "varlik/kids/gorsel/tarif/firin-sebzeli-kofte.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: small soft oven-baked meatballs with grated vegetables, finger shaped, on a pastel mint plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "ad6a84fb-b10f-4840-8b19-54ce1553c254",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "ad6a84fb-b10f-4840-8b19-54ce1553c254",
+     "prompt": "Top-down overhead food photo: small soft oven-baked meatballs with grated vegetables, finger shaped, on a pastel mint plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 66160
+  },
+  "varlik/kids/gorsel/tarif/nohutlu-sebze-ezmesi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Edit this photo: remove the pile of chickpeas on the right side of the bowl and replace that area with the same plain cream linen fabric. Keep everything else exactly the same: the pink bowl of orange mash, parsley, carrot, lighting and composition.",
+   "jobId": "438278cd-635f-41e9-8c10-fc753cf886ad",
+   "creditsSpent": 10.0,
+   "attempts": [
+    {
+     "jobId": "15c519bf-4b70-424b-ad4e-963d2181f04c",
+     "prompt": "45-degree angle food photo: chunky mashed chickpea and carrot spread in a pastel pink bowl, a few cooked chickpeas mashed beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "a59cd2c1-6aa9-41c4-8754-9fb23ce9406f",
+     "prompt": "Smooth-chunky orange chickpea-carrot mash only, absolutely no whole chickpeas visible anywhere, a small carrot and a sprig of parsley as props. 45-degree angle food photo: chunky mashed chickpea and carrot spread in a pastel pink bowl, a few cooked chickpeas mashed beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    },
+    {
+     "jobId": "ece55bbc-6543-48a3-ade4-c3c0378e8cad",
+     "prompt": "The only food in the scene is the bowl of mash; props are one whole raw carrot and a parsley sprig; there are no chickpeas, beans, nuts or small round items anywhere outside the bowl. 45-degree angle food photo: chunky mashed chickpea and carrot spread in a pastel pink bowl, a few cooked chickpeas mashed beside. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    },
+    {
+     "jobId": "438278cd-635f-41e9-8c10-fc753cf886ad",
+     "prompt": "Edit this photo: remove the pile of chickpeas on the right side of the bowl and replace that area with the same plain cream linen fabric. Keep everything else exactly the same: the pink bowl of orange mash, parsley, carrot, lighting and composition.",
+     "kind": "edit (image reference of _r1)"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 59776
+  },
+  "varlik/kids/gorsel/tarif/somonlu-patates-toplari.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: soft baked salmon and potato patties on a pastel blue plate, dill sprig. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "6cf4bd52-78f1-4b13-b3dd-fd18c249ca9e",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "6cf4bd52-78f1-4b13-b3dd-fd18c249ca9e",
+     "prompt": "Top-down overhead food photo: soft baked salmon and potato patties on a pastel blue plate, dill sprig. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 46114
+  },
+  "varlik/kids/gorsel/tarif/muzlu-yulaf-pankeki.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Three small round banana oat pancakes sliced into finger-width strips laid flat side by side on a plate, not stacked. 45-degree angle food photo: small thick banana oat pancakes cut into strips on a pastel peach plate, banana slices. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "d97dc6a6-739e-482d-b29b-7835a2296963",
+   "creditsSpent": 5.0,
+   "attempts": [
+    {
+     "jobId": "88bab703-0d24-407e-b077-03b1e16c2bf4",
+     "prompt": "45-degree angle food photo: small thick banana oat pancakes cut into strips on a pastel peach plate, banana slices. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "d97dc6a6-739e-482d-b29b-7835a2296963",
+     "prompt": "Three small round banana oat pancakes sliced into finger-width strips laid flat side by side on a plate, not stacked. 45-degree angle food photo: small thick banana oat pancakes cut into strips on a pastel peach plate, banana slices. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 46866
+  },
+  "varlik/kids/gorsel/tarif/yumusak-bulgur-pilavi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: soft fine bulgur pilaf with tiny diced carrots and peas in a pastel yellow bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "87e4d424-bc14-44ab-aaf9-2985add20ce2",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "87e4d424-bc14-44ab-aaf9-2985add20ce2",
+     "prompt": "Top-down overhead food photo: soft fine bulgur pilaf with tiny diced carrots and peas in a pastel yellow bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 50558
+  },
+  "varlik/kids/gorsel/tarif/firin-kabak-mucveri.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: soft oven-baked zucchini fritters with white cheese, cut in strips, on a pastel mint plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "6a3232bb-f170-44a7-98eb-7007c51521fa",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "6a3232bb-f170-44a7-98eb-7007c51521fa",
+     "prompt": "45-degree angle food photo: soft oven-baked zucchini fritters with white cheese, cut in strips, on a pastel mint plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 52374
+  },
+  "varlik/kids/gorsel/tarif/tavuklu-sehriye-corbasi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "No salt or pepper shakers or grinders anywhere in the scene. Top-down overhead food photo: light chicken and orzo soup with carrot bits in a pastel blue toddler bowl, spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "6c59728c-5541-42ed-bad5-c2f66508264c",
+   "creditsSpent": 5.0,
+   "attempts": [
+    {
+     "jobId": "982f369a-e3f7-4686-8fb5-8c51b20fb8cc",
+     "prompt": "Top-down overhead food photo: light chicken and orzo soup with carrot bits in a pastel blue toddler bowl, spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "6c59728c-5541-42ed-bad5-c2f66508264c",
+     "prompt": "No salt or pepper shakers or grinders anywhere in the scene. Top-down overhead food photo: light chicken and orzo soup with carrot bits in a pastel blue toddler bowl, spoon. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 47274
+  },
+  "varlik/kids/gorsel/tarif/etli-nohut-cocuk-porsiyonu.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: home-style chickpea and diced beef stew in a pastel peach toddler bowl, tomato-light color. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "777727ac-ec14-45ed-bca2-ac5aa4885b94",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "777727ac-ec14-45ed-bca2-ac5aa4885b94",
+     "prompt": "45-degree angle food photo: home-style chickpea and diced beef stew in a pastel peach toddler bowl, tomato-light color. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 52486
+  },
+  "varlik/kids/gorsel/tarif/zeytinyagli-taze-fasulye.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Green beans are cut into short soft 2 cm pieces, stewed with soft diced carrot in a light tomato-olive oil sauce, served on a pastel butter yellow toddler plate; no cherry tomatoes, no raw vegetables. Top-down overhead food photo: tender green beans cooked in olive oil with tomato and carrot, cut small, in a pastel yellow toddler plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "d92715f9-5473-44ce-ae3a-bede02b419cb",
+   "creditsSpent": 5.0,
+   "attempts": [
+    {
+     "jobId": "43ec8d82-c5f6-4ef1-9f58-f0275116c586",
+     "prompt": "Top-down overhead food photo: tender green beans cooked in olive oil with tomato and carrot, cut small, in a pastel yellow toddler plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "d92715f9-5473-44ce-ae3a-bede02b419cb",
+     "prompt": "Green beans are cut into short soft 2 cm pieces, stewed with soft diced carrot in a light tomato-olive oil sauce, served on a pastel butter yellow toddler plate; no cherry tomatoes, no raw vegetables. Top-down overhead food photo: tender green beans cooked in olive oil with tomato and carrot, cut small, in a pastel yellow toddler plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 48704
+  },
+  "varlik/kids/gorsel/tarif/meyveli-yogurt-kasesi.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Strawberries are mashed and blueberries are cut into tiny quarters mixed into the yogurt; absolutely no whole blueberries or whole berries anywhere in the scene, only a pink bowl on cream linen. 45-degree angle food photo: bowl of plain yogurt topped with mashed strawberries and quartered blueberries in a pastel pink toddler bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "1a3c3df2-3a85-441c-8686-4c1b1ee92445",
+   "creditsSpent": 5.0,
+   "attempts": [
+    {
+     "jobId": "7365d3f7-1ecd-462c-9ec2-4b67021ba415",
+     "prompt": "45-degree angle food photo: bowl of plain yogurt topped with mashed strawberries and quartered blueberries in a pastel pink toddler bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "1a3c3df2-3a85-441c-8686-4c1b1ee92445",
+     "prompt": "Strawberries are mashed and blueberries are cut into tiny quarters mixed into the yogurt; absolutely no whole blueberries or whole berries anywhere in the scene, only a pink bowl on cream linen. 45-degree angle food photo: bowl of plain yogurt topped with mashed strawberries and quartered blueberries in a pastel pink toddler bowl. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 37594
+  },
+  "varlik/kids/gorsel/tarif/tahinli-muz-dilimleri.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: banana coins lightly drizzled with thin tahini on a pastel mint toddler plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "08faa9c4-7c91-440f-b545-f658b2d0f487",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "08faa9c4-7c91-440f-b545-f658b2d0f487",
+     "prompt": "Top-down overhead food photo: banana coins lightly drizzled with thin tahini on a pastel mint toddler plate. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 37600
+  },
+  "varlik/kids/gorsel/tarif/sebzeli-firin-makarna.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "45-degree angle food photo: baked short pasta with broccoli, carrot and light cheese in a pastel blue toddler dish. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "c120367a-101d-4ea2-a356-12b54c14d0c7",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "c120367a-101d-4ea2-a356-12b54c14d0c7",
+     "prompt": "45-degree angle food photo: baked short pasta with broccoli, carrot and light cheese in a pastel blue toddler dish. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 36668
+  },
+  "varlik/kids/gorsel/tarif/mini-sebzeli-pide.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3",
+   "prompt": "Top-down overhead food photo: small boat-shaped homemade pide with vegetables and white cheese, cut into pieces, on a pastel peach board. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "169df4ca-19b3-4498-b311-f8aa06eda3c8",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "169df4ca-19b3-4498-b311-f8aa06eda3c8",
+     "prompt": "Top-down overhead food photo: small boat-shaped homemade pide with vegetables and white cheese, cut into pieces, on a pastel peach board. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 57288
+  },
+  "varlik/kids/gorsel/rehber-ek-gida.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "16:9",
+   "prompt": "A small silicone baby spoon with the first smooth orange vegetable puree resting beside a small pastel peach bowl of puree, on cream linen, generous empty space. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "411e4091-7c9d-4729-9e3d-99a545cba3c5",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "411e4091-7c9d-4729-9e3d-99a545cba3c5",
+     "prompt": "A small silicone baby spoon with the first smooth orange vegetable puree resting beside a small pastel peach bowl of puree, on cream linen, generous empty space. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 29078
+  },
+  "varlik/kids/gorsel/rehber-blw.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "16:9",
+   "prompt": "Only three foods on the tray: thick soft sweet potato sticks, broccoli florets with long stems, avocado slices; no berries, no tomatoes, no grapes. Top-down: a pastel mint tray of soft baby-led weaning finger foods: thick baked sweet potato sticks, steamed broccoli florets with long stems, ripe avocado slices, arranged neatly. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "42de179e-516c-49f8-8f58-69bd5d0c5d34",
+   "creditsSpent": 5.0,
+   "attempts": [
+    {
+     "jobId": "58953d59-27a1-413d-8dd4-1957fa3acdb9",
+     "prompt": "Top-down: a pastel mint tray of soft baby-led weaning finger foods: thick baked sweet potato sticks, steamed broccoli florets with long stems, ripe avocado slices, arranged neatly. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    },
+    {
+     "jobId": "42de179e-516c-49f8-8f58-69bd5d0c5d34",
+     "prompt": "Only three foods on the tray: thick soft sweet potato sticks, broccoli florets with long stems, avocado slices; no berries, no tomatoes, no grapes. Top-down: a pastel mint tray of soft baby-led weaning finger foods: thick baked sweet potato sticks, steamed broccoli florets with long stems, ripe avocado slices, arranged neatly. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "regeneration"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 48728
+  },
+  "varlik/kids/gorsel/rehber-alerjen.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "16:9",
+   "prompt": "Four tiny pastel bowls (peach, mint, pink, blue) in a row: fully cooked mashed hard-boiled egg, thinned smooth peanut butter, plain white yogurt, smooth tahini, each with a small baby spoon, no labels. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+   "jobId": "cc57f7e2-9712-4391-90c8-ba76696a7727",
+   "creditsSpent": 2.5,
+   "attempts": [
+    {
+     "jobId": "cc57f7e2-9712-4391-90c8-ba76696a7727",
+     "prompt": "Four tiny pastel bowls (peach, mint, pink, blue) in a row: fully cooked mashed hard-boiled egg, thinned smooth peanut butter, plain white yogurt, smooth tahini, each with a small baby spoon, no labels. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
+     "kind": "original"
+    }
+   ],
+   "webpQuality": 80,
+   "bytes": 28562
+  }
+ }
+}

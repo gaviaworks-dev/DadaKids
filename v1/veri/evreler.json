@@ -1,0 +1,562 @@
+{
+ "_aciklama": "Evre içerikleri — ÖRNEK İÇERİK, uzman onayı bekliyor. Yalnız DSÖ, NHS, AAP, ASCIA ve T.C. Sağlık Bakanlığı'nın genel olarak uzlaştığı ifadeler; takviye dozu, tanı ve sayısal hedef içermez. Alanlar her evrede aynıdır (karşılaştırılabilirlik). uygun/dikkat/henuz alanları besinler.json slug'larıdır.",
+ "evreler": [
+  {
+   "kod": "hamilelik",
+   "ad": "Hamilelik & Lohusalık",
+   "aralik": "1., 2., 3. trimester ve emzirme",
+   "renk": "pembe",
+   "ikon": "hamile",
+   "slogan": "İki kişi için değil, iki kişi adına",
+   "ozet": "Bu dönemde amaç çok yemek değil, dengeli ve güvenli beslenmektir. Folat, demir ve iyot öne çıkar; gıda güvenliği her zamankinden önemlidir. Takviyeler konusunda hekiminizin önerisi esastır.",
+   "gunluk": {
+    "sut": "Pastörize süt ve süt ürünleri günlük öğünlerde yer alabilir.",
+    "ekGida": "Bebek için ek gıda yok; odak sizin dengeli beslenmeniz.",
+    "ogunSayisi": "3 ana öğün ve gerekirse 1–2 ara öğün; bulantıda küçük ve sık öğünler."
+   },
+   "beslenme": [
+    "Her öğünde sebze ya da meyve, tam tahıl ve bir protein kaynağı bulundurmaya çalışın.",
+    "Folik asit takviyesi gebelik öncesinden itibaren önerilir; başlama zamanını ve miktarını hekiminiz belirler.",
+    "Gün boyu susadıkça su için; şekerli ve kafeinli içecekleri sınırlayın.",
+    "Balığı haftalık menüye ekleyin; cıvası düşük türleri seçip iyi pişirin.",
+    "Bitkisel takviye ve çayları kullanmadan önce hekiminize danışın."
+   ],
+   "kivamDikkat": [
+    "Et, tavuk, balık ve yumurtayı tamamen pişirin; içi pembe ya da akışkan kalmasın.",
+    "Yalnız pastörize süt ve süt ürünleri tüketin; açık sütü kaynatın.",
+    "Sebze ve meyveleri, özellikle toprak bulaşmış olanları bol suyla yıkayın.",
+    "Çiğ et için ayrı kesme tahtası kullanın; elleri ve yüzeyleri sık yıkayın.",
+    "Hazır salata ve önceden kesilmiş meyveleri bekletmeden tüketin; artık yemekleri buharı tütene kadar ısıtın."
+   ],
+   "odakBesinler": [
+    {
+     "ad": "Folat",
+     "neden": "Bebeğin sinir sistemi gelişiminde, özellikle ilk haftalarda önemli rol oynar. Besinlere ek olarak takviye de önerilir.",
+     "ornekler": [
+      "mercimek",
+      "nohut",
+      "ıspanak",
+      "brokoli",
+      "portakal"
+     ]
+    },
+    {
+     "ad": "Demir",
+     "neden": "Hamilelikte kan hacmi arttığı için ihtiyaç yükselir. C vitamini içeren besinlerle birlikte tüketmek emilimi destekler.",
+     "ornekler": [
+      "kırmızı et",
+      "mercimek",
+      "yumurta",
+      "kuru fasulye",
+      "yeşil yapraklı sebzeler"
+     ]
+    },
+    {
+     "ad": "İyot",
+     "neden": "Bebeğin beyin gelişimi ve annenin tiroit işlevi için gereklidir. Tuz kullanıyorsanız iyotlu tuz seçin, ama miktarı artırmayın.",
+     "ornekler": [
+      "süt ve yoğurt",
+      "yumurta",
+      "balık",
+      "iyotlu tuz"
+     ]
+    }
+   ],
+   "uygun": [
+    "mercimek",
+    "nohut",
+    "yumurta",
+    "balik",
+    "yogurt",
+    "peynir",
+    "kofte",
+    "brokoli",
+    "ispanak",
+    "bulgur",
+    "yulaf"
+   ],
+   "dikkat": [
+    "kafein",
+    "karaciger"
+   ],
+   "henuz": [
+    "alkol",
+    "pastorize-olmayan-peynir",
+    "pastorize-olmayan-sut",
+    "ciy-yumurta",
+    "ciy-et",
+    "yuksek-civali-balik"
+   ],
+   "sss": [
+    {
+     "s": "Hamilelikte iki kişilik mi yemeliyim?",
+     "c": "Hayır. Enerji ihtiyacı özellikle son aylarda bir miktar artar ama 'iki kişilik' kadar değil. Miktardan çok besin çeşitliliğine odaklanın; kilo artışınızı hekiminizle birlikte takip edin."
+    },
+    {
+     "s": "Balık yemek güvenli mi?",
+     "c": "Evet, iyi pişmiş ve cıvası düşük balıklar hamilelikte önerilir. Köpekbalığı, kılıçbalığı gibi büyük avcı türlerden ve çiğ balıktan kaçının."
+    },
+    {
+     "s": "Emzirirken bazı besinlerden kaçınmam gerekir mi?",
+     "c": "Çoğu anne için özel bir perhiz gerekmez. Bebeğinizde bir besinle ilişkili olduğunu düşündüğünüz bir tepki görürseniz, besini kendiniz kesmeden önce hekiminize danışın."
+    }
+   ],
+   "altBolumler": [
+    {
+     "ad": "1. Trimester",
+     "metin": "Bulantı ve iştahsızlık sık görülür. Küçük ve sık öğünler, kuru kraker gibi hafif atıştırmalıklar ve bol sıvı işe yarayabilir. Folik asit takviyesine devam edin ve gıda güvenliği kurallarını bu dönemde alışkanlık hâline getirin. Kusma çok sıksa ve sıvı tutamıyorsanız hekiminize başvurun."
+    },
+    {
+     "ad": "2. Trimester",
+     "metin": "Bulantı çoğunlukla azalır, iştah artar. Demir ve kalsiyum içeren besinlere öncelik verin; öğünleri düzenli tutun. Hareketli kalmak ve lifli besinler kabızlığı önlemeye yardımcı olur."
+    },
+    {
+     "ad": "3. Trimester",
+     "metin": "Büyüyen bebek mideye baskı yapabildiği için mide yanması ve çabuk doyma sık görülür. Daha küçük porsiyonlar, yemekten hemen sonra uzanmamak ve gece geç saatte ağır yememek rahatlatabilir. Sıvı ve lif alımına devam edin."
+    },
+    {
+     "ad": "Emzirme / Lohusalık",
+     "metin": "Doğumdan sonra iyileşme ve süt üretimi için dengeli beslenme önemlidir. Emzirirken susadıkça su için; bir bardak suyu emzirme yerinizin yanında tutmak işe yarar. İyot ihtiyacı emzirmede de sürer. Alkolden kaçının, kafeini sınırlayın; ilaç ve takviyeleri hekiminize danışarak kullanın."
+    }
+   ]
+  },
+  {
+   "kod": "0-6-ay",
+   "ad": "0–6 Ay",
+   "aralik": "Yalnız süt",
+   "renk": "mavi",
+   "ikon": "biberon",
+   "slogan": "Süt yeter, gerisi bekleyebilir",
+   "ozet": "İlk 6 ayda bebeğinizin ihtiyacı anne sütü ya da formül mama ile karşılanır. Ek gıda ve su gerekmez. Bu dönemin sonuna doğru bebeğinizin ek gıdaya hazır olduğunu gösteren işaretleri takip edin.",
+   "gunluk": {
+    "sut": "Bebeğinizin açlık işaretlerine göre anne sütü ya da formül mama.",
+    "ekGida": "Yok. Ek gıda yaklaşık 6. ayda, hazır olma işaretleriyle başlar.",
+    "ogunSayisi": "Bebeğe göre değişir; yenidoğanlar gece-gündüz sık beslenir."
+   },
+   "beslenme": [
+    "DSÖ ilk 6 ay yalnız anne sütünü önerir; anne sütü alan bebeğin ayrıca suya ihtiyacı yoktur.",
+    "Formül mama kullanıyorsanız paketteki hazırlama talimatına tam uyun; mamayı koyulaştırmayın ya da sulandırmayın.",
+    "Açlık işaretlerini (elini ağzına götürme, dudak şapırdatma, arama refleksi) ağlamadan önce yakalamaya çalışın.",
+    "Türkiye'de bebeklere D vitamini desteği Sağlık Bakanlığı programı kapsamında önerilir; miktarını hekiminiz belirler.",
+    "Formül mama alan bebeklerde sıcak havalarda ek su gerekip gerekmediğini hekiminize sorun."
+   ],
+   "kivamDikkat": [
+    "Hazır olma işareti 1: Başını ve boynunu dik tutabiliyor, destekle oturabiliyor.",
+    "Hazır olma işareti 2: Yiyeceğe bakıp, uzanıp, ağzına götürebiliyor.",
+    "Hazır olma işareti 3: Yiyeceği diliyle dışarı itmeden yutabiliyor.",
+    "Gece uyanma, yumruğunu emme ya da daha sık süt isteme tek başına hazır olma işareti değildir.",
+    "Ek gıdaya 4. aydan önce başlanmaz; erken doğan bebeklerde zamanlamayı hekiminizle belirleyin."
+   ],
+   "odakBesinler": [
+    {
+     "ad": "Anne sütü",
+     "neden": "Bebeğin ihtiyacına göre değişen içeriği ve bağışıklığı destekleyen bileşenleriyle ilk 6 ayın temel besinidir.",
+     "ornekler": [
+      "isteğe göre emzirme",
+      "sağılmış anne sütü"
+     ]
+    },
+    {
+     "ad": "Formül mama",
+     "neden": "Emzirilmeyen ya da ek desteğe ihtiyaç duyan bebekler için güvenli bir alternatiftir; doğru hazırlanması önemlidir.",
+     "ornekler": [
+      "bebeğin yaşına uygun formül",
+      "temiz biberon ve kaynatılmış su"
+     ]
+    },
+    {
+     "ad": "D vitamini",
+     "neden": "Kemik gelişimi için gereklidir; anne sütündeki miktarı sınırlı olduğundan destek önerilir.",
+     "ornekler": [
+      "hekimin önerdiği damla"
+     ]
+    }
+   ],
+   "uygun": [],
+   "dikkat": [],
+   "henuz": [
+    "bal",
+    "inek-sutu-icecek",
+    "bitki-cayi",
+    "cay",
+    "meyve-suyu",
+    "tuz",
+    "seker"
+   ],
+   "sss": [
+    {
+     "s": "Bebeğime su vermeli miyim?",
+     "c": "Yalnız anne sütü alan bebeklerin ilk 6 ayda suya ihtiyacı yoktur. Formül mama alan bebeklerde sıcak havalarda ek su gerekebilir; bunu hekiminize danışın."
+    },
+    {
+     "s": "Gece sık uyanıyor; ek gıdaya erken başlasam daha iyi uyur mu?",
+     "c": "Ek gıdanın uykuyu düzelttiğine dair güçlü bir kanıt yok. Gece uyanmaları bu yaşta olağandır. Ek gıdaya bebeğiniz hazır olma işaretlerini gösterdiğinde, yaklaşık 6. ayda başlayın."
+    },
+    {
+     "s": "Gaz için rezene çayı verebilir miyim?",
+     "c": "İlk 6 ayda anne sütü ya da formül mama dışında bir içecek önerilmez; bitki çayları sütün yerini alabilir. Gaz ve huzursuzluk sorunlarını hekiminizle konuşun."
+    }
+   ]
+  },
+  {
+   "kod": "6-8-ay",
+   "ad": "6–8 Ay",
+   "aralik": "İlk tatlar",
+   "renk": "seftali",
+   "ikon": "kasik",
+   "slogan": "Her kaşık yeni bir keşif",
+   "ozet": "Yaklaşık 6. ayda ek gıdaya başlanır; süt hâlâ ana besin kaynağıdır. Bu dönem tat ve dokuları tanıma dönemidir. Demirden zengin besinlere ve alerjenlerin geciktirilmeden tanıştırılmasına öncelik verin.",
+   "gunluk": {
+    "sut": "Anne sütü ya da formül mama hâlâ ana besin kaynağı.",
+    "ekGida": "Birkaç kaşıkla başlayıp bebeğinizin iştahına göre artırın.",
+    "ogunSayisi": "Önce günde 1 öğün; 8. aya doğru 2–3 öğün."
+   },
+   "beslenme": [
+    "Demirden zengin besinleri (et, tavuk, mercimek, yumurta) erken dönemde menüye ekleyin.",
+    "Yumurta, fıstık ezmesi, tahin, süt ürünleri ve balık gibi alerjenleri geciktirmeden, tek tek tanıştırın; tanıştıktan sonra düzenli verin.",
+    "Acımsı sebzeler dahil çeşitli tatlar sunun; reddedilen besini farklı günlerde tekrar deneyin.",
+    "Yemeklere tuz, şeker ve bal eklemeyin.",
+    "Öğünlerde açık bardaktan birkaç yudum su sunabilirsiniz."
+   ],
+   "kivamDikkat": [
+    "Pürüzsüz püreyle başlayın, birkaç hafta içinde çatalla ezilmiş kıvama geçin.",
+    "Parmak gıdaları yetişkin parmağı boyunda ve kalınlığında, başparmak ile işaret parmağı arasında ezilecek yumuşaklıkta hazırlayın.",
+    "Üzüm ve kiraz domates gibi yuvarlak besinleri boyuna dörde bölüp bastırın; asla bütün vermeyin.",
+    "Bebeğiniz dik oturarak ve sizin gözetiminizde yesin.",
+    "Öğürme bu dönemde normaldir; bebeğin öğrenme sürecinin parçasıdır."
+   ],
+   "odakBesinler": [
+    {
+     "ad": "Demir",
+     "neden": "Doğumda depolanan demir 6. aya doğru azalır; ihtiyacın büyük kısmı artık ek gıdadan karşılanır.",
+     "ornekler": [
+      "kırmızı et",
+      "tavuk",
+      "mercimek",
+      "yumurta",
+      "nohut ezmesi"
+     ]
+    },
+    {
+     "ad": "Alerjenler",
+     "neden": "Yaygın alerjenleri bebeklikte erken ve düzenli tanıştırmak, bazı besin alerjilerinin riskini azaltabilir.",
+     "ornekler": [
+      "tam pişmiş yumurta",
+      "inceltilmiş fıstık ezmesi",
+      "tahin",
+      "yoğurt",
+      "balık"
+     ]
+    },
+    {
+     "ad": "Sağlıklı yağlar",
+     "neden": "Bebeğin beyin gelişimi ve enerji ihtiyacı için önemlidir.",
+     "ornekler": [
+      "avokado",
+      "zeytinyağı",
+      "somon",
+      "tam yağlı yoğurt"
+     ]
+    }
+   ],
+   "uygun": [
+    "balkabagi",
+    "tatli-patates",
+    "kabak",
+    "brokoli",
+    "patlican",
+    "muz",
+    "avokado",
+    "seftali",
+    "karpuz",
+    "yogurt",
+    "mercimek",
+    "yulaf",
+    "pirinc",
+    "bulgur",
+    "makarna"
+   ],
+   "dikkat": [
+    "yumurta",
+    "yer-fistigi",
+    "tahin",
+    "balik",
+    "tavuk",
+    "kofte",
+    "nohut",
+    "havuc",
+    "elma",
+    "armut",
+    "uzum",
+    "kiraz-domates",
+    "cilek",
+    "salatalik",
+    "peynir",
+    "ispanak"
+   ],
+   "henuz": [
+    "bal",
+    "inek-sutu-icecek",
+    "butun-kuruyemis",
+    "patlamis-misir",
+    "tuz",
+    "seker",
+    "meyve-suyu",
+    "cay"
+   ],
+   "sss": [
+    {
+     "s": "Hangi besinle başlamalıyım?",
+     "c": "Belirli bir başlangıç sırası şart değildir. Birçok aile sebze pürelerini ve demirden zengin besinleri öne alır. Önemli olan, kısa sürede çeşitli besinlere ve dokulara geçmektir."
+    },
+    {
+     "s": "3 gün kuralı zorunlu mu?",
+     "c": "Yeni bir besini birkaç gün izlemek yaygın bir gözlem uygulamasıdır, tıbbi bir zorunluluk değildir. Bebeğinize yeni besinleri tek tek tanıtın, ama bu bekleme alerjenlerin tanıştırılmasını geciktirmesin."
+    },
+    {
+     "s": "Yumurta ve fıstık riskli değil mi?",
+     "c": "Güncel rehberler bu besinlerin 6. aydan itibaren, uygun formda tanıştırılmasını önerir; geciktirmek alerjiyi önlemez. Yumurta tamamen pişmiş, fıstık ise inceltilmiş ezme olarak verilir. Ağır egzaması olan bebeklerde önce hekiminize danışın."
+    }
+   ]
+  },
+  {
+   "kod": "9-12-ay",
+   "ad": "9–12 Ay",
+   "aralik": "Pütürlü & parmak gıda",
+   "renk": "mint",
+   "ikon": "tabak-bolmeli",
+   "slogan": "Küçük eller, büyük merak",
+   "ozet": "Bebeğiniz artık daha pütürlü dokuları ve küçük parçaları yönetebilir. Öğün sayısı artar, aile sofrasına katılım başlar. Süt beslenmesi sürerken ek gıda giderek daha büyük bir pay alır.",
+   "gunluk": {
+    "sut": "Anne sütü ya da formül mama sürer; miktar kendiliğinden azalabilir.",
+    "ekGida": "Çeşitli dokularda ev yemekleri; aile yemeğinden tuzsuz porsiyon.",
+    "ogunSayisi": "3 ana öğün ve iştaha göre 1–2 ara öğün."
+   },
+   "beslenme": [
+    "Aile yemeklerinden, tuz eklenmeden önce bebeğinizin porsiyonunu ayırın.",
+    "Her öğünde bir demir kaynağı ve bir sebze ya da meyve bulundurmaya çalışın.",
+    "Bebeğinizin kendi kendine yemesine, kaşık denemesine ve açık bardaktan içmesine fırsat verin.",
+    "Tanıştırdığınız alerjenleri haftalık menüde düzenli tutun.",
+    "Şekerli ve tuzlu hazır atıştırmalıklar yerine meyve, yoğurt, sebze çubukları sunun."
+   ],
+   "kivamDikkat": [
+    "Pütürlü kıvama ve dişetiyle ezilebilecek küçük yumuşak parçalara geçin.",
+    "Kıskaç tutuşu (başparmak-işaret parmağı) geliştikçe nohut büyüklüğünde yumuşak parçalar sunabilirsiniz.",
+    "Yuvarlak besinler boyuna dörde bölünmeye devam eder; bütün verilmez.",
+    "Çiğ havuç, elma gibi sert besinleri pişirin ya da ince rendeleyin.",
+    "Kuruyemiş ezmelerini ince sürün ya da yemeğe karıştırın; kaşıkla topak hâlinde vermeyin."
+   ],
+   "odakBesinler": [
+    {
+     "ad": "Demir",
+     "neden": "Hızlı büyüme nedeniyle ihtiyaç yüksek kalır; çeşitli kaynaklardan düzenli alınmalıdır.",
+     "ornekler": [
+      "köfte",
+      "tavuk",
+      "mercimek",
+      "yumurta",
+      "bulgur"
+     ]
+    },
+    {
+     "ad": "Çinko",
+     "neden": "Büyüme ve bağışıklık için gereklidir; demir içeren besinlerin çoğunda birlikte bulunur.",
+     "ornekler": [
+      "kırmızı et",
+      "nohut",
+      "yoğurt",
+      "yulaf"
+     ]
+    },
+    {
+     "ad": "Kalsiyum",
+     "neden": "Kemik ve diş gelişimini destekler; süt beslenmesi azaldıkça ek gıdadan da gelmelidir.",
+     "ornekler": [
+      "yoğurt",
+      "lor peyniri",
+      "tahin",
+      "brokoli"
+     ]
+    }
+   ],
+   "uygun": [
+    "balkabagi",
+    "tatli-patates",
+    "kabak",
+    "brokoli",
+    "patlican",
+    "muz",
+    "avokado",
+    "seftali",
+    "karpuz",
+    "armut",
+    "cilek",
+    "yogurt",
+    "mercimek",
+    "nohut",
+    "tavuk",
+    "kofte",
+    "yulaf",
+    "pirinc",
+    "bulgur",
+    "makarna"
+   ],
+   "dikkat": [
+    "yumurta",
+    "yer-fistigi",
+    "tahin",
+    "balik",
+    "havuc",
+    "elma",
+    "uzum",
+    "kiraz-domates",
+    "salatalik",
+    "peynir",
+    "ispanak"
+   ],
+   "henuz": [
+    "bal",
+    "inek-sutu-icecek",
+    "butun-kuruyemis",
+    "patlamis-misir",
+    "tuz",
+    "seker",
+    "meyve-suyu",
+    "cay"
+   ],
+   "sss": [
+    {
+     "s": "Bebeğim hâlâ pütürlü yemekleri öğürüyor; normal mi?",
+     "c": "Evet, öğürme bu yaşta da sık görülür ve bebeğin yeni dokulara alışma yoludur. Pütürlü kıvamı geciktirmek ileride yemek seçiciliğini artırabilir; küçük adımlarla devam edin."
+    },
+    {
+     "s": "Dişi yok; parmak gıda verebilir miyim?",
+     "c": "Evet. Bebekler yumuşak besinleri dişetleriyle ezebilir. Besinin başparmak ile işaret parmağınız arasında kolayca ezildiğinden emin olun."
+    },
+    {
+     "s": "Ne kadar yemeli?",
+     "c": "Miktar bebekten bebeğe ve günden güne değişir. Bebeğinizin açlık ve tokluk işaretlerini izleyin; başını çevirmesi ya da ağzını kapatması doyduğunu gösterebilir. Büyümesiyle ilgili sorularınızı hekiminize danışın."
+    }
+   ]
+  },
+  {
+   "kod": "1-3-yas",
+   "ad": "1–3 Yaş",
+   "aralik": "Aile sofrası",
+   "renk": "sari",
+   "ikon": "yurumeye-baslayan",
+   "slogan": "Aynı sofrada, kendi tabağında",
+   "ozet": "Çocuğunuz artık aile yemeklerinin çoğunu paylaşabilir; yeter ki tuzsuz ve güvenli kesilmiş olsun. İştah dalgalanmaları ve seçici yeme bu dönemde olağandır. Düzenli öğün ritmi ve birlikte yemek iyi alışkanlıkların temelidir.",
+   "gunluk": {
+    "sut": "Tam yağlı inek sütü ana içecek olabilir; emzirme isteğe göre sürebilir. Fazla süt iştahı azaltabilir.",
+    "ekGida": "Aile sofrası; tuz ve şeker eklenmeden ayrılan porsiyonlar.",
+    "ogunSayisi": "3 ana öğün ve 2 ara öğün."
+   },
+   "beslenme": [
+    "Çocuğunuzla aynı sofraya oturun; aile yemeğinden tuz eklenmeden önce porsiyonunu ayırın.",
+    "Ne kadar yiyeceğine çocuğunuzun karar vermesine izin verin; zorlamak ve ödül olarak yiyecek kullanmak ters etki yapabilir.",
+    "Reddedilen besinleri baskı yapmadan, farklı şekillerde tekrar sunun.",
+    "Su ve süt temel içecekler olsun; meyve suyu ve şekerli içecekleri sınırlayın.",
+    "Biberondan açık bardağa geçişi bu dönemde tamamlamaya çalışın."
+   ],
+   "kivamDikkat": [
+    "Üzüm, kiraz domates, yaban mersini gibi yuvarlak besinler 4 yaşına kadar boyuna dörde bölünür.",
+    "Bütün ya da kırık kuruyemiş 5 yaşına kadar verilmez; ezmeleri ince sürülür.",
+    "Çiğ havuç ve elma ince rendelenir ya da çok ince dilimlenir.",
+    "Çocuğunuz oturarak yesin; yürürken, koşarken ya da oyun oynarken yemesine izin vermeyin.",
+    "Sert şeker, sakız, patlamış mısır gibi yüksek boğulma riskli yiyecekleri vermeyin."
+   ],
+   "odakBesinler": [
+    {
+     "ad": "Demir",
+     "neden": "Süt fazla içildiğinde demirden zengin besinlerin yeri daralabilir; her gün demir kaynağı sunmak önemlidir.",
+     "ornekler": [
+      "köfte",
+      "etli nohut",
+      "mercimek",
+      "yumurta",
+      "bulgur"
+     ]
+    },
+    {
+     "ad": "Kalsiyum",
+     "neden": "Hızla büyüyen kemik ve dişler için gereklidir.",
+     "ornekler": [
+      "süt",
+      "yoğurt",
+      "peynir",
+      "tahin"
+     ]
+    },
+    {
+     "ad": "Lif",
+     "neden": "Düzenli bağırsak alışkanlığını destekler; sebze, meyve, baklagil ve tam tahıllarda bulunur.",
+     "ornekler": [
+      "mercimek",
+      "taze fasulye",
+      "bulgur",
+      "meyveler"
+     ]
+    }
+   ],
+   "uygun": [
+    "inek-sutu-icecek",
+    "yogurt",
+    "peynir",
+    "yumurta",
+    "balik",
+    "tavuk",
+    "kofte",
+    "mercimek",
+    "nohut",
+    "bulgur",
+    "makarna",
+    "pirinc",
+    "yulaf",
+    "tahin",
+    "balkabagi",
+    "brokoli",
+    "kabak",
+    "patlican",
+    "muz",
+    "avokado",
+    "karpuz",
+    "seftali"
+   ],
+   "dikkat": [
+    "uzum",
+    "kiraz-domates",
+    "yer-fistigi",
+    "havuc",
+    "elma",
+    "armut",
+    "salatalik",
+    "cilek",
+    "ispanak",
+    "bal",
+    "tuz",
+    "seker",
+    "meyve-suyu"
+   ],
+   "henuz": [
+    "butun-kuruyemis",
+    "patlamis-misir",
+    "cay"
+   ],
+   "sss": [
+    {
+     "s": "Çocuğum çok az yiyor; endişelenmeli miyim?",
+     "c": "Bu yaşta büyüme hızı yavaşladığı için iştah azalabilir ve günden güne değişebilir. Haftalık toplamda çeşitli besinler alıyorsa ve büyümesi düzenliyse bu genellikle olağandır. Kilo kaybı ya da halsizlik görürseniz hekiminize danışın."
+    },
+    {
+     "s": "Bal artık verilebilir mi?",
+     "c": "Evet, 1 yaşından sonra bal botulizm riski açısından güvenli kabul edilir. Yine de eklenmiş şeker gibi değerlendirilir; sınırlı tutun."
+    },
+    {
+     "s": "İnek sütüne nasıl geçerim?",
+     "c": "1 yaşından sonra tam yağlı inek sütü ana içecek olarak verilebilir. Açık bardaktan sunun; süt miktarı yemeklerin yerini almasın. Emzirmeye devam etmek isterseniz sürdürebilirsiniz."
+    }
+   ]
+  }
+ ]
+}

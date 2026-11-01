@@ -1,0 +1,1282 @@
+{
+ "_aciklama": "Dada Kids tek kaynak besin tablosu (dalga 1: evre, kesim ve hamilelik kayıtlarıyla genişletildi). CanEatCard, FoodMatrix, ProduceCard rozetleri, Güvenli Kesim listesi ve tarif alerjen filtreleri bu tablodan beslenir. ÖRNEK İÇERİK — uzman onayı bekliyor. Yalnız ana akım rehberlerin (NHS, AAP, DSÖ) uzlaştığı bilgiler yazıldı; tartışmalı değerler null bırakılıp 'uzmanKarari' ile işaretlendi. Kaynak metinler kopyalanmadı; ifadeler özgündür.",
+ "_sema": {
+  "minAy": "bu besinin bu formda en erken verilebileceği ay (null = uzman kararı bekliyor; 36'dan büyükse Kids aralığı dışında); 'tuz' ve 'seker' gibi kayıtlarda eklenmiş tüketim kastedilir",
+  "durum": "evet | hazirlikla | henuz — 'hazirlikla': uygun ama hazırlık şekli kritik",
+  "bogulmaRiski": "dusuk | orta | yuksek (yanlış hazırlanırsa)",
+  "alerjen": "9 ana alerjenden biri ya da null (tarifler.json 'alerjenler' anahtarlarıyla aynı)",
+  "onay": "bekliyor | onaylandi",
+  "hamilelik": "true ise kayıt yalnız Hamilelik & Lohusalık evresi içindir: durum ve gerekce gebelik/emzirme için yazılmıştır; minAy, ilkSunum ve bogulmaRiski kullanılmaz (null). Bebek araçları bu kayıtları filtrelemelidir.",
+  "hamilelikNotu": "isteğe bağlı: genel bir besinin hamilelikteki kullanımına dair kısa not"
+ },
+ "kaynaklar": {
+  "nhs-kacinilacak": "https://www.nhs.uk/best-start-in-life/baby/weaning/safe-weaning/food-and-drinks-to-avoid/",
+  "nhs-6ay": "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/",
+  "aap-bogulma": "https://www.healthychildren.org/English/health-issues/injuries-emergencies/Pages/Choking-Prevention.aspx",
+  "aap-ekgida": "https://www.healthychildren.org/English/ages-stages/baby/feeding-nutrition/Pages/Starting-Solid-Foods.aspx",
+  "nhs-alerji": "https://www.nhs.uk/baby/weaning-and-feeding/food-allergies-in-babies-and-young-children/",
+  "nhs-hamilelik": "https://www.nhs.uk/pregnancy/keeping-well/foods-to-avoid/"
+ },
+ "besinler": [
+  {
+   "slug": "bal",
+   "ad": "Bal",
+   "esAnlamlar": [
+    "süzme bal",
+    "petek bal"
+   ],
+   "grup": "tatlandırıcı",
+   "minAy": 12,
+   "durum": "henuz",
+   "gerekce": "1 yaşından önce bebek botulizmi riski nedeniyle verilmez; pişmiş ürünlerin içinde de.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "inek-sutu-icecek",
+   "ad": "İnek sütü (içecek olarak)",
+   "esAnlamlar": [
+    "süt",
+    "inek sütü"
+   ],
+   "grup": "süt ürünü",
+   "minAy": 12,
+   "durum": "henuz",
+   "gerekce": "12 aydan önce ana içecek olarak verilmez; yemeklerde ve yoğurtta kullanılabilir.",
+   "ilkSunum": null,
+   "alerjen": "sut",
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "yogurt",
+   "ad": "Yoğurt (tam yağlı, sade)",
+   "esAnlamlar": [
+    "süzme yoğurt"
+   ],
+   "grup": "süt ürünü",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Şekersiz, sade ve tam yağlı olanı tercih edilir.",
+   "ilkSunum": {
+    "6": "Kaşıkla, sade.",
+    "9": "Meyve ezmesiyle karıştırılmış.",
+    "12": "Aile sofrasındaki sade yoğurttan."
+   },
+   "alerjen": "sut",
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Pastörize sütten yapılmış yoğurt hamilelikte güvenle tüketilebilir."
+  },
+  {
+   "slug": "yumurta",
+   "ad": "Yumurta",
+   "esAnlamlar": [
+    "haşlanmış yumurta",
+    "omlet"
+   ],
+   "grup": "protein",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Sarısı ve beyazı tamamen pişmiş olmalı. Alerjenlerin geciktirilmesi önerilmez; tek tek tanıştırılır.",
+   "ilkSunum": {
+    "6": "Tam pişmiş, ezilmiş ya da omlet şeritleri.",
+    "9": "Küçük omlet parçaları.",
+    "12": "Aile sofrasından, tam pişmiş."
+   },
+   "alerjen": "yumurta",
+   "demirZengini": true,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": "yumurta",
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay",
+    "nhs-alerji"
+   ],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Hamilelikte sarısı ve beyazı tamamen katılaşana kadar pişirilmiş olarak tüketilir."
+  },
+  {
+   "slug": "yer-fistigi",
+   "ad": "Yer fıstığı",
+   "esAnlamlar": [
+    "fıstık",
+    "fıstık ezmesi"
+   ],
+   "grup": "kuruyemiş",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Bütün ya da kırık hâlde 5 yaşına kadar verilmez; ezmesi ince ve sulandırılmış olarak sunulur. Alerjen olarak tek başına tanıştırılır.",
+   "ilkSunum": {
+    "6": "Şekersiz-tuzsuz ezme, püreye karıştırılmış ya da çok ince sürülmüş.",
+    "9": "Aynı; topak hâlinde değil.",
+    "12": "Aynı; bütün tane yok."
+   },
+   "alerjen": "yerfistigi",
+   "demirZengini": false,
+   "bogulmaRiski": "yuksek",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak",
+    "nhs-alerji"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "uzum",
+   "ad": "Üzüm",
+   "esAnlamlar": [
+    "kuru üzüm"
+   ],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Yuvarlak ve kaygandır: 4 yaşına kadar bütün verilmez, boyuna dörde bölünür.",
+   "ilkSunum": {
+    "6": "Boyuna dörde bölünmüş ve ezilmiş.",
+    "9": "Boyuna dörde bölünmüş.",
+    "12": "Boyuna dörde bölünmüş; bütün değil."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "yuksek",
+   "kesimSlug": "uzum",
+   "mevsim": [
+    7,
+    8,
+    9,
+    10
+   ],
+   "kaynak": [
+    "nhs-kacinilacak",
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "kiraz-domates",
+   "ad": "Kiraz domates",
+   "esAnlamlar": [
+    "çeri domates",
+    "cherry domates"
+   ],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Yuvarlak: 4 yaşına kadar bütün verilmez, boyuna dörde bölünür.",
+   "ilkSunum": {
+    "6": "Boyuna dörde bölünmüş, kabuğu ezilmiş.",
+    "9": "Boyuna dörde bölünmüş.",
+    "12": "Boyuna dörde bölünmüş."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "yuksek",
+   "kesimSlug": "kiraz-domates",
+   "mevsim": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "kaynak": [
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "havuc",
+   "ad": "Havuç",
+   "esAnlamlar": [],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Çiğ havuç serttir; yumuşayana kadar pişirilir.",
+   "ilkSunum": {
+    "6": "İyice pişmiş, parmakla ezilen kalın şeritler ya da püre.",
+    "9": "Pişmiş küçük yumuşak küpler.",
+    "12": "Pişmiş; çiğse ince rendelenmiş."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "yuksek",
+   "kesimSlug": "havuc",
+   "mevsim": [
+    1,
+    2,
+    3,
+    4,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [
+    "aap-bogulma",
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "elma",
+   "ad": "Elma",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Çiğ elma dilimi serttir; pişirilir ya da ince rendelenir.",
+   "ilkSunum": {
+    "6": "Pişmiş püre ya da yumuşak pişmiş dilimler.",
+    "9": "Pişmiş küçük parçalar ya da ince rendelenmiş.",
+    "12": "İnce dilim ya da rendelenmiş."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "orta",
+   "kesimSlug": "elma",
+   "mevsim": [
+    1,
+    2,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "muz",
+   "ad": "Muz",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Yumuşak; ezilerek ya da tutulabilir parçalar hâlinde.",
+   "ilkSunum": {
+    "6": "Ezilmiş ya da kabuğunun bir kısmı tutamak bırakılmış uzun parça.",
+    "9": "Küçük parçalar.",
+    "12": "Dilimler."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": "muz",
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "avokado",
+   "ad": "Avokado",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Olgun ve yumuşak olanı.",
+   "ilkSunum": {
+    "6": "Ezilmiş ya da kalın dilim.",
+    "9": "Küçük küpler.",
+    "12": "Dilim ya da küp."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": "avokado",
+   "mevsim": [
+    1,
+    2,
+    3,
+    11,
+    12
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "balkabagi",
+   "ad": "Balkabağı",
+   "esAnlamlar": [
+    "bal kabağı"
+   ],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Pişmiş olarak.",
+   "ilkSunum": {
+    "6": "Püre ya da yumuşak pişmiş şerit.",
+    "9": "Pişmiş küçük küpler.",
+    "12": "Aile yemeğinden tuzsuz porsiyon."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [
+    9,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "balik",
+   "ad": "Balık (kılçıksız)",
+   "esAnlamlar": [
+    "somon",
+    "levrek",
+    "alabalık"
+   ],
+   "grup": "protein",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "İyice pişmiş ve kılçıkları dikkatle ayıklanmış olmalı. Köpekbalığı, kılıçbalığı gibi türler verilmez.",
+   "ilkSunum": {
+    "6": "Pişmiş, kılçıksız, ezilmiş.",
+    "9": "Pişmiş küçük pullar.",
+    "12": "Aile sofrasından, kılçıksız."
+   },
+   "alerjen": "balik",
+   "demirZengini": true,
+   "bogulmaRiski": "orta",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Hamilelikte iyi pişmiş, cıvası düşük balıklar (ör. somon, hamsi, sardalya, levrek, çupra) haftalık menüde yer alabilir. Çiğ balık ve cıvası yüksek türlerden kaçınılır."
+  },
+  {
+   "slug": "patlamis-misir",
+   "ad": "Patlamış mısır",
+   "esAnlamlar": [],
+   "grup": "atıştırmalık",
+   "minAy": 48,
+   "durum": "henuz",
+   "gerekce": "Boğulma riski yüksek atıştırmalıklardandır; küçük çocuklara önerilmez.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "yuksek",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "ispanak",
+   "ad": "Ispanak",
+   "esAnlamlar": [],
+   "grup": "sebze",
+   "minAy": null,
+   "uzmanKarari": "Kaynaklar 6–9 ay arasında farklı yaş veriyor (nitrat). Rozet yaşını uzman belirleyecek.",
+   "durum": "hazirlikla",
+   "gerekce": "Pişmiş olarak.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": true,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [
+    1,
+    2,
+    3,
+    4,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Folat içeren yeşil yapraklı sebzelerdendir; iyice yıkayıp tüketin."
+  },
+  {
+   "slug": "brokoli",
+   "ad": "Brokoli",
+   "esAnlamlar": [],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Yumuşayana kadar pişirildiğinde sapı doğal bir tutamaktır.",
+   "ilkSunum": {
+    "6": "Buharda yumuşamış, sapı uzun büyük çiçekler.",
+    "9": "Küçük çiçekler.",
+    "12": "Küçük çiçekler, yemeklerin içinde."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": "brokoli",
+   "mevsim": [
+    1,
+    2,
+    3,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "salatalik",
+   "ad": "Salatalık",
+   "esAnlamlar": [
+    "hıyar"
+   ],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Çiğ ve serttir; kabuğu soyulup büyük çubuklar ya da ince rendelenmiş olarak verilir. Yuvarlak kalın dilimler verilmez.",
+   "ilkSunum": {
+    "6": "Kabuksuz, parmaktan uzun kalın çubuk ya da ince rendelenmiş.",
+    "9": "İnce rendelenmiş ya da çok ince şeritler.",
+    "12": "İnce yarım ay dilimler."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "orta",
+   "kesimSlug": "salatalik",
+   "mevsim": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "kaynak": [
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "cilek",
+   "ad": "Çilek",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Olgun çilek yumuşaktır; küçük ve sert olanlar dörde bölünür ya da ezilir.",
+   "ilkSunum": {
+    "6": "Ezilmiş ya da dörde bölünüp bastırılmış.",
+    "9": "Küçük parçalar.",
+    "12": "Dörde bölünmüş ya da ince dilim."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "orta",
+   "kesimSlug": "cilek",
+   "mevsim": [
+    4,
+    5,
+    6
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "karpuz",
+   "ad": "Karpuz",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Yumuşak ve suludur; çekirdekleri ayıklanır.",
+   "ilkSunum": {
+    "6": "Çekirdeksiz parmak boyu çubuk.",
+    "9": "Çekirdeksiz küçük parçalar.",
+    "12": "Çekirdeksiz küçük dilimler."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": "karpuz",
+   "mevsim": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "tavuk",
+   "ad": "Tavuk",
+   "esAnlamlar": [
+    "tavuk göğsü",
+    "tavuk but"
+   ],
+   "grup": "protein",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Tamamen pişmiş olmalıdır. Kuru ve iri parçalar boğazda takılabilir; nemli ve didiklenmiş sunulur.",
+   "ilkSunum": {
+    "6": "Püre ya da nemli, lif yönünde ince şeritler.",
+    "9": "İnce didiklenmiş, sosla nemlendirilmiş.",
+    "12": "Küçük ve ince parçalar."
+   },
+   "alerjen": null,
+   "demirZengini": true,
+   "bogulmaRiski": "orta",
+   "kesimSlug": "tavuk",
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay",
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "kofte",
+   "ad": "Köfte (kıyma)",
+   "esAnlamlar": [
+    "kıyma",
+    "kırmızı et",
+    "dana kıyma",
+    "kuzu kıyma"
+   ],
+   "grup": "protein",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Kırmızı et demir ve çinko kaynağıdır. İçi pembe kalmayacak şekilde tamamen pişirilir; yumuşak ve nemli olmalıdır.",
+   "ilkSunum": {
+    "6": "Parmak boyu yumuşak, yassı köfte ya da kıymalı püre.",
+    "9": "Küçük parçalara bölünmüş köfte.",
+    "12": "Küçük köfteler, ikiye bölünmüş."
+   },
+   "alerjen": null,
+   "demirZengini": true,
+   "bogulmaRiski": "orta",
+   "kesimSlug": "kofte",
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay",
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "makarna",
+   "ad": "Makarna",
+   "esAnlamlar": [
+    "şehriye",
+    "erişte"
+   ],
+   "grup": "tahıl",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "İyice yumuşayana kadar pişirilir.",
+   "ilkSunum": {
+    "6": "Burgu, kalem gibi tutulabilir büyük şekiller, iyi pişmiş.",
+    "9": "Kısa makarna ya da küçük parçalar.",
+    "12": "Aile porsiyonundan, tuzsuz."
+   },
+   "alerjen": "gluten",
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": "makarna",
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "peynir",
+   "ad": "Peynir (pastörize)",
+   "esAnlamlar": [
+    "beyaz peynir",
+    "kaşar",
+    "lor"
+   ],
+   "grup": "süt ürünü",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Pastörize sütten yapılmış peynirler uygundur. Beyaz peynir tuzludur; az miktarda ve suda bekletilerek tuzu alınmış olarak kullanılır. Küflü yumuşak peynirler bebeklere verilmez. Sert küpler yerine rendelenmiş ya da ince dilim tercih edilir.",
+   "ilkSunum": {
+    "6": "Lor ya da rendelenmiş kaşar, yemeğe karıştırılmış.",
+    "9": "İnce dilim ya da rendelenmiş.",
+    "12": "İnce dilim ya da ince çubuk."
+   },
+   "alerjen": "sut",
+   "demirZengini": false,
+   "bogulmaRiski": "orta",
+   "kesimSlug": "peynir",
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay",
+    "nhs-kacinilacak",
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Hamilelikte pastörize sütten yapılmış sert ve yarı sert peynirler uygundur; pastörize olmayan ve küflü yumuşak peynirlerden kaçınılır."
+  },
+  {
+   "slug": "mercimek",
+   "ad": "Mercimek",
+   "esAnlamlar": [
+    "kırmızı mercimek",
+    "yeşil mercimek"
+   ],
+   "grup": "baklagil",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Bitkisel demir ve protein kaynağıdır; iyice pişirilir.",
+   "ilkSunum": {
+    "6": "Pürüzsüz çorba ya da püre.",
+    "9": "Çatalla ezilmiş ya da yumuşak köfte.",
+    "12": "Aile çorbası ve yemeklerinden, tuzsuz."
+   },
+   "alerjen": null,
+   "demirZengini": true,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Folat, demir ve protein içerir; hamilelikte düzenli tüketilebilir."
+  },
+  {
+   "slug": "nohut",
+   "ad": "Nohut",
+   "esAnlamlar": [],
+   "grup": "baklagil",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Bütün nohut tanesi yuvarlak ve kaygandır; ezilerek ya da yassılaştırılarak verilir.",
+   "ilkSunum": {
+    "6": "Pürüzsüz ezme (humus gibi, tuzsuz).",
+    "9": "Çatalla ezilmiş ya da yassılaştırılmış taneler.",
+    "12": "Çok iyi pişmiş, hafifçe bastırılmış taneler."
+   },
+   "alerjen": null,
+   "demirZengini": true,
+   "bogulmaRiski": "orta",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor",
+   "hamilelikNotu": "Folat, lif ve bitkisel protein içerir."
+  },
+  {
+   "slug": "bulgur",
+   "ad": "Bulgur",
+   "esAnlamlar": [
+    "pilavlık bulgur",
+    "köftelik bulgur"
+   ],
+   "grup": "tahıl",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "İyice yumuşayana kadar pişirilir.",
+   "ilkSunum": {
+    "6": "Çok iyi pişmiş, ezilmiş ya da püreye karıştırılmış.",
+    "9": "Yumuşak pilav ya da köfte.",
+    "12": "Aile pilavından, tuzu eklenmeden önce ayrılmış."
+   },
+   "alerjen": "gluten",
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "yulaf",
+   "ad": "Yulaf",
+   "esAnlamlar": [
+    "yulaf ezmesi"
+   ],
+   "grup": "tahıl",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Lapa ya da pankek olarak uygundur. Glutensiz sertifikası olmayan yulaf gluten içerir kabul edilir.",
+   "ilkSunum": {
+    "6": "Pürüzsüz lapa.",
+    "9": "Lapa, pankek şeritleri.",
+    "12": "Lapa, pankek, ev yapımı yulaflı atıştırmalık."
+   },
+   "alerjen": "gluten",
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "pirinc",
+   "ad": "Pirinç",
+   "esAnlamlar": [
+    "pilav"
+   ],
+   "grup": "tahıl",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Lapa ya da yumuşak pilav olarak uygundur. Tahılları çeşitlendirmek önerilir; pirinç içeceği küçük çocuklar için uygun değildir.",
+   "ilkSunum": {
+    "6": "Ezilmiş lapa.",
+    "9": "Yumuşak pilav.",
+    "12": "Aile pilavından, tuzsuz."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "tahin",
+   "ad": "Tahin",
+   "esAnlamlar": [
+    "susam ezmesi"
+   ],
+   "grup": "tohum",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Susam alerjenidir; geciktirilmeden tek başına tanıştırılır. Koyu kıvamı yapışkan olduğu için suyla inceltilip yemeğe karıştırılır.",
+   "ilkSunum": {
+    "6": "Suyla inceltilip püre ya da yoğurda karıştırılmış.",
+    "9": "İnceltilmiş, ekmeğe ya da meyveye ince sürülmüş.",
+    "12": "İnce sürülmüş; kaşıkla topak hâlinde değil."
+   },
+   "alerjen": "susam",
+   "demirZengini": false,
+   "bogulmaRiski": "orta",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-alerji"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "tatli-patates",
+   "ad": "Tatlı patates",
+   "esAnlamlar": [
+    "batat"
+   ],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Pişmiş olarak.",
+   "ilkSunum": {
+    "6": "Püre ya da yumuşak pişmiş kalın çubuk.",
+    "9": "Pişmiş küçük küpler.",
+    "12": "Fırın dilimleri."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [
+    9,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "kabak",
+   "ad": "Kabak",
+   "esAnlamlar": [
+    "sakız kabağı"
+   ],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Pişmiş olarak.",
+   "ilkSunum": {
+    "6": "Püre ya da yumuşak pişmiş kalın çubuk.",
+    "9": "Pişmiş küçük parçalar, rendelenmiş.",
+    "12": "Aile yemeğinden, mücver, omlet."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "armut",
+   "ad": "Armut",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "hazirlikla",
+   "gerekce": "Olgun armut yumuşaktır; sert olanı pişirilir ya da rendelenir.",
+   "ilkSunum": {
+    "6": "Pişmiş püre ya da çok olgun, kabuksuz kalın dilim.",
+    "9": "Olgun küçük parçalar ya da rendelenmiş.",
+    "12": "İnce dilimler."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "orta",
+   "kesimSlug": null,
+   "mevsim": [
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "kaynak": [
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "seftali",
+   "ad": "Şeftali",
+   "esAnlamlar": [],
+   "grup": "meyve",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Olgun ve kabuğu soyulmuş olarak.",
+   "ilkSunum": {
+    "6": "Ezilmiş ya da büyük dilim.",
+    "9": "Küçük parçalar.",
+    "12": "Dilimler."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "patlican",
+   "ad": "Patlıcan",
+   "esAnlamlar": [],
+   "grup": "sebze",
+   "minAy": 6,
+   "durum": "evet",
+   "gerekce": "Yasaklı bir besin değildir. İyice pişirilip kabuğu sertse soyulur.",
+   "ilkSunum": {
+    "6": "Közlenmiş ya da fırınlanmış, ezilmiş.",
+    "9": "Yumuşak pişmiş küçük parçalar.",
+    "12": "Aile yemeğinden, tuzsuz."
+   },
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "kaynak": [
+    "nhs-6ay"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "butun-kuruyemis",
+   "ad": "Bütün ya da kırık kuruyemiş",
+   "esAnlamlar": [
+    "ceviz",
+    "fındık",
+    "badem",
+    "antep fıstığı",
+    "kaju"
+   ],
+   "grup": "kuruyemiş",
+   "minAy": 60,
+   "durum": "henuz",
+   "gerekce": "Bütün ve kırık kuruyemişler 5 yaşına kadar boğulma riski nedeniyle verilmez. Pürüzsüz ezmeleri inceltilerek 6. aydan itibaren tanıştırılabilir.",
+   "ilkSunum": null,
+   "alerjen": "sertkabuklu",
+   "demirZengini": false,
+   "bogulmaRiski": "yuksek",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak",
+    "aap-bogulma"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "tuz",
+   "ad": "Eklenmiş tuz",
+   "esAnlamlar": [
+    "sofra tuzu",
+    "bulyon"
+   ],
+   "grup": "tatlandırıcı",
+   "minAy": 12,
+   "durum": "henuz",
+   "gerekce": "Bebeklerin böbrekleri fazla tuzu kaldıramaz; 1 yaşından önce yemeğe tuz eklenmez, sonrasında da çok sınırlı tutulur. Bulyon, salça, tuzlu peynir ve hazır ürünlerdeki gizli tuza dikkat edilir.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "seker",
+   "ad": "Eklenmiş şeker",
+   "esAnlamlar": [
+    "toz şeker",
+    "pekmez",
+    "şurup"
+   ],
+   "grup": "tatlandırıcı",
+   "minAy": 24,
+   "durum": "henuz",
+   "gerekce": "Ana akım rehberler 2 yaşından önce yemek ve içeceklere şeker eklenmemesini önerir; diş sağlığı ve tat alışkanlığı için sonrasında da sınırlı tutulur. Meyvenin doğal tatlılığı yeterlidir.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "meyve-suyu",
+   "ad": "Meyve suyu",
+   "esAnlamlar": [
+    "taze sıkma meyve suyu"
+   ],
+   "grup": "içecek",
+   "minAy": 12,
+   "durum": "henuz",
+   "gerekce": "1 yaşından önce meyve suyu önerilmez; sonrasında da meyvenin kendisi tercih edilir. Verilecekse az miktarda ve yemekle birlikte sunulur.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "aap-ekgida"
+   ],
+   "onay": "bekliyor"
+  },
+  {
+   "slug": "bitki-cayi",
+   "ad": "Bitki çayı",
+   "esAnlamlar": [
+    "rezene çayı",
+    "ıhlamur",
+    "papatya çayı"
+   ],
+   "grup": "içecek",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "İlk 6 ayda anne sütü ya da formül mama dışında içecek gerekmez. Çaylar süt alımının yerini alabilir ve bazı bitkilerin bebeklerde güvenliği yeterince bilinmez.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [],
+   "onay": "bekliyor",
+   "uzmanKarari": "6. aydan sonra bitki çayları için kaynaklarda ortak bir yaş yok; uzman değerlendirecek."
+  },
+  {
+   "slug": "cay",
+   "ad": "Çay (siyah çay)",
+   "esAnlamlar": [
+    "demli çay"
+   ],
+   "grup": "içecek",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Bebek ve küçük çocuklara önerilmez: içindeki maddeler demir emilimini azaltabilir ve kafein içerir. Yerine su ve süt sunulur.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": "dusuk",
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-kacinilacak"
+   ],
+   "onay": "bekliyor",
+   "uzmanKarari": "Kaynaklar küçük çocuklara çay önermiyor; belirli bir yaş sınırında uzlaşı yok."
+  },
+  {
+   "slug": "alkol",
+   "ad": "Alkol",
+   "esAnlamlar": [
+    "şarap",
+    "bira",
+    "rakı"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Hamilelikte güvenli bir alkol miktarı bilinmez; hiç içilmemesi önerilir. Emzirirken de kaçınmak en güvenli yaklaşımdır; sorularınızı hekiminize danışın.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "kafein",
+   "ad": "Kafein (kahve, çay, kola, enerji içeceği)",
+   "esAnlamlar": [
+    "kahve",
+    "türk kahvesi",
+    "enerji içeceği"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "hazirlikla",
+   "gerekce": "Hamilelikte kafeinin sınırlı tutulması önerilir. Çay, kahve, kola, çikolata ve enerji içecekleri de kafein içerir. Size uygun miktarı hekiminize danışın.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "karaciger",
+   "ad": "Karaciğer ve ciğer ürünleri",
+   "esAnlamlar": [
+    "ciğer",
+    "ciğer sarma"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "hazirlikla",
+   "gerekce": "Karaciğer çok yüksek miktarda A vitamini içerir. NHS gibi bazı rehberler hamilelikte tamamen kaçınmayı önerir; hekiminize danışın.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "pastorize-olmayan-peynir",
+   "ad": "Pastörize edilmemiş ve küflü yumuşak peynirler",
+   "esAnlamlar": [
+    "köy peyniri",
+    "çiğ süt peyniri",
+    "tulum peyniri",
+    "rokfor",
+    "brie"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Listeria bakterisi taşıyabilir; hamilelikte bu enfeksiyon bebeği etkileyebilir. Etiketinde 'pastörize sütten' yazan peynirleri seçin; küflü yumuşak peynirler yalnız buharı tütene kadar pişirilerek tüketilebilir.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "pastorize-olmayan-sut",
+   "ad": "Çiğ süt (açık süt)",
+   "esAnlamlar": [
+    "sokak sütü",
+    "köy sütü"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Pastörize edilmemiş süt listeria ve bruselloz gibi enfeksiyonlara yol açabilir. Pastörize ya da UHT süt seçin; çiğ süt kullanacaksanız iyice kaynatın.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "ciy-yumurta",
+   "ad": "Çiğ ya da az pişmiş yumurta",
+   "esAnlamlar": [
+    "rafadan",
+    "ev yapımı mayonez",
+    "çiğ hamur"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Salmonella riski nedeniyle hamilelikte yumurtanın sarısı ve beyazı katılaşana kadar pişirilmesi önerilir. Çiğ yumurta içeren ev yapımı mayonez, tiramisu ve kek hamurundan kaçının.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "ciy-et",
+   "ad": "Çiğ ya da az pişmiş et",
+   "esAnlamlar": [
+    "etli çiğ köfte",
+    "az pişmiş biftek",
+    "tartar"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Toksoplazma ve listeria gibi enfeksiyon riski taşır. Eti içinde pembe kalmayacak şekilde pişirin; çiğ et ile temas eden yüzey ve elleri yıkayın. Pastırma gibi pişirilmeden yenen kurutulmuş etler için hekiminize danışın.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  },
+  {
+   "slug": "yuksek-civali-balik",
+   "ad": "Cıvası yüksek balıklar",
+   "esAnlamlar": [
+    "köpekbalığı",
+    "kılıçbalığı",
+    "marlin"
+   ],
+   "grup": "hamilelik",
+   "minAy": null,
+   "durum": "henuz",
+   "gerekce": "Cıva bebeğin gelişmekte olan sinir sistemini etkileyebilir. Bu türler yerine somon, hamsi, sardalya, levrek gibi cıvası düşük balıkları iyi pişirerek tercih edin. Ton balığı için bazı rehberler miktar sınırı önerir.",
+   "ilkSunum": null,
+   "alerjen": null,
+   "demirZengini": false,
+   "bogulmaRiski": null,
+   "kesimSlug": null,
+   "mevsim": [],
+   "kaynak": [
+    "nhs-hamilelik"
+   ],
+   "onay": "bekliyor",
+   "hamilelik": true
+  }
+ ]
+}
