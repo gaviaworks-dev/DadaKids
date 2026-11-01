@@ -553,8 +553,15 @@
       if (D.gizli || D.durdu || D.mesgul || D.menu || D.balon) return;
       var k = hedefKutu(), m = etkilesimMerkezleri(), yer = null, gen = 104, boy = 34;
       var solKayma = Math.max(0, 6 - k.left);
+      var mobil = innerWidth <= 480;
       if (k.top - boy - 12 > ustSinir() && bosMu(m, k.left + solKayma, k.top - boy - 12, k.left + solKayma + gen, k.top - 8)) yer = 'ust';
-      else if (bosMu(m, k.right + 6, k.top + k.height * .2, k.right + 8 + gen, k.bottom)) yer = 'sag';
+      else if (!mobil && bosMu(m, k.right + 6, k.top + k.height * .2, k.right + 8 + gen, k.bottom)) yer = 'sag';
+      // Beyar 1 Kas: ≤480px'te balon yalnız Pütür'ün üstünde, sol kenarına hizalı; altında içerik (metin, bağ, düğme, rozet) varsa hiç gösterilmez
+      if (mobil && yer === 'ust') {
+        var bx0 = k.left + solKayma - 4, by0 = k.top - boy - 16, bx1 = k.left + solKayma + gen + 4, by1 = k.top - 4;
+        var cak = engelKutulari(bx0, by0, bx1, by1).some(function (r) { return r.l < bx1 && r.r > bx0 && r.t < by1 && r.b > by0; });
+        if (cak) yer = null;
+      }
       if (!yer) return;                                                         // yer yoksa bu sayfada gösterme, sonrakinde dene
       try { localStorage.setItem(MERHABA, '1'); } catch (e) { return; }
       var b = el('div', { class: 'kd-pt__merhaba', role: 'status', 'data-yer': yer }, 'Merhaba!');
@@ -563,6 +570,7 @@
       requestAnimationFrame(function () { requestAnimationFrame(function () { b.classList.add('kd-acik'); }); });
       if (!azalt()) selamVer();
       setTimeout(function () { b.classList.remove('kd-acik'); setTimeout(function () { b.hidden = true; }, 260); }, 3000);
+      if (mobil) addEventListener('scroll', function () { merhabaGizle(); }, { once: true, passive: true });   // mobilde içerik altından geçmesin
     }, 800);
   }
 
