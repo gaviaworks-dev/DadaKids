@@ -5,6 +5,7 @@
 // Form içinde input[name="evre"] radyoları varsa evre çipleriyle kendiliğinden senkron olur (hamilelik → tahmini doğum ayı modu).
 // Saklama: yalnız bu tarayıcı, localStorage 'dadakids.dogum.v1' = {y, m, mod} (try/catch); hiçbir yere gönderilmez.
 // kompakt: true → başlık yalnız ekran okuyucuya, tetik küçük bir metin bağı (hub hero'daki dönem çubuğunun yanında).
+// gun: true, uzun: true → tetik tarihi her zaman uzun Türkçe biçimde yazar (ör. 2 Kasım 2026; alerjen takip başlangıç tarihi).
 // gun: true → tarih kipi (yıl → ay → gün, form alanı gibi etiketli tetik + gizli input ISO). Persentil doğum/ölçüm tarihi. Evre senkronu ve saklama yok.
 
 export const AYLAR = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
@@ -51,8 +52,8 @@ export const MEVSIM_SVG = {
  * @param {object} o ortak yardımcılar (EVRE, evreSayfasi, esc)
  * @param {{id?: string, baslik?: string, aciklama?: string, kompakt?: boolean, tetik?: string}} opts
  */
-export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.', kompakt = false, tetik = 'Doğum ayını seçin', gun = false, girdi, deger = '', minGirdi = '', onden = '', yilSayi = 5 } = {}) {
-  if (gun) return tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, onden, yilSayi });
+export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.', kompakt = false, tetik = 'Doğum ayını seçin', gun = false, girdi, deger = '', minGirdi = '', onden = '', yilSayi = 5, uzun = false } = {}) {
+  if (gun) return tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, onden, yilSayi, uzun });
   const { esc } = o;
   const evreVeri = Object.fromEntries(Object.entries(o.EVRE).map(([k, e]) => [k, { ad: e.ad, kisa: e.kisa, renk: e.renk, aralik: e.aralik, sayfa: o.evreSayfasi(k) }]));
   const satirlar = [0, 1, 2].map((r) => `<div role="row" class="kd-ds__satir">${[0, 1, 2, 3].map((c) => {
@@ -92,7 +93,7 @@ export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını se�
  * dogumSecici(o, { gun: true, girdi: 'prDogum', ... }) ile çağrılır; davranış dogum-secici.js → kurTarih (evre senkronu/saklama yok).
  * @param {{id: string, baslik: string, aciklama?: string, tetik?: string, girdi: string, deger?: ''|'bugun'|string, minGirdi?: string, onden?: ''|'dogum', yilSayi?: number}} opts
  */
-function tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, onden, yilSayi }) {
+function tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, onden, yilSayi, uzun }) {
   const { esc } = o;
   if (!girdi) throw new Error('dogumSecici({gun:true}) için girdi (gizli input id) gerekli');
   const satirlar = [0, 1, 2].map((r) => `<div role="row" class="kd-ds__satir">${[0, 1, 2, 3].map((c) => {
@@ -101,7 +102,7 @@ function tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, o
   }).join('')}</div>`).join('');
   const cizgi = (yol, b = 20) => `<svg viewBox="0 0 24 24" width="${b}" height="${b}" aria-hidden="true" focusable="false"><path d="${yol}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   const takvim = '<svg class="kd-ds__ikon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 7h16v13H4zM4 11h16M8 4v5M16 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const oz = [deger ? ` data-deger="${esc(deger)}"` : '', minGirdi ? ` data-min-girdi="${esc(minGirdi)}"` : '', onden ? ` data-onden="${esc(onden)}"` : ''].join('');
+  const oz = [deger ? ` data-deger="${esc(deger)}"` : '', minGirdi ? ` data-min-girdi="${esc(minGirdi)}"` : '', onden ? ` data-onden="${esc(onden)}"` : '', uzun ? ' data-uzun' : ''].join('');
   return `<div class="kd-ds kd-ds--tarih" data-kd-dogum data-kd-tarih id="${id}" data-tetik-bos="${esc(tetik)}" data-yil-sayi="${yilSayi}"${oz}>
  <span class="kd-ds__baslik kd-ds__etiket" id="${id}Baslik">${esc(baslik)}</span>
  <input type="hidden" id="${esc(girdi)}" name="${esc(girdi)}" value="">

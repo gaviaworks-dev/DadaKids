@@ -1,7 +1,7 @@
 // Dada Gastro Kids — Araçlar (sahibi: araçlar kolu)
 // kids-araclar.html (hub) · kids-arac-hazir-mi.html · kids-arac-alerjen-takip.html
 // kids-arac-ogun-planlayici.html · kids-arac-persentil.html
-import { dogumSecici } from '../dogum.mjs';   // persentil: doğum/ölçüm tarihi (gün kipi)
+import { dogumSecici } from '../dogum.mjs';   // gün kipi: persentil doğum/ölçüm tarihi · alerjen takip başlangıç tarihi
 /* ---------- V2: düz bölüm ritmi (karakter, süs ve dalga geçişi yok) ---------- */
 /** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (düz zemin). Her bölüm (z) => html; z section class'ına eklenir. */
 function ritim(bolumler, renkler, { zebraIle = true } = {}) {
@@ -207,12 +207,11 @@ ${ritim([(z) => `<section class="kd-bolum${z}">
     ['gaz', 'Gaz'], ['huzursuz', 'Huzursuzluk'], ['sislik', 'Şişlik'], ['yok', 'Belirti yok'],
   ];
   const at = A['alerjen-takip'];
-  const bugun = new Date().toISOString().slice(0, 10);
   const alerjenSecim = ALERJENLER.map(([k, ad, r]) => `<label data-renk="${r}"><input type="radio" name="alerjen" value="${k}" data-ad="${esc(ad)}"><span>${esc(ad)}</span></label>`).join('')
     + `<label><input type="radio" name="alerjen" value="ozel" data-ad="Başka bir besin"><span>${fa('plus')} Başka bir besin</span></label>`;
 
   const alerjenTakip = {
-    dosya: 'kids-arac-alerjen-takip.html', aktif: 'araclar', css: ['araclar'], js: ['alerjen-takip'],
+    dosya: 'kids-arac-alerjen-takip.html', aktif: 'araclar', css: ['araclar', 'dogum-secici'], js: ['dogum-secici', 'alerjen-takip'],
     baslik: '3 günlük gözlem: alerjen tanıştırma takipçisi — Dada Gastro Kids',
     aciklama: 'Yeni bir alerjeni tanıştırırken üç gün boyunca gözlemlerinizi kaydedin. Yaygın bir uygulama; kesin tıbbi kural değil. Kayıtlar yalnız bu cihazda tutulur.',
     main: o.sayfa(`${aracHero(at, {
@@ -251,9 +250,8 @@ ${ritim([(z) => `<section class="kd-bolum${z}">
         <label for="atOzelAd">Besinin adı</label>
         <input type="text" id="atOzelAd" maxlength="40" autocomplete="off" placeholder="ör. kivi">
        </div>
-       <div class="kd-ar-alan kd-ar-alan--kisa">
-        <label for="atBaslangic">Başlangıç tarihi</label>
-        <input type="date" id="atBaslangic" value="${bugun}" max="${bugun}">
+       <div class="kd-ar-alan kd-ar-alan--kisa kd-ar-alan--tarih">
+        ${dogumSecici(o, { gun: true, uzun: true, id: 'atBaslangicDs', girdi: 'atBaslangic', baslik: 'Başlangıç tarihi', tetik: 'Tarih seçin', aciklama: 'Yeni besini ilk verdiğiniz gün. Gelecek tarih seçilemez.', deger: 'bugun', yilSayi: 2 })}
        </div>
        <p class="kd-at-hata" data-at-hata hidden role="alert"></p>
        <div class="kd-at-uyari" data-at-uyari hidden role="alert">
