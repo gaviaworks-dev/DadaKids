@@ -52,7 +52,7 @@ html:not(.kd-js) .kd-ds { display: none; }
 .kd-ds__sonuc[data-tur="buyuk"] .kd-ds__alt { color: var(--kd-uyari-k); }
 .kd-ds__eylem { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .kd-ds__eylem:empty { display: none; }
-.kd-ds__sonuc[data-renk] .kd-ds__eylem .kd-btn:not(.kd-btn--hafif) { background: var(--r-k); box-shadow: 0 8px 18px -10px var(--r-k); }
+.kd-ds__sonuc[data-renk] .kd-ds__eylem .kd-btn:not(.kd-btn--hafif) { background: var(--r-k); box-shadow: none; }
 .kd-ds__temizle { min-height: 38px; padding: 0 2px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 13px; font-weight: 700; font-family: var(--kd-font-kalin); color: var(--kd-ikincil); text-decoration: underline; text-underline-offset: 3px; }
 .kd-ds__temizle:hover { color: var(--kd-murekkep); }
 
@@ -76,7 +76,7 @@ html.kd-ds-kilit, html.kd-ds-kilit body { overflow: hidden; }
 .kd-ds__sheet-alt .kd-btn { flex: none; }
 .kd-ds__tutamak { display: none; }
 @media (min-width: 641px) {
-  .kd-ds__panel { position: absolute; top: calc(100% + var(--kd-s2)); left: 0; z-index: 40; width: min(540px, 100%); max-height: calc(100vh - var(--kd-ust-bosluk, 0px) - 200px); overflow-y: auto; overscroll-behavior: contain; padding: 0 var(--kd-s4); background: #fff; border-radius: var(--kd-r); box-shadow: inset 0 0 0 1.5px var(--kd-cizgi), var(--kd-golge-yuksek); scroll-margin: calc(var(--kd-ust-bosluk, 0px) + 96px) 0 var(--kd-s4); animation: kd-ds-pop .18s ease-out; }
+  .kd-ds__panel { position: absolute; top: calc(100% + var(--kd-s2)); left: 0; z-index: 40; width: min(540px, 100%); max-height: calc(100vh - var(--kd-ust-bosluk, 0px) - 200px); overflow-y: auto; overscroll-behavior: contain; padding: 0 var(--kd-s4); background: #fff; border-radius: var(--kd-r); box-shadow: inset 0 0 0 1.5px var(--kd-cizgi), var(--kd-golge-yuzer); scroll-margin: calc(var(--kd-ust-bosluk, 0px) + 96px) 0 var(--kd-s4); animation: kd-ds-pop .18s ease-out; }
   .kd-ds__panel:not([data-acik]) { display: none; }
   .kd-profil:has(.kd-ds__panel[data-acik]) { position: relative; z-index: 3; }
 }

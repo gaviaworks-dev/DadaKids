@@ -12,7 +12,7 @@
 .kd-dkolaj__oge:nth-child(3) { grid-column: 1 / 3; }
 .kd-dkolaj__oge:nth-child(4) { grid-column: 3 / 5; }
 .kd-dkolaj__oge:nth-child(5) { grid-column: 5 / 7; }
-.kd-dkolaj__oge:hover { box-shadow: var(--kd-golge-yuksek); }
+.kd-dkolaj__oge:hover { box-shadow: var(--kd-golge-hero); }   /* gölgesiz kart kararı: hover'da gölge artmaz */
 
 /* ---------- Evre şeridi (zaman çizelgesi) ---------- */
 .kd-dserit { background: #fff; border-block: 1px solid var(--kd-cizgi); }
