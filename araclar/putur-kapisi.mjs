@@ -464,8 +464,8 @@ const YARICAP = () => {
       for (const k of ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius']) {
         const v = c[k]; if (!v || v === '0px') continue;
         const yuzde = /%/.test(v), px = parseFloat(v);
-        // Beyar 1 Kas: köşe = Dada Gastro ölçeği {2,4,6,8,11,12,16,24}, ≤ 24px, pill yok (daire yalnız kare öğede)
-        const ok = yuzde ? (px === 50 && kare) : ([2, 4, 6, 8, 11, 12, 16, 24].some((o) => Math.abs(o - px) <= .51) && px < Math.min(gen, yuk) / 2 - .5) || px <= 8.01 || (kare && px >= Math.min(gen, yuk) / 2 - .5);
+        // Beyar 2 Kas R2: köşe TEK DEĞER = Gastro buton köşesi 12px (kısa öğede yarı kenara kırpılması serbest); daire yalnız kare öğede
+        const ok = yuzde ? (px === 50 && kare) : Math.abs(px - 12) <= .51 || (kare && px >= Math.min(gen, yuk) / 2 - .5);
         if (!ok) { out.push(`${(e.className && e.className.baseVal === undefined ? e.className : e.tagName)}${ps || ''} ${k.replace('border', '').replace('Radius', '')}=${v} (${Math.round(gen)}×${Math.round(yuk)})`); break; }
       }
     }
