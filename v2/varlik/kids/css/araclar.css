@@ -23,6 +23,8 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-ar-alan > label, .kd-pl-ayar legend, .kd-at-form legend, .kd-pr-form legend { font-size: 14px; font-weight: 800; font-family: var(--kd-font-ekstra); color: var(--kd-murekkep); }
 .kd-at-form legend, .kd-pl-ayar legend, .kd-pr-form legend { margin-bottom: var(--kd-s2); }
 .kd-ar-alan--kisa { max-width: 240px; }
+.kd-ar-alan--tarih { max-width: 300px; }   /* başlangıç tarihi: Kids tarih seçicisi (dogum-secici gün kipi), "22 Ağustos 2026" sığsın */
+.kd-ar-alan--tarih > .kd-ds--tarih { margin: 0; }
 .kd-ar-alan__ipucu { margin: var(--kd-s2) 0 0; font-size: 13px; color: var(--kd-ikincil); line-height: 1.5; }
 .kd-sayfa .kd-ar-alan input, .kd-ar-birimli input, .kd-at-gun textarea {
   width: 100%; min-height: 48px; font: inherit; font-size: 16px; color: var(--kd-murekkep);

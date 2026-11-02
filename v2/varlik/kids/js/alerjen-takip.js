@@ -78,7 +78,10 @@
   var hataEl = $('[data-at-hata]');
   var uyariEl = $('[data-at-uyari]');
   var bekleyen = null;
-  tarihGirdi.value = bugun(); tarihGirdi.max = bugun();
+  // Başlangıç tarihi = Kids tarih seçicisi (dogum-secici.js gün kipi; gizli input ISO). Seçici yoksa yalnız gizli değer yazılır.
+  var tarihKok = tarihGirdi.closest('[data-kd-tarih]');
+  function tarihAyarla(v) { if (tarihKok && tarihKok.kdTarih) tarihKok.kdTarih.ayarla(v, false); else tarihGirdi.value = v; }
+  tarihAyarla(bugun());
 
   function hata(m) { hataEl.textContent = m || ''; hataEl.hidden = !m; }
   form.addEventListener('change', function (e) {
@@ -119,7 +122,7 @@
 
   function baslat(k) {
     veri.kayitlar.push(k); kaydet(); sonMesaj = null;
-    form.reset(); tarihGirdi.value = bugun(); ozelKutu.hidden = true;
+    form.reset(); tarihAyarla(bugun()); ozelKutu.hidden = true;
     ciz();
     duyur(k.ad + ' için 3 günlük gözlem başladı.');
     var kart = $('.kd-at-kayit[data-id="' + k.id + '"]');
@@ -307,7 +310,7 @@
       var eski = bul(t.getAttribute('data-yeniden')); if (!eski) return;
       var sec = form.querySelector('input[name="alerjen"][value="' + eski.k + '"]');
       if (sec) { sec.checked = true; ozelKutu.hidden = eski.k !== 'ozel'; if (eski.k === 'ozel') ozelGirdi.value = eski.ad; }
-      tarihGirdi.value = bugun();
+      tarihAyarla(bugun());
       if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit', { cancelable: true }));
       return;
     }
@@ -343,7 +346,7 @@
 
   // gün değişimi (sayfa açık kalırsa) — sekmeye dönüldüğünde yeniden çiz
   var sonGun = bugun();
-  document.addEventListener('visibilitychange', function () { if (!document.hidden && bugun() !== sonGun) { sonGun = bugun(); tarihGirdi.max = sonGun; ciz(); } });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && bugun() !== sonGun) { sonGun = bugun(); if (tarihGirdi.value > sonGun) tarihAyarla(sonGun); ciz(); } });
 
   ciz();
 })();

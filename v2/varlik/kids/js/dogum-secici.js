@@ -446,7 +446,7 @@
       kisaEl.textContent = d.g !== null && d.m !== null ? uzunTarih(d) : d.m !== null ? AYLAR[d.m - 1] + ' ' + d.y + ' · günü seçin' : d.y !== null ? d.y + ' · ayı seçin' : '';
       if (p) {
         var bugunMu = girdi.value === bugunIso();
-        metinEl.innerHTML = '<span aria-hidden="true">' + (bugunMu ? 'Bugün' : p.g + ' ' + KISA_AY[p.m - 1] + ' ' + p.y) + '</span><span class="kd-gizli">' + (bugunMu ? 'bugün, ' : '') + uzunTarih(p) + '</span>';
+        metinEl.innerHTML = '<span aria-hidden="true">' + (kok.hasAttribute('data-uzun') ? uzunTarih(p) : bugunMu ? 'Bugün' : p.g + ' ' + KISA_AY[p.m - 1] + ' ' + p.y) + '</span><span class="kd-gizli">' + (bugunMu ? 'bugün, ' : '') + uzunTarih(p) + '</span>';
       } else metinEl.textContent = kok.getAttribute('data-tetik-bos') || 'Tarih seçin';
       tetik.setAttribute('data-dolu', String(!!p));
     }
