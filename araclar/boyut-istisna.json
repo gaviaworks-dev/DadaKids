@@ -680,6 +680,30 @@
       "sayfa": "kids-mevsim.html",
       "sinif": "kd-urun-foto",
       "gerekce": "Beyar 1 Kas: kalın halka (iç boşluk) yerine ince dış halka token'ı; fotoğraf aynı boyuttaki daireyi tam doldurur ('görsel küçülmesin'). Kahraman dairesi kutusu değişmedi (280/240/234), yalnız içindeki fotoğraf 16px büyüdü. Lead kararı 2026-11-01."
+    },
+    {
+      "sayfa": "kids-bebek-dolabi.html",
+      "sinif": "kd-dolap*",
+      "taban": "8772",
+      "gerekce": "Revize 2 Kas R4 (Beyar): kategori akordeonu yerine kategori başına yatay kayan şerit (2 sütun masaüstü, 1 sütun ≤1024); kapalı akordeon satırı (61px) artık açık şerit, panel bu yüzden uzar"
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mneden*",
+      "taban": "8772",
+      "gerekce": "Revize 2 Kas R8b (Beyar): 'Lezzet, bütçe ve çeşitlilik' başlığı tam genişlik üstte; sol 3 kart ile Dondurulmuş kartı aynı satırda üst/alt hizalı (≤760'a kadar iki sütun)"
+    },
+    {
+      "sayfa": "kids-mevsim.html",
+      "sinif": "kd-mdondurulmus*",
+      "taban": "8772",
+      "gerekce": "Revize 2 Kas R8b (Beyar): Dondurulmuş kartı sol kart listesiyle aynı yükseklikte, sağ sütunda"
+    },
+    {
+      "sayfa": "kids-guvenli-kesim.html",
+      "sinif": "kd-kokuma*",
+      "taban": "8772",
+      "gerekce": "Revize 2 Kas R8a (Beyar): 'Kartlar nasıl okunur?' 3 evre kartı eşit 3 sütun; dar ekranda tek satır (eskiden 2+1 sarıyordu) → kutu kısalır"
     }
   ]
 }

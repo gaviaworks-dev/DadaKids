@@ -283,11 +283,13 @@ if (BOLUM.has('davranis')) {
     kontrol(`${w} tek tık: menü ~250 ms sonra açık`, z.acik && gec >= 220 && gec <= 450, JSON.stringify({ gec: Math.round(gec), acik: z.acik }));
     kontrol(`${w} tek tık: zıplama (tepki) state'i, sürpriz yok`, z.durum.some(([d]) => d === 'tepki') && !z.surpriz, JSON.stringify(z.durum.map(([d]) => d)));
     await s.waitForTimeout(1500);
+    [x, y] = await merkez(s, '.kd-pt__btn');   // Pütür açılınca kenara çekilebilir (yer yoksa): kullanıcı düğmenin O ANKİ yerine tıklar
     await s.mouse.click(x, y); await s.waitForTimeout(700);
     kontrol(`${w} tek tık: açık menüde ikinci tek tık menüyü kapatır`, !(await menuAcik(s)));
     await s.mouse.move(w - 200, 300); await s.waitForTimeout(500);
     // çift tık → sürpriz, menü açılmaz, ~2 sn, el sallar
     await s.evaluate(SAAT_SIFIRLA);
+    [x, y] = await merkez(s, '.kd-pt__btn');   // Pütür açılınca kenara çekilebilir (yer yoksa): kullanıcı düğmenin O ANKİ yerine tıklar
     await s.mouse.dblclick(x, y);
     await s.waitForTimeout(2900);
     z = await s.evaluate(SAAT_OKU);
@@ -299,6 +301,7 @@ if (BOLUM.has('davranis')) {
     kontrol(`${w} çift tık: geri toplanıp el sallar`, z.selam >= 1 && await s.evaluate(() => getComputedStyle(document.querySelector('.kd-pt__karakter')).opacity === '1' && !document.querySelector('.kd-pt__sahne').children.length), JSON.stringify({ selam: z.selam }));
     // 9 sn bekleme: çift tık sürpriz başlatmaz, menü normal açılır
     await s.evaluate(SAAT_SIFIRLA);
+    [x, y] = await merkez(s, '.kd-pt__btn');   // Pütür açılınca kenara çekilebilir (yer yoksa): kullanıcı düğmenin O ANKİ yerine tıklar
     await s.mouse.dblclick(x, y); await s.waitForTimeout(900);
     z = await s.evaluate(SAAT_OKU);
     kontrol(`${w} bekleme (9 sn): ikinci çift tık sürpriz başlatmaz`, z.surpriz === '1' && !z.durum.some(([d]) => d === 'surpriz'), JSON.stringify({ say: z.surpriz, d: z.durum.map(([d]) => d) }));
@@ -308,6 +311,7 @@ if (BOLUM.has('davranis')) {
       const kalanSure = 9000 - (await s.evaluate((b) => performance.now() - b, bas)) + 250;
       await s.waitForTimeout(Math.max(0, kalanSure));
       await s.evaluate(SAAT_SIFIRLA);
+      [x, y] = await merkez(s, '.kd-pt__btn');   // Pütür açılınca kenara çekilebilir (yer yoksa): kullanıcı düğmenin O ANKİ yerine tıklar
       await s.mouse.dblclick(x, y); await s.waitForTimeout(400);
       z = await s.evaluate(SAAT_OKU);
       kontrol(`${w} bekleme: 9 sn sonra çift tık yeniden sürpriz`, z.surpriz === '2' && z.d === 'surpriz' && !z.acik, JSON.stringify({ say: z.surpriz, d: z.d }));
@@ -317,6 +321,7 @@ if (BOLUM.has('davranis')) {
     // yavaş çift tık (iki tık arası ~330 ms): yine sürpriz, sonunda menü kapalı
     s = await acSayfa(bag, 'kids.html', jsHata); await s.waitForTimeout(400); await s.evaluate(SAAT);
     [x, y] = await merkez(s, '.kd-pt__btn');
+    [x, y] = await merkez(s, '.kd-pt__btn');   // Pütür açılınca kenara çekilebilir (yer yoksa): kullanıcı düğmenin O ANKİ yerine tıklar
     await s.mouse.click(x, y); await s.waitForTimeout(330); await s.mouse.click(x, y);
     await s.waitForTimeout(2600);
     z = await s.evaluate(SAAT_OKU);
@@ -328,6 +333,7 @@ if (BOLUM.has('davranis')) {
     await s.mouse.move(x + 30, y - 120); await s.mouse.move(x, y, { steps: 4 }); await s.waitForTimeout(520);
     kontrol(`${w} hover: imleçle ~200 ms sonra menü açılır`, await s.evaluate(() => !!document.querySelector('#kdPtMenu.kd-acik') && document.querySelector('.kd-pt').hasAttribute('data-hover')));
     await s.evaluate(SAAT);
+    [x, y] = await merkez(s, '.kd-pt__btn');   // Pütür açılınca kenara çekilebilir (yer yoksa): kullanıcı düğmenin O ANKİ yerine tıklar
     await s.mouse.dblclick(x, y); await s.waitForTimeout(300);
     z = await s.evaluate(SAAT_OKU);
     kontrol(`${w} hover + çift tık: menü kapanır, sürpriz oynar`, z.d === 'surpriz' && !z.acik, JSON.stringify({ d: z.d, acik: z.acik }));
