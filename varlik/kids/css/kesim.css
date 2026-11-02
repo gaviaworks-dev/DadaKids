@@ -130,6 +130,7 @@
   .kd-khero { justify-self: start; }
   .kd-kokuma { grid-template-columns: minmax(0, 1fr); }
   .kd-kokuma__asamalar { grid-column: 1 / -1; grid-row: 2; }   /* metnin altında tam genişlik, 3 eşit kart */
+  .kd-kokuma__asamalar li { justify-content: flex-start; }      /* etiket iki satıra sarınca başlık satırları üstten hizalı kalsın (ızgara dilimi) */
 }
 @media (max-width: 420px) { .kd-kokuma__asamalar { gap: 6px; } .kd-kokuma__asamalar li { padding: 8px; } }
 @media (max-width: 860px) {
