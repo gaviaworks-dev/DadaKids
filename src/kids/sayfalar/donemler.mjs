@@ -13,7 +13,7 @@ import { sss as sssBilesen } from '../sss.mjs';
 import { existsSync } from 'node:fs';
 const KOK = new URL('../../../', import.meta.url).pathname;
 // Foto turu: o.urun() gerçek ürün fotoğrafı basar (foto-urun: varlik/kids/gorsel/urun/<ad>-k.webp); fotoğrafı olmayan üründe yedek görsel kullanılır
-const urunVar = (k) => !!k && existsSync(`${KOK}varlik/kids/gorsel/urun/${k}-k.webp`);
+const urunVar = (k) => !!k && (existsSync(`${KOK}varlik/kids/gorsel/urun-pixar/${k}-k.webp`) || existsSync(`${KOK}varlik/kids/gorsel/urun/${k}-k.webp`));   // tek kaynak: o.urun() şeffaf ikonu önceler
 /** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (düz zemin). Her bölüm (z) => html; z section class'ına eklenir. */
 function ritim(bolumler, renkler, { zebraIle = true } = {}) {
   const dolu = bolumler.filter((b) => b && b(''));

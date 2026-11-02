@@ -54,8 +54,9 @@ export const ikon = (ad, boy = 24, alt = '') => `<img src="varlik/kids/svg/ui/${
 // -k 192px (render ≤ 96px: ay seçici, ızgara, hub, dönem) · -b 560px (render ≤ 280px: büyük görsel).
 // Kaynak: varlik/kids/gorsel/urun/<ad>-<k|b>.webp (rapor/tmp/foto/foto-urun/manifest.json).
 export const urunYol = (ad, boy = 40) => `varlik/kids/gorsel/urun/${ad}-${boy > 96 ? 'b' : 'k'}.webp`;
-export const urunVar = (ad) => !!ad && _var(_kok(urunYol(ad)));
-export const urun = (ad, boy = 40, alt = '') => `<img class="kd-urun-foto" src="${urunYol(ad, boy)}" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} style="border-radius:var(--kd-r-daire);object-fit:cover" loading="lazy" decoding="async">`;
+export const urunFotoVar = (ad) => !!ad && _var(_kok(urunYol(ad)));
+/** Yuvarlak kırpılmış gerçek ürün fotoğrafı (yalnız şeffaf ikonu olmayan ürünlerde yedek). */
+export const urunFoto = (ad, boy = 40, alt = '') => `<img class="kd-urun-foto" src="${urunYol(ad, boy)}" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} style="border-radius:var(--kd-r-daire);object-fit:cover" loading="lazy" decoding="async">`;
 // Revize 2 Kas R4/R5: şeffaf Pixar tarzı 3D ürün ikonu (webp alfa, zemin/kırpım/halka YOK). Aynı iki çözünürlük kuralı:
 // -k 192px (render ≤ 96px) · -b 560px (render > 96px). Kaynak: varlik/kids/gorsel/urun-pixar/<ad>-<k|b>.webp.
 // Mevsim seti (35 ürün) ajan `mevsim`, Dolap'a özgü ek ürünler ajan `dolap` üretir; ikisi aynı klasöre farklı adlarla yazar.
@@ -64,7 +65,10 @@ export const pixarVar = (ad) => !!ad && _var(_kok(pixarYol(ad, 40))) && _var(_ko
 /** Şeffaf ürün ikonu; yoksa (geçiş dönemi) yuvarlak gerçek fotoğrafa düşer. sinif: ek sınıf. */
 export const urunPixar = (ad, boy = 40, alt = '', { sinif = '' } = {}) => pixarVar(ad)
   ? `<img class="kd-urun-pixar${sinif ? ' ' + sinif : ''}" src="${pixarYol(ad, boy)}" width="${boy}" height="${boy}" alt="${esc(alt)}"${_dek(alt)} loading="lazy" decoding="async">`
-  : urun(ad, boy, alt);
+  : urunFoto(ad, boy, alt);
+/** Revize 2 Kas (Beyar ACİL): ürün görseli TEK KAYNAK — şeffaf Pixar ikonu varsa her yerde o (Mevsim ile aynı dosya, aynı stil), yoksa yuvarlak fotoğraf. */
+export const urun = (ad, boy = 40, alt = '', ek = {}) => urunPixar(ad, boy, alt, ek);
+export const urunVar = (ad) => pixarVar(ad) || urunFotoVar(ad);
 // Foto turu: sahne = küçük kare gerçek fotoğraf (kutu ölçüsü aynı; .kd-foto-ikon CSS'i img'yi kutuya sığdırır). İmza aynı.
 const SAHNE_FOTO = { 'bos-kase': 'bos/bos-kase', 'meyve-sepeti': 'bolum/mevsim', 'kesim-tahtasi': 'bolum/kesim', 'mama-sandalyesi-sahne': 'arac/hazir-mi-kare', 'tabak-parmak-gida': 'bolum/kivam-parmak' };
 /** İkon kutusunun yerine geçen kare/küçük fotoğraf (dekoratifse alt boş). yol: varlik/kids/gorsel/ altı, uzantısız. */
