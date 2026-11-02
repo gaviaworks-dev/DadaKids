@@ -118,7 +118,7 @@ legend.kd-ar-panel__baslik + * { clear: both; }
 .kd-ar-kart__maddeler { list-style: none; margin: 2px 0 var(--kd-s1); padding: 0; display: grid; gap: var(--kd-s2); }
 .kd-ar-kart__maddeler li { display: flex; gap: var(--kd-s2); align-items: flex-start; font-size: 14.5px; font-weight: 500; font-family: var(--kd-font); }
 .kd-ar-kart__maddeler i { flex: none; width: 22px; height: 22px; border-radius: var(--kd-r-daire); display: grid; place-items: center; font-size: 11px; background: var(--r-a); color: var(--r-k); margin-top: 1px; }
-.kd-sayfa .kd-ar-kart__ac { margin-top: auto; align-self: end; justify-self: start; background: var(--r-k); box-shadow: 0 8px 18px -10px var(--r-k); }
+.kd-sayfa .kd-ar-kart__ac { margin-top: auto; align-self: end; justify-self: start; background: var(--r-k); box-shadow: none; }
 
 .kd-ar-guven { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(var(--kd-s5), 3vw, var(--kd-s6)); align-items: center; padding: clamp(var(--kd-s5), 3vw, var(--kd-s6)); border-radius: var(--kd-r); background: linear-gradient(120deg, var(--kd-mavi-a), var(--kd-mint-a) 60%, var(--kd-sari-a)); }
 .kd-sayfa .kd-ar-guven h2 { font-size: clamp(1.3rem, 1.1rem + .8vw, 1.7rem); margin-bottom: var(--kd-s3); }

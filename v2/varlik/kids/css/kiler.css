@@ -113,7 +113,7 @@
 .kd-mz__ad { font-family: var(--kd-font-kalin); font-size: 12.5px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; hyphens: auto; }
 .kd-mz__uyari { font-family: var(--kd-font-kalin); font-size: 11px; font-weight: 700; line-height: 1.2; color: var(--kd-uyari-k); }
 .kd-mz__uyari:empty { display: none; }
-.kd-mz__ck { position: absolute; top: 6px; right: 6px; display: none; place-items: center; width: 20px; height: 20px; border-radius: var(--kd-r-daire); background: var(--kd-tema); color: #fff; box-shadow: 0 2px 6px rgba(33, 30, 22, .25); }
+.kd-mz__ck { position: absolute; top: 6px; right: 6px; display: none; place-items: center; width: 20px; height: 20px; border-radius: var(--kd-r-daire); background: var(--kd-tema); color: #fff; box-shadow: none; }
 .kd-mz:hover { border-color: color-mix(in srgb, var(--kd-tema) 60%, transparent); box-shadow: var(--kd-golge); transform: translateY(-1px); }
 .kd-mz:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: -3px; }
 .kd-mz[aria-pressed="true"] { border-color: var(--kd-tema); background: color-mix(in srgb, var(--kd-tema-a, var(--kd-mint-a)) 55%, #fff); box-shadow: inset 0 0 0 1px var(--kd-tema); }
@@ -163,7 +163,7 @@
 .kd-dolap-grup__isaret { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: var(--kd-r-daire); background: var(--kd-mint-k); color: #fff; font-family: var(--kd-font-kalin); font-size: 11.5px; font-weight: 700; }
 .kd-dolap-grup__isaret[data-durum="eksik"] { background: var(--kd-sari-o); color: var(--kd-sari-k); }
 .kd-dolap-izgara { --kd-min: 250px; }
-.kd-dolap-rozet { position: absolute; left: var(--kd-s3); bottom: var(--kd-s3); z-index: 2; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; max-width: calc(100% - var(--kd-s5)); padding: 5px 10px; border-radius: var(--kd-r); background: var(--kd-mint-k); color: #fff; font-family: var(--kd-font-kalin); font-size: 12.5px; font-weight: 700; line-height: 1.25; box-shadow: 0 4px 12px -4px rgba(23, 104, 76, .5); }
+.kd-dolap-rozet { position: absolute; left: var(--kd-s3); bottom: var(--kd-s3); z-index: 2; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; max-width: calc(100% - var(--kd-s5)); padding: 5px 10px; border-radius: var(--kd-r); background: var(--kd-mint-k); color: #fff; font-family: var(--kd-font-kalin); font-size: 12.5px; font-weight: 700; line-height: 1.25; box-shadow: none; }
 .kd-dolap-rozet[data-durum="eksik"] { background: rgba(43, 33, 29, .84); box-shadow: none; }
 .kd-dolap-rozet small { font-family: var(--kd-font); font-weight: 500; font-size: 11.5px; }
 /* Dolgu kartı: son satırın boş yuvalarını doldurur (yarım satır yok) — öneri çipleri ya da "Tam ekranda aç" */

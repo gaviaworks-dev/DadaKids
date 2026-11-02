@@ -26,8 +26,11 @@
   --kd-murekkep: #3A2E2A;
   --kd-ikincil: #6B5A52;
   --kd-cizgi: #F0E3D6;
-  --kd-golge: 0 1px 2px rgba(58, 46, 42, .06), 0 4px 14px -8px rgba(58, 46, 42, .16);
-  --kd-golge-yuksek: 0 2px 4px rgba(58, 46, 42, .06), 0 12px 28px -14px rgba(58, 46, 42, .24);
+  /* Gölgesiz kart kararı (Beyar 2 Kas): kart/panel gölge token'ları boş katman (virgüllü listelerde geçerli kalsın diye "none" değil).
+     Yüzen katmanlar (tarih seçici paneli, profil) --kd-golge-yuzer kullanır. */
+  --kd-golge: 0 0 0 0 transparent;
+  --kd-golge-yuksek: 0 0 0 0 transparent;
+  --kd-golge-yuzer: 0 2px 4px rgba(58, 46, 42, .06), 0 12px 28px -14px rgba(58, 46, 42, .24);
   /* V2 köşe ölçeği (sözleşme): en çok 8px; daire yalnız eşit en-boy ikon/avatar */
   /* köşe ölçeği = Dada Gastro token'ları (Beyar 1 Kas: "Gastro'daki radius nasılsa öyle"): rozet 6 · chip/etiket 8 (.chip/.tag) · düğme/giriş 12 (.btn) · kart/panel 16 (.card-visual) · büyük blok 24 */
   /* Revize 2 Kas R2: köşe yarıçapı TEK DEĞER = Dada Gastro buton köşesi (.btn-login 12px = --radius-md). Eski adlar aynı değere bağlı (geriye uyum); istisna yalnız gerçek daire (--kd-r-daire) ve tam yuvarlak switch. */
@@ -97,8 +100,13 @@ html.kd-ust-gizli .kd-ust__logo { max-width: 140px; margin-right: 0; opacity: 1;
 .kd-ust__menu > a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--kd-r); font-size: 14.5px; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1; text-decoration: none; color: var(--kd-murekkep); white-space: nowrap; transition: background-color .18s ease, color .18s ease; }
 .kd-ust__menu > .kd-ust__ev { justify-content: center; min-width: 44px; padding: 0; margin-left: auto; }   /* R3: ev ikonu "Tarifler"in hemen solunda, menüyle tek grup (grup ortada) */
 .kd-ust__ev svg { display: block; width: 22px; height: 22px; }
-.kd-ust__menu > a:hover { background: var(--kd-krem-2); }
-.kd-ust__menu > a[aria-current="page"] { background: var(--kd-tema-a); color: var(--kd-tema); box-shadow: inset 0 -2px 0 var(--kd-tema); }
+/* Gastro .nav a birebir (Beyar 2 Kas): hover = aksan yıkaması + aksan rengi; aktif = yalnız aksan rengi + metin altında 2px ince çizgi
+   (left/right 12px, bottom 2px, radius-sm). Zemin/3D gölge yok. Ev ikonunda çizgi de yok (yalnız renk). */
+.kd-ust__menu > a { position: relative; transition: color .2s ease, background .2s ease; }
+.kd-ust__menu > a:hover { background: var(--kd-tema-a); color: var(--kd-tema); }
+.kd-ust__menu > a[aria-current="page"] { background: transparent; color: var(--kd-tema); box-shadow: none; }
+.kd-ust__menu > a[aria-current="page"]:hover { background: var(--kd-tema-a); }
+.kd-ust__menu > a[aria-current="page"]:not(.kd-ust__ev)::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: currentColor; border-radius: var(--radius-sm, 8px); }
 .kd-ust__menu > a:focus-visible, .kd-ust__logo:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: -3px; }
 /* Yardım düğmesi (yardim.js açar; JS yoksa hidden kalır) */
 .kd-yardim-ac { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid var(--kd-cizgi); border-radius: var(--kd-r); background: #fff; color: var(--kd-murekkep); font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1; cursor: pointer; transition: background-color .18s ease, border-color .18s ease; }
@@ -309,7 +317,7 @@ a.kd-kart:hover, .kd-kart--tik:hover, article.kd-tarif:hover { box-shadow: inset
 /* ---------------------------------------------------------------------
    8 · Profil kutusu (hub)
    --------------------------------------------------------------------- */
-.kd-profil { background: #fff; border-radius: var(--kd-r); padding: 22px; box-shadow: var(--kd-golge-yuksek); }
+.kd-profil { background: #fff; border-radius: var(--kd-r); padding: 22px; box-shadow: var(--kd-golge-yuzer); }
 .kd-profil h2 { font-size: 1.3rem; margin: 0 0 4px; }
 .kd-profil__alt { margin: 0 0 14px; color: var(--kd-ikincil); font-size: 14px; }
 .kd-profil fieldset { border: 0; padding: 0; margin: 0 0 14px; }
@@ -407,7 +415,7 @@ html[data-kd-tema="erkek"] { --kd-krem: #F7F8FC; --kd-krem-2: #EEF2FA; --kd-cizg
 /* Kare illüstrasyon hero'da: kutu tabandaki 4:3 ölçüde kalır, görsel kırpılmadan ortalanır */
 .kd-hero__gorsel.kd-dhero-illus, .kd-hero__gorsel.kd-rhero-illus { display: flex; justify-content: center; aspect-ratio: 4 / 3; }
 .kd-hero__gorsel.kd-dhero-illus::after, .kd-hero__gorsel.kd-rhero-illus::after { display: none; }
-.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-rhero-illus > img { width: auto; max-width: 100%; height: 100%; aspect-ratio: 1; object-fit: contain; background: transparent; box-shadow: var(--kd-golge); border-radius: var(--kd-r); }
+.kd-hero__gorsel.kd-dhero-illus > img, .kd-hero__gorsel.kd-rhero-illus > img { width: auto; max-width: 100%; height: 100%; aspect-ratio: 1; object-fit: contain; background: transparent; box-shadow: var(--kd-golge-hero); border-radius: var(--kd-r); }
 /* Kompakt ipucu: güven şeridi gibi dar bantlarda bandın boyunu uzatmaz */
 .kd-rehberci.kd-ipucu--kompakt { align-items: center; }
 .kd-rehberci.kd-ipucu--kompakt .kd-baloncuk { margin: 0; padding: var(--kd-s2) var(--kd-s3); max-width: 640px; font-size: 14px; line-height: 1.45; }
@@ -458,7 +466,7 @@ html[data-kd-tema="erkek"] { --kd-krem: #F7F8FC; --kd-krem-2: #EEF2FA; --kd-cizg
 :root { --kd-golge-ton: rgba(90, 60, 40, .22); }
 html[data-kd-tema="kiz"]   { --kd-krem: #FDF2FA; --kd-krem-2: #F8E2F3; --kd-cizgi: #EDD5E9; --kd-tema: #A23585; --kd-tema-a: #F5DEF2; --kd-golge-ton: rgba(162, 53, 133, .22); }
 html[data-kd-tema="erkek"] { --kd-krem: #F5F8FD; --kd-krem-2: #E6EEFA; --kd-cizgi: #D8E2F2; --kd-tema: #2F6497; --kd-tema-a: #DCE9F9; --kd-golge-ton: rgba(47, 100, 151, .22); }
-:root { --kd-golge: 0 1px 2px rgba(58, 46, 42, .06), 0 4px 14px -8px var(--kd-golge-ton); --kd-golge-yuksek: 0 2px 4px rgba(58, 46, 42, .06), 0 12px 28px -14px var(--kd-golge-ton); }
+:root { --kd-golge: 0 0 0 0 transparent; --kd-golge-yuksek: 0 0 0 0 transparent; --kd-golge-yuzer: 0 2px 4px rgba(58, 46, 42, .06), 0 12px 28px -14px var(--kd-golge-ton); }
 .kd-hero { background: linear-gradient(180deg, color-mix(in srgb, var(--r-a, var(--kd-krem-2)) 55%, var(--kd-krem)) 0%, var(--kd-krem) 100%); }
 .pg-kids, .pg-kids .page-main, .kd-sayfa, .kd-hero, .kd-zebra, .kd-kart, .kd-chip, .kd-secim span { transition: background-color .45s ease, background .45s ease, color .3s ease, box-shadow .45s ease, border-color .45s ease; }
 @media (prefers-reduced-motion: reduce) { .pg-kids, .pg-kids .page-main, .kd-sayfa, .kd-hero, .kd-zebra, .kd-kart, .kd-btn, .kd-chip, .kd-secim span { transition: none !important; } }
@@ -550,7 +558,7 @@ html[data-kd-tema="erkek"] { --kd-krem: #F5F8FD; --kd-krem-2: #E6EEFA; --kd-cizg
    ===================================================================== */
 
 /* KidsAgeBadge: kart sol üst, koyu mürekkep zemin + beyaz yazı (13,1:1). o.yasRozet de bu görünümde. */
-.kd-age-badge { display: inline-flex; align-items: center; gap: 4px; padding: 6px 9px; border-radius: var(--kd-r); background: var(--kd-murekkep); color: #fff; font-family: var(--kd-font-ekstra); font-size: 13px; font-weight: 800; letter-spacing: .04em; line-height: 1; text-transform: uppercase; white-space: nowrap; box-shadow: 0 1px 2px rgba(0, 0, 0, .18); }
+.kd-age-badge { display: inline-flex; align-items: center; gap: 4px; padding: 6px 9px; border-radius: var(--kd-r); background: var(--kd-murekkep); color: #fff; font-family: var(--kd-font-ekstra); font-size: 13px; font-weight: 800; letter-spacing: .04em; line-height: 1; text-transform: uppercase; white-space: nowrap; box-shadow: none; }
 
 /* Tarif kartı (article): başlık bağı uzatılmış (::after tüm kart), Kiler düğmesi bağın dışında ve üstte */
 article.kd-tarif { cursor: pointer; }
@@ -773,3 +781,22 @@ article.kd-tarif { cursor: pointer; }
 :root { --kd-kirinti-ust: 16px; }
 @media (max-width: 640px) { :root { --kd-kirinti-ust: 12px; } }
 .kd-sayfa section:has(> .wrap > .kd-kirinti:first-child) { padding-top: var(--kd-kirinti-ust); }
+/* KARTLAR = Gastro kart stili, GÖLGESİZ (Beyar 2 Kas). Gastro .r-card: border 1px solid var(--line) #ECECEC · radius var(--radius-lg) 16px;
+   hover'da yalnız çerçeve #DCDCDC (Gastro'nun translateY(-6px) kalkması ve gölgesi Kids'te YOK). box-shadow yok — seçili/hedef/odak
+   durumları outline ile. Liste araclar/golge-kapisi.mjs KARTLAR ile aynı tutulur. Yüzen katmanlar (tarih seçici, öneri listesi,
+   Yardım paneli, mobil filtre sheet'i) ve hero görselleri (R6 --kd-golge-hero) kart değildir. */
+:root .kd-sayfa :is(.kd-kart, .kd-evre, .kd-mkart, .kd-ar-mini, .kd-ar-panel, .kd-at-kayit, .kd-pr-panel, .kd-pr-ipucu, .kd-pl-slot, .kd-hm-sonuc,
+  .kd-kesim, .kd-kokuma, .kd-kbogulma__liste li, .kd-murun, .kd-mkahraman, .kd-mmevsim, .kd-may, .kd-mtab__liste, .kd-mneden__liste li, .kd-mbilgi,
+  .kd-rmozaik__oge, .kd-rsonraki, .kd-rtoc__kutu, .kd-rtablo-kap, .kd-rhero-ikon, .kd-dsonraki__kart, .kd-dhap, .kd-dpanel, .kd-dsekme__panel, .kd-dtablo-kap,
+  .kd-td-buyur__kart, .kd-td-malz, .kd-td-adimlar li, .kd-mz, .kd-dolap, .kd-sss__oge, .kd-hub-besin, .kd-hub-kesim, .kd-hub-donem__liste) {
+  border: 1px solid var(--line, #ECECEC); border-radius: var(--radius-lg, 16px); box-shadow: none !important;
+}
+:root .kd-sayfa :is(a.kd-kart, .kd-kart--tik, article.kd-tarif, .kd-ar-kart, .kd-evre, .kd-mkart, .kd-ar-mini, .kd-murun, .kd-mz, .kd-rsonraki, .kd-dsonraki__kart,
+  .kd-td-buyur__kart, .kd-rmozaik__oge, .kd-mmevsim, .kd-mneden__liste li):hover { border-color: #DCDCDC; transform: none !important; }
+:root .kd-sayfa :is(.kd-kart, .kd-murun, .kd-rmozaik__oge, .kd-td-buyur__kart, .kd-evre, .kd-ar-mini):hover img { transform: none !important; }
+/* durumlar: gölge yerine outline (aynı renkler) */
+:root .kd-sayfa .kd-evre[aria-current="true"] { border-color: var(--r-k); outline: 2px solid var(--r-k); outline-offset: -2px; }
+:root .kd-sayfa .kd-mz[aria-pressed="true"] { border-color: var(--kd-tema); }
+:root .kd-sayfa :is(.kd-kesim:target, .kd-kesim.kd-hedef) { outline: 4px solid var(--kd-mint-o); outline-offset: 0; }
+:root .kd-sayfa .kd-ar-kart:focus-within, :root .kd-sayfa .kd-pr-panel:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+:root .kd-sayfa .kd-pl-slot:not([data-dolu]) { border-style: dashed; border-color: var(--kd-cizgi); }

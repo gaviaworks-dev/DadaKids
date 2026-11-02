@@ -20,7 +20,7 @@
 .kd-kbogulma__bas h2 { margin: 10px 0 6px !important; color: var(--kd-tehlike-k) !important; }
 .kd-kbogulma__bas p { margin: 0; color: var(--kd-murekkep); }
 .kd-kbogulma__liste { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 14px; }
-.kd-kbogulma__liste li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 14px; align-items: start; background: #fff; border-radius: var(--kd-r); padding: 16px; box-shadow: 0 8px 22px -16px rgba(161, 38, 31, .5); }
+.kd-kbogulma__liste li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 14px; align-items: start; background: #fff; border-radius: var(--kd-r); padding: 16px; box-shadow: none; }
 .kd-kbogulma__liste li > div { align-self: stretch; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
 .kd-kbogulma__liste .kd-kbogulma__yerine { margin-top: auto !important; width: 100%; }
 .kd-kbogulma__liste li > div > p:not(.kd-kbogulma__yerine) { margin-bottom: var(--kd-s2); }

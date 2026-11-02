@@ -39,7 +39,7 @@
 .kd-td-hero { padding-bottom: clamp(28px, 4vw, 48px); }
 .kd-td-ust { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 48px); align-items: start; }
 .kd-td-foto { position: relative; }
-.kd-td-foto > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--kd-r); box-shadow: var(--kd-golge-yuksek); background: var(--r-a); }
+.kd-td-foto > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--kd-r); box-shadow: var(--kd-golge-hero); background: var(--r-a); }
 .kd-td-foto > .kd-age-badge, .kd-td-foto > .kd-yas { position: absolute; top: var(--kd-s4); left: var(--kd-s4); }
 .kd-td-imza { display: flex; flex-wrap: wrap; gap: var(--kd-s2) var(--kd-s5); margin-top: var(--kd-s3); }
 .kd-td-imza .kd-td-inceleyen { margin: 0; }
