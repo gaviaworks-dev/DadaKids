@@ -4,8 +4,9 @@
    · html.kd-js sınıfı · .kd-gir öğeleri görünür alana girince .kd-gorundu alır
    · window.DadaKids = { profil:{evre,c,ay}, EVRE, kova(), profilAyarla(p), dinle(fn) }
    · href'i "kids" ile başlayan bağlar profili taşır (?evre=…&c=…&ay=…) — depolama YOK
-   · --kd-ust-bosluk: görünen Gastro header'ının alt kenarı (yapışkan öğeler için; header gizliyken 0)
-   · Yapışkan Kids barı: aşağı kayınca html.kd-ust-gizli (Gastro header'ı transform ile gizlenir, bar top=0)
+   · --kd-ust-bosluk: görünen Gastro katmanının alt kenarı (üstte header altı; ana menü gizliyken siyah üst bandın altı, mobilde 0)
+   · --kd-bar-alt (kids.css): Kids barının alt kenarı — sayfa yapışkan barları top: var(--kd-bar-alt)
+   · Yapışkan Kids barı: aşağı kayınca html.kd-ust-gizli (yalnız Gastro ana menüsü transform ile gizlenir, siyah bant + bar kalır)
    · Tema rengi kontrolü Kids barında en sağda (Yardım ile); ≤600px Yardım panelinde (DadaKids.temaSecici)
    · Filtre paneli: .kd-filtre-ac[aria-controls=ID] → #ID.kd-filtre, kapat: .kd-filtre__kapat
    ===================================================================== */
@@ -125,16 +126,20 @@
     var kok = document.documentElement, bar = $('.kd-ust');
     var gastro = $$('header.header, .topbar, .ust-bant').filter(function (e, i, d) { return d.indexOf(e) === i; });
     var kidsSayfa = document.body.classList.contains('pg-kids') && bar;
-    var alt = 0, gizli = false, sonY = Math.max(0, scrollY), birikim = 0, bekliyor = false;
+    var alt = 0, bant = 0, gizli = false, sonY = Math.max(0, scrollY), birikim = 0, bekliyor = false;
     function olc() {                                   // layout alt kenarı: transform'dan bağımsız (top + yükseklik)
-      alt = 0;
+      alt = 0; bant = 0;
       gastro.forEach(function (el) {
         var cs = getComputedStyle(el); if (cs.display === 'none' || !el.offsetHeight) return;
-        if (cs.position === 'fixed' || cs.position === 'sticky') alt = Math.max(alt, (parseFloat(cs.top) || 0) + el.offsetHeight);
+        if (cs.position === 'fixed' || cs.position === 'sticky') {
+          var a = (parseFloat(cs.top) || 0) + el.offsetHeight; alt = Math.max(alt, a);
+          if (!el.matches('header.header')) bant = Math.max(bant, a);   // R3: üst siyah bant gizlenmez
+        }
       });
+      bant = Math.round(bant);
       alt = Math.round(alt); kok.style.setProperty('--kd-gastro-alt', alt + 'px'); uygula();
     }
-    function uygula() { kok.style.setProperty('--kd-ust-bosluk', (gizli ? 0 : alt) + 'px'); kok.classList.toggle('kd-ust-gizli', gizli); }
+    function uygula() { kok.style.setProperty('--kd-ust-bosluk', (gizli ? bant : alt) + 'px'); kok.classList.toggle('kd-ust-gizli', gizli); }
     function acikMi() { return !!document.querySelector('.has-mega:hover, .has-mega:focus-within, .drawer.open, header.header:focus-within, .topbar:focus-within'); }
     function ayarla(yeni) { if (yeni !== gizli) { gizli = yeni; birikim = 0; uygula(); } }
     function kaydir() {

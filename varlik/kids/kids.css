@@ -95,7 +95,7 @@ html.kd-ust-gizli .kd-ust__logo { max-width: 140px; margin-right: 0; opacity: 1;
 .kd-ust__menu { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding: 6px 2px; scroll-padding-inline: var(--kd-s6); }
 .kd-ust__menu::-webkit-scrollbar { display: none; }
 .kd-ust__menu > a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--kd-r); font-size: 14.5px; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1; text-decoration: none; color: var(--kd-murekkep); white-space: nowrap; transition: background-color .18s ease, color .18s ease; }
-.kd-ust__menu > .kd-ust__ev { justify-content: center; min-width: 44px; padding: 0; margin-right: auto; }
+.kd-ust__menu > .kd-ust__ev { justify-content: center; min-width: 44px; padding: 0; margin-left: auto; }   /* R3: ev ikonu "Tarifler"in hemen solunda, menüyle tek grup (grup ortada) */
 .kd-ust__ev svg { display: block; width: 22px; height: 22px; }
 .kd-ust__menu > a:hover { background: var(--kd-krem-2); }
 .kd-ust__menu > a[aria-current="page"] { background: var(--kd-tema-a); color: var(--kd-tema); box-shadow: inset 0 -2px 0 var(--kd-tema); }
@@ -107,9 +107,14 @@ html.kd-ust-gizli .kd-ust__logo { max-width: 140px; margin-right: 0; opacity: 1;
 .kd-yardim-ac:hover { background: var(--kd-krem-2); }
 .kd-yardim-ac[aria-expanded="true"] { background: var(--kd-tema-a); border-color: color-mix(in srgb, var(--kd-tema) 45%, transparent); }
 .kd-yardim-ac:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
-/* Gastro header'ı gizlenince (yalnız Kids sayfaları; DOM'a öğe eklenmez, yalnız transform) */
-.pg-kids header.header, .pg-kids .topbar { transition: transform .28s cubic-bezier(.2, .7, .2, 1); }
-html.kd-ust-gizli .pg-kids header.header, html.kd-ust-gizli .pg-kids .topbar { transform: translateY(calc(-1 * var(--kd-gastro-alt, 120px) - 8px)); }
+/* Gastro ana menüsü gizlenince (yalnız Kids sayfaları; DOM'a öğe eklenmez, yalnız transform).
+   R3 (Beyar 2 Kas): üstteki siyah bant (.topbar) HEP görünür; yalnız header.header (z 60) bandın (z 70) altına kayar.
+   --kd-ust-bosluk = görünen Gastro katmanının alt kenarı (üstte header altı, gizliyken bant altı; mobilde bant yok → 0).
+   --kd-bar-alt = Kids barının alt kenarı → sayfanın kendi yapışkan barı (Tarifler Yaş barı vb.) top: var(--kd-bar-alt). */
+:root { --kd-bar-h: 61px; --kd-bar-alt: calc(var(--kd-ust-bosluk, 0px) + var(--kd-bar-h)); }
+@media (max-width: 640px) { :root { --kd-bar-h: 55px; } }
+.pg-kids header.header { transition: transform .28s cubic-bezier(.2, .7, .2, 1); }
+html.kd-ust-gizli .pg-kids header.header { transform: translateY(calc(-1 * var(--kd-gastro-alt, 120px) - 8px)); }
 @media (max-width: 640px) {
   .kd-ust .wrap { gap: var(--kd-s2); min-height: 54px; }
   .kd-ust__logo-svg { width: 84px; }

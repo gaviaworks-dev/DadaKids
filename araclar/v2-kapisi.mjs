@@ -3,7 +3,8 @@
 // Denetimler:
 //  a maskot/çizgi film yok (maskot/ illus/ logo/cocuk- yolları, süs/yüz/ayırıcı/desen öğeleri, Fredoka). Pütür serbest (Beyar ek kararı: kalıyor).
 //  b köşe yarıçapı Dada Gastro ölçeğinde (Beyar 1 Kas: Gastro token'ları --radius-sm 8 / -md 12 / -lg 16 / -xl 24, rozet 6, 2/4/11; ≤ 24px, pill yok) (Kids öğeleri; daire istisnası: |w−h| ≤ 2 ve r ≥ min/2 − 1; boyasız öğe — zemin/çerçeve/gölge/kırpma yok — sayılmaz)
-//  c sticky: üstte Gastro header + altında .kd-ust; 900px aşağı → header gizli, .kd-ust top≈0, mini logo + ev ikonu; 250px yukarı → header geri;
+//  c sticky: üstte Gastro header + altında .kd-ust; 900px aşağı → Gastro ana menüsü gizli, siyah üst bant (masaüstü) görünür,
+//    .kd-ust top = bant altı (mobilde 0), mini logo + ev ikonu; 250px yukarı → header geri (Revize 2 Kas R3);
 //    reducedMotion'da geçiş 0; 390'da kategori şeridi yatay kayar, sayfa taşmaz; menü sırası ve ev bağı
 //  d yaş barı (kids.html)        e tarif kartı rozet/kıvam/kiler düğmesi     f sahte onay yok + bekliyor rozetleri
 //  g isim "Dada Gastro Kids", "Mevsim Takvimi"  h güvenlik şeridi        i kiler (kids-tarifler.html)
@@ -205,7 +206,9 @@ async function sticky(p, w) {
     const gor = (e) => { if (!e) return false; const b = e.getBoundingClientRect(); if (b.width < 4 || b.height < 4 || b.bottom <= 0 || b.top >= innerHeight) return false; for (let x = e; x && x.nodeType === 1; x = x.parentElement) { const c = getComputedStyle(x); if (c.display === 'none' || c.visibility === 'hidden' || +c.opacity === 0) return false; } return true; };
     const ev = u?.querySelector('a[aria-label="Dada Gastro Kids ana sayfa"]');
     const logo = u ? [...u.querySelectorAll('[class*="logo"], img[alt*="Gastro" i], svg[aria-label*="Gastro" i], [aria-label*="Gastro Kids" i]:not(a[aria-label="Dada Gastro Kids ana sayfa"])')].filter((x) => !ev || !ev.contains(x)) : [];
-    return { hGor, hAlt: hb ? Math.round(hb.bottom) : null, uUst: ub ? Math.round(ub.top) : null, uVar: !!u, y: Math.round(scrollY), boy: document.documentElement.scrollHeight, ev: gor(ev), logo: logo.some(gor) };
+    const tb = [...document.querySelectorAll('.topbar, .ust-bant')].find((x) => getComputedStyle(x).display !== 'none' && x.offsetHeight > 0);
+    const tbAlt = tb ? Math.round(tb.getBoundingClientRect().bottom) : 0;   // R3: siyah üst bant (masaüstü) hep görünür
+    return { tbAlt, hGor, hAlt: hb ? Math.round(hb.bottom) : null, uUst: ub ? Math.round(ub.top) : null, uVar: !!u, y: Math.round(scrollY), boy: document.documentElement.scrollHeight, ev: gor(ev), logo: logo.some(gor) };
   });
   await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(200);
   const a = await olc();
@@ -217,8 +220,9 @@ async function sticky(p, w) {
   await p.waitForTimeout(700);
   const b = await olc();
   if (b.y < 400) s.push(`kaydırma gerçekleşmedi (scrollY ${b.y}, boy ${b.boy})`);
-  if (b.hGor) s.push(`900px aşağıda Gastro header hâlâ görünür (alt ${b.hAlt})`);
-  if (Math.abs(b.uUst) > 2) s.push(`900px aşağıda .kd-ust top=${b.uUst} (≈0 olmalı)`);
+  if (b.hGor && b.hAlt > b.tbAlt + 1) s.push(`900px aşağıda Gastro ana menüsü hâlâ görünür (alt ${b.hAlt}, bant alt ${b.tbAlt})`);
+  if (Math.abs(b.uUst - b.tbAlt) > 2) s.push(`900px aşağıda .kd-ust top=${b.uUst} (siyah bandın altı ${b.tbAlt} olmalı)`);
+  if (a.tbAlt && b.tbAlt !== a.tbAlt) s.push(`900px aşağıda siyah üst bant gizlendi (alt ${a.tbAlt} → ${b.tbAlt})`);
   if (!b.logo) s.push('yapışık barda mini logo görünmüyor');
   if (!b.ev) s.push('yapışık barda ev ikonu görünmüyor');
   for (let i = 0; i < 2; i++) { await p.mouse.wheel(0, -125); await p.waitForTimeout(90); }
