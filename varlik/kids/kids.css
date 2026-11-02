@@ -731,3 +731,7 @@ article.kd-tarif { cursor: pointer; }
    Mevsim ürün/ay/kahraman daireleri, hub/dönem ürün fotoğrafları (o.urun), Dolap malzeme kartları ve seçilen malzeme çipleri. */
 .kd-sayfa, .kd-yardim, .kd-pt { --kd-halka-renk: color-mix(in srgb, var(--kd-tema) 34%, #fff); --kd-halka: 0 0 0 1.5px var(--kd-halka-renk); }
 .kd-sayfa img.kd-urun-foto, .kd-mz__foto, .kd-dolap__cip-foto, .kd-dolap-sonuc__bos-foto { box-shadow: var(--kd-halka); }
+
+/* Revize 2 Kas R4/R5: şeffaf Pixar ürün ikonu (o.urunPixar) — zemin, halka, kırpım yok; görsel kutuya sığar */
+.kd-urun-pixar { display: block; object-fit: contain; background: none; border-radius: 0; box-shadow: none; }
+
