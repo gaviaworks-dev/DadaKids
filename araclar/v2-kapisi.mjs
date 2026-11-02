@@ -7,7 +7,9 @@
 //    .kd-ust top = bant altı (mobilde 0), mini logo + ev ikonu; 250px yukarı → header geri (Revize 2 Kas R3);
 //    reducedMotion'da geçiş 0; 390'da kategori şeridi yatay kayar, sayfa taşmaz; menü sırası ve ev bağı
 //  d yaş barı (kids.html)        e tarif kartı rozet/kıvam/kiler düğmesi     f sahte onay yok + bekliyor rozetleri
-//  g isim "Dada Gastro Kids", "Mevsim Takvimi"  h güvenlik şeridi        i kiler (kids-tarifler.html)
+//  g isim "Dada Gastro Kids", "Mevsim Takvimi"  h güvenlik şeridi
+//  i kiler: "Dolapta Ne Var?" paneli + "bal" reddi kids-bebek-dolabi.html'de (Revize 2 Kas R10: Tarifler'den kalktı),
+//    kart üstü "Bebek Kilerime Ekle" kids-tarifler.html'de
 //  j yardım düğmesi: karaktersiz, sayfa başıyla kesişmez (1440…320), 6 kalem, Esc kapatır
 // Kullanım: node araclar/v2-kapisi.mjs   ·  TABAN=http://localhost:8765/DadaKids/v1/ (v1'e karşı)  ·  GENISLIK=1440,390  ·  SAYFA=kids.html,kids-tarifler
 //           KOSUT=4 (eş zamanlı sekme) · J_GENISLIK=1440,1366,1280,1024,768,390,320
@@ -352,16 +354,16 @@ async function yasBari(w) {
 if (HARF.includes('d') && sec('kids.html')) for (const w of [1440, 390].filter((x) => GENISLIK.includes(x) || !process.env.GENISLIK)) kaydet('d', w, 'kids.html', await yasBari(w));
 
 /* ---------- 4 · i: kiler ---------- */
-if (HARF.includes('i') && sec('kids-tarifler')) for (const iw of [1440, 390].filter((x) => GENISLIK.includes(x) || !process.env.GENISLIK)) {
+if (HARF.includes('i') && (sec('kids-tarifler') || sec('kids-bebek-dolabi'))) for (const iw of [1440, 390].filter((x) => GENISLIK.includes(x) || !process.env.GENISLIK)) {
   const sorun = [];
   const bag = await yeniBag(iw); const p = await bag.newPage(); const jsHata = []; p.on('pageerror', (e) => jsHata.push(e.message));
-  await p.goto(TABAN + 'kids-tarifler.html', { waitUntil: 'networkidle' });
+  await p.goto(TABAN + 'kids-bebek-dolabi.html', { waitUntil: 'networkidle' });
   // mobilde panel kapalı başlayabilir: panel içindeki aria-expanded="false" düğmesiyle (kullanıcı yüzeyinden) aç
-  await p.evaluate(() => { const h = [...document.querySelectorAll('.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa h4, .kd-sayfa legend, .kd-sayfa summary')].find((x) => /Dolapta Ne Var\?/.test(x.textContent)); const pn = h && (h.closest('[data-kd-kiler-panel], [data-kd-dolap], form, section, aside, details, fieldset') || h.parentElement); const b = pn && pn.querySelector('[aria-expanded="false"][aria-controls]:not([role=combobox])'); if (b) b.setAttribute('data-v2-kiler-ac', ''); });
+  await p.evaluate(() => { const h = [...document.querySelectorAll('.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa h4, .kd-sayfa legend, .kd-sayfa summary')].find((x) => /Dolapta (Ne Var\?|\d+ malzeme)/.test(x.textContent)); const pn = h && (h.closest('[data-kd-kiler-panel], [data-kd-dolap], form, section, aside, details, fieldset') || h.parentElement); const b = pn && pn.querySelector('[aria-expanded="false"][aria-controls]:not([role=combobox])'); if (b) b.setAttribute('data-v2-kiler-ac', ''); });
   if (await p.locator('[data-v2-kiler-ac]').count()) { await p.locator('[data-v2-kiler-ac]').click(); await p.waitForTimeout(400); if (await p.getAttribute('[data-v2-kiler-ac]', 'aria-expanded') !== 'true') sorun.push('kapalı dolap paneli açılmadı'); }
   const panel = await p.evaluate(() => {
     const gor = (e) => { const r = e.getBoundingClientRect(); if (r.width <= 0 || r.height <= 0) return false; for (let x = e; x && x.nodeType === 1; x = x.parentElement) { const c = getComputedStyle(x); if (c.display === 'none' || c.visibility === 'hidden') return false; } return true; };
-    const bas = [...document.querySelectorAll('.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa h4, .kd-sayfa legend, .kd-sayfa summary, .kd-sayfa strong, .kd-sayfa b')].find((h) => /Dolapta Ne Var\?/.test(h.textContent) && gor(h));
+    const bas = [...document.querySelectorAll('.kd-sayfa h1, .kd-sayfa h2, .kd-sayfa h3, .kd-sayfa h4, .kd-sayfa legend, .kd-sayfa summary, .kd-sayfa strong, .kd-sayfa b')].find((h) => /Dolapta (Ne Var\?|\d+ malzeme)/.test(h.textContent) && gor(h));
     if (!bas) return { hata: '"Dolapta Ne Var?" paneli yok' };
     const pn = bas.closest('[data-kd-kiler-panel], [data-kd-dolap], form, section, aside, details, fieldset') || bas.parentElement; pn.setAttribute('data-v2-kiler', '');
     const bd = [...document.querySelectorAll('.kd-sayfa label, .kd-sayfa button, .kd-sayfa [role=switch], .kd-sayfa [role=checkbox], .kd-sayfa a')].find((e) => /Bebek Dolabı/.test(e.textContent) && gor(e));
@@ -383,6 +385,7 @@ if (HARF.includes('i') && sec('kids-tarifler')) for (const iw of [1440, 390].fil
       if (!ret.length) sorun.push('"bal" için görünür ret bildirimi (role=alert/status, "bal" geçen) yok');
     }
   }
+  await p.goto(TABAN + 'kids-tarifler.html', { waitUntil: 'networkidle' });
   const dug = p.locator('.kd-tarif .kd-kiler-ekle:visible').first();
   if (!(await dug.count())) sorun.push('görünür .kd-kiler-ekle düğmesi yok');
   else {
@@ -397,7 +400,7 @@ if (HARF.includes('i') && sec('kids-tarifler')) for (const iw of [1440, 390].fil
     else if (slug && !ls.includes(slug)) sorun.push(`localStorage kaydında ${slug} yok`);
   }
   if (jsHata.length) sorun.push('JS hatası: ' + jsHata[0].slice(0, 80));
-  kaydet('i', iw, 'kids-tarifler.html', sorun);
+  kaydet('i', iw, 'kids-bebek-dolabi + kids-tarifler', sorun);
   await bag.close();
 }
 
