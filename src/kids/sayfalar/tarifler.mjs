@@ -1,9 +1,10 @@
-// kids-tarifler.html (katalog + "Dolapta Ne Var?") + kids-tarif.html (detay, ?t=<slug>) — sahibi: v2-tarif
+// kids-tarifler.html (katalog; liste kısmı sahibi: dolap, Revize 2 Kas R9/R10) + kids-tarif.html (detay, ?t=<slug>) — sahibi: v2-tarif
 // V2 (REV-2026-DK01): kartlar yalnız o.tarifKart; yaş rozeti o.kidsAgeBadge, kıvam o.kivamGostergesi, kiler o.kilerDugmesi;
-// maskot / illüstrasyon / video / ayırıcı / desen / parıltı yok; hero gerçek fotoğraf; güvenlik şeridi hero'nun hemen altında.
+// maskot / illüstrasyon / video / ayırıcı / desen / parıltı yok. Katalogda hero yok (yaş barıyla başlar), güvenlik şeridi ızgaranın altında;
+// detayda güvenlik şeridi hero'nun hemen altında.
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { dolapBileseni } from '../dolap.mjs';
+import { yasSeridi, dolapBanner } from '../dolap.mjs';
 
 const KOK = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../..');
 const jsonOku = async (p, yedek) => { try { return JSON.parse(await readFile(path.join(KOK, p), 'utf8')); } catch { return yedek; } };
@@ -20,7 +21,6 @@ export default async function (o) {
   const kivam = (k) => (o.kivamGostergesi ? o.kivamGostergesi(k) : o.kivamEtiket(k));
   const kilerDugme = (t) => (o.kilerDugmesi ? o.kilerDugmesi(t) : '');
   const serit = () => (o.guvenlikSeridi ? o.guvenlikSeridi() : '');
-  const heroSeritli = (ayar) => { const h = o.hero({ ...ayar, serit: true }); return h.includes('kd-guvenlik-serit') ? h : h + serit(); };
   const KIDS = ['Dada Gastro Kids', 'kids.html'];
 
   const jsonGom = (id, v) => `<script type="application/json" id="${id}">${JSON.stringify(v).replace(/</g, '\\u003c')}</script>`;
@@ -28,9 +28,6 @@ export default async function (o) {
 
   /* ================= Liste ================= */
   const say = (f) => T.filter(f).length;
-  // yaş chip'leri: birikimli gerçek sayılar derlemede basılır (JS filtrelerle günceller)
-  const yasChip = [`<button class="kd-chip kd-yas-chip" type="button" role="radio" aria-checked="false" data-yas="tumu">Tümü <small>${T.length}</small></button>`]
-    .concat(YASLAR.map((y) => `<button class="kd-chip kd-yas-chip" type="button" role="radio" aria-checked="false" data-yas="${y}" data-renk="${yasRenk(y)}">${esc(YAS_ETIKET[y])} <small>${T.filter((t) => t.yas <= y).length}</small></button>`)).join('');
   const secim = (ad, tip, liste) => `<div class="kd-secim">${liste.map(([v, et, renk, ek = '', duz]) => `<label${renk ? ` data-renk="${renk}"` : ''}><input type="${tip}" name="${ad}" value="${v}" data-ad="${esc(duz || et)}"${ek}><span>${et}</span></label>`).join('')}</div>`;
   const KG = o.KIVAM_GOSTERGE || KIVAM_AD;
   const kivamlar = Object.keys(KIVAM_AD).map((k) => [k, `${o.kivamSvg(k).replace('<svg ', '<svg width="18" height="18" ')}${esc(KG[k])} <small class="kd-ikincil">${say((t) => t.kivam === k)}</small>`, null, '', KG[k]]);
@@ -41,33 +38,18 @@ export default async function (o) {
   const ogunler = Object.entries(OGUN_AD).map(([k, ad]) => [k, ad, null]);
   const sureler = [['', 'Hepsi', null, ' checked'], ['15', '15 dk ve altı', null], ['30', '30 dk ve altı', null]];
 
-  const heroFoto = `<div class="kd-hero__gorsel kd-tl-foto">${o.foto('varlik/kids/gorsel/bant-kids.webp', 'Pastel kâselerde balkabağı, bezelye, muz ve elma püreleri; yanında muz ve çilek dilimleri', { gen: 1800, yuk: 766, oncelik: true })}</div>`;
-
-  // "Dolapta Ne Var?" — tek kaynak bileşen src/kids/dolap.mjs (sahibi: dolap); burada kompakt, açılır/kapanır hâli; tam hâli kids-bebek-dolabi.html.
-  const dolapPanel = dolapBileseni(o, { kip: 'kompakt' });
-
-  const liste = `${heroSeritli({
-    renk: 'seftali', kucuk: true,
-    kirinti: [['Tarifler', 'tarifler.html'], KIDS, ['Kids Tarifleri']],
-    ust: { metin: 'Kids Tarifleri', ikon: 'kase' },
-    baslik: 'Yaşa göre bebek ve çocuk tarifleri',
-    giris: `6. aydan 3 yaşa ${T.length} örnek tarif. Önce yaşı seçin, sonra kıvam, alerjen, öğün ve süreye göre daraltın ya da dolabınızdakilerle arayın.`,
-    ek: `<div class="kd-ara kd-tl-ara"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label class="kd-gizli" for="kdTarifAra">Tariflerde ara</label><input id="kdTarifAra" type="search" placeholder="Tarif ya da malzeme ara (ör. balkabağı)" autocomplete="off"></div>`,
-    sag: heroFoto,
-  })}
-<div class="kd-tl-yas">
- <div class="wrap">
-  <span class="kd-tl-yas__bas">${o.ikon('bebek', 22)} Yaş</span>
-  <div class="kd-serit" id="kdYasSerit" role="radiogroup" aria-label="Yaş filtresi (zorunlu)">${yasChip}</div>
-  <span class="kd-tl-yas__kural">Seçilen yaş ve öncesine uygun tarifler</span>
- </div>
-</div>
-${dolapPanel}
+  // Revize 2 Kas R9/R10: hero ve kırıntı YOK; sayfa doğrudan yapışkan yaş barıyla (dolap.mjs yasSeridi, Bebek Dolabı ile aynı) başlar;
+  // altında ince Bebek Dolabı bandı (dolapBanner), sonra sol filtre paneli (arama kutusu en üstte) + sağda sonuç sayısı ve ızgara;
+  // güvenlik şeridi ızgaranın altında. "Dolapta Ne Var?" bileşeni yalnız kids-bebek-dolabi.html'de.
+  // h1 görsel olarak gizli, <main>'in ilk öğesi (.kd-sayfa'nın önünde; görünür başlık kapıları gizli başlığı ölçmesin).
+  const liste = `${yasSeridi(o)}
+${dolapBanner(o)}
 <section class="kd-bolum kd-bolum--sikisik kd-tl-bolum">
  <div class="wrap">
   <div class="kd-liste" data-denge-serbest="filtre paneli yapışkan; uzun sonuç listesi kaydırılırken yanında kalır">
-   <aside class="kd-filtre" id="kdFiltre" aria-label="Filtreler">
+   <aside class="kd-filtre" id="kdFiltre" aria-label="Arama ve filtreler">
     <div class="kd-filtre__ust"><h2>Filtreler</h2><div><button class="kd-chip" type="button" data-kd-temizle>Temizle</button> <button class="kd-chip kd-filtre__kapat" type="button" aria-label="Filtreleri kapat"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div></div>
+    <div class="kd-ara kd-tl-ara"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label class="kd-gizli" for="kdTarifAra">Tariflerde ara</label><input id="kdTarifAra" type="search" placeholder="Tarif ya da malzeme ara" autocomplete="off"></div>
     <form id="kdTarifFiltre" onsubmit="return false">
      <fieldset class="kd-tl-grup kd-tl-grup--kivam"><legend>Kıvam</legend>${secim('kivam', 'checkbox', kivamlar)}</fieldset>
      <fieldset class="kd-tl-grup kd-tl-grup--iki"><legend>Alerjen içermez</legend>${secim('icermez', 'checkbox', icermez)}</fieldset>
@@ -80,7 +62,7 @@ ${dolapPanel}
     <div class="kd-sonuc-bar">
      <b id="kdSonucSayi" aria-live="polite">${T.length} tarif</b>
      <div>
-      <button class="kd-btn kd-btn--hafif kd-btn--kucuk kd-filtre-ac" type="button" aria-controls="kdFiltre" aria-expanded="false"><i class="fa-solid fa-sliders" aria-hidden="true"></i> Filtrele <span data-kd-filtre-sayi></span></button>
+      <button class="kd-btn kd-btn--hafif kd-btn--kucuk kd-filtre-ac" type="button" aria-controls="kdFiltre" aria-expanded="false"><i class="fa-solid fa-sliders" aria-hidden="true"></i> Ara ve filtrele <span data-kd-filtre-sayi></span></button>
       <label class="kd-gizli" for="kdSirala">Sıralama</label>
       <select class="kd-sec" id="kdSirala"><option value="onerilen">Önerilen</option><option value="yas">Yaşa en yakın</option><option value="hizli">En hızlı</option><option value="az">A'dan Z'ye</option></select>
      </div>
@@ -94,7 +76,9 @@ ${o.ctaKart({ href: 'kids-guvenli-kesim.html', ikonAd: 'bicak-tahta', gorsel: 'b
    </div>
   </div>
  </div>
-</section>`;
+</section>
+${serit()}
+${jsonGom('kdDolapVeri', { riskli: riskliOzet })}`;
 
   /* ================= Detay ================= */
   const evreOf = (t) => EVRE[t.evre] || EVRE[yasEvresi(t.yas)];
@@ -171,7 +155,7 @@ ${T.map(detay).join('\n')}
 ${jsonGom('kdDolapVeri', { riskli: riskliOzet })}`;
 
   return [
-    { dosya: 'kids-tarifler.html', baslik: 'Kids Tarifleri — Yaşa Göre Bebek ve Çocuk Tarifleri | Dada Gastro Kids', aciklama: '+6 aydan 3 yaşa, yaş rozeti, kıvam göstergesi ve alerjen etiketli bebek ve çocuk tarifleri. Yaşı seçin, filtreleyin ya da "Dolapta Ne Var?" ile elinizdeki malzemelerle arayın.', aktif: 'tarifler', css: ['tarifler'], main: o.sayfa(liste, 'tarifler') },
+    { dosya: 'kids-tarifler.html', baslik: 'Kids Tarifleri — Yaşa Göre Bebek ve Çocuk Tarifleri | Dada Gastro Kids', aciklama: '+6 aydan 3 yaşa, yaş rozeti, kıvam göstergesi ve alerjen etiketli bebek ve çocuk tarifleri. Yaşı seçin, arayın ve filtreleyin; elinizdeki malzemelerle tarif için Bebek Dolabı’nı açın.', aktif: 'tarifler', css: ['tarifler'], main: `<h1 class="kd-gizli">Kids Tarifleri: yaşa göre bebek ve çocuk tarifleri</h1>\n${o.sayfa(liste, 'tarifler')}` },
     { dosya: 'kids-tarif.html', baslik: `${T[0]?.ad || 'Tarif'} | Dada Gastro Kids · Dada Gastro`, aciklama: 'Dada Gastro Kids tarif detayı: yaş rozeti, kıvam, kesim notu, alerjen uyarısı, malzemeler ve adımlar.', aktif: 'tarifler', css: ['tarifler'], main: o.sayfa(detaySayfa, 'tarifler') },
   ];
 }
