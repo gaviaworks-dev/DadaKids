@@ -23,13 +23,13 @@ function ritim(bolumler, renkler, { zebraIle = true } = {}) {
   }).join('\n');
 }
 /** Evre fotoğrafı: gerçekçi, aydınlık; 0–6 ay karesi oyuncak (peluş) içermeyecek biçimde kırpıldı (karar: tasks/kids-ui-tur2.md). */
-const EVRE_FOTO = { '0-6-ay': 'varlik/kids/gorsel/evre-0-6-ay-kirp.webp' };
+const EVRE_FOTO = {};   // Revize 2 Kas R6: 0–6 ayın kırpılmış (oyuncaksız) kopyasına gerek kalmadı; yeni evre görselleri orta tonlu zeminde
 const EVRE_FOTO_ALT = {
-  'hamilelik': 'Aydınlık bir masada yeşil yapraklar, avokado, portakal, armut ve çilekli taze ürün kasesi',
-  '0-6-ay': 'Süt dolu biberon, açık mavi mama kasesi ve kaşık',
-  '6-8-ay': 'Şeftali rengi silikon kasede pürüzsüz meyve püresi ve bebek kaşığı',
-  '9-12-ay': 'Bölmeli tabakta havuç çubukları, brokoli, avokado, muz ve ekmek dilimleri',
-  '1-3-yas': 'Bölmeli çocuk tabağında sebzeli pirinç, salatalık çubukları ve köfte',
+  'hamilelik': 'Ceviz masada adaçayı yeşili keten üstünde yeşil yapraklar, avokado, portakal, armut ve çilekli taze ürün kasesi; yanında bir bardak su',
+  '0-6-ay': 'Ahşap masada toz mavi keten üstünde süt dolu biberon ve katlanmış müslin bezi',
+  '6-8-ay': 'Ahşap masada şeftali rengi keten üstünde, şeftali rengi silikon kasede pürüzsüz meyve püresi ve bebek kaşığı',
+  '9-12-ay': 'Adaçayı yeşili keten üstünde bölmeli tabakta havuç çubukları, brokoli, avokado, muz ve ekmek dilimleri',
+  '1-3-yas': 'Aile masasında sarı bölmeli çocuk tabağında sebzeli pirinç, salatalık çubukları ve köfte; yanında toz mavi peçete',
 };
 
 export default async function donemler(o) {

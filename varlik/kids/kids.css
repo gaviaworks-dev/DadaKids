@@ -203,7 +203,9 @@ a.kd-chip:hover, button.kd-chip:hover { background: var(--r-o, var(--kd-cizgi));
 .kd-hero__metin .kd-giris { font-size: clamp(1.02rem, .95rem + .3vw, 1.18rem); color: var(--kd-ikincil); margin: 14px 0 0; max-width: 560px; }
 .kd-hero__eylem { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .kd-hero__gorsel { position: relative; isolation: isolate; }
-.kd-hero__gorsel > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--kd-r); box-shadow: var(--kd-golge); background: var(--r-a, var(--kd-krem-2)); }
+/* Revize 2 Kas R6 (Beyar onayı): hero görseli zeminden ayrışsın — çerçeve YOK, yalnız ince kontur + yumuşak derin gölge (tek token) */
+:root { --kd-golge-hero: 0 0 0 1px rgba(58, 46, 42, .10), 0 18px 36px -22px rgba(58, 46, 42, .55); }
+.kd-hero__gorsel > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--kd-r); box-shadow: var(--kd-golge-hero); background: var(--r-a, var(--kd-krem-2)); }
 .kd-hero--kucuk .kd-hero__izgara { grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); }
 
 .kd-izgara { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(var(--kd-min, 260px), 100%), 1fr)); gap: clamp(14px, 1.6vw, 22px); }

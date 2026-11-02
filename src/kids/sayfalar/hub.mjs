@@ -56,7 +56,7 @@ export default async function (o) {
     </div>
    </div>
    <div class="kd-hero__gorsel kd-hub-gorsel">
-    ${o.foto('varlik/kids/gorsel/hero-mutfak-kirp.webp', 'Gün ışığı alan mutfakta, tepsisinde kase ve kaşık olan ahşap mama sandalyesi; tezgâhta taze meyve tabağı', { gen: 1028, yuk: 822, oncelik: true })}
+    ${o.foto('varlik/kids/gorsel/hero-mutfak-kirp.webp', 'Adaçayı yeşili duvarlı mutfakta, tepsisinde şeftali rengi kase ve kaşık olan açık ahşap mama sandalyesi; ceviz tezgâhta taze meyve tabağı', { gen: 1028, yuk: 822, oncelik: true })}
    </div>
    ${donemCubugu}
   </div>
