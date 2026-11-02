@@ -735,3 +735,25 @@ article.kd-tarif { cursor: pointer; }
 /* Revize 2 Kas R4/R5: şeffaf Pixar ürün ikonu (o.urunPixar) — zemin, halka, kırpım yok; görsel kutuya sığar */
 .kd-urun-pixar { display: block; object-fit: contain; background: none; border-radius: 0; box-shadow: none; }
 
+/* ---------------------------------------------------------------------
+   Revize 2 Kas R1 · Section ritmi (v1'den geri): evre tonlu zebra bantlar arasında düz çizgi yerine yumuşak geçiş.
+   Renkli bandın (.kd-zebra, .kd-bolum--beyaz) KENDİ dolgusunun içine komşu bandın renginde maske çizilir:
+   üst kenar = dalga (üstteki krem bant dalgalı iner), alt kenar = bulut (alttaki krem bant bulutla yükselir).
+   Komşu bölümün içeriği hiçbir zaman örtülmez (çizim yalnız bandın kendi üst/alt padding'inde: 72/40px ≥ 44/20px).
+   Güvenlik şeridi ve hero'dan sonra üst geçiş yok (şerit kendi çizgisini taşır). Hareket yok; tema/evre tonuyla birlikte değişir.
+   --------------------------------------------------------------------- */
+:root { --kd-dalga-ust: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 64' preserveAspectRatio='none'%3E%3Cpath d='M0%2C0 L1440%2C0 L1440%2C34 C1320%2C48 1200%2C46 1080%2C30 C960%2C14 840%2C12 720%2C30 C600%2C48 480%2C52 360%2C36 C240%2C20 120%2C20 0%2C32 Z'/%3E%3C/svg%3E"); --kd-bulut-alt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 64' preserveAspectRatio='none'%3E%3Cpath d='M0%2C64 L0%2C42 C60%2C42 80%2C20 140%2C22 C200%2C4 290%2C8 320%2C30 C360%2C14 430%2C18 450%2C38 C500%2C22 570%2C20 600%2C40 C650%2C16 740%2C14 770%2C36 C810%2C22 870%2C24 890%2C40 C940%2C18 1030%2C16 1060%2C36 C1100%2C24 1160%2C26 1180%2C40 C1230%2C20 1320%2C18 1350%2C36 C1390%2C30 1420%2C34 1440%2C40 L1440%2C64 Z'/%3E%3C/svg%3E"); --kd-gecis-h: clamp(20px, 3.6vw, 44px); }
+.kd-sayfa .kd-zebra, .kd-sayfa .kd-bolum--beyaz { position: relative; }
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz)::before,
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz):not(:last-child)::after {
+  content: ""; position: absolute; left: 0; right: 0; height: var(--kd-gecis-h); pointer-events: none; background-color: var(--kd-krem);
+}
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz)::before { top: -1px; -webkit-mask: var(--kd-dalga-ust) center top / 100% 100% no-repeat; mask: var(--kd-dalga-ust) center top / 100% 100% no-repeat; }
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz):not(:last-child)::after { bottom: -1px; -webkit-mask: var(--kd-bulut-alt) center bottom / 100% 100% no-repeat; mask: var(--kd-bulut-alt) center bottom / 100% 100% no-repeat; }
+/* komşu beyaz bant ise geçiş beyaz; ardışık iki renkli bantta (zebra+zebra) geçiş yok; şerit/hero sonrası üst geçiş yok */
+.kd-sayfa .kd-bolum--beyaz + .kd-zebra::before { background-color: #fff; }
+.kd-sayfa .kd-zebra:has(+ .kd-bolum--beyaz)::after { background-color: #fff; }
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz) + :is(.kd-zebra, .kd-bolum--beyaz)::before,
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz):has(+ :is(.kd-zebra, .kd-bolum--beyaz))::after,
+.kd-sayfa :is(.kd-guvenlik-serit, .kd-hero) + :is(.kd-zebra, .kd-bolum--beyaz)::before,
+.kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz):first-child::before { content: none; }
