@@ -16,14 +16,19 @@ const SAYFALAR = [...readdirSync('.').filter((f) => /^kids(-.+)?\.html$/.test(f)
   .filter((s) => !SUZ.length || SUZ.some((x) => s.includes(x)));
 
 const t = await chromium.launch();
-let R = null, kirmizi = 0, toplam = 0;
+let R = null, RK = null, kirmizi = 0, toplam = 0;
+// Gölgesiz kart kararı (Beyar 2 Kas): kartlar Gastro kart köşesini taşır (tarifler.html .r-card → RK, 16px). Liste golge-kapisi.mjs KARTLAR ile aynı.
+const KARTLAR = '.kd-kart, .kd-evre, .kd-mkart, .kd-ar-mini, .kd-ar-panel, .kd-at-kayit, .kd-pr-panel, .kd-pr-ipucu, .kd-pl-slot, .kd-hm-sonuc, .kd-kesim, .kd-kokuma, .kd-kbogulma__liste li, .kd-murun, .kd-mkahraman, .kd-mmevsim, .kd-may, .kd-mtab__liste, .kd-mneden__liste li, .kd-mbilgi, .kd-rmozaik__oge, .kd-rsonraki, .kd-rtoc__kutu, .kd-rtablo-kap, .kd-rhero-ikon, .kd-dsonraki__kart, .kd-dhap, .kd-dpanel, .kd-dsekme__panel, .kd-dtablo-kap, .kd-td-buyur__kart, .kd-td-malz, .kd-td-adimlar li, .kd-mz, .kd-dolap, .kd-sss__oge, .kd-hub-besin, .kd-hub-kesim, .kd-hub-donem__liste';
 { // ölçüm: Gastro "Giriş Yap"
   const p = await t.newPage({ viewport: { width: 1440, height: 900 } });
   await p.goto(TABAN + 'index.html', { waitUntil: 'domcontentloaded' });
   R = await p.evaluate(() => { const b = [...document.querySelectorAll('button, a')].find((e) => /Giriş Yap/.test(e.textContent) && e.offsetWidth); return b ? parseFloat(getComputedStyle(b).borderTopLeftRadius) : null; });
-  await p.close();
   if (!R) { console.log('✗ Gastro "Giriş Yap" düğmesi ölçülemedi'); process.exit(1); }
-  console.log(`Gastro buton köşesi (Giriş Yap): ${R}px → Kids tek değer`);
+  await p.goto(TABAN + 'tarifler.html', { waitUntil: 'domcontentloaded' });
+  RK = await p.evaluate(() => { const k = document.querySelector('.r-card'); return k ? parseFloat(getComputedStyle(k).borderTopLeftRadius) : null; });
+  await p.close();
+  if (!RK) { console.log('✗ Gastro .r-card ölçülemedi'); process.exit(1); }
+  console.log(`Gastro buton köşesi (Giriş Yap): ${R}px → Kids tek değer · Gastro kart köşesi ${RK}px → Kids kartları`);
 }
 for (const w of GENISLIK) {
   const ctx = await t.newContext({ viewport: { width: w, height: w < 500 ? 844 : 900 }, reducedMotion: 'reduce' });
@@ -32,7 +37,7 @@ for (const w of GENISLIK) {
     await p.goto(TABAN + s, { waitUntil: 'networkidle' }).catch(() => {});
     if (process.env.BOZ) await p.addStyleTag({ content: process.env.BOZ === 'keskin' ? '.kd-kart, .kd-kutu, .kd-chip { border-radius: 0 !important; }' : '.kd-tarif, .kd-kart, .kd-kutu { border-radius: 8px !important; }' });
     await p.waitForTimeout(200);
-    const hatalar = await p.evaluate((R) => {
+    const hatalar = await p.evaluate(({ R, RK, KARTLAR }) => {
       const vw = innerWidth, out = [];
       const kdTok = (x) => typeof x.className === 'string' && x.className.split(/\s+/).some((c) => c.startsWith('kd-'));
       const kidsMi = (e) => { if (e.closest('header.header, .topbar, .ust-bant, footer, .footer, .drawer')) return false; for (let x = e; x && x !== document.body; x = x.parentElement) if (kdTok(x)) return true; return false; };
@@ -53,7 +58,8 @@ for (const w of GENISLIK) {
         const gs = typeof e.className === 'string' ? e.className.trim().split(/\s+/).find((x) => x && !x.startsWith('kd-')) : null;
         if (gs && !e.closest('.kd-sayfa, .kd-ust') && [...document.getElementsByClassName(gs)].some((x) => x !== e && !kidsMi(x) && getComputedStyle(x).borderTopLeftRadius === c.borderTopLeftRadius)) continue;
         if (ham.some((x) => x > 0)) {
-          if (ham.some((x) => x > 0 && Math.abs(x - R) > 0.5)) out.push(`farklı köşe ${ad(e)} ${ham.map((x) => Math.round(x * 10) / 10).join('/')} (${Math.round(r.width)}×${Math.round(r.height)})`);
+          const hedef = e.matches(KARTLAR) ? RK : R;
+          if (ham.some((x) => x > 0 && Math.abs(x - hedef) > 0.5)) out.push(`farklı köşe ${ad(e)} ${ham.map((x) => Math.round(x * 10) / 10).join('/')} (${Math.round(r.width)}×${Math.round(r.height)})`);
           continue;
         }
         // keskin köşe: kutu görünümlü mü?
@@ -77,7 +83,7 @@ for (const w of GENISLIK) {
         out.push(`keskin köşe ${ad(e)} (${Math.round(r.width)}×${Math.round(r.height)})`);
       }
       return [...new Set(out)];
-    }, R);
+    }, { R, RK, KARTLAR });
     toplam++;
     if (hatalar.length) { kirmizi++; console.log(`✗ ${w} ${s}: ${hatalar.length} → ${hatalar.slice(0, 6).join(' | ')}`); }
     else console.log(`✓ ${w} ${s}`);
