@@ -52,7 +52,7 @@ Ajanlar HEPSİ BİTTİ ve kapatıldı (2 Kas ~13:50). Sıradaki: yayin worktree'
 - ☑ R9 (673ca4e yerel) Kids Tarifleri: hero KALKAR; sayfa yapışkan Yaş barı (sayılı) ile başlar; sol filtre + sağda "27 tarif" + ızgara; Yaş barı R3 header altına yapışık
 - ☑ R10 (673ca4e yerel, R9 ile aynı dosyalar) Tarifler'den Dolap bileşeni KALKAR → Yaş barı altı ince tam genişlik banner "Elindeki malzemelerle bebeğine ne yapabilirsin? Bebek Dolabı'nı aç →" (evre/c parametreleri korunur); radius R2
 - ☑ R11 (a5633d3 yerel) Bebek Dolabı: hero YOK; Yaş barı (Tarifler'le aynı bileşen, sayılar dahil) + "Dolapta 0 malzeme" kartı (arama, anahtar, kategoriler) R4 slider + şeffaf görsellerle
-- ☐ Kapılar → madde başına commit → push → /v2/ canlı doğrula → rapor (önce/sonra 1440+390 her madde, R6 demo paftası, kredi) → DUR
+- ◐ YAYINDA 1b1ae8d (Beyar: kapıları beklemeden yayınla; Pages ✓, canlı duman 52/52: 200, JS 0, kırık görsel 0, taşma 0; göz kontrolü 1440/390 ✓). Yayın öncesi yerel yeşil: radius 52/52, varlık 100/100, davranış, boşluk 100/100. Kalan kapılar canlıya karşı arka planda (log scratchpad/kapi-canli.log; boyut TABAN_ESKI=8772/v2 = onceki worktree 0c06ab4); kırmızı → düzelt → ayrı push. ⚠ R6 Beyar 'olur' ile yayında; son mesajı 'onayım olmadan girmesin' dedi → geri alma isterse R6 commit 54a8671 revert. Paftalar rapor/tmp/rev2kas/once-sonra/R*.png.
 
 ## ■ DURUM (2 Kas gece) — DUR; Beyar'ın yeni talimatını bekle
 Canlı: v2 (güncel) https://gaviaworks-dev.github.io/DadaKids/v2/kids.html · v1 (dondurulmuş) …/DadaKids/v1/kids.html · kök → /v2/ (query+hash). Son push 7a2c2a2.
