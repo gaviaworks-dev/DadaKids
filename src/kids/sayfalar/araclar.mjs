@@ -1,6 +1,7 @@
 // Dada Gastro Kids — Araçlar (sahibi: araçlar kolu)
 // kids-araclar.html (hub) · kids-arac-hazir-mi.html · kids-arac-alerjen-takip.html
 // kids-arac-ogun-planlayici.html · kids-arac-persentil.html
+import { dogumSecici } from '../dogum.mjs';   // persentil: doğum/ölçüm tarihi (gün kipi)
 /* ---------- V2: düz bölüm ritmi (karakter, süs ve dalga geçişi yok) ---------- */
 /** Bölümleri sırayla dizer: bir krem, bir açık evre bandı (düz zemin). Her bölüm (z) => html; z section class'ına eklenir. */
 function ritim(bolumler, renkler, { zebraIle = true } = {}) {
@@ -410,7 +411,7 @@ ${ritim([(z) => `<section class="kd-bolum${z}">
   </div>`;
 
   const persentil = {
-    dosya: 'kids-arac-persentil.html', aktif: 'araclar', css: ['araclar'], js: ['persentil'],
+    dosya: 'kids-arac-persentil.html', aktif: 'araclar', css: ['araclar', 'dogum-secici'], js: ['dogum-secici', 'persentil'],
     baslik: 'Büyüme persentili hesaplayıcı (DSÖ) — Dada Gastro Kids',
     aciklama: 'DSÖ Çocuk Büyüme Standartlarına göre 0–36 ay için kilo, boy ve baş çevresi persentili. Grafik ve tablo görünümü; hiçbir veri kaydedilmez.',
     main: o.sayfa(`${aracHero(pr, {
@@ -432,8 +433,8 @@ ${ritim([(z) => `<section class="kd-bolum${z}">
      <p class="kd-ar-alan__ipucu">DSÖ tabloları kız ve erkek için ayrıdır.</p>
     </fieldset>
     <div class="kd-pr-form__tarih">
-     <div class="kd-ar-alan"><label for="prDogum">Doğum tarihi</label><input type="date" id="prDogum" max="${bugun}"></div>
-     <div class="kd-ar-alan"><label for="prOlcum">Ölçüm tarihi</label><input type="date" id="prOlcum" value="${bugun}"></div>
+     ${dogumSecici(o, { gun: true, id: 'prDogumDs', girdi: 'prDogum', baslik: 'Doğum tarihi', tetik: 'Tarih seçin', aciklama: 'Yılı, ayı, sonra günü seçin.', onden: 'dogum' })}
+     ${dogumSecici(o, { gun: true, id: 'prOlcumDs', girdi: 'prOlcum', baslik: 'Ölçüm tarihi', tetik: 'Tarih seçin', aciklama: 'Doğum tarihinden önce olamaz.', deger: 'bugun', minGirdi: 'prDogum' })}
     </div>
     <p class="kd-pr-yas" data-pr-yas aria-live="polite"></p>
     ${olcuAlan('prKilo', 'Kilo', 'kg', 'ör. 8,4')}

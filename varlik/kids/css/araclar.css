@@ -332,7 +332,8 @@ legend.kd-ar-panel__baslik + * { clear: both; }
    5 · Persentil
    --------------------------------------------------------------------- */
 .kd-pr { display: grid; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); gap: clamp(var(--kd-s4), 2.4vw, var(--kd-s6)); align-items: start; }
-.kd-pr-form { position: sticky; top: calc(var(--kd-ust-bosluk, 0px) + 80px); }
+.kd-pr-form { position: sticky; top: calc(var(--kd-bar-alt) + var(--kd-s4)); }
+.kd-pr-form:has(.kd-ds__panel[data-acik]) { z-index: 5; }   /* tarih popover'ı sonuç sütununun üstünde */
 .kd-pr-form fieldset { margin-bottom: var(--kd-s4); }
 .kd-pr-form__tarih { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--kd-s3); }
 .kd-pr-form > .kd-btn { width: 100%; margin-top: var(--kd-s1); }

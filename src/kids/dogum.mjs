@@ -5,6 +5,7 @@
 // Form içinde input[name="evre"] radyoları varsa evre çipleriyle kendiliğinden senkron olur (hamilelik → tahmini doğum ayı modu).
 // Saklama: yalnız bu tarayıcı, localStorage 'dadakids.dogum.v1' = {y, m, mod} (try/catch); hiçbir yere gönderilmez.
 // kompakt: true → başlık yalnız ekran okuyucuya, tetik küçük bir metin bağı (hub hero'daki dönem çubuğunun yanında).
+// gun: true → tarih kipi (yıl → ay → gün, form alanı gibi etiketli tetik + gizli input ISO). Persentil doğum/ölçüm tarihi. Evre senkronu ve saklama yok.
 
 export const AYLAR = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const KISA = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
@@ -50,7 +51,8 @@ export const MEVSIM_SVG = {
  * @param {object} o ortak yardımcılar (EVRE, evreSayfasi, esc)
  * @param {{id?: string, baslik?: string, aciklama?: string, kompakt?: boolean, tetik?: string}} opts
  */
-export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.', kompakt = false, tetik = 'Doğum ayını seçin' } = {}) {
+export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını seçin', aciklama = 'Gün gerekmez; ay ve yıl yeterli.', kompakt = false, tetik = 'Doğum ayını seçin', gun = false, girdi, deger = '', minGirdi = '', onden = '', yilSayi = 5 } = {}) {
+  if (gun) return tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, onden, yilSayi });
   const { esc } = o;
   const evreVeri = Object.fromEntries(Object.entries(o.EVRE).map(([k, e]) => [k, { ad: e.ad, kisa: e.kisa, renk: e.renk, aralik: e.aralik, sayfa: o.evreSayfasi(k) }]));
   const satirlar = [0, 1, 2].map((r) => `<div role="row" class="kd-ds__satir">${[0, 1, 2, 3].map((c) => {
@@ -81,6 +83,50 @@ export function dogumSecici(o, { id = 'kdDs', baslik = 'ya da doğum ayını se�
    <div class="kd-ds__eylem" data-kd-ds-eylem></div>
   </div>
   <div class="kd-ds__sheet-alt"><span data-kd-ds-kisa aria-hidden="true"></span><button type="button" class="kd-btn kd-btn--kucuk" data-kd-ds-tamam>Tamam</button></div>
+ </div>
+</div>`;
+}
+
+/**
+ * Tarih kipi (gün hassasiyeti): aynı bileşen, yıl → ay → gün. Form alanı gibi etiketli tetik + gizli input (ISO yyyy-aa-gg).
+ * dogumSecici(o, { gun: true, girdi: 'prDogum', ... }) ile çağrılır; davranış dogum-secici.js → kurTarih (evre senkronu/saklama yok).
+ * @param {{id: string, baslik: string, aciklama?: string, tetik?: string, girdi: string, deger?: ''|'bugun'|string, minGirdi?: string, onden?: ''|'dogum', yilSayi?: number}} opts
+ */
+function tarihSecici(o, { id, baslik, aciklama, tetik, girdi, deger, minGirdi, onden, yilSayi }) {
+  const { esc } = o;
+  if (!girdi) throw new Error('dogumSecici({gun:true}) için girdi (gizli input id) gerekli');
+  const satirlar = [0, 1, 2].map((r) => `<div role="row" class="kd-ds__satir">${[0, 1, 2, 3].map((c) => {
+    const m = r * 4 + c + 1;
+    return `<div role="gridcell" class="kd-ds__ay" data-m="${m}" data-mevsim="${mevsim(m)}" tabindex="${m === 1 ? 0 : -1}" aria-selected="false" aria-disabled="true">${MEVSIM_SVG[mevsim(m)]}<span class="kd-ds__ay-ad" aria-hidden="true">${KISA[m - 1]}</span><span class="kd-gizli" data-ay-etiket>${AYLAR[m - 1]}</span></div>`;
+  }).join('')}</div>`).join('');
+  const cizgi = (yol, b = 20) => `<svg viewBox="0 0 24 24" width="${b}" height="${b}" aria-hidden="true" focusable="false"><path d="${yol}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const takvim = '<svg class="kd-ds__ikon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 7h16v13H4zM4 11h16M8 4v5M16 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const oz = [deger ? ` data-deger="${esc(deger)}"` : '', minGirdi ? ` data-min-girdi="${esc(minGirdi)}"` : '', onden ? ` data-onden="${esc(onden)}"` : ''].join('');
+  return `<div class="kd-ds kd-ds--tarih" data-kd-dogum data-kd-tarih id="${id}" data-tetik-bos="${esc(tetik)}" data-yil-sayi="${yilSayi}"${oz}>
+ <span class="kd-ds__baslik kd-ds__etiket" id="${id}Baslik">${esc(baslik)}</span>
+ <input type="hidden" id="${esc(girdi)}" name="${esc(girdi)}" value="">
+ <button type="button" class="kd-ds__ac" aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}Panel" aria-labelledby="${id}Baslik ${id}Metin" data-dolu="false">
+  <span class="kd-ds__ac-metin" id="${id}Metin" data-kd-ds-tetik>${esc(tetik)}</span><span class="kd-ds__ac-ikon">${takvim}</span>
+ </button>
+ <div class="kd-ds__perde" data-kd-ds-perde hidden></div>
+ <div class="kd-ds__panel kd-ds__panel--tarih" id="${id}Panel" role="dialog" aria-labelledby="${id}PanelBaslik" tabindex="-1">
+  <div class="kd-ds__sheet-bas"><span class="kd-ds__tutamak" aria-hidden="true"></span><b id="${id}PanelBaslik">${esc(baslik)}</b><button type="button" class="kd-ds__kapat" data-kd-ds-kapat aria-label="Kapat">${cizgi('M6 6l12 12M18 6 6 18')}</button></div>
+  ${aciklama ? `<small class="kd-ds__aciklama">${esc(aciklama)}</small>` : ''}
+  <div class="kd-ds__tarih">
+   <div class="kd-ds__t-yil">
+    <div class="kd-ds__grup-ad" id="${id}YilAd">Yıl</div>
+    <div class="kd-ds__yillar" role="radiogroup" aria-labelledby="${id}YilAd" data-kd-ds-yillar></div>
+   </div>
+   <div class="kd-ds__t-ay">
+    <div class="kd-ds__grup-ad" id="${id}AyAd">Ay <small data-kd-ds-ay-ipucu>önce yılı seçin</small></div>
+    <div class="kd-ds__aylar" role="grid" aria-labelledby="${id}AyAd" data-kd-ds-aylar>${satirlar}</div>
+   </div>
+   <div class="kd-ds__t-gun">
+    <div class="kd-ds__grup-ad" id="${id}GunAd">Gün <small data-kd-ds-gun-ipucu>önce ayı seçin</small></div>
+    <div class="kd-ds__gunler" role="grid" aria-labelledby="${id}GunAd" data-kd-ds-gunler></div>
+   </div>
+  </div>
+  <div class="kd-ds__sheet-alt"><span data-kd-ds-kisa aria-live="polite"></span><button type="button" class="kd-btn kd-btn--kucuk" data-kd-ds-tamam>Tamam</button></div>
  </div>
 </div>`;
 }

@@ -131,3 +131,71 @@ html.kd-ds-kilit, html.kd-ds-kilit body { overflow: hidden; }
 .kd-ds--kompakt .kd-ds__ac[data-dolu="true"], .kd-ds--kompakt .kd-ds__ac[aria-expanded="true"], .kd-ds--kompakt[data-mod="gebelik"] .kd-ds__ac[data-dolu="true"] { box-shadow: none; }
 .kd-ds--kompakt .kd-ds__ac-ikon { width: auto; height: auto; background: none; border-radius: 0; color: var(--kd-ikincil); }
 .kd-ds--kompakt .kd-ds__ac-ikon .kd-ds__ikon { width: 18px; height: 18px; }
+
+/* ---------- tarih kipi (gün hassasiyeti): dogumSecici(o, {gun: true}) · persentil doğum/ölçüm tarihi ----------
+   Tetik form alanı gibi (etiket üstte, metin solda, takvim ikonu sağda). Panel: masaüstünde yıl üstte, ay | gün yan yana;
+   ≤640px alt sayfada tek sütun. Panel mobilde body'ye taşındığından panel kuralları .kd-ds__panel--tarih ile kapsanır. */
+.kd-ds.kd-ds--tarih { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--kd-s2); margin: 0 0 var(--kd-s3); }
+.kd-ds--tarih .kd-ds__etiket { font-size: 14px; font-weight: 800; font-family: var(--kd-font-ekstra); }
+.kd-ds--tarih .kd-ds__ac { display: flex; width: 100%; min-height: 48px; padding: var(--kd-s2) var(--kd-s2) var(--kd-s2) var(--kd-s3); font-size: 16px; font-weight: 700; font-family: var(--kd-font-kalin); white-space: nowrap; }
+.kd-ds--tarih .kd-ds__ac-metin { overflow: hidden; text-overflow: ellipsis; }
+.kd-ds--tarih .kd-ds__ac[data-dolu="false"] .kd-ds__ac-metin { color: var(--kd-ikincil); font-weight: 500; font-family: var(--kd-font); }
+.kd-ds--tarih .kd-ds__ac-ikon { width: 32px; height: 32px; color: var(--r-k, var(--kd-murekkep)); background: var(--r-a, var(--kd-krem)); }
+.kd-ds--tarih .kd-ds__ac[data-dolu="true"]:not([aria-expanded="true"]) { box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-ds--tarih .kd-ds__ac:hover { box-shadow: inset 0 0 0 2px var(--kd-murekkep); }
+.kd-ds--tarih .kd-ds__ac[aria-expanded="true"] { box-shadow: inset 0 0 0 2px var(--kd-tema); }
+
+.kd-ds__panel--tarih .kd-ds__t-yil .kd-ds__yillar { margin-bottom: var(--kd-s3); }
+.kd-ds__panel--tarih .kd-ds__ay { flex-direction: column; justify-content: center; gap: 2px; min-height: 52px; padding: 4px 2px; font-size: 13px; text-align: center; }
+.kd-ds__panel--tarih .kd-ds__ay .kd-ds__ikon { width: 18px; height: 18px; }
+.kd-ds__panel--tarih .kd-ds__satir, .kd-ds__panel--tarih .kd-ds__aylar { gap: 6px; }
+.kd-ds__gunler { display: grid; align-content: start; gap: 4px; min-height: calc(20px + 6 * var(--ds-gun, 38px) + 5 * 4px); }   /* 6 hafta için yer: panel yüksekliği aydan aya oynamaz */
+.kd-ds__hafta { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.kd-ds__hg { display: block; padding-bottom: 2px; font-size: 11px; font-weight: 800; font-family: var(--kd-font-ekstra); letter-spacing: .03em; text-transform: uppercase; text-align: center; color: var(--kd-ikincil); }
+.kd-ds__gun { position: relative; display: grid; place-items: center; height: var(--ds-gun, 38px); border-radius: var(--kd-r); cursor: pointer; font-size: 14.5px; font-weight: 700; font-family: var(--kd-font-kalin); font-variant-numeric: tabular-nums; color: var(--kd-murekkep); user-select: none; -webkit-tap-highlight-color: transparent; transition: background-color .15s, box-shadow .15s; }
+.kd-ds__gun[aria-disabled="false"]:hover { background: var(--kd-krem); }
+.kd-ds__gun--bugun { box-shadow: inset 0 0 0 1.5px var(--kd-cizgi); }
+.kd-ds__gun--bugun::after { content: ""; position: absolute; bottom: 4px; left: 50%; width: 4px; height: 4px; margin-left: -2px; border-radius: var(--kd-r-daire); background: currentColor; opacity: .55; }
+.kd-ds__gun[aria-selected="true"] { background: var(--kd-tema); color: #fff; box-shadow: none; }
+.kd-ds__gun[aria-disabled="true"] { cursor: not-allowed; opacity: .32; }
+.kd-ds__gun:focus-visible { outline: 3px solid var(--kd-tema); outline-offset: 2px; }
+.kd-ds__gunler[aria-disabled="true"]::after { content: ""; display: block; height: calc(6 * var(--ds-gun, 38px) + 5 * 4px); border-radius: var(--kd-r); background: repeating-linear-gradient(-45deg, transparent 0 10px, color-mix(in srgb, var(--kd-cizgi) 45%, transparent) 10px 11px); }
+
+/* masaüstü popover: ≥761px yıl | ay | gün üç sütun, 641–760px yıl üstte; gün seçimi paneli kapatır → alt bar yok */
+@media (min-width: 641px) {
+  .kd-ds__panel--tarih { width: min(680px, calc(100vw - 32px)); left: var(--ds-kay, 0px); padding-bottom: var(--kd-s4); }
+  .kd-ds__panel--tarih[data-yon="ust"] { top: auto; bottom: calc(100% + var(--kd-s2)); }
+  .kd-ds__panel--tarih .kd-ds__sheet-alt, .kd-ds__panel--tarih .kd-ds__aciklama { display: none; }
+  .kd-ds__panel--tarih .kd-ds__sheet-bas { margin-bottom: var(--kd-s2); }
+  .kd-ds__tarih { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 0 var(--kd-s5); align-items: start; }
+  .kd-ds__t-yil { grid-column: 1 / -1; }
+}
+@media (min-width: 761px) {
+  .kd-ds__tarih { grid-template-columns: 112px minmax(0, 1fr) minmax(0, 1.15fr); }
+  .kd-ds__t-yil { grid-column: auto; }
+  .kd-ds__panel--tarih .kd-ds__t-yil .kd-ds__yillar { flex-direction: column; flex-wrap: nowrap; gap: 6px; margin: 0; }
+  .kd-ds__panel--tarih .kd-ds__yil { display: grid; place-content: center start; justify-items: start; width: 100%; height: 44px; padding: 0 30px 0 12px; }
+  .kd-ds__panel--tarih .kd-ds__yil b { font-size: 17px; }
+  .kd-ds__panel--tarih .kd-ds__yil small { font-size: 10px; }
+  .kd-ds__panel--tarih .kd-ds__yil[aria-checked="true"]::after { top: 50%; right: 8px; width: 18px; height: 18px; margin-top: -9px; box-shadow: none; }
+}
+/* alt sayfa: 844px yüksek ekranda kaydırmasız sığsın */
+@media (max-width: 640px) {
+  .kd-ds--tarih .kd-ds__ac { min-height: 52px; font-size: 16px; }
+  .kd-ds__panel--tarih .kd-ds__sheet-bas { padding: 16px 0 8px; }
+  .kd-ds__panel--tarih .kd-ds__aciklama { margin-bottom: var(--kd-s2); }
+  .kd-ds__panel--tarih { --ds-gun: 36px; }
+  .kd-ds__panel--tarih .kd-ds__yil { height: 52px; }
+  .kd-ds__panel--tarih .kd-ds__t-ay { margin-bottom: var(--kd-s3); }
+  .kd-ds__panel--tarih .kd-ds__ay { flex-direction: row; gap: 6px; min-height: 44px; padding: 4px; }
+  .kd-ds__panel--tarih .kd-ds__yillar { padding-top: 6px; }
+  .kd-ds__panel--tarih .kd-ds__yil[aria-checked="true"]::after { top: -6px; right: -6px; width: 18px; height: 18px; }
+  .kd-ds__panel--tarih .kd-ds__sheet-alt { margin-top: var(--kd-s3); padding: 10px 0 calc(12px + env(safe-area-inset-bottom)); }
+  .kd-ds__gunler[aria-disabled="true"] { min-height: 0; }
+  .kd-ds__gunler[aria-disabled="true"]::after { height: 60px; }
+}
+@media (max-width: 360px) {
+  .kd-ds__panel--tarih .kd-ds__yil { height: 52px; }
+  .kd-ds__panel--tarih .kd-ds__ay { flex-direction: column; gap: 1px; }
+  .kd-ds__panel--tarih .kd-ds__ay .kd-ds__ikon { width: 16px; height: 16px; }
+}
