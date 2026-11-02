@@ -5,9 +5,10 @@
    · Depo: localStorage "dadagastrokids.kiler.v1" = {v:1, malzemeler:[anahtar], tarifler:[slug]};
      her erişim try/catch; depolama kapalıysa bellek içi (bildirim "yalnız bu oturumda" der).
    · Riskli liste: sayfadaki #kdDolapVeri (derlemede gömülü) → yoksa veri/bebek-dolabi.json → yoksa çekirdek yedek.
-   · "Dolapta Ne Var?" bileşeni (#kdDolap, src/kids/dolap.mjs): fotoğraflı kategorili malzeme kartları + combobox,
-     yaşa göre riskli uyarısı, iki grup sonuç ("Hemen yapabilirsin" / "1 malzeme eksik"), Bebek Kilerim (ekle / yükle).
-     Kids Tarifleri katalog ızgarasını süzmez (sonuçlar bileşenin kendi gruplarında); yaşı #kdYasSerit'ten okur.
+   · "Dolapta Ne Var?" bileşeni (#kdDolap, src/kids/dolap.mjs; yalnız kids-bebek-dolabi.html): kategori başına kendi kendine
+     kayan şerit (kayanKur) + şeffaf ürün ikonlu kartlar + combobox, yaşa göre riskli uyarısı, iki grup sonuç
+     ("Hemen yapabilirsin" / "1 malzeme eksik"), Bebek Kilerim (ekle / yükle). Yaşı #kdYasSerit'ten okur; yaş barı sayıları dolaba göre.
+   · Kids Tarifleri: [data-kd-dolap-bag] bandı tıklanınca seçili yaşı (?yas) Bebek Dolabı bağına ekler (profil kids.js'ten).
    ===================================================================== */
 (function () {
   'use strict';
@@ -38,6 +39,11 @@
     return riskliSozVaadi;
   }
   var adOf = function (a) { return (SOZ[a] && SOZ[a].ad) || (riskliSoz && riskliSoz[a]) || a; };
+  /* çip görseli: şeffaf Pixar ikonu (p) ya da yedek yuvarlak ürün fotoğrafı (f) */
+  var cipFoto = function (a) {
+    var k = SOZ[a]; if (!k || !(k.p || k.f)) return '';
+    return '<span class="kd-dolap__cip-foto' + (k.p ? ' kd-dolap__cip-foto--pixar' : '') + '" style="background-image:url(\'varlik/kids/gorsel/' + (k.p ? 'urun-pixar/' : 'urun/') + escH(a) + '-k.webp\')" aria-hidden="true"></span>';
+  };
 
   /* ---------- Depo ---------- */
   var bellek = null, kalici = true;
@@ -60,7 +66,6 @@
 
   /* ---------- Bildirim (role=status, ~3,5 sn; üzerindeyken/odaktayken bekler) ---------- */
   var bildirim, bildirimMetin, sayac;
-  var dolapPanelAc = null;   // katalogda dolapKur atar: "Kilere git" paneli açar
   function bildirimKur() {
     if (bildirim) return;
     bildirim = document.createElement('div');
@@ -124,7 +129,6 @@
     if (g && g.getAttribute('href') === '#kdKiler') {
       var hedef = document.getElementById('kdKiler'); if (!hedef) return;
       e.preventDefault();
-      if (dolapPanelAc) dolapPanelAc(true);
       var azalt = matchMedia('(prefers-reduced-motion: reduce)').matches;
       hedef.scrollIntoView({ behavior: azalt ? 'auto' : 'smooth', block: 'start' });
       hedef.focus({ preventScroll: true });
@@ -135,21 +139,19 @@
   dinleyen.push(dugmeleriGuncelle);
 
   /* =====================================================================
-     "Dolapta Ne Var?" bileşeni (src/kids/dolap.mjs): Kids Tarifleri'nde kompakt, kids-bebek-dolabi.html'de tam.
+     "Dolapta Ne Var?" bileşeni (src/kids/dolap.mjs): yalnız kids-bebek-dolabi.html (Kids Tarifleri'nde yerine bant).
      Akış (Gastro tarif-bulucu): fotoğraflı malzeme kartı / arama → seçilenler şeridi → "Hemen yapabilirsin" + "1 malzeme eksik".
      Yaş: #kdYasSerit .kd-yas-chip[aria-checked=true] (Kids Tarifleri'nde kids.js yönetir, tam sayfada burada).
      Riskli: seçili yaş < minAy (null = her yaşta) → kartta kısa uyarı; Bebek Dolabı açıkken eklenmez ve eşleşmeye katılmaz.
      ===================================================================== */
   function dolapKur() {
     var kok = document.getElementById('kdDolap'); if (!kok || !V.sozluk) return;
-    var kompakt = kok.getAttribute('data-kip') === 'kompakt';
     var gir = $('#kdDolapGir'), oneri = $('#kdDolapOneri'), cipler = $('#kdDolapCipler'), seciliBos = $('#kdDolapSeciliBos');
     var uyari = $('#kdDolapUyari'), ozet = $('#kdDolapOzet'), bebekSec = $('#kdBebekDolabi');
     var temizleB = $('[data-kd-dolap-temizle]'), sayE = $('#kdDolapSay'), durumE = $('#kdDolapDurum');
-    var acB = $('[data-kd-dolap-ac]', kok), govde = $('#kdDolapGovde');
     var sablon = document.getElementById('kdDolapKartlar');
     var grupTam = $('#kdDolapGrupTam'), grupEksik = $('#kdDolapGrupEksik'), bosE = $('#kdDolapBos'), yokE = $('#kdDolapYok');
-    var sonucSay = $('#kdDolapSonucSay'), tumuB = $('.kd-dolap-sonuc__tumu');
+    var sonucSay = $('#kdDolapSonucSay');
     var TEMEL = V.temel || [], TARIF = V.tarif || {};
     var dolap = [], etkin = -1, liste = [];
     var ilk = true;
@@ -160,7 +162,6 @@
 
     /* yaş */
     var serit = document.getElementById('kdYasSerit');
-    var katalogVar = !!document.getElementById('kdTarifIzgara');
     function yas() { var c = serit && serit.querySelector('.kd-yas-chip[aria-checked="true"]'); var v = c ? c.getAttribute('data-yas') : 'tumu'; return v === 'tumu' || !v ? 'tumu' : +v; }
     function yasEtkin() { var y = yas(); return y === 'tumu' ? 6 : y; }
     function yasAd() { var y = yas(); return y === 'tumu' ? 'tüm yaşlar' : '+' + y + ' Ay'; }
@@ -263,7 +264,7 @@
       cipler.innerHTML = dolap.map(function (a) {
         var k = SOZ[a] || { ad: a }, r = riskliSimdi(a), s = disi(a);
         return '<li class="kd-dolap__cip' + (r ? ' kd-dolap__cip--riskli' : '') + (s ? ' kd-dolap__cip--disi' : '') + '">' +
-          (k.f ? '<span class="kd-dolap__cip-foto" style="background-image:url(\'varlik/kids/gorsel/urun/' + escH(a) + '-k.webp\')" aria-hidden="true"></span>' : '') +
+          cipFoto(a) +
           '<span>' + escH(k.ad) + (s ? ' <small>dışlandı</small>' : '') + '</span>' +
           '<button type="button" data-kd-cikar="' + escH(a) + '" aria-label="' + escH(k.ad) + ' malzemesini dolaptan çıkar"><span aria-hidden="true">×</span></button></li>';
       }).join('');
@@ -274,11 +275,15 @@
 
     /* ---------- eşleşme ---------- */
     var son = { tam: [], eksik: [], yakin: [], riskli: 0, yasDisi: 0 };
-    function hesapla() {
-      son = { tam: [], eksik: [], yakin: [], riskli: 0, yasDisi: 0 };
-      var elde = dolap.filter(function (a) { return !disi(a); }); if (!elde.length) return;
+    function hesapla() { son = esle(yas()); }
+    /* y: 'tumu' ya da ay; riskli eşiği o yaşa göre (yaş barı sayıları her yaş için ayrı hesaplanır) */
+    function esle(y) {
+      var son = { tam: [], eksik: [], yakin: [], riskli: 0, yasDisi: 0 };
+      var yE = y === 'tumu' ? 6 : y;
+      var riskliY = function (a) { var k = SOZ[a]; return !!(k && k.r && (k.m == null || k.m > yE)); };
+      var disiY = function (a) { return bebek() && riskliY(a); };
+      var elde = dolap.filter(function (a) { return !disiY(a); }); if (!elde.length) return son;
       var var_ = {}; elde.concat(TEMEL).forEach(function (a) { var_[a] = 1; });
-      var y = yas();
       Object.keys(TARIF).forEach(function (slug) {
         if (!KART[slug]) return;
         var t = TARIF[slug], g = t.g || [], i = t.i || [];
@@ -287,12 +292,24 @@
         var eksik = g.filter(function (a) { return !var_[a]; });
         if (eksik.length > 2) return;
         if (y !== 'tumu' && t.y > y) { if (eksik.length < 2) son.yasDisi++; return; }
-        if (bebek() && g.some(riskliSimdi)) { son.riskli++; return; }
-        var o = { s: slug, u: kullanilan.length, eksik: eksik, not: bebek() ? i.filter(riskliSimdi) : [], y: t.y };
+        if (bebek() && g.some(riskliY)) { son.riskli++; return; }
+        var o = { s: slug, u: kullanilan.length, eksik: eksik, not: bebek() ? i.filter(riskliY) : [], y: t.y };
         (eksik.length === 0 ? son.tam : eksik.length === 1 ? son.eksik : son.yakin).push(o);
       });
       var sira = function (a, b) { return (b.u - a.u) || (b.y - a.y); };
       son.tam.sort(sira); son.eksik.sort(sira); son.yakin.sort(sira);
+      return son;
+    }
+    /* yaş barı sayıları (Kids Tarifleri'ndeki gibi): dolap boşken birikimli tarif sayısı, doluyken o yaşta çıkan sonuç (hazır + 1 eksik) */
+    var yasIlk = {};
+    function yasSayilari() {
+      if (!serit) return;
+      $$('.kd-yas-chip', serit).forEach(function (c) {
+        var v = c.getAttribute('data-yas'), sm = c.querySelector('small'); if (!sm) return;
+        if (!(v in yasIlk)) yasIlk[v] = sm.textContent;
+        if (!dolap.length) { sm.textContent = yasIlk[v]; return; }
+        var r = esle(v === 'tumu' ? 'tumu' : +v); sm.textContent = r.tam.length + r.eksik.length;
+      });
     }
     /* en sık eksik malzemeler (öneri çipleri): 1 eksikler önce, sonra 2 eksikler */
     function oneriler(kaynak, adet) {
@@ -302,12 +319,6 @@
     }
     var oneriCip = function (l) { return l.map(function (o) { return '<button type="button" class="kd-dolap__oneri-ekle" data-kd-oneri-ekle="' + escH(o.a) + '"><span aria-hidden="true">+</span> ' + escH(adOf(o.a)) + '</button>'; }).join(''); };
 
-    function tamHref() {
-      var p = new URLSearchParams(location.search); p.delete('q'); p.delete('t');
-      if (dolap.length) p.set('m', dolap.join(',')); else p.delete('m');
-      var y = yas(); if (y === 'tumu') p.delete('yas'); else p.set('yas', String(y));
-      var s = p.toString(); return 'kids-bebek-dolabi.html' + (s ? '?' + s : '');
-    }
     function kartYap(o, grup) {
       var k = KART[o.s].cloneNode(true);
       k.classList.add('kd-gorundu');
@@ -333,13 +344,10 @@
       bolum.hidden = !l.length; iz.innerHTML = '';
       var sayE2 = bolum.querySelector('[data-kd-grup-say]'); if (sayE2) sayE2.textContent = l.length ? '(' + l.length + ')' : '';
       if (!l.length) return false;
-      var c = sutun(iz), sinir = kompakt ? (c >= 2 ? c : 2) : Infinity, fazla = l.length > sinir;
-      var goster = fazla ? (c >= 2 ? sinir - 1 : sinir) : l.length;
-      l.slice(0, goster).forEach(function (o) { iz.appendChild(kartYap(o, grup)); });
-      var bos = c >= 2 ? (c - goster % c) % c : 0;
-      if (fazla && c >= 2) {
-        iz.appendChild(dolgu(bos || c, '<span class="kd-dolap-dolgu__ust">+' + (l.length - goster) + ' tarif daha</span><h3>Tüm sonuçlar tam ekranda</h3><p>Bu gruptaki ' + l.length + ' tarifin hepsini, kategorili malzeme seçimiyle birlikte görün.</p><a class="kd-btn kd-btn--kucuk" href="' + escH(tamHref()) + '" data-kd-dolap-tam>Tam ekranda aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>'));
-      } else if (bos) {
+      var c = sutun(iz);
+      l.forEach(function (o) { iz.appendChild(kartYap(o, grup)); });
+      var bos = c >= 2 ? (c - l.length % c) % c : 0;
+      if (bos) {
         var on = oneriler(grup === 'tam' ? son.eksik.concat(son.yakin) : son.yakin.concat(son.eksik), 3);
         var imza = on.map(function (x) { return x.a; }).join(',');
         if (grup === 'eksik' && imza && imza === oneriImza) on = [];   // aynı öneriler iki kez çıkmasın: ikinci dolgu tüm tariflere yönlendirir
@@ -348,19 +356,18 @@
           ? '<span class="kd-dolap-dolgu__ust">Daha çok tarif</span><h3>Bir malzeme daha ekleyin</h3><p>Dolabınızda varsa ekleyin; eşleşen tarifler artsın.</p><div class="kd-dolap-oneri-cip">' + oneriCip(on) + '</div>'
           : '<span class="kd-dolap-dolgu__ust">Daha çok tarif</span><h3>Kids Tarifleri</h3><p>Yaşa, kıvama ve alerjene göre tüm tariflere göz atın.</p><a class="kd-btn kd-btn--hafif kd-btn--kucuk" href="kids-tarifler.html">Tüm tarifler <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>'));
       }
-      return fazla;
+      return false;
     }
     var oneriImza = '';
     function sonuclariCiz() {
       oneriImza = '';
       var aktif = dolap.some(function (a) { return !disi(a); });
       bosE.hidden = aktif;
-      var fazla1 = false, fazla2 = false;
       if (!aktif) { grupTam.hidden = true; grupEksik.hidden = true; yokE.hidden = true; }
       else {
         // önce görünür yap (sütun sayısı ölçülebilsin), sonra çiz
         grupTam.hidden = !son.tam.length; grupEksik.hidden = !son.eksik.length;
-        fazla1 = grupCiz(grupTam, son.tam, 'tam'); fazla2 = grupCiz(grupEksik, son.eksik, 'eksik');
+        grupCiz(grupTam, son.tam, 'tam'); grupCiz(grupEksik, son.eksik, 'eksik');
         var hic = !son.tam.length && !son.eksik.length;
         yokE.hidden = !hic;
         if (hic) {
@@ -375,8 +382,6 @@
           $('[data-kd-yok-oneri]', yokE).innerHTML = oneriCip(on) + ek;
         }
       }
-      if (tumuB) { tumuB.hidden = !(fazla1 || fazla2) || sutun(grupTam.querySelector('.kd-dolap-izgara')) >= 2; tumuB.href = tamHref(); }
-      $$('[data-kd-dolap-tam]').forEach(function (a) { a.href = tamHref(); });
       var n = aktif ? son.tam.length + son.eksik.length : 0;
       sonucSay.textContent = n;
       dugmeleriGuncelle();
@@ -403,10 +408,10 @@
       durumE.textContent = p.join(' · ');
     }
     function adresYaz() {
-      if (kompakt || ilk) return;
+      if (ilk) return;
       if (window.DadaKids && window.DadaKids.adresiGuncelle) window.DadaKids.adresiGuncelle({ m: dolap.length ? dolap.join(',') : null });
     }
-    function guncelle() { cipleriCiz(); kartlariGuncelle(); hesapla(); sonuclariCiz(); ozetYaz(); durumYaz(); kileriCiz(); adresYaz(); }
+    function guncelle() { cipleriCiz(); kartlariGuncelle(); hesapla(); sonuclariCiz(); ozetYaz(); durumYaz(); kileriCiz(); yasSayilari(); adresYaz(); }
 
     /* ---------- olaylar ---------- */
     gir.addEventListener('input', function () { if (/[,;\n]/.test(gir.value)) metniIsle(false); listeyiCiz(gir.value); });
@@ -443,13 +448,6 @@
         var a = c.getAttribute('data-a'), k = SOZ[a]; if (!k) return;
         if (dolap.indexOf(a) > -1) { cikar(a); uyar(''); return; }
         if (sec(k)) { c.classList.remove('kd-mz--pop'); void c.offsetWidth; c.classList.add('kd-mz--pop'); guncelle(); }
-        return;
-      }
-      var h = e.target.closest('.kd-dolap-kat__bas button');
-      if (h) {
-        var ac = h.getAttribute('aria-expanded') !== 'true', s = h.closest('.kd-dolap-kat');
-        h.setAttribute('aria-expanded', String(ac)); s.classList.toggle('kd-acik', ac);
-        document.getElementById(h.getAttribute('aria-controls')).hidden = !ac;
       }
     });
     document.addEventListener('click', function (e) {
@@ -474,7 +472,7 @@
       guncelle(); if (!oneri.hidden) listeyiCiz(gir.value);
     }
     if (serit) {
-      if (!katalogVar) {
+      {
         var cs = $$('.kd-yas-chip', serit), bas = new URLSearchParams(location.search).get('yas');
         var kv = window.DadaKids && window.DadaKids.kova ? window.DadaKids.kova() : null;
         var ilkY = cs.some(function (c) { return c.getAttribute('data-yas') === bas; }) ? bas : (kv ? String(kv) : 'tumu');
@@ -492,10 +490,6 @@
             n.focus(); n.click(); e.preventDefault();
           });
         });
-      } else {
-        serit.addEventListener('click', function () { setTimeout(yasDegisti, 0); });
-        serit.addEventListener('keydown', function () { setTimeout(yasDegisti, 0); });
-        $$('[data-kd-temizle]').forEach(function (b) { b.addEventListener('click', function () { setTimeout(yasDegisti, 0); }); });
       }
     }
 
@@ -506,7 +500,7 @@
     function kileriCiz() {
       var d = kilerOku();
       kListe.innerHTML = d.malzemeler.map(function (a) {
-        return '<li class="kd-dolap__cip">' + (SOZ[a] && SOZ[a].f ? '<span class="kd-dolap__cip-foto" style="background-image:url(\'varlik/kids/gorsel/urun/' + escH(a) + '-k.webp\')" aria-hidden="true"></span>' : '') + '<span>' + escH(adOf(a)) + '</span><button type="button" data-kd-kiler-cikar="' + escH(a) + '" aria-label="' + escH(adOf(a)) + ' malzemesini Bebek Kilerinden çıkar"><span aria-hidden="true">×</span></button></li>';
+        return '<li class="kd-dolap__cip">' + cipFoto(a) + '<span>' + escH(adOf(a)) + '</span><button type="button" data-kd-kiler-cikar="' + escH(a) + '" aria-label="' + escH(adOf(a)) + ' malzemesini Bebek Kilerinden çıkar"><span aria-hidden="true">×</span></button></li>';
       }).join('');
       var yeni = dolap.filter(function (a) { return kilereGirer(a) && d.malzemeler.indexOf(a) < 0; });
       kListe.hidden = !d.malzemeler.length;
@@ -545,35 +539,128 @@
       var n = dolap.length - once;
       uyar(n ? n + ' malzeme Bebek Kilerinden dolaba yüklendi.' + (red.length ? ' ' + red.join(', ') + ' seçili yaşa uygun değil.' : '') : 'Kilerdeki malzemeler zaten dolapta.');
       guncelle();
-      var s = $('#kdDolapSonuc'); if (s && !kompakt) s.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      var s = $('#kdDolapSonuc'); if (s) s.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
       gir.focus({ preventScroll: true });
     });
     bosaltB.addEventListener('click', function () { kilerYaz(bos()); bildir('Bebek Kileri boşaltıldı.', false); kok.focus && gir.focus({ preventScroll: true }); });
     dinleyen.push(kileriCiz);
 
-    /* ---------- açılır/kapanır (yalnız kompakt): ≤768px'te kapalı; seçim varsa ya da #kdKiler / #dolap ile gelinirse açık ---------- */
-    var HASH = /^#(kdKiler|dolap|kdDolap)$/;
-    function panelAc(ac) {
-      if (!acB || !govde) return;
-      govde.hidden = !ac; acB.setAttribute('aria-expanded', String(ac));
-      kok.classList.toggle('kd-dolap--kapali', !ac);
-      if (ac) sonuclariCiz();   // gizliyken sütun ölçülemez
-    }
-    dolapPanelAc = panelAc;
-    if (acB) acB.addEventListener('click', function () { panelAc(acB.getAttribute('aria-expanded') !== 'true'); });
-    addEventListener('hashchange', function () { if (HASH.test(location.hash)) panelAc(true); });
-
     /* başlangıç: ?m=… ile gelen seçim (Tam ekranda aç / paylaşılan bağ) */
     (new URLSearchParams(location.search).get('m') || '').split(',').forEach(function (a) { a = a.trim(); if (SOZ[a] && dolap.indexOf(a) < 0 && !disi(a)) dolap.push(a); });
-    var hashIle = HASH.test(location.hash);
-    if (acB) panelAc(!matchMedia('(max-width: 768px)').matches || hashIle || dolap.length > 0);
-    requestAnimationFrame(function () { requestAnimationFrame(function () { kok.classList.add('kd-dolap--hazir'); }); });
-    if (hashIle) { var h = document.getElementById(location.hash.slice(1)); if (h) requestAnimationFrame(function () { h.scrollIntoView({ block: 'start' }); if (h.id === 'kdKiler') h.focus({ preventScroll: true }); }); }
+    if (/^#kdKiler$/.test(location.hash)) { var h = document.getElementById('kdKiler'); if (h) requestAnimationFrame(function () { h.scrollIntoView({ block: 'start' }); h.focus({ preventScroll: true }); }); }
     guncelle(); ilk = false;
+    kayanKur(kok);
     /* sütun sayısı değişince grupları yeniden diz (dolgu kartı satırı tamamlar) */
     var sonGen = innerWidth, zz;
     addEventListener('resize', function () { if (innerWidth === sonGen) return; sonGen = innerWidth; clearTimeout(zz); zz = setTimeout(sonuclariCiz, 120); });
   }
+
+  /* =====================================================================
+     Kayan kategori şeritleri (Revize 2 Kas R4; Gastro .mz-grid yatay şeridi + kendi kendine kayma)
+     · .kd-kayan: yatay kaydırma + scroll-snap; her ~3,2 sn bir kart kayar, sonda başa döner (satırlar kademeli başlar)
+     · Durur: imleç şeridin üstündeyken, şeritte odak varken, dokunma/sürükleme/tekerlek sonrası 6 sn, sekme gizliyken,
+       şerit ekranda değilken (IntersectionObserver), "Kaydırmayı durdur" düğmesiyle (WCAG 2.2.2; kalıcı, yeniden başlatılabilir)
+     · prefers-reduced-motion: reduce → otomatik kayma YOK, düğme gizli; ok düğmeleri anında (smooth yok) kaydırır
+     · Klavye: kartlar sekme sırasında (odak gelen kart görünür alana kayar); şeritte ←/→ komşu karta geçer
+     · Kenar durumu: .kd-kayan--tasma / --bas / --son (kenar solması + ok düğmelerinin disabled hâli)
+     ===================================================================== */
+  function kayanKur(kok) {
+    var izler = $$('.kd-kayan', kok); if (!izler.length) return;
+    var mq = matchMedia('(prefers-reduced-motion: reduce)');
+    var durB = $('[data-kd-kayan-dur]', kok), durMetin = durB && $('[data-kd-kayan-dur-metin]', durB);
+    var kullaniciDurdu = false, ADIM = 3200, BEKLE = 6000;
+    var D = izler.map(function (iz, i) {
+      var sec = iz.closest('.kd-dolap-kat') || iz.parentNode;
+      return { iz: iz, oklar: $$('[data-kd-kayan-yon]', sec), gor: !('IntersectionObserver' in window), ust: false, odak: false, bekle: 0, son: Date.now() + i * 650 };
+    });
+    var azalt = function () { return mq.matches; };
+    function kenar(d) {
+      var iz = d.iz, t = iz.scrollWidth > iz.clientWidth + 2;
+      var bas = iz.scrollLeft <= 2, son = iz.scrollLeft + iz.clientWidth >= iz.scrollWidth - 2;
+      iz.classList.toggle('kd-kayan--tasma', t); iz.classList.toggle('kd-kayan--bas', !t || bas); iz.classList.toggle('kd-kayan--son', !t || son);
+      d.oklar.forEach(function (b) { var geri = b.getAttribute('data-kd-kayan-yon') === '-1'; b.disabled = !t || (geri ? bas : son); });
+      return t;
+    }
+    function kartGen(d) { var k = d.iz.querySelector('.kd-mz'); if (!k) return 120; var g = parseFloat(getComputedStyle(d.iz).columnGap) || 8; return k.getBoundingClientRect().width + g; }
+    function kaydir(d, dx, mutlak) {
+      var o = { behavior: azalt() ? 'auto' : 'smooth' };
+      if (mutlak) { o.left = dx; d.iz.scrollTo(o); } else { o.left = dx; d.iz.scrollBy(o); }
+    }
+    function adim(d) {
+      if (!kenar(d)) return;
+      if (d.iz.scrollLeft + d.iz.clientWidth >= d.iz.scrollWidth - 2) kaydir(d, 0, true); else kaydir(d, kartGen(d));
+    }
+    /* odaklanan kart tam görünsün: scroll-snap (mandatory) tarayıcının odak kaydırmasını kart başına geri hizalayıp kartı yarım
+       bırakabiliyor → kartı tümüyle gösteren en yakın kart başına (snap noktası) anında kaydır */
+    function odakGoster(d, k) {
+      if (!k) return;
+      var iz = d.iz, pad = parseFloat(getComputedStyle(iz).scrollPaddingLeft) || 0, sol = iz.scrollLeft, w = iz.clientWidth;
+      var bas = k.offsetLeft - iz.firstElementChild.offsetLeft, son = bas + k.offsetWidth;
+      var hedef = null;
+      if (bas - pad < sol) hedef = bas - pad;
+      else if (son + pad > sol + w) {
+        var gerek = son + pad - w;
+        $$('.kd-mz', iz).some(function (m) { var x = m.offsetLeft - iz.firstElementChild.offsetLeft - pad; if (x >= gerek - 1) { hedef = x; return true; } return false; });
+        if (hedef === null) hedef = iz.scrollWidth;
+      }
+      if (hedef !== null) iz.scrollTo({ left: Math.max(0, hedef), behavior: 'auto' });
+    }
+    function dursunMu(d, simdi) { return azalt() || kullaniciDurdu || document.hidden || !d.gor || d.ust || d.odak || simdi < d.bekle; }
+    setInterval(function () {
+      var simdi = Date.now();
+      D.forEach(function (d) {
+        if (dursunMu(d, simdi)) { d.son = Math.max(d.son, simdi); return; }   // durunca sayaç baştan: yeniden başlayınca hemen zıplamaz
+        if (simdi - d.son >= ADIM) { d.son = simdi; adim(d); }
+      });
+    }, 250);
+    D.forEach(function (d) {
+      var iz = d.iz;
+      iz.addEventListener('scroll', function () { kenar(d); }, { passive: true });
+      iz.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') d.ust = true; });
+      iz.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { d.ust = false; d.son = Date.now(); } });
+      ['pointerdown', 'touchstart', 'wheel'].forEach(function (t) { iz.addEventListener(t, function () { d.bekle = Date.now() + BEKLE; }, { passive: true }); });
+      iz.addEventListener('focusin', function (e) { d.odak = true; odakGoster(d, e.target.closest('.kd-mz')); });
+      iz.addEventListener('focusout', function (e) { if (!iz.contains(e.relatedTarget)) { d.odak = false; d.son = Date.now(); } });
+      iz.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var k = $$('.kd-mz', iz), i = k.indexOf(document.activeElement); if (i < 0) return;
+        var n = k[i + (e.key === 'ArrowRight' ? 1 : -1)]; if (n) { n.focus(); e.preventDefault(); }
+      });
+      d.oklar.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var yon = +b.getAttribute('data-kd-kayan-yon'), sayfa = Math.max(kartGen(d), iz.clientWidth - kartGen(d));
+          d.bekle = Date.now() + BEKLE; kaydir(d, yon * sayfa);
+        });
+      });
+      kenar(d);
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (g) { g.forEach(function (x) { var d = D.filter(function (y) { return y.iz === x.target; })[0]; if (d) { d.gor = x.isIntersecting; if (d.gor) d.son = Date.now(); } }); }, { threshold: 0.6 });
+      D.forEach(function (d) { io.observe(d.iz); });
+    }
+    addEventListener('resize', function () { D.forEach(kenar); });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) D.forEach(function (d) { d.son = Date.now(); }); });
+    function durYaz() {
+      if (!durB) return;
+      durB.hidden = azalt();
+      durB.setAttribute('aria-pressed', String(kullaniciDurdu));
+      durB.classList.toggle('kd-kayan-dur--durdu', kullaniciDurdu);
+      if (durMetin) durMetin.textContent = kullaniciDurdu ? 'Kaydırmayı başlat' : 'Kaydırmayı durdur';
+    }
+    if (durB) durB.addEventListener('click', function () { kullaniciDurdu = !kullaniciDurdu; D.forEach(function (d) { d.son = Date.now(); }); durYaz(); });
+    if (mq.addEventListener) mq.addEventListener('change', durYaz);
+    durYaz();
+    window.KdKayan = { durdur: function (v) { kullaniciDurdu = v !== false; durYaz(); }, durum: function () { return { durdu: kullaniciDurdu, azalt: azalt(), izler: D.map(function (d) { return { id: d.iz.id, gor: d.gor, x: Math.round(d.iz.scrollLeft) }; }) }; } };
+  }
+
+  /* Kids Tarifleri: Bebek Dolabı bandı seçili yaşı taşır (profil parametreleri kids.js baglariGuncelle'den zaten bağda) */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-kd-dolap-bag]'); if (!a) return;
+    var c = document.querySelector('#kdYasSerit .kd-yas-chip[aria-checked="true"]'), y = c ? c.getAttribute('data-yas') : 'tumu';
+    var ham = a.getAttribute('href'), parca = ham.split('#'), yol = parca[0].split('?'), p = new URLSearchParams(yol[1] || '');
+    if (y && y !== 'tumu') p.set('yas', y); else p.delete('yas');
+    var s = p.toString(); a.setAttribute('href', yol[0] + (s ? '?' + s : '') + (parca[1] ? '#' + parca[1] : ''));
+  }, true);
 
   function basla() { bildirimKur(); dolapKur(); dugmeleriGuncelle(); }
   window.KdKiler = { oku: kilerOku, ekle: kilereEkle, yenile: degisti };

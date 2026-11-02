@@ -50,82 +50,47 @@
   "varlik/kids/gorsel/evre-hamilelik.webp": {
    "model": "seedream_v5_pro",
    "aspectRatio": "4:3",
-   "prompt": "Still life on a cream table: fresh produce (leafy greens, avocado, oranges, berries, a pear), a clear glass of water, a folded soft muslin cloth, soft blush pink tones, calm and nourishing mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-   "jobId": "b0ecebb4-7c73-44d0-88e8-0f3d5addcb08",
-   "creditsSpent": 2.5,
-   "attempts": [
-    {
-     "jobId": "b0ecebb4-7c73-44d0-88e8-0f3d5addcb08",
-     "prompt": "Still life on a cream table: fresh produce (leafy greens, avocado, oranges, berries, a pear), a clear glass of water, a folded soft muslin cloth, soft blush pink tones, calm and nourishing mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-     "kind": "original"
-    }
-   ],
-   "webpQuality": 80,
-   "bytes": 49692
+   "revize": "2026-11-02 R6 (orta tonlu zemin)",
+   "jobId": "01a7a6b4-b212-4231-813f-4a66debeb6e3",
+   "credits": 2.5,
+   "prompt": "Realistic food photography still life for pregnancy nutrition: a bowl of fresh produce (leafy greens, halved avocado, oranges, berries, a pear), a clear glass of water and a folded muslin cloth, arranged on a deep sage green linen tablecloth over a warm walnut wooden table, a muted sage green painted wall behind, gentle window light from the left with soft deeper shadows, rich but soft natural colors, mid-tone image with no white or cream backdrop. No people, no faces, no hands, no text, no logos.",
+   "not": "referanssız ikinci deneme; ilk deneme açık zeminde kaldı, elendi (2,5 kr)"
   },
   "varlik/kids/gorsel/evre-0-6-ay.webp": {
    "model": "seedream_v5_pro",
    "aspectRatio": "4:3",
-   "prompt": "Still life on a cream surface: a baby bottle with milk, a soft folded baby blue muslin cloth, a small knitted soft toy bunny, baby blue and cream tones, tender calm mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-   "jobId": "f3c0f1d2-9a09-43bd-ab09-d877433ccfa2",
-   "creditsSpent": 2.5,
-   "attempts": [
-    {
-     "jobId": "f3c0f1d2-9a09-43bd-ab09-d877433ccfa2",
-     "prompt": "Still life on a cream surface: a baby bottle with milk, a soft folded baby blue muslin cloth, a small knitted soft toy bunny, baby blue and cream tones, tender calm mood. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-     "kind": "original"
-    }
-   ],
-   "webpQuality": 80,
-   "bytes": 38476
+   "revize": "2026-11-02 R6 (orta tonlu zemin)",
+   "jobId": "344749b7-79cd-4ee7-8db8-fe10d214d78f",
+   "credits": 2.5,
+   "prompt": "Still life for the milk-only stage: a baby bottle with milk and a folded soft muslin cloth, on a dusty blue linen over a warm wooden table. Realistic food photography, same subject and composition as the attached reference, but the BACKGROUND must be mid-tone with real color depth so the photo edges separate clearly from a very pale cream / pale pink / pale blue web page: a warm medium-brown wooden table and a saturated pastel linen cloth, gentle natural window light from the left with slightly deeper soft shadows, rich but soft colors, no white or cream backdrop, no pale high-key look. No people, no faces, no hands, no toys, no text, no logos, no brands.",
+   "not": "iç fotoğraf kırpıldı (model renkli çerçeve eklemişti)"
   },
   "varlik/kids/gorsel/evre-6-8-ay.webp": {
    "model": "seedream_v5_pro",
    "aspectRatio": "4:3",
-   "prompt": "Close-up of a first small silicone baby spoon holding smooth peach-colored puree above a pastel peach bowl of puree, soft peach and cream tones, first tastes. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-   "jobId": "4814704c-1618-4969-8ff4-3b866a9f7e5c",
-   "creditsSpent": 2.5,
-   "attempts": [
-    {
-     "jobId": "4814704c-1618-4969-8ff4-3b866a9f7e5c",
-     "prompt": "Close-up of a first small silicone baby spoon holding smooth peach-colored puree above a pastel peach bowl of puree, soft peach and cream tones, first tastes. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-     "kind": "original"
-    }
-   ],
-   "webpQuality": 80,
-   "bytes": 33000
+   "revize": "2026-11-02 R6 (orta tonlu zemin)",
+   "jobId": "620da46b-08ba-4a37-82d8-1272ca67895c",
+   "credits": 2.5,
+   "prompt": "Close-up of a small silicone baby spoon holding smooth peach-colored puree above a pastel peach bowl of puree, on a saturated peach linen over a warm wooden table. Realistic food photography, same subject and composition as the attached reference, but the BACKGROUND must be mid-tone with real color depth so the photo edges separate clearly from a very pale cream / pale pink / pale blue web page: a warm medium-brown wooden table and a saturated pastel linen cloth, gentle natural window light from the left with slightly deeper soft shadows, rich but soft colors, no white or cream backdrop, no pale high-key look. No people, no faces, no hands, no toys, no text, no logos, no brands.",
+   "not": "mevcut görsel --image referans"
   },
   "varlik/kids/gorsel/evre-9-12-ay.webp": {
    "model": "seedream_v5_pro",
    "aspectRatio": "4:3",
-   "prompt": "Top-down: soft finger foods on a sectioned pastel mint silicone baby plate: soft steamed carrot sticks, steamed broccoli florets with stems, avocado slices, soft banana spears, toast fingers, cream background. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-   "jobId": "53f37f9d-b9fb-4af3-b986-8df28278bd8d",
-   "creditsSpent": 2.5,
-   "attempts": [
-    {
-     "jobId": "53f37f9d-b9fb-4af3-b986-8df28278bd8d",
-     "prompt": "Top-down: soft finger foods on a sectioned pastel mint silicone baby plate: soft steamed carrot sticks, steamed broccoli florets with stems, avocado slices, soft banana spears, toast fingers, cream background. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-     "kind": "original"
-    }
-   ],
-   "webpQuality": 80,
-   "bytes": 64416
+   "revize": "2026-11-02 R6 (orta tonlu zemin)",
+   "jobId": "cddaec84-00d6-46fd-9817-08b480c653de",
+   "credits": 2.5,
+   "prompt": "Top-down: soft finger foods on a sectioned pastel mint silicone baby plate (steamed carrot sticks, broccoli florets, avocado slices, banana spears, toast fingers), on a deep sage green linen over a warm wooden table. Realistic food photography, same subject and composition as the attached reference, but the BACKGROUND must be mid-tone with real color depth so the photo edges separate clearly from a very pale cream / pale pink / pale blue web page: a warm medium-brown wooden table and a saturated pastel linen cloth, gentle natural window light from the left with slightly deeper soft shadows, rich but soft colors, no white or cream backdrop, no pale high-key look. No people, no faces, no hands, no toys, no text, no logos, no brands.",
+   "not": "mevcut görsel --image referans"
   },
   "varlik/kids/gorsel/evre-1-3-yas.webp": {
    "model": "seedream_v5_pro",
    "aspectRatio": "4:3",
-   "prompt": "A toddler plate with small portions of family food (soft rice, cooked vegetables, small meatball pieces, cucumber sticks) on a butter yellow toddler plate at a sunlit family dining table, adult plates softly blurred in the background, butter yellow and cream tones. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-   "jobId": "44e10559-c1d2-4fd6-8799-260df4c53407",
-   "creditsSpent": 2.5,
-   "attempts": [
-    {
-     "jobId": "44e10559-c1d2-4fd6-8799-260df4c53407",
-     "prompt": "A toddler plate with small portions of family food (soft rice, cooked vegetables, small meatball pieces, cucumber sticks) on a butter yellow toddler plate at a sunlit family dining table, adult plates softly blurred in the background, butter yellow and cream tones. bright natural daylight, airy high-key food photography, soft diffused shadows, cream linen or light wood background, pastel ceramic or silicone tableware, fresh and appetizing, baby food styling, shallow depth of field, no text, no logos, no brand names, no cartoon characters, no people faces",
-     "kind": "original"
-    }
-   ],
-   "webpQuality": 80,
-   "bytes": 48724
+   "revize": "2026-11-02 R6 (orta tonlu zemin)",
+   "jobId": "bad1f4b5-6365-4ada-bb31-13881c9a781f",
+   "credits": 2.5,
+   "prompt": "A butter yellow toddler plate with small portions of family food (soft rice, cooked vegetables, small meatball pieces, cucumber sticks) at a family dining table, on a dusty blue linen over a warm medium-brown wooden table, adult plates softly blurred behind. Realistic food photography, same subject and composition as the attached reference, but the BACKGROUND must be mid-tone with real color depth so the photo edges separate clearly from a very pale cream / pale pink / pale blue web page: a warm medium-brown wooden table and a saturated pastel linen cloth, gentle natural window light from the left with slightly deeper soft shadows, rich but soft colors, no white or cream backdrop, no pale high-key look. No people, no faces, no hands, no toys, no text, no logos, no brands.",
+   "not": "mevcut görsel --image referans"
   },
   "varlik/kids/gorsel/tarif/balkabagi-puresi.webp": {
    "model": "seedream_v5_pro",
@@ -661,6 +626,14 @@
    ],
    "webpQuality": 80,
    "bytes": 28562
+  },
+  "varlik/kids/gorsel/hero-mutfak-kirp.webp": {
+   "model": "seedream_v5_pro",
+   "aspectRatio": "4:3 → 5:4 kırpım 1028×822",
+   "revize": "2026-11-02 R6 (adaçayı yeşili duvar, koyu ceviz)",
+   "jobId": "a28a90c1-4201-4e98-82f3-bf98c282b0fd",
+   "credits": 2.5,
+   "not": "2 varyant (adaçayı seçildi, moka elendi; 5 kr); hero-mutfak.webp referans"
   }
  }
 }

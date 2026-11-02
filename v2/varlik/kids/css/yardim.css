@@ -8,7 +8,7 @@
 .kd-yardim {
   position: absolute; top: calc(100% + 6px); right: var(--kd-yd-sag, 16px); z-index: 45; width: 384px; max-width: calc(100vw - 32px);
   display: flex; flex-direction: column; max-height: min(640px, var(--kd-yd-max, 70vh));
-  background: #fff; color: var(--kd-murekkep, #3A2E2A); border-radius: var(--kd-r-l, 8px);
+  background: #fff; color: var(--kd-murekkep, #3A2E2A); border-radius: var(--kd-r);
   box-shadow: 0 0 0 1px var(--kd-cizgi, #F0E3D6), 0 18px 40px -18px rgba(58, 46, 42, .35);
   font-family: var(--kd-font, var(--font, "Gilroy", system-ui, sans-serif)); opacity: 0; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease;
 }
@@ -17,15 +17,15 @@
 .kd-yardim__ust { flex: none; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--kd-s3, 12px); padding: 14px 10px 10px 16px; border-bottom: 1px solid var(--kd-cizgi, #F0E3D6); }
 .kd-yardim .kd-yardim__baslik { margin: 0; font-size: 17px; font-weight: 800; font-family: var(--kd-font-ekstra); line-height: 1.2; letter-spacing: -.01em; color: var(--kd-murekkep, #3A2E2A); }
 .kd-yardim .kd-yardim__alt { margin: 2px 0 0; font-size: 13px; line-height: 1.35; color: var(--kd-ikincil, #6B5A52); }
-.kd-yardim__kapat { flex: none; display: grid; place-items: center; width: 40px; height: 40px; margin: -6px 0 0; border: 0; border-radius: var(--kd-r-m, 6px); background: transparent; color: var(--kd-murekkep, #3A2E2A); cursor: pointer; }
+.kd-yardim__kapat { flex: none; display: grid; place-items: center; width: 40px; height: 40px; margin: -6px 0 0; border: 0; border-radius: var(--kd-r); background: transparent; color: var(--kd-murekkep, #3A2E2A); cursor: pointer; }
 .kd-yardim__kapat:hover { background: var(--kd-krem-2, #FFF1E4); }
 .kd-yardim__govde { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px; }
 .kd-yardim__liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .kd-yardim__liste[hidden] { display: none; }
-.kd-yardim__secenek { width: 100%; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 8px 10px; border: 0; border-radius: var(--kd-r-m, 6px); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.kd-yardim__secenek { width: 100%; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 8px 10px; border: 0; border-radius: var(--kd-r); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
 .kd-yardim__secenek:hover { background: var(--kd-krem, #FFF8F0); }
 .kd-yardim__secenek > svg { flex: none; margin-left: auto; color: var(--kd-ikincil, #6B5A52); }
-.kd-yardim__ikon { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--kd-r-m, 6px); background: var(--kd-krem-2, #FFF1E4); }
+.kd-yardim__ikon { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--kd-r); background: var(--kd-krem-2, #FFF1E4); }
 .kd-yardim__ikon img { display: block; width: 20px; height: 20px; }
 .kd-yardim__metin { min-width: 0; }
 .kd-yardim__metin b { display: block; font-size: 14.5px; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1.25; }
@@ -34,7 +34,7 @@
 .kd-yardim__secenek[data-secenek="acil"] b { color: var(--kd-tehlike-k, #A1261F); }
 .kd-yardim :focus-visible { outline: 3px solid var(--kd-tema, #1F7A68); outline-offset: -2px; }
 .kd-yardim__cevap[hidden] { display: none; }
-.kd-yardim__geri { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; margin: 0 0 4px; padding: 0 8px; border: 0; border-radius: var(--kd-r-m, 6px); background: transparent; color: var(--kd-tema, #1F7A68); font: inherit; font-size: 13.5px; font-weight: 800; font-family: var(--kd-font-ekstra); cursor: pointer; }
+.kd-yardim__geri { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; margin: 0 0 4px; padding: 0 8px; border: 0; border-radius: var(--kd-r); background: transparent; color: var(--kd-tema, #1F7A68); font: inherit; font-size: 13.5px; font-weight: 800; font-family: var(--kd-font-ekstra); cursor: pointer; }
 .kd-yardim__geri:hover { background: var(--kd-tema-a, #E1F3EE); }
 .kd-yardim__cevap-ic { padding: 0 8px 6px; }
 
@@ -43,10 +43,10 @@
 .kd-yardim .kd-yd__baslik { margin: 0 0 6px; font-size: 17px; font-weight: 800; font-family: var(--kd-font-ekstra); line-height: 1.25; letter-spacing: -.01em; color: var(--kd-murekkep, #3A2E2A); }
 .kd-yd__baslik:focus { outline: none; }
 .kd-yd__yukleniyor { color: var(--kd-ikincil, #6B5A52) !important; }
-.kd-yd__ornek { display: inline-block; margin: 6px 0 4px !important; padding: 4px 8px; border-radius: var(--kd-r-s, 4px); background: var(--kd-uyari-a, #FFF1E0); color: var(--kd-uyari-k, #8A3B00) !important; font-size: 12.5px !important; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1.3 !important; }
+.kd-yd__ornek { display: inline-block; margin: 6px 0 4px !important; padding: 4px 8px; border-radius: var(--kd-r); background: var(--kd-uyari-a, #FFF1E0); color: var(--kd-uyari-k, #8A3B00) !important; font-size: 12.5px !important; font-weight: 700; font-family: var(--kd-font-kalin); line-height: 1.3 !important; }
 .kd-yd__kucuk { color: var(--kd-ikincil, #6B5A52) !important; font-size: 13px !important; }
 .kd-yd__bag { padding: 0; border: 0; background: none; color: var(--kd-tema, #1F7A68) !important; font: inherit; font-weight: 800; font-family: var(--kd-font-ekstra); font-size: 14px; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; cursor: pointer; }
-.kd-yd__dugme { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 8px 14px; margin: 4px 6px 6px 0; border: 0; border-radius: var(--kd-r-m, 6px); background: var(--kd-tema, #1F7A68); color: #fff !important; font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); text-decoration: none; line-height: 1.2; cursor: pointer; }
+.kd-yd__dugme { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 8px 14px; margin: 4px 6px 6px 0; border: 0; border-radius: var(--kd-r); background: var(--kd-tema, #1F7A68); color: #fff !important; font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); text-decoration: none; line-height: 1.2; cursor: pointer; }
 .kd-yd__dugme:hover { background: color-mix(in srgb, var(--kd-tema, #1F7A68) 86%, #000); }
 .kd-yd__dugme--ikincil { background: #fff; color: var(--kd-murekkep, #3A2E2A) !important; box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); }
 .kd-yd__dugme--ikincil:hover { background: var(--kd-krem-2, #FFF1E4); }
@@ -56,33 +56,33 @@
 .kd-yd__onay { font-size: 13.5px; font-weight: 700; font-family: var(--kd-font-kalin); color: var(--kd-uygun-k, #16653F); }
 .kd-yd__chipler { display: flex; gap: 6px; flex-wrap: wrap; margin: 2px 0 8px; }
 .kd-yd__chipler--ay { display: grid; grid-template-columns: repeat(4, 1fr); }
-.kd-yd__chip { min-height: 40px; min-width: 62px; padding: 4px 8px; border: 1px solid var(--kd-cizgi, #F0E3D6); border-radius: var(--kd-r-m, 6px); background: #fff; color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); cursor: pointer; }
+.kd-yd__chip { min-height: 40px; min-width: 62px; padding: 4px 8px; border: 1px solid var(--kd-cizgi, #F0E3D6); border-radius: var(--kd-r); background: #fff; color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 14px; font-weight: 700; font-family: var(--kd-font-kalin); cursor: pointer; }
 .kd-yd__chip:hover:not(:disabled) { background: var(--kd-krem-2, #FFF1E4); }
 .kd-yd__chip[aria-checked="true"] { border-color: var(--kd-tema, #1F7A68); background: var(--kd-tema-a, #E1F3EE); box-shadow: inset 0 0 0 1px var(--kd-tema, #1F7A68); }
 .kd-yd__chip:disabled { opacity: .4; cursor: not-allowed; }
-.kd-yd__sonuc:not(:empty) { margin: 2px 0 8px; padding: 10px 12px 6px; border-radius: var(--kd-r-l, 8px); background: var(--r-a, var(--kd-krem-2, #FFF1E4)); }
+.kd-yd__sonuc:not(:empty) { margin: 2px 0 8px; padding: 10px 12px 6px; border-radius: var(--kd-r); background: var(--r-a, var(--kd-krem-2, #FFF1E4)); }
 .kd-yd__etiket { display: block; margin-bottom: 4px; color: var(--kd-ikincil, #6B5A52); font-size: 13.5px; font-weight: 700; font-family: var(--kd-font-kalin); }
-.kd-yd__ara input { width: 100%; height: 44px; padding: 0 12px; border: 0; border-radius: var(--kd-r-m, 6px); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 16px; }
+.kd-yd__ara input { width: 100%; height: 44px; padding: 0 12px; border: 0; border-radius: var(--kd-r); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); color: var(--kd-murekkep, #3A2E2A); font: inherit; font-size: 16px; }
 .kd-yd__ara input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--kd-tema, #1F7A68); }
 .kd-yd__sonuclar { margin-top: 8px; }
-.kd-yd__besin { margin-bottom: 8px; padding: 10px 12px; border-radius: var(--kd-r-l, 8px); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); }
+.kd-yd__besin { margin-bottom: 8px; padding: 10px 12px; border-radius: var(--kd-r); background: var(--kd-krem, #FFF8F0); box-shadow: inset 0 0 0 1px var(--kd-cizgi, #F0E3D6); }
 .kd-yd__besin p { font-size: 13.5px !important; margin-bottom: 5px !important; }
 .kd-yd__besin-ust { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; font-size: 15px; }
-.kd-yd__rozet { flex: none; padding: 3px 8px; border-radius: var(--kd-r-s, 4px); font-size: 12.5px; font-weight: 800; font-family: var(--kd-font-ekstra); }
+.kd-yd__rozet { flex: none; padding: 3px 8px; border-radius: var(--kd-r); font-size: 12.5px; font-weight: 800; font-family: var(--kd-font-ekstra); }
 .kd-yd__besin[data-durum="uygun"] .kd-yd__rozet { background: var(--kd-uygun-a, #E3F5EC); color: var(--kd-uygun-k, #16653F); }
 .kd-yd__besin[data-durum="dikkat"] .kd-yd__rozet { background: var(--kd-uyari-a, #FFF1E0); color: var(--kd-uyari-k, #8A3B00); }
 .kd-yd__besin[data-durum="henuz"] .kd-yd__rozet { background: var(--kd-tehlike-a, #FDECEC); color: var(--kd-tehlike-k, #A1261F); }
 .kd-yd__hazirlik { padding-left: 9px; border-left: 3px solid var(--kd-tema, #1F7A68); }
 .kd-yd__tarifler { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 6px; }
-.kd-yd__tarifler a { display: flex; align-items: center; gap: 10px; padding: 6px; border-radius: var(--kd-r-l, 8px); background: var(--kd-krem, #FFF8F0); color: var(--kd-murekkep, #3A2E2A); text-decoration: none; }
+.kd-yd__tarifler a { display: flex; align-items: center; gap: 10px; padding: 6px; border-radius: var(--kd-r); background: var(--kd-krem, #FFF8F0); color: var(--kd-murekkep, #3A2E2A); text-decoration: none; }
 .kd-yd__tarifler a:hover { background: var(--kd-krem-2, #FFF1E4); }
-.kd-yd__tarifler img { flex: none; display: block; width: 52px; height: 52px; object-fit: cover; border-radius: var(--kd-r-m, 6px); }
+.kd-yd__tarifler img { flex: none; display: block; width: 52px; height: 52px; object-fit: cover; border-radius: var(--kd-r); }
 .kd-yd__tarifler b { display: block; font-size: 14.5px; line-height: 1.25; }
 .kd-yd__tarifler small { display: block; margin-top: 2px; color: var(--kd-ikincil, #6B5A52); font-size: 12.5px; }
 .kd-yd__liste { margin: 2px 0 8px; padding: 0 0 0 18px; list-style: disc; }
 .kd-yd__liste li { display: list-item; list-style: disc; margin-bottom: 4px; font-size: 14px; line-height: 1.4; }
 .kd-yd__liste li::marker { color: var(--kd-tema, #1F7A68); }
-.kd-yd__acil { padding: 10px 12px 8px; border-radius: var(--kd-r-l, 8px); background: var(--kd-tehlike-a, #FDECEC); }
+.kd-yd__acil { padding: 10px 12px 8px; border-radius: var(--kd-r); background: var(--kd-tehlike-a, #FDECEC); }
 .kd-yd__acil-metin { color: var(--kd-tehlike-k, #A1261F) !important; font-size: 16px !important; }
 .kd-yardim .kd-yd__acil .kd-yd__baslik { color: var(--kd-tehlike-k, #A1261F); }
 .kd-yd__acil a:not(.kd-yd__dugme) { color: var(--kd-tehlike-k, #A1261F); font-weight: 800; font-family: var(--kd-font-ekstra); }

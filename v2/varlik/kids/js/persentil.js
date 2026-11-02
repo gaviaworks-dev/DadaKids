@@ -91,13 +91,16 @@
   /* ---------- Form ---------- */
   var form = $('#prForm');
   var dogumEl = $('#prDogum'), olcumEl = $('#prOlcum'), yasEl = $('[data-pr-yas]'), hataEl = $('[data-pr-hata]');
-  olcumEl.value = bugun(); olcumEl.max = bugun(); dogumEl.max = bugun();
+  // Tarihler Kids tarih seçicisinden gelir (dogum-secici.js, gün kipi): gizli input'ta ISO yyyy-aa-gg, değişince 'change'.
+  // Seçici yüklenmemişse (eski önbellek) ölçüm tarihi bugüne düşer.
+  if (!olcumEl.value) olcumEl.value = bugun();
+  function alanOdak(el) { var k = el.type === 'hidden' && el.closest('[data-kd-dogum]'); return k ? k.querySelector('.kd-ds__ac') : el; }
   try {
     var pc = window.DadaKids && window.DadaKids.profil && window.DadaKids.profil.c;
     if (pc === 'kiz' || pc === 'erkek') { var r = form.querySelector('input[name="cinsiyet"][value="' + pc + '"]'); if (r) r.checked = true; }
   } catch (e) { /* yok say */ }
 
-  function hata(m, odak) { hataEl.textContent = m || ''; hataEl.hidden = !m; if (m && odak) odak.focus(); }
+  function hata(m, odak) { hataEl.textContent = m || ''; hataEl.hidden = !m; if (m && odak) alanOdak(odak).focus(); }
   function yasGoster() {
     if (!gecerli(dogumEl.value) || !gecerli(olcumEl.value)) { yasEl.textContent = ''; return null; }
     var y = yasHesap(dogumEl.value, olcumEl.value);
