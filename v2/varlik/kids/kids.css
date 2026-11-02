@@ -759,3 +759,9 @@ article.kd-tarif { cursor: pointer; }
 .kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz):has(+ :is(.kd-zebra, .kd-bolum--beyaz))::after,
 .kd-sayfa :is(.kd-guvenlik-serit, .kd-hero) + :is(.kd-zebra, .kd-bolum--beyaz)::before,
 .kd-sayfa :is(.kd-zebra, .kd-bolum--beyaz):first-child::before { content: none; }
+/* Revize 2 Kas (ACİL): ürün görseli tek kaynak (o.urun → şeffaf Pixar ikonu). İkon/görsel sarmalayıcısı şeffaf ikon taşıyorsa
+   zemin, halka, daire ve gölge yok — ikon serbest durur (Mevsim ile aynı stil). Kart kutuları (ör. .kd-hub-urun) kendi zeminini korur. */
+.kd-sayfa :is([class*="ikon"], [class*="gorsel"], [class*="foto"]):has(> img.kd-urun-pixar) { background: none !important; box-shadow: none !important; border: 0 !important; }
+.kd-sayfa :is([class*="ikon"], [class*="gorsel"], [class*="foto"]):has(> img.kd-urun-pixar)::before,
+.kd-sayfa :is([class*="ikon"], [class*="gorsel"], [class*="foto"]):has(> img.kd-urun-pixar)::after { content: none !important; }
+.kd-sayfa img.kd-urun-pixar { border-radius: 0 !important; box-shadow: none !important; background: none !important; object-fit: contain !important; }
