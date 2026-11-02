@@ -37,6 +37,12 @@ Ajan kolları (dosya sahipliği; iki ajan aynı dosyaya yazmaz):
 - **Kredi:** tur 2 başlangıç 4771,93 (hesap başka oturumla paylaşımlı → kendi harcamamızı manifest'ten say)
 - **Kararlar (kids-ui-tur2.md §4'e taşınacak):** yaş rozeti biçimi tek: "+N Ay" (2–3 Yaş → +24 Ay) · başlık fontu Fredoka (OFL, kendi barındırma), gövde Gilroy · maskot "Pütür" (krem kase karakteri) · ortak.mjs: illus/maskot/ayirici/video yardımcıları eklendi
 
+## ▶ SIRADAKİ — Revize 2 Kas açık kalanları (Beyar kararı bekleniyor; kendiliğinden başlama)
+- ☐ R6 hero yayında (Beyar "olur" cevabı onay sayıldı; 54a8671). Geri alma istenirse: `git revert 54a8671` (hub + 5 evre görseli, --kd-golge-hero, evre-0-6-ay-kirp geri gelir) → build → yayinla → ayrı push.
+- ☐ Rehber hub mozaiği (ek gıda / BLW / alerjen kapakları), 5 makale hero'su ve tarif detay hero fotoğrafları hâlâ açık zeminde. Aynı tarifle (orta tonlu zemin: ceviz ahşap + adaçayı/şeftali/toz mavi keten, çerçeve yok) yeniden üretim gerekir → kredi onayı lazım (bakiye 566,88; taban 560 → 6,88 kr kaldı).
+- ☐ Pixar setinde (varlik/kids/gorsel/urun-pixar, 75 ürün) olmayan ürünler o.urun() yedeğinde yuvarlak fotoğraf gösteriyor (ör. dönem sayfası besin matrisinde patlıcan). Tek kaynak için bunların da Beyar prompt'uyla üretilmesi gerekir → kredi onayı lazım.
+- ☐ Alerjen takip aracı (kids-arac-alerjen-takip, alan atBaslangic) hâlâ tarayıcının yerel `input type=date` kutusu; persentildeki gibi dogumSecici `gun:true` kipine geçirilebilir (kredi gerekmez).
+
 ## ■ BİTTİ — Revize 2 Kas (Beyar, 11 madde; FULL OTONOM, compact sonrası YALNIZ buradan devam)
 Kurallar: push izni yalnız bu repo/main, force yok, `git add -A` yok, staged kontrol; madde başına ayrı commit; yayın /v2/ (yayinla.mjs), v1/ DOKUNULMAZ. Kredi ≤40 (bakiye taban 560). Soru yok; belirsizlik → kids-ui-tur2.md "karar: … gerekçe: …". Bitince rapor → DUR.
 Yayın worktree'si: $SP=/private/tmp/claude-501/-Users-gaviaworks-Developer-Projects-dadakids-prototip/d74c97bd-159e-4f64-83d1-9554af6ed901/scratchpad (yayin/ orada; eski 2f7ba82f oturumunun worktree'leri prunable). Önce görüntüleri: rapor/tmp/rev2kas/once/ (1440+390, 11 sayfa) + v1 rapor/tmp/rev2kas/v1/. Higgsfield başlangıç 606,88 → alt sınır 566,88.
