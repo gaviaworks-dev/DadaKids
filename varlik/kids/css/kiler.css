@@ -89,7 +89,7 @@
 .kd-dolap-kat__bas { display: flex; align-items: center; gap: var(--kd-s2); min-height: 44px; }
 .kd-dolap-kat__kapak { flex: none; display: grid; place-items: center; width: 36px; height: 36px; }
 .kd-dolap-kat__kapak img { display: block; width: 36px; height: 36px; object-fit: contain; }
-.kd-dolap .kd-dolap-kat__ad { margin: 0; font-family: var(--kd-font-kalin); font-size: 15.5px; font-weight: 700; line-height: 1.25; }
+.kd-dolap .kd-dolap-kat__ad { margin: 0; font-family: var(--kd-font-kalin); font-size: 15.5px; font-weight: 700; line-height: var(--lh-head, 1.12); }
 .kd-dolap-kat__n { min-width: 0; font-size: 12.5px; font-weight: 500; font-family: var(--kd-font); color: var(--kd-ikincil); white-space: nowrap; }
 .kd-dolap-kat__secili { flex: none; padding: 2px 8px; border-radius: var(--kd-r); background: var(--kd-tema); color: #fff; font-family: var(--kd-font-kalin); font-size: 12px; font-weight: 700; line-height: 1.4; }
 .kd-dolap-kat__secili[hidden] { display: none; }
