@@ -767,3 +767,9 @@ article.kd-tarif { cursor: pointer; }
 .kd-sayfa img.kd-urun-pixar { border-radius: 0 !important; box-shadow: none !important; background: none !important; object-fit: contain !important; }
 /* R9/R11: görsel olarak gizli sayfa başlığı .kd-sayfa'nın dışında (main'in ilk öğesi) — Gastro başlık ailesi (sahte kalın yok) */
 .pg-kids h1.kd-gizli { font-family: var(--kd-baslik); font-weight: 700; line-height: var(--lh-head, 1.12); }
+/* Breadcrumb ↔ header mesafesi = Gastro Tarifler BİREBİR (Beyar 2 Kas). Gastro: .lst-top padding-top 128px / ≤640 74px
+   − --header-offset 112px / 62px → 16px / 12px (header'ın 1px alt kenarıyla görünen 15 / 11px). Kids'te ölçü Kids barının
+   (.kd-ust, akışta) altından; yalnız breadcrumb'la başlayan bölümün üst boşluğu değişir, breadcrumb altı (18px) aynen kalır. */
+:root { --kd-kirinti-ust: 16px; }
+@media (max-width: 640px) { :root { --kd-kirinti-ust: 12px; } }
+.kd-sayfa section:has(> .wrap > .kd-kirinti:first-child) { padding-top: var(--kd-kirinti-ust); }
